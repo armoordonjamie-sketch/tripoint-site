@@ -13,7 +13,7 @@ export function Footer() {
                     {/* Brand */}
                     <div>
                         <Link to="/" className="mb-4 flex items-center gap-2">
-                            <img src="/logo.png" alt={siteConfig.brandName} className="h-8 w-auto" />
+                            <img src="/logo-full.png" alt={siteConfig.brandName} className="h-10 w-auto" />
                             <span className="text-lg font-bold text-text-primary">
                                 {siteConfig.brandName}
                             </span>
