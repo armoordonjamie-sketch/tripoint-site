@@ -7,6 +7,7 @@ import { Section } from '@/components/Section';
 import { CTAButton } from '@/components/CTAButton';
 import { siteConfig } from '@/config/site';
 import { Phone, MessageCircle, Mail, CheckCircle2 } from 'lucide-react';
+import { trackEvent } from '@/lib/analytics';
 
 const contactSchema = z.object({
     name: z.string().min(2, 'Name is required'),
@@ -38,6 +39,7 @@ export function ContactPage() {
         const existing = JSON.parse(localStorage.getItem('tripoint_contacts') ?? '[]') as unknown[];
         existing.push({ ...data, timestamp: new Date().toISOString() });
         localStorage.setItem('tripoint_contacts', JSON.stringify(existing));
+        trackEvent('submit_contact_form');
         setSubmitted(true);
     };
 
@@ -74,7 +76,7 @@ export function ContactPage() {
                             <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand/10 text-brand">
                                 <Phone className="h-6 w-6" />
                             </div>
-                            <div>
+                            <div onClick={() => trackEvent('click_phone_header', { location: 'contact_page' })}>
                                 <p className="font-semibold text-text-primary">Call Us</p>
                                 <p className="text-sm text-text-secondary">{siteConfig.contact.phoneDisplay}</p>
                             </div>

@@ -8,6 +8,7 @@ import { CTAButton } from '@/components/CTAButton';
 import { Notice } from '@/components/Notice';
 import { siteConfig } from '@/config/site';
 import { Calendar, Clock, CheckCircle2, Loader2 } from 'lucide-react';
+import { trackEvent } from '@/lib/analytics';
 
 /* ── Calendly embed ─────────────────────────────────── */
 function CalendlyEmbed() {
@@ -86,6 +87,7 @@ function BookingForm() {
         const existing = JSON.parse(localStorage.getItem('tripoint_bookings') ?? '[]') as unknown[];
         existing.push({ ...data, timestamp: new Date().toISOString() });
         localStorage.setItem('tripoint_bookings', JSON.stringify(existing));
+        trackEvent('submit_booking_request', { urgency: String(data.urgency), vehicle: `${data.vehicleMake} ${data.vehicleModel}` });
         setSubmitted(true);
     };
 

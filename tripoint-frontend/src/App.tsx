@@ -23,7 +23,13 @@ import { DisclaimerPage } from '@/pages/legal/DisclaimerPage';
 import { OurWorkPage } from '@/pages/OurWorkPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 
+import { useEffect } from 'react';
+import { initAnalytics } from '@/lib/analytics';
+
 export default function App() {
+  useEffect(() => {
+    initAnalytics();
+  }, []);
   return (
     <HelmetProvider>
       <BrowserRouter>
