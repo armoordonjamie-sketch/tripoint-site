@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import { Seo } from '@/components/Seo';
 import { Section } from '@/components/Section';
+import { SectionDivider } from '@/components/SectionDivider';
 import { CTAButton } from '@/components/CTAButton';
 import { ServiceCard } from '@/components/ServiceCard';
 import { TownChips } from '@/components/TownChips';
@@ -15,19 +16,58 @@ import { siteConfig } from '@/config/site';
 import { galleryImages } from '@/data/galleryImages';
 
 /* ── Intersection Observer for scroll-reveal ─────────── */
+const REVEAL_SELECTORS = '.reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-blur';
+
 function useScrollReveal() {
     const ref = useRef<HTMLDivElement>(null);
     useEffect(() => {
         const el = ref.current;
         if (!el) return;
         const observer = new IntersectionObserver(
-            (entries) => entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add('in-view'); }),
-            { threshold: 0.1, rootMargin: '0px 0px -40px 0px' },
+            (entries) => entries.forEach((e) => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('in-view');
+                }
+            }),
+            { threshold: 0.08, rootMargin: '0px 0px -60px 0px' },
         );
-        el.querySelectorAll('.reveal').forEach((child) => observer.observe(child));
+        el.querySelectorAll(REVEAL_SELECTORS).forEach((child) => observer.observe(child));
         return () => observer.disconnect();
     }, []);
     return ref;
+}
+
+/* ── Parallax scroll offset hook ─────────────────────── */
+function useParallax(speed = 0.3) {
+    const ref = useRef<HTMLDivElement>(null);
+    const [offset, setOffset] = useState(0);
+
+    useEffect(() => {
+        let ticking = false;
+        const handleScroll = () => {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    if (ref.current) {
+                        const rect = ref.current.getBoundingClientRect();
+                        const viewH = window.innerHeight;
+                        // Only calculate when element is in/near viewport
+                        if (rect.bottom > -200 && rect.top < viewH + 200) {
+                            const center = rect.top + rect.height / 2;
+                            const dist = center - viewH / 2;
+                            setOffset(dist * speed);
+                        }
+                    }
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        };
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        handleScroll();
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [speed]);
+
+    return { ref, offset };
 }
 
 /* ── Static data ─────────────────────────────────────── */
@@ -73,6 +113,9 @@ const galleryPreview = [
 
 export function HomePage() {
     const scrollRef = useScrollReveal();
+    const sprinterParallax = useParallax(0.15);
+    const coverageParallax = useParallax(0.12);
+    const ctaParallax = useParallax(0.1);
 
     /* ── Rotating hero images ─────────────────────── */
     const heroImages = [
@@ -125,20 +168,20 @@ export function HomePage() {
 
                 <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
                     <div className="max-w-3xl">
-                        <h1 className="reveal text-5xl font-extrabold leading-[1.1] tracking-tight text-text-primary sm:text-6xl md:text-7xl">
+                        <h1 className="reveal-blur text-5xl font-extrabold leading-[1.1] tracking-tight text-text-primary sm:text-6xl md:text-7xl text-balance">
                             Mobile Vehicle{' '}
                             <span className="text-gradient">Diagnostics</span>{' '}
                             <br className="hidden sm:block" />
                             & Repairs
                         </h1>
 
-                        <p className="reveal mt-6 max-w-xl text-lg text-text-secondary md:text-xl" style={{ transitionDelay: '0.1s' }}>
+                        <p className="reveal-blur mt-6 max-w-xl text-lg text-text-secondary md:text-xl text-pretty" style={{ transitionDelay: '0.15s' }}>
                             Dealer-level diagnostic depth delivered to your driveway. Written fix plans,
                             compliance-first approach, no guesswork.
                         </p>
 
                         {/* Stats row */}
-                        <div className="reveal mt-8 flex flex-wrap gap-8" style={{ transitionDelay: '0.2s' }}>
+                        <div className="reveal-left mt-8 flex flex-wrap gap-8" style={{ transitionDelay: '0.25s' }}>
                             {[
                                 { value: '60min', label: 'Coverage radius' },
                                 { value: '£80+', label: 'Diagnostics from' },
@@ -152,7 +195,7 @@ export function HomePage() {
                         </div>
 
                         {/* CTAs */}
-                        <div className="reveal mt-10 flex flex-wrap items-center gap-4" style={{ transitionDelay: '0.3s' }}>
+                        <div className="reveal-left mt-10 flex flex-wrap items-center gap-4" style={{ transitionDelay: '0.4s' }}>
                             <CTAButton href="/booking" size="lg">
                                 Book a Diagnostic
                             </CTAButton>
@@ -175,16 +218,19 @@ export function HomePage() {
                 </div>
             </section>
 
+            {/* ── HERO → WHAT WE SOLVE transition ──────────── */}
+            <SectionDivider variant="curve" fillClass="fill-surface" />
+
             {/* ── WHAT WE SOLVE ──────────────────────────────── */}
             <Section className="relative">
                 <div className="absolute inset-0 dot-grid opacity-20" aria-hidden="true" />
                 <div className="relative">
-                    <div className="text-center reveal">
+                    <div className="text-center reveal-blur">
                         <p className="text-sm font-semibold uppercase tracking-widest text-brand mb-3">Common Issues</p>
-                        <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">
+                        <h2 className="text-3xl font-bold text-text-primary sm:text-4xl text-balance">
                             What We Solve
                         </h2>
-                        <p className="mx-auto mt-3 max-w-2xl text-text-secondary">
+                        <p className="mx-auto mt-3 max-w-2xl text-text-secondary text-pretty">
                             From urgent warning lights to complex emissions systems - we bring the right tools and knowledge to your door.
                         </p>
                     </div>
@@ -192,7 +238,7 @@ export function HomePage() {
                         {problems.map((p, i) => (
                             <div
                                 key={p.title}
-                                className="reveal glass rounded-2xl p-6 transition-all duration-300 hover:border-brand/30 hover:shadow-lg hover:shadow-brand/5 hover:-translate-y-1 shine"
+                                className={`${i % 2 === 0 ? 'reveal-left' : 'reveal-right'} glass rounded-2xl p-6 transition-all duration-300 hover:border-brand/30 hover:shadow-lg hover:shadow-brand/5 hover:-translate-y-1 shine`}
                                 style={{ transitionDelay: `${i * 0.08}s` }}
                             >
                                 <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-brand/20 to-brand/5 text-brand">
@@ -206,12 +252,15 @@ export function HomePage() {
                 </div>
             </Section>
 
+            {/* ── SOLVE → SERVICES transition ─────────────── */}
+            <SectionDivider variant="wave" fillClass="fill-surface-alt/30" />
+
             {/* ── SERVICES with images ───────────────────────── */}
             <Section className="bg-surface-alt/30">
-                <div className="text-center reveal">
+                <div className="text-center reveal-blur">
                     <p className="text-sm font-semibold uppercase tracking-widest text-brand mb-3">What We Offer</p>
-                    <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">Our Services</h2>
-                    <p className="mx-auto mt-3 max-w-2xl text-text-secondary">
+                    <h2 className="text-3xl font-bold text-text-primary sm:text-4xl text-balance">Our Services</h2>
+                    <p className="mx-auto mt-3 max-w-2xl text-text-secondary text-pretty">
                         Fixed-price diagnostic services with written outcomes. No surprises.
                     </p>
                 </div>
@@ -247,14 +296,23 @@ export function HomePage() {
                 </div>
             </Section>
 
+            {/* ── SERVICES → SPRINTER transition ─────────── */}
+            <SectionDivider variant="angle" fillClass="fill-transparent" className="bg-surface-alt/30" />
+
             {/* ── SPRINTER SPECIALIST BANNER ──────────────────── */}
-            <section className="relative overflow-hidden">
+            <section ref={sprinterParallax.ref} className="relative overflow-hidden">
                 <div className="absolute inset-0">
-                    <img src="/images/sprinter-specialist.jpg" alt="" className="h-full w-full object-cover" aria-hidden="true" />
+                    <img
+                        src="/images/sprinter-specialist.jpg"
+                        alt=""
+                        className="h-[120%] w-full object-cover transition-transform duration-100 ease-out"
+                        style={{ transform: `translateY(${sprinterParallax.offset}px)` }}
+                        aria-hidden="true"
+                    />
                     <div className="absolute inset-0 bg-gradient-to-r from-surface via-surface/80 to-surface/40" />
                 </div>
                 <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 md:py-24">
-                    <div className="max-w-xl reveal">
+                    <div className="max-w-xl reveal-left">
                         <p className="text-sm font-semibold uppercase tracking-widest text-brand mb-3">Specialist Knowledge</p>
                         <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">
                             Mercedes Sprinter Expert
@@ -280,20 +338,23 @@ export function HomePage() {
                 </div>
             </section>
 
+            {/* ── SPRINTER → HOW IT WORKS transition ──────── */}
+            <SectionDivider variant="curve" fillClass="fill-surface" />
+
             {/* ── HOW IT WORKS ────────────────────────────────── */}
             <Section className="relative overflow-hidden">
                 <div className="absolute inset-0 mesh-gradient opacity-30" aria-hidden="true" />
                 <div className="relative">
-                    <div className="text-center reveal">
+                    <div className="text-center reveal-blur">
                         <p className="text-sm font-semibold uppercase tracking-widest text-brand mb-3">Process</p>
-                        <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">How It Works</h2>
-                        <p className="mx-auto mt-3 max-w-2xl text-text-secondary">
+                        <h2 className="text-3xl font-bold text-text-primary sm:text-4xl text-balance">How It Works</h2>
+                        <p className="mx-auto mt-3 max-w-2xl text-text-secondary text-pretty">
                             Simple, transparent process from first contact to fix plan.
                         </p>
                     </div>
                     <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
                         {steps.map((step, i) => (
-                            <div key={step.title} className="reveal relative text-center" style={{ transitionDelay: `${i * 0.1}s` }}>
+                            <div key={step.title} className="reveal-scale relative text-center" style={{ transitionDelay: `${i * 0.12}s` }}>
                                 {/* Connector line (desktop) */}
                                 {i < steps.length - 1 && (
                                     <div className="hidden lg:block absolute top-5 left-[60%] w-[calc(100%-20%)] h-px bg-gradient-to-r from-brand/30 to-transparent" aria-hidden="true" />
@@ -309,23 +370,32 @@ export function HomePage() {
                 </div>
             </Section>
 
+            {/* ── HOW IT WORKS → COVERAGE transition ──────── */}
+            <SectionDivider variant="wave" fillClass="fill-transparent" />
+
             {/* ── COVERAGE with image ─────────────────────────── */}
-            <section className="relative overflow-hidden">
+            <section ref={coverageParallax.ref} className="relative overflow-hidden">
                 <div className="absolute inset-0">
-                    <img src="/images/coverage-map.jpg" alt="" className="h-full w-full object-cover opacity-90" aria-hidden="true" />
+                    <img
+                        src="/images/coverage-map.jpg"
+                        alt=""
+                        className="h-[120%] w-full object-cover opacity-90 transition-transform duration-100 ease-out"
+                        style={{ transform: `translateY(${coverageParallax.offset}px)` }}
+                        aria-hidden="true"
+                    />
                     <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/80 to-surface/60" />
                 </div>
                 <Section className="relative">
-                    <div className="text-center reveal">
+                    <div className="text-center reveal-blur">
                         <p className="text-sm font-semibold uppercase tracking-widest text-brand mb-3">Coverage</p>
-                        <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">
+                        <h2 className="text-3xl font-bold text-text-primary sm:text-4xl text-balance">
                             Areas We Cover
                         </h2>
-                        <p className="mx-auto mt-3 max-w-2xl text-text-secondary">
+                        <p className="mx-auto mt-3 max-w-2xl text-text-secondary text-pretty">
                             Mobile diagnostics across Kent and South East London - up to 60 minutes from our rotating base.
                         </p>
                     </div>
-                    <div className="mt-8 flex justify-center reveal" style={{ transitionDelay: '0.15s' }}>
+                    <div className="mt-8 flex justify-center reveal-scale" style={{ transitionDelay: '0.15s' }}>
                         <TownChips />
                     </div>
                     <div className="mt-6 text-center reveal" style={{ transitionDelay: '0.25s' }}>
@@ -336,11 +406,14 @@ export function HomePage() {
                 </Section>
             </section>
 
+            {/* ── COVERAGE → WHY TRIPOINT transition ──────── */}
+            <SectionDivider variant="curve" fillClass="fill-surface-alt/30" />
+
             {/* ── WHY TRIPOINT (Trust cards) ──────────────────── */}
             <Section className="bg-surface-alt/30">
-                <div className="text-center reveal">
+                <div className="text-center reveal-blur">
                     <p className="text-sm font-semibold uppercase tracking-widest text-brand mb-3">Why Us</p>
-                    <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">
+                    <h2 className="text-3xl font-bold text-text-primary sm:text-4xl text-balance">
                         Why Choose TriPoint?
                     </h2>
                 </div>
@@ -348,7 +421,7 @@ export function HomePage() {
                     {trustPoints.map((t, i) => (
                         <div
                             key={t.title}
-                            className="reveal glass rounded-2xl p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-brand/5 shine"
+                            className="reveal-scale glass rounded-2xl p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-brand/5 shine"
                             style={{ transitionDelay: `${i * 0.1}s` }}
                         >
                             <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-brand/20 to-brand/5 text-brand">
@@ -361,6 +434,9 @@ export function HomePage() {
                 </div>
             </Section>
 
+            {/* ── WHY TRIPOINT → GALLERY transition ──────── */}
+            <SectionDivider variant="angle" fillClass="fill-surface" className="bg-surface-alt/30" />
+
             {/* ── OUR WORK GALLERY PREVIEW ─────────────────── */}
             <section className="relative overflow-hidden">
                 {/* Subtle background accent */}
@@ -368,7 +444,7 @@ export function HomePage() {
 
                 <Section className="relative">
                     {/* Header row */}
-                    <div className="flex flex-col items-center justify-between gap-4 sm:flex-row sm:items-end reveal">
+                    <div className="flex flex-col items-center justify-between gap-4 sm:flex-row sm:items-end reveal-left">
                         <div>
                             <p className="text-sm font-semibold uppercase tracking-widest text-brand mb-2">Our Work</p>
                             <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">
@@ -386,7 +462,7 @@ export function HomePage() {
                     {/* Bento-style image grid */}
                     <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-12 md:grid-rows-2">
                         {/* Featured large image — spans left 7 columns and both rows */}
-                        <div className="reveal group relative overflow-hidden rounded-2xl md:col-span-7 md:row-span-2" style={{ transitionDelay: '0.1s' }}>
+                        <div className="reveal-scale group relative overflow-hidden rounded-2xl md:col-span-7 md:row-span-2" style={{ transitionDelay: '0.1s' }}>
                             <img
                                 src={galleryPreview[0].src}
                                 alt={galleryPreview[0].alt}
@@ -408,7 +484,7 @@ export function HomePage() {
                         {galleryPreview.slice(1, 5).map((img, i) => (
                             <div
                                 key={img.src}
-                                className="reveal group relative overflow-hidden rounded-2xl md:col-span-5"
+                                className="reveal-scale group relative overflow-hidden rounded-2xl md:col-span-5"
                                 style={{ transitionDelay: `${0.15 + i * 0.08}s` }}
                             >
                                 <img
@@ -450,27 +526,33 @@ export function HomePage() {
                 </Section>
             </section>
 
+            {/* ── GALLERY → PRICING transition ───────────── */}
+            <SectionDivider variant="wave" fillClass="fill-surface" />
+
             {/* ── PRICING TEASER ──────────────────────────────── */}
             <Section>
-                <div className="text-center reveal">
+                <div className="text-center reveal-blur">
                     <p className="text-sm font-semibold uppercase tracking-widest text-brand mb-3">Pricing</p>
-                    <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">
+                    <h2 className="text-3xl font-bold text-text-primary sm:text-4xl text-balance">
                         Transparent Pricing
                     </h2>
-                    <p className="mx-auto mt-3 max-w-2xl text-text-secondary">
+                    <p className="mx-auto mt-3 max-w-2xl text-text-secondary text-pretty">
                         Zone-based pricing with no hidden fees. Deposit secures your slot.
                     </p>
                 </div>
-                <div className="mt-10 reveal" style={{ transitionDelay: '0.15s' }}>
+                <div className="mt-10 reveal-scale" style={{ transitionDelay: '0.15s' }}>
                     <PricingTable compact />
                 </div>
             </Section>
 
+            {/* ── PRICING → FAQ transition ──────────────────── */}
+            <SectionDivider variant="curve" fillClass="fill-surface-alt/30" />
+
             {/* ── FAQ TEASER ─────────────────────────────────── */}
             <Section className="bg-surface-alt/30">
-                <div className="text-center reveal">
+                <div className="text-center reveal-blur">
                     <p className="text-sm font-semibold uppercase tracking-widest text-brand mb-3">FAQ</p>
-                    <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">
+                    <h2 className="text-3xl font-bold text-text-primary sm:text-4xl text-balance">
                         Frequently Asked Questions
                     </h2>
                 </div>
@@ -478,7 +560,7 @@ export function HomePage() {
                     {faqTeasers.map((faq, i) => (
                         <div
                             key={faq.q}
-                            className="reveal glass rounded-xl p-5 transition-all hover:border-brand/20"
+                            className="reveal-right glass rounded-xl p-5 transition-all hover:border-brand/20"
                             style={{ transitionDelay: `${i * 0.1}s` }}
                         >
                             <h3 className="mb-2 font-semibold text-text-primary">{faq.q}</h3>
@@ -493,9 +575,12 @@ export function HomePage() {
                 </div>
             </Section>
 
+            {/* ── FAQ → COMPLIANCE transition ─────────────── */}
+            <SectionDivider variant="wave" fillClass="fill-surface" className="bg-surface-alt/30" />
+
             {/* ── COMPLIANCE NOTICE ──────────────────────────── */}
             <Section className="py-8 md:py-12">
-                <div className="mx-auto max-w-3xl reveal">
+                <div className="mx-auto max-w-3xl reveal-scale">
                     <Notice variant="compliance">
                         <strong>Compliance-first:</strong> TriPoint Diagnostics does not perform emissions deletes, DPF removal, or defeat device installation.
                         We diagnose and repair emissions systems through proper manufacturer procedures. Independent service - not affiliated with vehicle manufacturers.
@@ -503,14 +588,23 @@ export function HomePage() {
                 </div>
             </Section>
 
+            {/* ── COMPLIANCE → FOOTER CTA transition ──────── */}
+            <SectionDivider variant="angle" fillClass="fill-transparent" />
+
             {/* ── FOOTER CTA BANNER ──────────────────────────── */}
-            <section className="relative overflow-hidden">
+            <section ref={ctaParallax.ref} className="relative overflow-hidden">
                 <div className="absolute inset-0">
-                    <img src="/images/cta-bg.jpg" alt="" className="h-full w-full object-cover" aria-hidden="true" />
+                    <img
+                        src="/images/cta-bg.jpg"
+                        alt=""
+                        className="h-[120%] w-full object-cover transition-transform duration-100 ease-out"
+                        style={{ transform: `translateY(${ctaParallax.offset}px)` }}
+                        aria-hidden="true"
+                    />
                     <div className="absolute inset-0 bg-gradient-to-r from-brand-dark/90 to-brand/80" />
                 </div>
                 <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 md:py-20">
-                    <div className="text-center reveal">
+                    <div className="text-center reveal-blur">
                         <h2 className="text-3xl font-bold text-white sm:text-4xl md:text-5xl">
                             Need help today?
                         </h2>
