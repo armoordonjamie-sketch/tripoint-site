@@ -1,0 +1,67 @@
+{
+  "hero-bg": {
+    "section_filename": "hero-bg.jpg",
+    "source_image": "26402657-F7E5-439D-B9D2-DE62EF28E483.jpg",
+    "description": "This high-quality landscape image shows a detailed, close-up view of a Mercedes-Benz diesel engine, likely an OM651 or OM654 commonly found in Sprinter vans, which has been completely removed from the vehicle. The engine is positioned on a red floor jack within a workshop setting, revealing mechanical components such as the flywheel, timing gear, and alternator, alongside various sensors and wiring harnesses. The lighting is bright and industrial, highlighting the gritty, professional nature of a major mechanical repair. No diagnostic computers or faces are visible, focusing entirely on the internal hardware of the powertrain resting on the concrete workshop floor."
+  },
+  "diagnostic-callout": {
+    "section_filename": "diagnostic-callout.jpg",
+    "source_image": "IMG_0841.jpg",
+    "description": "This high-quality portrait orientation image shows a professional engine bay diagnostic session being performed on a white Mercedes-Benz Sprinter van. A Teslong digital borescope is the central focus, displaying a clear internal inspection image on its screen, while a red Milwaukee impact driver rests on the cowl panel in the background. The lighting is bright and industrial, highlighting professional tools like red battery jumper clamps and various engine components. No people or faces are visible, though a gloved hand is partially seen holding the borescope handle. This scene represents a detailed mechanical inspection within a workshop or professional service setting."
+  },
+  "vor-triage": {
+    "section_filename": "vor-triage.jpg",
+    "source_image": "IMG_0499.jpg",
+    "description": "This landscape-oriented, high-quality photograph shows a close-up of a Mercedes-Benz infotainment screen, specifically the MBUX system typical of a modern Sprinter van. A diagnostic alert message is displayed reading, \"Your vehicle has detected a breakdown,\" offering the driver options to call for assistance. Below the screen, physical buttons for navigation, radio, and volume are visible, along with a yellow identification sticker featuring the registration \"OW19 ZHG.\" The lighting is dim and focused on the screen, creating a professional but urgent tone suitable for highlighting a vehicle fault. No people, workshop tools, or exterior vehicle parts are visible in this interior shot."
+  },
+  "emissions-diagnostics": {
+    "section_filename": "emissions-diagnostics.jpg",
+    "source_image": "IMG_0443.jpg",
+    "description": "This portrait-oriented image shows a close-up of a heavily fouled automotive component, specifically an Exhaust Gas Recirculation (EGR) pipe or sensor, thick with black carbon soot buildup. The component is resting against the exterior of a white van, likely a Mercedes Sprinter, near the windshield and wiper assembly in a bright, outdoor setting. No diagnostic tools, digital screens, or people are visible, as the focus is entirely on the physical evidence of the engine fault. The image is of high quality and serves as a professional, factual record of a common mechanical issue encountered during a vehicle inspection."
+  },
+  "pre-purchase": {
+    "section_filename": "pre-purchase.jpg",
+    "source_image": "IMG_0058.jpg",
+    "description": "This high-quality, portrait-orientation image shows a close-up of a technician's oil-stained hand holding a circular vacuum or pressure gauge over a vehicle's engine bay. The gauge features a needle pointing deep into a green \"negative\" zone (near -10 to -20 range) and is marked with percentages from 0 to -100. In the blurred background, components of a Mercedes-Benz engine bay are visible, including hoses, a fuel injector area, and various mechanical parts, suggesting a workshop setting. The lighting is bright and industrial, creating a professional and practical mood for mechanical troubleshooting. No faces are visible, focusing the viewer's attention entirely on the diagnostic tool and the engine inspection process."
+  },
+  "about-hero": {
+    "section_filename": "about-hero.jpg",
+    "source_image": "IMG_0325.jpg",
+    "description": "This high-resolution landscape photograph provides a detailed top-down view into the engine bay of a white vehicle, consistent with the Mercedes-Benz Sprinter engine layout. The engine components are covered in white soapy foam, suggesting a leak detection process or a deep cleaning service is underway. The lighting is bright and industrial, creating a professional and diagnostic atmosphere, though no external diagnostic equipment, laptops, or people are visible in the frame. The focus is entirely on the mechanical condition of the engine block, various hoses, and wiring looms, highlighting the technical nature of TriPoint Diagnostics' work."
+  },
+  "sprinter-specialist": {
+    "section_filename": "sprinter-specialist.jpg",
+    "source_image": "IMG_0243.jpg",
+    "description": "This high-quality, portrait-orientation image provides a close-up overhead view of a Mercedes-Benz diesel engine bay, focusing on a fuel injector and its associated wiring harness. The component displays a clear Mercedes-Benz logo and serial numbers (part A6510703087), identifying it as part of an OM651 engine commonly found in Sprinter vans. The lighting is direct and bright, highlighting the dusty condition of the engine components and the multicolor electrical connector wires (yellow, red, blue, and white). The shot focuses purely on the mechanical hardware for diagnostic inspection; no people, diagnostic screens, or external tools are visible in this professional, technical capture."
+  },
+  "tools-array": {
+    "section_filename": "tools-array.jpg",
+    "source_image": "IMG_0722.jpg",
+    "description": "This portrait-orientation image shows a close-up of electrical diagnostic tools, specifically a UNI-T UT203 digital clamp multimeter and a handheld digital oscilloscope screen displaying a DC voltage reading of 13.650V. The equipment is resting on a textured, grey concrete workshop floor, with various red and black test leads connected to the devices. No vehicles or people are visible in this shot, focusing entirely on the technical measurement process. The lighting is bright and even, creating a clear, professional, and factual mood suitable for documenting a battery or alternator charging test. The image is of high quality and provides a detailed view of the tool interfaces and readings."
+  },
+  "testimonial-bg": {
+    "section_filename": "testimonial-bg.jpg",
+    "source_image": "IMG_0500.jpg",
+    "description": "This landscape-oriented photograph shows a close-up of a Mercedes-Benz Sprinter instrument cluster, likely from a second-generation (NCV3) model, displaying numerous active warning lights. The central digital display shows a \"Reserve fuel level\" message alongside a litany of amber and red fault indicators, including the check engine light, ABS, ESP, battery, and brake system warnings. The shot is taken from the driver's perspective in a low-light setting, creating a professional but moody atmosphere that highlights the vehicle's electrical or mechanical issues. This high-quality image focuses entirely on the van's interior dashboard with no people, diagnostic tools, or external environment visible."
+  },
+  "cta-bg": {
+    "section_filename": "cta-bg.jpg",
+    "source_image": "IMG_0129.jpg",
+    "description": "This portrait-oriented image shows a close-up, under-chassis view of a vehicle, highlighting the driveshaft, exhaust system, and fuel tank. The driveshaft features a distinctive dark wear mark or residue ring, and a thin metal cable is visible running parallel to it. No diagnostic tools, digital screens, or people are visible, as the shot focuses purely on the mechanical components. The lighting is bright and clinical, likely from a workshop torch, providing a clear and professional view of the underside for inspection purposes. While no branding is visible, the component layout is consistent with the underside of a large commercial van like a Mercedes Sprinter."
+  },
+  "blog-header": {
+    "section_filename": "blog-header.jpg",
+    "source_image": "IMG_0845.jpg",
+    "description": "This high-quality, portrait-orientation image shows an Owon HDS242 handheld oscilloscope and multimeter being used inside a vehicle cabin, resting on a textured black floor mat. The device is actively measuring 02.685 Volts, with red and black diagnostic test leads plugged into the front and trailing out of frame. The setting appears to be the interior footwell of a Mercedes-Benz Sprinter, evidenced by the \"A210\" part number and Mercedes star logo visible on the plastic trim piece nearby. The lighting is direct and bright, highlighting the diagnostic screen and the dusty, professional working environment of a mobile technician. No people or faces are visible in the shot."
+  },
+  "mobile-setup": {
+    "section_filename": "mobile-setup.jpg",
+    "source_image": "IMG_0646.jpg",
+    "description": "This landscape-oriented, high-resolution photograph shows a detailed top-down view of a Mercedes-Benz fuse box and relay panel, likely located under the dashboard or seat of a Sprinter van. The image features several Mercedes-branded relays and a multi-colored array of blade fuses organized into blue, yellow, and green banks. In the foreground, a brown padded mailing envelope with a shipping label addressed to a UK location is visible against a black diamond-plate floor mat. The lighting is bright and clear, creating a professional, documentary-style mood that highlights the electrical components for diagnostic purposes. No people, faces, or diagnostic screens are visible in this interior workshop-style shot."
+  },
+  "coverage-map": {
+    "section_filename": "coverage-map.jpg",
+    "source_image": "26402657-F7E5-439D-B9D2-DE62EF28E483.jpg",
+    "description": "This high-quality landscape image shows a detailed, close-up view of a Mercedes-Benz diesel engine, likely an OM651 or OM654 commonly found in Sprinter vans, which has been completely removed from the vehicle. The engine is positioned on a red floor jack within a workshop setting, revealing mechanical components such as the flywheel, timing gear, and alternator, alongside various sensors and wiring harnesses. The lighting is bright and industrial, highlighting the gritty, professional nature of a major mechanical repair. No diagnostic computers or faces are visible, focusing entirely on the internal hardware of the powertrain resting on the concrete workshop floor."
+  }
+}
