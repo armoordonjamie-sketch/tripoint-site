@@ -213,79 +213,12 @@
   .reveal {
     opacity: 0;
     transform: translateY(24px);
-    transition:
-      opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-      transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-      filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: opacity, transform;
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .reveal.in-view {
     opacity: 1;
     transform: translateY(0);
-  }
-
-  /* Reveal from left */
-  .reveal-left {
-    opacity: 0;
-    transform: translateX(-40px);
-    transition:
-      opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-      transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: opacity, transform;
-  }
-
-  .reveal-left.in-view {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
-  /* Reveal from right */
-  .reveal-right {
-    opacity: 0;
-    transform: translateX(40px);
-    transition:
-      opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-      transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: opacity, transform;
-  }
-
-  .reveal-right.in-view {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
-  /* Scale-in reveal */
-  .reveal-scale {
-    opacity: 0;
-    transform: scale(0.92);
-    transition:
-      opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-      transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: opacity, transform;
-  }
-
-  .reveal-scale.in-view {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  /* Fade-up with blur */
-  .reveal-blur {
-    opacity: 0;
-    transform: translateY(20px);
-    filter: blur(8px);
-    transition:
-      opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
-      transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
-      filter 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: opacity, transform, filter;
-  }
-
-  .reveal-blur.in-view {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
   }
 
   /* Animated gradient mesh background */
