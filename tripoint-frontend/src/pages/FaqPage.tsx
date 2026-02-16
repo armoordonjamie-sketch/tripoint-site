@@ -57,7 +57,7 @@ const faqs: FaqItem[] = [
             'Yes. We work with owner-driver couriers, SME fleets, and van hire branches. For fleets, we offer priority triage (VOR service), documented outcomes, and can discuss fleet scan sweep arrangements for preventive maintenance.',
     },
     {
-        question: 'What are your operating hours (AM/PM weeks)?',
+        question: 'What are your operating hours?',
         answer:
             'We operate 6:00 AM – 10:00 PM, Monday to Saturday. We cover up to 60 minutes drive time from our bases in Tonbridge (TN9) and Eltham (SE9).',
     },

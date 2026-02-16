@@ -242,13 +242,12 @@ export function BookingPage() {
                     <div className="grid gap-4 sm:grid-cols-2">
                         <div className="rounded-xl border border-border-default bg-surface-alt p-4">
                             <div className="mb-2 flex items-center gap-2 text-brand">
-                                <Calendar className="h-5 w-5" />
-                                <h3 className="font-semibold text-text-primary">Rotating Hours</h3>
+                                <Clock className="h-5 w-5" />
+                                <h3 className="font-semibold text-text-primary">Operating Hours</h3>
                             </div>
                             <p className="text-sm text-text-secondary">
-                                <strong>PM weeks:</strong> Appointments 3pm–11pm (based from Tonbridge, TN9 1PP)<br />
-                                <strong>AM weeks:</strong> Appointments 6am–1pm (based from Eltham, SE9 4HA)<br />
-                                <strong>Saturdays:</strong> 8am–4pm every week
+                                <strong>Mon - Sat:</strong> 6:00 AM – 10:00 PM<br />
+                                We cover up to 60 minutes drive from our bases in Tonbridge (TN9) and Eltham (SE9).
                             </p>
                         </div>
                         <div className="rounded-xl border border-border-default bg-surface-alt p-4">
