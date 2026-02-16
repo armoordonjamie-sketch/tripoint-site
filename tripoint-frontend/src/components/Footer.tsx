@@ -7,18 +7,19 @@ export function Footer() {
     const year = new Date().getFullYear();
 
     return (
-        <footer className="border-t border-slate-300 bg-gradient-to-b from-slate-100 via-slate-50 to-slate-200" role="contentinfo">
+        <footer className="border-t border-border-default bg-surface" role="contentinfo">
             <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
                 <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
                     {/* Brand */}
                     <div>
                         <Link to="/" className="mb-4 flex items-center gap-2">
-                            <img src="/logo-full.png" alt={siteConfig.brandName} className="h-10 w-auto" />
-                            <span className="text-lg font-bold text-slate-900">
-                                {siteConfig.brandName}
-                            </span>
+                            <img
+                                src="/logo-full.png"
+                                alt={siteConfig.brandName}
+                                className="h-16 w-auto brightness-0 invert filter"
+                            />
                         </Link>
-                        <p className="mb-4 text-sm text-slate-600">
+                        <p className="mb-4 text-sm text-text-secondary">
                             Dealer-level mobile diagnostics and compliant repairs for vans and cars across Kent and South East London.
                         </p>
                         <div className="flex gap-3">
@@ -26,7 +27,7 @@ export function Footer() {
                                 href={siteConfig.social.facebook}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="rounded-lg bg-white p-2 text-slate-500 shadow-sm transition-colors hover:bg-slate-200 hover:text-slate-900"
+                                className="rounded-lg bg-surface-alt p-2 text-text-muted transition-colors hover:bg-surface-elevated hover:text-text-primary"
                                 aria-label="Facebook"
                                 onClick={() => trackEvent('click_social', { platform: 'facebook' })}
                             >
@@ -38,7 +39,7 @@ export function Footer() {
                                 href={siteConfig.social.instagram}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="rounded-lg bg-white p-2 text-slate-500 shadow-sm transition-colors hover:bg-slate-200 hover:text-slate-900"
+                                className="rounded-lg bg-surface-alt p-2 text-text-muted transition-colors hover:bg-surface-elevated hover:text-text-primary"
                                 aria-label="Instagram"
                                 onClick={() => trackEvent('click_social', { platform: 'instagram' })}
                             >
@@ -50,7 +51,7 @@ export function Footer() {
                                 href={siteConfig.social.google}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="rounded-lg bg-white p-2 text-slate-500 shadow-sm transition-colors hover:bg-slate-200 hover:text-slate-900"
+                                className="rounded-lg bg-surface-alt p-2 text-text-muted transition-colors hover:bg-surface-elevated hover:text-text-primary"
                                 aria-label="Google"
                                 onClick={() => trackEvent('click_social', { platform: 'google' })}
                             >
@@ -63,27 +64,27 @@ export function Footer() {
 
                     {/* Services */}
                     <div>
-                        <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-slate-500">
+                        <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-text-muted">
                             Services
                         </h3>
                         <ul className="space-y-2">
                             <li>
-                                <Link to="/services/diagnostic-callout" className="text-sm text-slate-600 transition-colors hover:text-brand-dark">
+                                <Link to="/services/diagnostic-callout" className="text-sm text-text-secondary transition-colors hover:text-brand-light">
                                     Diagnostic Callout
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/services/vor-triage" className="text-sm text-slate-600 transition-colors hover:text-brand-dark">
+                                <Link to="/services/vor-triage" className="text-sm text-text-secondary transition-colors hover:text-brand-light">
                                     VOR / Priority Triage
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/services/emissions-diagnostics" className="text-sm text-slate-600 transition-colors hover:text-brand-dark">
+                                <Link to="/services/emissions-diagnostics" className="text-sm text-text-secondary transition-colors hover:text-brand-light">
                                     Emissions Diagnostics
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/services/pre-purchase-health-check" className="text-sm text-slate-600 transition-colors hover:text-brand-dark">
+                                <Link to="/services/pre-purchase-health-check" className="text-sm text-text-secondary transition-colors hover:text-brand-light">
                                     Pre-Purchase Health Check
                                 </Link>
                             </li>
@@ -92,14 +93,14 @@ export function Footer() {
 
                     {/* Contact */}
                     <div>
-                        <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-slate-500">
+                        <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-text-muted">
                             Contact
                         </h3>
                         <ul className="space-y-3">
                             <li>
                                 <a
                                     href={`tel:${siteConfig.contact.phoneE164}`}
-                                    className="flex items-center gap-2 text-sm text-slate-600 transition-colors hover:text-brand-dark"
+                                    className="flex items-center gap-2 text-sm text-text-secondary transition-colors hover:text-brand-light"
                                     onClick={() => trackEvent('click_phone_footer')}
                                 >
                                     <Phone className="h-4 w-4 shrink-0" />
@@ -111,7 +112,7 @@ export function Footer() {
                                     href={`https://wa.me/${siteConfig.contact.whatsappE164}`}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="flex items-center gap-2 text-sm text-slate-600 transition-colors hover:text-brand-dark"
+                                    className="flex items-center gap-2 text-sm text-text-secondary transition-colors hover:text-brand-light"
                                 >
                                     <MessageCircle className="h-4 w-4 shrink-0" />
                                     WhatsApp
@@ -120,7 +121,7 @@ export function Footer() {
                             <li>
                                 <a
                                     href={`mailto:${siteConfig.contact.email}`}
-                                    className="flex items-center gap-2 text-sm text-slate-600 transition-colors hover:text-brand-dark"
+                                    className="flex items-center gap-2 text-sm text-text-secondary transition-colors hover:text-brand-light"
                                 >
                                     <Mail className="h-4 w-4 shrink-0" />
                                     {siteConfig.contact.email}
@@ -131,52 +132,52 @@ export function Footer() {
 
                     {/* Hours & Legal */}
                     <div>
-                        <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-slate-500">
+                        <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-text-muted">
                             Operating Hours
                         </h3>
-                        <ul className="space-y-2 text-sm text-slate-600">
+                        <ul className="space-y-2 text-sm text-text-secondary">
                             <li className="flex items-start gap-2">
-                                <Clock className="mt-0.5 h-4 w-4 shrink-0 text-slate-400" />
+                                <Clock className="mt-0.5 h-4 w-4 shrink-0 text-text-muted" />
                                 <div>
-                                    <p className="font-medium text-slate-900">PM Weeks</p>
+                                    <p className="font-medium text-text-primary">PM Weeks</p>
                                     <p>3:00 PM – 11:00 PM</p>
                                 </div>
                             </li>
                             <li className="flex items-start gap-2">
-                                <Clock className="mt-0.5 h-4 w-4 shrink-0 text-slate-400" />
+                                <Clock className="mt-0.5 h-4 w-4 shrink-0 text-text-muted" />
                                 <div>
-                                    <p className="font-medium text-slate-900">AM Weeks</p>
+                                    <p className="font-medium text-text-primary">AM Weeks</p>
                                     <p>6:00 AM – 1:00 PM</p>
                                 </div>
                             </li>
                             <li className="flex items-start gap-2">
-                                <Clock className="mt-0.5 h-4 w-4 shrink-0 text-slate-400" />
+                                <Clock className="mt-0.5 h-4 w-4 shrink-0 text-text-muted" />
                                 <div>
-                                    <p className="font-medium text-slate-900">Saturdays</p>
+                                    <p className="font-medium text-text-primary">Saturdays</p>
                                     <p>8:00 AM – 4:00 PM</p>
                                 </div>
                             </li>
                             <li className="flex items-start gap-2">
-                                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-slate-400" />
+                                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-text-muted" />
                                 <p>Kent & SE London (up to 60 min radius)</p>
                             </li>
                         </ul>
 
                         <div className="mt-6 space-y-1">
-                            <Link to="/legal/privacy-policy" className="block text-xs text-slate-500 transition-colors hover:text-slate-800">
+                            <Link to="/legal/privacy-policy" className="block text-xs text-text-muted transition-colors hover:text-text-secondary">
                                 Privacy Policy
                             </Link>
-                            <Link to="/legal/terms" className="block text-xs text-slate-500 transition-colors hover:text-slate-800">
+                            <Link to="/legal/terms" className="block text-xs text-text-muted transition-colors hover:text-text-secondary">
                                 Terms of Service
                             </Link>
-                            <Link to="/legal/disclaimer" className="block text-xs text-slate-500 transition-colors hover:text-slate-800">
+                            <Link to="/legal/disclaimer" className="block text-xs text-text-muted transition-colors hover:text-text-secondary">
                                 Disclaimer
                             </Link>
                         </div>
                     </div>
                 </div>
 
-                <div className="mt-10 border-t border-slate-300 pt-6 text-center text-xs text-slate-500">
+                <div className="mt-10 border-t border-border-default pt-6 text-center text-xs text-text-muted">
                     <p>
                         &copy; {year} {siteConfig.brandName}. All rights reserved. Independent service - not affiliated with vehicle manufacturers.
                     </p>
