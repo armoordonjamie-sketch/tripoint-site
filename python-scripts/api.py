@@ -24,8 +24,8 @@ app.add_middleware(
 )
 
 BASES = {
-    'Tonbridge (PM/Sat)': 'TN9 1PP',
-    'Eltham (AM)': 'SE9 4HA'
+    'Tonbridge': 'TN9 1PP',
+    'Eltham': 'SE9 4HA'
 }
 REGION = 'EU'
 
