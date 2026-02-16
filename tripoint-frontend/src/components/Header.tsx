@@ -36,9 +36,9 @@ export function Header() {
                 {/* Logo */}
                 <Link to="/" className="flex items-center gap-3" aria-label="TriPoint Diagnostics Home">
                     <img
-                        src="/logo-icon.svg"
+                        src="/logo-no-text-light.png"
                         alt={siteConfig.brandName}
-                        className="h-14 w-auto brightness-200 contrast-125"
+                        className="h-14 w-auto"
                     />
                     <span className="hidden text-xl font-bold text-text-primary sm:block">
                         {siteConfig.brandName}
