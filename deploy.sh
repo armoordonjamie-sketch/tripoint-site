@@ -61,8 +61,52 @@ server {
         expires 1y;
         add_header Cache-Control "public, no-transform";
     }
+
+    # API Reverse Proxy
+    location /api/ {
+        proxy_pass http://127.0.0.1:8000/;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto \$scheme;
+    }
 }
 EOL
+
+# 6. Setup Python Backend
+echo ">>> Setting up Python backend..."
+apt-get install -y python3 python3-pip python3-venv
+
+# Create venv if not exists
+if [ ! -d "$APP_DIR/venv" ]; then
+    python3 -m venv "$APP_DIR/venv"
+fi
+
+# Install dependencies
+source "$APP_DIR/venv/bin/activate"
+pip install fastapi uvicorn WazeRouteCalculator
+
+# Create Systemd Service
+cat > /etc/systemd/system/tripoint-api.service <<EOL
+[Unit]
+Description=TriPoint API Service
+After=network.target
+
+[Service]
+User=root
+WorkingDirectory=$APP_DIR
+Environment="PATH=$APP_DIR/venv/bin:/usr/bin"
+ExecStart=$APP_DIR/venv/bin/uvicorn python-scripts.api:app --host 127.0.0.1 --port 8000
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+EOL
+
+# Reload Systemd and Start Service
+systemctl daemon-reload
+systemctl enable tripoint-api
+systemctl restart tripoint-api
 
 # Enable site and remove default
 ln -sf /etc/nginx/sites-available/tripoint /etc/nginx/sites-enabled/

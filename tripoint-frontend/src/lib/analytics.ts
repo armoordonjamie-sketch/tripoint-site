@@ -25,7 +25,8 @@ export type AnalyticsEvent =
     | 'submit_contact_form'
     | 'submit_booking_request'
     | 'view_service'
-    | 'view_booking_form';
+    | 'view_booking_form'
+    | 'zone_check';
 
 export const trackEvent = (eventName: AnalyticsEvent, props?: Record<string, string | number | boolean>) => {
     if (typeof window !== 'undefined') {

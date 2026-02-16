@@ -9,6 +9,7 @@ import { Notice } from '@/components/Notice';
 import { siteConfig } from '@/config/site';
 import { Clock, CheckCircle2, Loader2 } from 'lucide-react';
 import { trackEvent } from '@/lib/analytics';
+import { ZoneCalculator } from '@/components/ZoneCalculator';
 
 /* ── Calendly embed ─────────────────────────────────── */
 function CalendlyEmbed() {
@@ -234,6 +235,9 @@ export function BookingPage() {
                     <p className="mx-auto mt-4 max-w-2xl text-lg text-text-secondary">
                         Choose a slot through our scheduling calendar below, or submit a booking request and we&apos;ll confirm your zone and price.
                     </p>
+                    <div className="mx-auto mt-8 max-w-xl">
+                        <ZoneCalculator />
+                    </div>
                 </div>
 
                 {/* How booking works */}

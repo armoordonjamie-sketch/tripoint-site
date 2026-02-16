@@ -32,6 +32,8 @@ if [ "$LOCAL" != "$REMOTE" ]; then
     if npm run build; then
         echo ">>> Build successful. Reloading Nginx..."
         systemctl reload nginx
+        echo ">>> Restarting API service..."
+        systemctl restart tripoint-api
         echo ">>> [$(date)] Deployment complete."
     else
         echo ">>> [$(date)] Build FAILED."

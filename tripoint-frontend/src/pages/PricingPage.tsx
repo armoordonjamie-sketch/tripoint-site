@@ -4,6 +4,7 @@ import { PricingTable } from '@/components/PricingTable';
 import { CTAButton } from '@/components/CTAButton';
 import { Notice } from '@/components/Notice';
 import { siteConfig } from '@/config/site';
+import { ZoneCalculator } from '@/components/ZoneCalculator';
 
 export function PricingPage() {
     return (
@@ -22,6 +23,10 @@ export function PricingPage() {
                     <p className="mx-auto mt-4 max-w-2xl text-lg text-text-secondary">
                         Zone-based pricing with no hidden fees. All services include travel within your zone and a written diagnostic outcome.
                     </p>
+                </div>
+
+                <div className="mx-auto mt-8 max-w-xl">
+                    <ZoneCalculator />
                 </div>
 
                 {/* Zone explanation */}
