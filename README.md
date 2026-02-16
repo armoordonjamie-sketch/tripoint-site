@@ -49,3 +49,39 @@ Requires Python 3 and any dependencies listed in the scripts (e.g. `pillow`, `py
 ## Links
 
 - **GitHub repo:** [armoordonjamie-sketch/tripoint-site](https://github.com/armoordonjamie-sketch/tripoint-site)
+
+## Booking API (Google Calendar + Zoho)
+
+The FastAPI app in `python-scripts/api.py` now provides:
+- `GET /calculate-zone`
+- `GET /booking/services`
+- `GET /booking/availability`
+- `POST /booking/reserve`
+- `POST /booking/cancel`
+- `POST /booking/reschedule`
+
+### Required environment variables
+
+Google Calendar:
+- `GOOGLE_CALENDAR_ID` (default: `primary`)
+- One of:
+  - Service account: `GOOGLE_SERVICE_ACCOUNT_FILE` **or** `GOOGLE_SERVICE_ACCOUNT_JSON`
+  - OAuth refresh token: `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `GOOGLE_REFRESH_TOKEN`
+- Optional: `GOOGLE_DELEGATED_USER` (if domain-wide delegation is used)
+
+Booking behavior:
+- `TRIPOINT_TIMEZONE` (default: `Europe/London`)
+- `EARLY_LATE_SHIFT_MARKERS` (comma-separated event title markers, default includes `early shift` and `late shift`)
+
+Zoho Mail notifications:
+- `ZOHO_MAIL_ACCESS_TOKEN`
+- `ZOHO_MAIL_ACCOUNT_ID`
+- Optional: `ZOHO_FROM_EMAIL` (default `contact@tripointdiagnostics.co.uk`)
+
+### Post-deploy checklist
+
+1. Add the environment variables to the `tripoint-api` systemd service.
+2. `sudo systemctl daemon-reload`
+3. `sudo systemctl restart tripoint-api`
+4. Verify `GET /api/booking/services` returns configured services.
+5. Run a full booking flow from `/booking` and confirm event creation + emails.

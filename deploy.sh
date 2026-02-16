@@ -84,7 +84,7 @@ fi
 
 # Install dependencies
 source "$APP_DIR/venv/bin/activate"
-pip install fastapi uvicorn WazeRouteCalculator
+pip install fastapi uvicorn WazeRouteCalculator requests google-api-python-client google-auth google-auth-oauthlib email-validator
 
 # Create Systemd Service
 cat > /etc/systemd/system/tripoint-api.service <<EOL
