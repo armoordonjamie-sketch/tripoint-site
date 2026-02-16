@@ -11,7 +11,7 @@ export function CoveragePage() {
         <>
             <Seo
                 title="Coverage Area"
-                description="Mobile diagnostic coverage across Kent & SE London. Zone-based pricing by drive time from our rotating weekly base."
+                description="Mobile diagnostic coverage across Kent & SE London. Zone-based pricing by drive time from our bases in Tonbridge and Eltham."
                 canonical="/coverage"
             />
 

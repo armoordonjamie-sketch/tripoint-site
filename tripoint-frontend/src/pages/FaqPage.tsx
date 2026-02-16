@@ -59,7 +59,7 @@ const faqs: FaqItem[] = [
     {
         question: 'What are your operating hours (AM/PM weeks)?',
         answer:
-            'Our hours rotate with a shift pattern: PM weeks (appointments 3pm–11pm, based from Tonbridge), AM weeks (appointments 6am–1pm, based from Eltham), and every Saturday 8am–4pm. Your booking confirmation will always show the active hours and base.',
+            'We operate 6:00 AM – 10:00 PM, Monday to Saturday. We cover up to 60 minutes drive time from our bases in Tonbridge (TN9) and Eltham (SE9).',
     },
 ];
 

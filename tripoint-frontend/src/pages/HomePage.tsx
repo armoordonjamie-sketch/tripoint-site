@@ -58,7 +58,7 @@ const trustPoints = [
 const faqTeasers = [
     { q: 'Do you work on cars as well as vans?', a: 'Yes - our diagnostic services cover both vans and cars. Our special strength is Mercedes commercial vehicles, but we work across makes.' },
     { q: 'Do you do AdBlue/DPF/EGR deletes?', a: 'No. We diagnose and repair emissions systems; we do not disable, remove, or defeat them. Compliance-first, always.' },
-    { q: 'What areas do you cover?', a: 'Up to 60 minutes drive time from our active base that week (Tonbridge on PM weeks, Eltham on AM weeks).' },
+    { q: 'What areas do you cover?', a: 'Up to 60 minutes drive time from our bases in Tonbridge (TN9) and Eltham (SE9).' },
 ];
 
 /* Curated selection of 6 diverse photos for the homepage gallery teaser */
@@ -322,7 +322,7 @@ export function HomePage() {
                             Areas We Cover
                         </h2>
                         <p className="mx-auto mt-3 max-w-2xl text-text-secondary">
-                            Mobile diagnostics across Kent and South East London - up to 60 minutes from our rotating base.
+                            Mobile diagnostics across Kent and South East London - up to 60 minutes from our bases.
                         </p>
                     </div>
                     <div className="mt-8 flex justify-center reveal" style={{ transitionDelay: '0.15s' }}>

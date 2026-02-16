@@ -48,7 +48,7 @@ export function PricingPage() {
                         </table>
                     </div>
                     <p className="mt-3 text-sm text-text-muted">
-                        Drive time is calculated from the active base that week using Google/Apple Maps at time of booking.
+                        Drive time is calculated from our nearest base using Google/Apple Maps at time of booking.
                     </p>
                 </div>
 
