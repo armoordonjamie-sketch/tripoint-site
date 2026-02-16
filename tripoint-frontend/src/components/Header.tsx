@@ -38,7 +38,7 @@ export function Header() {
                     <img
                         src="/logo-icon.svg"
                         alt={siteConfig.brandName}
-                        className="h-14 w-auto brightness-0 invert filter"
+                        className="h-14 w-auto brightness-200 contrast-125"
                     />
                     <span className="hidden text-xl font-bold text-text-primary sm:block">
                         {siteConfig.brandName}

@@ -16,7 +16,7 @@ export function Footer() {
                             <img
                                 src="/logo-full.png"
                                 alt={siteConfig.brandName}
-                                className="h-16 w-auto brightness-0 invert filter"
+                                className="h-32 w-auto brightness-200 contrast-125"
                             />
                         </Link>
                         <p className="mb-4 text-sm text-text-secondary">
