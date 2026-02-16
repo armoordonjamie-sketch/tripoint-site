@@ -139,22 +139,8 @@ export function Footer() {
                             <li className="flex items-start gap-2">
                                 <Clock className="mt-0.5 h-4 w-4 shrink-0 text-text-muted" />
                                 <div>
-                                    <p className="font-medium text-text-primary">PM Weeks</p>
-                                    <p>3:00 PM – 11:00 PM</p>
-                                </div>
-                            </li>
-                            <li className="flex items-start gap-2">
-                                <Clock className="mt-0.5 h-4 w-4 shrink-0 text-text-muted" />
-                                <div>
-                                    <p className="font-medium text-text-primary">AM Weeks</p>
-                                    <p>6:00 AM – 1:00 PM</p>
-                                </div>
-                            </li>
-                            <li className="flex items-start gap-2">
-                                <Clock className="mt-0.5 h-4 w-4 shrink-0 text-text-muted" />
-                                <div>
-                                    <p className="font-medium text-text-primary">Saturdays</p>
-                                    <p>8:00 AM – 4:00 PM</p>
+                                    <p className="font-medium text-text-primary">Mon - Sat</p>
+                                    <p>6:00 AM – 10:00 PM</p>
                                 </div>
                             </li>
                             <li className="flex items-start gap-2">

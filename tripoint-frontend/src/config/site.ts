@@ -20,23 +20,17 @@ export const siteConfig = {
     },
 
     baseLocations: {
-        pm: {
-            label: 'PM Weeks (Tonbridge)',
+        weekA: {
+            label: 'Week A (Tonbridge)',
             postcode: 'TN9 1PP',
-            hours: '3:00 PM – 11:00 PM',
-            note: 'When on earlies at main job',
+            hours: 'Mon - Sat: 6:00 AM – 10:00 PM',
+            note: 'Rotating Base',
         },
-        am: {
-            label: 'AM Weeks (Eltham)',
+        weekB: {
+            label: 'Week B (Eltham)',
             postcode: 'SE9 4HA',
-            hours: '6:00 AM – 1:00 PM',
-            note: 'When on lates at main job',
-        },
-        saturday: {
-            label: 'Saturdays',
-            postcode: 'Rotating',
-            hours: '8:00 AM – 4:00 PM',
-            note: 'Every Saturday',
+            hours: 'Mon - Sat: 6:00 AM – 10:00 PM',
+            note: 'Rotating Base',
         },
     },
 
