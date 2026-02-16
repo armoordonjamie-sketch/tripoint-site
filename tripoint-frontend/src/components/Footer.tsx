@@ -16,7 +16,7 @@ export function Footer() {
                             <img
                                 src="/logo-light.png"
                                 alt={siteConfig.brandName}
-                                className="h-40 w-auto"
+                                className="h-50 w-auto"
                             />
                         </Link>
                         <p className="mb-4 text-sm text-text-secondary">

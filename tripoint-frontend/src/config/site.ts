@@ -6,11 +6,11 @@ export const siteConfig = {
     url: 'https://tripointdiagnostics.co.uk',
 
     contact: {
-        phoneDisplay: '07XXX XXXXXX',
-        phoneE164: '+447XXXXXXXXX',
-        whatsappE164: '447XXXXXXXXX',
-        email: 'hello@REPLACE_ME.co.uk',
-        calendlyUrl: 'https://calendly.com/REPLACE_ME/tripoint-diagnostics',
+        phoneDisplay: '020 8058 6095',
+        phoneE164: '+442080586095',
+        whatsappE164: 'message/NROKKGS6QK54G1',
+        email: 'contact@tripointdiagnostics.co.uk',
+        calendlyUrl: 'https://calendly.com/tripoint-diagnostics',
     },
 
     social: {
