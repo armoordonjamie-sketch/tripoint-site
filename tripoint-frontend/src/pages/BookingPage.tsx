@@ -7,7 +7,7 @@ import { Section } from '@/components/Section';
 import { CTAButton } from '@/components/CTAButton';
 import { Notice } from '@/components/Notice';
 import { siteConfig } from '@/config/site';
-import { Calendar, Clock, CheckCircle2, Loader2 } from 'lucide-react';
+import { Clock, CheckCircle2, Loader2 } from 'lucide-react';
 import { trackEvent } from '@/lib/analytics';
 
 /* ── Calendly embed ─────────────────────────────────── */
