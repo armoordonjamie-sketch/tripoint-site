@@ -80,9 +80,11 @@ export function ZoneCalculator() {
                             <h4 className="font-bold text-text-primary">
                                 You are in <span className="text-brand-light">Zone {result.zone}</span>
                             </h4>
-                            <p className="mt-1 text-sm text-text-secondary">
-                                Estimated {result.time_minutes} mins drive from our {result.best_base_name} base.
-                            </p>
+                            <div className="mt-2 space-y-1 text-sm text-text-secondary">
+                                <p><strong>Time:</strong> {result.time_minutes} mins</p>
+                                <p><strong>Distance:</strong> {result.distance_km} km</p>
+                                <p className="text-xs text-text-muted">(from {result.best_base_name})</p>
+                            </div>
 
                             {result.zone !== 'Out of area' ? (
                                 <div className="mt-3">
