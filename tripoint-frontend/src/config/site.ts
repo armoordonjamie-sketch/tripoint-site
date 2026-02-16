@@ -19,20 +19,19 @@ export const siteConfig = {
         google: 'https://g.page/REPLACE_ME',
     },
 
-    baseLocations: {
-        weekA: {
-            label: 'Week A (Tonbridge)',
+    baseLocations: [
+        {
+            label: 'Tonbridge Base',
             postcode: 'TN9 1PP',
-            hours: 'Mon - Sat: 6:00 AM – 10:00 PM',
-            note: 'Rotating Base',
+            address: 'Use for distance checks',
         },
-        weekB: {
-            label: 'Week B (Eltham)',
+        {
+            label: 'Eltham Base',
             postcode: 'SE9 4HA',
-            hours: 'Mon - Sat: 6:00 AM – 10:00 PM',
-            note: 'Rotating Base',
+            address: 'Use for distance checks',
         },
-    },
+    ],
+    operatingHours: 'Mon - Sat: 6:00 AM – 10:00 PM',
 
     coverageTowns: [
         'Bromley',
