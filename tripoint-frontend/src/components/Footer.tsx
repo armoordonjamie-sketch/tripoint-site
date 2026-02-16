@@ -14,9 +14,9 @@ export function Footer() {
                     <div>
                         <Link to="/" className="mb-4 flex items-center gap-2">
                             <img
-                                src="/logo-full.png"
+                                src="/logo-light.png"
                                 alt={siteConfig.brandName}
-                                className="h-32 w-auto brightness-200 contrast-100"
+                                className="h-40 w-auto"
                             />
                         </Link>
                         <p className="mb-4 text-sm text-text-secondary">
