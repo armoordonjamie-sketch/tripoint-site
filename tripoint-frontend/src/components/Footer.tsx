@@ -3,13 +3,27 @@ import { Phone, MessageCircle, Mail, MapPin, Clock } from 'lucide-react';
 import { siteConfig } from '@/config/site';
 import { trackEvent } from '@/lib/analytics';
 
+const footerServices = [
+    { label: 'Diagnostic Callout', href: '/services/diagnostic-callout' },
+    { label: 'VOR Van Diagnostics', href: '/services/vor-van-diagnostics' },
+    { label: 'Emissions Diagnostics', href: '/services/emissions-diagnostics' },
+    { label: 'Pre-Purchase Digital Health Check', href: '/services/pre-purchase-digital-health-check' },
+    { label: 'Sprinter Limp Mode', href: '/services/sprinter-limp-mode' },
+    { label: 'AdBlue Countdown', href: '/services/adblue-countdown' },
+    { label: 'NOx / SCR Diagnostics', href: '/services/nox-scr-diagnostics' },
+    { label: 'DPF Warning Light', href: '/services/dpf-regeneration-decision' },
+    { label: 'Mercedes Xentry Diagnostics', href: '/services/mercedes-xentry-diagnostics-coding' },
+    { label: 'Intermittent Electrical', href: '/services/intermittent-electrical-faults' },
+    { label: 'Fleet Health Check', href: '/services/fleet-health-check' },
+];
+
 export function Footer() {
     const year = new Date().getFullYear();
 
     return (
         <footer className="border-t border-border-default bg-surface" role="contentinfo">
             <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-                <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+                <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
                     {/* Brand */}
                     <div>
                         <Link to="/" className="mb-4 flex items-center gap-2">
@@ -68,26 +82,42 @@ export function Footer() {
                             Services
                         </h3>
                         <ul className="space-y-2">
-                            <li>
-                                <Link to="/services/diagnostic-callout" className="text-sm text-text-secondary transition-colors hover:text-brand-light">
-                                    Diagnostic Callout
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/services/vor-triage" className="text-sm text-text-secondary transition-colors hover:text-brand-light">
-                                    VOR / Priority Triage
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/services/emissions-diagnostics" className="text-sm text-text-secondary transition-colors hover:text-brand-light">
-                                    Emissions Diagnostics
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/services/pre-purchase-health-check" className="text-sm text-text-secondary transition-colors hover:text-brand-light">
-                                    Pre-Purchase Health Check
-                                </Link>
-                            </li>
+                            {footerServices.map((s) => (
+                                <li key={s.href}>
+                                    <Link to={s.href} className="text-sm text-text-secondary transition-colors hover:text-brand-light">
+                                        {s.label}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    {/* Company */}
+                    <div>
+                        <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-text-muted">
+                            Company
+                        </h3>
+                        <ul className="space-y-2">
+                            <li><Link to="/about" className="text-sm text-text-secondary transition-colors hover:text-brand-light">About</Link></li>
+                            <li><Link to="/our-work" className="text-sm text-text-secondary transition-colors hover:text-brand-light">Our Work</Link></li>
+                            <li><Link to="/blog" className="text-sm text-text-secondary transition-colors hover:text-brand-light">Blog</Link></li>
+                            <li><Link to="/contact" className="text-sm text-text-secondary transition-colors hover:text-brand-light">Contact</Link></li>
+                            <li><Link to="/faq" className="text-sm text-text-secondary transition-colors hover:text-brand-light">FAQs</Link></li>
+                            <li><Link to="/process" className="text-sm text-text-secondary transition-colors hover:text-brand-light">Our Process</Link></li>
+                            <li><Link to="/areas" className="text-sm text-text-secondary transition-colors hover:text-brand-light">Areas We Cover</Link></li>
+                        </ul>
+                    </div>
+
+                    {/* Legal */}
+                    <div>
+                        <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-text-muted">
+                            Legal
+                        </h3>
+                        <ul className="space-y-2">
+                            <li><Link to="/legal/privacy-policy" className="text-sm text-text-secondary transition-colors hover:text-brand-light">Privacy Policy</Link></li>
+                            <li><Link to="/legal/terms" className="text-sm text-text-secondary transition-colors hover:text-brand-light">Terms of Service</Link></li>
+                            <li><Link to="/legal/disclaimer" className="text-sm text-text-secondary transition-colors hover:text-brand-light">Disclaimer</Link></li>
+                            <li><Link to="/legal/accessibility" className="text-sm text-text-secondary transition-colors hover:text-brand-light">Accessibility</Link></li>
                         </ul>
                     </div>
 
@@ -113,6 +143,7 @@ export function Footer() {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="flex items-center gap-2 text-sm text-text-secondary transition-colors hover:text-brand-light"
+                                    onClick={() => trackEvent('click_whatsapp', { location: 'footer' })}
                                 >
                                     <MessageCircle className="h-4 w-4 shrink-0" />
                                     WhatsApp
@@ -127,45 +158,24 @@ export function Footer() {
                                     {siteConfig.contact.email}
                                 </a>
                             </li>
-                        </ul>
-                    </div>
-
-                    {/* Hours & Legal */}
-                    <div>
-                        <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-text-muted">
-                            Operating Hours
-                        </h3>
-                        <ul className="space-y-2 text-sm text-text-secondary">
-                            <li className="flex items-start gap-2">
+                            <li className="flex items-start gap-2 text-sm text-text-secondary">
                                 <Clock className="mt-0.5 h-4 w-4 shrink-0 text-text-muted" />
-                                <div>
-                                    <p className="font-medium text-text-primary">Mon - Sat</p>
-                                    <p>6:00 AM – 10:00 PM</p>
-                                </div>
+                                <span>{siteConfig.operatingHours}</span>
                             </li>
-                            <li className="flex items-start gap-2">
+                            <li className="flex items-start gap-2 text-sm text-text-secondary">
                                 <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-text-muted" />
-                                <p>Kent & SE London (up to 60 min radius)</p>
+                                <span>Kent & SE London (up to 60 min radius)</span>
                             </li>
                         </ul>
-
-                        <div className="mt-6 space-y-1">
-                            <Link to="/legal/privacy-policy" className="block text-xs text-text-muted transition-colors hover:text-text-secondary">
-                                Privacy Policy
-                            </Link>
-                            <Link to="/legal/terms" className="block text-xs text-text-muted transition-colors hover:text-text-secondary">
-                                Terms of Service
-                            </Link>
-                            <Link to="/legal/disclaimer" className="block text-xs text-text-muted transition-colors hover:text-text-secondary">
-                                Disclaimer
-                            </Link>
-                        </div>
                     </div>
                 </div>
 
                 <div className="mt-10 border-t border-border-default pt-6 text-center text-xs text-text-muted">
                     <p>
-                        &copy; {year} {siteConfig.brandName}. All rights reserved. Independent service - not affiliated with vehicle manufacturers.
+                        TriPoint Diagnostics Ltd (company no. placeholder) &middot; VAT no. placeholder
+                    </p>
+                    <p className="mt-1">
+                        &copy; {year} {siteConfig.brandName}. Independent service - not affiliated with vehicle manufacturers.
                     </p>
                 </div>
             </div>

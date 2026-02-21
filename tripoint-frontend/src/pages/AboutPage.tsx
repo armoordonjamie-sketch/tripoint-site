@@ -1,8 +1,8 @@
 import { Seo } from '@/components/Seo';
+import { trackEvent } from '@/lib/analytics';
 import { Section } from '@/components/Section';
 import { CTAButton } from '@/components/CTAButton';
 import { PhotoGallery } from '@/components/PhotoGallery';
-import { Notice } from '@/components/Notice';
 import { Wrench, Truck, Shield, MapPin, Users, FileText } from 'lucide-react';
 import { galleryImages } from '@/data/galleryImages';
 
@@ -23,7 +23,7 @@ export function AboutPage() {
         <>
             <Seo
                 title="About"
-                description="About TriPoint Diagnostics - independent, compliance-first mobile diagnostics for vans and cars across Kent & SE London."
+                description="About TriPoint Diagnostics - independent mobile diagnostics for vans and cars across Kent & SE London. Dealer-level tooling, written outcomes."
                 canonical="/about"
             />
 
@@ -33,7 +33,7 @@ export function AboutPage() {
                         About TriPoint Diagnostics
                     </h1>
                     <p className="mt-4 text-lg text-text-secondary">
-                        Dealer-level diagnostic thinking in a mobile format. Independent, compliance-first, and focused on getting you a proper answer.
+                        Dealer-level diagnostic thinking in a mobile format. Independent, thorough, and focused on getting you a proper answer.
                     </p>
 
                     <div className="mt-10 space-y-8">
@@ -50,12 +50,19 @@ export function AboutPage() {
                         </div>
 
                         <div>
+                            <h2 className="text-2xl font-bold text-text-primary">Credibility</h2>
+                            <p className="mt-3 text-text-secondary">
+                                Mercedes-Benz Truck &amp; Van trained technician (UK). We focus on process, tooling, and approach - not guesswork. Dealer-level diagnostic access where applicable. <strong>Independent service - we are not affiliated with or endorsed by Mercedes-Benz.</strong>
+                            </p>
+                        </div>
+
+                        <div>
                             <h2 className="text-2xl font-bold text-text-primary">What Sets Us Apart</h2>
                             <div className="mt-4 grid gap-4 sm:grid-cols-2">
                                 {[
                                     { icon: <Wrench className="h-5 w-5" />, title: 'Dealer-Level Tooling', desc: 'Professional diagnostic equipment with deep system access - not a generic code reader from Amazon.' },
                                     { icon: <Truck className="h-5 w-5" />, title: 'Sprinter Expertise', desc: 'Special strength in Mercedes Sprinter (W906/W907) and OM651/OM654 engines. We know the common failures and the proper fix paths.' },
-                                    { icon: <Shield className="h-5 w-5" />, title: 'Compliance-First', desc: 'We diagnose and repair emissions systems; we don\'t delete them. Your MOT, your ULEZ, your compliance - protected.' },
+                                    { icon: <Shield className="h-5 w-5" />, title: 'Proper Process', desc: 'Structured diagnostic workflow. We follow manufacturer procedures and document everything.' },
                                     { icon: <FileText className="h-5 w-5" />, title: 'Written Outcomes', desc: 'Every job ends with a written report: what we found, what we tested, and what to do next. No verbal "it\'s probably the…" guesses.' },
                                     { icon: <MapPin className="h-5 w-5" />, title: 'Mobile Convenience', desc: 'We come to you across Kent and SE London. Driveway, depot, yard - wherever the vehicle is, as long as it\'s safe to work.' },
                                     { icon: <Users className="h-5 w-5" />, title: 'Clear Communication', desc: 'Plain English findings. We explain what\'s wrong, why it happened, and what the options are - without jargon walls.' },
@@ -99,13 +106,8 @@ export function AboutPage() {
                             </ol>
                         </div>
 
-                        <Notice variant="compliance">
-                            <strong>Independent service:</strong> TriPoint Diagnostics is not affiliated with any vehicle manufacturer.
-                            We operate as an independent mobile diagnostics and repair service.
-                        </Notice>
-
                         <div className="text-center">
-                            <CTAButton href="/booking" size="lg">
+                            <CTAButton href="/booking" size="lg" onClick={() => trackEvent('click_book_now', { location: 'about' })}>
                                 Book a Diagnostic
                             </CTAButton>
                         </div>

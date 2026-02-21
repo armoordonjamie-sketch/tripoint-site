@@ -23,6 +23,12 @@ if [ "$LOCAL" != "$REMOTE" ]; then
     # Pull changes
     git pull origin main
     
+    # Update Python dependencies
+    echo ">>> Installing Python dependencies..."
+    source "$APP_DIR/venv/bin/activate"
+    pip install -q -r "$APP_DIR/python-scripts/requirements.txt" 2>/dev/null || \
+        pip install -q fastapi uvicorn WazeRouteCalculator requests google-api-python-client google-auth google-auth-oauthlib email-validator python-dotenv aiosqlite stripe python-multipart reportlab
+    
     # Rebuild
     cd "$FRONTEND_DIR" || exit 1
     echo ">>> Installing dependencies..."

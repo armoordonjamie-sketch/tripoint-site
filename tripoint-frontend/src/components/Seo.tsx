@@ -24,6 +24,10 @@ export function Seo({
         ? `${siteConfig.url}${canonical}`
         : undefined;
 
+    const imageUrl = ogImage
+        ? (ogImage.startsWith('http') ? ogImage : `${siteConfig.url}${ogImage}`)
+        : `${siteConfig.url}/og-default.jpg`;
+
     return (
         <Helmet>
             <title>{fullTitle}</title>
@@ -37,13 +41,17 @@ export function Seo({
             <meta property="og:type" content={siteConfig.defaultSeo.openGraph.type} />
             <meta property="og:locale" content={siteConfig.defaultSeo.openGraph.locale} />
             <meta property="og:site_name" content={siteConfig.defaultSeo.openGraph.siteName} />
-            {ogImage && <meta property="og:image" content={ogImage} />}
+            <meta property="og:image" content={imageUrl} />
+            <meta property="og:image:width" content="1200" />
+            <meta property="og:image:height" content="630" />
+            <meta property="og:image:alt" content={`${siteConfig.brandName} - ${siteConfig.tagline}`} />
             {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
 
             {/* Twitter */}
             <meta name="twitter:card" content="summary_large_image" />
             <meta name="twitter:title" content={fullTitle} />
             <meta name="twitter:description" content={description} />
+            <meta name="twitter:image" content={imageUrl} />
         </Helmet>
     );
 }

@@ -10,13 +10,12 @@ export const siteConfig = {
         phoneE164: '+442080586095',
         whatsappE164: 'message/NROKKGS6QK54G1',
         email: 'contact@tripointdiagnostics.co.uk',
-        calendlyUrl: 'https://calendly.com/tripoint-diagnostics',
     },
 
     social: {
         facebook: 'https://facebook.com/REPLACE_ME',
         instagram: 'https://instagram.com/REPLACE_ME',
-        google: 'https://g.page/REPLACE_ME',
+        google: 'https://share.google/VzrAGFshBV7ITb7s2',
     },
 
     baseLocations: [
@@ -84,7 +83,7 @@ export const siteConfig = {
             },
             {
                 name: 'Pre-Purchase Digital Health Check',
-                slug: 'pre-purchase-health-check',
+                slug: 'pre-purchase-digital-health-check',
                 zoneA: 160,
                 zoneB: 175,
                 zoneC: 190,

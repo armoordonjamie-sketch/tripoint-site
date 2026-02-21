@@ -5,12 +5,15 @@ const DOMAIN = import.meta.env.VITE_PLAUSIBLE_DOMAIN || 'tripointdiagnostics.co.
 
 // Initialize tracking
 // We'll export a setup function to be called in App.tsx
+let isInitialized = false;
+
 export const initAnalytics = () => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== 'undefined' && !isInitialized) {
         init({
             domain: DOMAIN,
             autoCapturePageviews: true,
         });
+        isInitialized = true;
     }
 };
 
@@ -18,12 +21,15 @@ export const initAnalytics = () => {
 // Define known event names for type safety
 export type AnalyticsEvent =
     | 'click_book_now'
+    | 'click_whatsapp'
     | 'click_phone_header'
     | 'click_phone_footer'
     | 'click_email_footer'
     | 'click_social'
+    | 'click_contact'
     | 'submit_contact_form'
     | 'submit_booking_request'
+    | 'confirm_booking'
     | 'view_service'
     | 'view_booking_form'
     | 'zone_check';

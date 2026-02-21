@@ -1,57 +1,83 @@
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Seo } from '@/components/Seo';
 import { Section } from '@/components/Section';
 import { CTAButton } from '@/components/CTAButton';
 import { BookOpen } from 'lucide-react';
+import { blogPosts } from '@/data/blogPosts';
+
+const categories = ['All', ...Array.from(new Set(blogPosts.map((p) => p.category)))];
 
 export function BlogIndexPage() {
+    const [filter, setFilter] = useState('All');
+    const filtered = filter === 'All' ? blogPosts : blogPosts.filter((p) => p.category === filter);
+
     return (
         <>
             <Seo
                 title="Blog"
-                description="Technical insights, case studies, and diagnostic tips from TriPoint Diagnostics. Coming soon."
+                description="Technical insights on Sprinter limp mode, AdBlue countdown, DPF diagnostics, and mobile vehicle diagnostics from TriPoint."
                 canonical="/blog"
             />
 
             <Section>
-                <div className="mx-auto max-w-3xl text-center">
+                <div className="mx-auto max-w-4xl">
                     <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-brand/10">
                         <BookOpen className="h-8 w-8 text-brand" />
                     </div>
-                    <h1 className="text-4xl font-extrabold text-text-primary sm:text-5xl">
+                    <h1 className="text-center text-4xl font-extrabold text-text-primary sm:text-5xl">
                         Blog
                     </h1>
-                    <p className="mx-auto mt-4 max-w-xl text-lg text-text-secondary">
-                        Technical insights, case studies, and diagnostic tips - coming soon.
-                    </p>
-                    <p className="mt-6 text-sm text-text-muted">
-                        We&apos;re preparing articles on common diagnostic scenarios, Sprinter-specific issues,
-                        emissions system troubleshooting, and mobile diagnostics best practices.
+                    <p className="mx-auto mt-4 max-w-xl text-center text-lg text-text-secondary">
+                        Technical insights, diagnostic tips, and practical guidance.
                     </p>
 
-                    {/* Placeholder cards */}
-                    <div className="mt-12 grid gap-6 text-left sm:grid-cols-2 lg:grid-cols-3">
-                        {[
-                            { title: 'Understanding AdBlue Countdowns', cat: 'Emissions', desc: 'What triggers the countdown, what the stages mean, and how we diagnose it properly.' },
-                            { title: 'Sprinter Limp Mode: Common Causes', cat: 'Mercedes', desc: 'A breakdown of the most frequent limp-mode triggers on W906 and W907 platforms.' },
-                            { title: 'Mobile vs Workshop Diagnostics', cat: 'Industry', desc: 'When mobile is the right choice - and when you genuinely need a workshop.' },
-                        ].map((post) => (
-                            <div
-                                key={post.title}
-                                className="rounded-2xl border border-border-default bg-surface-alt p-5 opacity-60"
+                    <div className="mt-8 flex flex-wrap justify-center gap-2">
+                        {categories.map((cat) => (
+                            <button
+                                key={cat}
+                                onClick={() => setFilter(cat)}
+                                className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+                                    filter === cat
+                                        ? 'bg-brand text-white'
+                                        : 'bg-surface-alt text-text-secondary hover:bg-surface-elevated'
+                                }`}
                             >
-                                <span className="text-xs font-semibold uppercase tracking-wider text-brand">
-                                    {post.cat}
-                                </span>
-                                <h3 className="mt-2 font-semibold text-text-primary">{post.title}</h3>
-                                <p className="mt-2 text-sm text-text-secondary">{post.desc}</p>
-                                <p className="mt-3 text-xs text-text-muted italic">Coming soon</p>
-                            </div>
+                                {cat}
+                            </button>
                         ))}
                     </div>
 
-                    <div className="mt-12">
+                    <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                        {filtered.map((post) => (
+                            <Link
+                                key={post.slug}
+                                to={`/blog/${post.slug}`}
+                                className="rounded-2xl border border-border-default bg-surface-alt p-5 transition-all hover:border-brand/30 hover:bg-brand/5"
+                            >
+                                <span className="text-xs font-semibold uppercase tracking-wider text-brand">
+                                    {post.category}
+                                </span>
+                                <h3 className="mt-2 font-semibold text-text-primary">{post.title}</h3>
+                                <p className="mt-2 text-sm text-text-secondary line-clamp-3">{post.description}</p>
+                                <p className="mt-3 text-xs text-text-muted">
+                                    {new Date(post.publishedAt).toLocaleDateString('en-GB', {
+                                        day: 'numeric',
+                                        month: 'long',
+                                        year: 'numeric',
+                                    })}
+                                </p>
+                            </Link>
+                        ))}
+                    </div>
+
+                    {filtered.length === 0 && (
+                        <p className="mt-12 text-center text-text-secondary">No posts in this category yet.</p>
+                    )}
+
+                    <div className="mt-12 text-center">
                         <CTAButton href="/contact" variant="outline">
-                            Get Notified When We Publish
+                            Get in Touch
                         </CTAButton>
                     </div>
                 </div>

@@ -1,0 +1,17 @@
+{
+  "name": "TriPoint Diagnostics",
+  "short_name": "TriPoint",
+  "description": "Mobile vehicle diagnostics and compliant repairs for vans and cars across Kent & SE London.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0ea5e9",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

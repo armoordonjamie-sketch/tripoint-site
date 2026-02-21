@@ -1,5 +1,5 @@
 """
-TriPoint Diagnostics — Image Processor
+TriPoint Diagnostics - Image Processor
 1. Converts HEIC/PNG images to JPEG
 2. Sends each image to Gemini 3 Flash Preview via OpenRouter for analysis
 3. Builds a JSON file with descriptions
@@ -60,73 +60,73 @@ SECTIONS = [
     {
         "id": "hero-bg",
         "filename": "hero-bg.jpg",
-        "description": "Hero background — the main banner image at the top of the homepage. Best fit: a wide shot of your van, your setup, or something that represents mobile diagnostics at a glance. Preferably dramatic or atmospheric.",
+        "description": "Hero background - the main banner image at the top of the homepage. Best fit: a wide shot of your van, your setup, or something that represents mobile diagnostics at a glance. Preferably dramatic or atmospheric.",
         "priority_keywords": ["van", "sprinter", "parked", "driveway", "road", "setup", "mobile", "wide shot"],
     },
     {
         "id": "diagnostic-callout",
         "filename": "diagnostic-callout.jpg",
-        "description": "Diagnostic Callout service page — showing diagnostic work. Best fit: OBD cable connected, laptop showing diagnostics, Xentry screen, or hands-on diagnostic work.",
+        "description": "Diagnostic Callout service page - showing diagnostic work. Best fit: OBD cable connected, laptop showing diagnostics, Xentry screen, or hands-on diagnostic work.",
         "priority_keywords": ["diagnostic", "obd", "xentry", "laptop", "screen", "cable", "connected", "fault", "scan"],
     },
     {
         "id": "vor-triage",
         "filename": "vor-triage.jpg",
-        "description": "VOR / Priority Triage service page — urgent commercial vehicle repair. Best fit: a commercial van or fleet vehicle, depot setting, or urgent breakdown scenario.",
+        "description": "VOR / Priority Triage service page - urgent commercial vehicle repair. Best fit: a commercial van or fleet vehicle, depot setting, or urgent breakdown scenario.",
         "priority_keywords": ["van", "commercial", "fleet", "breakdown", "urgent", "depot", "loading", "sprinter", "parked"],
     },
     {
         "id": "emissions-diagnostics",
         "filename": "emissions-diagnostics.jpg",
-        "description": "Emissions Diagnostics service page — exhaust, DPF, AdBlue, SCR work. Best fit: exhaust system, engine bay, emissions-related components, under-vehicle work.",
+        "description": "Emissions Diagnostics service page - exhaust, DPF, AdBlue, SCR work. Best fit: exhaust system, engine bay, emissions-related components, under-vehicle work.",
         "priority_keywords": ["exhaust", "dpf", "adblue", "engine", "emissions", "underside", "pipe", "filter"],
     },
     {
         "id": "pre-purchase",
         "filename": "pre-purchase.jpg",
-        "description": "Pre-Purchase Health Check service page — inspecting a vehicle before buying. Best fit: checking a vehicle, inspection report, looking at a van critically.",
+        "description": "Pre-Purchase Health Check service page - inspecting a vehicle before buying. Best fit: checking a vehicle, inspection report, looking at a van critically.",
         "priority_keywords": ["inspection", "check", "report", "condition", "exterior", "bodywork", "full vehicle"],
     },
     {
         "id": "about-hero",
         "filename": "about-hero.jpg",
-        "description": "About / Trust section — professional credibility. Best fit: your full setup, branded van, professional equipment laid out, or a wide atmospheric shot.",
+        "description": "About / Trust section - professional credibility. Best fit: your full setup, branded van, professional equipment laid out, or a wide atmospheric shot.",
         "priority_keywords": ["professional", "setup", "branded", "equipment", "tools", "van", "workshop"],
     },
     {
         "id": "sprinter-specialist",
         "filename": "sprinter-specialist.jpg",
-        "description": "Sprinter Specialist section — Mercedes Sprinter expertise. Best fit: engine bay of a Sprinter, Sprinter-specific work, close-up of Mercedes engine or components.",
+        "description": "Sprinter Specialist section - Mercedes Sprinter expertise. Best fit: engine bay of a Sprinter, Sprinter-specific work, close-up of Mercedes engine or components.",
         "priority_keywords": ["sprinter", "mercedes", "engine bay", "engine", "bonnet", "diesel", "motor"],
     },
     {
         "id": "tools-array",
         "filename": "tools-array.jpg",
-        "description": "Equipment/Tools banner — showing your professional toolkit. Best fit: tools laid out, diagnostic equipment, laptop and cables, professional setup.",
+        "description": "Equipment/Tools banner - showing your professional toolkit. Best fit: tools laid out, diagnostic equipment, laptop and cables, professional setup.",
         "priority_keywords": ["tools", "equipment", "laptop", "cables", "laid out", "organised", "kit", "case"],
     },
     {
         "id": "testimonial-bg",
         "filename": "testimonial-bg.jpg",
-        "description": "Testimonial background — subtle dark background for customer quotes. Best fit: dashboard close-up, dark moody shot, interior of van, abstract/atmospheric.",
+        "description": "Testimonial background - subtle dark background for customer quotes. Best fit: dashboard close-up, dark moody shot, interior of van, abstract/atmospheric.",
         "priority_keywords": ["dashboard", "dark", "interior", "moody", "night", "close-up", "abstract", "subtle"],
     },
     {
         "id": "cta-bg",
         "filename": "cta-bg.jpg",
-        "description": "Footer CTA background — call-to-action banner. Best fit: road shot, light trails, atmospheric driving shot, or dramatic wide angle.",
+        "description": "Footer CTA background - call-to-action banner. Best fit: road shot, light trails, atmospheric driving shot, or dramatic wide angle.",
         "priority_keywords": ["road", "driving", "wide", "atmospheric", "night", "lights", "dramatic"],
     },
     {
         "id": "blog-header",
         "filename": "blog-header.jpg",
-        "description": "Blog header — technical/knowledge section. Best fit: laptop with diagnostic screen, technical documentation, workspace setup.",
+        "description": "Blog header - technical/knowledge section. Best fit: laptop with diagnostic screen, technical documentation, workspace setup.",
         "priority_keywords": ["laptop", "screen", "technical", "desk", "work", "data", "reading"],
     },
     {
         "id": "mobile-setup",
         "filename": "mobile-setup.jpg",
-        "description": "Mobile Van Setup — showing your mobile workshop. Best fit: van interior with organised equipment, rear doors open showing kit, mobile workshop setup.",
+        "description": "Mobile Van Setup - showing your mobile workshop. Best fit: van interior with organised equipment, rear doors open showing kit, mobile workshop setup.",
         "priority_keywords": ["van interior", "rear", "doors open", "kit", "organised", "mobile", "workshop", "storage"],
     },
     {
@@ -184,7 +184,7 @@ def convert_images():
                 print(f"  ✗ {f.name}: {e}")
 
         elif ext in (".JPG", ".JPEG"):
-            # Already JPEG — just copy
+            # Already JPEG - just copy
             shutil.copy2(f, out_path)
             print(f"  ✓ {f.name} → {out_name} (copied)")
             converted += 1
@@ -288,7 +288,7 @@ def analyze_all_images():
 
     for i, f in enumerate(jpeg_files):
         if f.name in existing:
-            print(f"  [{i+1:>3}/{len(jpeg_files)}] {f.name} — cached")
+            print(f"  [{i+1:>3}/{len(jpeg_files)}] {f.name} - cached")
             results.append(existing[f.name])
             skipped += 1
             continue
@@ -338,7 +338,7 @@ def assign_images(descriptions: list):
     image_summaries = []
     for i, img in enumerate(descriptions):
         image_summaries.append(
-            f"  [{i}] {img['filename']} — {img.get('orientation', '?')}, "
+            f"  [{i}] {img['filename']} - {img.get('orientation', '?')}, "
             f"{img.get('width', '?')}×{img.get('height', '?')}, "
             f"{img.get('size_kb', '?')}KB\n"
             f"      Description: {img['description']}"
@@ -433,19 +433,19 @@ def copy_to_output(descriptions: list, assignments: dict):
     for section in SECTIONS:
         sid = section["id"]
         if sid not in assignments:
-            print(f"  ⚠ {sid} — no assignment, skipping")
+            print(f"  ⚠ {sid} - no assignment, skipping")
             continue
 
         idx = assignments[sid]
         if idx < 0 or idx >= len(descriptions):
-            print(f"  ⚠ {sid} — invalid index {idx}")
+            print(f"  ⚠ {sid} - invalid index {idx}")
             continue
 
         src = Path(descriptions[idx]["original_path"])
         dst = OUTPUT_DIR / section["filename"]
 
         if not src.exists():
-            print(f"  ✗ {sid} — source not found: {src.name}")
+            print(f"  ✗ {sid} - source not found: {src.name}")
             continue
 
         shutil.copy2(src, dst)
@@ -482,7 +482,7 @@ def main():
     args = parser.parse_args()
 
     print("=" * 60)
-    print("  TriPoint Diagnostics — Image Processor")
+    print("  TriPoint Diagnostics - Image Processor")
     print("=" * 60)
 
     if args.assign_only:

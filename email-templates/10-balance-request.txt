@@ -1,0 +1,37 @@
+TRIPOINT DIAGNOSTICS
+Payment Requested - Remaining Balance
+==============================
+
+Hi [CLIENT_FIRST_NAME],
+
+We've completed the work on your vehicle. Please pay the remaining balance of £[BALANCE_GBP] using the link below.
+
+JOB SUMMARY
+--------------------
+Booking ID: [BOOKING_ID]
+Service: [SERVICE_NAME]
+Vehicle: [VEHICLE_MAKE_MODEL] ([VEHICLE_REG])
+Balance due: £[BALANCE_GBP]
+
+PAY BALANCE
+-----------
+Click here to pay: [PAYMENT_LINK]
+
+Cheers,
+[TECH_NAME]
+Tripoint Diagnostics
+
+------------------------------
+Tripoint Diagnostics Ltd
+Company No: 17038307
+476 Sidcup Road, Eltham, London
+Website: https://tripointdiagnostics.co.uk
+Google: https://share.google/VzrAGFshBV7ITb7s2
+Email: contact@tripointdiagnostics.co.uk
+Phone: 020 8058 6095
+WhatsApp: https://wa.me/message/NROKKGS6QK54G1
+
+(c) [CURRENT_YEAR] Tripoint Diagnostics Ltd. All rights reserved.
+Privacy: https://tripointdiagnostics.co.uk/legal/privacy-policy
+Terms: https://tripointdiagnostics.co.uk/legal/terms
+Disclaimer: https://tripointdiagnostics.co.uk/legal/disclaimer

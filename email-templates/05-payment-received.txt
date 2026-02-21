@@ -1,0 +1,41 @@
+TRIPOINT DIAGNOSTICS
+Payment Received - Thank You
+==============================
+
+Hi [CLIENT_FIRST_NAME],
+
+We've received your payment. Here's your receipt for your records.
+
+RECEIPT
+--------------------
+Invoice: [INVOICE_ID]
+Vehicle: [VEHICLE_MAKE_MODEL] ([VEHICLE_REG])
+Service: [SERVICE_NAME]
+
+[INVOICE_LINE_ITEMS_HTML]
+
+Total paid: [INVOICE_TOTAL]
+
+If you've received a diagnostic report, you can access it here:
+[REPORT_LINK]
+
+Thanks for choosing Tripoint Diagnostics. If you need anything else or have follow-up questions about your vehicle, don't hesitate to get in touch.
+
+Cheers,
+[TECH_NAME]
+Tripoint Diagnostics
+
+------------------------------
+Tripoint Diagnostics Ltd
+Company No: 17038307
+476 Sidcup Road, Eltham, London
+Website: https://tripointdiagnostics.co.uk
+Google: https://share.google/VzrAGFshBV7ITb7s2
+Email: contact@tripointdiagnostics.co.uk
+Phone: 020 8058 6095
+WhatsApp: https://wa.me/message/NROKKGS6QK54G1
+
+(c) [CURRENT_YEAR] Tripoint Diagnostics Ltd. All rights reserved.
+Privacy: https://tripointdiagnostics.co.uk/legal/privacy-policy
+Terms: https://tripointdiagnostics.co.uk/legal/terms
+Disclaimer: https://tripointdiagnostics.co.uk/legal/disclaimer

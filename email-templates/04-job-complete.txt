@@ -1,0 +1,56 @@
+TRIPOINT DIAGNOSTICS
+Job Complete - Diagnostic Report for [VEHICLE_REG]
+==============================
+
+Hi [CLIENT_FIRST_NAME],
+
+Your diagnostic visit is complete. Below is a summary of the findings, along with your invoice and a link to the full report.
+
+DIAGNOSTIC SUMMARY
+--------------------
+Report ID: [REPORT_ID]
+Vehicle: [VEHICLE_MAKE_MODEL] ([VEHICLE_REG])
+Service: [SERVICE_NAME]
+
+[REPORT_SUMMARY]
+
+View Full Report: [REPORT_LINK]
+
+PAYMENT DUE
+--------------------
+Invoice: [INVOICE_ID]
+
+[INVOICE_LINE_ITEMS_HTML]
+
+Total: [INVOICE_TOTAL]
+
+Payment methods: [PAYMENT_METHODS]
+Pay Now: [PAYMENT_LINK]
+
+WHAT HAPPENS NEXT
+-----------------
+1. Review your full diagnostic report using the link above.
+2. Complete payment at your convenience using the link above.
+3. If follow-on work was recommended, we'll be happy to discuss options and scheduling.
+
+Questions about your report or invoice? Just reply to this email or message us on WhatsApp.
+WhatsApp: https://wa.me/message/NROKKGS6QK54G1
+
+Cheers,
+[TECH_NAME]
+Tripoint Diagnostics
+
+------------------------------
+Tripoint Diagnostics Ltd
+Company No: 17038307
+476 Sidcup Road, Eltham, London
+Website: https://tripointdiagnostics.co.uk
+Google: https://share.google/VzrAGFshBV7ITb7s2
+Email: contact@tripointdiagnostics.co.uk
+Phone: 020 8058 6095
+WhatsApp: https://wa.me/message/NROKKGS6QK54G1
+
+(c) [CURRENT_YEAR] Tripoint Diagnostics Ltd. All rights reserved.
+Privacy: https://tripointdiagnostics.co.uk/legal/privacy-policy
+Terms: https://tripointdiagnostics.co.uk/legal/terms
+Disclaimer: https://tripointdiagnostics.co.uk/legal/disclaimer

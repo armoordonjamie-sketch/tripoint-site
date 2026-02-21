@@ -1,6 +1,6 @@
 """
-TriPoint Diagnostics — Stock Photo Downloader
-Downloads curated real stock photographs — NO PEOPLE visible.
+TriPoint Diagnostics - Stock Photo Downloader
+Downloads curated real stock photographs - NO PEOPLE visible.
 Focused on: white vans, engine bays, diagnostic tools, UK roads, dashboards.
 
 Usage:
@@ -29,12 +29,12 @@ PROJECT_ROOT = SCRIPT_DIR.parent
 DEFAULT_OUTPUT_DIR = PROJECT_ROOT / "tripoint-frontend" / "public" / "images"
 DELAY = 1
 
-# ── Curated stock photos — NO PEOPLE ─────────────────────────────────
+# ── Curated stock photos - NO PEOPLE ─────────────────────────────────
 # Every image verified: no people, fits mobile diagnostics / automotive
 IMAGES = [
     {
         "number": "1",
-        "title": "Hero Background — White van on road at dusk",
+        "title": "Hero Background - White van on road at dusk",
         "filename": "hero-bg.jpg",
         "width": 1920, "height": 1080,
         # White delivery van driving on road, moody dusk sky
@@ -43,7 +43,7 @@ IMAGES = [
     },
     {
         "number": "2",
-        "title": "Diagnostic Callout — OBD port close-up",
+        "title": "Diagnostic Callout - OBD port close-up",
         "filename": "diagnostic-callout.jpg",
         "width": 800, "height": 600,
         # Car OBD port / diagnostic connector under dashboard
@@ -52,7 +52,7 @@ IMAGES = [
     },
     {
         "number": "3",
-        "title": "VOR / Priority Triage — Delivery van at depot",
+        "title": "VOR / Priority Triage - Delivery van at depot",
         "filename": "vor-triage.jpg",
         "width": 800, "height": 600,
         # White cargo van at loading dock / industrial
@@ -61,7 +61,7 @@ IMAGES = [
     },
     {
         "number": "4",
-        "title": "Emissions Diagnostics — Exhaust pipe close-up",
+        "title": "Emissions Diagnostics - Exhaust pipe close-up",
         "filename": "emissions-diagnostics.jpg",
         "width": 800, "height": 600,
         # Exhaust pipe / tailpipe close-up, no people
@@ -70,7 +70,7 @@ IMAGES = [
     },
     {
         "number": "5",
-        "title": "Pre-Purchase Health Check — Used van for sale",
+        "title": "Pre-Purchase Health Check - Used van for sale",
         "filename": "pre-purchase.jpg",
         "width": 800, "height": 600,
         # Parked white van, clean, could be for sale, suburban setting
@@ -79,7 +79,7 @@ IMAGES = [
     },
     {
         "number": "6",
-        "title": "About / Trust — Road at golden hour",
+        "title": "About / Trust - Road at golden hour",
         "filename": "about-hero.jpg",
         "width": 1200, "height": 600,
         # Open road at golden hour, van perspective, no people
@@ -88,7 +88,7 @@ IMAGES = [
     },
     {
         "number": "7",
-        "title": "Coverage Map — English countryside aerial",
+        "title": "Coverage Map - English countryside aerial",
         "filename": "coverage-map.jpg",
         "width": 1200, "height": 600,
         # Aerial English countryside, green fields, winding roads
@@ -97,7 +97,7 @@ IMAGES = [
     },
     {
         "number": "8.1",
-        "title": "Step 1 — Phone on table",
+        "title": "Step 1 - Phone on table",
         "filename": "step-1-get-in-touch.jpg",
         "width": 400, "height": 400,
         # Smartphone on a table, clean, no people
@@ -106,7 +106,7 @@ IMAGES = [
     },
     {
         "number": "8.2",
-        "title": "Step 2 — Calendar / booking",
+        "title": "Step 2 - Calendar / booking",
         "filename": "step-2-confirm-book.jpg",
         "width": 400, "height": 400,
         # Calendar / planner on desk, no people
@@ -115,7 +115,7 @@ IMAGES = [
     },
     {
         "number": "8.3",
-        "title": "Step 3 — Laptop with data",
+        "title": "Step 3 - Laptop with data",
         "filename": "step-3-on-site-diagnosis.jpg",
         "width": 400, "height": 400,
         # Laptop screen showing data/graphs, no people
@@ -124,7 +124,7 @@ IMAGES = [
     },
     {
         "number": "8.4",
-        "title": "Step 4 — Clipboard / report",
+        "title": "Step 4 - Clipboard / report",
         "filename": "step-4-written-fix-plan.jpg",
         "width": 400, "height": 400,
         # Clipboard with document, pen, on desk, no people
@@ -133,7 +133,7 @@ IMAGES = [
     },
     {
         "number": "9",
-        "title": "Equipment / Tools — Flat lay",
+        "title": "Equipment / Tools - Flat lay",
         "filename": "tools-array.jpg",
         "width": 1200, "height": 400,
         # Mechanic tools arranged on dark surface, wrenches, flat lay
@@ -142,7 +142,7 @@ IMAGES = [
     },
     {
         "number": "10",
-        "title": "Testimonial Background — Dashboard at night",
+        "title": "Testimonial Background - Dashboard at night",
         "filename": "testimonial-bg.jpg",
         "width": 1920, "height": 400,
         # Car dashboard / instrument cluster at night, dark moody
@@ -151,7 +151,7 @@ IMAGES = [
     },
     {
         "number": "11",
-        "title": "Sprinter Specialist — Engine bay",
+        "title": "Sprinter Specialist - Engine bay",
         "filename": "sprinter-specialist.jpg",
         "width": 800, "height": 600,
         # Car/van engine bay close-up, bonnet open, no people
@@ -160,7 +160,7 @@ IMAGES = [
     },
     {
         "number": "12",
-        "title": "Footer CTA — Road light trails at night",
+        "title": "Footer CTA - Road light trails at night",
         "filename": "cta-bg.jpg",
         "width": 1920, "height": 400,
         # Light trails on road at night, long exposure
@@ -169,7 +169,7 @@ IMAGES = [
     },
     {
         "number": "13",
-        "title": "Blog Header — Laptop on desk",
+        "title": "Blog Header - Laptop on desk",
         "filename": "blog-header.jpg",
         "width": 1200, "height": 400,
         # Laptop on clean desk, no people, work setup
@@ -178,7 +178,7 @@ IMAGES = [
     },
     {
         "number": "14",
-        "title": "Mobile Van Setup — Van rear doors open",
+        "title": "Mobile Van Setup - Van rear doors open",
         "filename": "mobile-setup.jpg",
         "width": 800, "height": 600,
         # Van with open rear doors showing cargo area / equipment
@@ -225,7 +225,7 @@ def main():
     if args.only:
         images = [img for img in images if img["number"] in args.only]
 
-    print(f"\n📸 TriPoint Diagnostics — Stock Photo Downloader")
+    print(f"\n📸 TriPoint Diagnostics - Stock Photo Downloader")
     print(f"   {len(images)} images  |  NO people  |  Unsplash (free)\n")
     print("=" * 60)
     for img in images:
@@ -234,7 +234,7 @@ def main():
     print("=" * 60)
 
     if args.dry_run:
-        print("\n🏁 Dry run — no files downloaded.")
+        print("\n🏁 Dry run - no files downloaded.")
         return
 
     output_dir = args.output.resolve()
@@ -245,7 +245,7 @@ def main():
     for i, img in enumerate(images):
         path = output_dir / img["filename"]
         if path.exists() and not args.force:
-            print(f"[{img['number']:>4}] {img['title']} — SKIPPED")
+            print(f"[{img['number']:>4}] {img['title']} - SKIPPED")
             skip += 1; continue
 
         print(f"[{img['number']:>4}] {img['title']}...")

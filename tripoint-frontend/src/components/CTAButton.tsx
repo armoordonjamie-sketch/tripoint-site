@@ -1,4 +1,4 @@
-import type { ReactNode, ButtonHTMLAttributes } from 'react';
+import type { ReactNode, ButtonHTMLAttributes, MouseEventHandler } from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 
@@ -39,10 +39,11 @@ export function CTAButton({
     external = false,
     icon,
     className,
+    onClick,
     ...props
 }: CTAButtonProps) {
     const classes = cn(
-        'inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition-all duration-200 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand disabled:opacity-50 disabled:cursor-not-allowed',
+        'inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition-all duration-200 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none disabled:grayscale',
         variants[variant],
         sizes[size],
         className,
@@ -55,6 +56,7 @@ export function CTAButton({
                 target="_blank"
                 rel="noopener noreferrer"
                 className={classes}
+                onClick={onClick as unknown as MouseEventHandler<HTMLAnchorElement>}
             >
                 {icon}
                 {children}
@@ -64,7 +66,7 @@ export function CTAButton({
 
     if (href) {
         return (
-            <Link to={href} className={classes}>
+            <Link to={href} className={classes} onClick={onClick as unknown as MouseEventHandler<HTMLAnchorElement>}>
                 {icon}
                 {children}
             </Link>
@@ -72,7 +74,7 @@ export function CTAButton({
     }
 
     return (
-        <button className={classes} {...props}>
+        <button className={classes} onClick={onClick} {...props}>
             {icon}
             {children}
         </button>

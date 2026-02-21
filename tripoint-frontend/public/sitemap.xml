@@ -16,7 +16,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://tripointdiagnostics.co.uk/services/vor-triage</loc>
+    <loc>https://tripointdiagnostics.co.uk/services/vor-van-diagnostics</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -26,7 +26,42 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://tripointdiagnostics.co.uk/services/pre-purchase-health-check</loc>
+    <loc>https://tripointdiagnostics.co.uk/services/pre-purchase-digital-health-check</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://tripointdiagnostics.co.uk/services/sprinter-limp-mode</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://tripointdiagnostics.co.uk/services/adblue-countdown</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://tripointdiagnostics.co.uk/services/nox-scr-diagnostics</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://tripointdiagnostics.co.uk/services/dpf-regeneration-decision</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://tripointdiagnostics.co.uk/services/mercedes-xentry-diagnostics-coding</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://tripointdiagnostics.co.uk/services/intermittent-electrical-faults</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://tripointdiagnostics.co.uk/services/fleet-health-check</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -36,9 +71,14 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://tripointdiagnostics.co.uk/coverage</loc>
+    <loc>https://tripointdiagnostics.co.uk/areas</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://tripointdiagnostics.co.uk/process</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tripointdiagnostics.co.uk/booking</loc>
@@ -71,6 +111,21 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://tripointdiagnostics.co.uk/blog/sprinter-limp-mode-proper-diagnostic</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://tripointdiagnostics.co.uk/blog/adblue-countdown-clearing-codes-not-fix</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://tripointdiagnostics.co.uk/blog/dpf-warning-light-regen-vs-worse</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://tripointdiagnostics.co.uk/legal/privacy-policy</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
@@ -82,6 +137,11 @@
   </url>
   <url>
     <loc>https://tripointdiagnostics.co.uk/legal/disclaimer</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://tripointdiagnostics.co.uk/legal/accessibility</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>

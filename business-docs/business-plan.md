@@ -7,7 +7,7 @@ Below is a complete business plan you can use as your “north star” and also 
 ## 1) Executive summary
 
 **What you’re building**
-A mobile, appointment-based diagnostics and repair service focused on modern diesel vans (especially Mercedes-Benz platforms you already know inside out) plus selective passenger-car diagnostic work. The core product is **certainty + speed of decision**: deep scan, guided tests where applicable, live data validation, and a **written fix plan**—with mobile repairs only where safe and feasible.
+A mobile, appointment-based diagnostics and repair service focused on modern diesel vans (especially Mercedes-Benz platforms you already know inside out) plus selective passenger-car diagnostic work. The core product is **certainty + speed of decision**: deep scan, guided tests where applicable, live data validation, and a **written fix plan**-with mobile repairs only where safe and feasible.
 
 **Why it wins**
 
@@ -15,7 +15,7 @@ A mobile, appointment-based diagnostics and repair service focused on modern die
 * **The market is saturated at the “cheap code read / mobile mechanic” layer**, but there’s clear space for “dealer-level depth, mobile convenience, and documented outcomes.”
 * **Compliance-first is a margin lever**: you explicitly *don’t* offer deletes/defeat. DPF removal is “almost always illegal” per UK guidance and can lead to MOT failure and fines (including higher fines for light goods vehicles). ([GOV.UK][1])
 * **ULEZ pressure** increases the cost of ignoring emissions issues for customers operating inside London (24/7 except Christmas Day, £12.50/day for vans ≤3.5t if non-compliant). ([Transport for London][2])
-* **Security-related access is getting tighter**, and UK SERMI go-live is being reported as **1 April 2026**—raising the barrier for “cheap scanner” competition and making authorised workflows a clearer differentiator. ([rmif.co.uk][3])
+* **Security-related access is getting tighter**, and UK SERMI go-live is being reported as **1 April 2026**-raising the barrier for “cheap scanner” competition and making authorised workflows a clearer differentiator. ([rmif.co.uk][3])
 
 **Targets (12 months)**
 
@@ -29,18 +29,18 @@ A mobile, appointment-based diagnostics and repair service focused on modern die
 
 ### Mission
 
-Keep working vehicles compliant, reliable, and earning—by delivering dealership-grade diagnostic thinking in a mobile format.
+Keep working vehicles compliant, reliable, and earning-by delivering dealership-grade diagnostic thinking in a mobile format.
 
 ### Positioning statement
 
-**“Compliance-first mobile diagnostics & repairs for modern diesel vans — dealer-level depth, written fix plans, no guesswork.”**
+**“Compliance-first mobile diagnostics & repairs for modern diesel vans - dealer-level depth, written fix plans, no guesswork.”**
 
 ### Core differentiators
 
 1. **Diagnostics-first (productised)**: every job ends with a written outcome.
 2. **Commercial downtime focus**: VOR triage and depot-friendly hours (AM weeks).
 3. **Mercedes van expertise**: W906/W907 + OM651/OM654 familiarity and correct procedures.
-4. **Compliance-first**: you repair and verify—no delete marketing.
+4. **Compliance-first**: you repair and verify-no delete marketing.
 
 ---
 
@@ -216,7 +216,7 @@ So your angle is: **“fix and verify” to keep them compliant and earning**.
 ### Business structure & tax (high-level)
 
 * Plan for VAT early. The UK VAT registration threshold increased to **£90,000** from April 2024. ([GOV.UK][4])
-  At 10–12 jobs/week, you may approach this—especially if you add repair labour/parts margin—so decide whether you aim to **stay under** or **price for VAT**.
+  At 10–12 jobs/week, you may approach this-especially if you add repair labour/parts margin-so decide whether you aim to **stay under** or **price for VAT**.
 
 Work with HMRC rules and get an accountant lined up from day 1.
 
@@ -263,7 +263,7 @@ Work with HMRC rules and get an accountant lined up from day 1.
 * Phone/software/accounting: £X
 * Van costs/maintenance: £X
 
-Using a typical mixed-cost model (moderate fixed costs + ~£21/job variable + ~1.5% card fees), the **pre-tax profit can be strong**—but the real lever is **time discipline** and **avoiding travel waste**, not squeezing pennies.
+Using a typical mixed-cost model (moderate fixed costs + ~£21/job variable + ~1.5% card fees), the **pre-tax profit can be strong**-but the real lever is **time discipline** and **avoiding travel waste**, not squeezing pennies.
 
 ### Break-even thinking (what matters)
 

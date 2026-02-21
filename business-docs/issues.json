@@ -1,0 +1,273 @@
+[
+    {
+        "severity": "critical",
+        "category": "conversion",
+        "issue": "Contact form not wired to any email API",
+        "evidence_urls": [
+            "https://tripointdiagnostics.co.uk/contact"
+        ],
+        "why_it_matters": "Form submissions save to localStorage only. Real enquiries are silently lost - zero leads captured from the contact page.",
+        "recommended_fix": "Wire the form to an email API (Zoho ZeptoMail is already configured in the booking system, reuse it). Add webhook or Zapier fallback. Confirm with a delivery test.",
+        "effort": "S"
+    },
+    {
+        "severity": "critical",
+        "category": "conversion",
+        "issue": "Pricing mismatch: hero says '£80+' but minimum Zone A is £120",
+        "evidence_urls": [
+            "https://tripointdiagnostics.co.uk/"
+        ],
+        "why_it_matters": "Misleading pricing erodes trust instantly. A visitor clicking expecting £80 sees £120 on the pricing page, creating a bait-and-switch feeling.",
+        "recommended_fix": "Change the hero stat to '£120+' to match the actual lowest Zone A diagnostic callout price, or add context ('from £120 Zone A').",
+        "effort": "S"
+    },
+    {
+        "severity": "critical",
+        "category": "legal",
+        "issue": "Legal pages have unfilled placeholders: [DATE], [EMAIL], [SPECIFY METHODS]",
+        "evidence_urls": [
+            "https://tripointdiagnostics.co.uk/legal/privacy-policy",
+            "https://tripointdiagnostics.co.uk/legal/terms",
+            "https://tripointdiagnostics.co.uk/legal/disclaimer"
+        ],
+        "why_it_matters": "Unprofessional and non-compliant. UK GDPR requires a valid privacy policy with actual contact details and date. Visitors who see '[EMAIL ADDRESS]' will question legitimacy.",
+        "recommended_fix": "Replace all placeholders: [DATE] → '17 February 2026', [EMAIL] → 'contact@tripointdiagnostics.co.uk', [SPECIFY METHODS] → 'bank transfer, card payment (via Stripe/Square), cash'.",
+        "effort": "S"
+    },
+    {
+        "severity": "critical",
+        "category": "conversion",
+        "issue": "Social media links are placeholder REPLACE_ME URLs",
+        "evidence_urls": [
+            "https://tripointdiagnostics.co.uk/"
+        ],
+        "why_it_matters": "Footer links to facebook.com/REPLACE_ME, instagram.com/REPLACE_ME, and g.page/REPLACE_ME. Clicking them leads to 404/broken pages, destroying trust.",
+        "recommended_fix": "Either set up real social profiles and update siteConfig.social, or hide the social links entirely until profiles exist.",
+        "effort": "S"
+    },
+    {
+        "severity": "high",
+        "category": "conversion",
+        "issue": "No customer reviews or testimonials anywhere on the site",
+        "evidence_urls": [
+            "https://tripointdiagnostics.co.uk/"
+        ],
+        "why_it_matters": "Social proof is the #1 trust driver for local service businesses. Without reviews, visitors must take claims at face value. Google reviews have massive impact on local SEO too.",
+        "recommended_fix": "Add a testimonials section to the homepage (even 2-3 initial reviews). If no reviews exist yet, add Google review badges once you have them. Consider embedding Google Reviews widget.",
+        "effort": "M"
+    },
+    {
+        "severity": "high",
+        "category": "legal",
+        "issue": "No cookie consent banner",
+        "evidence_urls": [
+            "https://tripointdiagnostics.co.uk/"
+        ],
+        "why_it_matters": "While Plausible is cookieless, the site uses localStorage for form data. UK PECR and GDPR require informed consent for any persistent client-side storage. Also, any future addition of GA4/Meta pixel would need consent.",
+        "recommended_fix": "Add a minimal cookie/storage consent banner. Since Plausible is cookieless, you can keep it simple - just disclose localStorage usage for form data. Use a lightweight solution like CookieConsent.js.",
+        "effort": "S"
+    },
+    {
+        "severity": "high",
+        "category": "legal",
+        "issue": "No company registration details in footer",
+        "evidence_urls": [
+            "https://tripointdiagnostics.co.uk/"
+        ],
+        "why_it_matters": "If TriPoint is a Ltd company, UK Companies Act 2006 requires the company name, number, and registered office on the website. Even sole traders benefit from displaying registration details for trust.",
+        "recommended_fix": "Add to footer: trading name, company number (if Ltd), registered office, VAT number (if registered). If sole trader, state 'Sole trader' with trading address.",
+        "effort": "S"
+    },
+    {
+        "severity": "high",
+        "category": "seo",
+        "issue": "SPA with no server-side rendering - poor SEO crawlability",
+        "evidence_urls": [
+            "https://tripointdiagnostics.co.uk/"
+        ],
+        "why_it_matters": "The site is a client-side React SPA. Google can render JS but it's slower to index, and Bing/other crawlers may not render JS at all. All pages return the same empty HTML shell.",
+        "recommended_fix": "For launch, consider Prerender.io or a similar pre-rendering service. Long-term, migrate to Next.js or use vite-plugin-ssr for SSG/SSR. At minimum, ensure sitemap.xml is submitted to Google Search Console.",
+        "effort": "L"
+    },
+    {
+        "severity": "high",
+        "category": "seo",
+        "issue": "No structured data (Schema.org) on any page",
+        "evidence_urls": [
+            "https://tripointdiagnostics.co.uk/",
+            "https://tripointdiagnostics.co.uk/faq",
+            "https://tripointdiagnostics.co.uk/services/diagnostic-callout"
+        ],
+        "why_it_matters": "Schema markup enables rich snippets in Google results (star ratings, FAQ dropdowns, service details, pricing). Without it, you miss out on significant SERP real estate.",
+        "recommended_fix": "Add LocalBusiness schema to homepage, Service schema to each service page, FAQPage schema to /faq. Use JSON-LD format via react-helmet.",
+        "effort": "M"
+    },
+    {
+        "severity": "high",
+        "category": "conversion",
+        "issue": "No persistent sticky CTA on mobile",
+        "evidence_urls": [
+            "https://tripointdiagnostics.co.uk/"
+        ],
+        "why_it_matters": "The header has a 'Book Now' button but it's behind the hamburger menu on mobile. As users scroll long pages, there's no always-visible CTA. Mobile users (likely 60%+ of traffic) lose easy access to convert.",
+        "recommended_fix": "Add a sticky bottom bar on mobile with 'Book' and 'Call/WhatsApp' buttons that persist while scrolling. This is the single highest-impact conversion change.",
+        "effort": "S"
+    },
+    {
+        "severity": "high",
+        "category": "conversion",
+        "issue": "About page has no personal founder bio or face",
+        "evidence_urls": [
+            "https://tripointdiagnostics.co.uk/about"
+        ],
+        "why_it_matters": "For a sole-trader/small mobile service, customers want to know WHO is coming to their home. A faceless 'About' page reduces trust and makes you indistinguishable from generic competitors.",
+        "recommended_fix": "Add a short founder section with name, photo, background (e.g., years experience, certifications/training). Even 2-3 sentences with a professional photo dramatically increases trust.",
+        "effort": "S"
+    },
+    {
+        "severity": "medium",
+        "category": "seo",
+        "issue": "Homepage title tag not optimised for local search",
+        "evidence_urls": [
+            "https://tripointdiagnostics.co.uk/"
+        ],
+        "why_it_matters": "The default title 'TriPoint Diagnostics - Mobile Vehicle Diagnostics & Repairs | Kent & SE London' is good but could be stronger. The page-specific Seo component for '/' doesn't set a custom title, using the defaultTitle instead.",
+        "recommended_fix": "Set a custom title on the homepage Seo component: e.g., 'Mobile Vehicle Diagnostics Kent & SE London | TriPoint Diagnostics' - leading with the keyword.",
+        "effort": "S"
+    },
+    {
+        "severity": "medium",
+        "category": "seo",
+        "issue": "No OG image set for social sharing",
+        "evidence_urls": [
+            "https://tripointdiagnostics.co.uk/"
+        ],
+        "why_it_matters": "When the site URL is shared on WhatsApp, Facebook, or LinkedIn, there's no preview image. This reduces click-through on shared links.",
+        "recommended_fix": "Create a branded OG image (1200x630px) with the logo + tagline. Set it in the Seo component's defaultSeo config. Add to /public and reference as ogImage.",
+        "effort": "S"
+    },
+    {
+        "severity": "medium",
+        "category": "conversion",
+        "issue": "Coverage page has empty map placeholder",
+        "evidence_urls": [
+            "https://tripointdiagnostics.co.uk/coverage"
+        ],
+        "why_it_matters": "An 'Interactive map coming soon' placeholder looks unfinished. Users want visual confirmation they're within coverage. Unprofessional for a launch.",
+        "recommended_fix": "Replace with a static Google Maps embed showing the two base locations with 60min radius circles, or a static image of the coverage area. Even a simple map screenshot is better than an empty box.",
+        "effort": "S"
+    },
+    {
+        "severity": "medium",
+        "category": "content",
+        "issue": "Blog is entirely placeholder ('coming soon')",
+        "evidence_urls": [
+            "https://tripointdiagnostics.co.uk/blog"
+        ],
+        "why_it_matters": "A 'coming soon' page signals the site isn't finished. It offers no SEO value and clutters navigation. Better to hide until there's real content.",
+        "recommended_fix": "Either remove Blog from navigation until launch content is ready, or write 1-2 genuine articles before March 1 (the AdBlue and Sprinter topics listed are excellent choices).",
+        "effort": "M"
+    },
+    {
+        "severity": "medium",
+        "category": "conversion",
+        "issue": "WhatsApp link format may be incorrect",
+        "evidence_urls": [
+            "https://tripointdiagnostics.co.uk/"
+        ],
+        "why_it_matters": "WhatsApp E164 is set to 'message/NROKKGS6QK54G1' which generates wa.me/message/NROKKGS6QK54G1. This is a WhatsApp Business short link format that may not work consistently on all devices.",
+        "recommended_fix": "Test the WhatsApp link on both iOS and Android. The standard format is wa.me/447XXXXXXXXX (country code + number). Use the long-form E.164 number if the short link is unreliable.",
+        "effort": "S"
+    },
+    {
+        "severity": "medium",
+        "category": "tracking",
+        "issue": "No click-to-call or click-to-WhatsApp tracking on most pages",
+        "evidence_urls": [
+            "https://tripointdiagnostics.co.uk/",
+            "https://tripointdiagnostics.co.uk/services/diagnostic-callout"
+        ],
+        "why_it_matters": "Plausible analytics is set up but trackEvent is only wired on the header call button, footer call button, and contact page phone link. Hero CTAs and service page CTAs don't track.",
+        "recommended_fix": "Add trackEvent calls to all WhatsApp and phone CTAs across all pages. Add submit_booking_request tracking to the BookingScheduler component.",
+        "effort": "S"
+    },
+    {
+        "severity": "medium",
+        "category": "ux",
+        "issue": "Our Work gallery page has no CTA or conversion path",
+        "evidence_urls": [
+            "https://tripointdiagnostics.co.uk/our-work"
+        ],
+        "why_it_matters": "The gallery page showcases 50+ real photos (excellent trust content) but there's no CTA to book, call, or enquire. It's a dead-end for conversion.",
+        "recommended_fix": "Add a CTA section at the bottom: 'Seen enough? Book a diagnostic' with Book + WhatsApp buttons.",
+        "effort": "S"
+    },
+    {
+        "severity": "medium",
+        "category": "conversion",
+        "issue": "Pricing inconsistency between homepage ServiceCards and actual prices",
+        "evidence_urls": [
+            "https://tripointdiagnostics.co.uk/",
+            "https://tripointdiagnostics.co.uk/services"
+        ],
+        "why_it_matters": "Homepage ServiceCards show 'from £80' for Diagnostic Callout and 'from £90' for Pre-Purchase, but actual Zone A prices are £120 and £160 respectively. This creates confusion.",
+        "recommended_fix": "Update ServiceCard fromPrice props to match siteConfig.pricing: Diagnostic Callout → 120, VOR → 160, Emissions → 170, Pre-Purchase → 160.",
+        "effort": "S"
+    },
+    {
+        "severity": "medium",
+        "category": "conversion",
+        "issue": "Operating hours on site differ from business plan reality",
+        "evidence_urls": [
+            "https://tripointdiagnostics.co.uk/",
+            "https://tripointdiagnostics.co.uk/faq"
+        ],
+        "why_it_matters": "Site displays '6:00 AM – 10:00 PM Mon-Sat' uniformly, but pricing.md reveals hours rotate: PM weeks 3pm-11pm, AM weeks 6am-1pm. If a customer books outside actual availability, it breeds distrust.",
+        "recommended_fix": "Either adjust displayed hours to match reality (e.g., 'typically 6am-11pm, specific slots shown at booking') or clarify the rotating schedule openly. The booking scheduler already handles this via Google Calendar - just align the marketing copy.",
+        "effort": "S"
+    },
+    {
+        "severity": "low",
+        "category": "seo",
+        "issue": "Hero images missing alt text",
+        "evidence_urls": [
+            "https://tripointdiagnostics.co.uk/"
+        ],
+        "why_it_matters": "The three rotating hero images all have alt=\"\" (empty). While decorative images can have empty alt, the hero is the most prominent visual and could carry keyword-rich alt text for image SEO.",
+        "recommended_fix": "Add descriptive alt text like 'TriPoint Diagnostics mobile van diagnostics in Kent' to the hero images.",
+        "effort": "S"
+    },
+    {
+        "severity": "low",
+        "category": "accessibility",
+        "issue": "FAQ accordion has no keyboard navigation announcement",
+        "evidence_urls": [
+            "https://tripointdiagnostics.co.uk/faq"
+        ],
+        "why_it_matters": "The accordion uses aria-expanded but the expanding/collapsing panel has no role or aria-controls/aria-labelledby linking. Screen readers may not announce content changes properly.",
+        "recommended_fix": "Add id to each answer panel, add aria-controls on the button linking to the panel id, and add role='region' with aria-labelledby on the answer panel.",
+        "effort": "S"
+    },
+    {
+        "severity": "low",
+        "category": "performance",
+        "issue": "No image optimisation or WebP format used",
+        "evidence_urls": [
+            "https://tripointdiagnostics.co.uk/our-work"
+        ],
+        "why_it_matters": "The site loads 50+ gallery images as .jpg files. No WebP fallback, no srcset for responsive images. Gallery page will be slow on mobile connections.",
+        "recommended_fix": "Convert gallery images to WebP format with vite-imagetools or at build time. Add srcset for responsive sizing. Add loading='lazy' (already present on most images, good).",
+        "effort": "M"
+    },
+    {
+        "severity": "low",
+        "category": "ux",
+        "issue": "Services dropdown closes on blur with 200ms timeout - may cause usability issues",
+        "evidence_urls": [
+            "https://tripointdiagnostics.co.uk/"
+        ],
+        "why_it_matters": "The desktop services dropdown uses onBlur with a 200ms setTimeout to close. Fast mouse movements between the trigger and dropdown items may cause it to close unexpectedly.",
+        "recommended_fix": "Use onMouseEnter/onMouseLeave on the parent container instead, or increase the timeout to 300ms and add a hover intent check.",
+        "effort": "S"
+    }
+]

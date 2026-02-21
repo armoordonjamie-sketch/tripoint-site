@@ -22,9 +22,14 @@ interface ZoneResult {
     details: Record<string, any>;
 }
 
-export function ZoneCalculator() {
+interface ZoneCalculatorProps {
+    onZoneChecked?: (postcode: string) => void;
+}
+
+export function ZoneCalculator({ onZoneChecked }: ZoneCalculatorProps) {
     const [result, setResult] = useState<ZoneResult | null>(null);
     const [error, setError] = useState<string | null>(null);
+    const [loading, setLoading] = useState(false);
     const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<FormData>({
         resolver: zodResolver(schema),
     });
@@ -32,15 +37,19 @@ export function ZoneCalculator() {
     const onSubmit = async (data: FormData) => {
         setError(null);
         setResult(null);
+        setLoading(true);
         try {
             const res = await fetch(`/api/calculate-zone?postcode=${encodeURIComponent(data.postcode)}`);
             if (!res.ok) throw new Error('Could not calculate zone. Please check the postcode.');
 
             const json = await res.json();
             setResult(json);
+            onZoneChecked?.(data.postcode.replace(/\s+/g, '').toUpperCase());
             trackEvent('zone_check', { postcode: data.postcode, zone: json.zone });
         } catch (err) {
             setError(err instanceof Error ? err.message : 'An error occurred');
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -60,8 +69,8 @@ export function ZoneCalculator() {
                     />
                     {errors.postcode && <p className="mt-1 text-xs text-danger">{errors.postcode.message}</p>}
                 </div>
-                <CTAButton type="submit" disabled={isSubmitting} icon={isSubmitting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Search className="h-4 w-4" />}>
-                    {isSubmitting ? 'Checking...' : 'Check Now'}
+                <CTAButton type="submit" disabled={loading || isSubmitting} icon={(loading || isSubmitting) ? <Loader2 className="h-4 w-4 animate-spin" /> : <Search className="h-4 w-4" />}>
+                    {(loading || isSubmitting) ? 'Checking...' : 'Check Now'}
                 </CTAButton>
             </form>
 

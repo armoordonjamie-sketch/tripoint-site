@@ -8,6 +8,8 @@ dist-ssr/
 
 # Python
 __pycache__/
+python-scripts/bookings.db
+python-scripts/media/
 *.py[cod]
 *$py.class
 .Python
@@ -17,6 +19,9 @@ env/
 .env
 .env.*
 !.env.example
+
+# Google service account credentials
+python-scripts/*.json
 
 # Logs and debug
 logs/

@@ -1,6 +1,14 @@
+import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { siteConfig } from '@/config/site';
 import { CTAButton } from './CTAButton';
+
+const slugToHref: Record<string, string> = {
+    'diagnostic-callout': '/services/diagnostic-callout',
+    'vor-triage': '/services/vor-van-diagnostics',
+    'emissions-diagnostics': '/services/emissions-diagnostics',
+    'pre-purchase-digital-health-check': '/services/pre-purchase-digital-health-check',
+};
 
 interface PricingTableProps {
     /** When true, show a compact version for teasers */
@@ -47,7 +55,11 @@ export function PricingTable({ compact = false, className }: PricingTableProps) 
                                 )}
                             >
                                 <td className="px-4 py-4 text-sm font-medium text-text-primary sm:px-6">
-                                    {service.name}
+                                    {slugToHref[service.slug] ? (
+                                        <Link to={slugToHref[service.slug]} className="text-brand hover:underline">{service.name}</Link>
+                                    ) : (
+                                        service.name
+                                    )}
                                 </td>
                                 <td className="px-4 py-4 text-center text-sm font-bold text-brand-light">
                                     £{service.zoneA}

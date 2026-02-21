@@ -1,0 +1,49 @@
+TRIPOINT DIAGNOSTICS
+Booking Confirmed
+==============================
+
+Hi [CLIENT_FIRST_NAME],
+
+Your diagnostic appointment has been confirmed. Here are the details:
+
+BOOKING DETAILS
+--------------------
+Booking ID: [BOOKING_ID]
+Service: [SERVICE_NAME]
+Date: [BOOKING_DATE]
+Time window: [BOOKING_TIME_WINDOW]
+Vehicle: [VEHICLE_MAKE_MODEL] ([VEHICLE_REG])
+Location: [POSTCODE]
+
+View Booking: [BOOKING_LINK]
+Add to Calendar: [ICS_LINK]
+
+WHAT HAPPENS NEXT
+-----------------
+1. On the day, we'll send you a message when we're on the way with an estimated arrival.
+2. Please ensure the vehicle is parked in a safe, accessible location (driveway, yard, depot - not a live road).
+3. After the visit, you'll receive a written diagnostic outcome with findings and recommended next steps.
+
+NEED TO RESCHEDULE?
+No problem - just give us 24 hours' notice and your deposit carries over.
+WhatsApp: https://wa.me/message/NROKKGS6QK54G1
+Phone: 020 8058 6095
+
+Cheers,
+[TECH_NAME]
+Tripoint Diagnostics
+
+------------------------------
+Tripoint Diagnostics Ltd
+Company No: 17038307
+476 Sidcup Road, Eltham, London
+Website: https://tripointdiagnostics.co.uk
+Google: https://share.google/VzrAGFshBV7ITb7s2
+Email: contact@tripointdiagnostics.co.uk
+Phone: 020 8058 6095
+WhatsApp: https://wa.me/message/NROKKGS6QK54G1
+
+(c) [CURRENT_YEAR] Tripoint Diagnostics Ltd. All rights reserved.
+Privacy: https://tripointdiagnostics.co.uk/legal/privacy-policy
+Terms: https://tripointdiagnostics.co.uk/legal/terms
+Disclaimer: https://tripointdiagnostics.co.uk/legal/disclaimer

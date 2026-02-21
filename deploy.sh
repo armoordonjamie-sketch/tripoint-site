@@ -84,7 +84,7 @@ fi
 
 # Install dependencies
 source "$APP_DIR/venv/bin/activate"
-pip install fastapi uvicorn WazeRouteCalculator requests google-api-python-client google-auth google-auth-oauthlib email-validator
+pip install fastapi uvicorn WazeRouteCalculator requests google-api-python-client google-auth google-auth-oauthlib email-validator python-dotenv aiosqlite stripe python-multipart reportlab
 
 # Create Systemd Service
 cat > /etc/systemd/system/tripoint-api.service <<EOL
@@ -94,9 +94,10 @@ After=network.target
 
 [Service]
 User=root
-WorkingDirectory=$APP_DIR
+WorkingDirectory=$APP_DIR/python-scripts
+EnvironmentFile=$APP_DIR/python-scripts/.env
 Environment="PATH=$APP_DIR/venv/bin:/usr/bin"
-ExecStart=$APP_DIR/venv/bin/uvicorn python-scripts.api:app --host 127.0.0.1 --port 8000
+ExecStart=$APP_DIR/venv/bin/uvicorn api:app --host 127.0.0.1 --port 8000
 Restart=always
 
 [Install]

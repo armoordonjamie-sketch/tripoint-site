@@ -1,0 +1,45 @@
+TRIPOINT DIAGNOSTICS
+Slot Reserved - Pay Deposit to Confirm
+==============================
+
+Hi [CLIENT_FIRST_NAME],
+
+We've reserved your slot pending deposit payment. Please pay your deposit of £[DEPOSIT_GBP] to confirm your booking. You will receive another email confirming your deposit with invoice once payment is received.
+
+BOOKING DETAILS
+--------------------
+Booking ID: [BOOKING_ID]
+Service: [SERVICE_NAME]
+Date: [BOOKING_DATE]
+Time window: [BOOKING_TIME_WINDOW]
+Vehicle: [VEHICLE_MAKE_MODEL] ([VEHICLE_REG])
+Location: [POSTCODE]
+
+PAY DEPOSIT
+-----------
+Click here to pay your deposit: [PAYMENT_LINK]
+
+WHAT HAPPENS NEXT
+-----------------
+1. Pay your deposit using the link above.
+2. Once paid, you'll receive a confirmation email with your invoice and calendar links.
+3. On the day, we'll send you a message when we're on the way with an estimated arrival.
+
+Cheers,
+[TECH_NAME]
+Tripoint Diagnostics
+
+------------------------------
+Tripoint Diagnostics Ltd
+Company No: 17038307
+476 Sidcup Road, Eltham, London
+Website: https://tripointdiagnostics.co.uk
+Google: https://share.google/VzrAGFshBV7ITb7s2
+Email: contact@tripointdiagnostics.co.uk
+Phone: 020 8058 6095
+WhatsApp: https://wa.me/message/NROKKGS6QK54G1
+
+(c) [CURRENT_YEAR] Tripoint Diagnostics Ltd. All rights reserved.
+Privacy: https://tripointdiagnostics.co.uk/legal/privacy-policy
+Terms: https://tripointdiagnostics.co.uk/legal/terms
+Disclaimer: https://tripointdiagnostics.co.uk/legal/disclaimer

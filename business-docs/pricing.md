@@ -1,7 +1,7 @@
-## TriPoint Diagnostics — Pricing & Booking Policy (Mobile)
+## TriPoint Diagnostics - Pricing & Booking Policy (Mobile)
 
 Mobile diagnostics-first service for vans & cars across Kent + South East London.
-**Independent service — not affiliated with vehicle manufacturers.**
+**Independent service - not affiliated with vehicle manufacturers.**
 **Compliance-first:** AdBlue/DPF/EGR/SCR diagnosis & repair only (no deletes/defeat).
 
 ---

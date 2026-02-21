@@ -1,0 +1,60 @@
+DEPOSIT INVOICE
+Tripoint Diagnostics Ltd | Company No. 17038307
+Registered office: 476 Sidcup Road, London, United Kingdom, SE9 4HA
+[VAT_NUMBER]
+Website: https://tripointdiagnostics.co.uk
+Email: contact@tripointdiagnostics.co.uk | Phone: 020 8058 6095
+WhatsApp: https://wa.me/message/NROKKGS6QK54G1
+
+---
+Invoice: [INVOICE_ID]
+Date: [INVOICE_DATE]
+Due: [DUE_DATE]
+Terms: [PAYMENT_TERMS]
+Status: [STATUS]
+
+---
+This deposit secures your diagnostic booking. It will be deducted from your final service invoice upon completion. Balance due after service completion.
+
+BILL TO:
+[CLIENT_FULL_NAME]
+[CLIENT_EMAIL]
+[CLIENT_PHONE]
+[BILL_TO_ADDRESS]
+
+SERVICE ADDRESS:
+[SERVICE_ADDRESS]
+
+VEHICLE: [VEHICLE_MAKE_MODEL] ([VEHICLE_REG])
+Odometer: [ODOMETER]
+Job ID: [JOB_ID]
+PO: [PO_NUMBER]
+Technician: [TECH_NAME]
+Deposit reason: [DEPOSIT_REASON]
+Deposit amount: [DEPOSIT_AMOUNT]
+
+---
+LINE ITEMS:
+[LINE_ITEMS_HTML]
+
+---
+Subtotal: [SUBTOTAL]
+Discount: [DISCOUNT]
+VAT ([VAT_RATE]): [VAT_AMOUNT]
+Total: [TOTAL]
+Amount paid: [AMOUNT_PAID]
+Balance due: [BALANCE_DUE]
+
+---
+PAYMENT
+[PAYMENT_METHODS]
+[BANK_DETAILS]
+[PAYMENT_LINK]
+
+---
+[NOTES]
+
+---
+[CANCELLATION_URL] | [TERMS_URL] | [PRIVACY_URL] | [DISCLAIMER_URL]
+Thank you for your business. Contact: contact@tripointdiagnostics.co.uk
+© [CURRENT_YEAR] Tripoint Diagnostics Ltd

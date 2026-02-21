@@ -1,67 +1,67 @@
 import { Seo } from '@/components/Seo';
 import { Section } from '@/components/Section';
-import { Notice } from '@/components/Notice';
-import { Clock } from 'lucide-react';
-import { ZoneCalculator } from '@/components/ZoneCalculator';
 import { BookingScheduler } from '@/components/BookingScheduler';
+import { Phone, MessageCircle, Clock, Shield } from 'lucide-react';
+import { siteConfig } from '@/config/site';
 
 export function BookingPage() {
     return (
         <>
             <Seo
                 title="Book a Diagnostic"
-                description="Book your mobile diagnostic appointment with TriPoint Diagnostics using our live booking scheduler."
+                description="Book your mobile diagnostic appointment with TriPoint Diagnostics. Pick your service, check live availability, and confirm your fixed price online."
                 canonical="/booking"
             />
 
             <Section>
-                <div className="text-center">
-                    <h1 className="text-4xl font-extrabold text-text-primary sm:text-5xl">Book a Diagnostic</h1>
+                {/* Hero */}
+                <div className="text-center mb-10">
+                    <h1 className="text-4xl font-extrabold text-text-primary sm:text-5xl">
+                        Book Your Diagnostic
+                    </h1>
                     <p className="mx-auto mt-4 max-w-2xl text-lg text-text-secondary">
-                        Pick your service, check live availability, and confirm your fixed zone-based price online.
+                        Select your service, enter your postcode, choose a slot - done. Fixed pricing, no surprises.
                     </p>
-                    <div className="mx-auto mt-8 max-w-xl">
-                        <ZoneCalculator />
+
+                    {/* Trust badges */}
+                    <div className="mx-auto mt-6 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-text-muted">
+                        <span className="inline-flex items-center gap-1.5">
+                            <Clock className="h-4 w-4 text-brand" />
+                            Mon–Sat, 6 AM – 10 PM
+                        </span>
+                        <span className="inline-flex items-center gap-1.5">
+                            <Shield className="h-4 w-4 text-brand" />
+                            Fixed zone-based pricing
+                        </span>
                     </div>
                 </div>
 
-                <div className="mx-auto mt-12 max-w-3xl">
-                    <h2 className="mb-4 text-2xl font-bold text-text-primary">How Booking Works</h2>
-                    <div className="grid gap-4 sm:grid-cols-2">
-                        <div className="rounded-xl border border-border-default bg-surface-alt p-4">
-                            <div className="mb-2 flex items-center gap-2 text-brand">
-                                <Clock className="h-5 w-5" />
-                                <h3 className="font-semibold text-text-primary">Operating Hours</h3>
-                            </div>
-                            <p className="text-sm text-text-secondary">
-                                <strong>Mon - Sat:</strong> 6:00 AM – 10:00 PM
-                                <br />
-                                Slots are shown in 30-minute starts and filtered against existing Google Calendar events.
-                            </p>
-                        </div>
-                        <div className="rounded-xl border border-border-default bg-surface-alt p-4">
-                            <div className="mb-2 flex items-center gap-2 text-brand">
-                                <Clock className="h-5 w-5" />
-                                <h3 className="font-semibold text-text-primary">Pricing & Deposits</h3>
-                            </div>
-                            <p className="text-sm text-text-secondary">
-                                Your zone and service selection set the confirmed fixed price instantly.
-                                Deposits remain £30 (Zone A/B) and £50 (Zone C or VOR).
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="mx-auto mt-12 max-w-5xl">
-                    <h2 className="mb-4 text-2xl font-bold text-text-primary">Schedule Online</h2>
+                {/* Booking scheduler */}
+                <div className="mx-auto max-w-3xl">
                     <BookingScheduler />
                 </div>
 
-                <div className="mx-auto mt-8 max-w-3xl">
-                    <Notice variant="info">
-                        <strong>Safety note:</strong> Please confirm the vehicle is in a safe, accessible working location (driveway, depot, yard).
-                        We may need to decline or rearrange jobs at unsafe roadside locations.
-                    </Notice>
+                {/* Prefer to call? */}
+                <div className="mx-auto mt-10 max-w-md rounded-xl border border-border-default bg-surface-alt p-5 text-center">
+                    <p className="text-sm font-medium text-text-primary mb-3">Prefer to book by phone?</p>
+                    <div className="flex flex-wrap justify-center gap-4 text-sm">
+                        <a
+                            href={`tel:${siteConfig.contact.phoneE164}`}
+                            className="inline-flex items-center gap-2 text-brand hover:text-brand-light transition-colors"
+                        >
+                            <Phone className="h-4 w-4" />
+                            {siteConfig.contact.phoneDisplay}
+                        </a>
+                        <a
+                            href={`https://wa.me/${siteConfig.contact.whatsappE164}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 text-success hover:text-success/80 transition-colors"
+                        >
+                            <MessageCircle className="h-4 w-4" />
+                            WhatsApp
+                        </a>
+                    </div>
                 </div>
             </Section>
         </>

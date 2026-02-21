@@ -1,0 +1,41 @@
+TRIPOINT DIAGNOSTICS
+Thanks for getting in touch
+==============================
+
+Hi [CLIENT_FIRST_NAME],
+
+Thanks for getting in touch. We've received your enquiry and will review the details shortly.
+
+YOUR ENQUIRY DETAILS
+--------------------
+Vehicle: [VEHICLE_MAKE_MODEL] ([VEHICLE_REG])
+Location: [POSTCODE]
+Service interest: [SERVICE_NAME]
+
+WHAT HAPPENS NEXT
+-----------------
+1. We'll review your details and confirm your service zone & pricing.
+2. We'll get back to you - usually within a few hours during operating hours (Mon–Sat, 6am–10pm).
+3. Once confirmed, we'll send you a booking link with available slots.
+
+Reply on WhatsApp: https://wa.me/message/NROKKGS6QK54G1
+Or call us: 020 8058 6095
+
+Cheers,
+[TECH_NAME]
+Tripoint Diagnostics
+
+------------------------------
+Tripoint Diagnostics Ltd
+Company No: 17038307
+476 Sidcup Road, Eltham, London
+Website: https://tripointdiagnostics.co.uk
+Google: https://share.google/VzrAGFshBV7ITb7s2
+Email: contact@tripointdiagnostics.co.uk
+Phone: 020 8058 6095
+WhatsApp: https://wa.me/message/NROKKGS6QK54G1
+
+(c) [CURRENT_YEAR] Tripoint Diagnostics Ltd. All rights reserved.
+Privacy: https://tripointdiagnostics.co.uk/legal/privacy-policy
+Terms: https://tripointdiagnostics.co.uk/legal/terms
+Disclaimer: https://tripointdiagnostics.co.uk/legal/disclaimer

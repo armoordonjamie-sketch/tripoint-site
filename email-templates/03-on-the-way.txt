@@ -1,0 +1,46 @@
+TRIPOINT DIAGNOSTICS
+On the Way - ETA [ETA_WINDOW]
+==============================
+
+Hi [CLIENT_FIRST_NAME],
+
+Just a heads-up - I'm on my way to you now for your [SERVICE_NAME] appointment.
+
+APPOINTMENT SUMMARY
+--------------------
+Booking ID: [BOOKING_ID]
+Vehicle: [VEHICLE_MAKE_MODEL] ([VEHICLE_REG])
+Location: [ADDRESS_LINE]
+
+Estimated arrival: [ETA_WINDOW]
+
+QUICK REMINDERS
+-----------------
+- Please make sure the vehicle is accessible and parked safely.
+- If you've moved location, let me know ASAP.
+- No need to wait outside - I'll message you when I arrive.
+
+View on Map: [MAP_LINK]
+
+Need to reach me urgently?
+Phone: 020 8058 6095
+WhatsApp: https://wa.me/message/NROKKGS6QK54G1
+
+See you shortly,
+[TECH_NAME]
+Tripoint Diagnostics
+
+------------------------------
+Tripoint Diagnostics Ltd
+Company No: 17038307
+476 Sidcup Road, Eltham, London
+Website: https://tripointdiagnostics.co.uk
+Google: https://share.google/VzrAGFshBV7ITb7s2
+Email: contact@tripointdiagnostics.co.uk
+Phone: 020 8058 6095
+WhatsApp: https://wa.me/message/NROKKGS6QK54G1
+
+(c) [CURRENT_YEAR] Tripoint Diagnostics Ltd. All rights reserved.
+Privacy: https://tripointdiagnostics.co.uk/legal/privacy-policy
+Terms: https://tripointdiagnostics.co.uk/legal/terms
+Disclaimer: https://tripointdiagnostics.co.uk/legal/disclaimer

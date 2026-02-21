@@ -1,0 +1,42 @@
+TRIPOINT DIAGNOSTICS
+Friendly Reminder - Invoice [INVOICE_ID] is Now Overdue
+==============================
+
+Hi [CLIENT_FIRST_NAME],
+
+This is a friendly reminder that the following invoice is now past its due date. We'd appreciate it if you could arrange payment at your earliest convenience.
+
+INVOICE DETAILS
+--------------------
+Invoice: [INVOICE_ID]
+Due date: [INVOICE_DUE_DATE]
+Vehicle: [VEHICLE_MAKE_MODEL] ([VEHICLE_REG])
+Service: [SERVICE_NAME]
+
+[INVOICE_LINE_ITEMS_HTML]
+
+Amount outstanding: [INVOICE_TOTAL]
+
+Pay Now: [PAYMENT_LINK]
+Payment methods: [PAYMENT_METHODS]
+
+If you've already made this payment, please disregard this email - it may take a short while for us to process. If you're having any difficulty or would like to discuss a payment arrangement, please don't hesitate to get in touch.
+
+Kind regards,
+[TECH_NAME]
+Tripoint Diagnostics
+
+------------------------------
+Tripoint Diagnostics Ltd
+Company No: 17038307
+476 Sidcup Road, Eltham, London
+Website: https://tripointdiagnostics.co.uk
+Google: https://share.google/VzrAGFshBV7ITb7s2
+Email: contact@tripointdiagnostics.co.uk
+Phone: 020 8058 6095
+WhatsApp: https://wa.me/message/NROKKGS6QK54G1
+
+(c) [CURRENT_YEAR] Tripoint Diagnostics Ltd. All rights reserved.
+Privacy: https://tripointdiagnostics.co.uk/legal/privacy-policy
+Terms: https://tripointdiagnostics.co.uk/legal/terms
+Disclaimer: https://tripointdiagnostics.co.uk/legal/disclaimer

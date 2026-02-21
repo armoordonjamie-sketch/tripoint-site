@@ -1,0 +1,34 @@
+Subject: Your diagnostic report is ready - [VEHICLE_REG]
+
+Hi [CLIENT_FIRST_NAME],
+
+Your diagnostic report for [VEHICLE_MAKE_MODEL] ([VEHICLE_REG]) is now ready. You can view the full findings, test results, and recommendations using the link below.
+
+Report details
+- Booking ID: [BOOKING_ID]
+- Service: [SERVICE_NAME]
+- Vehicle: [VEHICLE_MAKE_MODEL] ([VEHICLE_REG])
+
+View Report: [REPORT_LINK]
+
+What happens next
+Review the report and let us know if you have any questions. If you'd like to book a follow-up visit or discuss the recommended next steps, just reply to this email or give us a call.
+
+Cheers,
+[TECH_NAME]
+Tripoint Diagnostics
+
+---
+Tripoint Diagnostics Ltd
+Company No: 17038307
+476 Sidcup Road, Eltham, London
+Website: https://tripointdiagnostics.co.uk
+Google: https://share.google/VzrAGFshBV7ITb7s2
+WhatsApp: https://wa.me/message/NROKKGS6QK54G1
+Tel: 020 8058 6095
+contact@tripointdiagnostics.co.uk
+
+(c) [CURRENT_YEAR] Tripoint Diagnostics Ltd. All rights reserved.
+Privacy: https://tripointdiagnostics.co.uk/legal/privacy-policy
+Terms: https://tripointdiagnostics.co.uk/legal/terms
+Disclaimer: https://tripointdiagnostics.co.uk/legal/disclaimer

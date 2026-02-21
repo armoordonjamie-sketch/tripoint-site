@@ -1,0 +1,38 @@
+TRIPOINT DIAGNOSTICS
+How Did We Do?
+==============================
+
+Hi [CLIENT_FIRST_NAME],
+
+Thanks again for using Tripoint Diagnostics for your recent [SERVICE_NAME] on [VEHICLE_MAKE_MODEL].
+
+If you have a moment, we'd really appreciate a quick Google review. It helps other vehicle owners find reliable diagnostics - and it means a lot to a small business like ours.
+
+Leave a Review: [REVIEW_LINK]
+
+It only takes about 30 seconds. Thank you!
+
+-----
+
+If anything wasn't right, please let us know directly - we'd rather hear from you first so we can make it right. Just reply to this email or message us on WhatsApp.
+
+WhatsApp: https://wa.me/message/NROKKGS6QK54G1
+
+Cheers,
+[TECH_NAME]
+Tripoint Diagnostics
+
+------------------------------
+Tripoint Diagnostics Ltd
+Company No: 17038307
+476 Sidcup Road, Eltham, London
+Website: https://tripointdiagnostics.co.uk
+Google: https://share.google/VzrAGFshBV7ITb7s2
+Email: contact@tripointdiagnostics.co.uk
+Phone: 020 8058 6095
+WhatsApp: https://wa.me/message/NROKKGS6QK54G1
+
+(c) [CURRENT_YEAR] Tripoint Diagnostics Ltd. All rights reserved.
+Privacy: https://tripointdiagnostics.co.uk/legal/privacy-policy
+Terms: https://tripointdiagnostics.co.uk/legal/terms
+Disclaimer: https://tripointdiagnostics.co.uk/legal/disclaimer
