@@ -65,6 +65,7 @@ export type AnalyticsEvent =
     | 'click_email_footer'
     | 'click_social'
     | 'click_contact'
+    | 'click_review_prompt'
     | 'submit_contact_form'
     | 'submit_booking_request'
     | 'confirm_booking'

@@ -24,13 +24,11 @@ const navLinks = [
             { label: 'Fleet Health Check', href: '/services/fleet-health-check' },
         ],
     },
-    { label: 'Pricing', href: '/pricing' },
     { label: 'Areas Covered', href: '/areas-covered' },
+    { label: 'Pricing', href: '/pricing' },
+    { label: 'Blog', href: '/blog' },
     { label: 'About', href: '/about' },
     { label: 'Contact', href: '/contact' },
-    { label: 'Blog', href: '/blog' },
-    { label: 'FAQs', href: '/faq' },
-    { label: 'Our Work', href: '/our-work' },
 ];
 
 export function Header() {
@@ -56,10 +54,14 @@ export function Header() {
                 <nav className="hidden items-center gap-1 lg:flex" aria-label="Main navigation">
                     {navLinks.map((link) =>
                         link.children ? (
-                            <div key={link.label} className="relative">
+                            <div
+                                key={link.label}
+                                className="relative"
+                                onMouseLeave={() => setServicesOpen(false)}
+                            >
                                 <button
                                     onClick={() => setServicesOpen(!servicesOpen)}
-                                    onBlur={() => setTimeout(() => setServicesOpen(false), 200)}
+                                    onMouseEnter={() => setServicesOpen(true)}
                                     className="flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-text-secondary transition-colors hover:bg-surface-alt hover:text-text-primary"
                                     aria-expanded={servicesOpen}
                                     aria-haspopup="true"

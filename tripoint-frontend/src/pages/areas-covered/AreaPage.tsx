@@ -6,7 +6,8 @@ import { FaqAccordion } from '@/components/FaqAccordion';
 import { getSeoForPath } from '@/routes';
 import { getAreaData } from '@/data/areas';
 import { siteConfig } from '@/config/site';
-import { CheckCircle2, MessageCircle, Phone } from 'lucide-react';
+import { CheckCircle2, MessageCircle, Phone, MapPin } from 'lucide-react';
+import { trackEvent } from '@/lib/analytics';
 
 function formatSlug(slug: string): string {
     return slug
@@ -46,6 +47,7 @@ export function AreaPage() {
             <section className="relative py-16 md:py-24">
                 <div className="absolute inset-0 mesh-gradient opacity-30" aria-hidden="true" />
                 <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                    <p className="text-sm font-semibold uppercase tracking-widest text-brand mb-3">Mobile Mercedes Specialist</p>
                     <h1 className="text-4xl font-extrabold text-text-primary sm:text-5xl">
                         Mobile Vehicle Diagnostics in {town} | Mercedes Specialist
                     </h1>
@@ -53,6 +55,45 @@ export function AreaPage() {
                         {areaData?.intro ??
                             `TriPoint Diagnostics brings dealer-level Mercedes diagnostics and fault finding to ${town} and the surrounding area. We are a mobile service, so we come to you.`}
                     </p>
+
+                    {/* Availability and pricing note */}
+                    <div className="mt-4 flex flex-wrap items-center gap-4 text-sm">
+                        <span className="inline-flex items-center gap-1.5 text-text-secondary">
+                            <MapPin className="h-4 w-4 text-brand shrink-0" />
+                            Available Mon to Sat. Often same-day in core zones.
+                        </span>
+                        <span className="inline-flex items-center gap-1.5 font-medium text-brand-light">
+                            From £120 (Zone A/B) -- zone confirmed at booking based on your postcode.
+                        </span>
+                    </div>
+
+                    {/* Above-the-fold CTAs */}
+                    <div className="mt-8 flex flex-wrap gap-3">
+                        <CTAButton
+                            href={`tel:${siteConfig.contact.phoneE164}`}
+                            external
+                            icon={<Phone className="h-4 w-4" />}
+                            onClick={() => trackEvent('click_phone_header', { location: `area_${town.toLowerCase()}` })}
+                        >
+                            Call {siteConfig.contact.phoneDisplay}
+                        </CTAButton>
+                        <CTAButton
+                            href={`https://wa.me/${siteConfig.contact.whatsappE164}`}
+                            variant="outline"
+                            external
+                            icon={<MessageCircle className="h-4 w-4" />}
+                            onClick={() => trackEvent('click_whatsapp', { location: `area_${town.toLowerCase()}` })}
+                        >
+                            WhatsApp Us
+                        </CTAButton>
+                        <CTAButton
+                            href="/booking"
+                            variant="outline"
+                            onClick={() => trackEvent('click_book_now', { location: `area_${town.toLowerCase()}` })}
+                        >
+                            Book Online
+                        </CTAButton>
+                    </div>
                 </div>
             </section>
 

@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
     Zap, AlertTriangle, Gauge, Wrench, Shield, Droplets, Wind,
     ArrowRight, Phone, MessageCircle, Search,
     MapPin, Truck, ChevronRight,
-    Settings, Users, FileSearch, BookOpen,
+    Settings, Users, FileSearch, BookOpen, Star,
 } from 'lucide-react';
 import { Seo } from '@/components/Seo';
 import { Section } from '@/components/Section';
@@ -14,22 +14,9 @@ import { siteConfig } from '@/config/site';
 import { trackEvent } from '@/lib/analytics';
 import { galleryImages } from '@/data/galleryImages';
 import { blogPosts } from '@/data/blogPosts';
+import { useScrollReveal } from '@/lib/useScrollReveal';
 
 /* ── Intersection Observer for scroll-reveal ─────────── */
-function useScrollReveal() {
-    const ref = useRef<HTMLDivElement>(null);
-    useEffect(() => {
-        const el = ref.current;
-        if (!el) return;
-        const observer = new IntersectionObserver(
-            (entries) => entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add('in-view'); }),
-            { threshold: 0.1, rootMargin: '0px 0px -40px 0px' },
-        );
-        el.querySelectorAll('.reveal').forEach((child) => observer.observe(child));
-        return () => observer.disconnect();
-    }, []);
-    return ref;
-}
 
 /* ── Static data ─────────────────────────────────────── */
 
@@ -58,10 +45,10 @@ const steps = [
 ];
 
 const trustPoints = [
-    { icon: <Wrench className="h-6 w-6" />, title: 'Dealer-Level Tooling', desc: 'Professional diagnostic equipment - not a cheap code reader.' },
-    { icon: <Truck className="h-6 w-6" />, title: 'Sprinter Expertise', desc: 'Specialist in W906/W907 and OM651/OM654 failure patterns.' },
-    { icon: <MessageCircle className="h-6 w-6" />, title: 'Clear Communication', desc: 'Plain-English findings and documented outcomes.' },
-    { icon: <MapPin className="h-6 w-6" />, title: 'Mobile Convenience', desc: 'Kent & SE London. No workshop drop-off needed.' },
+    { icon: <Wrench className="h-6 w-6" />, title: 'XENTRY & STAR Diagnostics', desc: 'We use Mercedes-Benz XENTRY and STAR tools. Dealer-level access at your location, not a cheap code reader.' },
+    { icon: <Truck className="h-6 w-6" />, title: 'Mercedes-Benz Trained', desc: 'W906/W907 Sprinter, OM651/OM654 -- specialist knowledge for the common failures, not generic diagnostics.' },
+    { icon: <MessageCircle className="h-6 w-6" />, title: 'Clear Communication', desc: 'Plain-English findings and a documented written outcome every time.' },
+    { icon: <MapPin className="h-6 w-6" />, title: 'Mobile Convenience', desc: 'Kent and SE London. No workshop drop-off needed -- we come to you.' },
 ];
 
 /* Curated gallery preview */
@@ -135,8 +122,8 @@ export function HomePage() {
 
                         <div className="reveal mt-8 flex flex-wrap gap-8" style={{ transitionDelay: '0.2s' }}>
                             {[
-                                { value: '11', label: 'Services' },
-                                { value: '60min', label: 'Coverage radius' },
+                                { value: 'Mercedes', label: 'Specialist' },
+                                { value: 'Up to 60 min', label: 'Drive time covered' },
                                 { value: '£120+', label: 'Diagnostics from' },
                             ].map((s) => (
                                 <div key={s.label}>
@@ -293,6 +280,35 @@ export function HomePage() {
                     <CTAButton href="/about" variant="outline" size="sm" icon={<ArrowRight className="h-4 w-4" />}>
                         About TriPoint
                     </CTAButton>
+                </div>
+            </Section>
+
+            {/* ── GOOGLE REVIEWS PROMPT ─────────────────────── */}
+            <Section>
+                <div className="mx-auto max-w-2xl reveal">
+                    <div className="rounded-2xl border border-brand/20 bg-brand/5 p-8 text-center">
+                        <div className="flex justify-center gap-1 mb-4">
+                            {[1, 2, 3, 4, 5].map((n) => (
+                                <Star key={n} className="h-6 w-6 fill-yellow-400 text-yellow-400" />
+                            ))}
+                        </div>
+                        <h2 className="text-xl font-bold text-text-primary">Happy with our service?</h2>
+                        <p className="mt-2 text-text-secondary text-sm">
+                            Reviews help other drivers find us. If we&apos;ve helped you, leaving a Google review takes less than a minute.
+                        </p>
+                        <div className="mt-5">
+                            <CTAButton
+                                href={siteConfig.social.google}
+                                external
+                                variant="outline"
+                                size="sm"
+                                icon={<ArrowRight className="h-4 w-4" />}
+                                onClick={() => trackEvent('click_review_prompt', { location: 'homepage' })}
+                            >
+                                Leave a Google Review
+                            </CTAButton>
+                        </div>
+                    </div>
                 </div>
             </Section>
 

@@ -90,10 +90,10 @@ export function ContactPage() {
             <Section>
                 <div className="text-center">
                     <h1 className="text-4xl font-extrabold text-text-primary sm:text-5xl">
-                        Get in Touch
+                        Book Your Mobile Diagnostic
                     </h1>
                     <p className="mx-auto mt-4 max-w-2xl text-lg text-text-secondary">
-                        Have a question or ready to book? Reach out via phone, WhatsApp, or the form below or <Link to="/booking" className="text-brand hover:underline">book a slot online</Link>.
+                        Kent and South East London -- we come to you. Call, WhatsApp, or send your details below and we will get back to you to confirm your slot.
                     </p>
                     <div className="mx-auto mt-6 max-w-2xl rounded-xl border border-brand/20 bg-brand/5 p-4 text-left">
                         <p className="text-sm font-semibold text-text-primary">For faster diagnosis, include:</p>
@@ -171,12 +171,27 @@ export function ContactPage() {
                     {/* Contact form */}
                     <div className="lg:col-span-2">
                         {submitted ? (
-                            <div className="rounded-2xl border border-success/30 bg-success/5 p-8 text-center">
-                                <CheckCircle2 className="mx-auto h-12 w-12 text-success" />
-                                <h3 className="mt-4 text-xl font-bold text-text-primary">Message Sent!</h3>
-                                <p className="mt-2 text-text-secondary">
-                                    We&apos;ll get back to you as soon as possible. Usually within a few hours during operating hours.
+                            <div className="rounded-2xl border border-success/30 bg-success/5 p-8">
+                                <div className="flex items-center gap-3">
+                                    <CheckCircle2 className="h-10 w-10 text-success shrink-0" />
+                                    <h3 className="text-xl font-bold text-text-primary">Enquiry Sent!</h3>
+                                </div>
+                                <p className="mt-3 text-text-secondary">
+                                    Your details are with us. Here is what happens next:
                                 </p>
+                                <ol className="mt-4 space-y-3">
+                                    {[
+                                        'You will receive a confirmation email shortly.',
+                                        'We will review your postcode and vehicle details, then confirm your zone and price.',
+                                        'We will contact you (usually within a few hours during operating hours) to confirm your slot.',
+                                    ].map((step, i) => (
+                                        <li key={i} className="flex items-start gap-3 text-sm text-text-secondary">
+                                            <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand/10 text-brand text-xs font-bold">{i + 1}</span>
+                                            <span>{step}</span>
+                                        </li>
+                                    ))}
+                                </ol>
+                                <p className="mt-4 text-sm text-text-muted">Operating hours: {siteConfig.operatingHours}</p>
                             </div>
                         ) : (
                             <form
@@ -240,7 +255,7 @@ export function ContactPage() {
 
                                 <div className="mt-6">
                                     <CTAButton type="submit" disabled={isSubmitting} className="w-full sm:w-auto">
-                                        {isSubmitting ? 'Sending…' : 'Send Message'}
+                                        {isSubmitting ? 'Sending...' : 'Send Booking Enquiry'}
                                     </CTAButton>
                                 </div>
                             </form>

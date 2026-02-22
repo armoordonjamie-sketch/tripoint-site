@@ -13,8 +13,8 @@ export const siteConfig = {
     },
 
     social: {
-        facebook: 'https://facebook.com/REPLACE_ME',
-        instagram: 'https://instagram.com/REPLACE_ME',
+        facebook: '',
+        instagram: '',
         google: 'https://share.google/VzrAGFshBV7ITb7s2',
     },
 
@@ -30,7 +30,7 @@ export const siteConfig = {
             address: 'Use for distance checks',
         },
     ],
-    operatingHours: 'Mon - Sat: 6:00 AM – 10:00 PM',
+    operatingHours: 'Mon to Sat: 6 AM to 10 PM',
 
     coverageTowns: [
         'Bromley',
