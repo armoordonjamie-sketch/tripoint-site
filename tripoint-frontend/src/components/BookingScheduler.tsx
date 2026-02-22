@@ -250,7 +250,7 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
     const [availability, setAvailability] = useState<AvailabilityResponse | null>(null);
     const [selectedSlot, setSelectedSlot] = useState<string>('');
     const [priceInfo, setPriceInfo] = useState<PriceResponse | null>(null);
-    const [loadingPrice, setLoadingPrice] = useState(false);
+    const [, setLoadingPrice] = useState(false);
     const [status, setStatus] = useState<string>('');
     const [error, setError] = useState<string>('');
     const [loadingServices, setLoadingServices] = useState(false);
@@ -260,7 +260,6 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
     const [calendarOpen, setCalendarOpen] = useState(false);
     const calendarRef = useRef<HTMLDivElement>(null);
     const [prevStep, setPrevStep] = useState<1 | 2 | 3>(1);
-    const [breakdownOpen, setBreakdownOpen] = useState(true);
 
     // Derive step from state
     const currentStep: 1 | 2 | 3 = availability && !availability.manual_review_required
@@ -475,8 +474,6 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
     const labelClass = 'block text-sm font-medium text-text-secondary mb-1.5';
     const selectedService = services.find((s) => booking.service_ids.includes(s.id));
     const effectiveDeposit = priceInfo?.deposit_gbp ?? availability?.deposit_gbp;
-    const effectiveTotal = priceInfo?.total_gbp ?? availability?.fixed_price_gbp;
-    const effectiveBalance = effectiveTotal != null && effectiveDeposit != null ? effectiveTotal - effectiveDeposit : null;
 
     return (
         <div className="space-y-0">
