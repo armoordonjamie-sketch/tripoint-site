@@ -30,15 +30,19 @@ async function runPrerender() {
 
     for (const route of indexableRoutes) {
         const { appHtml, helmet } = render(route.path);
+        const path = route.canonicalPath || route.path || '/';
+        const canonicalUrl = path === '/' ? `${SITE_URL}/` : `${SITE_URL}${path}`;
+        const hreflangTags = `<link rel="alternate" hreflang="en-GB" href="${canonicalUrl}">\n<link rel="alternate" hreflang="x-default" href="${canonicalUrl}">`;
         const headTags = helmet
             ? [
                   helmet.title?.toString?.() ?? '',
                   helmet.meta?.toString?.() ?? '',
                   helmet.link?.toString?.() ?? '',
+                  hreflangTags,
               ]
                   .filter(Boolean)
                   .join('\n')
-            : '';
+            : hreflangTags;
 
         let html = template
             .replace('<!--head-tags-->', headTags)
@@ -50,7 +54,7 @@ async function runPrerender() {
         console.log('Prerendered:', route.path);
     }
 
-    // 404 page
+    // 404 page (no hreflang - noindex)
     const notFound = render('/404');
     const headTags404 = notFound.helmet
         ? [
