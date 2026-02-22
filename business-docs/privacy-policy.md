@@ -36,7 +36,7 @@ When you use our website, book a service, or contact us, we may collect:
 ### Information collected automatically
 
 - **Browser localStorage:** We temporarily store form progress in your browser's local storage for convenience. This data remains on your device only and is not transmitted to us unless you submit a form.
-- **Analytics:** We use privacy-friendly analytics (Plausible Analytics or similar) that do not use cookies, do not collect personal data, and do not track individuals across sites. No data is shared with third parties for advertising.
+- **Analytics:** We use Google Tag (gtag.js) for Google Ads conversion tracking to measure advertising effectiveness (e.g. form submissions, phone clicks, booking confirmations). Google may use cookies and collect data as described in [Google's Privacy Policy](https://policies.google.com/privacy).
 - **Server logs:** Our web server may record IP addresses, request timestamps, and user-agent strings for security and operational purposes. These logs are retained for a limited period and are not used for marketing.
 
 ### Information from third parties

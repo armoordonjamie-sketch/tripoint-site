@@ -1,24 +1,10 @@
-import { init, track } from '@plausible-analytics/tracker';
-
-// Define the environment variable for the domain, or fallback to the production domain.
-const DOMAIN = import.meta.env.VITE_PLAUSIBLE_DOMAIN || 'tripointdiagnostics.co.uk';
-
-// Initialize tracking
-// We'll export a setup function to be called in App.tsx
-let isInitialized = false;
-
-export const initAnalytics = () => {
-    if (typeof window !== 'undefined' && !isInitialized) {
-        init({
-            domain: DOMAIN,
-            autoCapturePageviews: true,
-        });
-        isInitialized = true;
+declare global {
+    interface Window {
+        gtag?: (...args: unknown[]) => void;
     }
-};
+}
 
-// Typed wrapper for custom events
-// Define known event names for type safety
+// Typed wrapper for custom events (Google Ads conversion goals)
 export type AnalyticsEvent =
     | 'click_book_now'
     | 'click_whatsapp'
@@ -35,15 +21,14 @@ export type AnalyticsEvent =
     | 'zone_check';
 
 export const trackEvent = (eventName: AnalyticsEvent, props?: Record<string, string | number | boolean>) => {
-    if (typeof window !== 'undefined') {
-        // Convert all props to strings as Plausible expects Record<string, string>
-        const stringProps: Record<string, string> | undefined = props
+    if (typeof window !== 'undefined' && window.gtag) {
+        const eventParams: Record<string, string> = props
             ? Object.entries(props).reduce((acc, [key, value]) => {
                 acc[key] = String(value);
                 return acc;
             }, {} as Record<string, string>)
-            : undefined;
+            : {};
 
-        track(eventName, { props: stringProps });
+        window.gtag('event', eventName, eventParams);
     }
 };

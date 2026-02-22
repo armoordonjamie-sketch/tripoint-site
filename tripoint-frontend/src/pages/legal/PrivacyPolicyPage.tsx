@@ -62,7 +62,7 @@ export function PrivacyPolicyPage() {
                             <h3 className="mt-4 text-lg font-semibold text-text-primary">Information collected automatically</h3>
                             <ul className="mt-2 list-inside list-disc space-y-1">
                                 <li><strong>Browser localStorage:</strong> We temporarily store form progress in your browser&apos;s local storage for convenience. This data remains on your device only and is not transmitted to us unless you submit a form.</li>
-                                <li><strong>Analytics:</strong> We use privacy-friendly analytics (Plausible Analytics or similar) that do not use cookies, do not collect personal data, and do not track individuals across sites. No data is shared with third parties for advertising.</li>
+                                <li><strong>Analytics:</strong> We use Google Tag (gtag.js) for Google Ads conversion tracking to measure advertising effectiveness (e.g. form submissions, phone clicks, booking confirmations). Google may use cookies and collect data as described in <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-primary-600 hover:underline">Google&apos;s Privacy Policy</a>.</li>
                                 <li><strong>Server logs:</strong> Our web server may record IP addresses, request timestamps, and user-agent strings for security and operational purposes. These logs are retained for a limited period and are not used for marketing.</li>
                             </ul>
 
