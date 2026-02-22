@@ -1,7 +1,5 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { HelmetProvider } from 'react-helmet-async';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { Layout } from '@/components/Layout';
-import { RouteTracker } from '@/components/RouteTracker';
 
 // Pages
 import { HomePage } from '@/pages/HomePage';
@@ -17,8 +15,13 @@ import { DpfRegenerationDecisionPage } from '@/pages/services/DpfRegenerationDec
 import { MercedesXentryPage } from '@/pages/services/MercedesXentryPage';
 import { IntermittentElectricalPage } from '@/pages/services/IntermittentElectricalPage';
 import { FleetHealthCheckPage } from '@/pages/services/FleetHealthCheckPage';
+import { MobileFaultFindingPage } from '@/pages/services/MobileFaultFindingPage';
+import { DpfRegenerationDiagnosticsPage } from '@/pages/services/DpfRegenerationDiagnosticsPage';
+import { AdblueScrDiagnosticsPage } from '@/pages/services/AdblueScrDiagnosticsPage';
+import { EcuCodingPage } from '@/pages/services/EcuCodingPage';
 import { PricingPage } from '@/pages/PricingPage';
 import { CoveragePage } from '@/pages/CoveragePage';
+import { AreaPage } from '@/pages/areas-covered/AreaPage';
 import { AboutPage } from '@/pages/AboutPage';
 import { FaqPage } from '@/pages/FaqPage';
 import { BookingPage } from '@/pages/BookingPage';
@@ -40,11 +43,8 @@ import { OurWorkPage } from '@/pages/OurWorkPage';
 import { ProcessPage } from '@/pages/ProcessPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 
-export default function App() {
-  return (
-    <HelmetProvider>
-      <BrowserRouter>
-        <RouteTracker />
+export function AppRoutes() {
+    return (
         <Routes>
           <Route element={<Layout />}>
             {/* Public pages */}
@@ -61,11 +61,17 @@ export default function App() {
             <Route path="services/nox-scr-diagnostics" element={<NoxScrDiagnosticsPage />} />
             <Route path="services/dpf-regeneration-decision" element={<DpfRegenerationDecisionPage />} />
             <Route path="services/mercedes-xentry-diagnostics-coding" element={<MercedesXentryPage />} />
+            <Route path="services/mobile-fault-finding" element={<MobileFaultFindingPage />} />
+            <Route path="services/dpf-regeneration-and-diagnostics" element={<DpfRegenerationDiagnosticsPage />} />
+            <Route path="services/adblue-scr-diagnostics" element={<AdblueScrDiagnosticsPage />} />
+            <Route path="services/ecu-coding-and-variant-coding" element={<EcuCodingPage />} />
             <Route path="services/intermittent-electrical-faults" element={<IntermittentElectricalPage />} />
             <Route path="services/fleet-health-check" element={<FleetHealthCheckPage />} />
             <Route path="pricing" element={<PricingPage />} />
-            <Route path="areas" element={<CoveragePage />} />
-            <Route path="coverage" element={<Navigate to="/areas" replace />} />
+            <Route path="areas-covered" element={<CoveragePage />} />
+            <Route path="areas-covered/:slug" element={<AreaPage />} />
+            <Route path="areas" element={<Navigate to="/areas-covered" replace />} />
+            <Route path="coverage" element={<Navigate to="/areas-covered" replace />} />
             <Route path="about" element={<AboutPage />} />
             <Route path="our-work" element={<OurWorkPage />} />
             <Route path="process" element={<ProcessPage />} />
@@ -90,9 +96,8 @@ export default function App() {
 
             {/* 404 */}
             <Route path="*" element={<NotFoundPage />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </HelmetProvider>
-  );
+        </Route>
+    </Routes>
+    );
 }
+

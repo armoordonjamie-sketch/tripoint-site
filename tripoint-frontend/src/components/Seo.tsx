@@ -1,3 +1,4 @@
+import { useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { siteConfig } from '@/config/site';
 
@@ -16,12 +17,13 @@ export function Seo({
     ogImage,
     noIndex = false,
 }: SeoProps) {
+    const { pathname } = useLocation();
     const fullTitle = title
         ? siteConfig.defaultSeo.titleTemplate.replace('%s', title)
         : siteConfig.defaultSeo.defaultTitle;
 
     const canonicalUrl = canonical
-        ? `${siteConfig.url}${canonical}`
+        ? `${siteConfig.url}${canonical.startsWith('/') ? canonical : `/${canonical}`}`
         : undefined;
 
     const imageUrl = ogImage
@@ -29,11 +31,22 @@ export function Seo({
         : `${siteConfig.url}/og-default.jpg`;
 
     return (
-        <Helmet>
+        <Helmet htmlAttributes={{ lang: 'en-GB' }}>
             <title>{fullTitle}</title>
             <meta name="description" content={description} />
             {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+            {!noIndex && (
+                <meta name="robots" content="index, follow, max-image-preview:large" />
+            )}
             {noIndex && <meta name="robots" content="noindex,nofollow" />}
+
+            {/* hreflang - only when we have canonical */}
+            {canonicalUrl && (
+                <>
+                    <link rel="alternate" hrefLang="en-GB" href={canonicalUrl} />
+                    <link rel="alternate" hrefLang="x-default" href={canonicalUrl} />
+                </>
+            )}
 
             {/* Open Graph */}
             <meta property="og:title" content={fullTitle} />
@@ -45,7 +58,7 @@ export function Seo({
             <meta property="og:image:width" content="1200" />
             <meta property="og:image:height" content="630" />
             <meta property="og:image:alt" content={`${siteConfig.brandName} - ${siteConfig.tagline}`} />
-            {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+            <meta property="og:url" content={canonicalUrl ?? `${siteConfig.url}${pathname}`} />
 
             {/* Twitter */}
             <meta name="twitter:card" content="summary_large_image" />

@@ -36,11 +36,11 @@ else
     git clone "$REPO_URL" "$APP_DIR"
 fi
 
-# 4. Build Frontend
+# 4. Build Frontend (SSG pre-render)
 echo ">>> Building frontend..."
 cd "$FRONTEND_DIR"
 npm install --legacy-peer-deps
-npm run build
+npm run build:ssg
 
 # 5. Configure Nginx
 echo ">>> Configuring Nginx..."
@@ -52,11 +52,19 @@ server {
     root $FRONTEND_DIR/dist;
     index index.html;
 
+    # Pre-rendered HTML: no aggressive caching
     location / {
-        try_files \$uri \$uri/ /index.html;
+        try_files \$uri \$uri/index.html \$uri.html =404;
+        add_header Cache-Control "no-cache, no-store, must-revalidate";
     }
 
-    # Cache static assets
+    # Custom 404
+    error_page 404 /404.html;
+    location = /404.html {
+        internal;
+    }
+
+    # Hashed static assets: long cache
     location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2)$ {
         expires 1y;
         add_header Cache-Control "public, no-transform";

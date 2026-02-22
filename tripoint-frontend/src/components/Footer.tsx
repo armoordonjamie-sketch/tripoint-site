@@ -104,7 +104,7 @@ export function Footer() {
                             <li><Link to="/contact" className="text-sm text-text-secondary transition-colors hover:text-brand-light">Contact</Link></li>
                             <li><Link to="/faq" className="text-sm text-text-secondary transition-colors hover:text-brand-light">FAQs</Link></li>
                             <li><Link to="/process" className="text-sm text-text-secondary transition-colors hover:text-brand-light">Our Process</Link></li>
-                            <li><Link to="/areas" className="text-sm text-text-secondary transition-colors hover:text-brand-light">Areas We Cover</Link></li>
+                            <li><Link to="/areas-covered" className="text-sm text-text-secondary transition-colors hover:text-brand-light">Areas Covered</Link></li>
                         </ul>
                     </div>
 

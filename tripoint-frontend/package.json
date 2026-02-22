@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "extract-routes": "npx tsx scripts/extract-routes.mjs",
+    "build:ssg": "npm run build && npm run extract-routes && vite build --ssr src/entry-server.tsx --outDir dist/server && node scripts/prerender.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -26,6 +28,7 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "tsx": "^4.19.2",
     "@eslint/js": "^9.39.1",
     "@types/leaflet": "^1.9.21",
     "@types/node": "^24.10.1",

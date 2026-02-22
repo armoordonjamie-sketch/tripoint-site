@@ -314,7 +314,7 @@ export function HomePage() {
                         <TownChips />
                     </div>
                     <div className="mt-6 text-center reveal" style={{ transitionDelay: '0.2s' }}>
-                        <CTAButton href="/areas" variant="outline" size="sm" icon={<ArrowRight className="h-4 w-4" />}>
+                        <CTAButton href="/areas-covered" variant="outline" size="sm" icon={<ArrowRight className="h-4 w-4" />}>
                             View Full Coverage Map
                         </CTAButton>
                     </div>

@@ -1,39 +1,61 @@
 import { siteConfig } from '@/config/site';
 
+const AREA_SERVED_TOWNS = [
+    'Tonbridge',
+    'Sevenoaks',
+    'Bromley',
+    'Bexley',
+    'Greenwich',
+    'Lewisham',
+    'Dartford',
+    'Orpington',
+    'Sidcup',
+    'Eltham',
+    'Tunbridge Wells',
+    'Maidstone',
+    'Gravesend',
+];
+
+const SERVICE_TYPES = [
+    'Mercedes diagnostics',
+    'STAR/XENTRY diagnostics',
+    'Coding',
+    'Fault finding',
+    'DPF diagnostics and regeneration',
+    'AdBlue/SCR diagnostics',
+];
+
 /* ── LocalBusiness (AutoRepair) schema ───────────────────────── */
 export function LocalBusinessSchema() {
     const schema = {
         '@context': 'https://schema.org',
-        '@type': 'AutoRepair',
+        '@type': 'AutoRepair' as const,
         '@id': `${siteConfig.url}/#business`,
         name: siteConfig.brandName,
         description: siteConfig.description,
         url: siteConfig.url,
         telephone: siteConfig.contact.phoneE164,
         email: siteConfig.contact.email,
-        areaServed: {
-            '@type': 'GeoCircle',
-            geoMidpoint: {
-                '@type': 'GeoCoordinates',
-                latitude: 51.32,
-                longitude: 0.17,
-            },
-            geoRadius: '60000',
-        },
+        priceRange: '££' as const,
+        areaServed: AREA_SERVED_TOWNS.map((name) => ({
+            '@type': 'AdministrativeArea' as const,
+            name,
+        })),
         serviceArea: {
-            '@type': 'GeoCircle',
+            '@type': 'GeoCircle' as const,
             geoMidpoint: {
-                '@type': 'GeoCoordinates',
+                '@type': 'GeoCoordinates' as const,
                 latitude: 51.32,
                 longitude: 0.17,
             },
             geoRadius: '60000',
         },
+        serviceType: SERVICE_TYPES,
         openingHoursSpecification: {
-            '@type': 'OpeningHoursSpecification',
+            '@type': 'OpeningHoursSpecification' as const,
             dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-            opens: '06:00',
-            closes: '22:00',
+            opens: '08:00',
+            closes: '18:00',
         },
         sameAs: [
             siteConfig.social.facebook,

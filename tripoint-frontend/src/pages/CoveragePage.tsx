@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, lazy, Suspense } from 'react';
 import {
     MapPin, Clock, Navigation, Phone, MessageCircle,
     Car, CheckCircle2,
@@ -7,13 +7,16 @@ import { Seo } from '@/components/Seo';
 import { Section } from '@/components/Section';
 import { TownChips } from '@/components/TownChips';
 import { ZoneCalculator } from '@/components/ZoneCalculator';
-import { CoverageMap } from '@/components/CoverageMap';
 import { CTAButton } from '@/components/CTAButton';
 import { Notice } from '@/components/Notice';
 import { FaqAccordion } from '@/components/FaqAccordion';
 import { siteConfig } from '@/config/site';
 import { trackEvent } from '@/lib/analytics';
 
+// Lazy load CoverageMap - Leaflet accesses window at import time and crashes in SSR
+const CoverageMap = lazy(() =>
+    import('@/components/CoverageMap').then((m) => ({ default: m.CoverageMap }))
+);
 /* ── Intersection Observer for scroll-reveal ─────────── */
 function useScrollReveal() {
     const ref = useRef<HTMLDivElement>(null);
@@ -59,9 +62,9 @@ export function CoveragePage() {
     return (
         <div ref={scrollRef}>
             <Seo
-                title="Areas We Cover"
+                title="Areas Covered"
                 description="Mobile diagnostic coverage across Kent & SE London. Zone-based pricing by drive time from our bases. Check your zone and book."
-                canonical="/areas"
+                canonical="/areas-covered"
             />
 
             {/* ── HERO ──────────────────────────────────────── */}
@@ -112,7 +115,15 @@ export function CoveragePage() {
                     </p>
                 </div>
                 <div className="mx-auto mt-8 max-w-5xl reveal" style={{ transitionDelay: '0.1s' }}>
-                    <CoverageMap />
+                    {typeof window !== 'undefined' ? (
+                        <Suspense fallback={<div className="h-96 bg-surface-secondary animate-pulse rounded-xl" />}>
+                            <CoverageMap />
+                        </Suspense>
+                    ) : (
+                        <div className="h-96 rounded-xl bg-surface-secondary flex items-center justify-center text-text-muted">
+                            Coverage map
+                        </div>
+                    )}
                 </div>
             </Section>
 

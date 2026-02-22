@@ -4,7 +4,6 @@ import { trackEvent } from '@/lib/analytics';
 import { Section } from '@/components/Section';
 import { CTAButton } from '@/components/CTAButton';
 import { PhotoGallery } from '@/components/PhotoGallery';
-import { Notice } from '@/components/Notice';
 import { FaqAccordion } from '@/components/FaqAccordion';
 import { Link } from 'react-router-dom';
 import { CheckCircle2, ArrowRight, Phone, MessageCircle } from 'lucide-react';
@@ -12,7 +11,7 @@ import { galleryImages } from '@/data/galleryImages';
 import { siteConfig } from '@/config/site';
 import { ServiceSchema, BreadcrumbSchema, FaqPageSchema } from '@/components/JsonLd';
 
-const photos = [galleryImages[30], galleryImages[22], galleryImages[2], galleryImages[47], galleryImages[4]];
+const photos = [galleryImages[30], galleryImages[22], galleryImages[2], galleryImages[47]];
 const diagnosticService = siteConfig.pricing.services.find((s) => s.slug === 'diagnostic-callout');
 const zoneA = diagnosticService?.zoneA ?? 120;
 const zoneB = diagnosticService?.zoneB ?? 135;
@@ -34,30 +33,45 @@ function useScrollReveal() {
 }
 
 const faqs = [
-    { question: 'What is Xentry?', answer: 'Xentry is the official Mercedes-Benz diagnostic and programming platform. It provides dealer-level access to guided tests, live data, SCN coding, adaptations, and key programming. We use it mobile for Mercedes Truck and Van platforms.' },
-    { question: 'Are you affiliated with Mercedes-Benz?', answer: 'No. We are an independent mobile diagnostics business. We use Mercedes-Benz diagnostic tools and have technician training, but we are not affiliated with or endorsed by Mercedes-Benz.' },
-    { question: 'What vehicles do you cover?', answer: 'Mercedes Sprinter (W906, W907), Vito (W447), Citan, and other Mercedes Truck and Van platforms. We also work on cars where Xentry access applies.' },
-    { question: 'Where do you offer Xentry diagnostics?', answer: 'We are mobile across Kent and South East London. We cover Tonbridge, Sevenoaks, Bromley, Bexley, Greenwich, Lewisham, Dartford, and the wider area. See our areas covered for your location.' },
-    { question: 'Can you do coding and adaptations?', answer: 'Yes. Xentry gives us SCN coding, adaptations, and module initialisation. We can code replacement modules and run adaptations mobile. Coding add-on from £45.' },
+    {
+        question: 'What is ECU coding?',
+        answer:
+            'ECU coding configures vehicle control units. This includes adaptations (settings), SCN coding (software calibration), and variant coding. We use Mercedes STAR/XENTRY for dealer-level access.',
+    },
+    {
+        question: 'What is variant coding?',
+        answer:
+            'Variant coding configures a control unit for the correct vehicle specification. For example, when fitting a replacement module, it must be coded to match the vehicle. We use Xentry for this.',
+    },
+    {
+        question: 'Do you code after parts replacement?',
+        answer:
+            'Yes. When you fit a replacement ECU, module, or sensor that requires coding, we can carry out the coding mobile. We also do adaptations and initialisation where applicable.',
+    },
+    {
+        question: 'Where do you offer ECU coding?',
+        answer:
+            'We are mobile across Kent and South East London. We cover Tonbridge, Sevenoaks, Bromley, Bexley, Greenwich, and the wider area. See our areas covered for your location.',
+    },
 ];
 
 const crossSell = [
+    { title: 'Mercedes XENTRY Diagnostics', desc: 'Dealer-level Mercedes diagnostics and coding', href: '/services/mercedes-xentry-diagnostics-coding' },
     { title: 'Diagnostic Callout', desc: 'General fault diagnosis', href: '/services/diagnostic-callout' },
-    { title: 'Sprinter Limp Mode', desc: 'Sprinter-specific diagnostics', href: '/services/sprinter-limp-mode' },
 ];
 
-export function MercedesXentryPage() {
+export function EcuCodingPage() {
     const scrollRef = useScrollReveal();
 
     return (
         <div ref={scrollRef}>
             <Seo
-                title="Mercedes Xentry Diagnostics and Coding"
-                description="Mobile Mercedes Xentry diagnostics - guided tests, SCN coding, adaptations, key programming. Independent service, dealer-level access. Kent & SE London. From £120."
-                canonical="/services/mercedes-xentry-diagnostics-coding"
+                title="ECU Coding & Variant Coding"
+                description="Mercedes ECU coding, adaptations, and variant coding. STAR/XENTRY dealer-level coding mobile across Kent and South East London. From £120."
+                canonical="/services/ecu-coding-and-variant-coding"
             />
-            <ServiceSchema name="Mercedes Xentry Diagnostics and Coding" description="Mobile Mercedes Xentry diagnostics - guided tests, SCN coding, adaptations, key programming. Independent service, dealer-level access." url="/services/mercedes-xentry-diagnostics-coding" priceFrom={zoneA} />
-            <BreadcrumbSchema items={[{ name: 'Home', url: '/' }, { name: 'Services', url: '/services' }, { name: 'Mercedes Xentry', url: '/services/mercedes-xentry-diagnostics-coding' }]} />
+            <ServiceSchema name="ECU Coding & Variant Coding" description="Mercedes ECU coding, adaptations, variant coding. STAR/XENTRY dealer-level. Mobile." url="/services/ecu-coding-and-variant-coding" priceFrom={zoneA} />
+            <BreadcrumbSchema items={[{ name: 'Home', url: '/' }, { name: 'Services', url: '/services' }, { name: 'ECU Coding & Variant Coding', url: '/services/ecu-coding-and-variant-coding' }]} />
             <FaqPageSchema items={faqs} />
 
             <section className="relative h-56 sm:h-72 overflow-hidden">
@@ -65,8 +79,8 @@ export function MercedesXentryPage() {
                 <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/70 to-surface/30" />
                 <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-10">
                     <div className="mx-auto max-w-3xl">
-                        <p className="text-sm font-semibold uppercase tracking-widest text-brand mb-2">Independent Service</p>
-                        <h1 className="text-4xl font-extrabold text-text-primary sm:text-5xl">Mercedes Xentry Diagnostics and Coding</h1>
+                        <p className="text-sm font-semibold uppercase tracking-widest text-brand mb-2">Mercedes Specialist</p>
+                        <h1 className="text-4xl font-extrabold text-text-primary sm:text-5xl">ECU Coding & Variant Coding</h1>
                     </div>
                 </div>
             </section>
@@ -74,26 +88,13 @@ export function MercedesXentryPage() {
             <Section>
                 <div className="mx-auto max-w-3xl">
                     <p className="text-xl text-text-secondary leading-relaxed">
-                        Dealer-level Mercedes diagnostics, mobile. Xentry gives us guided tests, live data, SCN coding, adaptations, and key programming where applicable. We bring it to you - Sprinter, Vito, Citan, and other Mercedes Truck and Van platforms. Independent service, not affiliated with Mercedes-Benz.
+                        Mercedes ECU coding, adaptations, and variant coding. STAR/XENTRY dealer-level coding mobile across Kent and South East London. We code replacement modules, run adaptations, and carry out initialisation where applicable. See our <Link to="/areas-covered" className="text-brand hover:underline">areas covered</Link>.
                     </p>
 
-                    <div className="mt-10 reveal">
-                        <Notice variant="info">
-                            <strong>Independent service.</strong> We are not affiliated with or endorsed by Mercedes-Benz. We use Mercedes diagnostic tools and have Mercedes-Benz Truck and Van trained technician experience.
-                        </Notice>
-                    </div>
-
                     <div className="mt-10 rounded-2xl border border-brand/20 bg-brand/5 p-6 reveal">
-                        <h2 className="text-lg font-bold text-text-primary">Why Choose TriPoint Diagnostics</h2>
-                        <p className="mt-2 text-text-secondary">
-                            Dealer-level tooling, compliance-first diagnostics, mobile convenience, and clear communication. We serve Kent and South East London. See our <Link to="/areas-covered" className="text-brand hover:underline">areas covered</Link> for Tonbridge, Sevenoaks, Bromley, Bexley, Greenwich, and more.
-                        </p>
-                    </div>
-
-                    <div className="mt-10 rounded-2xl border border-brand/20 bg-brand/5 p-6 reveal">
-                        <h2 className="text-lg font-bold text-text-primary">What Xentry Enables</h2>
+                        <h2 className="text-lg font-bold text-text-primary">What&apos;s Included</h2>
                         <ul className="mt-4 space-y-2">
-                            {['Guided fault finding and component tests', 'Live data and actuations', 'SCN coding and adaptations', 'Key programming (where applicable)', 'Module initialisation and calibration', 'Fault code read/clear with full context'].map((s) => (
+                            {['SCN coding and adaptations', 'Variant coding for replacement modules', 'Module initialisation where applicable', 'Diagnostic callout pricing (coding add-on from £45)', 'Up to 60 minutes on-site', 'Written confirmation'].map((s) => (
                                 <li key={s} className="flex items-start gap-2 text-text-secondary">
                                     <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-brand" />
                                     <span>{s}</span>
@@ -108,13 +109,13 @@ export function MercedesXentryPage() {
                     </div>
 
                     <div className="mt-10 flex flex-wrap gap-3 reveal">
-                        <CTAButton href="/booking" size="md" onClick={() => trackEvent('click_book_now', { location: 'xentry' })}>Book Now</CTAButton>
-                        <CTAButton href={`https://wa.me/${siteConfig.contact.whatsappE164}`} variant="outline" size="md" external icon={<MessageCircle className="h-4 w-4" />} onClick={() => trackEvent('click_whatsapp', { location: 'xentry' })}>WhatsApp Us</CTAButton>
+                        <CTAButton href="/booking" size="md" onClick={() => trackEvent('click_book_now', { location: 'ecu_coding' })}>Book Now</CTAButton>
+                        <CTAButton href={`https://wa.me/${siteConfig.contact.whatsappE164}`} variant="outline" size="md" external icon={<MessageCircle className="h-4 w-4" />} onClick={() => trackEvent('click_whatsapp', { location: 'ecu_coding' })}>WhatsApp Us</CTAButton>
                     </div>
 
                     <div className="mt-12 reveal">
                         <h2 className="text-2xl font-bold text-text-primary">Pricing</h2>
-                        <p className="mt-2 text-text-secondary">Xentry diagnostics use our standard Diagnostic Callout pricing. Coding and adaptations may incur add-on charges.</p>
+                        <p className="mt-2 text-text-secondary">Coding uses our standard Diagnostic Callout pricing. Coding and adaptations may incur add-on charges from £45.</p>
                         <div className="mt-4 overflow-x-auto rounded-xl border border-border-default">
                             <table className="min-w-full">
                                 <thead><tr className="border-b border-border-default bg-surface-alt"><th className="px-4 py-3 text-left text-sm font-semibold text-text-primary">Zone</th><th className="px-4 py-3 text-left text-sm font-semibold text-text-primary">Drive time</th><th className="px-4 py-3 text-right text-sm font-semibold text-text-primary">Price</th></tr></thead>
@@ -136,7 +137,7 @@ export function MercedesXentryPage() {
                         <p className="text-2xl font-bold text-text-primary">From <span className="text-brand-light">£{zoneA}</span></p>
                         <div className="mt-4 flex flex-wrap justify-center gap-3">
                             <CTAButton href="/pricing" variant="outline" size="sm" icon={<ArrowRight className="h-4 w-4" />}>Full Pricing</CTAButton>
-                            <CTAButton href="/booking" size="sm" onClick={() => trackEvent('click_book_now', { location: 'xentry' })}>Book Now</CTAButton>
+                            <CTAButton href="/booking" size="sm" onClick={() => trackEvent('click_book_now', { location: 'ecu_coding' })}>Book Now</CTAButton>
                         </div>
                     </div>
 
@@ -161,11 +162,11 @@ export function MercedesXentryPage() {
                 </div>
                 <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 md:py-20">
                     <div className="text-center reveal">
-                        <h2 className="text-3xl font-bold text-white sm:text-4xl md:text-5xl">Dealer-level Mercedes diagnostics, mobile.</h2>
+                        <h2 className="text-3xl font-bold text-white sm:text-4xl md:text-5xl">Mercedes ECU coding, mobile.</h2>
                         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-                            <CTAButton href="/booking" variant="secondary" size="lg" onClick={() => trackEvent('click_book_now', { location: 'xentry_footer' })}>Book Now</CTAButton>
-                            <CTAButton href={`https://wa.me/${siteConfig.contact.whatsappE164}`} variant="ghost" size="lg" external icon={<MessageCircle className="h-5 w-5" />} className="text-white hover:text-white hover:bg-white/10" onClick={() => trackEvent('click_whatsapp', { location: 'xentry' })}>WhatsApp Us</CTAButton>
-                            <CTAButton href={`tel:${siteConfig.contact.phoneE164}`} variant="ghost" size="lg" external icon={<Phone className="h-5 w-5" />} className="text-white hover:text-white hover:bg-white/10" onClick={() => trackEvent('click_phone_header', { location: 'xentry' })}>{siteConfig.contact.phoneDisplay}</CTAButton>
+                            <CTAButton href="/booking" variant="secondary" size="lg" onClick={() => trackEvent('click_book_now', { location: 'ecu_coding_footer' })}>Book Now</CTAButton>
+                            <CTAButton href={`https://wa.me/${siteConfig.contact.whatsappE164}`} variant="ghost" size="lg" external icon={<MessageCircle className="h-5 w-5" />} className="text-white hover:text-white hover:bg-white/10" onClick={() => trackEvent('click_whatsapp', { location: 'ecu_coding' })}>WhatsApp Us</CTAButton>
+                            <CTAButton href={`tel:${siteConfig.contact.phoneE164}`} variant="ghost" size="lg" external icon={<Phone className="h-5 w-5" />} className="text-white hover:text-white hover:bg-white/10">{siteConfig.contact.phoneDisplay}</CTAButton>
                         </div>
                     </div>
                 </div>

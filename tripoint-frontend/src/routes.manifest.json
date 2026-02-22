@@ -1,0 +1,416 @@
+[
+  {
+    "path": "/",
+    "title": "Mobile Vehicle Diagnostics & Repairs | Kent & SE London",
+    "description": "Dealer-level mobile diagnostics and compliant repairs for vans and cars across Kent and South East London. Mercedes specialist. Compliance-first, no guesswork.",
+    "canonicalPath": "/",
+    "priority": 1,
+    "changefreq": "daily",
+    "indexable": true
+  },
+  {
+    "path": "/services",
+    "title": "Services",
+    "description": "Mercedes diagnostics, fault finding, DPF regeneration, AdBlue/SCR diagnostics, ECU coding. Mobile service across Kent and South East London.",
+    "canonicalPath": "/services",
+    "priority": 0.9,
+    "changefreq": "weekly",
+    "indexable": true
+  },
+  {
+    "path": "/areas-covered",
+    "title": "Areas Covered",
+    "description": "Mobile vehicle diagnostics across Tonbridge, Sevenoaks, Bromley, Bexley, Greenwich, Lewisham, Dartford, Orpington, Sidcup, Eltham, Tunbridge Wells, Maidstone, Gravesend.",
+    "canonicalPath": "/areas-covered",
+    "priority": 0.9,
+    "changefreq": "weekly",
+    "indexable": true
+  },
+  {
+    "path": "/services/mercedes-xentry-diagnostics-coding",
+    "title": "Mercedes XENTRY Diagnostics & Coding",
+    "description": "Dealer-level Mercedes diagnostics and coding with STAR/XENTRY. Mobile fault finding, adaptations, and variant coding across Kent and SE London.",
+    "canonicalPath": "/services/mercedes-xentry-diagnostics-coding",
+    "priority": 0.8,
+    "changefreq": "weekly",
+    "indexable": true
+  },
+  {
+    "path": "/services/mobile-fault-finding",
+    "title": "Mobile Fault Finding",
+    "description": "Professional mobile fault finding for Mercedes and commercial vehicles. Dealer-level diagnostics at your location across Kent and South East London.",
+    "canonicalPath": "/services/mobile-fault-finding",
+    "priority": 0.8,
+    "changefreq": "weekly",
+    "indexable": true
+  },
+  {
+    "path": "/services/dpf-regeneration-and-diagnostics",
+    "title": "DPF Regeneration & Diagnostics",
+    "description": "DPF diagnostics and forced regeneration. Compliance-first approach. We diagnose before regen to avoid masking deeper faults.",
+    "canonicalPath": "/services/dpf-regeneration-and-diagnostics",
+    "priority": 0.8,
+    "changefreq": "weekly",
+    "indexable": true
+  },
+  {
+    "path": "/services/adblue-scr-diagnostics",
+    "title": "AdBlue & SCR Diagnostics",
+    "description": "AdBlue and SCR system diagnostics. NOx sensor faults, dosing issues, countdown resolution. Compliance-first diagnostics.",
+    "canonicalPath": "/services/adblue-scr-diagnostics",
+    "priority": 0.8,
+    "changefreq": "weekly",
+    "indexable": true
+  },
+  {
+    "path": "/services/ecu-coding-and-variant-coding",
+    "title": "ECU Coding & Variant Coding",
+    "description": "Mercedes ECU coding, adaptations, and variant coding. STAR/XENTRY dealer-level coding mobile across Kent and South East London.",
+    "canonicalPath": "/services/ecu-coding-and-variant-coding",
+    "priority": 0.8,
+    "changefreq": "weekly",
+    "indexable": true
+  },
+  {
+    "path": "/services/diagnostic-callout",
+    "title": "Diagnostic Callout",
+    "description": "Standard mobile diagnostic callout. Up to 60 minutes on-site. Dealer-level fault finding at your location.",
+    "canonicalPath": "/services/diagnostic-callout",
+    "priority": 0.8,
+    "changefreq": "weekly",
+    "indexable": true
+  },
+  {
+    "path": "/services/vor-van-diagnostics",
+    "title": "VOR Van Diagnostics",
+    "description": "VOR and priority triage for commercial vehicles. Faster response for off-road vans and fleet diagnostics.",
+    "canonicalPath": "/services/vor-van-diagnostics",
+    "priority": 0.8,
+    "changefreq": "weekly",
+    "indexable": true
+  },
+  {
+    "path": "/services/emissions-diagnostics",
+    "title": "Emissions Diagnostics",
+    "description": "AdBlue, SCR, DPF, NOx emissions fault decision visits. Compliance-first diagnostics before any repair.",
+    "canonicalPath": "/services/emissions-diagnostics",
+    "priority": 0.8,
+    "changefreq": "weekly",
+    "indexable": true
+  },
+  {
+    "path": "/services/pre-purchase-digital-health-check",
+    "title": "Pre-Purchase Digital Health Check",
+    "description": "Pre-purchase diagnostic health check for used Mercedes and commercial vehicles. Know before you buy.",
+    "canonicalPath": "/services/pre-purchase-digital-health-check",
+    "priority": 0.8,
+    "changefreq": "weekly",
+    "indexable": true
+  },
+  {
+    "path": "/services/sprinter-limp-mode",
+    "title": "Sprinter Limp Mode",
+    "description": "Sprinter limp mode triage and diagnostics. Proper fault finding before any repair. W906 and W907 specialist.",
+    "canonicalPath": "/services/sprinter-limp-mode",
+    "priority": 0.8,
+    "changefreq": "weekly",
+    "indexable": true
+  },
+  {
+    "path": "/services/adblue-countdown",
+    "title": "AdBlue Countdown",
+    "description": "AdBlue countdown diagnostic. Proper diagnosis before code clearing. SCR system fault finding.",
+    "canonicalPath": "/services/adblue-countdown",
+    "priority": 0.8,
+    "changefreq": "weekly",
+    "indexable": true
+  },
+  {
+    "path": "/services/nox-scr-diagnostics",
+    "title": "NOx & SCR Diagnostics",
+    "description": "NOx sensor and SCR system diagnostics. Emissions compliance fault finding.",
+    "canonicalPath": "/services/nox-scr-diagnostics",
+    "priority": 0.8,
+    "changefreq": "weekly",
+    "indexable": true
+  },
+  {
+    "path": "/services/dpf-regeneration-decision",
+    "title": "DPF Regeneration Decision",
+    "description": "DPF diagnostic decision visit. We check before regen. Compliance-first approach.",
+    "canonicalPath": "/services/dpf-regeneration-decision",
+    "priority": 0.8,
+    "changefreq": "weekly",
+    "indexable": true
+  },
+  {
+    "path": "/services/intermittent-electrical-faults",
+    "title": "Intermittent Electrical Faults",
+    "description": "Intermittent electrical fault diagnostics. Wiring, connectors, CAN faults. Mobile diagnostics.",
+    "canonicalPath": "/services/intermittent-electrical-faults",
+    "priority": 0.8,
+    "changefreq": "weekly",
+    "indexable": true
+  },
+  {
+    "path": "/services/fleet-health-check",
+    "title": "Fleet Health Check",
+    "description": "Fleet vehicle health checks. Mercedes and commercial vehicle diagnostics for fleet operators.",
+    "canonicalPath": "/services/fleet-health-check",
+    "priority": 0.8,
+    "changefreq": "weekly",
+    "indexable": true
+  },
+  {
+    "path": "/areas-covered/tonbridge",
+    "title": "Mobile Vehicle Diagnostics in Tonbridge",
+    "description": "Mobile Mercedes diagnostics and fault finding in Tonbridge. Dealer-level STAR/XENTRY at your location.",
+    "canonicalPath": "/areas-covered/tonbridge",
+    "priority": 0.7,
+    "changefreq": "monthly",
+    "indexable": true
+  },
+  {
+    "path": "/areas-covered/sevenoaks",
+    "title": "Mobile Vehicle Diagnostics in Sevenoaks",
+    "description": "Mobile Mercedes diagnostics and fault finding in Sevenoaks. Dealer-level STAR/XENTRY at your location.",
+    "canonicalPath": "/areas-covered/sevenoaks",
+    "priority": 0.7,
+    "changefreq": "monthly",
+    "indexable": true
+  },
+  {
+    "path": "/areas-covered/bromley",
+    "title": "Mobile Vehicle Diagnostics in Bromley",
+    "description": "Mobile Mercedes diagnostics and fault finding in Bromley. Dealer-level STAR/XENTRY at your location.",
+    "canonicalPath": "/areas-covered/bromley",
+    "priority": 0.7,
+    "changefreq": "monthly",
+    "indexable": true
+  },
+  {
+    "path": "/areas-covered/bexley",
+    "title": "Mobile Vehicle Diagnostics in Bexley",
+    "description": "Mobile Mercedes diagnostics and fault finding in Bexley. Dealer-level STAR/XENTRY at your location.",
+    "canonicalPath": "/areas-covered/bexley",
+    "priority": 0.7,
+    "changefreq": "monthly",
+    "indexable": true
+  },
+  {
+    "path": "/areas-covered/greenwich",
+    "title": "Mobile Vehicle Diagnostics in Greenwich",
+    "description": "Mobile Mercedes diagnostics and fault finding in Greenwich. Dealer-level STAR/XENTRY at your location.",
+    "canonicalPath": "/areas-covered/greenwich",
+    "priority": 0.7,
+    "changefreq": "monthly",
+    "indexable": true
+  },
+  {
+    "path": "/areas-covered/lewisham",
+    "title": "Mobile Vehicle Diagnostics in Lewisham",
+    "description": "Mobile Mercedes diagnostics and fault finding in Lewisham. Dealer-level STAR/XENTRY at your location.",
+    "canonicalPath": "/areas-covered/lewisham",
+    "priority": 0.7,
+    "changefreq": "monthly",
+    "indexable": true
+  },
+  {
+    "path": "/areas-covered/dartford",
+    "title": "Mobile Vehicle Diagnostics in Dartford",
+    "description": "Mobile Mercedes diagnostics and fault finding in Dartford. Dealer-level STAR/XENTRY at your location.",
+    "canonicalPath": "/areas-covered/dartford",
+    "priority": 0.7,
+    "changefreq": "monthly",
+    "indexable": true
+  },
+  {
+    "path": "/areas-covered/orpington",
+    "title": "Mobile Vehicle Diagnostics in Orpington",
+    "description": "Mobile Mercedes diagnostics and fault finding in Orpington. Dealer-level STAR/XENTRY at your location.",
+    "canonicalPath": "/areas-covered/orpington",
+    "priority": 0.7,
+    "changefreq": "monthly",
+    "indexable": true
+  },
+  {
+    "path": "/areas-covered/sidcup",
+    "title": "Mobile Vehicle Diagnostics in Sidcup",
+    "description": "Mobile Mercedes diagnostics and fault finding in Sidcup. Dealer-level STAR/XENTRY at your location.",
+    "canonicalPath": "/areas-covered/sidcup",
+    "priority": 0.7,
+    "changefreq": "monthly",
+    "indexable": true
+  },
+  {
+    "path": "/areas-covered/eltham",
+    "title": "Mobile Vehicle Diagnostics in Eltham",
+    "description": "Mobile Mercedes diagnostics and fault finding in Eltham. Dealer-level STAR/XENTRY at your location.",
+    "canonicalPath": "/areas-covered/eltham",
+    "priority": 0.7,
+    "changefreq": "monthly",
+    "indexable": true
+  },
+  {
+    "path": "/areas-covered/tunbridge-wells",
+    "title": "Mobile Vehicle Diagnostics in Tunbridge Wells",
+    "description": "Mobile Mercedes diagnostics and fault finding in Tunbridge Wells. Dealer-level STAR/XENTRY at your location.",
+    "canonicalPath": "/areas-covered/tunbridge-wells",
+    "priority": 0.7,
+    "changefreq": "monthly",
+    "indexable": true
+  },
+  {
+    "path": "/areas-covered/maidstone",
+    "title": "Mobile Vehicle Diagnostics in Maidstone",
+    "description": "Mobile Mercedes diagnostics and fault finding in Maidstone. Dealer-level STAR/XENTRY at your location.",
+    "canonicalPath": "/areas-covered/maidstone",
+    "priority": 0.7,
+    "changefreq": "monthly",
+    "indexable": true
+  },
+  {
+    "path": "/areas-covered/gravesend",
+    "title": "Mobile Vehicle Diagnostics in Gravesend",
+    "description": "Mobile Mercedes diagnostics and fault finding in Gravesend. Dealer-level STAR/XENTRY at your location.",
+    "canonicalPath": "/areas-covered/gravesend",
+    "priority": 0.7,
+    "changefreq": "monthly",
+    "indexable": true
+  },
+  {
+    "path": "/pricing",
+    "title": "Pricing",
+    "description": "Transparent pricing for mobile diagnostics. Zone-based callout fees. No hidden costs.",
+    "canonicalPath": "/pricing",
+    "priority": 0.9,
+    "changefreq": "weekly",
+    "indexable": true
+  },
+  {
+    "path": "/about",
+    "title": "About",
+    "description": "TriPoint Diagnostics. Mobile vehicle diagnostics specialist. Mercedes and commercial vehicles across Kent and South East London.",
+    "canonicalPath": "/about",
+    "priority": 0.7,
+    "changefreq": "monthly",
+    "indexable": true
+  },
+  {
+    "path": "/faq",
+    "title": "FAQ",
+    "description": "Frequently asked questions about mobile diagnostics, Mercedes specialist services, and our coverage area.",
+    "canonicalPath": "/faq",
+    "priority": 0.7,
+    "changefreq": "weekly",
+    "indexable": true
+  },
+  {
+    "path": "/booking",
+    "title": "Booking",
+    "description": "Book a mobile diagnostic callout. Choose your service and location. TriPoint Diagnostics.",
+    "canonicalPath": "/booking",
+    "priority": 0.9,
+    "changefreq": "weekly",
+    "indexable": true
+  },
+  {
+    "path": "/contact",
+    "title": "Contact",
+    "description": "Contact TriPoint Diagnostics. Call, WhatsApp, or use our contact form. Mobile diagnostics across Kent and SE London.",
+    "canonicalPath": "/contact",
+    "priority": 0.8,
+    "changefreq": "monthly",
+    "indexable": true
+  },
+  {
+    "path": "/process",
+    "title": "Our Process",
+    "description": "How TriPoint Diagnostics works. From booking to diagnosis. Clear, compliance-first approach.",
+    "canonicalPath": "/process",
+    "priority": 0.8,
+    "changefreq": "monthly",
+    "indexable": true
+  },
+  {
+    "path": "/our-work",
+    "title": "Our Work",
+    "description": "Photo gallery of diagnostic work. Real jobs, real results. Mercedes and commercial vehicle diagnostics.",
+    "canonicalPath": "/our-work",
+    "priority": 0.7,
+    "changefreq": "weekly",
+    "indexable": true
+  },
+  {
+    "path": "/blog",
+    "title": "Blog",
+    "description": "Diagnostics insights. Sprinter limp mode, AdBlue, DPF. Mercedes and commercial vehicle advice.",
+    "canonicalPath": "/blog",
+    "priority": 0.6,
+    "changefreq": "weekly",
+    "indexable": true
+  },
+  {
+    "path": "/blog/sprinter-limp-mode-proper-diagnostic",
+    "title": "Sprinter Limp Mode: What a Proper Diagnostic Looks Like",
+    "description": "Common triggers for Sprinter limp mode, why code-clearing does not work, and what a proper diagnostic session involves.",
+    "canonicalPath": "/blog/sprinter-limp-mode-proper-diagnostic",
+    "priority": 0.5,
+    "changefreq": "monthly",
+    "indexable": true
+  },
+  {
+    "path": "/blog/adblue-countdown-clearing-codes-not-fix",
+    "title": "AdBlue Countdown: Why Clearing Codes Is Not a Fix",
+    "description": "What triggers the AdBlue countdown, why it returns after clearing, and what a proper decision visit actually does.",
+    "canonicalPath": "/blog/adblue-countdown-clearing-codes-not-fix",
+    "priority": 0.5,
+    "changefreq": "monthly",
+    "indexable": true
+  },
+  {
+    "path": "/blog/dpf-warning-light-regen-vs-worse",
+    "title": "DPF Warning Lights: When Regen Helps vs When It Makes Things Worse",
+    "description": "Forced regen vs passive, when regen is safe, when it masks a deeper fault, and why we diagnose first.",
+    "canonicalPath": "/blog/dpf-warning-light-regen-vs-worse",
+    "priority": 0.5,
+    "changefreq": "monthly",
+    "indexable": true
+  },
+  {
+    "path": "/legal/privacy-policy",
+    "title": "Privacy Policy",
+    "description": "TriPoint Diagnostics privacy policy. GDPR compliant.",
+    "canonicalPath": "/legal/privacy-policy",
+    "priority": 0.3,
+    "changefreq": "yearly",
+    "indexable": true
+  },
+  {
+    "path": "/legal/terms",
+    "title": "Terms of Service",
+    "description": "TriPoint Diagnostics terms of service.",
+    "canonicalPath": "/legal/terms",
+    "priority": 0.3,
+    "changefreq": "yearly",
+    "indexable": true
+  },
+  {
+    "path": "/legal/disclaimer",
+    "title": "Disclaimer",
+    "description": "TriPoint Diagnostics disclaimers and emissions compliance.",
+    "canonicalPath": "/legal/disclaimer",
+    "priority": 0.3,
+    "changefreq": "yearly",
+    "indexable": true
+  },
+  {
+    "path": "/legal/accessibility",
+    "title": "Accessibility",
+    "description": "TriPoint Diagnostics accessibility statement.",
+    "canonicalPath": "/legal/accessibility",
+    "priority": 0.3,
+    "changefreq": "yearly",
+    "indexable": true
+  }
+]

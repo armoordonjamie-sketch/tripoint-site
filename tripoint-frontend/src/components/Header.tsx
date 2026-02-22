@@ -25,7 +25,7 @@ const navLinks = [
         ],
     },
     { label: 'Pricing', href: '/pricing' },
-    { label: 'Areas We Cover', href: '/areas' },
+    { label: 'Areas Covered', href: '/areas-covered' },
     { label: 'About', href: '/about' },
     { label: 'Contact', href: '/contact' },
     { label: 'Blog', href: '/blog' },
