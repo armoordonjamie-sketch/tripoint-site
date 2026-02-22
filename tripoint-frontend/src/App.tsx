@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { Layout } from '@/components/Layout';
+import { RouteTracker } from '@/components/RouteTracker';
 
 // Pages
 import { HomePage } from '@/pages/HomePage';
@@ -43,6 +44,7 @@ export default function App() {
   return (
     <HelmetProvider>
       <BrowserRouter>
+        <RouteTracker />
         <Routes>
           <Route element={<Layout />}>
             {/* Public pages */}

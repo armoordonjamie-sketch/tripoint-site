@@ -1,0 +1,8 @@
+# Google Setup CLI Tool
+google-ads>=25.0.0
+google-analytics-admin>=0.22.0
+google-auth>=2.0.0
+google-auth-oauthlib>=1.0.0
+google-auth-httplib2>=0.2.0
+pyyaml>=6.0
+click>=8.0

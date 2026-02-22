@@ -1,0 +1,7 @@
+### INSTRUCTIONS ###,,,,,,
+"# IMPORTANT: Remember to set the TimeZone value in the ""parameters"" row and/or in your Conversion Time column",,,,,,
+# For instructions on how to set your timezones visit http://goo.gl/BUrhyD,,,,,,
+,,,,,,
+### TEMPLATE ###,,,,,,
+Parameters:TimeZone=<insert_TZ>,,,,,,
+Caller's Phone Number,Call Start Time,Conversion Name,Conversion Time,Conversion Value,Conversion Currency,Ad User Data,Ad Personalization

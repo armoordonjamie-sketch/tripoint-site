@@ -8,7 +8,8 @@ import { CTAButton } from '@/components/CTAButton';
 import { siteConfig } from '@/config/site';
 import { Link } from 'react-router-dom';
 import { Phone, MessageCircle, Mail, CheckCircle2, Calendar } from 'lucide-react';
-import { trackEvent } from '@/lib/analytics';
+import { trackEvent, trackConversion, CONVERSIONS } from '@/lib/analytics';
+import { getAttribution } from '@/lib/attribution';
 
 const contactSchema = z.object({
     name: z.string().min(2, 'Name is required'),
@@ -39,6 +40,7 @@ export function ContactPage() {
     const onSubmit = async (data: ContactFormData) => {
         setSubmitError(null);
         try {
+            const attribution = getAttribution();
             const response = await fetch('/api/contact/submit', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -50,6 +52,8 @@ export function ContactPage() {
                     vehicle_registration: data.vehicleReg || null,
                     message: data.message,
                     safe_location_confirmed: data.safeLocation,
+                    // Attribution / click-ID data for conversion tracking
+                    ...(Object.keys(attribution).length > 0 && { attribution }),
                 }),
             });
             if (!response.ok) {
@@ -62,7 +66,8 @@ export function ContactPage() {
                         : 'Failed to send message. Please try again.';
                 throw new Error(message);
             }
-            trackEvent('submit_contact_form');
+            trackEvent('submit_contact_form', { form: 'contact' });
+            trackConversion(CONVERSIONS.bookAppointment);
             setSubmitted(true);
         } catch (err) {
             setSubmitError(err instanceof Error ? err.message : 'Failed to send message. Please try again.');

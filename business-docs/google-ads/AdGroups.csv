@@ -1,0 +1,10 @@
+Row Type,Action,Ad group status,Campaign ID,Campaign,Ad group ID,Ad group,Ad group type,Ad rotation,Default max. CPC,CPC%,Max. CPM,Max. CPV,Target CPA,Target CPM,TrueView target CPV,Label,Tracking template,Final URL suffix,Custom parameter,Target ROAS
+Ad group,Add,Enabled,,TriPoint | Search | Mercedes Vans | Kent + SE London,,Brand | TriPoint,,Optimize,,,,,,,,,,,,
+Ad group,Add,Enabled,,TriPoint | Search | Mercedes Vans | Kent + SE London,,Mercedes Vans | Diagnostics (Core),,Optimize,,,,,,,,,,,,
+Ad group,Add,Enabled,,TriPoint | Search | Mercedes Vans | Kent + SE London,,Sprinter Limp Mode | Reduced Power,,Optimize,,,,,,,,,,,,
+Ad group,Add,Enabled,,TriPoint | Search | Mercedes Vans | Kent + SE London,,VOR | Urgent Triage,,Optimize,,,,,,,,,,,,
+Ad group,Add,Enabled,,TriPoint | Search | Mercedes Vans | Kent + SE London,,Xentry / SCN / Module Coding,,Optimize,,,,,,,,,,,,
+Ad group,Add,Enabled,,TriPoint | Search | Mercedes Vans | Kent + SE London,,Intermittent Electrical | CAN Faults,,Optimize,,,,,,,,,,,,
+Ad group,Add,Paused,,TriPoint | Search | Mercedes Vans | Kent + SE London,,Emissions Diagnostics | AdBlue/SCR/DPF,,Optimize,,,,,,,,,,,,
+Ad group,Add,Paused,,TriPoint | Search | Mercedes Vans | Kent + SE London,,Fleet Health Check | B2B,,Optimize,,,,,,,,,,,,
+Ad group,Add,Paused,,TriPoint | Search | Mercedes Vans | Kent + SE London,,Pre-Purchase Health Check,,Optimize,,,,,,,,,,,,

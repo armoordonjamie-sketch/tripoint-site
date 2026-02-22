@@ -1,0 +1,9 @@
+### INSTRUCTIONS ###,,,,,
+"# IMPORTANT: Remember to set the TimeZone value in the ""parameters"" row and/or in your Conversion Time column",,,,,
+# For instructions on how to set your timezones visit http://goo.gl/T1C5Ov,,,,,
+"# If you include conversion value, it should be the value corresponding to the attributed conversion credit.",,,,,
+,,,,,
+### TEMPLATE ###,,,,,
+Parameters:Attribution Model = <insert_attribution_model_name>,,,,,
+Parameters:TimeZone=<insert_TZ>,,,# Attributed credit should be between 0 and 1 #,# Optional #,# Optional #
+Google Click ID,Conversion Name,Conversion Time,Attributed Credit,Conversion Value,Conversion Currency,Ad User Data,Ad Personalization

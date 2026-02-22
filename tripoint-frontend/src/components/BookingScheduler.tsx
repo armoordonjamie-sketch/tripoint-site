@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState, useRef } from 'react';
 import { Loader2, AlertCircle, CheckCircle2, ChevronLeft, ChevronRight, Calendar, Search, MapPin, Car, Wrench, User, CreditCard } from 'lucide-react';
 import { CTAButton } from './CTAButton';
-import { trackEvent } from '@/lib/analytics';
+import { trackEvent, trackConversion, CONVERSIONS } from '@/lib/analytics';
+import { getAttribution } from '@/lib/attribution';
 
 /* ---------- types ---------- */
 interface Service {
@@ -398,11 +399,12 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
             const response = await fetch('/api/booking/reserve', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ ...booking, slot_start_iso: selectedSlot }),
+                body: JSON.stringify({ ...booking, slot_start_iso: selectedSlot, attribution: getAttribution() }),
             });
             const json = await response.json();
             if (!response.ok) throw new Error(json.detail || 'Booking failed');
-            trackEvent('confirm_booking');
+            trackEvent('confirm_booking', { flow: 'booking' });
+            trackConversion(CONVERSIONS.bookAppointment);
             if (json.status === 'pending_deposit' && json.payment_url) {
                 window.location.href = json.payment_url;
                 return;

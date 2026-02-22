@@ -1,10 +1,16 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Seo } from '@/components/Seo';
 import { Section } from '@/components/Section';
 import { CTAButton } from '@/components/CTAButton';
 import { CheckCircle2 } from 'lucide-react';
+import { trackConversion, CONVERSIONS } from '@/lib/analytics';
 
 export function PaymentSuccessPage() {
+    useEffect(() => {
+        trackConversion(CONVERSIONS.bookAppointment);
+    }, []);
+
     return (
         <>
             <Seo
