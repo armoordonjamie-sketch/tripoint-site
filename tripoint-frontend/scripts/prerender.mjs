@@ -29,20 +29,20 @@ async function runPrerender() {
     const indexableRoutes = routeManifest.filter((r) => r.indexable);
 
     for (const route of indexableRoutes) {
-        const { appHtml, helmet } = render(route.path);
+        const { appHtml, helmet } = await render(route.path);
         const path = route.canonicalPath || route.path || '/';
         const canonicalUrl = path === '/' ? `${SITE_URL}/` : `${SITE_URL}${path}`;
         const hreflangTags = `<link rel="alternate" hreflang="en-GB" href="${canonicalUrl}">\n<link rel="alternate" hreflang="x-default" href="${canonicalUrl}">`;
-        const headTags = helmet
-            ? [
-                  helmet.title?.toString?.() ?? '',
-                  helmet.meta?.toString?.() ?? '',
-                  helmet.link?.toString?.() ?? '',
-                  hreflangTags,
-              ]
-                  .filter(Boolean)
-                  .join('\n')
-            : hreflangTags;
+        const lcpPreload = path === '/' ? '<link rel="preload" as="image" href="/images/optimized/gallery/work-48-640.webp" fetchpriority="high" type="image/webp">' : '';
+        const headTags = [
+            lcpPreload,
+            helmet?.title?.toString?.() ?? '',
+            helmet?.meta?.toString?.() ?? '',
+            helmet?.link?.toString?.() ?? '',
+            hreflangTags,
+        ]
+            .filter(Boolean)
+            .join('\n');
 
         let html = template
             .replace('<!--head-tags-->', headTags)
@@ -55,7 +55,7 @@ async function runPrerender() {
     }
 
     // 404 page (no hreflang - noindex)
-    const notFound = render('/404');
+    const notFound = await render('/404');
     const headTags404 = notFound.helmet
         ? [
               notFound.helmet.title?.toString?.() ?? '',

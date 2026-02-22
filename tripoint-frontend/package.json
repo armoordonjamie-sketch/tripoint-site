@@ -6,8 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "optimize-images": "node scripts/optimize-images.mjs",
     "extract-routes": "npx tsx scripts/extract-routes.mjs",
-    "build:ssg": "npm run build && npm run extract-routes && vite build --ssr src/entry-server.tsx --outDir dist/server && node scripts/prerender.mjs",
+    "build:ssg": "npm run optimize-images && npm run build && npm run extract-routes && vite build --ssr src/entry-server.tsx --outDir dist/server && node scripts/prerender.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -28,7 +29,6 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
-    "tsx": "^4.19.2",
     "@eslint/js": "^9.39.1",
     "@types/leaflet": "^1.9.21",
     "@types/node": "^24.10.1",
@@ -39,6 +39,8 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.5.0",
+    "sharp": "^0.34.5",
+    "tsx": "^4.19.2",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.48.0",
     "vite": "^7.3.1"

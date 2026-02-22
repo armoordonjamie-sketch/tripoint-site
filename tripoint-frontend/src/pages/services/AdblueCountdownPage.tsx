@@ -11,6 +11,7 @@ import { CheckCircle2, ArrowRight, Phone, MessageCircle } from 'lucide-react';
 import { galleryImages } from '@/data/galleryImages';
 import { siteConfig } from '@/config/site';
 import { ServiceSchema, BreadcrumbSchema, FaqPageSchema } from '@/components/JsonLd';
+import { OptimizedImage } from '@/components/OptimizedImage';
 
 const photos = [galleryImages[25], galleryImages[34], galleryImages[13], galleryImages[42], galleryImages[26]];
 const emissionsService = siteConfig.pricing.services.find((s) => s.slug === 'emissions-diagnostics');
@@ -60,7 +61,7 @@ export function AdblueCountdownPage() {
             <FaqPageSchema items={faqs} />
 
             <section className="relative h-56 sm:h-72 overflow-hidden">
-                <img src="/images/emissions-diagnostics.jpg" alt="" className="h-full w-full object-cover" aria-hidden="true" />
+                <OptimizedImage src="/images/emissions-diagnostics.jpg" alt="" className="h-full w-full object-cover" aria-hidden="true" />
                 <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/70 to-surface/30" />
                 <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-10">
                     <div className="mx-auto max-w-3xl">
@@ -170,7 +171,7 @@ export function AdblueCountdownPage() {
 
             <section className="relative overflow-hidden">
                 <div className="absolute inset-0">
-                    <img src="/images/cta-bg.jpg" alt="" className="h-full w-full object-cover" aria-hidden="true" />
+                    <OptimizedImage src="/images/cta-bg.jpg" alt="" className="h-full w-full object-cover" aria-hidden="true" />
                     <div className="absolute inset-0 bg-gradient-to-r from-brand-dark/90 to-brand/80" />
                 </div>
                 <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 md:py-20">

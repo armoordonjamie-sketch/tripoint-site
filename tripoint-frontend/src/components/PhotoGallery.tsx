@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { OptimizedImage } from '@/components/OptimizedImage';
 import type { GalleryImage } from '@/data/galleryImages';
 
 interface PhotoGalleryProps {
@@ -35,10 +36,9 @@ export function PhotoGallery({ images, columns = 3, className, maxVisible }: Pho
                         onClick={() => openLightbox(i)}
                         className="group relative mb-4 block w-full overflow-hidden rounded-xl break-inside-avoid focus:outline-none focus-visible:ring-2 focus-visible:ring-brand"
                     >
-                        <img
+                        <OptimizedImage
                             src={img.src}
                             alt={img.alt}
-                            loading="lazy"
                             className="w-full rounded-xl transition-transform duration-300 group-hover:scale-105"
                         />
                         {/* Hover overlay */}
@@ -87,7 +87,7 @@ export function PhotoGallery({ images, columns = 3, className, maxVisible }: Pho
 
                     {/* Image */}
                     <div className="max-h-[85vh] max-w-[90vw]" onClick={(e) => e.stopPropagation()}>
-                        <img
+                        <OptimizedImage
                             src={images[lightboxIdx].src}
                             alt={images[lightboxIdx].alt}
                             className="max-h-[85vh] max-w-[90vw] rounded-lg object-contain"

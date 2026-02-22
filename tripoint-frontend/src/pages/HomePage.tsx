@@ -15,6 +15,7 @@ import { trackEvent } from '@/lib/analytics';
 import { galleryImages } from '@/data/galleryImages';
 import { blogPosts } from '@/data/blogPosts';
 import { useScrollReveal } from '@/lib/useScrollReveal';
+import { OptimizedImage } from '@/components/OptimizedImage';
 
 /* ── Intersection Observer for scroll-reveal ─────────── */
 
@@ -89,9 +90,10 @@ export function HomePage() {
                 {/* Rotating background images */}
                 <div className="absolute inset-0">
                     {heroImages.map((img, i) => (
-                        <img
+                        <OptimizedImage
                             key={img.src}
                             src={img.src}
+                            priority={i === 0}
                             alt=""
                             className="absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ease-in-out"
                             style={{
@@ -195,7 +197,7 @@ export function HomePage() {
             {/* ── SPRINTER SPECIALIST BANNER ──────────────────── */}
             <section className="relative overflow-hidden">
                 <div className="absolute inset-0">
-                    <img src="/images/sprinter-specialist.jpg" alt="" className="h-full w-full object-cover" aria-hidden="true" />
+                    <OptimizedImage src="/images/sprinter-specialist.jpg" alt="" className="h-full w-full object-cover" aria-hidden="true" />
                     <div className="absolute inset-0 bg-gradient-to-r from-surface via-surface/85 to-surface/40" />
                 </div>
                 <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 md:py-20">
@@ -315,7 +317,7 @@ export function HomePage() {
             {/* ── COVERAGE ─────────────────────────────────── */}
             <section className="relative overflow-hidden">
                 <div className="absolute inset-0">
-                    <img src="/images/coverage-map.jpg" alt="" className="h-full w-full object-cover opacity-90" aria-hidden="true" />
+                    <OptimizedImage src="/images/coverage-map.jpg" alt="" className="h-full w-full object-cover opacity-90" aria-hidden="true" />
                     <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/85 to-surface/60" />
                 </div>
                 <Section className="relative">
@@ -359,10 +361,9 @@ export function HomePage() {
                             className="reveal group relative aspect-[4/3] overflow-hidden rounded-xl"
                             style={{ transitionDelay: `${i * 0.08}s` }}
                         >
-                            <img
+                            <OptimizedImage
                                 src={img.src}
                                 alt={img.alt}
-                                loading="lazy"
                                 className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
@@ -454,7 +455,7 @@ export function HomePage() {
             {/* ── FOOTER CTA BANNER ──────────────────────────── */}
             <section className="relative overflow-hidden">
                 <div className="absolute inset-0">
-                    <img src="/images/cta-bg.jpg" alt="" className="h-full w-full object-cover" aria-hidden="true" />
+                    <OptimizedImage src="/images/cta-bg.jpg" alt="" className="h-full w-full object-cover" aria-hidden="true" />
                     <div className="absolute inset-0 bg-gradient-to-r from-brand-dark/90 to-brand/80" />
                 </div>
                 <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 md:py-20">

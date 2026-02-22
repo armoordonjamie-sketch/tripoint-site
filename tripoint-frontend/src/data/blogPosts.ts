@@ -22,7 +22,7 @@ export const blogPosts: BlogPost[] = [
             </div>
 
             <figure class="blog-image">
-                <img src="/images/gallery/work-31.jpg" alt="Sprinter instrument cluster with multiple warning lights active" loading="lazy" />
+                <img src="/images/optimized/gallery/work-31.jpg" alt="Sprinter instrument cluster with multiple warning lights active" loading="lazy" />
             </figure>
 
             <p>A lot of people try the quick route: clear the codes and hope it's gone. Sometimes the van feels better for a short while… until the same fault is detected again and the power drops back.</p>
@@ -54,7 +54,7 @@ export const blogPosts: BlogPost[] = [
             <div class="blog-symptom">No pull, underboost codes, worse under load</div>
 
             <figure class="blog-image">
-                <img src="/images/gallery/work-22.jpg" alt="Damaged turbocharger with sheared metal inside housing" loading="lazy" />
+                <img src="/images/optimized/gallery/work-22.jpg" alt="Damaged turbocharger with sheared metal inside housing" loading="lazy" />
             </figure>
 
             <div class="blog-step"><span class="step-num">2</span> Fuel rail pressure deviation</div>
@@ -74,7 +74,7 @@ export const blogPosts: BlogPost[] = [
             <div class="blog-symptom">Poor response, smoke, flat spots, recurring derate</div>
 
             <figure class="blog-image">
-                <img src="/images/gallery/work-26.jpg" alt="Fouled EGR pipe with thick carbon soot on white Sprinter" loading="lazy" />
+                <img src="/images/optimized/gallery/work-26.jpg" alt="Fouled EGR pipe with thick carbon soot on white Sprinter" loading="lazy" />
             </figure>
 
             <div class="blog-step"><span class="step-num">4</span> DPF/emissions-related derate</div>
@@ -90,7 +90,7 @@ export const blogPosts: BlogPost[] = [
             <div class="blog-symptom">Random limp mode that appears/disappears, comes back on bumps or in rain</div>
 
             <figure class="blog-image">
-                <img src="/images/gallery/work-05.jpg" alt="Damaged wiring loom in Sprinter engine bay with frayed cables" loading="lazy" />
+                <img src="/images/optimized/gallery/work-05.jpg" alt="Damaged wiring loom in Sprinter engine bay with frayed cables" loading="lazy" />
             </figure>
 
             <hr class="blog-divider"/>
@@ -130,7 +130,7 @@ export const blogPosts: BlogPost[] = [
             </ul>
 
             <figure class="blog-image">
-                <img src="/images/gallery/work-48.jpg" alt="Teslong borescope inspecting Sprinter engine bay with Milwaukee tools" loading="lazy" />
+                <img src="/images/optimized/gallery/work-48.jpg" alt="Teslong borescope inspecting Sprinter engine bay with Milwaukee tools" loading="lazy" />
             </figure>
 
             <div class="blog-step"><span class="step-num">3</span> Live data capture: "requested vs actual"</div>
@@ -193,7 +193,7 @@ export const blogPosts: BlogPost[] = [
             </div>
 
             <figure class="blog-image">
-                <img src="/images/gallery/work-30.jpg" alt="MBUX screen showing vehicle breakdown alert on Sprinter" loading="lazy" />
+                <img src="/images/optimized/gallery/work-30.jpg" alt="MBUX screen showing vehicle breakdown alert on Sprinter" loading="lazy" />
             </figure>
 
             <p>The internet is full of "quick fixes" like clearing codes, disconnecting sensors, or trying random resets. The problem is: if the underlying system issue is still present, the countdown usually returns.</p>
@@ -214,7 +214,7 @@ export const blogPosts: BlogPost[] = [
             </ul>
 
             <figure class="blog-image">
-                <img src="/images/gallery/work-27.jpg" alt="Soot-covered NOx sensor probe removed from engine" loading="lazy" />
+                <img src="/images/optimized/gallery/work-27.jpg" alt="Soot-covered NOx sensor probe removed from engine" loading="lazy" />
             </figure>
 
             <div class="blog-step"><span class="step-num">2</span> AdBlue dosing faults</div>
@@ -240,7 +240,7 @@ export const blogPosts: BlogPost[] = [
             <p>If a sensor is reading implausibly, if dosing isn't behaving as expected, or if a component fails a plausibility test - the fault comes back. Sometimes immediately, sometimes after a short drive.</p>
 
             <figure class="blog-image">
-                <img src="/images/gallery/work-33.jpg" alt="Corroded sensor pins with moisture damage in connector" loading="lazy" />
+                <img src="/images/optimized/gallery/work-33.jpg" alt="Corroded sensor pins with moisture damage in connector" loading="lazy" />
             </figure>
 
             <div class="blog-takeaway">
@@ -271,7 +271,7 @@ export const blogPosts: BlogPost[] = [
             </ul>
 
             <figure class="blog-image">
-                <img src="/images/gallery/work-41.jpg" alt="UNI-T clamp multimeter measuring parasitic draw on Mercedes door sill" loading="lazy" />
+                <img src="/images/optimized/gallery/work-41.jpg" alt="UNI-T clamp multimeter measuring parasitic draw on Mercedes door sill" loading="lazy" />
             </figure>
 
             <div class="blog-step"><span class="step-num">3</span> Component-level checks</div>
@@ -313,7 +313,7 @@ export const blogPosts: BlogPost[] = [
             </div>
 
             <figure class="blog-image">
-                <img src="/images/gallery/work-14.jpg" alt="Sooty exhaust tailpipe showing carbon deposits for emissions check" loading="lazy" />
+                <img src="/images/optimized/gallery/work-14.jpg" alt="Sooty exhaust tailpipe showing carbon deposits for emissions check" loading="lazy" />
             </figure>
 
             <div class="blog-takeaway">
@@ -368,7 +368,7 @@ export const blogPosts: BlogPost[] = [
             </ul>
 
             <figure class="blog-image">
-                <img src="/images/gallery/work-43.jpg" alt="Garrett turbocharger removed showing soot build-up inside housing" loading="lazy" />
+                <img src="/images/optimized/gallery/work-43.jpg" alt="Garrett turbocharger removed showing soot build-up inside housing" loading="lazy" />
             </figure>
 
             <div class="blog-callout">
@@ -387,7 +387,7 @@ export const blogPosts: BlogPost[] = [
             </ul>
 
             <figure class="blog-image">
-                <img src="/images/gallery/work-35.jpg" alt="Carbon-clogged MAP sensor from Sprinter engine bay" loading="lazy" />
+                <img src="/images/optimized/gallery/work-35.jpg" alt="Carbon-clogged MAP sensor from Sprinter engine bay" loading="lazy" />
             </figure>
 
             <div class="blog-takeaway">
@@ -409,7 +409,7 @@ export const blogPosts: BlogPost[] = [
             </ul>
 
             <figure class="blog-image">
-                <img src="/images/gallery/work-44.jpg" alt="Removed intake manifold and throttle body with carbon deposits on workshop floor" loading="lazy" />
+                <img src="/images/optimized/gallery/work-44.jpg" alt="Removed intake manifold and throttle body with carbon deposits on workshop floor" loading="lazy" />
             </figure>
 
             <div class="blog-step"><span class="step-num">2</span> Check for regen blockers</div>

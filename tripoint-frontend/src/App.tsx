@@ -1,50 +1,54 @@
+import { lazy, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Layout } from '@/components/Layout';
 
-// Pages
+// Static import for LCP (landing page)
 import { HomePage } from '@/pages/HomePage';
-import { ServicesPage } from '@/pages/ServicesPage';
-import { DiagnosticCalloutPage } from '@/pages/services/DiagnosticCalloutPage';
-import { VorVanDiagnosticsPage } from '@/pages/services/VorVanDiagnosticsPage';
-import { EmissionsDiagnosticsPage } from '@/pages/services/EmissionsDiagnosticsPage';
-import { PrePurchaseHealthCheckPage } from '@/pages/services/PrePurchaseHealthCheckPage';
-import { SprinterLimpModePage } from '@/pages/services/SprinterLimpModePage';
-import { AdblueCountdownPage } from '@/pages/services/AdblueCountdownPage';
-import { NoxScrDiagnosticsPage } from '@/pages/services/NoxScrDiagnosticsPage';
-import { DpfRegenerationDecisionPage } from '@/pages/services/DpfRegenerationDecisionPage';
-import { MercedesXentryPage } from '@/pages/services/MercedesXentryPage';
-import { IntermittentElectricalPage } from '@/pages/services/IntermittentElectricalPage';
-import { FleetHealthCheckPage } from '@/pages/services/FleetHealthCheckPage';
-import { MobileFaultFindingPage } from '@/pages/services/MobileFaultFindingPage';
-import { DpfRegenerationDiagnosticsPage } from '@/pages/services/DpfRegenerationDiagnosticsPage';
-import { AdblueScrDiagnosticsPage } from '@/pages/services/AdblueScrDiagnosticsPage';
-import { EcuCodingPage } from '@/pages/services/EcuCodingPage';
-import { PricingPage } from '@/pages/PricingPage';
-import { CoveragePage } from '@/pages/CoveragePage';
-import { AreaPage } from '@/pages/areas-covered/AreaPage';
-import { AboutPage } from '@/pages/AboutPage';
-import { FaqPage } from '@/pages/FaqPage';
-import { BookingPage } from '@/pages/BookingPage';
-import { PaymentPage } from '@/pages/PaymentPage';
-import { PaymentSuccessPage } from '@/pages/PaymentSuccessPage';
-import { AdminLoginPage } from '@/pages/admin/AdminLoginPage';
-import { AdminDashboardPage } from '@/pages/admin/AdminDashboardPage';
-import { AdminReportsPage } from '@/pages/admin/AdminReportsPage';
-import { AdminReportEditorPage } from '@/pages/admin/AdminReportEditorPage';
-import { ReportViewerPage } from '@/pages/ReportViewerPage';
-import { ContactPage } from '@/pages/ContactPage';
-import { BlogIndexPage } from '@/pages/BlogIndexPage';
-import { BlogPostPage } from '@/pages/BlogPostPage';
-import { PrivacyPolicyPage } from '@/pages/legal/PrivacyPolicyPage';
-import { TermsPage } from '@/pages/legal/TermsPage';
-import { DisclaimerPage } from '@/pages/legal/DisclaimerPage';
-import { AccessibilityPage } from '@/pages/legal/AccessibilityPage';
-import { OurWorkPage } from '@/pages/OurWorkPage';
-import { ProcessPage } from '@/pages/ProcessPage';
-import { NotFoundPage } from '@/pages/NotFoundPage';
+
+// Lazy-loaded pages
+const ServicesPage = lazy(() => import('@/pages/ServicesPage').then((m) => ({ default: m.ServicesPage })));
+const DiagnosticCalloutPage = lazy(() => import('@/pages/services/DiagnosticCalloutPage').then((m) => ({ default: m.DiagnosticCalloutPage })));
+const VorVanDiagnosticsPage = lazy(() => import('@/pages/services/VorVanDiagnosticsPage').then((m) => ({ default: m.VorVanDiagnosticsPage })));
+const EmissionsDiagnosticsPage = lazy(() => import('@/pages/services/EmissionsDiagnosticsPage').then((m) => ({ default: m.EmissionsDiagnosticsPage })));
+const PrePurchaseHealthCheckPage = lazy(() => import('@/pages/services/PrePurchaseHealthCheckPage').then((m) => ({ default: m.PrePurchaseHealthCheckPage })));
+const SprinterLimpModePage = lazy(() => import('@/pages/services/SprinterLimpModePage').then((m) => ({ default: m.SprinterLimpModePage })));
+const AdblueCountdownPage = lazy(() => import('@/pages/services/AdblueCountdownPage').then((m) => ({ default: m.AdblueCountdownPage })));
+const NoxScrDiagnosticsPage = lazy(() => import('@/pages/services/NoxScrDiagnosticsPage').then((m) => ({ default: m.NoxScrDiagnosticsPage })));
+const DpfRegenerationDecisionPage = lazy(() => import('@/pages/services/DpfRegenerationDecisionPage').then((m) => ({ default: m.DpfRegenerationDecisionPage })));
+const MercedesXentryPage = lazy(() => import('@/pages/services/MercedesXentryPage').then((m) => ({ default: m.MercedesXentryPage })));
+const IntermittentElectricalPage = lazy(() => import('@/pages/services/IntermittentElectricalPage').then((m) => ({ default: m.IntermittentElectricalPage })));
+const FleetHealthCheckPage = lazy(() => import('@/pages/services/FleetHealthCheckPage').then((m) => ({ default: m.FleetHealthCheckPage })));
+const MobileFaultFindingPage = lazy(() => import('@/pages/services/MobileFaultFindingPage').then((m) => ({ default: m.MobileFaultFindingPage })));
+const DpfRegenerationDiagnosticsPage = lazy(() => import('@/pages/services/DpfRegenerationDiagnosticsPage').then((m) => ({ default: m.DpfRegenerationDiagnosticsPage })));
+const AdblueScrDiagnosticsPage = lazy(() => import('@/pages/services/AdblueScrDiagnosticsPage').then((m) => ({ default: m.AdblueScrDiagnosticsPage })));
+const EcuCodingPage = lazy(() => import('@/pages/services/EcuCodingPage').then((m) => ({ default: m.EcuCodingPage })));
+const PricingPage = lazy(() => import('@/pages/PricingPage').then((m) => ({ default: m.PricingPage })));
+const CoveragePage = lazy(() => import('@/pages/CoveragePage').then((m) => ({ default: m.CoveragePage })));
+const AreaPage = lazy(() => import('@/pages/areas-covered/AreaPage').then((m) => ({ default: m.AreaPage })));
+const AboutPage = lazy(() => import('@/pages/AboutPage').then((m) => ({ default: m.AboutPage })));
+const FaqPage = lazy(() => import('@/pages/FaqPage').then((m) => ({ default: m.FaqPage })));
+const BookingPage = lazy(() => import('@/pages/BookingPage').then((m) => ({ default: m.BookingPage })));
+const PaymentPage = lazy(() => import('@/pages/PaymentPage').then((m) => ({ default: m.PaymentPage })));
+const PaymentSuccessPage = lazy(() => import('@/pages/PaymentSuccessPage').then((m) => ({ default: m.PaymentSuccessPage })));
+const AdminLoginPage = lazy(() => import('@/pages/admin/AdminLoginPage').then((m) => ({ default: m.AdminLoginPage })));
+const AdminDashboardPage = lazy(() => import('@/pages/admin/AdminDashboardPage').then((m) => ({ default: m.AdminDashboardPage })));
+const AdminReportsPage = lazy(() => import('@/pages/admin/AdminReportsPage').then((m) => ({ default: m.AdminReportsPage })));
+const AdminReportEditorPage = lazy(() => import('@/pages/admin/AdminReportEditorPage').then((m) => ({ default: m.AdminReportEditorPage })));
+const ReportViewerPage = lazy(() => import('@/pages/ReportViewerPage').then((m) => ({ default: m.ReportViewerPage })));
+const ContactPage = lazy(() => import('@/pages/ContactPage').then((m) => ({ default: m.ContactPage })));
+const BlogIndexPage = lazy(() => import('@/pages/BlogIndexPage').then((m) => ({ default: m.BlogIndexPage })));
+const BlogPostPage = lazy(() => import('@/pages/BlogPostPage').then((m) => ({ default: m.BlogPostPage })));
+const PrivacyPolicyPage = lazy(() => import('@/pages/legal/PrivacyPolicyPage').then((m) => ({ default: m.PrivacyPolicyPage })));
+const TermsPage = lazy(() => import('@/pages/legal/TermsPage').then((m) => ({ default: m.TermsPage })));
+const DisclaimerPage = lazy(() => import('@/pages/legal/DisclaimerPage').then((m) => ({ default: m.DisclaimerPage })));
+const AccessibilityPage = lazy(() => import('@/pages/legal/AccessibilityPage').then((m) => ({ default: m.AccessibilityPage })));
+const OurWorkPage = lazy(() => import('@/pages/OurWorkPage').then((m) => ({ default: m.OurWorkPage })));
+const ProcessPage = lazy(() => import('@/pages/ProcessPage').then((m) => ({ default: m.ProcessPage })));
+const NotFoundPage = lazy(() => import('@/pages/NotFoundPage').then((m) => ({ default: m.NotFoundPage })));
 
 export function AppRoutes() {
     return (
+        <Suspense fallback={<div className="min-h-screen" />}>
         <Routes>
           <Route element={<Layout />}>
             {/* Public pages */}
@@ -98,6 +102,7 @@ export function AppRoutes() {
             <Route path="*" element={<NotFoundPage />} />
         </Route>
     </Routes>
+        </Suspense>
     );
 }
 

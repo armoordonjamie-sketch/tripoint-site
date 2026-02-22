@@ -52,6 +52,12 @@ server {
     root $FRONTEND_DIR/dist;
     index index.html;
 
+    gzip on;
+    gzip_comp_level 5;
+    gzip_min_length 256;
+    gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript image/svg+xml;
+    gzip_vary on;
+
     # Pre-rendered HTML: no aggressive caching
     location / {
         try_files \$uri \$uri/index.html \$uri.html =404;
@@ -65,7 +71,7 @@ server {
     }
 
     # Hashed static assets: long cache
-    location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2)$ {
+    location ~* \.(js|css|png|jpg|jpeg|gif|webp|ico|svg|woff|woff2)$ {
         expires 1y;
         add_header Cache-Control "public, no-transform";
     }
