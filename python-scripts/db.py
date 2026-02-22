@@ -222,6 +222,12 @@ async def init_db() -> None:
             await conn.commit()
         except Exception:
             pass
+        # Migration: add price_breakdown_json to bookings (if missing)
+        try:
+            await conn.execute("ALTER TABLE bookings ADD COLUMN price_breakdown_json TEXT")
+            await conn.commit()
+        except Exception:
+            pass
 
 
 async def insert_booking(
@@ -250,6 +256,7 @@ async def insert_booking(
     total_amount: int | None,
     deposit_amount: int | None,
     balance_due: int | None,
+    price_breakdown_json: str | None = None,
 ) -> None:
     _require_aiosqlite()
     now = _now_iso()
@@ -262,8 +269,8 @@ async def insert_booking(
                 approx_mileage, symptoms, additional_notes, safe_location,
                 service_ids, slot_start_iso, slot_end_iso, zone, drive_time_mins,
                 travel_buffer, total_amount, deposit_amount, balance_due,
-                created_at, updated_at
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                price_breakdown_json, created_at, updated_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
             (
                 id, STATUS_PENDING_DEPOSIT, payment_link_token, full_name, email, phone, postcode,
@@ -271,7 +278,7 @@ async def insert_booking(
                 approx_mileage, symptoms, additional_notes or "", 1 if safe_location else 0,
                 service_ids, slot_start_iso, slot_end_iso, zone, drive_time_mins,
                 travel_buffer, total_amount, deposit_amount, balance_due,
-                now, now,
+                price_breakdown_json, now, now,
             ),
         )
         await conn.commit()

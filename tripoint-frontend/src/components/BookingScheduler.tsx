@@ -15,6 +15,19 @@ interface Service {
 
 interface SlotItem { iso: string; available: boolean; }
 
+interface PriceBreakdown {
+    description: string;
+    amount_gbp: number;
+    is_addon: boolean;
+}
+
+interface PriceResponse {
+    zone: string;
+    price_breakdown: PriceBreakdown[];
+    total_gbp: number;
+    deposit_gbp: number;
+}
+
 interface AvailabilityResponse {
     postcode: string;
     zone: string;
@@ -24,6 +37,7 @@ interface AvailabilityResponse {
     booking_duration_minutes: number;
     fixed_price_gbp: number | null;
     deposit_gbp: number | null;
+    price_breakdown: PriceBreakdown[] | null;
     manual_review_required: boolean;
     slots: SlotItem[];
 }
@@ -235,6 +249,8 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
     const [booking, setBooking] = useState<BookingPayload>(INITIAL_BOOKING);
     const [availability, setAvailability] = useState<AvailabilityResponse | null>(null);
     const [selectedSlot, setSelectedSlot] = useState<string>('');
+    const [priceInfo, setPriceInfo] = useState<PriceResponse | null>(null);
+    const [loadingPrice, setLoadingPrice] = useState(false);
     const [status, setStatus] = useState<string>('');
     const [error, setError] = useState<string>('');
     const [loadingServices, setLoadingServices] = useState(false);
@@ -244,6 +260,7 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
     const [calendarOpen, setCalendarOpen] = useState(false);
     const calendarRef = useRef<HTMLDivElement>(null);
     const [prevStep, setPrevStep] = useState<1 | 2 | 3>(1);
+    const [breakdownOpen, setBreakdownOpen] = useState(true);
 
     // Derive step from state
     const currentStep: 1 | 2 | 3 = availability && !availability.manual_review_required
@@ -289,6 +306,7 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
         setStatus('');
         setAvailability(null);
         setSelectedSlot('');
+        setPriceInfo(null);
         setLoadingAvailability(true);
         try {
             const params = new URLSearchParams({ postcode, service_ids: serviceIds.join(',') });
@@ -302,6 +320,27 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
             setError(err instanceof Error ? err.message : 'Availability lookup failed');
         } finally {
             setLoadingAvailability(false);
+        }
+    };
+
+    /* fetch per-slot itemised price */
+    const fetchSlotPrice = async (slotIso: string) => {
+        if (!booking.postcode || booking.service_ids.length === 0) return;
+        setLoadingPrice(true);
+        try {
+            const params = new URLSearchParams({
+                postcode: booking.postcode,
+                service_ids: booking.service_ids.join(','),
+                slot_iso: slotIso,
+            });
+            const response = await fetch(`/api/booking/price?${params.toString()}`);
+            if (!response.ok) return; // silent fail -- fall back to availability estimate
+            const json: PriceResponse = await response.json();
+            setPriceInfo(json);
+        } catch {
+            // silent -- UI falls back to availability.fixed_price_gbp
+        } finally {
+            setLoadingPrice(false);
         }
     };
 
@@ -358,11 +397,13 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
     const goBackToStep1 = () => {
         setAvailability(null);
         setSelectedSlot('');
+        setPriceInfo(null);
     };
 
     /* go back to step 2 */
     const goBackToStep2 = () => {
         setSelectedSlot('');
+        setPriceInfo(null);
     };
 
     /* submit booking */
@@ -414,12 +455,14 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
                 setBooking(INITIAL_BOOKING);
                 setAvailability(null);
                 setSelectedSlot('');
+                setPriceInfo(null);
                 return;
             }
             setStatus(json.message || 'Booking submitted! Check your email for confirmation.');
             setBooking(INITIAL_BOOKING);
             setAvailability(null);
             setSelectedSlot('');
+            setPriceInfo(null);
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Could not create booking');
         } finally {
@@ -431,6 +474,9 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
         'w-full rounded-lg border border-border-default bg-surface px-4 py-2.5 text-sm text-text-primary placeholder:text-text-muted focus:border-brand focus:outline-none focus:ring-1 focus:ring-brand transition-colors duration-200';
     const labelClass = 'block text-sm font-medium text-text-secondary mb-1.5';
     const selectedService = services.find((s) => booking.service_ids.includes(s.id));
+    const effectiveDeposit = priceInfo?.deposit_gbp ?? availability?.deposit_gbp;
+    const effectiveTotal = priceInfo?.total_gbp ?? availability?.fixed_price_gbp;
+    const effectiveBalance = effectiveTotal != null && effectiveDeposit != null ? effectiveTotal - effectiveDeposit : null;
 
     return (
         <div className="space-y-0">
@@ -442,7 +488,7 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
                     {[
                         { label: 'Zone', value: availability.zone, accent: true },
                         { label: 'Drive time', value: `${Math.round(availability.drive_time_minutes)} min` },
-                        { label: 'Fixed price', value: availability.fixed_price_gbp ? `£${availability.fixed_price_gbp}` : 'Quote', accent: true },
+                        { label: 'Base price from', value: availability.fixed_price_gbp ? `£${availability.fixed_price_gbp}` : 'Quote', accent: true },
                         { label: 'Deposit', value: availability.deposit_gbp ? `£${availability.deposit_gbp}` : 'TBC' },
                     ].map((item) => (
                         <div key={item.label} className="rounded-xl border border-brand/15 bg-brand/5 px-4 py-3 text-center">
@@ -640,7 +686,11 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
                                                     ? 'border-2 border-brand bg-brand text-white shadow-lg shadow-brand/25 scale-105'
                                                     : 'border border-success/30 bg-success/5 text-text-primary hover:border-brand hover:bg-brand/10 hover:scale-105'
                                                 }`}
-                                            onClick={() => isAvailable && setSelectedSlot(slot.iso)}
+                                            onClick={() => {
+                                                if (!isAvailable) return;
+                                                setSelectedSlot(slot.iso);
+                                                void fetchSlotPrice(slot.iso);
+                                            }}
                                             title={!isAvailable ? 'Taken' : `Available - ${timeStr}`}
                                         >
                                             {timeStr}
@@ -825,9 +875,9 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
                         className="w-full"
                     >
                         {submitting ? (
-                            <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Submitting…</>
-                        ) : availability?.deposit_gbp ? (
-                            `Confirm & Pay £${availability.deposit_gbp} Deposit`
+                            <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Submitting&hellip;</>
+                        ) : effectiveDeposit ? (
+                            `Confirm & Pay £${effectiveDeposit} Deposit`
                         ) : (
                             'Confirm Booking'
                         )}

@@ -66,6 +66,7 @@ def generate_invoice_pdf(
     booking: dict[str, Any],
     invoice_type: str,  # "deposit" | "completed"
     service_labels: str,
+    price_breakdown: list[dict] | None = None,
 ) -> bytes | None:
     """
     Generate a professional PDF invoice.
@@ -150,23 +151,39 @@ def generate_invoice_pdf(
     balance_gbp = balance_pence / 100
     total_gbp = total_pence / 100
 
+    # Build itemised rows
+    header_row = ["Description", "Amount"]
+    detail_rows: list[list[str]] = []
+
+    if price_breakdown:
+        for item in price_breakdown:
+            desc = str(item.get("description", ""))
+            amt = item.get("amount_gbp", 0)
+            is_addon = item.get("is_addon", False)
+            prefix = "+" if is_addon else ""
+            detail_rows.append([desc, f"{prefix}£{amt:.2f}"])
+    else:
+        detail_rows.append([service_labels, f"£{total_gbp:.2f}"])
+
     if invoice_type == "deposit":
-        line_data = [
-            ["Description", "Amount"],
-            [service_labels, f"£{total_gbp:.2f}"],
+        summary_rows = [
+            ["Total job value", f"£{total_gbp:.2f}"],
             ["Deposit (paid)", f"£{deposit_gbp:.2f}"],
-            ["Balance due (pay on job completion)", f"£{balance_gbp:.2f}"],
+            ["Balance due (pay on completion)", f"£{balance_gbp:.2f}"],
         ]
     else:
-        line_data = [
-            ["Description", "Amount"],
-            [service_labels, f"£{total_gbp:.2f}"],
+        summary_rows = [
+            ["Total", f"£{total_gbp:.2f}"],
             ["Deposit (paid)", f"£{deposit_gbp:.2f}"],
             ["Balance (paid)", f"£{balance_gbp:.2f}"],
         ]
 
+    line_data = [header_row] + detail_rows + summary_rows
+    # Last N rows are summary rows (bold+border) after the detail rows
+    summary_start = 1 + len(detail_rows)  # 0=header, 1..detail_end=detail, summary_start..=summary
+
     line_table = Table(line_data, colWidths=[120 * mm, 55 * mm])
-    line_table.setStyle(TableStyle([
+    style_cmds = [
         ("FONTSIZE", (0, 0), (-1, -1), 10),
         ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#f3f4f6")),
         ("TEXTCOLOR", (0, 0), (-1, 0), colors.HexColor("#374151")),
@@ -174,9 +191,11 @@ def generate_invoice_pdf(
         ("BOTTOMPADDING", (0, 0), (-1, -1), 8),
         ("TOPPADDING", (0, 0), (-1, -1), 8),
         ("LINEBELOW", (0, 0), (-1, 0), 1, colors.HexColor("#e5e7eb")),
-        ("LINEABOVE", (0, -1), (-1, -1), 1, colors.HexColor("#e5e7eb")),
-        ("FONTNAME", (0, -1), (-1, -1), "Helvetica-Bold"),
-    ]))
+        ("LINEABOVE", (0, summary_start), (-1, summary_start), 2, colors.HexColor("#374151")),
+        ("FONTNAME", (0, summary_start), (-1, summary_start), "Helvetica-Bold"),
+        ("TEXTCOLOR", (0, summary_start + 1), (-1, -1), colors.HexColor("#6b7280")),
+    ]
+    line_table.setStyle(TableStyle(style_cmds))
     elements.append(line_table)
     elements.append(Spacer(1, 8 * mm))
 

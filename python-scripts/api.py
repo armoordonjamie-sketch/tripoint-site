@@ -124,6 +124,13 @@ class ServiceDef:
     zone_price: dict[str, int]
 
 
+@dataclass
+class PriceBreakdownItem:
+    description: str
+    amount_gbp: int  # always positive
+    is_addon: bool = False
+
+
 SERVICE_CATALOG: dict[str, ServiceDef] = {
     "diagnostic-callout": ServiceDef(
         id="diagnostic-callout",
@@ -234,6 +241,12 @@ class ZoneResponse(BaseModel):
     details: dict[str, Any]
 
 
+class PriceBreakdown(BaseModel):
+    description: str
+    amount_gbp: int
+    is_addon: bool
+
+
 class ServicePublic(BaseModel):
     id: str
     label: str
@@ -256,8 +269,16 @@ class AvailabilityResponse(BaseModel):
     booking_duration_minutes: int
     fixed_price_gbp: int | None
     deposit_gbp: int | None
+    price_breakdown: list[PriceBreakdown] | None = None
     manual_review_required: bool
     slots: list[Slot]
+
+
+class PriceResponse(BaseModel):
+    zone: str
+    price_breakdown: list[PriceBreakdown]
+    total_gbp: int
+    deposit_gbp: int
 
 
 class BookingRequest(BaseModel):
@@ -287,6 +308,7 @@ class BookingResponse(BaseModel):
     zone: str
     fixed_price_gbp: int | None
     deposit_gbp: int | None
+    price_breakdown: list[PriceBreakdown] | None = None
 
 
 class CancelRequest(BaseModel):
@@ -614,27 +636,57 @@ def _compute_booking_requirements(service_ids: list[str], drive_time_minutes: fl
     return service_duration, travel_buffer, service_duration + travel_buffer
 
 
-def _calc_fixed_price(service_ids: list[str], zone: str, start_local: datetime) -> int | None:
+def _calc_price_breakdown(
+    service_ids: list[str],
+    zone: str,
+    start_local: datetime | None = None,
+    include_time_addons: bool = True,
+) -> list[PriceBreakdownItem] | None:
+    """Return itemised add-on breakdown, or None if out-of-zone."""
     if zone not in {"A", "B", "C"}:
         return None
-
     services = _service_bundle(service_ids)
-    base_price = sum(s.zone_price[zone] for s in services)
+    items: list[PriceBreakdownItem] = []
 
-    if start_local.hour < 8 or start_local.hour >= 19:
-        base_price += 20
-    if start_local.hour == 21 and any(s.id == "diagnostic-callout" for s in services):
-        base_price += 40
+    # Base price per service
+    for s in services:
+        items.append(PriceBreakdownItem(s.label, s.zone_price[zone], is_addon=False))
 
-    return base_price
+    # Priority dispatch: VOR services always attract this
+    is_vor = any(s.id in {"vor-priority-triage", "vor-van-diagnostics"} for s in services)
+    if is_vor:
+        addon_price = 70 if zone == "C" else 50
+        items.append(PriceBreakdownItem("Priority dispatch upgrade (when available)", addon_price, is_addon=True))
+
+    # Time-band add-ons (only when a slot time is known)
+    if include_time_addons and start_local is not None:
+        hour = start_local.hour
+        if hour >= 21 and any(s.id in {"diagnostic-callout", "sprinter-limp-mode", "intermittent-electrical-faults"} for s in services):
+            items.append(PriceBreakdownItem("Late call (9 PM start)", 40, is_addon=True))
+        elif hour < 8 or hour >= 19:
+            items.append(PriceBreakdownItem("Early-bird / evening time band", 20, is_addon=True))
+
+    return items
+
+
+def _calc_fixed_price(service_ids: list[str], zone: str, start_local: datetime | None = None) -> int | None:
+    """Return total price in GBP, or None if out-of-zone. Thin wrapper over _calc_price_breakdown."""
+    breakdown = _calc_price_breakdown(service_ids, zone, start_local, include_time_addons=start_local is not None)
+    if breakdown is None:
+        return None
+    return sum(item.amount_gbp for item in breakdown)
 
 
 def _calc_deposit(service_ids: list[str], zone: str) -> int | None:
     if zone not in {"A", "B", "C"}:
         return None
-    if zone == "C" or "vor-priority-triage" in service_ids:
+    if zone == "C" or any(s in service_ids for s in ("vor-priority-triage", "vor-van-diagnostics")):
         return 50
     return 30
+
+
+def _breakdown_to_pydantic(items: list[PriceBreakdownItem]) -> list[PriceBreakdown]:
+    return [PriceBreakdown(description=i.description, amount_gbp=i.amount_gbp, is_addon=i.is_addon) for i in items]
 
 
 def _generate_available_slots(
@@ -811,6 +863,7 @@ async def get_booking_availability(postcode: str, service_ids: str, from_date: s
             booking_duration_minutes=service_duration + travel_buffer,
             fixed_price_gbp=None,
             deposit_gbp=None,
+            price_breakdown=None,
             manual_review_required=True,
             slots=[],
         )
@@ -823,7 +876,9 @@ async def get_booking_availability(postcode: str, service_ids: str, from_date: s
     blocked_intervals = list(calendar_intervals) + list(db_intervals)
     slots = _generate_available_slots(now_local, start_day, service_duration, travel_buffer, min_notice, blocked_intervals)
 
-    example_start = next((datetime.fromisoformat(s.iso) for s in slots if s.available), now_local)
+    # Base breakdown (no time-band add-ons -- slot not yet chosen)
+    base_breakdown = _calc_price_breakdown(service_list, zone_data.zone, start_local=None, include_time_addons=False)
+    base_price = sum(i.amount_gbp for i in base_breakdown) if base_breakdown else None
 
     return AvailabilityResponse(
         postcode=postcode,
@@ -832,10 +887,45 @@ async def get_booking_availability(postcode: str, service_ids: str, from_date: s
         travel_buffer_minutes=travel_buffer,
         service_duration_minutes=service_duration,
         booking_duration_minutes=service_duration + travel_buffer,
-        fixed_price_gbp=_calc_fixed_price(service_list, zone_data.zone, example_start),
+        fixed_price_gbp=base_price,
         deposit_gbp=_calc_deposit(service_list, zone_data.zone),
+        price_breakdown=_breakdown_to_pydantic(base_breakdown) if base_breakdown else None,
         manual_review_required=False,
         slots=slots,
+    )
+
+
+@app.get("/booking/price", response_model=PriceResponse)
+async def get_booking_price(postcode: str, service_ids: str, slot_iso: str):
+    """Return itemised price breakdown for a specific slot.
+    Call this when the user selects a time slot to show time-band add-ons.
+    """
+    service_list = [sid.strip() for sid in service_ids.split(",") if sid.strip()]
+    if not service_list:
+        raise HTTPException(status_code=400, detail="At least one service must be selected")
+    _service_bundle(service_list)  # validate service IDs
+
+    zone_data = calculate_zone_and_drive_time(postcode)
+    if zone_data.zone == "Out of area":
+        raise HTTPException(status_code=400, detail="Postcode is out of area -- contact us for a quote.")
+
+    try:
+        slot_start = datetime.fromisoformat(slot_iso.replace("Z", "+00:00")).astimezone(LOCAL_TZ)
+    except (ValueError, TypeError):
+        raise HTTPException(status_code=400, detail="Invalid slot_iso format")
+
+    breakdown = _calc_price_breakdown(service_list, zone_data.zone, slot_start, include_time_addons=True)
+    if breakdown is None:
+        raise HTTPException(status_code=400, detail="Cannot calculate price for this zone")
+
+    total = sum(i.amount_gbp for i in breakdown)
+    deposit = _calc_deposit(service_list, zone_data.zone) or 0
+
+    return PriceResponse(
+        zone=zone_data.zone,
+        price_breakdown=_breakdown_to_pydantic(breakdown),
+        total_gbp=total,
+        deposit_gbp=deposit,
     )
 
 
@@ -856,7 +946,8 @@ async def reserve_booking(payload: BookingRequest):
     if slot_start < datetime.now(tz=LOCAL_TZ) + timedelta(hours=min_notice):
         raise HTTPException(status_code=400, detail=f"Minimum notice for selected service is {min_notice} hours")
 
-    fixed_price = _calc_fixed_price(payload.service_ids, zone_data.zone, slot_start)
+    breakdown = _calc_price_breakdown(payload.service_ids, zone_data.zone, slot_start, include_time_addons=True)
+    fixed_price = sum(i.amount_gbp for i in breakdown) if breakdown else None
     deposit = _calc_deposit(payload.service_ids, zone_data.zone)
 
     if zone_data.zone == "Out of area":
@@ -871,6 +962,7 @@ async def reserve_booking(payload: BookingRequest):
             zone=zone_data.zone,
             fixed_price_gbp=None,
             deposit_gbp=None,
+            price_breakdown=None,
         )
 
     slot_end = slot_start + timedelta(minutes=service_duration)
@@ -878,6 +970,7 @@ async def reserve_booking(payload: BookingRequest):
     total_pence = (fixed_price or 0) * 100
     deposit_pence = (deposit or 0) * 100
     balance_pence = total_pence - deposit_pence
+    breakdown_json = json.dumps([{"description": i.description, "amount_gbp": i.amount_gbp, "is_addon": i.is_addon} for i in (breakdown or [])])
 
     booking_id = generate_booking_id()
     payment_token = generate_payment_token()
@@ -908,6 +1001,7 @@ async def reserve_booking(payload: BookingRequest):
         total_amount=total_pence,
         deposit_amount=deposit_pence,
         balance_due=balance_pence,
+        price_breakdown_json=breakdown_json,
     )
 
     tech_name = os.getenv("TECH_NAME", "TriPoint Team")
@@ -915,7 +1009,25 @@ async def reserve_booking(payload: BookingRequest):
     vehicle_make_model = f"{payload.vehicle_make} {payload.vehicle_model}".strip() or "-"
     service_labels = ", ".join(s.label for s in services)
     booking_date = slot_start.strftime("%A %d %B %Y")
-    booking_time_window = f"{slot_start.strftime('%H:%M')} – {slot_end.strftime('%H:%M')}"
+    booking_time_window = f"{slot_start.strftime('%H:%M')} - {slot_end.strftime('%H:%M')}"
+    # Breakdown for email body
+    breakdown_lines = "".join(
+        f"<tr><td style='padding:4px 8px'>{i.description}</td><td style='padding:4px 8px;text-align:right'>{'&plus;' if i.is_addon else ''}£{i.amount_gbp}</td></tr>"
+        for i in (breakdown or [])
+    )
+    breakdown_html = (
+        f"<table style='width:100%;border-collapse:collapse;font-size:14px'>"
+        f"<thead><tr><th style='text-align:left;padding:4px 8px;border-bottom:1px solid #e5e7eb'>Description</th>"
+        f"<th style='text-align:right;padding:4px 8px;border-bottom:1px solid #e5e7eb'>Amount</th></tr></thead>"
+        f"<tbody>{breakdown_lines}</tbody>"
+        f"<tfoot><tr><td style='padding:6px 8px;border-top:2px solid #e5e7eb;font-weight:bold'>Total</td>"
+        f"<td style='padding:6px 8px;border-top:2px solid #e5e7eb;text-align:right;font-weight:bold'>£{fixed_price or 0}</td></tr>"
+        f"<tr><td style='padding:4px 8px;color:#6b7280'>Deposit (due now)</td>"
+        f"<td style='padding:4px 8px;text-align:right;color:#6b7280'>£{deposit or 0}</td></tr>"
+        f"<tr><td style='padding:4px 8px;color:#6b7280'>Balance (due on completion)</td>"
+        f"<td style='padding:4px 8px;text-align:right;color:#6b7280'>£{balance_pence // 100}</td></tr></tfoot>"
+        f"</table>"
+    )
 
     template_data = {
         "CLIENT_FIRST_NAME": client_first_name,
@@ -928,6 +1040,9 @@ async def reserve_booking(payload: BookingRequest):
         "POSTCODE": payload.postcode,
         "PAYMENT_LINK": payment_url,
         "DEPOSIT_GBP": str(deposit or 0),
+        "TOTAL_GBP": str(fixed_price or 0),
+        "BALANCE_GBP": str(balance_pence // 100),
+        "PRICE_BREAKDOWN_HTML": breakdown_html,
         "TECH_NAME": tech_name,
     }
 
@@ -949,8 +1064,8 @@ async def reserve_booking(payload: BookingRequest):
         customer_html = (
             f"<h2>Slot reserved</h2><p>Hi {payload.full_name},</p>"
             f"<p>We've reserved your slot for {slot_start.strftime('%A %d %B %Y, %H:%M')}.</p>"
+            f"{breakdown_html}"
             f"<p>Please pay your deposit of £{deposit} to confirm: <a href='{payment_url}'>{payment_url}</a></p>"
-            f"<p>Service(s): {service_labels}<br/>Zone: {zone_data.zone}<br/>Fixed price: £{fixed_price}<br/>Deposit: £{deposit}</p>"
             "<p>Thanks,<br/>TriPoint Diagnostics</p>"
         )
         _send_zoho_email("Slot reserved - pay deposit to confirm", customer_html, [payload.email])
@@ -964,6 +1079,7 @@ async def reserve_booking(payload: BookingRequest):
         zone=zone_data.zone,
         fixed_price_gbp=fixed_price,
         deposit_gbp=deposit,
+        price_breakdown=_breakdown_to_pydantic(breakdown) if breakdown else None,
     )
 
 
