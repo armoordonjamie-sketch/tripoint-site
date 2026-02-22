@@ -103,6 +103,21 @@
   }
 }
 
+/* Composited version: use transform instead of background-position */
+@keyframes gradient-shift-x {
+  0% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(-50%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
 /* ── Base layer ─────────────────────────────────────── */
 @layer base {
   * {
@@ -221,14 +236,26 @@
     transform: translateY(0);
   }
 
-  /* Animated gradient mesh background */
+  /* Animated gradient mesh background (composited via transform) */
   .mesh-gradient {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .mesh-gradient::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 200%;
+    height: 200%;
     background:
       radial-gradient(ellipse at 20% 50%, rgba(14, 165, 233, 0.12) 0%, transparent 50%),
       radial-gradient(ellipse at 80% 20%, rgba(56, 189, 248, 0.08) 0%, transparent 50%),
       radial-gradient(ellipse at 50% 80%, rgba(2, 132, 199, 0.06) 0%, transparent 50%);
-    background-size: 200% 200%;
-    animation: gradient-shift 8s ease-in-out infinite;
+    background-size: 50% 50%;
+    animation: gradient-shift-x 8s ease-in-out infinite;
+    pointer-events: none;
   }
 
   /* Dot grid pattern */

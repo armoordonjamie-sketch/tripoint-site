@@ -4,6 +4,7 @@ import { Menu, X, ChevronDown, Phone, MessageCircle } from 'lucide-react';
 import { siteConfig } from '@/config/site';
 import { cn } from '@/lib/utils';
 import { trackEvent } from '@/lib/analytics';
+import { OptimizedLogo } from '@/components/OptimizedLogo';
 
 const navLinks = [
     {
@@ -40,8 +41,8 @@ export function Header() {
             <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
                 {/* Logo */}
                 <Link to="/" className="flex items-center gap-3" aria-label="TriPoint Diagnostics Home">
-                    <img
-                        src="/logo-no-text-light.png"
+                    <OptimizedLogo
+                        name="logo-no-text-light"
                         alt={siteConfig.brandName}
                         className="h-14 w-auto"
                     />

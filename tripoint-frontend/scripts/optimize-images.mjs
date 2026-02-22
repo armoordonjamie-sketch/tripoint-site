@@ -11,11 +11,13 @@ import sharp from 'sharp';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
-const SRC_DIR = join(ROOT, 'public', 'images');
-const OUT_DIR = join(ROOT, 'public', 'images', 'optimized');
+const PUBLIC = join(ROOT, 'public');
+const SRC_DIR = join(PUBLIC, 'images');
+const OUT_DIR = join(PUBLIC, 'images', 'optimized');
+const LOGO_OUT = join(PUBLIC, 'optimized');
 
-const WIDTHS = [640, 1024, 1536];
-const WEBP_QUALITY = 82;
+const WIDTHS = [480, 640, 1024, 1536];
+const WEBP_QUALITY = 75;
 const JPG_QUALITY = 80;
 
 /** Images that need responsive srcset (hero, feature, above-fold) */
@@ -84,22 +86,52 @@ async function optimizeImage(fullPath, relPath) {
     }
 }
 
+/** Logos: 2x display size (h-14 = 56px, 2x = 112px height) */
+const LOGO_FILES = ['logo-no-text-light.png', 'logo-light.png'];
+
+async function optimizeLogo(fullPath, baseName) {
+    mkdirSync(LOGO_OUT, { recursive: true });
+    const img = sharp(fullPath);
+    const meta = await img.metadata();
+    const w = meta.width ?? 400;
+    const h = meta.height ?? 400;
+    const maxDim = 224; // 2x of 112px
+    const scale = Math.min(1, maxDim / Math.max(w, h));
+    const outW = Math.round(w * scale);
+    const outH = Math.round(h * scale);
+    const outPath = join(LOGO_OUT, `${baseName}.webp`);
+    await img
+        .resize(outW, outH, { fit: 'inside' })
+        .webp({ quality: WEBP_QUALITY })
+        .toFile(outPath);
+}
+
 async function main() {
-    if (!existsSync(SRC_DIR)) {
-        console.log('No public/images directory, skipping.');
-        return;
-    }
     mkdirSync(OUT_DIR, { recursive: true });
 
-    const files = [...walkDir(SRC_DIR)];
-    console.log(`Optimizing ${files.length} images...`);
+    if (existsSync(SRC_DIR)) {
+        const files = [...walkDir(SRC_DIR)];
+        console.log(`Optimizing ${files.length} images...`);
+        for (const { fullPath, relPath } of files) {
+            try {
+                await optimizeImage(fullPath, relPath);
+                console.log(`  ✓ ${relPath}`);
+            } catch (err) {
+                console.error(`  ✗ ${relPath}:`, err.message);
+            }
+        }
+    }
 
-    for (const { fullPath, relPath } of files) {
-        try {
-            await optimizeImage(fullPath, relPath);
-            console.log(`  ✓ ${relPath}`);
-        } catch (err) {
-            console.error(`  ✗ ${relPath}:`, err.message);
+    console.log('Optimizing logos...');
+    for (const name of LOGO_FILES) {
+        const fullPath = join(PUBLIC, name);
+        if (existsSync(fullPath)) {
+            try {
+                await optimizeLogo(fullPath, name.replace(/\.png$/i, ''));
+                console.log(`  ✓ ${name}`);
+            } catch (err) {
+                console.error(`  ✗ ${name}:`, err.message);
+            }
         }
     }
     console.log('Done.');

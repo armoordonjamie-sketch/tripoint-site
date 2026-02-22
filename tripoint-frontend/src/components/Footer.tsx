@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Phone, MessageCircle, Mail, MapPin, Clock } from 'lucide-react';
 import { siteConfig } from '@/config/site';
 import { trackEvent } from '@/lib/analytics';
+import { OptimizedLogo } from '@/components/OptimizedLogo';
 
 const footerServices = [
     { label: 'Diagnostic Callout', href: '/services/diagnostic-callout' },
@@ -27,8 +28,8 @@ export function Footer() {
                     {/* Brand */}
                     <div>
                         <Link to="/" className="mb-4 flex items-center gap-2">
-                            <img
-                                src="/logo-light.png"
+                            <OptimizedLogo
+                                name="logo-light"
                                 alt={siteConfig.brandName}
                                 className="h-14 w-auto"
                             />

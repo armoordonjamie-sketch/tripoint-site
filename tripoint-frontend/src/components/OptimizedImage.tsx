@@ -20,7 +20,7 @@ function getOptimizedPaths(src: string): { webp: string; webpSrcset?: string; jp
     if (RESPONSIVE_BASES.has(name)) {
         return {
             webp: `${prefix}${name}-1536.webp`,
-            webpSrcset: `${prefix}${name}-640.webp 640w, ${prefix}${name}-1024.webp 1024w, ${prefix}${name}-1536.webp 1536w`,
+            webpSrcset: `${prefix}${name}-480.webp 480w, ${prefix}${name}-640.webp 640w, ${prefix}${name}-1024.webp 1024w, ${prefix}${name}-1536.webp 1536w`,
             jpg: `${prefix}${name}-1536.jpg`,
         };
     }
@@ -51,7 +51,7 @@ export function OptimizedImage({ src, priority, alt = '', className, style, ...r
     if (webpSrcset) {
         return (
             <picture className={className}>
-                <source type="image/webp" srcSet={webpSrcset} sizes="100vw" />
+                <source type="image/webp" srcSet={webpSrcset} sizes="(max-width: 640px) 100vw, 1024px" />
                 <img src={jpg} {...imgProps} />
             </picture>
         );
