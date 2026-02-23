@@ -1,9 +1,20 @@
 import { useParams, Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { Seo } from '@/components/Seo';
 import { Section } from '@/components/Section';
 import { CTAButton } from '@/components/CTAButton';
+import { OptimizedImage } from '@/components/OptimizedImage';
 import { BookOpen, ArrowRight } from 'lucide-react';
-import { getBlogPost } from '@/data/blogPosts';
+import { getBlogPost, getPostThumbnail } from '@/data/blogPosts';
+import { siteConfig } from '@/config/site';
+
+function BlogHeroImage({ src, alt }: { src: string; alt: string }) {
+    const isGallery = src.startsWith('/images/gallery/');
+    if (isGallery) {
+        return <OptimizedImage src={src} alt={alt} className="h-full w-full object-cover" priority />;
+    }
+    return <img src={src} alt={alt} className="h-full w-full object-cover" loading="eager" />;
+}
 
 const serviceSlugToHref: Record<string, string> = {
     'sprinter-limp-mode': '/services/sprinter-limp-mode',
@@ -48,33 +59,121 @@ export function BlogPostPage() {
         .filter((s) => serviceSlugToHref[s])
         .map((s) => ({ href: serviceSlugToHref[s], label: serviceSlugToLabel[s] ?? s }));
 
+    const canonicalUrl = `${siteConfig.url}/blog/${post.slug}`;
+    const imageUrl = post.ogImage
+        ? (post.ogImage.startsWith('http') ? post.ogImage : `${siteConfig.url}${post.ogImage}`)
+        : `${siteConfig.url}/og-default.jpg`;
+
+    // Rough word count from HTML content for schema
+    const wordCount = post.content.replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length;
+
+    const blogPostingLd = {
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: post.title,
+        description: post.description,
+        datePublished: post.publishedAt,
+        dateModified: post.publishedAt,
+        wordCount,
+        articleSection: post.category,
+        inLanguage: 'en-GB',
+        author: {
+            '@type': 'Organization',
+            name: post.author ?? 'TriPoint Diagnostics',
+            url: siteConfig.url,
+        },
+        publisher: {
+            '@type': 'Organization',
+            name: 'TriPoint Diagnostics',
+            url: siteConfig.url,
+            logo: {
+                '@type': 'ImageObject',
+                url: `${siteConfig.url}/favicon.svg`,
+            },
+        },
+        image: imageUrl,
+        mainEntityOfPage: {
+            '@type': 'WebPage',
+            '@id': canonicalUrl,
+        },
+    };
+
+    const breadcrumbLd = {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+            {
+                '@type': 'ListItem',
+                position: 1,
+                name: 'Home',
+                item: siteConfig.url,
+            },
+            {
+                '@type': 'ListItem',
+                position: 2,
+                name: 'Blog',
+                item: `${siteConfig.url}/blog`,
+            },
+            {
+                '@type': 'ListItem',
+                position: 3,
+                name: post.title,
+                item: canonicalUrl,
+            },
+        ],
+    };
+
     return (
         <>
             <Seo
                 title={post.title}
                 description={post.description}
                 canonical={`/blog/${post.slug}`}
+                ogImage={post.ogImage}
             />
+            <Helmet>
+                <meta property="og:type" content="article" />
+                <meta property="article:published_time" content={post.publishedAt} />
+                <meta property="article:section" content={post.category} />
+                <script type="application/ld+json">
+                    {JSON.stringify(blogPostingLd)}
+                </script>
+                <script type="application/ld+json">
+                    {JSON.stringify(breadcrumbLd)}
+                </script>
+            </Helmet>
 
-            <Section>
-                <div className="mx-auto max-w-4xl lg:flex lg:gap-12">
-                    <article className="flex-1 min-w-0">
-                        <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-brand hover:underline mb-6">
-                            ← Back to Blog
-                        </Link>
-                        <span className="text-xs font-semibold uppercase tracking-wider text-brand">
+            {/* Hero section */}
+            <section className="relative flex min-h-[50vh] flex-col md:min-h-[40vh] overflow-hidden">
+                <div className="absolute inset-0">
+                    <BlogHeroImage src={getPostThumbnail(post)} alt="" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/60 to-transparent" />
+                </div>
+                <div className="relative z-10 flex min-h-full flex-col px-4 py-8 sm:px-6 lg:px-8">
+                    <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-white/90 hover:text-white hover:underline">
+                        ← Back to Blog
+                    </Link>
+                    <div className="mx-auto mt-auto w-full max-w-4xl pb-8 pt-12">
+                        <span className="text-xs font-semibold uppercase tracking-wider text-brand-light">
                             {post.category}
                         </span>
-                        <h1 className="mt-2 text-4xl font-extrabold text-text-primary sm:text-5xl">
+                        <h1 className="mt-2 text-4xl font-extrabold text-white sm:text-5xl drop-shadow-lg">
                             {post.title}
                         </h1>
-                        <p className="mt-4 text-text-muted">
+                        <p className="mt-4 text-white/80">
                             {new Date(post.publishedAt).toLocaleDateString('en-GB', {
                                 day: 'numeric',
                                 month: 'long',
                                 year: 'numeric',
                             })}
                         </p>
+                    </div>
+                </div>
+            </section>
+
+            <Section>
+                <div className="mx-auto max-w-4xl lg:flex lg:gap-12">
+                    <article className="flex-1 min-w-0">
                         <div
                             className="prose prose-invert mt-8 max-w-none prose-headings:font-bold prose-p:text-text-secondary prose-li:text-text-secondary prose-a:text-brand prose-a:no-underline hover:prose-a:underline"
                             dangerouslySetInnerHTML={{ __html: post.content }}

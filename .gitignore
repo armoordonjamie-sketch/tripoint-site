@@ -24,7 +24,7 @@ env/
 python-scripts/*.json
 
 # Google setup tool secrets
-tools/google_setup/client_secret.json
+tools/google_setup/client_secret*.json
 tools/google_setup/token.json
 tools/google_setup/config.yaml
 tools/google_setup/report.json

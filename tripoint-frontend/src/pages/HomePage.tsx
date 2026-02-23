@@ -13,7 +13,7 @@ import { TownChips } from '@/components/TownChips';
 import { siteConfig } from '@/config/site';
 import { trackEvent } from '@/lib/analytics';
 import { galleryImages } from '@/data/galleryImages';
-import { blogPosts } from '@/data/blogPosts';
+import { blogPosts, getPostThumbnail } from '@/data/blogPosts';
 import { useScrollReveal } from '@/lib/useScrollReveal';
 import { OptimizedImage } from '@/components/OptimizedImage';
 
@@ -389,17 +389,35 @@ export function HomePage() {
                         <Link
                             key={post.slug}
                             to={`/blog/${post.slug}`}
-                            className="reveal group rounded-xl border border-border-default bg-surface-alt p-5 transition-all hover:border-brand/30 hover:bg-brand/5 hover:-translate-y-0.5"
+                            className="reveal group overflow-hidden rounded-xl border border-border-default bg-surface-alt transition-all hover:border-brand/30 hover:bg-brand/5 hover:-translate-y-0.5"
                             style={{ transitionDelay: `${i * 0.08}s` }}
                         >
-                            <span className="text-xs font-medium text-brand uppercase tracking-wider">{post.category}</span>
-                            <h3 className="mt-2 font-semibold text-text-primary text-sm leading-snug group-hover:text-brand-light transition-colors line-clamp-2">
-                                {post.title}
-                            </h3>
-                            <p className="mt-2 text-xs text-text-muted leading-relaxed line-clamp-2">{post.description}</p>
-                            <span className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-brand group-hover:gap-2 transition-all">
-                                Read article <ArrowRight className="h-3 w-3" />
-                            </span>
+                            <div className="relative aspect-video w-full overflow-hidden">
+                                {getPostThumbnail(post).startsWith('/images/gallery/') ? (
+                                    <OptimizedImage
+                                        src={getPostThumbnail(post)}
+                                        alt=""
+                                        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                                    />
+                                ) : (
+                                    <img
+                                        src={getPostThumbnail(post)}
+                                        alt=""
+                                        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                                        loading="lazy"
+                                    />
+                                )}
+                            </div>
+                            <div className="p-5">
+                                <span className="text-xs font-medium text-brand uppercase tracking-wider">{post.category}</span>
+                                <h3 className="mt-2 font-semibold text-text-primary text-sm leading-snug group-hover:text-brand-light transition-colors line-clamp-2">
+                                    {post.title}
+                                </h3>
+                                <p className="mt-2 text-xs text-text-muted leading-relaxed line-clamp-2">{post.description}</p>
+                                <span className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-brand group-hover:gap-2 transition-all">
+                                    Read article <ArrowRight className="h-3 w-3" />
+                                </span>
+                            </div>
                         </Link>
                     ))}
                 </div>
