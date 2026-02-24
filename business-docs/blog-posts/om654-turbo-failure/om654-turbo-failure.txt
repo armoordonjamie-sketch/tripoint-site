@@ -1,13 +1,13 @@
 Why OM654 Turbochargers Are Failing in Mercedes Sprinter (W907) and Vito (W447): A Real Workshop-Level Technical Breakdown
 
-At TriPoint Diagnostics Ltd (covering Kent and London), we’re seeing a clear pattern: OM654 turbo failures are disproportionately common in commercial vans — especially the Sprinter (W907/VS30) and Vito (W447) — compared with passenger-car applications.
+At TriPoint Diagnostics Ltd (covering Kent and London), we’re seeing a clear pattern: OM654 turbo failures are disproportionately common in commercial vans - especially the Sprinter (W907/VS30) and Vito (W447) - compared with passenger-car applications.
 
 This isn’t usually “a bad turbocharger.” The root cause is more boring and more brutal:
 
 emissions-driven thermal stress + lubrication degradation
-— not a simple defective turbocharger.
+- not a simple defective turbocharger.
 
-The turbo itself isn’t necessarily weak — the operating environment is harsher.
+The turbo itself isn’t necessarily weak - the operating environment is harsher.
 
 The core reason: the OM654 turbo sits in a much hotter emissions layout
 
@@ -15,7 +15,7 @@ Your first bullet point is bang on:
 
 Close-coupled emissions system (DPF/cat directly below the turbo compared to OM651) → higher turbo temperature
 
-On OM654, the aftertreatment layout is designed to stay hot and work fast (especially for modern Euro/RDE targets). Diesel technical coverage of the OM654 aftertreatment describes a close-coupled DOC followed by urea injection/mixing and a DPF/SCR unit (SCR-on-filter + SCR) — i.e., a compact “close to the engine” system.
+On OM654, the aftertreatment layout is designed to stay hot and work fast (especially for modern Euro/RDE targets). Diesel technical coverage of the OM654 aftertreatment describes a close-coupled DOC followed by urea injection/mixing and a DPF/SCR unit (SCR-on-filter + SCR) - i.e., a compact “close to the engine” system.
 
 That’s great for emissions. But it pushes more heat into the turbo’s neighbourhood.
 
@@ -94,11 +94,11 @@ The turbo itself isn’t necessarily weak
 It’s often manufactured by Garrett (a well-known, generally reliable turbo manufacturer)
 
 Many OM654 Sprinter turbo listings are indeed Garrett-referenced (by OE number and Garrett turbo number).
-(Workshop translation: “it’s not some no-name unit — the environment is killing it.”)
+(Workshop translation: “it’s not some no-name unit - the environment is killing it.”)
 
 Why OM651 turbos often lasted longer
 
-You asked to keep this section — so here it is, intact, but written cleanly.
+You asked to keep this section - so here it is, intact, but written cleanly.
 
 OM651 advantages (why they often survived better)
 
@@ -126,13 +126,13 @@ Shaft play increasing before failure
 
 Frequently occurs with DPF/EGR issues
 
-(That “oil in intercooler” point is important: it can be turbo-related, but crankcase ventilation can contribute too — diagnosis matters.)
+(That “oil in intercooler” point is important: it can be turbo-related, but crankcase ventilation can contribute too - diagnosis matters.)
 
 Why we’re not seeing these failures as often in passenger cars (W205/W213 etc.)
 
 Keeping your point:
 
-Specific to W907 Sprinter and W447 Vito — higher failure rates
+Specific to W907 Sprinter and W447 Vito - higher failure rates
 
 These vans are particularly vulnerable because of:
 
@@ -229,7 +229,7 @@ EGR coolers / EGR tract
 
 MAHLE specifically notes that after turbocharger damage, the charge air cooler must be checked and may need replacing, because internal contamination can’t always be removed reliably.
 
-And in the worst cases, oil ingestion can lead to hydrolock-type damage — including bent rods.
+And in the worst cases, oil ingestion can lead to hydrolock-type damage - including bent rods.
 
 What can you do to reduce the risk?
 
@@ -249,6 +249,6 @@ Final takeaway
 The OM654 turbo failure issue is fundamentally caused by:
 
 emissions-driven thermal stress + lubrication degradation
-—not a simple defective turbocharger.
+-not a simple defective turbocharger.
 
 If you’re hearing whining, seeing oil in boost pipes, or getting underboost/limp mode on a W907 Sprinter or W447 Vito, the best money you’ll spend is a proper diagnostic before it escalates.

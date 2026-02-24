@@ -78,7 +78,7 @@ DPF removal is **almost always illegal** for road-registered vehicles in the UK.
 
 London's Ultra Low Emission Zone (ULEZ) operates 24/7 (except Christmas Day). Non-compliant vehicles under 3.5 tonnes are charged £12.50 per day. Other UK cities operate or are implementing Clean Air Zones with similar restrictions.
 
-Our approach is to **diagnose and repair** emissions systems through proper procedures — not to bypass them. This protects you legally, keeps your vehicle compliant, and preserves its resale value.
+Our approach is to **diagnose and repair** emissions systems through proper procedures - not to bypass them. This protects you legally, keeps your vehicle compliant, and preserves its resale value.
 
 ---
 

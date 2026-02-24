@@ -114,7 +114,7 @@ Under the UK General Data Protection Regulation (UK GDPR) and the Data Protectio
 - **Rectify** inaccurate or incomplete data
 - **Erase** your data ("right to be forgotten"), subject to legal retention requirements
 - **Restrict** processing in certain circumstances
-- **Data portability** — receive your data in a structured, machine-readable format
+- **Data portability** - receive your data in a structured, machine-readable format
 - **Object** to processing based on legitimate interest
 - **Withdraw consent** where processing is based on consent
 
@@ -128,7 +128,7 @@ If you are not satisfied with our response, you have the right to lodge a compla
 
 ## 8. Cookies
 
-Our website does not use cookies for tracking or advertising. We use privacy-friendly analytics that operate without cookies. Your browser's localStorage may be used to save form progress locally on your device — this is not a cookie and is not transmitted to any server unless you submit the form.
+Our website does not use cookies for tracking or advertising. We use privacy-friendly analytics that operate without cookies. Your browser's localStorage may be used to save form progress locally on your device - this is not a cookie and is not transmitted to any server unless you submit the form.
 
 ---
 

@@ -24,21 +24,21 @@ export const blogPosts: BlogPost[] = [
         relatedServices: ['sprinter-limp-mode', 'diagnostic-callout', 'emissions-diagnostics'],
         content: `
             <div class="blog-lead">
-                At TriPoint Diagnostics Ltd (covering Kent and London), we're seeing a clear pattern: OM654 turbo failures are disproportionately common in commercial vans — especially the Sprinter (W907/VS30) and Vito (W447) — compared with passenger-car applications. The root cause isn't a defective turbocharger. It's emissions-driven thermal stress combined with lubrication degradation.
+                At TriPoint Diagnostics Ltd (covering Kent and London), we're seeing a clear pattern: OM654 turbo failures are disproportionately common in commercial vans - especially the Sprinter (W907/VS30) and Vito (W447) - compared with passenger-car applications. The root cause isn't a defective turbocharger. It's emissions-driven thermal stress combined with lubrication degradation.
             </div>
 
             <figure class="blog-image">
                 <img src="/images/blog/om654-turbo-failure/om654-turbo-compressor-split.jpeg" alt="Split turbocharger compressor wheel showing catastrophic failure on Mercedes OM654 engine" loading="lazy" />
-                <figcaption>Catastrophic compressor wheel failure on an OM654 turbocharger — a pattern we're seeing repeatedly on Sprinters and Vitos.</figcaption>
+                <figcaption>Catastrophic compressor wheel failure on an OM654 turbocharger - a pattern we're seeing repeatedly on Sprinters and Vitos.</figcaption>
             </figure>
 
             <div class="blog-takeaway">
                 <span class="takeaway-label">Key point</span>
-                <p>The turbo itself isn't necessarily weak — it's often manufactured by Garrett, a well-known and generally reliable manufacturer. <strong>The operating environment is what kills it.</strong></p>
+                <p>The turbo itself isn't necessarily weak - it's often manufactured by Garrett, a well-known and generally reliable manufacturer. <strong>The operating environment is what kills it.</strong></p>
             </div>
 
             <h2>The core reason: the OM654 turbo sits in a much hotter emissions layout</h2>
-            <p>On the OM654, the aftertreatment layout is designed to stay hot and work fast — especially for modern Euro 6d/RDE targets. The close-coupled DOC followed by urea injection/mixing and a DPF/SCR unit means a compact "close to the engine" emissions system.</p>
+            <p>On the OM654, the aftertreatment layout is designed to stay hot and work fast - especially for modern Euro 6d/RDE targets. The close-coupled DOC followed by urea injection/mixing and a DPF/SCR unit means a compact "close to the engine" emissions system.</p>
 
             <div class="blog-callout">
                 <p>Close-coupled emissions system (DPF/cat directly below the turbo compared to OM651) → <strong>significantly higher turbo operating temperature.</strong></p>
@@ -48,7 +48,7 @@ export const blogPosts: BlogPost[] = [
 
             <figure class="blog-image">
                 <img src="/images/blog/om654-turbo-failure/om654-engine-exhaust-system-diagram.avif" alt="OM654 engine exhaust and aftertreatment system diagram showing close-coupled DPF and SCR layout" loading="lazy" />
-                <figcaption>OM654 exhaust system layout — note the close-coupled aftertreatment positioning directly below the turbocharger.</figcaption>
+                <figcaption>OM654 exhaust system layout - note the close-coupled aftertreatment positioning directly below the turbocharger.</figcaption>
             </figure>
 
             <hr class="blog-divider"/>
@@ -65,7 +65,7 @@ export const blogPosts: BlogPost[] = [
             </ul>
 
             <div class="blog-callout">
-                <p>And it's especially problematic in vans doing <strong>short trips, urban stop/start, and delivery work</strong> — which is exactly typical W907/W447 usage.</p>
+                <p>And it's especially problematic in vans doing <strong>short trips, urban stop/start, and delivery work</strong> - which is exactly typical W907/W447 usage.</p>
             </div>
 
             <hr class="blog-divider"/>
@@ -82,17 +82,17 @@ export const blogPosts: BlogPost[] = [
 
             <figure class="blog-image">
                 <img src="/images/blog/om654-turbo-failure/om654-oil-pouring-out-charge-air-cooler.jpeg" alt="Engine oil pouring out of OM654 charge air cooler showing turbo seal failure" loading="lazy" />
-                <figcaption>Oil pouring out of the charge air cooler — clear evidence of turbo seal failure allowing oil to migrate through the boost system.</figcaption>
+                <figcaption>Oil pouring out of the charge air cooler - clear evidence of turbo seal failure allowing oil to migrate through the boost system.</figcaption>
             </figure>
 
             <hr class="blog-divider"/>
 
             <h2>Single turbo design under commercial duty</h2>
-            <p>The OM654 uses a single turbo doing all the work in a heavy van duty cycle. That means high average turbine load — especially when regen and high EGR/boost strategies are in play.</p>
+            <p>The OM654 uses a single turbo doing all the work in a heavy van duty cycle. That means high average turbine load - especially when regen and high EGR/boost strategies are in play.</p>
 
             <div class="blog-takeaway">
                 <span class="takeaway-label">Workshop translation</span>
-                <p>"It's not some no-name unit — the environment is killing it." Many OM654 Sprinter turbo listings are indeed Garrett-referenced by OE number.</p>
+                <p>"It's not some no-name unit - the environment is killing it." Many OM654 Sprinter turbo listings are indeed Garrett-referenced by OE number.</p>
             </div>
 
             <hr class="blog-divider"/>
@@ -145,7 +145,7 @@ export const blogPosts: BlogPost[] = [
 
             <figure class="blog-image">
                 <img src="/images/blog/om654-turbo-failure/om654-charge-air-cooler-oil-carbo.jpeg" alt="Carbon and oil contamination inside OM654 charge air cooler from turbo failure" loading="lazy" />
-                <figcaption>Carbon and oil buildup inside the charge air cooler — contamination from a failing turbo that wasn't caught early enough.</figcaption>
+                <figcaption>Carbon and oil buildup inside the charge air cooler - contamination from a failing turbo that wasn't caught early enough.</figcaption>
             </figure>
 
             <div class="blog-step"><span class="step-num">2</span> Turbo seizure / catastrophic failure (the expensive version)</div>
@@ -153,22 +153,22 @@ export const blogPosts: BlogPost[] = [
 
             <div class="blog-takeaway">
                 <span class="takeaway-label">⚠️ Hydrolock risk</span>
-                <p>When cylinders fill with oil, the real risk is <strong>liquid ingestion / hydrolock</strong> — a known mechanism that can cause severe damage including bent connecting rods.</p>
+                <p>When cylinders fill with oil, the real risk is <strong>liquid ingestion / hydrolock</strong> - a known mechanism that can cause severe damage including bent connecting rods.</p>
             </div>
 
             <figure class="blog-image">
                 <img src="/images/blog/om654-turbo-failure/om654-intake-ports-full-of-oil.jpeg" alt="OM654 intake ports completely saturated with engine oil from turbo failure" loading="lazy" />
-                <figcaption>Intake ports completely saturated with oil — this level of contamination risks hydrolock and catastrophic engine damage.</figcaption>
+                <figcaption>Intake ports completely saturated with oil - this level of contamination risks hydrolock and catastrophic engine damage.</figcaption>
             </figure>
 
             <figure class="blog-image">
                 <img src="/images/blog/om654-turbo-failure/om654-glow-plugs-oil-contamination.jpeg" alt="Oil-contaminated glow plugs removed from OM654 engine after turbo failure" loading="lazy" />
-                <figcaption>Glow plugs removed from this OM654 — covered in oil that migrated through the intake from the failed turbo.</figcaption>
+                <figcaption>Glow plugs removed from this OM654 - covered in oil that migrated through the intake from the failed turbo.</figcaption>
             </figure>
 
             <figure class="blog-image">
                 <img src="/images/blog/om654-turbo-failure/om654-oil-in-tailpipe.jpeg" alt="Visible oil residue in exhaust tailpipe indicating severe turbo oil migration on Mercedes" loading="lazy" />
-                <figcaption>Oil residue visible in the exhaust tailpipe — a sign that turbo oil migration has contaminated the entire exhaust tract.</figcaption>
+                <figcaption>Oil residue visible in the exhaust tailpipe - a sign that turbo oil migration has contaminated the entire exhaust tract.</figcaption>
             </figure>
 
             <hr class="blog-divider"/>
@@ -207,7 +207,7 @@ export const blogPosts: BlogPost[] = [
             </ul>
 
             <div class="blog-callout">
-                <p>MAHLE specifically notes that after turbocharger damage, the charge air cooler must be checked and may need replacing — internal contamination can't always be removed reliably. In the worst cases, oil ingestion can lead to <strong>hydrolock-type damage including bent rods.</strong></p>
+                <p>MAHLE specifically notes that after turbocharger damage, the charge air cooler must be checked and may need replacing - internal contamination can't always be removed reliably. In the worst cases, oil ingestion can lead to <strong>hydrolock-type damage including bent rods.</strong></p>
             </div>
 
             <hr class="blog-divider"/>
@@ -215,7 +215,7 @@ export const blogPosts: BlogPost[] = [
             <h2>What can you do to reduce the risk?</h2>
 
             <div class="blog-step"><span class="step-num">1</span> Don't stick rigidly to the longest Mercedes oil interval for commercial use</div>
-            <p>If your interval is typically 2 years or 40,000 km, consider making it <strong>1 year or 20,000 km</strong> — especially for urban/delivery vans.</p>
+            <p>If your interval is typically 2 years or 40,000 km, consider making it <strong>1 year or 20,000 km</strong> - especially for urban/delivery vans.</p>
 
             <div class="blog-step"><span class="step-num">2</span> Disable stop/start for heavy urban duty</div>
             <p>This can reduce repeated heat-soak cycles and constant restart demand. (Trade-off: fuel economy.)</p>
@@ -228,7 +228,7 @@ export const blogPosts: BlogPost[] = [
             <h2>Final takeaway</h2>
             <div class="blog-takeaway">
                 <span class="takeaway-label">The bottom line</span>
-                <p>The OM654 turbo failure issue is fundamentally caused by <strong>emissions-driven thermal stress + lubrication degradation</strong> — not a simple defective turbocharger.</p>
+                <p>The OM654 turbo failure issue is fundamentally caused by <strong>emissions-driven thermal stress + lubrication degradation</strong> - not a simple defective turbocharger.</p>
             </div>
 
             <div class="blog-cta-box">

@@ -8,8 +8,8 @@ Programmatically creates GA4 key events, Google Ads conversion actions, and link
 1. Go to [Google Cloud Console](https://console.cloud.google.com/)
 2. Create or select a project
 3. Enable these APIs:
-   - **Google Analytics Admin API** — [Enable](https://console.cloud.google.com/apis/library/analyticsadmin.googleapis.com)
-   - **Google Ads API** — [Enable](https://console.cloud.google.com/apis/library/googleads.googleapis.com)
+   - **Google Analytics Admin API** - [Enable](https://console.cloud.google.com/apis/library/analyticsadmin.googleapis.com)
+   - **Google Ads API** - [Enable](https://console.cloud.google.com/apis/library/googleads.googleapis.com)
 
 ### 2. OAuth 2.0 Credentials
 1. Go to **APIs & Services → Credentials**
@@ -88,10 +88,10 @@ Contains:
 ## Files (gitignored)
 
 These files are created locally and should NOT be committed:
-- `client_secret.json` — OAuth credentials
-- `token.json` — OAuth refresh token
-- `config.yaml` — Contains account IDs
-- `report.json` — Generated setup report
+- `client_secret.json` - OAuth credentials
+- `token.json` - OAuth refresh token
+- `config.yaml` - Contains account IDs
+- `report.json` - Generated setup report
 
 ## Conversion Actions Created
 

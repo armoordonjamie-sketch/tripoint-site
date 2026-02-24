@@ -88,7 +88,7 @@ def get_google_ads_config(creds: Credentials) -> dict:
 
 
 def run_auth_flow():
-    """Interactive auth flow — called by `setup_conversions.py auth`."""
+    """Interactive auth flow - called by `setup_conversions.py auth`."""
     print("\n=== Google API Authentication ===\n")
 
     if not CLIENT_SECRETS_PATH.exists():

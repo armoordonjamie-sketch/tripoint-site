@@ -18,8 +18,8 @@ By booking a service or using our website, you agree to these Terms. Please read
 Tripoint Diagnostics provides mobile vehicle diagnostic and selected repair services across Kent and South East London. All services are:
 
 - **Appointment-based** and subject to availability within our published coverage area
-- **Mobile-only** — we attend your location; we do not operate from a fixed workshop
-- **Diagnostics-first** — every job concludes with documented findings and recommended next steps
+- **Mobile-only** - we attend your location; we do not operate from a fixed workshop
+- **Diagnostics-first** - every job concludes with documented findings and recommended next steps
 
 Our published service catalogue, pricing, and coverage zones are available on our website at https://tripointdiagnostics.co.uk.
 
@@ -57,7 +57,7 @@ An invoice or receipt will be provided for every completed job, either by email 
 
 ### 4.1 Customer cancellations
 
-- **24+ hours' notice:** Reschedule free of charge — your deposit carries over to the new date.
+- **24+ hours' notice:** Reschedule free of charge - your deposit carries over to the new date.
 - **Less than 24 hours' notice or no-show:** The deposit is retained to cover the reserved time slot and travel planning costs. No further charges apply.
 
 ### 4.2 Our cancellations
@@ -112,7 +112,7 @@ We operate exclusively as a mobile service. We may decline, rearrange, or termin
 
 You are responsible for:
 
-- Ensuring the vehicle is in a safe, accessible location (driveway, yard, depot, car park — **not** a live carriageway)
+- Ensuring the vehicle is in a safe, accessible location (driveway, yard, depot, car park - **not** a live carriageway)
 - Being available or reachable by phone during the appointment
 - Providing accurate vehicle and symptom information at the time of booking
 - Disclosing any known vehicle faults, modifications, or prior work relevant to the diagnosis
@@ -138,7 +138,7 @@ Diagnostics do **not** guarantee a specific repair outcome. In complex cases, fu
 
 ### 7.2 Written outcomes
 
-Every job concludes with a written outcome — findings, probable cause(s), and recommended next steps — delivered by email or via our diagnostic report system. This is your record and can be shared with other workshops if needed.
+Every job concludes with a written outcome - findings, probable cause(s), and recommended next steps - delivered by email or via our diagnostic report system. This is your record and can be shared with other workshops if needed.
 
 ### 7.3 Limitation of liability
 
@@ -182,7 +182,7 @@ All emissions-related work is carried out on a diagnosis-and-compliant-repair ba
 
 ## 9. Intellectual property
 
-All content on our website — including text, images, design, logos, diagnostic reports, and case studies — is the property of Tripoint Diagnostics Ltd or its licensors and is protected by UK copyright and intellectual property law.
+All content on our website - including text, images, design, logos, diagnostic reports, and case studies - is the property of Tripoint Diagnostics Ltd or its licensors and is protected by UK copyright and intellectual property law.
 
 You may not reproduce, distribute, or republish our content without prior written permission, except for personal use of diagnostic reports issued to you.
 
