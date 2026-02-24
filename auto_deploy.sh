@@ -50,6 +50,15 @@ if [ "$LOCAL" != "$REMOTE" ]; then
         nginx -t
         echo ">>> Reloading Nginx..."
         systemctl reload nginx
+
+        # Check if SSL is still active in the config (prevents resets from losing SSL)
+        DOMAIN="tripointdiagnostics.co.uk"
+        if ! grep -q "443 ssl" /etc/nginx/sites-enabled/tripoint; then
+            echo ">>> [$(date)] SSL config missing from Nginx. Re-applying..."
+            certbot --nginx -d "$DOMAIN" -d "www.$DOMAIN" --non-interactive --agree-tos --redirect --expand
+            systemctl reload nginx
+        fi
+
         echo ">>> Restarting API service..."
         systemctl restart tripoint-api
         echo ">>> [$(date)] Deployment complete."

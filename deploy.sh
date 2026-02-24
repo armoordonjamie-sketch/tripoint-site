@@ -132,12 +132,9 @@ nginx -t
 systemctl reload nginx
 
 # 6. Setup SSL
-echo ">>> Setting up SSL..."
-# Check if certificate already exists to avoid rate limits/errors on re-run
-if ! certbot certificates | grep -q "$DOMAIN"; then
-    certbot --nginx -d "$DOMAIN" --non-interactive --agree-tos -m "$EMAIL" --redirect
-else
-    echo "SSL Certificate already exists."
-fi
+echo ">>> Ensuring SSL is configured..."
+# We always run this to make sure the Nginx config (which we just overwrote) is patched with SSL directives.
+# Certbot is idempotent and will skip renewal if not needed, but will re-apply the Nginx config.
+certbot --nginx -d "$DOMAIN" -d "www.$DOMAIN" --non-interactive --agree-tos -m "$EMAIL" --redirect --expand
 
 echo ">>> Deployment Complete! Visit https://$DOMAIN"
