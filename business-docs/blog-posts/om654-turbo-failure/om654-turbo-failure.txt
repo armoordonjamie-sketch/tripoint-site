@@ -1,0 +1,254 @@
+Why OM654 Turbochargers Are Failing in Mercedes Sprinter (W907) and Vito (W447): A Real Workshop-Level Technical Breakdown
+
+At TriPoint Diagnostics Ltd (covering Kent and London), we’re seeing a clear pattern: OM654 turbo failures are disproportionately common in commercial vans — especially the Sprinter (W907/VS30) and Vito (W447) — compared with passenger-car applications.
+
+This isn’t usually “a bad turbocharger.” The root cause is more boring and more brutal:
+
+emissions-driven thermal stress + lubrication degradation
+— not a simple defective turbocharger.
+
+The turbo itself isn’t necessarily weak — the operating environment is harsher.
+
+The core reason: the OM654 turbo sits in a much hotter emissions layout
+
+Your first bullet point is bang on:
+
+Close-coupled emissions system (DPF/cat directly below the turbo compared to OM651) → higher turbo temperature
+
+On OM654, the aftertreatment layout is designed to stay hot and work fast (especially for modern Euro/RDE targets). Diesel technical coverage of the OM654 aftertreatment describes a close-coupled DOC followed by urea injection/mixing and a DPF/SCR unit (SCR-on-filter + SCR) — i.e., a compact “close to the engine” system.
+
+That’s great for emissions. But it pushes more heat into the turbo’s neighbourhood.
+
+Regeneration heat is the turbo’s worst enemy (and vans trigger it more often)
+
+Another key point you listed:
+
+High regen frequency (due to Mercedes trying to hit Euro 6d emissions targets) → repeated thermal stress
+
+DPF regeneration is basically the ECU intentionally raising exhaust temps to burn soot out of the filter. During active regen, typical target temperature is around 600–700°C.
+
+Your notes on what that does are exactly what we see in the real world:
+
+Repeated regen cycles cause:
+
+extreme turbo thermal cycling
+
+bearing fatigue
+
+oil breakdown
+
+shaft distortion
+
+And it’s especially problematic in vans doing:
+
+short trips
+
+urban stop/start
+
+delivery work
+
+Which is exactly typical W907/W447 usage.
+
+Lubrication breakdown is the silent killer (and long service intervals make it worse)
+
+Your notes again:
+
+Oil breakdown and carbonisation (due to increased oil service intervals) → bearing wear
+
+Eventually turbo bearing failure or seizure
+
+The turbo bearings live off a thin oil film. When the turbo runs hotter (and heat-soaks more), oil is more likely to:
+
+oxidise sooner
+
+coke/carbonise in hot spots
+
+restrict the oil feed over time (carbon buildup)
+
+lose film strength under high thermal load
+
+Common real-world turbo lubrication failure modes you listed:
+
+oil feed restriction from carbon buildup
+
+oil degradation from excessive heat
+
+oil coking inside the turbo bearing housing
+
+reduced lubrication film strength
+
+That chain leads to: shaft play → seal control issues → oil migration → failure/seizure.
+
+“It’s a single turbo working harder” (and the van duty cycle doesn’t help)
+
+You also called out:
+
+Increased turbo load due to single turbo design (even smaller than OM651 single turbo)
+
+Even without debating exact frame sizes on every variant, the principle is correct: one turbo doing all the work in a heavy van duty cycle means high average turbine load (especially when regen and high EGR/boost strategies are in play).
+
+And to your point:
+
+The turbo itself isn’t necessarily weak
+
+It’s often manufactured by Garrett (a well-known, generally reliable turbo manufacturer)
+
+Many OM654 Sprinter turbo listings are indeed Garrett-referenced (by OE number and Garrett turbo number).
+(Workshop translation: “it’s not some no-name unit — the environment is killing it.”)
+
+Why OM651 turbos often lasted longer
+
+You asked to keep this section — so here it is, intact, but written cleanly.
+
+OM651 advantages (why they often survived better)
+
+Lower exhaust temps (typically less thermal stress in the turbo area)
+
+Twin turbo load distribution / bigger single turbo design
+
+Less aggressive regen strategy
+
+More robust oil viscosity spec / oil change intervals (in many real-world fleets)
+
+Less tightly integrated emissions system
+
+A major technical difference: OM651 high-output variants use dual-stage turbocharging (small high-pressure + large low-pressure turbo). This is explicitly described in Daimler technical documentation for OM651.
+
+That means the boost work can be split across stages instead of one unit constantly eating everything.
+
+Typical OM651 failure pattern (what we see)
+
+60k–120k miles turbo failure window
+
+Often oil present in intake/intercooler
+
+Shaft play increasing before failure
+
+Frequently occurs with DPF/EGR issues
+
+(That “oil in intercooler” point is important: it can be turbo-related, but crankcase ventilation can contribute too — diagnosis matters.)
+
+Why we’re not seeing these failures as often in passenger cars (W205/W213 etc.)
+
+Keeping your point:
+
+Specific to W907 Sprinter and W447 Vito — higher failure rates
+
+These vans are particularly vulnerable because of:
+
+heavy vehicle load
+
+frequent stop/start driving
+
+long idle times
+
+frequent DPF regeneration
+
+commercial duty cycle
+
+Passenger cars generally see fewer failures because their duty cycle is usually kinder: fewer interrupted regens, less idling, more steady-state cruising.
+
+Symptoms & failure modes (what owners actually notice)
+1) Shaft play and bearing wear (caught early = best outcome)
+
+Symptoms
+
+whining noise
+
+loss of boost
+
+oil in intake/intercooler
+
+Cause
+
+oil breakdown and bearing wear
+
+If you catch it here, you’re often saving the whole intake/emissions system from becoming an oil trap.
+
+2) Turbo seizure / catastrophic failure (the expensive version)
+
+Symptoms
+
+sudden loss of power
+
+limp mode
+
+no boost
+
+in severe cases: non-start / major running issues if enough oil enters cylinders
+
+You wrote: “eventually non start as cylinders fill with oil.” The real risk behind that is liquid ingestion / hydrolock. Hydrolock is a known mechanism that can cause severe damage including bent connecting rods.
+
+Why the “closely integrated emissions system” increases risk
+
+Keeping your notes, clearly laid out:
+
+Closely integrated emissions systems increase the risk of:
+
+soot contamination entering the turbine housing
+
+oil contamination from blow-by
+
+carbon buildup affecting turbo seals
+
+Also worsened by:
+
+extended oil change intervals
+
+low-viscosity oil spec (where the oil has less tolerance once heat degradation starts)
+
+And because OM654 is designed to meet modern emissions targets, it often involves:
+
+aggressive EGR use
+
+higher boost pressures
+
+more frequent regen cycles
+
+higher sustained turbine load
+
+All of these increase turbo duty cycle.
+
+Repair costs: why “early diagnosis” is everything
+
+You wanted this included exactly, so here it is (with the real consequences spelled out).
+
+If caught early
+
+If it’s diagnosed before it becomes an oil-dump situation, it can be as cheap as ~£1,500 for parts and labour to fit a remanufactured turbo (vehicle-dependent, access-dependent, and assuming no extra faults).
+
+If left too long
+
+If the turbo starts passing significant oil, it can contaminate:
+
+charge air cooler (intercooler)
+
+intake manifold
+
+EGR coolers / EGR tract
+
+MAHLE specifically notes that after turbocharger damage, the charge air cooler must be checked and may need replacing, because internal contamination can’t always be removed reliably.
+
+And in the worst cases, oil ingestion can lead to hydrolock-type damage — including bent rods.
+
+What can you do to reduce the risk?
+
+Keeping your prevention list, with a tiny bit of workshop context:
+
+Don’t stick rigidly to the longest Mercedes oil interval for commercial use
+If your interval is typically 2 years or 40,000 km, consider making it 1 year or 20,000 km (especially for urban/delivery vans).
+
+Disable stop/start (if your usage is heavy urban duty)
+This can reduce repeated heat-soak cycles and constant restart demand. (Trade-off: fuel economy.)
+
+Reduce short drives / give it a proper run
+Short trips and interrupted regens are turbo punishment. A regular longer run helps the DPF complete regeneration cleanly and reduces repeated “attempted” regen cycles.
+
+Final takeaway
+
+The OM654 turbo failure issue is fundamentally caused by:
+
+emissions-driven thermal stress + lubrication degradation
+—not a simple defective turbocharger.
+
+If you’re hearing whining, seeing oil in boost pipes, or getting underboost/limp mode on a W907 Sprinter or W447 Vito, the best money you’ll spend is a proper diagnostic before it escalates.

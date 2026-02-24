@@ -39,6 +39,7 @@ async function runPrerender() {
             helmet?.title?.toString?.() ?? '',
             helmet?.meta?.toString?.() ?? '',
             helmet?.link?.toString?.() ?? '',
+            helmet?.script?.toString?.() ?? '',
             hreflangTags,
         ]
             .filter(Boolean)
@@ -58,12 +59,12 @@ async function runPrerender() {
     const notFound = await render('/404');
     const headTags404 = notFound.helmet
         ? [
-              notFound.helmet.title?.toString?.() ?? '',
-              notFound.helmet.meta?.toString?.() ?? '',
-              notFound.helmet.link?.toString?.() ?? '',
-          ]
-              .filter(Boolean)
-              .join('\n')
+            notFound.helmet.title?.toString?.() ?? '',
+            notFound.helmet.meta?.toString?.() ?? '',
+            notFound.helmet.link?.toString?.() ?? '',
+        ]
+            .filter(Boolean)
+            .join('\n')
         : '';
     let html404 = template
         .replace('<!--head-tags-->', headTags404)
@@ -75,14 +76,14 @@ async function runPrerender() {
     const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${indexableRoutes
-    .map(
-        (r) => `  <url>
+            .map(
+                (r) => `  <url>
     <loc>${SITE_URL}${r.canonicalPath || r.path}</loc>
     <changefreq>${r.changefreq}</changefreq>
     <priority>${r.priority}</priority>
   </url>`
-    )
-    .join('\n')}
+            )
+            .join('\n')}
 </urlset>`;
     writeFileSync(join(DIST, 'sitemap.xml'), sitemap, 'utf8');
     console.log('Generated: sitemap.xml');

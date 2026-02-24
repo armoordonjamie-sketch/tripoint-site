@@ -289,7 +289,7 @@ export const routeManifest: RouteEntry[] = [
         path: '/blog',
         title: 'Blog',
         description:
-            'Diagnostics insights. Sprinter limp mode, AdBlue, DPF. Mercedes and commercial vehicle advice.',
+            'Technical insights on Mercedes OM654 turbo failures, Sprinter limp mode, AdBlue, DPF. Diagnostic tips and practical guidance.',
         canonicalPath: '/blog',
         priority: 0.6,
         changefreq: 'weekly',
@@ -321,6 +321,16 @@ export const routeManifest: RouteEntry[] = [
         description:
             'Forced regen vs passive, when regen is safe, when it masks a deeper fault, and why we diagnose first.',
         canonicalPath: '/blog/dpf-warning-light-regen-vs-worse',
+        priority: 0.5,
+        changefreq: 'monthly',
+        indexable: true,
+    },
+    {
+        path: '/blog/om654-turbo-failure-sprinter-vito',
+        title: 'Why OM654 Turbochargers Are Failing in Mercedes Sprinter and Vito',
+        description:
+            'Real workshop-level technical breakdown of OM654 turbo failures in W907 Sprinter and W447 Vito. Root causes, symptoms, repair costs, and prevention.',
+        canonicalPath: '/blog/om654-turbo-failure-sprinter-vito',
         priority: 0.5,
         changefreq: 'monthly',
         indexable: true,

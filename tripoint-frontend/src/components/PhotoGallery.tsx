@@ -24,22 +24,22 @@ export function PhotoGallery({ images, columns = 3, className, maxVisible }: Pho
     const prev = useCallback(() => setLightboxIdx((i) => (i !== null ? (i - 1 + images.length) % images.length : null)), [images.length]);
     const next = useCallback(() => setLightboxIdx((i) => (i !== null ? (i + 1) % images.length : null)), [images.length]);
 
-    const colClass = columns === 2 ? 'sm:columns-2' : columns === 4 ? 'sm:columns-2 lg:columns-4' : 'sm:columns-2 lg:columns-3';
+    const colClass = columns === 2 ? 'grid grid-cols-2' : columns === 4 ? 'grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4' : 'grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3';
 
     return (
         <>
-            {/* Masonry grid */}
-            <div className={cn(`columns-1 ${colClass} gap-4`, className)}>
+            {/* Grid */}
+            <div className={cn(`${colClass} gap-3 sm:gap-4`, className)}>
                 {visibleImages.map((img, i) => (
                     <button
                         key={img.src}
                         onClick={() => openLightbox(i)}
-                        className="group relative mb-4 block w-full overflow-hidden rounded-xl break-inside-avoid focus:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+                        className="group relative block w-full aspect-square overflow-hidden rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-brand"
                     >
                         <OptimizedImage
                             src={img.src}
                             alt={img.alt}
-                            className="w-full rounded-xl transition-transform duration-300 group-hover:scale-105"
+                            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                         />
                         {/* Hover overlay */}
                         <div className="absolute inset-0 flex items-end rounded-xl bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100">

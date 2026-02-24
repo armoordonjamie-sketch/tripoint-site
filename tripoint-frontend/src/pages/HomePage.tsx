@@ -136,19 +136,21 @@ export function HomePage() {
                         </div>
 
                         <div className="reveal mt-10 flex flex-wrap items-center gap-4" style={{ transitionDelay: '0.3s' }}>
-                            <CTAButton href="/booking" size="lg" onClick={() => trackEvent('click_book_now', { location: 'homepage' })}>
-                                Book a Diagnostic
-                            </CTAButton>
-                            <CTAButton
-                                href={`https://wa.me/${siteConfig.contact.whatsappE164}`}
-                                variant="outline"
-                                size="lg"
-                                external
-                                icon={<MessageCircle className="h-5 w-5" />}
-                                onClick={() => trackEvent('click_whatsapp', { location: 'homepage' })}
-                            >
-                                WhatsApp Us
-                            </CTAButton>
+                            <div className="hidden sm:flex gap-4">
+                                <CTAButton href="/booking" size="lg" onClick={() => trackEvent('click_book_now', { location: 'homepage' })}>
+                                    Book a Diagnostic
+                                </CTAButton>
+                                <CTAButton
+                                    href={`https://wa.me/${siteConfig.contact.whatsappE164}`}
+                                    variant="outline"
+                                    size="lg"
+                                    external
+                                    icon={<MessageCircle className="h-5 w-5" />}
+                                    onClick={() => trackEvent('click_whatsapp', { location: 'homepage' })}
+                                >
+                                    WhatsApp Us
+                                </CTAButton>
+                            </div>
                             <CTAButton href="/services" variant="ghost" size="lg">
                                 Our Services <ChevronRight className="ml-1 h-4 w-4" />
                             </CTAButton>
