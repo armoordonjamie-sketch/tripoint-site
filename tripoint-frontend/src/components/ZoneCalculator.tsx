@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Loader2, Search, AlertCircle, CheckCircle2 } from 'lucide-react';
-import { trackEvent } from '@/lib/analytics';
 import { CTAButton } from './CTAButton';
 
 const schema = z.object({
@@ -45,7 +44,6 @@ export function ZoneCalculator({ onZoneChecked }: ZoneCalculatorProps) {
             const json = await res.json();
             setResult(json);
             onZoneChecked?.(data.postcode.replace(/\s+/g, '').toUpperCase());
-            trackEvent('zone_check', { postcode: data.postcode, zone: json.zone });
         } catch (err) {
             setError(err instanceof Error ? err.message : 'An error occurred');
         } finally {

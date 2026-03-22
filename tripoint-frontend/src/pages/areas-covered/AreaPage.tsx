@@ -7,7 +7,7 @@ import { getSeoForPath } from '@/routes';
 import { getAreaData } from '@/data/areas';
 import { siteConfig } from '@/config/site';
 import { CheckCircle2, MessageCircle, Phone, MapPin } from 'lucide-react';
-import { trackBookNowClick, trackPhoneLead, trackWhatsAppLead } from '@/lib/analytics';
+import { trackNavClick, trackPhoneClick, trackWhatsAppClick } from '@/lib/analytics';
 
 function formatSlug(slug: string): string {
     return slug
@@ -73,7 +73,7 @@ export function AreaPage() {
                             href={`tel:${siteConfig.contact.phoneE164}`}
                             external
                             icon={<Phone className="h-4 w-4" />}
-                            onClick={() => trackPhoneLead(`area_${town.toLowerCase()}`)}
+                            onClick={() => trackPhoneClick(`area_${town.toLowerCase()}`)}
                         >
                             Call {siteConfig.contact.phoneDisplay}
                         </CTAButton>
@@ -82,14 +82,14 @@ export function AreaPage() {
                             variant="outline"
                             external
                             icon={<MessageCircle className="h-4 w-4" />}
-                            onClick={() => trackWhatsAppLead(`area_${town.toLowerCase()}`)}
+                            onClick={() => trackWhatsAppClick(`area_${town.toLowerCase()}`)}
                         >
                             WhatsApp Us
                         </CTAButton>
                         <CTAButton
                             href="/booking"
                             variant="outline"
-                            onClick={() => trackBookNowClick(`area_${town.toLowerCase()}`)}
+                            onClick={() => trackNavClick('/booking', 'Book Now', `area_${town.toLowerCase()}`)}
                         >
                             Book Online
                         </CTAButton>

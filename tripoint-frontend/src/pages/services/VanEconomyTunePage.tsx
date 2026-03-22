@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Seo } from '@/components/Seo';
-import { trackBookNowClick, trackPhoneLead, trackWhatsAppLead } from '@/lib/analytics';
+import { trackNavClick, trackPhoneClick, trackWhatsAppClick } from '@/lib/analytics';
 import { Section } from '@/components/Section';
 import { CTAButton } from '@/components/CTAButton';
 import { FaqAccordion } from '@/components/FaqAccordion';
@@ -114,8 +114,8 @@ export function VanEconomyTunePage() {
                                 This isn&apos;t about making your van faster. It&apos;s about making every mile cheaper and every drive more relaxed.
                             </p>
                             <div className="mt-6 flex flex-wrap gap-3">
-                                <CTAButton href="/booking" size="md" onClick={() => trackBookNowClick('economy_tune_top')}>Book Online</CTAButton>
-                                <CTAButton href={`https://wa.me/${siteConfig.contact.whatsappE164}`} variant="outline" size="md" external icon={<MessageCircle className="h-4 w-4" />} onClick={() => trackWhatsAppLead('economy_tune')}>WhatsApp Us</CTAButton>
+                                <CTAButton href="/booking" size="md" onClick={() => trackNavClick('/booking', 'Book Online', 'economy_tune_top')}>Book Online</CTAButton>
+                                <CTAButton href={`https://wa.me/${siteConfig.contact.whatsappE164}`} variant="outline" size="md" external icon={<MessageCircle className="h-4 w-4" />} onClick={() => trackWhatsAppClick('economy_tune')}>WhatsApp Us</CTAButton>
                             </div>
                         </div>
                         <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-6">
@@ -358,9 +358,9 @@ export function VanEconomyTunePage() {
                         <h2 className="text-2xl font-bold text-white sm:text-3xl md:text-4xl lg:text-5xl">Make every mile cheaper</h2>
                         <p className="mx-auto mt-4 max-w-xl text-lg text-white/80">Economy tune from &pound;199 - smoother driving, potential fuel savings, fully reversible.</p>
                         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-                            <CTAButton href="/booking" variant="secondary" size="lg" onClick={() => trackBookNowClick('economy_tune_footer')}>Book Online</CTAButton>
-                            <CTAButton href={`https://wa.me/${siteConfig.contact.whatsappE164}`} variant="ghost" size="lg" external icon={<MessageCircle className="h-5 w-5" />} className="text-white hover:text-white hover:bg-white/10" onClick={() => trackWhatsAppLead('economy_tune')}>WhatsApp Us</CTAButton>
-                            <CTAButton href={`tel:${siteConfig.contact.phoneE164}`} variant="ghost" size="lg" external icon={<Phone className="h-5 w-5" />} className="text-white hover:text-white hover:bg-white/10" onClick={() => trackPhoneLead('economy_tune')}>{siteConfig.contact.phoneDisplay}</CTAButton>
+                            <CTAButton href="/booking" variant="secondary" size="lg" onClick={() => trackNavClick('/booking', 'Book Online', 'economy_tune_footer')}>Book Online</CTAButton>
+                            <CTAButton href={`https://wa.me/${siteConfig.contact.whatsappE164}`} variant="ghost" size="lg" external icon={<MessageCircle className="h-5 w-5" />} className="text-white hover:text-white hover:bg-white/10" onClick={() => trackWhatsAppClick('economy_tune')}>WhatsApp Us</CTAButton>
+                            <CTAButton href={`tel:${siteConfig.contact.phoneE164}`} variant="ghost" size="lg" external icon={<Phone className="h-5 w-5" />} className="text-white hover:text-white hover:bg-white/10" onClick={() => trackPhoneClick('economy_tune')}>{siteConfig.contact.phoneDisplay}</CTAButton>
                         </div>
                     </div>
                 </div>

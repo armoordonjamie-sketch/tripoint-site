@@ -11,7 +11,7 @@ import {
 } from '@/config/servicesCatalog';
 import { CTAButton } from '@/components/CTAButton';
 import { cn } from '@/lib/utils';
-import { trackBookNowClick } from '@/lib/analytics';
+import { trackNavClick } from '@/lib/analytics';
 
 interface ServicePickerProps {
     title?: string;
@@ -154,7 +154,7 @@ export function ServicePicker({ title, subtitle, badges }: ServicePickerProps) {
                                         href="/booking"
                                         size="sm"
                                         className="flex-1 min-w-0 justify-center px-2.5 py-1.5 text-xs"
-                                        onClick={() => trackBookNowClick('service-picker')}
+                                        onClick={() => trackNavClick('/booking', 'Book', 'service-picker')}
                                     >
                                         Book
                                     </CTAButton>

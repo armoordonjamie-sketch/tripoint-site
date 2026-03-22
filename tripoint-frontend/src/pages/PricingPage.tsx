@@ -4,7 +4,7 @@ import { PricingTable } from '@/components/PricingTable';
 import { CTAButton } from '@/components/CTAButton';
 import { Notice } from '@/components/Notice';
 import { siteConfig } from '@/config/site';
-import { trackBookNowClick } from '@/lib/analytics';
+import { trackNavClick } from '@/lib/analytics';
 import { ZoneCalculator } from '@/components/ZoneCalculator';
 
 export function PricingPage() {
@@ -96,7 +96,7 @@ export function PricingPage() {
 
                 {/* CTA */}
                 <div className="mt-12 text-center">
-                    <CTAButton href="/booking" size="lg" onClick={() => trackBookNowClick('pricing')}>
+                    <CTAButton href="/booking" size="lg" onClick={() => trackNavClick('/booking', 'Book Now', 'pricing')}>
                         Book Your Diagnostic
                     </CTAButton>
                 </div>

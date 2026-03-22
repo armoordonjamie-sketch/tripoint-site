@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Phone, MessageCircle, CalendarDays } from 'lucide-react';
 import { siteConfig } from '@/config/site';
-import { trackBookNowClick, trackPhoneLead, trackWhatsAppLead } from '@/lib/analytics';
+import { trackNavClick, trackPhoneClick, trackWhatsAppClick } from '@/lib/analytics';
 
 export function MobileStickyCTA() {
     return (
@@ -10,7 +10,7 @@ export function MobileStickyCTA() {
                 href={`tel:${siteConfig.contact.phoneE164}`}
                 className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-brand py-3 text-sm font-semibold text-brand transition-colors hover:bg-brand hover:text-white"
                 aria-label={`Call us on ${siteConfig.contact.phoneDisplay}`}
-                onClick={() => trackPhoneLead('sticky_cta')}
+                onClick={() => trackPhoneClick('sticky_mobile')}
             >
                 <Phone className="h-5 w-5" />
                 Call
@@ -20,7 +20,7 @@ export function MobileStickyCTA() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-success bg-success/10 py-3 text-sm font-semibold text-success transition-colors hover:bg-success/20"
-                onClick={() => trackWhatsAppLead('sticky_cta')}
+                onClick={() => trackWhatsAppClick('sticky_mobile')}
             >
                 <MessageCircle className="h-5 w-5" />
                 WhatsApp
@@ -28,7 +28,7 @@ export function MobileStickyCTA() {
             <Link
                 to="/booking"
                 className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-brand py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-light"
-                onClick={() => trackBookNowClick('sticky_cta')}
+                onClick={() => trackNavClick('/booking', 'Book Now', 'sticky_mobile')}
             >
                 <CalendarDays className="h-4 w-4" />
                 Book Now

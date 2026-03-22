@@ -11,7 +11,7 @@ import { CTAButton } from '@/components/CTAButton';
 import { Notice } from '@/components/Notice';
 import { FaqAccordion } from '@/components/FaqAccordion';
 import { siteConfig } from '@/config/site';
-import { trackBookNowClick, trackPhoneLead, trackWhatsAppLead } from '@/lib/analytics';
+import { trackNavClick, trackPhoneClick, trackWhatsAppClick } from '@/lib/analytics';
 import { OptimizedImage } from '@/components/OptimizedImage';
 
 // Lazy load CoverageMap - Leaflet accesses window at import time and crashes in SSR
@@ -236,7 +236,7 @@ export function CoveragePage() {
                 </div>
 
                 <div className="mt-10 flex flex-wrap justify-center gap-4 reveal">
-                    <CTAButton href="/booking" size="lg" onClick={() => trackBookNowClick('coverage')}>
+                    <CTAButton href="/booking" size="lg" onClick={() => trackNavClick('/booking', 'Book Now', 'coverage')}>
                         Check Your Zone &amp; Book
                     </CTAButton>
                     <CTAButton
@@ -245,7 +245,7 @@ export function CoveragePage() {
                         size="lg"
                         external
                         icon={<MessageCircle className="h-5 w-5" />}
-                        onClick={() => trackWhatsAppLead('coverage')}
+                        onClick={() => trackWhatsAppClick('coverage')}
                     >
                         WhatsApp Us
                     </CTAButton>
@@ -267,7 +267,7 @@ export function CoveragePage() {
                             Enter your postcode, pick a service, and we’ll confirm your zone and price. Or WhatsApp us for a quick quote.
                         </p>
                         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-                            <CTAButton href="/booking" variant="secondary" size="lg" onClick={() => trackBookNowClick('coverage_footer')}>
+                            <CTAButton href="/booking" variant="secondary" size="lg" onClick={() => trackNavClick('/booking', 'Book Now', 'coverage_footer')}>
                                 Book Now
                             </CTAButton>
                             <CTAButton
@@ -277,7 +277,7 @@ export function CoveragePage() {
                                 external
                                 icon={<MessageCircle className="h-5 w-5" />}
                                 className="text-white hover:text-white hover:bg-white/10"
-                                onClick={() => trackWhatsAppLead('coverage_footer')}
+                                onClick={() => trackWhatsAppClick('coverage_footer')}
                             >
                                 WhatsApp Us
                             </CTAButton>
@@ -288,7 +288,7 @@ export function CoveragePage() {
                                 external
                                 icon={<Phone className="h-5 w-5" />}
                                 className="text-white hover:text-white hover:bg-white/10"
-                                onClick={() => trackPhoneLead('coverage_footer')}
+                                onClick={() => trackPhoneClick('coverage_footer')}
                             >
                                 {siteConfig.contact.phoneDisplay}
                             </CTAButton>

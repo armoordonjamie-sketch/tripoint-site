@@ -4,7 +4,7 @@ import { Menu, X, ChevronDown, ChevronRight, Phone, MessageCircle } from 'lucide
 import { siteConfig } from '@/config/site';
 import { CATEGORY_META, SERVICES_BY_CATEGORY, SERVICE_CATEGORY_ORDER } from '@/config/servicesCatalog';
 import { cn } from '@/lib/utils';
-import { trackBookNowClick, trackPhoneLead, trackWhatsAppLead } from '@/lib/analytics';
+import { trackNavClick, trackPhoneClick, trackWhatsAppClick } from '@/lib/analytics';
 import { OptimizedLogo } from '@/components/OptimizedLogo';
 
 const secondaryNav = [
@@ -133,7 +133,16 @@ export function Header() {
                     </div>
 
                     {secondaryNav.map((link) => (
-                        <NavLink key={link.href} to={link.href} className={({ isActive }) => navLinkClass(isActive)}>
+                        <NavLink
+                            key={link.href}
+                            to={link.href}
+                            className={({ isActive }) => navLinkClass(isActive)}
+                            onClick={
+                                link.href === '/contact'
+                                    ? () => trackNavClick('/contact', 'Contact', 'header')
+                                    : undefined
+                            }
+                        >
                             {link.label}
                         </NavLink>
                     ))}
@@ -145,7 +154,7 @@ export function Header() {
                         href={`tel:${siteConfig.contact.phoneE164}`}
                         className="flex items-center gap-2 rounded-lg px-2 py-2 text-text-secondary transition-colors hover:bg-surface-alt hover:text-brand"
                         aria-label={`Call ${siteConfig.contact.phoneDisplay}`}
-                        onClick={() => trackPhoneLead('header')}
+                        onClick={() => trackPhoneClick('header')}
                     >
                         <Phone className="h-5 w-5 shrink-0" />
                         <span className="hidden text-sm font-medium xl:inline">{siteConfig.contact.phoneDisplay}</span>
@@ -156,14 +165,14 @@ export function Header() {
                         rel="noopener noreferrer"
                         className="rounded-lg p-2 text-text-secondary transition-colors hover:bg-surface-alt hover:text-success"
                         aria-label="WhatsApp"
-                        onClick={() => trackWhatsAppLead('header')}
+                        onClick={() => trackWhatsAppClick('header')}
                     >
                         <MessageCircle className="h-5 w-5" />
                     </a>
                     <Link
                         to="/booking"
                         className="rounded-lg bg-brand px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-brand-light"
-                        onClick={() => trackBookNowClick('header_desktop')}
+                        onClick={() => trackNavClick('/booking', 'Book Now', 'header')}
                     >
                         Book Now
                     </Link>
@@ -247,7 +256,10 @@ export function Header() {
                                 key={link.href}
                                 to={link.href}
                                 className={({ isActive }) => cn('block', navLinkClass(isActive))}
-                                onClick={closeMobile}
+                                onClick={() => {
+                                    if (link.href === '/contact') trackNavClick('/contact', 'Contact', 'header');
+                                    closeMobile();
+                                }}
                             >
                                 {link.label}
                             </NavLink>

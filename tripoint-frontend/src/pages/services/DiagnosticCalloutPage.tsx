@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Seo } from '@/components/Seo';
-import { trackBookNowClick, trackPhoneLead, trackWhatsAppLead } from '@/lib/analytics';
+import { trackNavClick, trackPhoneClick, trackWhatsAppClick } from '@/lib/analytics';
 import { Section } from '@/components/Section';
 import { CTAButton } from '@/components/CTAButton';
 import { PhotoGallery } from '@/components/PhotoGallery';
@@ -270,7 +270,7 @@ export function DiagnosticCalloutPage() {
 
                     {/* Mid-page CTA */}
                     <div className="mt-10 flex flex-wrap gap-3 reveal">
-                        <CTAButton href="/booking" size="md" onClick={() => trackBookNowClick('standard_diagnosis_mid')}>
+                        <CTAButton href="/booking" size="md" onClick={() => trackNavClick('/booking', 'Book Online', 'standard_diagnosis_mid')}>
                             Book Now
                         </CTAButton>
                         <CTAButton
@@ -279,7 +279,7 @@ export function DiagnosticCalloutPage() {
                             size="md"
                             external
                             icon={<MessageCircle className="h-4 w-4" />}
-                            onClick={() => trackWhatsAppLead('standard_diagnosis')}
+                            onClick={() => trackWhatsAppClick('standard_diagnosis')}
                         >
                             WhatsApp Us
                         </CTAButton>
@@ -329,7 +329,7 @@ export function DiagnosticCalloutPage() {
                                 size="sm"
                                 external
                                 icon={<MessageCircle className="h-4 w-4" />}
-                                onClick={() => trackWhatsAppLead('standard_diagnosis_fleet')}
+                                onClick={() => trackWhatsAppClick('standard_diagnosis_fleet')}
                             >
                                 Discuss fleet requirements
                             </CTAButton>
@@ -404,7 +404,7 @@ export function DiagnosticCalloutPage() {
                             Book a Standard Diagnosis and get a clear answer - at your door.
                         </p>
                         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-                            <CTAButton href="/booking" variant="secondary" size="lg" onClick={() => trackBookNowClick('standard_diagnosis_footer')}>
+                            <CTAButton href="/booking" variant="secondary" size="lg" onClick={() => trackNavClick('/booking', 'Book Online', 'standard_diagnosis_footer')}>
                                 Book Now
                             </CTAButton>
                             <CTAButton
@@ -414,7 +414,7 @@ export function DiagnosticCalloutPage() {
                                 external
                                 icon={<MessageCircle className="h-5 w-5" />}
                                 className="text-white hover:text-white hover:bg-white/10"
-                                onClick={() => trackWhatsAppLead('standard_diagnosis')}
+                                onClick={() => trackWhatsAppClick('standard_diagnosis')}
                             >
                                 WhatsApp Us
                             </CTAButton>
@@ -425,7 +425,7 @@ export function DiagnosticCalloutPage() {
                                 external
                                 icon={<Phone className="h-5 w-5" />}
                                 className="text-white hover:text-white hover:bg-white/10"
-                                onClick={() => trackPhoneLead('standard_diagnosis')}
+                                onClick={() => trackPhoneClick('standard_diagnosis')}
                             >
                                 {siteConfig.contact.phoneDisplay}
                             </CTAButton>

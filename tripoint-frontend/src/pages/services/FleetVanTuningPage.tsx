@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Seo } from '@/components/Seo';
-import { trackBookNowClick, trackPhoneLead, trackWhatsAppLead } from '@/lib/analytics';
+import { trackNavClick, trackPhoneClick, trackWhatsAppClick } from '@/lib/analytics';
 import { Section } from '@/components/Section';
 import { CTAButton } from '@/components/CTAButton';
 import { FaqAccordion } from '@/components/FaqAccordion';
@@ -112,8 +112,8 @@ export function FleetVanTuningPage() {
                                 Volume pricing makes it commercially sensible. The ROI on fuel savings alone can pay back the investment within weeks on high-mileage fleets.
                             </p>
                             <div className="mt-6 flex flex-wrap gap-3">
-                                <CTAButton href="/booking" size="md" onClick={() => trackBookNowClick('fleet_tune_top')}>Get a Fleet Quote</CTAButton>
-                                <CTAButton href={`https://wa.me/${siteConfig.contact.whatsappE164}`} variant="outline" size="md" external icon={<MessageCircle className="h-4 w-4" />} onClick={() => trackWhatsAppLead('fleet_tune')}>WhatsApp Us</CTAButton>
+                                <CTAButton href="/booking" size="md" onClick={() => trackNavClick('/booking', 'Get a Fleet Quote', 'fleet_tune_top')}>Get a Fleet Quote</CTAButton>
+                                <CTAButton href={`https://wa.me/${siteConfig.contact.whatsappE164}`} variant="outline" size="md" external icon={<MessageCircle className="h-4 w-4" />} onClick={() => trackWhatsAppClick('fleet_tune')}>WhatsApp Us</CTAButton>
                             </div>
                         </div>
                         <div className="grid grid-cols-2 gap-4">
@@ -279,8 +279,8 @@ export function FleetVanTuningPage() {
                         <p className="text-xl font-bold text-text-primary">Fleet tuning from <span className="text-brand-light">&pound;169/van</span></p>
                         <p className="mt-1 text-sm text-text-secondary">Volume pricing - we come to your depot - full documentation included</p>
                         <div className="mt-4 flex flex-wrap justify-center gap-3">
-                            <CTAButton href="/booking" size="sm" onClick={() => trackBookNowClick('fleet_tune_pricing')}>Get a Fleet Quote</CTAButton>
-                            <CTAButton href={`https://wa.me/${siteConfig.contact.whatsappE164}`} variant="outline" size="sm" external icon={<MessageCircle className="h-4 w-4" />} onClick={() => trackWhatsAppLead('fleet_tune')}>WhatsApp Us</CTAButton>
+                            <CTAButton href="/booking" size="sm" onClick={() => trackNavClick('/booking', 'Get a Fleet Quote', 'fleet_tune_pricing')}>Get a Fleet Quote</CTAButton>
+                            <CTAButton href={`https://wa.me/${siteConfig.contact.whatsappE164}`} variant="outline" size="sm" external icon={<MessageCircle className="h-4 w-4" />} onClick={() => trackWhatsAppClick('fleet_tune')}>WhatsApp Us</CTAButton>
                         </div>
                     </div>
                 </div>
@@ -357,9 +357,9 @@ export function FleetVanTuningPage() {
                         <h2 className="text-2xl font-bold text-white sm:text-3xl md:text-4xl lg:text-5xl">Tune your entire fleet in one day</h2>
                         <p className="mx-auto mt-4 max-w-xl text-lg text-white/80">Volume pricing, depot visits, per-vehicle reports. Let&apos;s talk.</p>
                         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-                            <CTAButton href="/booking" variant="secondary" size="lg" onClick={() => trackBookNowClick('fleet_tune_footer')}>Get a Fleet Quote</CTAButton>
-                            <CTAButton href={`https://wa.me/${siteConfig.contact.whatsappE164}`} variant="ghost" size="lg" external icon={<MessageCircle className="h-5 w-5" />} className="text-white hover:text-white hover:bg-white/10" onClick={() => trackWhatsAppLead('fleet_tune')}>WhatsApp Us</CTAButton>
-                            <CTAButton href={`tel:${siteConfig.contact.phoneE164}`} variant="ghost" size="lg" external icon={<Phone className="h-5 w-5" />} className="text-white hover:text-white hover:bg-white/10" onClick={() => trackPhoneLead('fleet_tune')}>{siteConfig.contact.phoneDisplay}</CTAButton>
+                            <CTAButton href="/booking" variant="secondary" size="lg" onClick={() => trackNavClick('/booking', 'Get a Fleet Quote', 'fleet_tune_footer')}>Get a Fleet Quote</CTAButton>
+                            <CTAButton href={`https://wa.me/${siteConfig.contact.whatsappE164}`} variant="ghost" size="lg" external icon={<MessageCircle className="h-5 w-5" />} className="text-white hover:text-white hover:bg-white/10" onClick={() => trackWhatsAppClick('fleet_tune')}>WhatsApp Us</CTAButton>
+                            <CTAButton href={`tel:${siteConfig.contact.phoneE164}`} variant="ghost" size="lg" external icon={<Phone className="h-5 w-5" />} className="text-white hover:text-white hover:bg-white/10" onClick={() => trackPhoneClick('fleet_tune')}>{siteConfig.contact.phoneDisplay}</CTAButton>
                         </div>
                     </div>
                 </div>

@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Seo } from '@/components/Seo';
-import { trackBookNowClick, trackPhoneLead, trackWhatsAppLead } from '@/lib/analytics';
+import { trackNavClick, trackPhoneClick, trackWhatsAppClick } from '@/lib/analytics';
 import { Section } from '@/components/Section';
 import { CTAButton } from '@/components/CTAButton';
 import { PhotoGallery } from '@/components/PhotoGallery';
@@ -217,7 +217,7 @@ export function PrePurchaseHealthCheckPage() {
 
                     {/* Mid-page CTA */}
                     <div className="mt-10 flex flex-wrap gap-3 reveal">
-                        <CTAButton href="/booking" size="md" onClick={() => trackBookNowClick('pre_purchase_health_check_mid')}>
+                        <CTAButton href="/booking" size="md" onClick={() => trackNavClick('/booking', 'Book Online', 'pre_purchase_health_check_mid')}>
                             Book Now
                         </CTAButton>
                         <CTAButton
@@ -226,7 +226,7 @@ export function PrePurchaseHealthCheckPage() {
                             size="md"
                             external
                             icon={<MessageCircle className="h-4 w-4" />}
-                            onClick={() => trackWhatsAppLead('pre_purchase_health_check')}
+                            onClick={() => trackWhatsAppClick('pre_purchase_health_check')}
                         >
                             WhatsApp Us
                         </CTAButton>
@@ -318,7 +318,7 @@ export function PrePurchaseHealthCheckPage() {
                             <CTAButton href="/pricing" variant="outline" size="sm" icon={<ArrowRight className="h-4 w-4" />}>
                                 Full Pricing
                             </CTAButton>
-                            <CTAButton href="/booking" size="sm" onClick={() => trackBookNowClick('pre_purchase_health_check')}>
+                            <CTAButton href="/booking" size="sm" onClick={() => trackNavClick('/booking', 'Book Online', 'pre_purchase_health_check')}>
                                 Book Now
                             </CTAButton>
                         </div>
@@ -367,7 +367,7 @@ export function PrePurchaseHealthCheckPage() {
                             Get the data before you commit. Book a pre-purchase health check at the seller&apos;s location.
                         </p>
                         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-                            <CTAButton href="/booking" variant="secondary" size="lg" onClick={() => trackBookNowClick('pre_purchase_health_check_footer')}>
+                            <CTAButton href="/booking" variant="secondary" size="lg" onClick={() => trackNavClick('/booking', 'Book Online', 'pre_purchase_health_check_footer')}>
                                 Book Now
                             </CTAButton>
                             <CTAButton
@@ -377,7 +377,7 @@ export function PrePurchaseHealthCheckPage() {
                                 external
                                 icon={<MessageCircle className="h-5 w-5" />}
                                 className="text-white hover:text-white hover:bg-white/10"
-                                onClick={() => trackWhatsAppLead('pre_purchase_health_check')}
+                                onClick={() => trackWhatsAppClick('pre_purchase_health_check')}
                             >
                                 WhatsApp Us
                             </CTAButton>
@@ -388,7 +388,7 @@ export function PrePurchaseHealthCheckPage() {
                                 external
                                 icon={<Phone className="h-5 w-5" />}
                                 className="text-white hover:text-white hover:bg-white/10"
-                                onClick={() => trackPhoneLead('pre_purchase_health_check')}
+                                onClick={() => trackPhoneClick('pre_purchase_health_check')}
                             >
                                 {siteConfig.contact.phoneDisplay}
                             </CTAButton>

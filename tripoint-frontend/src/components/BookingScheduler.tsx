@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState, useRef } from 'react';
 import { Loader2, AlertCircle, CheckCircle2, ChevronLeft, ChevronRight, Calendar, Search, MapPin, Car, Wrench, User, CreditCard, Shield, Cog, TrendingUp } from 'lucide-react';
 import { CTAButton } from './CTAButton';
-import { trackEvent, trackConversion, CONVERSIONS } from '@/lib/analytics';
+import { trackBookingConfirmation } from '@/lib/analytics';
 import { getAttribution } from '@/lib/attribution';
 
 /* ---------- types ---------- */
@@ -319,9 +319,6 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
     const availabilityConversionTracked = useRef(false);
     const slotConversionForIso = useRef<string | null>(null);
 
-    useEffect(() => {
-        trackEvent('view_booking_form');
-    }, []);
 
     // Derive step from state
     const currentStep: 1 | 2 | 3 = availability && !availability.manual_review_required
@@ -371,8 +368,6 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
             (availability.slots && availability.slots.length > 0) || availability.manual_review_required;
         if (!hasPath) return;
         availabilityConversionTracked.current = true;
-        trackEvent('booking_availability_ok', { zone: availability.zone });
-        trackConversion(CONVERSIONS.bookingAvailability);
     }, [availability]);
 
     /* fetch availability */
@@ -391,7 +386,6 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
             if (!response.ok) throw new Error(json.detail || 'Failed to fetch availability');
             setAvailability(json);
             setSelectedDateIndex(0);
-            trackEvent('zone_check');
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Availability lookup failed');
         } finally {
@@ -525,13 +519,11 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
             });
             const json = await response.json();
             if (!response.ok) throw new Error(json.detail || 'Booking failed');
-            trackEvent('confirm_booking', { flow: 'booking' });
+            trackBookingConfirmation(selectedCategory ?? undefined);
             if (json.status === 'pending_deposit' && json.payment_url) {
-                // Deposit: conversion fires on /pay/.../success only (avoid duplicate with paymentCompleted)
                 window.location.href = json.payment_url;
                 return;
             }
-            trackConversion(CONVERSIONS.bookingConfirmed);
             if (json.status === 'pending_manual_review') {
                 setStatus(json.message || 'We\'ll contact you with a quote.');
                 setBooking(INITIAL_BOOKING);
@@ -1021,8 +1013,6 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
                                                 void fetchSlotPrice(slot.iso);
                                                 if (slotConversionForIso.current !== slot.iso) {
                                                     slotConversionForIso.current = slot.iso;
-                                                    trackEvent('booking_slot_selected');
-                                                    trackConversion(CONVERSIONS.bookingSlotSelected);
                                                 }
                                             }}
                                             title={!isAvailable ? 'Taken' : `Available - ${timeStr}`}

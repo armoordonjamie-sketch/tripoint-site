@@ -4,12 +4,11 @@ import { Seo } from '@/components/Seo';
 import { Section } from '@/components/Section';
 import { CTAButton } from '@/components/CTAButton';
 import { CheckCircle2 } from 'lucide-react';
-import { trackConversion, CONVERSIONS, trackEvent } from '@/lib/analytics';
+import { trackPaymentSuccess } from '@/lib/analytics';
 
 export function PaymentSuccessPage() {
     useEffect(() => {
-        trackEvent('payment_completed');
-        trackConversion(CONVERSIONS.paymentCompleted);
+        trackPaymentSuccess();
     }, []);
 
     return (

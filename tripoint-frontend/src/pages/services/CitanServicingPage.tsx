@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Seo } from '@/components/Seo';
-import { trackBookNowClick, trackPhoneLead, trackWhatsAppLead } from '@/lib/analytics';
+import { trackNavClick, trackPhoneClick, trackWhatsAppClick } from '@/lib/analytics';
 import { Section } from '@/components/Section';
 import { CTAButton } from '@/components/CTAButton';
 import { FaqAccordion } from '@/components/FaqAccordion';
@@ -114,8 +114,8 @@ export function CitanServicingPage() {
                                 Whether you&apos;re running a W415 with the K9K diesel or a newer W420 with the OM608, we bring the right parts and tooling to your door.
                             </p>
                             <div className="mt-6 flex flex-wrap gap-3">
-                                <CTAButton href="/booking" size="md" onClick={() => trackBookNowClick('citan_servicing_top')}>Book Online</CTAButton>
-                                <CTAButton href={`https://wa.me/${siteConfig.contact.whatsappE164}`} variant="outline" size="md" external icon={<MessageCircle className="h-4 w-4" />} onClick={() => trackWhatsAppLead('citan_servicing')}>WhatsApp Us</CTAButton>
+                                <CTAButton href="/booking" size="md" onClick={() => trackNavClick('/booking', 'Book Online', 'citan_servicing_top')}>Book Online</CTAButton>
+                                <CTAButton href={`https://wa.me/${siteConfig.contact.whatsappE164}`} variant="outline" size="md" external icon={<MessageCircle className="h-4 w-4" />} onClick={() => trackWhatsAppClick('citan_servicing')}>WhatsApp Us</CTAButton>
                             </div>
                         </div>
                         <div className="rounded-2xl border border-brand/20 bg-brand/5 p-6">
@@ -422,9 +422,9 @@ export function CitanServicingPage() {
                         <h2 className="text-2xl font-bold text-white sm:text-3xl md:text-4xl lg:text-5xl">Citan service - done at your door</h2>
                         <p className="mx-auto mt-4 max-w-xl text-lg text-white/80">Fixed-price servicing from &pound;175 - no workshop trip, no hassle.</p>
                         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-                            <CTAButton href="/booking" variant="secondary" size="lg" onClick={() => trackBookNowClick('citan_servicing_footer')}>Book Online</CTAButton>
-                            <CTAButton href={`https://wa.me/${siteConfig.contact.whatsappE164}`} variant="ghost" size="lg" external icon={<MessageCircle className="h-5 w-5" />} className="text-white hover:text-white hover:bg-white/10" onClick={() => trackWhatsAppLead('citan_servicing')}>WhatsApp Us</CTAButton>
-                            <CTAButton href={`tel:${siteConfig.contact.phoneE164}`} variant="ghost" size="lg" external icon={<Phone className="h-5 w-5" />} className="text-white hover:text-white hover:bg-white/10" onClick={() => trackPhoneLead('citan_servicing')}>{siteConfig.contact.phoneDisplay}</CTAButton>
+                            <CTAButton href="/booking" variant="secondary" size="lg" onClick={() => trackNavClick('/booking', 'Book Online', 'citan_servicing_footer')}>Book Online</CTAButton>
+                            <CTAButton href={`https://wa.me/${siteConfig.contact.whatsappE164}`} variant="ghost" size="lg" external icon={<MessageCircle className="h-5 w-5" />} className="text-white hover:text-white hover:bg-white/10" onClick={() => trackWhatsAppClick('citan_servicing')}>WhatsApp Us</CTAButton>
+                            <CTAButton href={`tel:${siteConfig.contact.phoneE164}`} variant="ghost" size="lg" external icon={<Phone className="h-5 w-5" />} className="text-white hover:text-white hover:bg-white/10" onClick={() => trackPhoneClick('citan_servicing')}>{siteConfig.contact.phoneDisplay}</CTAButton>
                         </div>
                     </div>
                 </div>

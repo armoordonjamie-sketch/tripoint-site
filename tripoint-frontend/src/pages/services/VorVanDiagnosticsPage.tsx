@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Seo } from '@/components/Seo';
-import { trackBookNowClick, trackPhoneLead, trackWhatsAppLead } from '@/lib/analytics';
+import { trackNavClick, trackPhoneClick, trackWhatsAppClick } from '@/lib/analytics';
 import { Section } from '@/components/Section';
 import { CTAButton } from '@/components/CTAButton';
 import { PhotoGallery } from '@/components/PhotoGallery';
@@ -169,8 +169,8 @@ export function VorVanDiagnosticsPage() {
                     </div>
 
                     <div className="mt-10 flex flex-wrap gap-3 reveal">
-                        <CTAButton href={`https://wa.me/${siteConfig.contact.whatsappE164}`} size="md" external icon={<MessageCircle className="h-4 w-4" />} onClick={() => trackWhatsAppLead('vor_van_mid')}>WhatsApp for Fast Response</CTAButton>
-                        <CTAButton href="/booking" variant="outline" size="md" onClick={() => trackBookNowClick('vor_van_mid')}>Book Online</CTAButton>
+                        <CTAButton href={`https://wa.me/${siteConfig.contact.whatsappE164}`} size="md" external icon={<MessageCircle className="h-4 w-4" />} onClick={() => trackWhatsAppClick('vor_van_mid')}>WhatsApp for Fast Response</CTAButton>
+                        <CTAButton href="/booking" variant="outline" size="md" onClick={() => trackNavClick('/booking', 'Book Online', 'vor_van_mid')}>Book Online</CTAButton>
                     </div>
 
                     <div className="mt-10 reveal">
@@ -238,9 +238,9 @@ export function VorVanDiagnosticsPage() {
                         <p className="text-2xl font-bold text-text-primary">From <span className="text-brand-light">£{zoneA}</span></p>
                         <p className="mt-1 text-sm text-text-secondary">Zone-based pricing - includes priority scheduling and up to 75 mins on-site</p>
                         <div className="mt-4 flex flex-wrap justify-center gap-3">
-                            <CTAButton href={`https://wa.me/${siteConfig.contact.whatsappE164}`} size="sm" external icon={<MessageCircle className="h-4 w-4" />} onClick={() => trackWhatsAppLead('vor_van')}>WhatsApp for Fast Response</CTAButton>
+                            <CTAButton href={`https://wa.me/${siteConfig.contact.whatsappE164}`} size="sm" external icon={<MessageCircle className="h-4 w-4" />} onClick={() => trackWhatsAppClick('vor_van')}>WhatsApp for Fast Response</CTAButton>
                             <CTAButton href="/pricing" variant="outline" size="sm" icon={<ArrowRight className="h-4 w-4" />}>Full Pricing</CTAButton>
-                            <CTAButton href="/booking" variant="outline" size="sm" onClick={() => trackBookNowClick('vor_van')}>Book Online</CTAButton>
+                            <CTAButton href="/booking" variant="outline" size="sm" onClick={() => trackNavClick('/booking', 'Book Online', 'vor_van')}>Book Online</CTAButton>
                         </div>
                     </div>
 
@@ -272,9 +272,9 @@ export function VorVanDiagnosticsPage() {
                         <h2 className="text-3xl font-bold text-white sm:text-4xl md:text-5xl">Van off the road?</h2>
                         <p className="mx-auto mt-4 max-w-xl text-lg text-white/80">WhatsApp us for the fastest response - we&apos;ll get you a priority slot.</p>
                         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-                            <CTAButton href={`https://wa.me/${siteConfig.contact.whatsappE164}`} variant="secondary" size="lg" external icon={<MessageCircle className="h-5 w-5" />} onClick={() => trackWhatsAppLead('vor_van_footer')}>WhatsApp Us</CTAButton>
-                            <CTAButton href="/booking" variant="ghost" size="lg" className="text-white hover:text-white hover:bg-white/10" onClick={() => trackBookNowClick('vor_van_footer')}>Book Online</CTAButton>
-                            <CTAButton href={`tel:${siteConfig.contact.phoneE164}`} variant="ghost" size="lg" external icon={<Phone className="h-5 w-5" />} className="text-white hover:text-white hover:bg-white/10" onClick={() => trackPhoneLead('vor_van')}>{siteConfig.contact.phoneDisplay}</CTAButton>
+                            <CTAButton href={`https://wa.me/${siteConfig.contact.whatsappE164}`} variant="secondary" size="lg" external icon={<MessageCircle className="h-5 w-5" />} onClick={() => trackWhatsAppClick('vor_van_footer')}>WhatsApp Us</CTAButton>
+                            <CTAButton href="/booking" variant="ghost" size="lg" className="text-white hover:text-white hover:bg-white/10" onClick={() => trackNavClick('/booking', 'Book Online', 'vor_van_footer')}>Book Online</CTAButton>
+                            <CTAButton href={`tel:${siteConfig.contact.phoneE164}`} variant="ghost" size="lg" external icon={<Phone className="h-5 w-5" />} className="text-white hover:text-white hover:bg-white/10" onClick={() => trackPhoneClick('vor_van')}>{siteConfig.contact.phoneDisplay}</CTAButton>
                         </div>
                     </div>
                 </div>

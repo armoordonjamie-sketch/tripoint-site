@@ -8,7 +8,7 @@ import { CTAButton } from '@/components/CTAButton';
 import { siteConfig } from '@/config/site';
 import { Link } from 'react-router-dom';
 import { Phone, MessageCircle, Mail, CheckCircle2, Calendar } from 'lucide-react';
-import { CONVERSIONS, trackBookNowClick, trackConversion, trackEvent, trackPhoneLead, trackWhatsAppLead } from '@/lib/analytics';
+import { trackContactFormSuccess, trackNavClick, trackPhoneClick, trackWhatsAppClick } from '@/lib/analytics';
 import { getAttribution } from '@/lib/attribution';
 
 const contactSchema = z.object({
@@ -66,8 +66,7 @@ export function ContactPage() {
                         : 'Failed to send message. Please try again.';
                 throw new Error(message);
             }
-            trackEvent('submit_contact_form', { form: 'contact' });
-            trackConversion(CONVERSIONS.contactForm);
+            trackContactFormSuccess();
             setSubmitted(true);
         } catch (err) {
             setSubmitError(err instanceof Error ? err.message : 'Failed to send message. Please try again.');
@@ -113,7 +112,7 @@ export function ContactPage() {
                         <a
                             href={`tel:${siteConfig.contact.phoneE164}`}
                             className="flex items-center gap-4 rounded-2xl border border-border-default bg-surface-alt p-5 transition-all hover:border-brand/50 hover:shadow-lg hover:shadow-brand/10"
-                            onClick={() => trackPhoneLead('contact_page')}
+                            onClick={() => trackPhoneClick('contact_page')}
                         >
                             <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand/10 text-brand">
                                 <Phone className="h-6 w-6" />
@@ -129,7 +128,7 @@ export function ContactPage() {
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center gap-4 rounded-2xl border border-border-default bg-surface-alt p-5 transition-all hover:border-success/50 hover:shadow-lg hover:shadow-success/10"
-                            onClick={() => trackWhatsAppLead('contact_page')}
+                            onClick={() => trackWhatsAppClick('contact_page')}
                         >
                             <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-success/10 text-success">
                                 <MessageCircle className="h-6 w-6" />
@@ -155,7 +154,7 @@ export function ContactPage() {
 
                         <Link
                             to="/booking"
-                            onClick={() => trackBookNowClick('contact_page')}
+                            onClick={() => trackNavClick('/booking', 'Book Now', 'contact_page')}
                             className="flex items-center gap-4 rounded-2xl border-2 border-brand bg-brand/10 p-5 transition-all hover:border-brand hover:bg-brand hover:shadow-lg hover:shadow-brand/20"
                         >
                             <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand text-white">

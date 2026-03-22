@@ -3,7 +3,7 @@ import { Section } from '@/components/Section';
 import { BookingScheduler } from '@/components/BookingScheduler';
 import { Phone, MessageCircle, Clock, Shield } from 'lucide-react';
 import { siteConfig } from '@/config/site';
-import { trackPhoneLead, trackWhatsAppLead } from '@/lib/analytics';
+import { trackPhoneClick, trackWhatsAppClick } from '@/lib/analytics';
 
 export function BookingPage() {
     return (
@@ -49,7 +49,7 @@ export function BookingPage() {
                         <a
                             href={`tel:${siteConfig.contact.phoneE164}`}
                             className="inline-flex items-center gap-2 text-brand hover:text-brand-light transition-colors"
-                            onClick={() => trackPhoneLead('booking')}
+                            onClick={() => trackPhoneClick('booking')}
                         >
                             <Phone className="h-4 w-4" />
                             {siteConfig.contact.phoneDisplay}
@@ -59,7 +59,7 @@ export function BookingPage() {
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-2 text-success hover:text-success/80 transition-colors"
-                            onClick={() => trackWhatsAppLead('booking')}
+                            onClick={() => trackWhatsAppClick('booking')}
                         >
                             <MessageCircle className="h-4 w-4" />
                             WhatsApp

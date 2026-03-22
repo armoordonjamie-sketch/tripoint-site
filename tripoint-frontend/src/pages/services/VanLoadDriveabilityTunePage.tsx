@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Seo } from '@/components/Seo';
-import { trackBookNowClick, trackPhoneLead, trackWhatsAppLead } from '@/lib/analytics';
+import { trackNavClick, trackPhoneClick, trackWhatsAppClick } from '@/lib/analytics';
 import { Section } from '@/components/Section';
 import { CTAButton } from '@/components/CTAButton';
 import { FaqAccordion } from '@/components/FaqAccordion';
@@ -113,8 +113,8 @@ export function VanLoadDriveabilityTunePage() {
                                 A Load &amp; Driveability Tune recalibrates your ECU to deliver more usable torque lower in the rev range, sharper throttle response, and smoother power delivery under load - making your van feel like it did when it was empty.
                             </p>
                             <div className="mt-6 flex flex-wrap gap-3">
-                                <CTAButton href="/booking" size="md" onClick={() => trackBookNowClick('load_tune_top')}>Book Online</CTAButton>
-                                <CTAButton href={`https://wa.me/${siteConfig.contact.whatsappE164}`} variant="outline" size="md" external icon={<MessageCircle className="h-4 w-4" />} onClick={() => trackWhatsAppLead('load_tune')}>WhatsApp Us</CTAButton>
+                                <CTAButton href="/booking" size="md" onClick={() => trackNavClick('/booking', 'Book Online', 'load_tune_top')}>Book Online</CTAButton>
+                                <CTAButton href={`https://wa.me/${siteConfig.contact.whatsappE164}`} variant="outline" size="md" external icon={<MessageCircle className="h-4 w-4" />} onClick={() => trackWhatsAppClick('load_tune')}>WhatsApp Us</CTAButton>
                             </div>
                         </div>
                         <div className="rounded-2xl border border-orange-500/20 bg-orange-500/5 p-6">
@@ -347,9 +347,9 @@ export function VanLoadDriveabilityTunePage() {
                         <h2 className="text-2xl font-bold text-white sm:text-3xl md:text-4xl lg:text-5xl">Make your loaded van drive like an empty one</h2>
                         <p className="mx-auto mt-4 max-w-xl text-lg text-white/80">Load &amp; Driveability Tune from &pound;199 - more torque, better response, fully reversible.</p>
                         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-                            <CTAButton href="/booking" variant="secondary" size="lg" onClick={() => trackBookNowClick('load_tune_footer')}>Book Online</CTAButton>
-                            <CTAButton href={`https://wa.me/${siteConfig.contact.whatsappE164}`} variant="ghost" size="lg" external icon={<MessageCircle className="h-5 w-5" />} className="text-white hover:text-white hover:bg-white/10" onClick={() => trackWhatsAppLead('load_tune')}>WhatsApp Us</CTAButton>
-                            <CTAButton href={`tel:${siteConfig.contact.phoneE164}`} variant="ghost" size="lg" external icon={<Phone className="h-5 w-5" />} className="text-white hover:text-white hover:bg-white/10" onClick={() => trackPhoneLead('load_tune')}>{siteConfig.contact.phoneDisplay}</CTAButton>
+                            <CTAButton href="/booking" variant="secondary" size="lg" onClick={() => trackNavClick('/booking', 'Book Online', 'load_tune_footer')}>Book Online</CTAButton>
+                            <CTAButton href={`https://wa.me/${siteConfig.contact.whatsappE164}`} variant="ghost" size="lg" external icon={<MessageCircle className="h-5 w-5" />} className="text-white hover:text-white hover:bg-white/10" onClick={() => trackWhatsAppClick('load_tune')}>WhatsApp Us</CTAButton>
+                            <CTAButton href={`tel:${siteConfig.contact.phoneE164}`} variant="ghost" size="lg" external icon={<Phone className="h-5 w-5" />} className="text-white hover:text-white hover:bg-white/10" onClick={() => trackPhoneClick('load_tune')}>{siteConfig.contact.phoneDisplay}</CTAButton>
                         </div>
                     </div>
                 </div>

@@ -1,5 +1,5 @@
 import { Seo } from '@/components/Seo';
-import { trackBookNowClick } from '@/lib/analytics';
+import { trackNavClick } from '@/lib/analytics';
 import { Section } from '@/components/Section';
 import { CTAButton } from '@/components/CTAButton';
 import { PhotoGallery } from '@/components/PhotoGallery';
@@ -107,7 +107,7 @@ export function AboutPage() {
                         </div>
 
                         <div className="text-center">
-                            <CTAButton href="/booking" size="lg" onClick={() => trackBookNowClick('about')}>
+                            <CTAButton href="/booking" size="lg" onClick={() => trackNavClick('/booking', 'Book Online', 'about')}>
                                 Book a Diagnostic
                             </CTAButton>
                         </div>
