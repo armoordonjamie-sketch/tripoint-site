@@ -11,7 +11,7 @@ export function RouteTracker() {
     const isFirst = useRef(true);
 
     useEffect(() => {
-        // Skip the initial mount – gtag config sends first page_view
+        // Skip the initial mount - gtag config sends first page_view
         if (isFirst.current) {
             isFirst.current = false;
             return;

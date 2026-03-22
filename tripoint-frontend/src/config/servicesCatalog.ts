@@ -121,7 +121,7 @@ export const SERVICES_BY_CATEGORY: Record<ServiceCategoryId, CatalogService[]> =
     servicing: [
         {
             title: 'Mercedes Van Servicing',
-            description: 'Minor and major packages — oil, filters, records.',
+            description: 'Minor and major packages - oil, filters, records.',
             href: '/services/mercedes-van-servicing',
             priceSlug: 'mercedes-van-minor-service',
             fallbackPrice: 175,

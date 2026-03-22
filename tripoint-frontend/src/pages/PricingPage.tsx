@@ -72,7 +72,7 @@ export function PricingPage() {
                             <li>• Full diagnostic scan across all modules</li>
                             <li>• Live data checks and guided tests</li>
                             <li>• Written outcome with findings and next steps</li>
-                            <li>• On-site time as per service (typically 60–90 mins)</li>
+                            <li>• On-site time as per service (typically 60-90 mins)</li>
                         </ul>
                     </div>
                     <div>

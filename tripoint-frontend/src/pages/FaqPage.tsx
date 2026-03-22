@@ -104,7 +104,7 @@ const faqCategories: FaqCategory[] = [
             },
             {
                 question: 'How long does a visit take?',
-                answer: 'Most diagnostic visits take 45–90 minutes depending on the service and fault complexity. Each service page states the included on-site time. If more time is needed, we\'ll discuss it with you before continuing.',
+                answer: 'Most diagnostic visits take 45-90 minutes depending on the service and fault complexity. Each service page states the included on-site time. If more time is needed, we\'ll discuss it with you before continuing.',
             },
             {
                 question: 'Will you fix the problem on the day?',
@@ -120,7 +120,7 @@ const faqCategories: FaqCategory[] = [
             },
             {
                 question: 'Do you have separate services for emissions, limp mode, or electrical faults?',
-                answer: 'No — Standard Diagnosis covers all fault types in one visit: warning lights, emissions (AdBlue, DPF, NOx), limp mode, electrical faults, and more. There are no separate specialist tiers. VOR Diagnosis is only different in that it provides priority scheduling for vehicles that are off the road.',
+                answer: 'No - Standard Diagnosis covers all fault types in one visit: warning lights, emissions (AdBlue, DPF, NOx), limp mode, electrical faults, and more. There are no separate specialist tiers. VOR Diagnosis is only different in that it provides priority scheduling for vehicles that are off the road.',
             },
             {
                 question: 'Can you diagnose intermittent faults?',
@@ -210,11 +210,11 @@ const faqCategories: FaqCategory[] = [
             },
             {
                 question: 'How do zones work?',
-                answer: 'We have three zones based on drive time: Zone A (0–25 mins, core area), Zone B (25–45 mins, standard coverage), Zone C (45–60 mins, edge of radius). Each zone has a fixed price per service. Over 60 minutes is by quote only.',
+                answer: 'We have three zones based on drive time: Zone A (0-25 mins, core area), Zone B (25-45 mins, standard coverage), Zone C (45-60 mins, edge of radius). Each zone has a fixed price per service. Over 60 minutes is by quote only.',
             },
             {
                 question: 'What are your operating hours?',
-                answer: 'We operate Monday to Saturday, 6:00 AM – 10:00 PM. Early-bird slots (before 8 AM) and evening slots (after 7 PM) are available with a small surcharge. Late-night diagnostic-only visits (9 PM start) are also available.',
+                answer: 'We operate Monday to Saturday, 6:00 AM - 10:00 PM. Early-bird slots (before 8 AM) and evening slots (after 7 PM) are available with a small surcharge. Late-night diagnostic-only visits (9 PM start) are also available.',
             },
             {
                 question: 'Do you work on Sundays?',
@@ -222,7 +222,7 @@ const faqCategories: FaqCategory[] = [
             },
             {
                 question: 'How quickly can you come out?',
-                answer: 'For standard bookings, we typically have availability within 1–3 working days. For VOR (vehicle off road) priority callouts, we aim for same-day or next-day response where capacity allows. Priority dispatch upgrades are available for an additional fee.',
+                answer: 'For standard bookings, we typically have availability within 1-3 working days. For VOR (vehicle off road) priority callouts, we aim for same-day or next-day response where capacity allows. Priority dispatch upgrades are available for an additional fee.',
             },
             {
                 question: 'I\'m outside your coverage area - can you still help?',

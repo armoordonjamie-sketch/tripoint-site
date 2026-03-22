@@ -78,14 +78,14 @@ export function CoveragePage() {
                             Where We Cover
                         </h1>
                         <p className="mx-auto mt-6 max-w-2xl text-lg text-text-secondary">
-                            Up to 60 minutes drive from our bases in Tonbridge and Eltham. Your zone determines your price – and we come to you. No workshop drop-off, no hassle.
+                            Up to 60 minutes drive from our bases in Tonbridge and Eltham. Your zone determines your price - and we come to you. No workshop drop-off, no hassle.
                         </p>
                         <div className="mt-8 flex flex-wrap justify-center gap-8 reveal" style={{ transitionDelay: '0.1s' }}>
                             {[
                                 { value: '60min', label: 'Max drive time' },
                                 { value: '2', label: 'Operating bases' },
                                 { value: '13+', label: 'Towns covered' },
-                                { value: 'A–C', label: 'Zone pricing' },
+                                { value: 'A-C', label: 'Zone pricing' },
                             ].map((s) => (
                                 <div key={s.label}>
                                     <p className="text-2xl font-bold text-brand-light">{s.value}</p>
@@ -112,7 +112,7 @@ export function CoveragePage() {
                 <div className="text-center reveal">
                     <h2 className="text-2xl font-bold text-text-primary sm:text-3xl">Coverage Map</h2>
                     <p className="mt-2 text-text-secondary">
-                        Kent and South East London – from Gravesend to Greenwich, Sevenoaks to Sidcup.
+                        Kent and South East London - from Gravesend to Greenwich, Sevenoaks to Sidcup.
                     </p>
                 </div>
                 <div className="mx-auto mt-8 max-w-5xl reveal" style={{ transitionDelay: '0.1s' }}>
@@ -207,7 +207,7 @@ export function CoveragePage() {
                         </div>
                         <div className="flex items-start gap-3 rounded-xl border border-border-default bg-surface-alt p-4">
                             <Car className="mt-0.5 h-5 w-5 shrink-0 text-brand" />
-                            <p>We use <strong>live routing</strong> (Google/Apple Maps) – not straight-line distance – so traffic and roads are factored in.</p>
+                            <p>We use <strong>live routing</strong> (Google/Apple Maps) - not straight-line distance - so traffic and roads are factored in.</p>
                         </div>
                         <div className="flex items-start gap-3 rounded-xl border border-border-default bg-surface-alt p-4">
                             <Clock className="mt-0.5 h-5 w-5 shrink-0 text-brand" />
@@ -231,7 +231,7 @@ export function CoveragePage() {
             <Section>
                 <div className="mx-auto max-w-2xl reveal">
                     <Notice variant="info">
-                        <strong>Outside the 60-minute radius?</strong> Get in touch anyway – we may be able to offer a quote depending on the job and scheduling. Out-of-area bookings are assessed individually.
+                        <strong>Outside the 60-minute radius?</strong> Get in touch anyway - we may be able to offer a quote depending on the job and scheduling. Out-of-area bookings are assessed individually.
                     </Notice>
                 </div>
 

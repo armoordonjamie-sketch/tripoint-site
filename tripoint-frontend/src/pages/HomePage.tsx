@@ -68,9 +68,9 @@ const steps = [
 
 const trustPoints = [
     { icon: <Wrench className="h-6 w-6" />, title: 'XENTRY & STAR Diagnostics', desc: 'We use Mercedes-Benz XENTRY and STAR tools. Dealer-level access at your location, not a cheap code reader.' },
-    { icon: <Truck className="h-6 w-6" />, title: 'Mercedes-Benz Trained', desc: 'W906/W907 Sprinter, OM651/OM654 -- specialist knowledge for the common failures, not generic diagnostics.' },
+    { icon: <Truck className="h-6 w-6" />, title: 'Mercedes-Benz Trained', desc: 'W906/W907 Sprinter, OM651/OM654 - specialist knowledge for the common failures, not generic diagnostics.' },
     { icon: <MessageCircle className="h-6 w-6" />, title: 'Clear Communication', desc: 'Plain-English findings and a documented written outcome every time.' },
-    { icon: <MapPin className="h-6 w-6" />, title: 'Mobile Convenience', desc: 'Kent and SE London. No workshop drop-off needed -- we come to you.' },
+    { icon: <MapPin className="h-6 w-6" />, title: 'Mobile Convenience', desc: 'Kent and SE London. No workshop drop-off needed - we come to you.' },
 ];
 
 /* Curated gallery preview */
@@ -186,7 +186,7 @@ export function HomePage() {
                     <p className="text-sm font-semibold uppercase tracking-widest text-brand mb-3">What We Do</p>
                     <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">Our Services</h2>
                     <p className="mx-auto mt-3 max-w-2xl text-text-secondary">
-                        Four core services — all mobile, all fixed-price, all backed by dealer-level tooling.
+                        Four core services - all mobile, all fixed-price, all backed by dealer-level tooling.
                     </p>
                 </div>
                 <div className="mt-10 grid gap-4 sm:grid-cols-2">

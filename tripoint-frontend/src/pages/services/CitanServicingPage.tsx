@@ -214,7 +214,7 @@ export function CitanServicingPage() {
                                 />
                             </div>
                             <figcaption className="border-t border-border-default bg-surface-alt px-4 py-3 text-sm text-text-secondary">
-                                Service due display — reset properly after your visit, not just cleared.
+                                Service due display - reset properly after your visit, not just cleared.
                             </figcaption>
                         </figure>
                         <figure className="overflow-hidden rounded-2xl border border-border-default">
@@ -226,7 +226,7 @@ export function CitanServicingPage() {
                                 />
                             </div>
                             <figcaption className="border-t border-border-default bg-surface-alt px-4 py-3 text-sm text-text-secondary">
-                                Oil level check on the dash — confirms correct fill after service.
+                                Oil level check on the dash - confirms correct fill after service.
                             </figcaption>
                         </figure>
                     </div>

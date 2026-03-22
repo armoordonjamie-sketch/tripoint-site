@@ -11,7 +11,7 @@ export function ServicesPage() {
         <div className="min-h-0">
             <Seo
                 title="Services"
-                description="Pick diagnostics, servicing, or tuning. Mobile fixed-price visits across Kent & SE London — then book online or view full details on each service page."
+                description="Pick diagnostics, servicing, or tuning. Mobile fixed-price visits across Kent & SE London - then book online or view full details on each service page."
                 canonical="/services"
             />
 
@@ -22,7 +22,7 @@ export function ServicesPage() {
                     badges={[
                         { icon: Shield, label: 'Fixed zone pricing' },
                         { icon: MapPin, label: 'Kent & SE London' },
-                        { icon: Clock, label: 'Mon–Sat 6–22' },
+                        { icon: Clock, label: 'Mon-Sat 6-22' },
                     ]}
                 />
                 <div className="mt-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-sm text-text-muted">

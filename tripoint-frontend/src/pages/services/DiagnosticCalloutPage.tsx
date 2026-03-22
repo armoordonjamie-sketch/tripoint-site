@@ -166,7 +166,7 @@ export function DiagnosticCalloutPage() {
                         <div className="relative mb-8">
                             <Notice variant="info">
                                 <p className="pr-6">
-                                    You followed a link to a specialist topic — we now cover these under{' '}
+                                    You followed a link to a specialist topic - we now cover these under{' '}
                                     <strong>Standard Diagnosis</strong> (same visit depth). Mention your symptom when you book or when we arrive.
                                 </p>
                             </Notice>
@@ -234,7 +234,7 @@ export function DiagnosticCalloutPage() {
                                                             />
                                                         </div>
                                                         <figcaption className="border-t border-border-default bg-surface-alt px-4 py-3 text-sm text-text-secondary">
-                                                            Dealer-level Xentry on site — guided tests, coding, and module access when OEM-level work is needed.
+                                                            Dealer-level Xentry on site - guided tests, coding, and module access when OEM-level work is needed.
                                                         </figcaption>
                                                     </figure>
                                                 )}

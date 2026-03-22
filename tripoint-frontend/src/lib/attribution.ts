@@ -124,7 +124,7 @@ export function decorateUrl(url: string): string {
         }
         return u.toString();
     } catch {
-        // Non-URL string (e.g. tel: link) – return as-is
+        // Non-URL string (e.g. tel: link) - return as-is
         return url;
     }
 }

@@ -98,7 +98,7 @@ export const routeManifest: RouteEntry[] = [
     },
     {
         path: '/services/diagnostic-callout',
-        title: 'Standard Diagnosis — Mobile Mercedes Diagnostics',
+        title: 'Standard Diagnosis - Mobile Mercedes Diagnostics',
         description:
             'Mobile diagnostic service for Mercedes cars and vans. Full-system scan with dealer tools (Xentry), live data, guided tests, and a written fix plan. From £120.',
         canonicalPath: '/services/diagnostic-callout',
@@ -108,7 +108,7 @@ export const routeManifest: RouteEntry[] = [
     },
     {
         path: '/services/vor-van-diagnostics',
-        title: 'VOR Diagnosis — Priority Commercial Vehicle Diagnostics',
+        title: 'VOR Diagnosis - Priority Commercial Vehicle Diagnostics',
         description:
             'Vehicle Off Road priority diagnostic for vans and commercial vehicles. Fast triage and back-on-road decisions. From £160.',
         canonicalPath: '/services/vor-van-diagnostics',

@@ -140,7 +140,7 @@ async function main() {
     console.log('Done.');
 }
 
-/** Default Open Graph / Twitter image (1200×630) — social previews when page has no custom og:image */
+/** Default Open Graph / Twitter image (1200×630) - social previews when page has no custom og:image */
 async function ensureOgDefault() {
     const outPath = join(PUBLIC, 'og-default.jpg');
     const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630">

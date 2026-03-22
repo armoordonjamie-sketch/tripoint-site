@@ -94,7 +94,7 @@ export function VorVanDiagnosticsPage() {
                             />
                         </div>
                         <figcaption className="border-t border-border-default bg-surface-alt px-4 py-3 text-sm text-text-secondary">
-                            Dealer-level Xentry on site — the same guided tests and module access we use on Standard Diagnosis, with VOR priority when you&apos;re off the road.
+                            Dealer-level Xentry on site - the same guided tests and module access we use on Standard Diagnosis, with VOR priority when you&apos;re off the road.
                         </figcaption>
                     </figure>
 

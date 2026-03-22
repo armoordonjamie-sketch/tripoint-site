@@ -133,7 +133,7 @@ export function PrePurchaseHealthCheckPage() {
                                 />
                             </div>
                             <figcaption className="border-t border-border-default bg-surface-alt px-4 py-3 text-sm text-text-secondary">
-                                We connect dealer-level diagnostics before you buy — fault history, live data, and emissions systems, not just a test drive.
+                                We connect dealer-level diagnostics before you buy - fault history, live data, and emissions systems, not just a test drive.
                             </figcaption>
                         </figure>
                         <div className="mt-6 grid gap-4 sm:grid-cols-2">

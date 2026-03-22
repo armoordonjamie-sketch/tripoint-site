@@ -7,13 +7,13 @@ const BASES = [
     { label: 'Eltham', postcode: 'SE9 4HA', lat: 51.4522, lng: 0.0517 },
 ] as const;
 
-/* Midpoint between the two bases – zone rings radiate from here */
+/* Midpoint between the two bases - zone rings radiate from here */
 const CENTER = {
     lat: (BASES[0].lat + BASES[1].lat) / 2,
     lng: (BASES[0].lng + BASES[1].lng) / 2,
 };
 
-/* Approximate radii in km – illustrative only, actual zones use live routing */
+/* Approximate radii in km - illustrative only, actual zones use live routing */
 const ZONES = [
     { label: 'Zone C', radiusKm: 50, color: '#f59e0b', fillOpacity: 0.06, weight: 1.5, dashArray: '6 4' },
     { label: 'Zone B', radiusKm: 35, color: '#38bdf8', fillOpacity: 0.08, weight: 1.5, dashArray: '' },
@@ -81,15 +81,15 @@ export function CoverageMap() {
                 <div className="space-y-1.5">
                     <div className="flex items-center gap-2.5">
                         <span className="inline-block h-0.5 w-5 rounded-full bg-[#0ea5e9]" />
-                        <span className="text-text-secondary">Zone A &nbsp;0–25 min</span>
+                        <span className="text-text-secondary">Zone A &nbsp;0-25 min</span>
                     </div>
                     <div className="flex items-center gap-2.5">
                         <span className="inline-block h-0.5 w-5 rounded-full bg-[#38bdf8]" />
-                        <span className="text-text-secondary">Zone B &nbsp;25–45 min</span>
+                        <span className="text-text-secondary">Zone B &nbsp;25-45 min</span>
                     </div>
                     <div className="flex items-center gap-2.5">
                         <span className="inline-block h-0.5 w-5 rounded-full bg-[#f59e0b]" style={{ borderTop: '1px dashed #f59e0b' }} />
-                        <span className="text-text-secondary">Zone C &nbsp;45–60 min</span>
+                        <span className="text-text-secondary">Zone C &nbsp;45-60 min</span>
                     </div>
                     <div className="flex items-center gap-2.5">
                         <span className="inline-block h-2.5 w-2.5 rounded-full bg-[#0ea5e9] border-2 border-white" />

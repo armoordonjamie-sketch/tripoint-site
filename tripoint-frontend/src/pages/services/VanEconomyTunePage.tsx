@@ -169,7 +169,7 @@ export function VanEconomyTunePage() {
                             />
                         </div>
                         <figcaption className="border-t border-border-default bg-surface-alt px-3 py-2 text-xs text-text-secondary text-center">
-                            The Sprinter cab — smoother cruising starts here.
+                            The Sprinter cab - smoother cruising starts here.
                         </figcaption>
                     </figure>
                     <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -182,7 +182,7 @@ export function VanEconomyTunePage() {
                                 />
                             </div>
                             <figcaption className="border-t border-border-default bg-surface-alt px-3 py-2 text-xs text-text-secondary">
-                                Real-world mpg on the trip computer — many drivers see smoother cruising after an economy map.
+                                Real-world mpg on the trip computer - many drivers see smoother cruising after an economy map.
                             </figcaption>
                         </figure>
                         <figure className="overflow-hidden rounded-xl border border-border-default">
@@ -194,7 +194,7 @@ export function VanEconomyTunePage() {
                                 />
                             </div>
                             <figcaption className="border-t border-border-default bg-surface-alt px-3 py-2 text-xs text-text-secondary">
-                                When diesel moves, every tenth of a mpg matters — the tune is about making the engine work smarter at the pump.
+                                When diesel moves, every tenth of a mpg matters - the tune is about making the engine work smarter at the pump.
                             </figcaption>
                         </figure>
                     </div>

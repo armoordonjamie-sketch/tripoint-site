@@ -63,7 +63,7 @@ export function AreaPage() {
                             Available Mon to Sat. Often same-day in core zones.
                         </span>
                         <span className="inline-flex items-center gap-1.5 font-medium text-brand-light">
-                            From £120 (Zone A/B) -- zone confirmed at booking based on your postcode.
+                            From £120 (Zone A/B) - zone confirmed at booking based on your postcode.
                         </span>
                     </div>
 

@@ -56,7 +56,7 @@ export const blogPosts: BlogPost[] = [
             <hr class="blog-divider"/>
 
             <h2>Regeneration heat is the turbo's worst enemy (and vans trigger it more often)</h2>
-            <p>DPF regeneration is basically the ECU intentionally raising exhaust temps to burn soot out of the filter. During active regen, typical target temperature is around 600–700°C.</p>
+            <p>DPF regeneration is basically the ECU intentionally raising exhaust temps to burn soot out of the filter. During active regen, typical target temperature is around 600-700°C.</p>
 
             <p>Repeated regen cycles cause:</p>
             <ul>
@@ -115,7 +115,7 @@ export const blogPosts: BlogPost[] = [
 
             <p>Typical OM651 failure pattern (what we see):</p>
             <ul>
-                <li>60k–120k miles turbo failure window</li>
+                <li>60k-120k miles turbo failure window</li>
                 <li>Often oil present in intake/intercooler</li>
                 <li>Shaft play increasing before failure</li>
                 <li>Frequently occurs with DPF/EGR issues</li>
@@ -235,7 +235,7 @@ export const blogPosts: BlogPost[] = [
 
             <div class="blog-cta-box">
                 <p><strong>Hearing whining, seeing oil in boost pipes, or getting underboost/limp mode on a W907 Sprinter or W447 Vito?</strong></p>
-                <p>The best money you'll spend is a proper diagnostic before it escalates. Book a <a href="/services/diagnostic-callout">Standard Diagnosis</a> — we cover all limp mode, emissions, and turbo-related faults in one visit.</p>
+                <p>The best money you'll spend is a proper diagnostic before it escalates. Book a <a href="/services/diagnostic-callout">Standard Diagnosis</a> - we cover all limp mode, emissions, and turbo-related faults in one visit.</p>
             </div>
         `,
     },
@@ -407,7 +407,7 @@ export const blogPosts: BlogPost[] = [
 
             <div class="blog-cta-box">
                 <p><strong>Want this done properly?</strong></p>
-                <p>If your Sprinter is in limp mode, book a <a href="/services/diagnostic-callout">Standard Diagnosis</a> — we cover all limp mode faults including turbo, boost, EGR, and electrical issues in one visit.</p>
+                <p>If your Sprinter is in limp mode, book a <a href="/services/diagnostic-callout">Standard Diagnosis</a> - we cover all limp mode faults including turbo, boost, EGR, and electrical issues in one visit.</p>
             </div>
         `,
     },
@@ -528,7 +528,7 @@ export const blogPosts: BlogPost[] = [
 
             <div class="blog-cta-box">
                 <p><strong>Got an AdBlue countdown?</strong></p>
-                <p>Book a <a href="/services/diagnostic-callout">Standard Diagnosis</a> — we cover all AdBlue, SCR, and emissions faults in one visit.</p>
+                <p>Book a <a href="/services/diagnostic-callout">Standard Diagnosis</a> - we cover all AdBlue, SCR, and emissions faults in one visit.</p>
             </div>
         `,
     },
@@ -658,7 +658,7 @@ export const blogPosts: BlogPost[] = [
 
             <div class="blog-cta-box">
                 <p><strong>DPF light on?</strong></p>
-                <p>Book a <a href="/services/diagnostic-callout">Standard Diagnosis</a> — we cover all DPF, regen, and emissions faults in one visit.</p>
+                <p>Book a <a href="/services/diagnostic-callout">Standard Diagnosis</a> - we cover all DPF, regen, and emissions faults in one visit.</p>
             </div>
         `,
     },

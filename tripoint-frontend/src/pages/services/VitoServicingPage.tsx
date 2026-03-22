@@ -208,7 +208,7 @@ export function VitoServicingPage() {
                 <div className="mx-auto max-w-5xl">
                     <h2 className="text-2xl sm:text-3xl font-bold text-text-primary text-center">ASSYST reset &amp; oil checks</h2>
                     <p className="mt-2 text-text-secondary text-center max-w-2xl mx-auto">
-                        After every service we reset the ASSYST counter via Xentry — your dash shows the correct next interval. We also confirm oil level using the electronic readout where fitted.
+                        After every service we reset the ASSYST counter via Xentry - your dash shows the correct next interval. We also confirm oil level using the electronic readout where fitted.
                     </p>
                     <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 reveal">
                         <figure className="overflow-hidden rounded-2xl border border-border-default">
@@ -220,7 +220,7 @@ export function VitoServicingPage() {
                                 />
                             </div>
                             <figcaption className="border-t border-border-default bg-surface-alt px-4 py-3 text-sm text-text-secondary">
-                                Service interval on the dash — recalculated after a full Xentry reset, not a generic code clear.
+                                Service interval on the dash - recalculated after a full Xentry reset, not a generic code clear.
                             </figcaption>
                         </figure>
                         <figure className="overflow-hidden rounded-2xl border border-border-default">
@@ -232,7 +232,7 @@ export function VitoServicingPage() {
                                 />
                             </div>
                             <figcaption className="border-t border-border-default bg-surface-alt px-4 py-3 text-sm text-text-secondary">
-                                Electronic oil level — checked after the oil change so you know the fill is right.
+                                Electronic oil level - checked after the oil change so you know the fill is right.
                             </figcaption>
                         </figure>
                     </div>
@@ -286,7 +286,7 @@ export function VitoServicingPage() {
                                         />
                                     </div>
                                     <figcaption className="border-t border-border-default bg-surface-alt px-3 py-2 text-xs text-text-secondary">
-                                        Transmission fluid service — correct spec for 7G-TRONIC / 9G-TRONIC.
+                                        Transmission fluid service - correct spec for 7G-TRONIC / 9G-TRONIC.
                                     </figcaption>
                                 </figure>
                                 <figure className="overflow-hidden rounded-xl border border-border-default">
@@ -298,7 +298,7 @@ export function VitoServicingPage() {
                                         />
                                     </div>
                                     <figcaption className="border-t border-border-default bg-surface-alt px-3 py-2 text-xs text-text-secondary">
-                                        Plugs torqued to spec — no leaks, no rounded fasteners.
+                                        Plugs torqued to spec - no leaks, no rounded fasteners.
                                     </figcaption>
                                 </figure>
                             </div>

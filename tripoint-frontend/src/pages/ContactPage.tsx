@@ -93,7 +93,7 @@ export function ContactPage() {
                         Contact
                     </h1>
                     <p className="mx-auto mt-4 max-w-2xl text-lg text-text-secondary">
-                        Kent and South East London -- we come to you. Call, WhatsApp, or send your details below and we will get back to you to confirm your slot.
+                        Kent and South East London - we come to you. Call, WhatsApp, or send your details below and we will get back to you to confirm your slot.
                     </p>
                     <div className="mx-auto mt-6 max-w-2xl rounded-xl border border-brand/20 bg-brand/5 p-4 text-left">
                         <p className="text-sm font-semibold text-text-primary">For faster diagnosis, include:</p>

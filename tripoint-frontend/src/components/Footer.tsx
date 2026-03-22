@@ -111,7 +111,7 @@ export function Footer() {
                             </div>
                         </div>
 
-                        {/* Services — grouped by category */}
+                        {/* Services - grouped by category */}
                         <div className="sm:col-span-1">
                             <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-text-muted">
                                 Services
@@ -284,7 +284,7 @@ export function Footer() {
 
                     <div className="mt-12 border-t border-border-default/80 pt-8 text-center text-xs text-text-muted">
                         <p>
-                            &copy; {year} {siteConfig.brandName}. Independent service -- not affiliated with vehicle manufacturers.
+                            &copy; {year} {siteConfig.brandName}. Independent service - not affiliated with vehicle manufacturers.
                         </p>
                     </div>
                 </div>

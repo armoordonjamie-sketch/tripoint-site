@@ -102,7 +102,7 @@ export function CitanBrakesPage() {
                                 Your Citan&apos;s brakes work harder than you think. Tight deliveries, stop-start traffic, fully loaded - when they start making noise or the light comes on, get them sorted fast.
                             </p>
                             <p className="mt-3 text-text-secondary leading-relaxed">
-                                Genuine Mercedes parts, proper fitment, no workshop trip — real Citan work, not generic stock photos. The Citan is one of the most affordable Mercedes vans to maintain - our fixed-price packages keep it that way.
+                                Genuine Mercedes parts, proper fitment, no workshop trip - real Citan work, not generic stock photos. The Citan is one of the most affordable Mercedes vans to maintain - our fixed-price packages keep it that way.
                             </p>
                             <div className="mt-6 flex flex-wrap gap-3">
                                 <CTAButton href="/booking" size="md" onClick={() => trackBookNowClick('citan_brakes_top')}>Book Online</CTAButton>
@@ -144,11 +144,11 @@ export function CitanBrakesPage() {
                                 <div className="relative aspect-[16/10] min-h-[220px] sm:min-h-[280px]">
                                     <OptimizedImage
                                         src="/images/new-images/sprinter-brakes-02.jpg"
-                                        alt="Digital vernier caliper measuring brake disc thickness — same process for Citan"
+                                        alt="Digital vernier caliper measuring brake disc thickness - same process for Citan"
                                         className="absolute inset-0 h-full w-full object-cover rounded-2xl transition-transform duration-500 hover:scale-105"
                                     />
                                 </div>
-                                <figcaption className="mt-2 text-xs text-text-muted">Disc thickness measured to Mercedes spec — same process for all our van brake work.</figcaption>
+                                <figcaption className="mt-2 text-xs text-text-muted">Disc thickness measured to Mercedes spec - same process for all our van brake work.</figcaption>
                             </figure>
                         </div>
                     </div>
@@ -203,11 +203,11 @@ export function CitanBrakesPage() {
                             <div className="relative aspect-[16/10] min-h-[200px] sm:min-h-[260px]">
                                 <OptimizedImage
                                     src="/images/new-images/sprinter-brakes-04.jpg"
-                                    alt="Completed front brake assembly with new pads and discs — same quality for Citan"
+                                    alt="Completed front brake assembly with new pads and discs - same quality for Citan"
                                     className="absolute inset-0 h-full w-full object-cover rounded-2xl"
                                 />
                             </div>
-                            <figcaption className="mt-2 text-xs text-text-muted text-center">New pads and discs fitted, ready for road test — same process across Mercedes vans.</figcaption>
+                            <figcaption className="mt-2 text-xs text-text-muted text-center">New pads and discs fitted, ready for road test - same process across Mercedes vans.</figcaption>
                         </figure>
                     </div>
                 </div>

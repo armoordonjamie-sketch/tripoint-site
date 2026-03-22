@@ -223,12 +223,12 @@ export function SprinterServicingPage() {
                                 />
                             </div>
                             <figcaption className="border-t border-border-default bg-surface-alt px-4 py-3 text-sm text-text-secondary">
-                                Electronic oil level check on the dash — we verify correct fill and spec on every service.
+                                Electronic oil level check on the dash - we verify correct fill and spec on every service.
                             </figcaption>
                         </figure>
                         <div className="rounded-2xl border border-border-default bg-surface-alt p-6 flex flex-col justify-center">
                             <p className="text-text-secondary leading-relaxed">
-                                Every minor and major service includes fluid level checks with the correct MB oil specification. On models with an electronic oil level readout, we confirm the level after the oil change so you leave with a clean bill of health — not a guess.
+                                Every minor and major service includes fluid level checks with the correct MB oil specification. On models with an electronic oil level readout, we confirm the level after the oil change so you leave with a clean bill of health - not a guess.
                             </p>
                         </div>
                     </div>
@@ -335,7 +335,7 @@ export function SprinterServicingPage() {
                                 />
                             </div>
                             <figcaption className="border-t border-border-default bg-surface-alt px-3 py-2 text-xs text-text-secondary">
-                                9G-TRONIC fluid service — correct spec and fill level, booked as an add-on.
+                                9G-TRONIC fluid service - correct spec and fill level, booked as an add-on.
                             </figcaption>
                         </figure>
                         <figure className="overflow-hidden rounded-xl border border-border-default">
@@ -347,7 +347,7 @@ export function SprinterServicingPage() {
                                 />
                             </div>
                             <figcaption className="border-t border-border-default bg-surface-alt px-3 py-2 text-xs text-text-secondary">
-                                Drain and fill plugs torqued to Mercedes specification — no rounded bolts, no leaks.
+                                Drain and fill plugs torqued to Mercedes specification - no rounded bolts, no leaks.
                             </figcaption>
                         </figure>
                     </div>
@@ -381,7 +381,7 @@ export function SprinterServicingPage() {
                                     />
                                 </div>
                                 <figcaption className="border-t border-border-default bg-surface-alt px-4 py-3 text-sm text-text-secondary">
-                                    ASSYST on the dash — next service date and distance recalculated after a proper Xentry reset.
+                                    ASSYST on the dash - next service date and distance recalculated after a proper Xentry reset.
                                 </figcaption>
                             </figure>
                             <div className="rounded-2xl border border-brand/20 bg-brand/5 p-6">

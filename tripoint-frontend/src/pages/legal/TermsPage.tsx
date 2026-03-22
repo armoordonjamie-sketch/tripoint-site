@@ -70,9 +70,9 @@ export function TermsPage() {
                                         </tr>
                                     </thead>
                                     <tbody className="divide-y divide-border-default">
-                                        <tr><td className="px-4 py-2">Zone A (0–25 min drive)</td><td className="px-4 py-2">£30</td></tr>
-                                        <tr><td className="px-4 py-2">Zone B (25–45 min drive)</td><td className="px-4 py-2">£30</td></tr>
-                                        <tr><td className="px-4 py-2">Zone C (45–60 min drive)</td><td className="px-4 py-2">£50</td></tr>
+                                        <tr><td className="px-4 py-2">Zone A (0-25 min drive)</td><td className="px-4 py-2">£30</td></tr>
+                                        <tr><td className="px-4 py-2">Zone B (25-45 min drive)</td><td className="px-4 py-2">£30</td></tr>
+                                        <tr><td className="px-4 py-2">Zone C (45-60 min drive)</td><td className="px-4 py-2">£50</td></tr>
                                         <tr><td className="px-4 py-2">VOR / Priority bookings</td><td className="px-4 py-2">£50</td></tr>
                                     </tbody>
                                 </table>

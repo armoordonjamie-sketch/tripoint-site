@@ -36,7 +36,7 @@ interface OptimizedImageProps extends React.ImgHTMLAttributes<HTMLImageElement> 
     priority?: boolean;
 }
 
-/** Use raw public URLs — no /images/optimized/ mirror (avoids 404 if optimize-images not run on host). */
+/** Use raw public URLs - no /images/optimized/ mirror (avoids 404 if optimize-images not run on host). */
 function useOriginalAsset(src: string): boolean {
     return src.startsWith('/images/new-images/') || src.startsWith('/images/services/');
 }

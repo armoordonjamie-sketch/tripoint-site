@@ -15,7 +15,7 @@ const DEBUG =
     new URLSearchParams(window.location.search).has('debug_tracking');
 
 // ---------------------------------------------------------------------------
-// Event queue – buffers events until gtag is available, then flushes
+// Event queue - buffers events until gtag is available, then flushes
 // ---------------------------------------------------------------------------
 type QueuedEvent = { name: string; params: Record<string, string> };
 const queue: QueuedEvent[] = [];
@@ -79,7 +79,7 @@ const bookingSendToResolved =
     buildSendTo(import.meta.env.VITE_GOOGLE_ADS_CONV_BOOKING) ?? `${AW}/${DEFAULT_BOOKING_LABEL}`;
 
 /**
- * All conversion labels — set env vars to the label segment AFTER AW-XXXXX/
+ * All conversion labels - set env vars to the label segment AFTER AW-XXXXX/
  * WhatsApp defaults to booking label until you create a dedicated “WhatsApp lead” action.
  */
 export const CONVERSIONS = {
@@ -97,7 +97,7 @@ export const CONVERSIONS = {
     /** Deposit / card payment completed */
     paymentCompleted:
         buildSendTo(import.meta.env.VITE_GOOGLE_ADS_CONV_PAYMENT) ?? bookingSendToResolved,
-    /** “Book now” CTAs site-wide — optional micro-conversion */
+    /** “Book now” CTAs site-wide - optional micro-conversion */
     bookNowClick: buildSendTo(import.meta.env.VITE_GOOGLE_ADS_CONV_BOOK_NOW),
 } as const;
 
@@ -180,26 +180,26 @@ export const trackConversion = (sendTo: string | null | undefined) => {
     }
 };
 
-/** tel: — GA event + Ads phone conversion when label configured */
+/** tel: - GA event + Ads phone conversion when label configured */
 export function trackPhoneLead(place: 'footer' | (string & {})) {
     if (place === 'footer') trackEvent('click_phone_footer');
     else trackEvent('click_phone_header', { location: place });
     trackConversion(CONVERSIONS.phoneCall);
 }
 
-/** WhatsApp — primary lead path; fires Ads conversion (defaults to booking label until WHATSAPP env set) */
+/** WhatsApp - primary lead path; fires Ads conversion (defaults to booking label until WHATSAPP env set) */
 export function trackWhatsAppLead(location: string) {
     trackEvent('click_whatsapp', { location });
     trackConversion(CONVERSIONS.whatsappLead);
 }
 
-/** Email mailto — footer / contact */
+/** Email mailto - footer / contact */
 export function trackEmailLead(location: string) {
     trackEvent('click_email_footer', { location });
     trackConversion(CONVERSIONS.emailLead);
 }
 
-/** Book Online CTAs — optional Ads micro-conversion if VITE_GOOGLE_ADS_CONV_BOOK_NOW set */
+/** Book Online CTAs - optional Ads micro-conversion if VITE_GOOGLE_ADS_CONV_BOOK_NOW set */
 export function trackBookNowClick(location: string) {
     trackEvent('click_book_now', { location });
     trackConversion(CONVERSIONS.bookNowClick);

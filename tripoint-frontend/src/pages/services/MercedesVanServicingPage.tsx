@@ -137,7 +137,7 @@ export function MercedesVanServicingPage() {
                         <CTAButton href="/pricing" variant="outline" size="md" icon={<ArrowRight className="h-4 w-4" />}>Full Pricing</CTAButton>
                     </div>
                     <h3 className="mt-10 text-lg font-semibold text-text-primary">What you&apos;ll see after a service</h3>
-                    <p className="mt-1 text-sm text-text-secondary">Your dash will show a fresh interval and correct oil level — here&apos;s what that looks like.</p>
+                    <p className="mt-1 text-sm text-text-secondary">Your dash will show a fresh interval and correct oil level - here&apos;s what that looks like.</p>
                     <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
                         <figure className="overflow-hidden rounded-2xl border border-border-default">
                             <div className="relative aspect-[16/10] min-h-[220px] sm:min-h-[280px]">
@@ -148,7 +148,7 @@ export function MercedesVanServicingPage() {
                                 />
                             </div>
                             <figcaption className="border-t border-border-default bg-surface-alt px-4 py-3 text-sm text-text-secondary">
-                                ASSYST / FSS on the dash — we reset with Xentry so your next interval matches how you actually drive.
+                                ASSYST / FSS on the dash - we reset with Xentry so your next interval matches how you actually drive.
                             </figcaption>
                         </figure>
                         <figure className="overflow-hidden rounded-2xl border border-border-default">
@@ -160,7 +160,7 @@ export function MercedesVanServicingPage() {
                                 />
                             </div>
                             <figcaption className="border-t border-border-default bg-surface-alt px-4 py-3 text-sm text-text-secondary">
-                                Electronic oil level — verified after every service with the correct MB oil spec.
+                                Electronic oil level - verified after every service with the correct MB oil spec.
                             </figcaption>
                         </figure>
                     </div>

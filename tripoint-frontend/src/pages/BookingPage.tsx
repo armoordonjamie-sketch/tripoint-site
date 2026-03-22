@@ -28,7 +28,7 @@ export function BookingPage() {
                     <div className="mx-auto mt-6 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-text-muted">
                         <span className="inline-flex items-center gap-1.5">
                             <Clock className="h-4 w-4 text-brand" />
-                            Mon–Sat, 6 AM – 10 PM
+                            Mon-Sat, 6 AM - 10 PM
                         </span>
                         <span className="inline-flex items-center gap-1.5">
                             <Shield className="h-4 w-4 text-brand" />

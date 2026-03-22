@@ -168,7 +168,7 @@ function SlotCalendar({
                 {(() => {
                     const last = new Date(dateKeys[dateKeys.length - 1]);
                     return firstDate.getMonth() !== last.getMonth()
-                        ? `${firstDate.toLocaleDateString('en-GB', { month: 'short' })} – ${last.toLocaleDateString('en-GB', { month: 'short', year: 'numeric' })}`
+                        ? `${firstDate.toLocaleDateString('en-GB', { month: 'short' })} - ${last.toLocaleDateString('en-GB', { month: 'short', year: 'numeric' })}`
                         : firstDate.toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
                 })()}
             </p>
@@ -410,11 +410,11 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
                 slot_iso: slotIso,
             });
             const response = await fetch(`/api/booking/price?${params.toString()}`);
-            if (!response.ok) return; // silent fail -- fall back to availability estimate
+            if (!response.ok) return; // silent fail - fall back to availability estimate
             const json: PriceResponse = await response.json();
             setPriceInfo(json);
         } catch {
-            // silent -- UI falls back to availability.fixed_price_gbp
+            // silent - UI falls back to availability.fixed_price_gbp
         } finally {
             setLoadingPrice(false);
         }
@@ -923,7 +923,7 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
                             </div>
                             <div>
                                 <h3 className="text-lg font-bold text-text-primary">Choose a Slot</h3>
-                                <p className="text-xs text-text-muted">Mon–Sat, 6 AM – 10 PM • 30-min starts</p>
+                                <p className="text-xs text-text-muted">Mon-Sat, 6 AM - 10 PM • 30-min starts</p>
                             </div>
                         </div>
                         <button

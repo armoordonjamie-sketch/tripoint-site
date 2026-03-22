@@ -49,9 +49,9 @@ export const siteConfig = {
     ],
 
     zones: [
-        { zone: 'A', driveTime: '0–25 mins', note: 'Core area' },
-        { zone: 'B', driveTime: '25–45 mins', note: 'Standard coverage' },
-        { zone: 'C', driveTime: '45–60 mins', note: 'Edge of radius' },
+        { zone: 'A', driveTime: '0-25 mins', note: 'Core area' },
+        { zone: 'B', driveTime: '25-45 mins', note: 'Standard coverage' },
+        { zone: 'C', driveTime: '45-60 mins', note: 'Edge of radius' },
         { zone: 'Out of area', driveTime: '60+ mins', note: 'Quote only' },
     ],
 
@@ -105,7 +105,7 @@ export const siteConfig = {
                 zoneA: 149,
                 zoneB: 164,
                 zoneC: 179,
-                included: 'Mobile brake service — front pads from £149',
+                included: 'Mobile brake service - front pads from £149',
             },
             {
                 name: 'Vito Brakes',
@@ -113,7 +113,7 @@ export const siteConfig = {
                 zoneA: 169,
                 zoneB: 184,
                 zoneC: 199,
-                included: 'Mobile brake service — front pads from £169',
+                included: 'Mobile brake service - front pads from £169',
             },
             {
                 name: 'Citan Brakes',
@@ -121,7 +121,7 @@ export const siteConfig = {
                 zoneA: 169,
                 zoneB: 184,
                 zoneC: 199,
-                included: 'Mobile brake service — front pads from £169',
+                included: 'Mobile brake service - front pads from £169',
             },
             // Commercial Van Tuning
             {
