@@ -36,7 +36,26 @@ interface OptimizedImageProps extends React.ImgHTMLAttributes<HTMLImageElement> 
     priority?: boolean;
 }
 
+/** Use raw public URLs — no /images/optimized/ mirror (avoids 404 if optimize-images not run on host). */
+function useOriginalAsset(src: string): boolean {
+    return src.startsWith('/images/new-images/') || src.startsWith('/images/services/');
+}
+
 export function OptimizedImage({ src, priority, alt = '', className, style, ...rest }: OptimizedImageProps) {
+    if (useOriginalAsset(src)) {
+        return (
+            <img
+                src={src}
+                alt={alt}
+                className={className}
+                style={style}
+                loading={priority ? ('eager' as const) : ('lazy' as const)}
+                fetchPriority={priority ? ('high' as const) : undefined}
+                {...rest}
+            />
+        );
+    }
+
     const { webp, webpSrcset, jpg } = getOptimizedPaths(src);
 
     const imgProps = {

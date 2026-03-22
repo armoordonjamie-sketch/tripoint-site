@@ -9,6 +9,7 @@ import { Notice } from '@/components/Notice';
 import { CheckCircle2, XCircle, ArrowRight, Phone, MessageCircle, AlertTriangle, Fuel, Gauge, TrendingUp, Shield } from 'lucide-react';
 import { siteConfig } from '@/config/site';
 import { ServiceSchema, BreadcrumbSchema, FaqPageSchema } from '@/components/JsonLd';
+import { OptimizedImage } from '@/components/OptimizedImage';
 
 function useScrollReveal() {
     const ref = useRef<HTMLDivElement>(null);
@@ -80,9 +81,15 @@ export function VanEconomyTunePage() {
 
             {/* \u2500\u2500\u2500 HERO \u2500\u2500\u2500 */}
             <section className="relative h-72 sm:h-96 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-emerald-950 via-surface to-surface" />
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(16,185,129,0.12),transparent_70%)]" />
-                <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-10">
+                <img
+                    src="/images/services/van-sprinter-w907-front.png"
+                    alt=""
+                    className="absolute inset-0 h-full w-full object-cover object-center"
+                    aria-hidden="true"
+                />
+                <div className="absolute inset-0 bg-gradient-to-br from-emerald-950/90 via-surface/85 to-surface" />
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(16,185,129,0.18),transparent_70%)]" />
+                <div className="absolute bottom-0 left-0 right-0 z-10 p-6 sm:p-10">
                     <div className="mx-auto max-w-5xl">
                         <p className="text-sm font-semibold uppercase tracking-widest text-emerald-400 mb-2">Commercial Van Tuning</p>
                         <h1 className="text-4xl font-extrabold text-text-primary sm:text-5xl lg:text-6xl">Economy Tune</h1>
@@ -151,6 +158,45 @@ export function VanEconomyTunePage() {
                                 <p className="mt-1 text-xs text-text-muted">{item.detail}</p>
                             </div>
                         ))}
+                    </div>
+                    <h3 className="mt-8 text-lg font-semibold text-text-primary">See what drivers see</h3>
+                    <figure className="mt-4 overflow-hidden rounded-xl border border-border-default max-w-2xl mx-auto mb-6">
+                        <div className="relative aspect-[16/10] min-h-[200px] sm:min-h-[260px]">
+                            <OptimizedImage
+                                src="/images/new-images/mercedes-sprinter-driving-pov.jpg"
+                                alt="Driver's view from a Mercedes Sprinter cab on the road"
+                                className="absolute inset-0 h-full w-full object-cover"
+                            />
+                        </div>
+                        <figcaption className="border-t border-border-default bg-surface-alt px-3 py-2 text-xs text-text-secondary text-center">
+                            The Sprinter cab — smoother cruising starts here.
+                        </figcaption>
+                    </figure>
+                    <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <figure className="overflow-hidden rounded-xl border border-border-default">
+                            <div className="relative aspect-[16/10] h-44 sm:h-52">
+                                <OptimizedImage
+                                    src="/images/new-images/mpg-62-on-merc.jpg"
+                                    alt="Mercedes van dash showing live fuel consumption readout"
+                                    className="absolute inset-0 h-full w-full object-cover"
+                                />
+                            </div>
+                            <figcaption className="border-t border-border-default bg-surface-alt px-3 py-2 text-xs text-text-secondary">
+                                Real-world mpg on the trip computer — many drivers see smoother cruising after an economy map.
+                            </figcaption>
+                        </figure>
+                        <figure className="overflow-hidden rounded-xl border border-border-default">
+                            <div className="relative aspect-[16/10] h-44 sm:h-52">
+                                <OptimizedImage
+                                    src="/images/new-images/fuel-price-on-pump.jpg"
+                                    alt="Fuel pump display showing price per litre at diesel pump"
+                                    className="absolute inset-0 h-full w-full object-cover"
+                                />
+                            </div>
+                            <figcaption className="border-t border-border-default bg-surface-alt px-3 py-2 text-xs text-text-secondary">
+                                When diesel moves, every tenth of a mpg matters — the tune is about making the engine work smarter at the pump.
+                            </figcaption>
+                        </figure>
                     </div>
                     <div className="mt-6 rounded-xl border border-yellow-500/20 bg-yellow-500/5 p-4">
                         <div className="flex items-start gap-3">

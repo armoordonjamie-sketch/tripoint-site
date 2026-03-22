@@ -79,9 +79,15 @@ export function FleetVanTuningPage() {
 
             {/* \u2500\u2500\u2500 HERO \u2500\u2500\u2500 */}
             <section className="relative h-72 sm:h-96 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-950 via-surface to-surface" />
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(59,130,246,0.12),transparent_70%)]" />
-                <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-10">
+                <img
+                    src="/images/services/van-sprinter-w906-front.png"
+                    alt=""
+                    className="absolute inset-0 h-full w-full object-cover object-center"
+                    aria-hidden="true"
+                />
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-950/90 via-surface/85 to-surface" />
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(59,130,246,0.18),transparent_70%)]" />
+                <div className="absolute bottom-0 left-0 right-0 z-10 p-6 sm:p-10">
                     <div className="mx-auto max-w-5xl">
                         <p className="text-sm font-semibold uppercase tracking-widest text-blue-400 mb-2">Fleet Operators</p>
                         <h1 className="text-4xl font-extrabold text-text-primary sm:text-5xl lg:text-6xl">Fleet Van Tuning</h1>

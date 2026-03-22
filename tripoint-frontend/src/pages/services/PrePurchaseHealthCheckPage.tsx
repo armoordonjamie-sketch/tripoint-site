@@ -124,6 +124,18 @@ export function PrePurchaseHealthCheckPage() {
                         <p className="mt-2 text-text-secondary">
                             Buyers often miss these hidden issues. We check for them.
                         </p>
+                        <figure className="mt-6 overflow-hidden rounded-2xl border border-border-default">
+                            <div className="relative aspect-[16/10] h-56 sm:h-64">
+                                <OptimizedImage
+                                    src="/images/new-images/xentry-on-mercedes-engine.jpg"
+                                    alt="Diagnostic scan of Mercedes commercial vehicle before purchase"
+                                    className="absolute inset-0 h-full w-full object-cover"
+                                />
+                            </div>
+                            <figcaption className="border-t border-border-default bg-surface-alt px-4 py-3 text-sm text-text-secondary">
+                                We connect dealer-level diagnostics before you buy — fault history, live data, and emissions systems, not just a test drive.
+                            </figcaption>
+                        </figure>
                         <div className="mt-6 grid gap-4 sm:grid-cols-2">
                             {hiddenIssues.map((item) => (
                                 <div key={item.title} className="rounded-xl border border-border-default bg-surface-alt p-4">

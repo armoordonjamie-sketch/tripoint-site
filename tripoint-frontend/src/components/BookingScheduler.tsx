@@ -1,9 +1,8 @@
 import { useEffect, useMemo, useState, useRef } from 'react';
-import { Loader2, AlertCircle, CheckCircle2, ChevronLeft, ChevronRight, Calendar, Search, MapPin, Car, Wrench, User, CreditCard } from 'lucide-react';
+import { Loader2, AlertCircle, CheckCircle2, ChevronLeft, ChevronRight, Calendar, Search, MapPin, Car, Wrench, User, CreditCard, Shield, Cog, TrendingUp } from 'lucide-react';
 import { CTAButton } from './CTAButton';
-import { trackEvent, trackConversion, CONVERSIONS, trackWhatsAppLead } from '@/lib/analytics';
+import { trackEvent, trackConversion, CONVERSIONS } from '@/lib/analytics';
 import { getAttribution } from '@/lib/attribution';
-import { siteConfig } from '@/config/site';
 
 /* ---------- types ---------- */
 interface Service {
@@ -94,6 +93,19 @@ const DEFAULT_SERVICE = 'diagnostic-callout';
 function getServiceHelper(id: string): string {
     return SERVICE_HELPERS[id] ?? id.replace(/-/g, ' ');
 }
+
+const SERVICE_CATEGORIES = [
+    { id: 'diagnostics', label: 'Diagnostics', icon: Search, desc: 'Warning lights, fault finding, pre-purchase checks' },
+    { id: 'servicing', label: 'Servicing', icon: Cog, desc: 'Full-service at your location, dealer-level' },
+    { id: 'brakes', label: 'Brakes', icon: Shield, desc: 'Mobile brake service for Sprinter, Vito & Citan' },
+    { id: 'tuning', label: 'Tuning', icon: TrendingUp, desc: 'Stage 1 calibration, economy tune, fleet pricing' },
+];
+
+const BRAKE_PRICING: Record<string, any> = {
+    sprinter: { label: 'Sprinter', options: { front: { pads: 120, 'pads-discs': 220 }, rear: { pads: 120, 'pads-discs': 220, 'pads-discs-shoes': 280 }, both: { pads: 240, 'pads-discs': 440, 'pads-discs-shoes': 500 } } },
+    vito: { label: 'Vito', options: { front: { pads: 110, 'pads-discs': 210 }, rear: { pads: 110, 'pads-discs': 210, 'pads-discs-shoes': 270 }, both: { pads: 220, 'pads-discs': 420, 'pads-discs-shoes': 480 } } },
+    citan: { label: 'Citan', options: { front: { pads: 100, 'pads-discs': 190 }, rear: { pads: 100, 'pads-discs': 190, 'pads-discs-shoes': 240 }, both: { pads: 200, 'pads-discs': 380, 'pads-discs-shoes': 430 } } },
+};
 
 /* ---------- step indicator ---------- */
 const STEPS = [
@@ -222,6 +234,41 @@ function StepPanel({ active, direction, children }: { active: boolean; direction
     );
 }
 
+/* ---------- animated substep wrapper ---------- */
+function SubStepPanel({ active, direction, children }: { active: boolean; direction: 'forward' | 'back'; children: React.ReactNode }) {
+    const [mounted, setMounted] = useState(active);
+    const [visible, setVisible] = useState(false);
+
+    useEffect(() => {
+        if (active) {
+            setMounted(true);
+            requestAnimationFrame(() => requestAnimationFrame(() => setVisible(true)));
+        } else {
+            setVisible(false);
+            const timer = setTimeout(() => setMounted(false), 300);
+            return () => clearTimeout(timer);
+        }
+    }, [active]);
+
+    if (!mounted) return null;
+    const enterFrom = direction === 'forward' ? 'translate-x-8' : '-translate-x-8';
+    return (
+        <div className={`transition-all duration-300 ease-out ${visible ? 'opacity-100 translate-x-0' : `opacity-0 ${enterFrom}`}`}>
+            {children}
+        </div>
+    );
+}
+
+function SubStepDots({ current, total }: { current: number; total: number }) {
+    return (
+        <div className="flex items-center gap-1.5 justify-center mt-6">
+            {Array.from({ length: total }).map((_, i) => (
+                <div key={i} className={`h-1.5 rounded-full transition-all duration-300 ${i === current ? 'w-6 bg-brand' : i < current ? 'w-2 bg-brand/40' : 'w-2 bg-border-default'}`} />
+            ))}
+        </div>
+    );
+}
+
 /* ---------- main component ---------- */
 const INITIAL_BOOKING: BookingPayload = {
     service_ids: [DEFAULT_SERVICE],
@@ -248,6 +295,14 @@ interface BookingSchedulerProps {
 export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
     const [services, setServices] = useState<Service[]>([]);
     const [booking, setBooking] = useState<BookingPayload>(INITIAL_BOOKING);
+    
+    // Sub-step state
+    const [subStep, setSubStep] = useState<'category' | 'service' | 'brake-config' | 'postcode'>('category');
+    const [subStepDirection, setSubStepDirection] = useState<'forward' | 'back'>('forward');
+    const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+    const [brakePosition, setBrakePosition] = useState<'front' | 'rear' | 'both'>('front');
+    const [brakeType, setBrakeType] = useState<string>('not-sure');
+    const [servicingModel, setServicingModel] = useState<string>('Sprinter');
     const [availability, setAvailability] = useState<AvailabilityResponse | null>(null);
     const [selectedSlot, setSelectedSlot] = useState<string>('');
     const [priceInfo, setPriceInfo] = useState<PriceResponse | null>(null);
@@ -446,7 +501,10 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
         if (!booking.vehicle_make.trim()) missing.push('Vehicle make');
         if (!booking.vehicle_model.trim()) missing.push('Vehicle model');
         if (!booking.approximate_mileage.trim()) missing.push('Approximate mileage');
-        if (!booking.symptoms.trim() || booking.symptoms.trim().length < 2) missing.push('Symptoms / fault description');
+        const symptomsRequired = selectedCategory === 'diagnostics' || selectedCategory === 'tuning';
+        if (symptomsRequired && (!booking.symptoms.trim() || booking.symptoms.trim().length < 2)) {
+            missing.push(selectedCategory === 'tuning' ? 'Tuning goals' : 'Symptoms / fault description');
+        }
 
         if (missing.length > 0) {
             setError(`Please fill in: ${missing.join(', ')}`);
@@ -480,6 +538,8 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
                 setAvailability(null);
                 setSelectedSlot('');
                 setPriceInfo(null);
+                setSubStep('category');
+                setSelectedCategory(null);
                 return;
             }
             setStatus(json.message || 'Booking submitted! Check your email for confirmation.');
@@ -487,6 +547,8 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
             setAvailability(null);
             setSelectedSlot('');
             setPriceInfo(null);
+            setSubStep('category');
+            setSelectedCategory(null);
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Could not create booking');
         } finally {
@@ -521,65 +583,295 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
                 </div>
             )}
 
-            {/* ===== STEP 1: Service & Location ===== */}
+            {/* ===== STEP 1: Service & Location (Sub-steps) ===== */}
             <StepPanel active={currentStep === 1} direction={direction}>
-                <div className="rounded-2xl border border-border-default bg-surface-alt p-6 sm:p-8">
+                <div className="rounded-2xl border border-border-default bg-surface-alt p-6 sm:p-8 overflow-hidden relative">
+                    {/* Header */}
                     <div className="flex items-center gap-3 mb-6">
                         <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand/10 text-brand">
                             <Wrench className="h-5 w-5" />
                         </div>
                         <div>
                             <h3 className="text-lg font-bold text-text-primary">Service & Location</h3>
-                            <p className="text-xs text-text-muted">Choose your service and enter your postcode</p>
+                            <p className="text-xs text-text-muted">
+                                {subStep === 'category' ? 'Select a service category' : 'Choose your specific service'}
+                            </p>
                         </div>
                     </div>
 
-                    {loadingServices && <p className="text-sm text-text-muted">Loading services…</p>}
+                    {loadingServices && (
+                        <div className="mb-6 flex items-center gap-2 text-sm text-text-muted">
+                            <Loader2 className="h-4 w-4 animate-spin" />
+                            Loading services...
+                        </div>
+                    )}
 
-                    <div className="grid gap-5 sm:grid-cols-2">
-                        {/* Service dropdown */}
-                        <div className="sm:col-span-2">
-                            <label htmlFor="service-select" className={labelClass}>Service *</label>
-                            <select
-                                id="service-select"
-                                value={booking.service_ids[0] || ''}
-                                onChange={(e) => {
-                                    setBooking((prev) => ({ ...prev, service_ids: [e.target.value] }));
-                                    setAvailability(null);
-                                    setSelectedSlot('');
-                                }}
-                                className={`${inputClass} appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%2394a3b8%22%20stroke-width%3D%222%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%2F%3E%3C%2Fsvg%3E')] bg-[position:right_12px_center] bg-no-repeat pr-10`}
-                            >
-                                {services.map((s) => (
-                                    <option key={s.id} value={s.id}>{s.label} - {s.duration_minutes} mins</option>
-                                ))}
-                            </select>
+                    {/* SubStep 1A: Category */}
+                    <SubStepPanel active={subStep === 'category'} direction={subStepDirection}>
+                        <div className="grid gap-3 sm:grid-cols-2">
+                            {SERVICE_CATEGORIES.map((cat) => {
+                                const Icon = cat.icon;
+                                return (
+                                    <button
+                                        key={cat.id}
+                                        type="button"
+                                        onClick={() => {
+                                            setSelectedCategory(cat.id);
+                                            setSubStepDirection('forward');
+                                            // Reset nested selections
+                                            setBooking((p) => ({ ...p, service_ids: [] }));
+                                            setSubStep('service');
+                                        }}
+                                        className="flex text-left items-start gap-4 rounded-xl border border-border-default bg-surface p-4 transition-all hover:border-brand/40 hover:bg-brand/5 hover:shadow-md group"
+                                    >
+                                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand/10 text-brand">
+                                            <Icon className="h-5 w-5" />
+                                        </div>
+                                        <div>
+                                            <h4 className="font-semibold text-text-primary group-hover:text-brand-light transition-colors">{cat.label}</h4>
+                                            <p className="mt-1 text-xs text-text-muted leading-relaxed">{cat.desc}</p>
+                                        </div>
+                                    </button>
+                                );
+                            })}
+                        </div>
+                    </SubStepPanel>
 
-                            {selectedService && (
-                                <p className="mt-2 text-xs text-text-muted leading-relaxed">
-                                    {getServiceHelper(selectedService.id)}
-                                </p>
+                    {/* SubStep 1B: Choose specific service */}
+                    <SubStepPanel active={subStep === 'service'} direction={subStepDirection}>
+                        <button
+                            type="button"
+                            onClick={() => { setSubStepDirection('back'); setSubStep('category'); }}
+                            className="flex items-center gap-1 text-xs font-semibold text-text-muted mb-4 hover:text-brand transition-colors"
+                        >
+                            <ChevronLeft className="h-4 w-4" /> Back to Categories
+                        </button>
+                        
+                        <div className="grid gap-3">
+                            {services
+                                .filter((s) => {
+                                    if (selectedCategory === 'diagnostics') return s.id.includes('diagnostic') || s.id.includes('health-check') || s.id.includes('adblue') || s.id.includes('limp') || s.id.includes('nox') || s.id.includes('dpf') || s.id.includes('electrical');
+                                    if (selectedCategory === 'servicing') return s.id.includes('service');
+                                    if (selectedCategory === 'brakes') return s.id.includes('brakes');
+                                    if (selectedCategory === 'tuning') return s.id.includes('tune') || s.id.includes('tuning');
+                                    return false;
+                                })
+                                .map((service) => {
+                                    const isSelected = booking.service_ids.includes(service.id);
+                                    
+                                    // Custom handling for Servicing includes
+                                    const isServicing = selectedCategory === 'servicing';
+                                    const includes = isServicing ? (service.label.toLowerCase().includes('minor') ? ['Oil & Filter', 'Fluid top-ups', 'Health Check'] : ['All minor items', 'Air, Fuel & Cabin Filters', 'Full Inspection']) : null;
+                                    
+                                    // Brakes handling
+                                    if (selectedCategory === 'brakes') return null; // handled separately below
+
+                                    return (
+                                        <label
+                                            key={service.id}
+                                            className={`relative flex cursor-pointer flex-col gap-3 rounded-xl border p-4 transition-all ${
+                                                isSelected
+                                                    ? 'border-brand bg-brand/5 shadow-sm ring-1 ring-brand'
+                                                    : 'border-border-default bg-surface hover:border-brand/40 hover:bg-surface-alt'
+                                            }`}
+                                        >
+                                            <div className="flex items-start gap-4">
+                                                <div className="flex h-5 items-center mt-0.5">
+                                                    <input
+                                                        type="radio"
+                                                        name="service_selection"
+                                                        value={service.id}
+                                                        checked={isSelected}
+                                                        onChange={(e) => {
+                                                            setBooking((p) => ({ ...p, service_ids: [e.target.value] }));
+                                                        }}
+                                                        className="h-4 w-4 border-border-default text-brand focus:ring-brand bg-surface"
+                                                    />
+                                                </div>
+                                                <div className="flex-1">
+                                                    <div className="flex items-center justify-between">
+                                                        <span className={`font-semibold ${isSelected ? 'text-brand-light' : 'text-text-primary'}`}>
+                                                            {service.label}
+                                                        </span>
+                                                        <span className="text-sm font-bold text-text-primary">
+                                                            from £{Object.values(service.zone_price)[0] ?? 120}
+                                                        </span>
+                                                    </div>
+                                                    <p className="mt-1 text-xs text-text-muted leading-relaxed">
+                                                        {getServiceHelper(service.id)}
+                                                    </p>
+                                                    <div className="mt-2.5 flex items-center gap-3 text-[11px] font-medium text-text-secondary">
+                                                        <span className="flex items-center gap-1">
+                                                            <Calendar className="h-3.5 w-3.5 opacity-70" /> {service.duration_minutes} mins
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            {/* Servicing checklist */}
+                                            {isServicing && includes && (
+                                                <div className="ml-9 mt-3 rounded-lg bg-surface pl-3 pr-4 py-3 text-xs border border-border-default">
+                                                    <ul className="space-y-1.5 text-text-secondary">
+                                                        {includes.map((inc, i) => (
+                                                            <li key={i} className="flex items-center gap-2">
+                                                                <CheckCircle2 className="h-3.5 w-3.5 text-brand shrink-0" />
+                                                                {inc}
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+                                            )}
+                                        </label>
+                                    );
+                                })}
+
+                            {/* Custom Brake Selector logic */}
+                            {selectedCategory === 'brakes' && (
+                                <div className="space-y-3">
+                                    <div className="grid gap-3 sm:grid-cols-3">
+                                        {['sprinter', 'vito', 'citan'].map((model) => (
+                                            <button
+                                                key={model}
+                                                type="button"
+                                                onClick={() => {
+                                                    const s = services.find(x => x.id.includes(model) && x.id.includes('brakes'));
+                                                    if (s) {
+                                                        setBooking((p) => ({ ...p, service_ids: [s.id] }));
+                                                        setServicingModel(model);
+                                                        setSubStepDirection('forward');
+                                                        setSubStep('brake-config');
+                                                    }
+                                                }}
+                                                className="flex flex-col items-center justify-center gap-2 rounded-xl border border-border-default bg-surface p-4 transition-all hover:border-brand/40 hover:bg-brand/5 group"
+                                            >
+                                                <Car className="h-6 w-6 text-text-muted group-hover:text-brand transition-colors" />
+                                                <span className="font-semibold text-text-primary group-hover:text-brand-light">{BRAKE_PRICING[model].label}</span>
+                                            </button>
+                                        ))}
+                                    </div>
+                                    <p className="text-center text-xs text-text-muted mt-2">Select your van model to configure brakes</p>
+                                </div>
                             )}
-                            <p className="mt-1.5 text-xs text-text-muted">
-                                Not sure which service? <a href="/services" className="text-brand hover:text-brand-light underline">View all services</a> or{' '}
-                                <a
-                                    href={`https://wa.me/${siteConfig.contact.whatsappE164}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="text-brand hover:text-brand-light underline"
-                                    onClick={() => trackWhatsAppLead('booking_form_inline')}
-                                >
-                                    message us on WhatsApp
-                                </a>
-                                .
-                            </p>
                         </div>
 
-                        {/* Postcode */}
+                        {/* Next step button (except for brakes which auto-advances to brake-config) */}
+                        {selectedCategory !== 'brakes' && booking.service_ids.length > 0 && (
+                            <div className="mt-6 flex justify-end">
+                                <CTAButton onClick={() => { setSubStepDirection('forward'); setSubStep('postcode'); }} icon={<ChevronRight className="h-4 w-4" />}>
+                                    Next: Location
+                                </CTAButton>
+                            </div>
+                        )}
+                    </SubStepPanel>
+
+                    {/* SubStep 1C: Brake Configurator */}
+                    <SubStepPanel active={subStep === 'brake-config'} direction={subStepDirection}>
+                        <button
+                            type="button"
+                            onClick={() => { setSubStepDirection('back'); setSubStep('service'); }}
+                            className="flex items-center gap-1 text-xs font-semibold text-text-muted mb-4 hover:text-brand transition-colors"
+                        >
+                            <ChevronLeft className="h-4 w-4" /> Back to Models
+                        </button>
+                        
+                        <div className="rounded-xl border border-border-default bg-surface p-5">
+                            <h4 className="font-semibold text-text-primary mb-4">Configure {BRAKE_PRICING[servicingModel]?.label} Brakes</h4>
+                            
+                            <div className="space-y-5">
+                                <div>
+                                    <label className={labelClass}>Which axle?</label>
+                                    <div className="flex gap-3">
+                                        {[
+                                            { id: 'front', label: 'Front' },
+                                            { id: 'rear', label: 'Rear' },
+                                            { id: 'both', label: 'Both' }
+                                        ].map(pos => (
+                                            <button
+                                                key={pos.id}
+                                                type="button"
+                                                onClick={() => setBrakePosition(pos.id as any)}
+                                                className={`flex-1 rounded-lg py-2 text-sm font-medium transition-colors border ${brakePosition === pos.id ? 'border-brand bg-brand/10 text-brand-light' : 'border-border-default bg-surface-alt text-text-muted hover:border-text-muted'}`}
+                                            >
+                                                {pos.label}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label className={labelClass}>What needs replacing?</label>
+                                    <div className="flex flex-col gap-2">
+                                        {[
+                                            { id: 'pads', label: 'Pads only' },
+                                            { id: 'pads-discs', label: 'Pads & Discs' },
+                                            { id: 'pads-discs-shoes', label: 'Pads, Discs & Park Brake Shoes', hide: brakePosition === 'front' },
+                                            { id: 'not-sure', label: 'Not sure (Get Quote)' }
+                                        ].filter(t => !t.hide).map(type => (
+                                            <label key={type.id} className={`flex items-center gap-3 rounded-lg border p-3 cursor-pointer transition-colors ${brakeType === type.id ? 'border-brand bg-brand/5' : 'border-border-default hover:border-text-muted'}`}>
+                                                <input
+                                                    type="radio"
+                                                    name="brake_type"
+                                                    checked={brakeType === type.id}
+                                                    onChange={() => setBrakeType(type.id)}
+                                                    className="h-4 w-4 text-brand focus:ring-brand border-border-default bg-surface"
+                                                />
+                                                <div className="flex flex-1 justify-between items-center text-sm">
+                                                    <span className={brakeType === type.id ? 'font-medium text-text-primary' : 'text-text-secondary'}>{type.label}</span>
+                                                    {type.id !== 'not-sure' && (
+                                                        <span className="font-bold text-text-primary">£{BRAKE_PRICING[servicingModel]?.options[brakePosition][type.id]}</span>
+                                                    )}
+                                                </div>
+                                            </label>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div className="mt-6 flex justify-end">
+                                <CTAButton onClick={() => { 
+                                    const opts = brakeType !== 'not-sure' ? ` - ${brakePosition} ${brakeType}` : ' - Unsure quote needed';
+                                    setBooking(p => ({ ...p, additional_notes: (p.additional_notes + ` [Brake Config: ${servicingModel}${opts}]`).trim() }));
+                                    setSubStepDirection('forward'); 
+                                    setSubStep('postcode'); 
+                                }} icon={<ChevronRight className="h-4 w-4" />}>
+                                    Next: Location
+                                </CTAButton>
+                            </div>
+                        </div>
+                    </SubStepPanel>
+
+                    {/* SubStep 1D: Postcode & Check */}
+                    <SubStepPanel active={subStep === 'postcode'} direction={subStepDirection}>
+                        <button
+                            type="button"
+                            onClick={() => { setSubStepDirection('back'); setSubStep(selectedCategory === 'brakes' ? 'brake-config' : 'service'); }}
+                            className="flex items-center gap-1 text-xs font-semibold text-text-muted mb-4 hover:text-brand transition-colors"
+                        >
+                            <ChevronLeft className="h-4 w-4" /> Back to {selectedCategory === 'brakes' ? 'Brakes' : 'Services'}
+                        </button>
+
+                        {/* Selected summary */}
+                        <div className="mb-6 rounded-xl border border-border-default bg-surface p-4 flex items-center justify-between">
+                            <div>
+                                <p className="text-xs text-text-muted uppercase tracking-wider mb-1">Selected Service</p>
+                                <p className="font-semibold text-text-primary">
+                                    {selectedService?.label}
+                                </p>
+                                {selectedCategory === 'brakes' && brakeType !== 'not-sure' && (
+                                    <p className="text-xs text-text-secondary mt-0.5">
+                                        {servicingModel} • {brakePosition} • {brakeType.replace(/-/g, ' ')}
+                                    </p>
+                                )}
+                            </div>
+                            <div className="h-10 w-10 flex items-center justify-center rounded-full bg-brand/10 text-brand">
+                                <CheckCircle2 className="h-5 w-5" />
+                            </div>
+                        </div>
+
                         <div>
                             <label htmlFor="booking-postcode" className={labelClass}>
                                 <MapPin className="inline h-3.5 w-3.5 mr-1 -mt-0.5" />
-                                Postcode *
+                                Please enter your postcode to check availability
                             </label>
                             <input
                                 id="booking-postcode"
@@ -595,24 +887,29 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
                         </div>
 
                         {/* Check Availability */}
-                        <div className="flex items-end">
+                        <div className="mt-5 flex items-end">
                             <CTAButton
                                 type="button"
                                 onClick={refreshAvailability}
-                                disabled={loadingAvailability}
+                                disabled={loadingAvailability || booking.postcode.length < 5}
                                 className="w-full"
                                 icon={loadingAvailability ? <Loader2 className="h-4 w-4 animate-spin" /> : <Search className="h-4 w-4" />}
                             >
-                                {loadingAvailability ? 'Checking…' : 'Check Availability'}
+                                {loadingAvailability ? 'Checking…' : 'Check Availability & Proceed'}
                             </CTAButton>
                         </div>
-                    </div>
+                        
+                        {availability?.manual_review_required && (
+                            <p className="mt-4 text-sm text-warning text-center">
+                                This postcode is outside our standard area. Proceed below and we'll review manually.
+                            </p>
+                        )}
+                    </SubStepPanel>
 
-                    {availability?.manual_review_required && (
-                        <p className="mt-4 text-sm text-warning">
-                            This postcode is over 60 minutes away. Fill in your details below and we'll review manually.
-                        </p>
-                    )}
+                    <SubStepDots 
+                        current={subStep === 'category' ? 0 : subStep === 'service' ? 1 : subStep === 'brake-config' ? 2 : selectedCategory === 'brakes' ? 3 : 2} 
+                        total={selectedCategory === 'brakes' ? 4 : 3} 
+                    />
                 </div>
             </StepPanel>
 
@@ -845,22 +1142,57 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
                         </div>
                     </fieldset>
 
-                    {/* Fault */}
-                    <fieldset className="mb-6">
-                        <legend className="text-sm font-semibold text-text-primary mb-3 flex items-center gap-2">
-                            <AlertCircle className="h-4 w-4 text-brand" /> Fault Description
-                        </legend>
-                        <div className="space-y-4">
-                            <div>
-                                <label htmlFor="b-symptoms" className={labelClass}>Symptoms / warning lights *</label>
-                                <textarea id="b-symptoms" className={inputClass} value={booking.symptoms} onChange={(e) => setBooking((p) => ({ ...p, symptoms: e.target.value }))} rows={3} placeholder="Describe the issue, when it started, and any warning lights" />
-                            </div>
-                            <div>
-                                <label htmlFor="b-notes" className={labelClass}>Additional notes</label>
-                                <textarea id="b-notes" className={inputClass} value={booking.additional_notes} onChange={(e) => setBooking((p) => ({ ...p, additional_notes: e.target.value }))} rows={2} placeholder="Parking instructions, previous repair history, etc." />
-                            </div>
-                        </div>
-                    </fieldset>
+                    {/* Service Specific Details */}
+                    {(() => {
+                        const forms = {
+                            diagnostics: {
+                                title: 'Fault Description',
+                                icon: <AlertCircle className="h-4 w-4 text-brand" />,
+                                label: 'Symptoms / warning lights *',
+                                placeholder: 'Describe the issue, when it started, and any warning lights...'
+                            },
+                            tuning: {
+                                title: 'Tuning Goals',
+                                icon: <TrendingUp className="h-4 w-4 text-brand" />,
+                                label: 'What are you looking to achieve? *',
+                                placeholder: 'e.g. Better fuel economy, more power, EGR delete...'
+                            },
+                            servicing: {
+                                title: 'Service Requirements',
+                                icon: <Wrench className="h-4 w-4 text-brand" />,
+                                label: 'Any specific concerns? (Optional)',
+                                placeholder: 'e.g. Squeaking belt, slow starting, overdue oil change...'
+                            },
+                            brakes: {
+                                title: 'Brake Condition',
+                                icon: <Shield className="h-4 w-4 text-brand" />,
+                                label: 'Are you experiencing specific issues? (Optional)',
+                                placeholder: 'e.g. Squealing, grinding noise, soft pedal, warning light...'
+                            }
+                        } as const;
+                        
+                        const form = (selectedCategory && forms[selectedCategory as keyof typeof forms]) || forms.diagnostics;
+
+                        return (
+                            <fieldset className="mb-6">
+                                <legend className="text-sm font-semibold text-text-primary mb-3 flex items-center gap-2">
+                                    {form.icon} {form.title}
+                                </legend>
+                                <div className="space-y-4">
+                                    <div>
+                                        <label htmlFor="b-symptoms" className={labelClass}>
+                                            {form.label}
+                                        </label>
+                                        <textarea id="b-symptoms" className={inputClass} value={booking.symptoms} onChange={(e) => setBooking((p) => ({ ...p, symptoms: e.target.value }))} rows={3} placeholder={form.placeholder} />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="b-notes" className={labelClass}>Additional notes (Optional)</label>
+                                        <textarea id="b-notes" className={inputClass} value={booking.additional_notes} onChange={(e) => setBooking((p) => ({ ...p, additional_notes: e.target.value }))} rows={2} placeholder="Parking instructions, previous repair history, etc." />
+                                    </div>
+                                </div>
+                            </fieldset>
+                        );
+                    })()}
 
                     {/* Safe location */}
                     <label className="flex items-start gap-3 rounded-xl border border-border-default bg-surface p-4 cursor-pointer transition-all hover:border-brand/30 text-sm text-text-secondary mb-6">

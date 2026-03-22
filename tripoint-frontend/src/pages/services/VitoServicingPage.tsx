@@ -9,6 +9,7 @@ import { Notice } from '@/components/Notice';
 import { CheckCircle2, ArrowRight, Phone, MessageCircle, AlertTriangle, Clock, Shield, Wrench, Gauge } from 'lucide-react';
 import { siteConfig } from '@/config/site';
 import { ServiceSchema, BreadcrumbSchema, FaqPageSchema } from '@/components/JsonLd';
+import { OptimizedImage } from '@/components/OptimizedImage';
 
 function useScrollReveal() {
     const ref = useRef<HTMLDivElement>(null);
@@ -80,9 +81,15 @@ export function VitoServicingPage() {
 
             {/* \u2500\u2500\u2500 HERO \u2500\u2500\u2500 */}
             <section className="relative h-72 sm:h-96 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-brand-dark via-surface to-surface" />
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(var(--color-brand-rgb),0.12),transparent_70%)]" />
-                <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-10">
+                <img
+                    src="/images/services/van-vito-w447-front.png"
+                    alt=""
+                    className="absolute inset-0 h-full w-full object-cover object-center"
+                    aria-hidden="true"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/80 to-surface/40" />
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(var(--color-brand-rgb),0.15),transparent_65%)]" />
+                <div className="absolute bottom-0 left-0 right-0 z-10 p-6 sm:p-10">
                     <div className="mx-auto max-w-5xl">
                         <p className="text-sm font-semibold uppercase tracking-widest text-brand mb-2">Mercedes Vito Specialist</p>
                         <h1 className="text-4xl font-extrabold text-text-primary sm:text-5xl lg:text-6xl">Vito Servicing</h1>
@@ -196,6 +203,42 @@ export function VitoServicingPage() {
                 </div>
             </Section>
 
+            {/* Service reset & fluids */}
+            <Section>
+                <div className="mx-auto max-w-5xl">
+                    <h2 className="text-2xl sm:text-3xl font-bold text-text-primary text-center">ASSYST reset &amp; oil checks</h2>
+                    <p className="mt-2 text-text-secondary text-center max-w-2xl mx-auto">
+                        After every service we reset the ASSYST counter via Xentry — your dash shows the correct next interval. We also confirm oil level using the electronic readout where fitted.
+                    </p>
+                    <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 reveal">
+                        <figure className="overflow-hidden rounded-2xl border border-border-default">
+                            <div className="relative aspect-[16/10] min-h-[220px] sm:min-h-[280px]">
+                                <OptimizedImage
+                                    src="/images/new-images/assyst-reset-on-dash.jpg"
+                                    alt="Mercedes van dash showing remaining service distance and time on ASSYST display"
+                                    className="absolute inset-0 h-full w-full object-cover"
+                                />
+                            </div>
+                            <figcaption className="border-t border-border-default bg-surface-alt px-4 py-3 text-sm text-text-secondary">
+                                Service interval on the dash — recalculated after a full Xentry reset, not a generic code clear.
+                            </figcaption>
+                        </figure>
+                        <figure className="overflow-hidden rounded-2xl border border-border-default">
+                            <div className="relative aspect-[16/10] min-h-[220px] sm:min-h-[280px]">
+                                <OptimizedImage
+                                    src="/images/new-images/mercedes-oil-level-on-dash.jpg"
+                                    alt="Mercedes instrument cluster showing electronic engine oil level"
+                                    className="absolute inset-0 h-full w-full object-cover"
+                                />
+                            </div>
+                            <figcaption className="border-t border-border-default bg-surface-alt px-4 py-3 text-sm text-text-secondary">
+                                Electronic oil level — checked after the oil change so you know the fill is right.
+                            </figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </Section>
+
             {/* \u2500\u2500\u2500 SECTION 3: Common Vito issues we catch \u2500\u2500\u2500 */}
             <Section>
                 <div className="mx-auto max-w-5xl">
@@ -218,18 +261,46 @@ export function VitoServicingPage() {
                                 ))}
                             </ul>
                         </div>
-                        <div className="order-1 md:order-2 rounded-2xl border border-yellow-500/20 bg-yellow-500/5 p-6">
-                            <div className="flex items-start gap-3">
-                                <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-yellow-500" />
-                                <div>
-                                    <h3 className="font-bold text-text-primary">A note on dual-clutch transmissions</h3>
-                                    <p className="mt-2 text-sm text-text-secondary">
-                                        Some W447 Vitos are fitted with the 7G-DCT dual-clutch transmission. This gearbox has specific fluid requirements and a service interval that&apos;s separate from the engine service. If you&apos;re unsure whether your Vito has a DCT or the standard 7G-TRONIC torque converter, send us your reg and we&apos;ll confirm.
-                                    </p>
-                                    <p className="mt-2 text-sm text-text-secondary">
-                                        We can perform transmission fluid changes alongside regular servicing - just ask when booking.
-                                    </p>
+                        <div className="order-1 md:order-2 space-y-4">
+                            <div className="rounded-2xl border border-yellow-500/20 bg-yellow-500/5 p-6">
+                                <div className="flex items-start gap-3">
+                                    <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-yellow-500" />
+                                    <div>
+                                        <h3 className="font-bold text-text-primary">A note on dual-clutch transmissions</h3>
+                                        <p className="mt-2 text-sm text-text-secondary">
+                                            Some W447 Vitos are fitted with the 7G-DCT dual-clutch transmission. This gearbox has specific fluid requirements and a service interval that&apos;s separate from the engine service. If you&apos;re unsure whether your Vito has a DCT or the standard 7G-TRONIC torque converter, send us your reg and we&apos;ll confirm.
+                                        </p>
+                                        <p className="mt-2 text-sm text-text-secondary">
+                                            We can perform transmission fluid changes alongside regular servicing - just ask when booking.
+                                        </p>
+                                    </div>
                                 </div>
+                            </div>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <figure className="overflow-hidden rounded-xl border border-border-default">
+                                    <div className="relative aspect-[16/10] h-44 sm:h-52">
+                                        <OptimizedImage
+                                            src="/images/new-images/transmission-service-on-9g-merc.jpg"
+                                            alt="Automatic transmission during fluid service on Mercedes commercial vehicle"
+                                            className="absolute inset-0 h-full w-full object-cover"
+                                        />
+                                    </div>
+                                    <figcaption className="border-t border-border-default bg-surface-alt px-3 py-2 text-xs text-text-secondary">
+                                        Transmission fluid service — correct spec for 7G-TRONIC / 9G-TRONIC.
+                                    </figcaption>
+                                </figure>
+                                <figure className="overflow-hidden rounded-xl border border-border-default">
+                                    <div className="relative aspect-[16/10] h-44 sm:h-52">
+                                        <OptimizedImage
+                                            src="/images/new-images/using-torque-wrench-on-transmission.jpg"
+                                            alt="Torque wrench on transmission drain plug to manufacturer torque"
+                                            className="absolute inset-0 h-full w-full object-cover"
+                                        />
+                                    </div>
+                                    <figcaption className="border-t border-border-default bg-surface-alt px-3 py-2 text-xs text-text-secondary">
+                                        Plugs torqued to spec — no leaks, no rounded fasteners.
+                                    </figcaption>
+                                </figure>
                             </div>
                         </div>
                     </div>

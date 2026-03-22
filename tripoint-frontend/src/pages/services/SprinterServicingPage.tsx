@@ -9,6 +9,7 @@ import { Notice } from '@/components/Notice';
 import { CheckCircle2, XCircle, ArrowRight, Phone, MessageCircle, AlertTriangle, Clock, Shield, Wrench, Gauge } from 'lucide-react';
 import { siteConfig } from '@/config/site';
 import { ServiceSchema, BreadcrumbSchema, FaqPageSchema } from '@/components/JsonLd';
+import { OptimizedImage } from '@/components/OptimizedImage';
 
 function useScrollReveal() {
     const ref = useRef<HTMLDivElement>(null);
@@ -85,9 +86,15 @@ export function SprinterServicingPage() {
 
             {/* \u2500\u2500\u2500 HERO \u2500\u2500\u2500 */}
             <section className="relative h-72 sm:h-96 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-brand-dark via-surface to-surface" />
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(var(--color-brand-rgb),0.15),transparent_70%)]" />
-                <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-10">
+                <img
+                    src="/images/services/van-sprinter-w907-front.png"
+                    alt=""
+                    className="absolute inset-0 h-full w-full object-cover object-center"
+                    aria-hidden="true"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/80 to-surface/40" />
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(var(--color-brand-rgb),0.18),transparent_65%)]" />
+                <div className="absolute bottom-0 left-0 right-0 z-10 p-6 sm:p-10">
                     <div className="mx-auto max-w-5xl">
                         <p className="text-sm font-semibold uppercase tracking-widest text-brand mb-2">Mercedes Sprinter Specialist</p>
                         <h1 className="text-4xl font-extrabold text-text-primary sm:text-5xl lg:text-6xl">Sprinter Servicing</h1>
@@ -206,6 +213,25 @@ export function SprinterServicingPage() {
                             </ul>
                         </div>
                     </div>
+                    <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch reveal">
+                        <figure className="overflow-hidden rounded-2xl border border-border-default">
+                            <div className="relative aspect-[16/10] min-h-[220px] sm:min-h-[280px]">
+                                <OptimizedImage
+                                    src="/images/new-images/mercedes-oil-level-on-dash.jpg"
+                                    alt="Mercedes instrument cluster showing electronic engine oil level check"
+                                    className="absolute inset-0 h-full w-full object-cover"
+                                />
+                            </div>
+                            <figcaption className="border-t border-border-default bg-surface-alt px-4 py-3 text-sm text-text-secondary">
+                                Electronic oil level check on the dash — we verify correct fill and spec on every service.
+                            </figcaption>
+                        </figure>
+                        <div className="rounded-2xl border border-border-default bg-surface-alt p-6 flex flex-col justify-center">
+                            <p className="text-text-secondary leading-relaxed">
+                                Every minor and major service includes fluid level checks with the correct MB oil specification. On models with an electronic oil level readout, we confirm the level after the oil change so you leave with a clean bill of health — not a guess.
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </Section>
 
@@ -295,8 +321,35 @@ export function SprinterServicingPage() {
                             <div className="flex justify-between"><span>Diagnostic fault scan</span><span className="font-semibold text-brand-light">included</span></div>
                             <div className="flex justify-between"><span>Battery condition test</span><span className="font-semibold text-brand-light">included (major)</span></div>
                             <div className="flex justify-between"><span>Forced DPF regeneration</span><span className="font-semibold text-brand-light">from &pound;45</span></div>
+                            <div className="flex justify-between"><span>9G-TRONIC transmission fluid service</span><span className="font-semibold text-brand-light">from &pound;120</span></div>
 
                         </div>
+                    </div>
+                    <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4 reveal">
+                        <figure className="overflow-hidden rounded-xl border border-border-default">
+                            <div className="relative aspect-[16/10] h-44 sm:h-52">
+                                <OptimizedImage
+                                    src="/images/new-images/transmission-service-on-9g-merc.jpg"
+                                    alt="Mercedes 9G-TRONIC automatic transmission during fluid service"
+                                    className="absolute inset-0 h-full w-full object-cover"
+                                />
+                            </div>
+                            <figcaption className="border-t border-border-default bg-surface-alt px-3 py-2 text-xs text-text-secondary">
+                                9G-TRONIC fluid service — correct spec and fill level, booked as an add-on.
+                            </figcaption>
+                        </figure>
+                        <figure className="overflow-hidden rounded-xl border border-border-default">
+                            <div className="relative aspect-[16/10] h-44 sm:h-52">
+                                <OptimizedImage
+                                    src="/images/new-images/using-torque-wrench-on-transmission.jpg"
+                                    alt="Torque wrench set to manufacturer specification on transmission drain plug"
+                                    className="absolute inset-0 h-full w-full object-cover"
+                                />
+                            </div>
+                            <figcaption className="border-t border-border-default bg-surface-alt px-3 py-2 text-xs text-text-secondary">
+                                Drain and fill plugs torqued to Mercedes specification — no rounded bolts, no leaks.
+                            </figcaption>
+                        </figure>
                     </div>
                     <p className="mt-3 text-sm text-text-muted">Prices based on standard Sprinter engines (OM651, OM654). V6 OM642 models may attract a supplement due to increased oil capacity. We&apos;ll confirm before booking.</p>
                 </div>
@@ -318,7 +371,19 @@ export function SprinterServicingPage() {
                                 A proper Xentry reset recalculates the next service date and mileage based on your actual driving data. A generic reset just clears the counter - meaning your next service alert may come too early or too late.
                             </p>
                         </div>
-                        <div className="order-1 md:order-2">
+                        <div className="order-1 md:order-2 space-y-4">
+                            <figure className="overflow-hidden rounded-2xl border border-border-default">
+                                <div className="relative aspect-[16/10] min-h-[200px] sm:min-h-[260px]">
+                                    <OptimizedImage
+                                        src="/images/new-images/assyst-reset-on-dash.jpg"
+                                        alt="Mercedes Sprinter dash showing ASSYST remaining time and distance until next service"
+                                        className="absolute inset-0 h-full w-full object-cover"
+                                    />
+                                </div>
+                                <figcaption className="border-t border-border-default bg-surface-alt px-4 py-3 text-sm text-text-secondary">
+                                    ASSYST on the dash — next service date and distance recalculated after a proper Xentry reset.
+                                </figcaption>
+                            </figure>
                             <div className="rounded-2xl border border-brand/20 bg-brand/5 p-6">
                                 <h3 className="text-lg font-bold text-text-primary mb-4">When is your Sprinter due?</h3>
                                 <div className="space-y-3">

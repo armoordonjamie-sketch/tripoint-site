@@ -18,11 +18,17 @@ export function Layout() {
             <LocalBusinessSchema />
             <OrganizationWebsiteSchema />
             <Header />
-            <main className="flex-1 pb-20 lg:pb-0">
+            <main
+                className={
+                    pathname === '/contact'
+                        ? 'min-h-0 w-full pb-8 pt-0 lg:pb-0'
+                        : 'min-h-0 flex-1 pb-20 lg:pb-0'
+                }
+            >
                 <Outlet />
             </main>
             <Footer />
-            <MobileStickyCTA />
+            {pathname !== '/contact' && <MobileStickyCTA />}
         </div>
     );
 }

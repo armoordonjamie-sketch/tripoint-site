@@ -9,6 +9,7 @@ import { Notice } from '@/components/Notice';
 import { CheckCircle2, XCircle, ArrowRight, Phone, MessageCircle, AlertTriangle, Shield, Wrench } from 'lucide-react';
 import { siteConfig } from '@/config/site';
 import { ServiceSchema, BreadcrumbSchema, FaqPageSchema } from '@/components/JsonLd';
+import { OptimizedImage } from '@/components/OptimizedImage';
 
 function useScrollReveal() {
     const ref = useRef<HTMLDivElement>(null);
@@ -80,9 +81,15 @@ export function CitanServicingPage() {
 
             {/* \u2500\u2500\u2500 HERO \u2500\u2500\u2500 */}
             <section className="relative h-72 sm:h-96 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-brand-dark via-surface to-surface" />
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(var(--color-brand-rgb),0.12),transparent_70%)]" />
-                <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-10">
+                <img
+                    src="/images/services/van-citan-w420-front.png"
+                    alt=""
+                    className="absolute inset-0 h-full w-full object-cover object-center"
+                    aria-hidden="true"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/80 to-surface/40" />
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(var(--color-brand-rgb),0.15),transparent_65%)]" />
+                <div className="absolute bottom-0 left-0 right-0 z-10 p-6 sm:p-10">
                     <div className="mx-auto max-w-5xl">
                         <p className="text-sm font-semibold uppercase tracking-widest text-brand mb-2">Mercedes Citan Specialist</p>
                         <h1 className="text-4xl font-extrabold text-text-primary sm:text-5xl lg:text-6xl">Citan Servicing</h1>
@@ -186,6 +193,42 @@ export function CitanServicingPage() {
                                 ))}
                             </ul>
                         </div>
+                    </div>
+                </div>
+            </Section>
+
+            {/* Service indicator & oil */}
+            <Section>
+                <div className="mx-auto max-w-5xl">
+                    <h2 className="text-2xl sm:text-3xl font-bold text-text-primary text-center">Service indicator &amp; oil level</h2>
+                    <p className="mt-2 text-text-secondary text-center max-w-2xl mx-auto">
+                        W415 models need a Renault-compatible reset; W420 uses Mercedes Xentry. Either way, your dash shows the correct next interval. We verify oil level on the electronic readout after every oil change.
+                    </p>
+                    <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 reveal">
+                        <figure className="overflow-hidden rounded-2xl border border-border-default">
+                            <div className="relative aspect-[16/10] min-h-[220px] sm:min-h-[280px]">
+                                <OptimizedImage
+                                    src="/images/new-images/assyst-reset-on-dash.jpg"
+                                    alt="Mercedes Citan dash showing remaining service distance and time"
+                                    className="absolute inset-0 h-full w-full object-cover"
+                                />
+                            </div>
+                            <figcaption className="border-t border-border-default bg-surface-alt px-4 py-3 text-sm text-text-secondary">
+                                Service due display — reset properly after your visit, not just cleared.
+                            </figcaption>
+                        </figure>
+                        <figure className="overflow-hidden rounded-2xl border border-border-default">
+                            <div className="relative aspect-[16/10] min-h-[220px] sm:min-h-[280px]">
+                                <OptimizedImage
+                                    src="/images/new-images/mercedes-oil-level-on-dash.jpg"
+                                    alt="Mercedes instrument cluster showing electronic engine oil level"
+                                    className="absolute inset-0 h-full w-full object-cover"
+                                />
+                            </div>
+                            <figcaption className="border-t border-border-default bg-surface-alt px-4 py-3 text-sm text-text-secondary">
+                                Oil level check on the dash — confirms correct fill after service.
+                            </figcaption>
+                        </figure>
                     </div>
                 </div>
             </Section>

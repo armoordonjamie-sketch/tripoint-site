@@ -85,6 +85,19 @@ export function VorVanDiagnosticsPage() {
                         Every hour your van is off the road costs you money. We get it. Whether you&apos;re an owner-driver missing deliveries, a hire branch with a vehicle stuck in the yard, or a fleet operator with downtime burning a hole in your budget - you need a fast, clear answer. VOR (Vehicle Off Road) van diagnostics gives you priority scheduling and a documented &ldquo;back-on-road&rdquo; decision: fix now, parts needed, or workshop referral. No waffle - a proper triage so you can plan.
                     </p>
 
+                    <figure className="mt-8 overflow-hidden rounded-2xl border border-border-default reveal">
+                        <div className="relative aspect-[16/10] h-56 sm:h-64">
+                            <OptimizedImage
+                                src="/images/new-images/xentry-on-mercedes-engine.jpg"
+                                alt="Mercedes Xentry dealer diagnostics laptop connected for commercial van fault finding"
+                                className="absolute inset-0 h-full w-full object-cover"
+                            />
+                        </div>
+                        <figcaption className="border-t border-border-default bg-surface-alt px-4 py-3 text-sm text-text-secondary">
+                            Dealer-level Xentry on site — the same guided tests and module access we use on Standard Diagnosis, with VOR priority when you&apos;re off the road.
+                        </figcaption>
+                    </figure>
+
                     <div className="mt-8 rounded-2xl border border-warning/30 bg-warning/10 p-6 reveal">
                         <div className="flex items-start gap-3">
                             <Clock className="h-6 w-6 shrink-0 text-warning" />

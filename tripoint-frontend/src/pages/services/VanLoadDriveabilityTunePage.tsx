@@ -8,6 +8,7 @@ import { FaqAccordion } from '@/components/FaqAccordion';
 import { CheckCircle2, XCircle, ArrowRight, Phone, MessageCircle, AlertTriangle, TrendingUp, Gauge, Shield, Zap } from 'lucide-react';
 import { siteConfig } from '@/config/site';
 import { ServiceSchema, BreadcrumbSchema, FaqPageSchema } from '@/components/JsonLd';
+import { OptimizedImage } from '@/components/OptimizedImage';
 
 function useScrollReveal() {
     const ref = useRef<HTMLDivElement>(null);
@@ -79,9 +80,15 @@ export function VanLoadDriveabilityTunePage() {
 
             {/* \u2500\u2500\u2500 HERO \u2500\u2500\u2500 */}
             <section className="relative h-72 sm:h-96 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-orange-950 via-surface to-surface" />
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(249,115,22,0.12),transparent_70%)]" />
-                <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-10">
+                <img
+                    src="/images/services/van-sprinter-w907-front.png"
+                    alt=""
+                    className="absolute inset-0 h-full w-full object-cover object-center"
+                    aria-hidden="true"
+                />
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-950/90 via-surface/85 to-surface" />
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(249,115,22,0.18),transparent_70%)]" />
+                <div className="absolute bottom-0 left-0 right-0 z-10 p-6 sm:p-10">
                     <div className="mx-auto max-w-5xl">
                         <p className="text-sm font-semibold uppercase tracking-widest text-orange-400 mb-2">Commercial Van Tuning</p>
                         <h1 className="text-4xl font-extrabold text-text-primary sm:text-5xl lg:text-6xl">Load &amp; Driveability Tune</h1>
@@ -138,6 +145,18 @@ export function VanLoadDriveabilityTunePage() {
                 <div className="mx-auto max-w-5xl reveal">
                     <h2 className="text-2xl sm:text-3xl font-bold text-text-primary text-center">Before vs after</h2>
                     <p className="mt-2 text-text-secondary text-center max-w-2xl mx-auto">How the driving experience changes with a load tune.</p>
+                    <figure className="mt-8 overflow-hidden rounded-xl border border-border-default max-w-3xl mx-auto">
+                        <div className="relative aspect-[16/10] min-h-[220px] sm:min-h-[280px]">
+                            <OptimizedImage
+                                src="/images/new-images/mercedes-sprinter-driving-pov.jpg"
+                                alt="Driver's view from a Mercedes Sprinter cab"
+                                className="absolute inset-0 h-full w-full object-cover"
+                            />
+                        </div>
+                        <figcaption className="border-t border-border-default bg-surface-alt px-3 py-2 text-xs text-text-secondary text-center">
+                            The view from your cab. The table below shows what changes when you add a load tune.
+                        </figcaption>
+                    </figure>
                     <div className="mt-8 overflow-x-auto rounded-xl border border-border-default">
                         <table className="min-w-full">
                             <thead>

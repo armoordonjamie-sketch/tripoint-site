@@ -67,9 +67,14 @@ export function CitanBrakesPage() {
 
             {/* ─── HERO ─── */}
             <section className="relative h-72 sm:h-96 overflow-hidden">
-                <OptimizedImage src="/images/new-images/sprinter-brakes-hero.jpg" alt="Mercedes Citan brake service by TriPoint" className="h-full w-full object-cover" priority />
-                <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/70 to-surface/20" />
-                <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-10">
+                <img
+                    src="/images/services/van-citan-w420-front.png"
+                    alt=""
+                    className="absolute inset-0 h-full w-full object-cover object-center"
+                    aria-hidden="true"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/70 to-surface/25" />
+                <div className="absolute bottom-0 left-0 right-0 z-10 p-6 sm:p-10">
                     <div className="mx-auto max-w-5xl">
                         <p className="text-sm font-semibold uppercase tracking-widest text-brand mb-2">Mercedes Citan Specialist</p>
                         <h1 className="text-4xl font-extrabold text-text-primary sm:text-5xl lg:text-6xl">Citan Brakes</h1>
@@ -83,11 +88,13 @@ export function CitanBrakesPage() {
                 <div className="mx-auto max-w-5xl">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center reveal">
                         <div className="overflow-hidden rounded-2xl">
-                            <OptimizedImage
-                                src="/images/new-images/sprinter-brakes-01.jpg"
-                                alt="Worn brake pad next to new pad comparison"
-                                className="h-full w-full object-cover rounded-2xl transition-transform duration-500 hover:scale-105"
-                            />
+                            <div className="relative aspect-[16/10] min-h-[220px] sm:min-h-[280px]">
+                                <OptimizedImage
+                                    src="/images/new-images/citan-brakes.jpg"
+                                    alt="Mercedes Citan front brake disc and caliper during pad replacement"
+                                    className="absolute inset-0 h-full w-full object-cover rounded-2xl transition-transform duration-500 hover:scale-105"
+                                />
+                            </div>
                         </div>
                         <div>
                             <h2 className="text-2xl sm:text-3xl font-bold text-text-primary">Small van, big workload</h2>
@@ -95,7 +102,7 @@ export function CitanBrakesPage() {
                                 Your Citan&apos;s brakes work harder than you think. Tight deliveries, stop-start traffic, fully loaded - when they start making noise or the light comes on, get them sorted fast.
                             </p>
                             <p className="mt-3 text-text-secondary leading-relaxed">
-                                Genuine Mercedes parts, proper fitment, no workshop trip. The Citan is one of the most affordable Mercedes vans to maintain - our fixed-price packages keep it that way.
+                                Genuine Mercedes parts, proper fitment, no workshop trip — real Citan work, not generic stock photos. The Citan is one of the most affordable Mercedes vans to maintain - our fixed-price packages keep it that way.
                             </p>
                             <div className="mt-6 flex flex-wrap gap-3">
                                 <CTAButton href="/booking" size="md" onClick={() => trackBookNowClick('citan_brakes_top')}>Book Online</CTAButton>
@@ -133,11 +140,16 @@ export function CitanBrakesPage() {
                             </ul>
                         </div>
                         <div className="order-1 md:order-2 overflow-hidden rounded-2xl">
-                            <OptimizedImage
-                                src="/images/new-images/sprinter-brakes-02.jpg"
-                                alt="Digital vernier caliper measuring brake disc thickness"
-                                className="h-full w-full object-cover rounded-2xl transition-transform duration-500 hover:scale-105"
-                            />
+                            <figure>
+                                <div className="relative aspect-[16/10] min-h-[220px] sm:min-h-[280px]">
+                                    <OptimizedImage
+                                        src="/images/new-images/sprinter-brakes-02.jpg"
+                                        alt="Digital vernier caliper measuring brake disc thickness — same process for Citan"
+                                        className="absolute inset-0 h-full w-full object-cover rounded-2xl transition-transform duration-500 hover:scale-105"
+                                    />
+                                </div>
+                                <figcaption className="mt-2 text-xs text-text-muted">Disc thickness measured to Mercedes spec — same process for all our van brake work.</figcaption>
+                            </figure>
                         </div>
                     </div>
                 </div>
@@ -187,12 +199,16 @@ export function CitanBrakesPage() {
                         </div>
                     </div>
                     <div className="mt-10 overflow-hidden rounded-2xl max-w-2xl mx-auto">
-                        <OptimizedImage
-                            src="/images/new-images/sprinter-brakes-04.jpg"
-                            alt="Completed front brake assembly with new pads and discs"
-                            className="w-full object-cover rounded-2xl"
-                        />
-                        <p className="mt-2 text-xs text-text-muted text-center">New pads and discs fitted, ready for road test</p>
+                        <figure>
+                            <div className="relative aspect-[16/10] min-h-[200px] sm:min-h-[260px]">
+                                <OptimizedImage
+                                    src="/images/new-images/sprinter-brakes-04.jpg"
+                                    alt="Completed front brake assembly with new pads and discs — same quality for Citan"
+                                    className="absolute inset-0 h-full w-full object-cover rounded-2xl"
+                                />
+                            </div>
+                            <figcaption className="mt-2 text-xs text-text-muted text-center">New pads and discs fitted, ready for road test — same process across Mercedes vans.</figcaption>
+                        </figure>
                     </div>
                 </div>
             </Section>

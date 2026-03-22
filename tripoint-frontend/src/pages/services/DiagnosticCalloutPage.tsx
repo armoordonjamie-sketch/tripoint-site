@@ -221,9 +221,23 @@ export function DiagnosticCalloutPage() {
                                             <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand/10 text-brand">
                                                 <Icon className="h-5 w-5" />
                                             </div>
-                                            <div>
+                                            <div className="min-w-0 flex-1">
                                                 <h3 className="font-semibold text-text-primary">{cat.title}</h3>
                                                 <p className="mt-1 text-sm text-text-secondary leading-relaxed">{cat.desc}</p>
+                                                {cat.id === 'xentry' && (
+                                                    <figure className="mt-4 overflow-hidden rounded-lg border border-border-default">
+                                                        <div className="relative aspect-[16/10] min-h-[200px] sm:min-h-[260px]">
+                                                            <OptimizedImage
+                                                                src="/images/new-images/xentry-on-mercedes-engine.jpg"
+                                                                alt="Mercedes Xentry diagnostics connected to engine bay for guided tests and coding"
+                                                                className="absolute inset-0 h-full w-full object-cover"
+                                                            />
+                                                        </div>
+                                                        <figcaption className="border-t border-border-default bg-surface-alt px-4 py-3 text-sm text-text-secondary">
+                                                            Dealer-level Xentry on site — guided tests, coding, and module access when OEM-level work is needed.
+                                                        </figcaption>
+                                                    </figure>
+                                                )}
                                             </div>
                                         </div>
                                     </div>

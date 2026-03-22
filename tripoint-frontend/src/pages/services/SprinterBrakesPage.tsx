@@ -70,9 +70,14 @@ export function SprinterBrakesPage() {
 
             {/* ─── HERO ─── taller, more dramatic */}
             <section className="relative h-72 sm:h-96 overflow-hidden">
-                <OptimizedImage src="/images/new-images/sprinter-brakes-hero.jpg" alt="Mercedes Sprinter brake assembly being serviced by TriPoint" className="h-full w-full object-cover" priority />
-                <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/70 to-surface/20" />
-                <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-10">
+                <img
+                    src="/images/services/van-sprinter-w907-front.png"
+                    alt=""
+                    className="absolute inset-0 h-full w-full object-cover object-center"
+                    aria-hidden="true"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/70 to-surface/25" />
+                <div className="absolute bottom-0 left-0 right-0 z-10 p-6 sm:p-10">
                     <div className="mx-auto max-w-5xl">
                         <p className="text-sm font-semibold uppercase tracking-widest text-brand mb-2">Mercedes Sprinter Specialist</p>
                         <h1 className="text-4xl font-extrabold text-text-primary sm:text-5xl lg:text-6xl">Sprinter Brakes</h1>

@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
-    Zap, AlertTriangle, Gauge, Wrench, Shield, Droplets, Wind,
+    Wrench, Shield,
     ArrowRight, Phone, MessageCircle, Search,
     MapPin, Truck, ChevronRight,
-    Settings, Users, FileSearch, BookOpen, Star,
+    BookOpen, Star, Cog,TrendingUp,
 } from 'lucide-react';
 import { Seo } from '@/components/Seo';
 import { Section } from '@/components/Section';
 import { CTAButton } from '@/components/CTAButton';
 import { TownChips } from '@/components/TownChips';
 import { siteConfig } from '@/config/site';
-import { trackBookNowClick, trackEvent, trackPhoneLead, trackWhatsAppLead } from '@/lib/analytics';
+import { trackEvent } from '@/lib/analytics';
 import { galleryImages } from '@/data/galleryImages';
 import { blogPosts, getPostThumbnail } from '@/data/blogPosts';
 import { useScrollReveal } from '@/lib/useScrollReveal';
@@ -24,18 +24,39 @@ import { OptimizedImage } from '@/components/OptimizedImage';
 const getPrice = (slug: string, fallback: number) =>
     siteConfig.pricing.services.find((s) => s.slug === slug)?.zoneA ?? fallback;
 
-const services = [
-    { title: 'Diagnostic Callout', desc: 'Full-system scan, live data, guided tests, and a written fix plan.', icon: <Search className="h-5 w-5" />, href: '/services/diagnostic-callout', price: getPrice('diagnostic-callout', 120) },
-    { title: 'VOR Van Diagnostics', desc: 'Same-day priority triage for off-road commercial vehicles.', icon: <AlertTriangle className="h-5 w-5" />, href: '/services/vor-van-diagnostics', price: getPrice('vor-triage', 160) },
-    { title: 'Mercedes Xentry Diagnostics', desc: 'OEM-level access, SCN coding, adaptations, and module initialisation.', icon: <Settings className="h-5 w-5" />, href: '/services/mercedes-xentry-diagnostics-coding', price: getPrice('diagnostic-callout', 120) },
-    { title: 'Emissions Fault Decision Visit', desc: 'DPF, AdBlue, SCR, EGR - root cause diagnosis with live data.', icon: <Gauge className="h-5 w-5" />, href: '/services/emissions-diagnostics', price: getPrice('emissions-diagnostics', 170) },
-    { title: 'AdBlue Countdown Fix', desc: 'NOx sensors, dosing faults, heater circuits - diagnosed properly, not code-cleared.', icon: <Droplets className="h-5 w-5" />, href: '/services/adblue-countdown', price: getPrice('emissions-diagnostics', 170) },
-    { title: 'DPF Warning Light Diagnostic', desc: 'Soot load, sensor plausibility, regen safety checks before any forced regen.', icon: <Wind className="h-5 w-5" />, href: '/services/dpf-regeneration-decision', price: getPrice('emissions-diagnostics', 170) },
-    { title: 'NOx Sensor & SCR Diagnostics', desc: 'Sensor drift, heater circuits, catalytic performance - tested with live data.', icon: <Shield className="h-5 w-5" />, href: '/services/nox-scr-diagnostics', price: getPrice('emissions-diagnostics', 170) },
-    { title: 'Sprinter Limp Mode Diagnostic', desc: 'Turbo, boost, fuel rail, EGR, and wiring - systematic derate diagnosis.', icon: <Zap className="h-5 w-5" />, href: '/services/sprinter-limp-mode', price: getPrice('diagnostic-callout', 120) },
-    { title: 'Intermittent Electrical Diagnostic', desc: 'Random faults, wiring issues, and connector failures traced with live data.', icon: <Zap className="h-5 w-5" />, href: '/services/intermittent-electrical-faults', price: getPrice('diagnostic-callout', 120) },
-    { title: 'Pre-Purchase Health Check', desc: 'Every module scanned, emissions checked, condition scored before you buy.', icon: <FileSearch className="h-5 w-5" />, href: '/services/pre-purchase-digital-health-check', price: getPrice('pre-purchase-digital-health-check', 160) },
-    { title: 'Fleet Health Check', desc: 'Proactive diagnostic sweep - fault status, DPF health, priority action list.', icon: <Users className="h-5 w-5" />, href: '/services/fleet-health-check', price: getPrice('diagnostic-callout', 120) },
+const serviceLanes = [
+    {
+        title: 'Diagnostics',
+        desc: 'Full-system fault finding with dealer-level XENTRY tools. Standard, VOR priority, and pre-purchase options.',
+        icon: <Search className="h-6 w-6" />,
+        href: '/services',
+        price: getPrice('diagnostic-callout', 120),
+        tags: ['Standard', 'VOR Priority', 'Pre-Purchase'],
+    },
+    {
+        title: 'Servicing',
+        desc: 'Mobile servicing for Mercedes Sprinter, Vito, and Citan. Minor and major packages with genuine parts.',
+        icon: <Cog className="h-6 w-6" />,
+        href: '/services/mercedes-van-servicing',
+        price: getPrice('mercedes-van-minor-service', 175),
+        tags: ['Minor Service', 'Major Service', 'Sprinter / Vito / Citan'],
+    },
+    {
+        title: 'Brakes',
+        desc: 'Pads, discs, sensors, and park brake shoes. Fixed pricing per axle with genuine Mercedes parts.',
+        icon: <Shield className="h-6 w-6" />,
+        href: '/services/sprinter-brakes',
+        price: 120,
+        tags: ['Front', 'Rear', 'Pads + Discs'],
+    },
+    {
+        title: 'Tuning',
+        desc: 'ECU remaps for load performance or fuel economy. Fleet day rates available for 3+ vehicles.',
+        icon: <TrendingUp className="h-6 w-6" />,
+        href: '/services/van-load-driveability-tune',
+        price: 169,
+        tags: ['Load & Driveability', 'Economy', 'Fleet Rates'],
+    },
 ];
 
 const steps = [
@@ -86,7 +107,7 @@ export function HomePage() {
             <Seo canonical="/" />
 
             {/* ── HERO ──────────────────────────────────────── */}
-            <section className="relative min-h-[85vh] flex items-center overflow-hidden">
+            <section data-hero className="relative min-h-[85vh] flex items-center overflow-hidden">
                 {/* Rotating background images */}
                 <div className="absolute inset-0">
                     {heroImages.map((img, i) => (
@@ -137,7 +158,7 @@ export function HomePage() {
 
                         <div className="reveal mt-10 flex flex-wrap items-center gap-4" style={{ transitionDelay: '0.3s' }}>
                             <div className="hidden sm:flex gap-4">
-                                <CTAButton href="/booking" size="lg" onClick={() => trackBookNowClick('homepage')}>
+                                <CTAButton href="/booking" size="lg" onClick={() => trackEvent('click_book_now', { location: 'homepage' })}>
                                     Book a Diagnostic
                                 </CTAButton>
                                 <CTAButton
@@ -146,7 +167,7 @@ export function HomePage() {
                                     size="lg"
                                     external
                                     icon={<MessageCircle className="h-5 w-5" />}
-                                    onClick={() => trackWhatsAppLead('homepage')}
+                                    onClick={() => trackEvent('click_whatsapp', { location: 'homepage' })}
                                 >
                                     WhatsApp Us
                                 </CTAButton>
@@ -159,47 +180,69 @@ export function HomePage() {
                 </div>
             </section>
 
-            {/* ── ALL SERVICES ─────────────────────────────── */}
+            {/* ── OUR SERVICES ─────────────────────────────── */}
             <Section>
                 <div className="text-center reveal">
-                    <p className="text-sm font-semibold uppercase tracking-widest text-brand mb-3">What We Offer</p>
+                    <p className="text-sm font-semibold uppercase tracking-widest text-brand mb-3">What We Do</p>
                     <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">Our Services</h2>
                     <p className="mx-auto mt-3 max-w-2xl text-text-secondary">
-                        11 specialist diagnostic services - all mobile, all fixed-price, all ending with a written outcome.
+                        Four core services — all mobile, all fixed-price, all backed by dealer-level tooling.
                     </p>
                 </div>
-                <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                    {services.map((s, i) => (
+                <div className="mt-10 grid gap-4 sm:grid-cols-2">
+                    {serviceLanes.map((s, i) => (
                         <Link
                             key={s.title}
                             to={s.href}
-                            className="reveal group flex items-start gap-4 rounded-xl border border-border-default bg-surface-alt p-4 transition-all duration-200 hover:border-brand/30 hover:bg-brand/5 hover:-translate-y-0.5"
-                            style={{ transitionDelay: `${i * 0.03}s` }}
+                            className="reveal group rounded-2xl border border-border-default bg-surface-alt p-6 transition-all duration-300 hover:border-brand/30 hover:bg-brand/5 hover:-translate-y-1 hover:shadow-lg hover:shadow-brand/5"
+                            style={{ transitionDelay: `${i * 0.06}s` }}
                         >
-                            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-brand/20 to-brand/5 text-brand transition-transform group-hover:scale-110">
-                                {s.icon}
-                            </div>
-                            <div className="min-w-0">
-                                <div className="flex items-baseline gap-2">
-                                    <h3 className="font-semibold text-text-primary group-hover:text-brand-light transition-colors text-sm">{s.title}</h3>
-                                    <span className="text-xs font-medium text-brand/70 shrink-0">from £{s.price}</span>
+                            <div className="flex items-center gap-4 mb-4">
+                                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-brand/20 to-brand/5 text-brand transition-transform group-hover:scale-110">
+                                    {s.icon}
                                 </div>
-                                <p className="mt-0.5 text-xs text-text-muted leading-relaxed line-clamp-2">{s.desc}</p>
+                                <div>
+                                    <h3 className="text-lg font-bold text-text-primary group-hover:text-brand-light transition-colors">{s.title}</h3>
+                                    <span className="text-sm font-semibold text-brand/70">from £{s.price}</span>
+                                </div>
+                            </div>
+                            <p className="text-sm text-text-secondary leading-relaxed">{s.desc}</p>
+                            <div className="mt-4 flex flex-wrap gap-1.5">
+                                {s.tags.map((tag) => (
+                                    <span key={tag} className="rounded-full border border-brand/15 bg-brand/5 px-2.5 py-0.5 text-xs font-medium text-brand-light">
+                                        {tag}
+                                    </span>
+                                ))}
+                            </div>
+                            <div className="mt-4 flex items-center gap-1 text-sm font-medium text-brand opacity-0 -translate-x-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">
+                                Learn more <ArrowRight className="h-3.5 w-3.5" />
                             </div>
                         </Link>
                     ))}
                 </div>
                 <div className="mt-8 text-center reveal">
                     <CTAButton href="/services" variant="outline" icon={<ArrowRight className="h-4 w-4" />}>
-                        View All Services & Pricing
+                        View All Services
                     </CTAButton>
                 </div>
             </Section>
 
             {/* ── SPRINTER SPECIALIST BANNER ──────────────────── */}
             <section className="relative overflow-hidden">
-                <div className="absolute inset-0">
-                    <OptimizedImage src="/images/sprinter-specialist.jpg" alt="" className="h-full w-full object-cover" aria-hidden="true" />
+                <div className="absolute inset-0 overflow-hidden [container-type:size]">
+                    {/* Swap w/h via cqh/cqw so after rotate(90deg) the bitmap covers the full strip */}
+                    <div
+                        className="absolute left-1/2 top-1/2 h-[100cqw] w-[100cqh]"
+                        style={{ transform: 'translate(-50%, -50%) rotate(90deg)' }}
+                        aria-hidden="true"
+                    >
+                        <OptimizedImage
+                            src="/images/sprinter-specialist.jpg"
+                            alt=""
+                            className="h-full w-full object-cover object-center"
+                            aria-hidden="true"
+                        />
+                    </div>
                     <div className="absolute inset-0 bg-gradient-to-r from-surface via-surface/85 to-surface/40" />
                 </div>
                 <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 md:py-20">
@@ -487,7 +530,7 @@ export function HomePage() {
                             Book a diagnostic and get a proper answer - at your door.
                         </p>
                         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-                            <CTAButton href="/booking" variant="secondary" size="lg" onClick={() => trackBookNowClick('homepage')}>
+                            <CTAButton href="/booking" variant="secondary" size="lg" onClick={() => trackEvent('click_book_now', { location: 'homepage' })}>
                                 Book a Diagnostic
                             </CTAButton>
                             <CTAButton
@@ -497,7 +540,7 @@ export function HomePage() {
                                 external
                                 icon={<MessageCircle className="h-5 w-5" />}
                                 className="text-white hover:text-white hover:bg-white/10"
-                                onClick={() => trackWhatsAppLead('homepage')}
+                                onClick={() => trackEvent('click_whatsapp', { location: 'homepage' })}
                             >
                                 WhatsApp Us
                             </CTAButton>
@@ -508,7 +551,7 @@ export function HomePage() {
                                 external
                                 icon={<Phone className="h-5 w-5" />}
                                 className="text-white hover:text-white hover:bg-white/10"
-                                onClick={() => trackPhoneLead('homepage')}
+                                onClick={() => trackEvent('click_phone_header', { location: 'homepage' })}
                             >
                                 {siteConfig.contact.phoneDisplay}
                             </CTAButton>
