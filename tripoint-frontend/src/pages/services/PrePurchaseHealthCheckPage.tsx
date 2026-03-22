@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Seo } from '@/components/Seo';
-import { trackEvent } from '@/lib/analytics';
+import { trackBookNowClick, trackPhoneLead, trackWhatsAppLead } from '@/lib/analytics';
 import { Section } from '@/components/Section';
 import { CTAButton } from '@/components/CTAButton';
 import { PhotoGallery } from '@/components/PhotoGallery';
@@ -80,7 +80,7 @@ const sampleFindings = [
 ];
 
 const crossSell = [
-    { title: 'Diagnostic Callout', desc: 'Got a fault after you\'ve bought? We diagnose it.', href: '/services/diagnostic-callout' },
+    { title: 'Standard Diagnosis', desc: 'Got a fault after you\'ve bought? We diagnose it.', href: '/services/diagnostic-callout' },
 ];
 
 export function PrePurchaseHealthCheckPage() {
@@ -205,7 +205,7 @@ export function PrePurchaseHealthCheckPage() {
 
                     {/* Mid-page CTA */}
                     <div className="mt-10 flex flex-wrap gap-3 reveal">
-                        <CTAButton href="/booking" size="md" onClick={() => trackEvent('click_book_now', { location: 'pre_purchase_health_check_mid' })}>
+                        <CTAButton href="/booking" size="md" onClick={() => trackBookNowClick('pre_purchase_health_check_mid')}>
                             Book Now
                         </CTAButton>
                         <CTAButton
@@ -214,7 +214,7 @@ export function PrePurchaseHealthCheckPage() {
                             size="md"
                             external
                             icon={<MessageCircle className="h-4 w-4" />}
-                            onClick={() => trackEvent('click_whatsapp', { location: 'pre_purchase_health_check' })}
+                            onClick={() => trackWhatsAppLead('pre_purchase_health_check')}
                         >
                             WhatsApp Us
                         </CTAButton>
@@ -279,9 +279,9 @@ export function PrePurchaseHealthCheckPage() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Zone A</td><td className="px-4 py-3 text-text-secondary">0–25 mins</td><td className="px-4 py-3 text-right font-semibold text-brand-light">£{zoneA}</td></tr>
-                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Zone B</td><td className="px-4 py-3 text-text-secondary">25–45 mins</td><td className="px-4 py-3 text-right font-semibold text-brand-light">£{zoneB}</td></tr>
-                                    <tr><td className="px-4 py-3 text-text-secondary">Zone C</td><td className="px-4 py-3 text-text-secondary">45–60 mins</td><td className="px-4 py-3 text-right font-semibold text-brand-light">£{zoneC}</td></tr>
+                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Zone A</td><td className="px-4 py-3 text-text-secondary">0-25 mins</td><td className="px-4 py-3 text-right font-semibold text-brand-light">£{zoneA}</td></tr>
+                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Zone B</td><td className="px-4 py-3 text-text-secondary">25-45 mins</td><td className="px-4 py-3 text-right font-semibold text-brand-light">£{zoneB}</td></tr>
+                                    <tr><td className="px-4 py-3 text-text-secondary">Zone C</td><td className="px-4 py-3 text-text-secondary">45-60 mins</td><td className="px-4 py-3 text-right font-semibold text-brand-light">£{zoneC}</td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -306,7 +306,7 @@ export function PrePurchaseHealthCheckPage() {
                             <CTAButton href="/pricing" variant="outline" size="sm" icon={<ArrowRight className="h-4 w-4" />}>
                                 Full Pricing
                             </CTAButton>
-                            <CTAButton href="/booking" size="sm" onClick={() => trackEvent('click_book_now', { location: 'pre_purchase_health_check' })}>
+                            <CTAButton href="/booking" size="sm" onClick={() => trackBookNowClick('pre_purchase_health_check')}>
                                 Book Now
                             </CTAButton>
                         </div>
@@ -355,7 +355,7 @@ export function PrePurchaseHealthCheckPage() {
                             Get the data before you commit. Book a pre-purchase health check at the seller&apos;s location.
                         </p>
                         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-                            <CTAButton href="/booking" variant="secondary" size="lg" onClick={() => trackEvent('click_book_now', { location: 'pre_purchase_health_check_footer' })}>
+                            <CTAButton href="/booking" variant="secondary" size="lg" onClick={() => trackBookNowClick('pre_purchase_health_check_footer')}>
                                 Book Now
                             </CTAButton>
                             <CTAButton
@@ -365,7 +365,7 @@ export function PrePurchaseHealthCheckPage() {
                                 external
                                 icon={<MessageCircle className="h-5 w-5" />}
                                 className="text-white hover:text-white hover:bg-white/10"
-                                onClick={() => trackEvent('click_whatsapp', { location: 'pre_purchase_health_check' })}
+                                onClick={() => trackWhatsAppLead('pre_purchase_health_check')}
                             >
                                 WhatsApp Us
                             </CTAButton>
@@ -376,7 +376,7 @@ export function PrePurchaseHealthCheckPage() {
                                 external
                                 icon={<Phone className="h-5 w-5" />}
                                 className="text-white hover:text-white hover:bg-white/10"
-                                onClick={() => trackEvent('click_phone_header', { location: 'pre_purchase_health_check' })}
+                                onClick={() => trackPhoneLead('pre_purchase_health_check')}
                             >
                                 {siteConfig.contact.phoneDisplay}
                             </CTAButton>

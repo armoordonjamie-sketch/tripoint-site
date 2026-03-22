@@ -11,7 +11,7 @@ import { Section } from '@/components/Section';
 import { CTAButton } from '@/components/CTAButton';
 import { TownChips } from '@/components/TownChips';
 import { siteConfig } from '@/config/site';
-import { trackEvent } from '@/lib/analytics';
+import { trackBookNowClick, trackEvent, trackPhoneLead, trackWhatsAppLead } from '@/lib/analytics';
 import { galleryImages } from '@/data/galleryImages';
 import { blogPosts, getPostThumbnail } from '@/data/blogPosts';
 import { useScrollReveal } from '@/lib/useScrollReveal';
@@ -137,7 +137,7 @@ export function HomePage() {
 
                         <div className="reveal mt-10 flex flex-wrap items-center gap-4" style={{ transitionDelay: '0.3s' }}>
                             <div className="hidden sm:flex gap-4">
-                                <CTAButton href="/booking" size="lg" onClick={() => trackEvent('click_book_now', { location: 'homepage' })}>
+                                <CTAButton href="/booking" size="lg" onClick={() => trackBookNowClick('homepage')}>
                                     Book a Diagnostic
                                 </CTAButton>
                                 <CTAButton
@@ -146,7 +146,7 @@ export function HomePage() {
                                     size="lg"
                                     external
                                     icon={<MessageCircle className="h-5 w-5" />}
-                                    onClick={() => trackEvent('click_whatsapp', { location: 'homepage' })}
+                                    onClick={() => trackWhatsAppLead('homepage')}
                                 >
                                     WhatsApp Us
                                 </CTAButton>
@@ -487,7 +487,7 @@ export function HomePage() {
                             Book a diagnostic and get a proper answer - at your door.
                         </p>
                         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-                            <CTAButton href="/booking" variant="secondary" size="lg" onClick={() => trackEvent('click_book_now', { location: 'homepage' })}>
+                            <CTAButton href="/booking" variant="secondary" size="lg" onClick={() => trackBookNowClick('homepage')}>
                                 Book a Diagnostic
                             </CTAButton>
                             <CTAButton
@@ -497,7 +497,7 @@ export function HomePage() {
                                 external
                                 icon={<MessageCircle className="h-5 w-5" />}
                                 className="text-white hover:text-white hover:bg-white/10"
-                                onClick={() => trackEvent('click_whatsapp', { location: 'homepage' })}
+                                onClick={() => trackWhatsAppLead('homepage')}
                             >
                                 WhatsApp Us
                             </CTAButton>
@@ -508,7 +508,7 @@ export function HomePage() {
                                 external
                                 icon={<Phone className="h-5 w-5" />}
                                 className="text-white hover:text-white hover:bg-white/10"
-                                onClick={() => trackEvent('click_phone_header', { location: 'homepage' })}
+                                onClick={() => trackPhoneLead('homepage')}
                             >
                                 {siteConfig.contact.phoneDisplay}
                             </CTAButton>

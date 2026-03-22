@@ -5,9 +5,16 @@ import { CTAButton } from './CTAButton';
 
 const slugToHref: Record<string, string> = {
     'diagnostic-callout': '/services/diagnostic-callout',
-    'vor-triage': '/services/vor-van-diagnostics',
-    'emissions-diagnostics': '/services/emissions-diagnostics',
+    'vor-van-diagnostics': '/services/vor-van-diagnostics',
     'pre-purchase-digital-health-check': '/services/pre-purchase-digital-health-check',
+    'mercedes-van-minor-service': '/services/mercedes-van-servicing',
+    'mercedes-van-major-service': '/services/mercedes-van-servicing',
+    'sprinter-brakes': '/services/sprinter-brakes',
+    'vito-brakes': '/services/vito-brakes',
+    'citan-brakes': '/services/citan-brakes',
+    'van-load-driveability-tune': '/services/van-load-driveability-tune',
+    'van-economy-tune': '/services/van-economy-tune',
+    'fleet-van-tuning': '/services/fleet-van-tuning',
 };
 
 interface PricingTableProps {

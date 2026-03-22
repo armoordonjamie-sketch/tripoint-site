@@ -4,6 +4,7 @@ import {
     Search, AlertTriangle, Gauge, Wrench, Phone, MessageCircle,
     Truck, MapPin, ArrowRight, Zap, Shield, Droplets, Wind,
     FileSearch, Users, Settings, CheckCircle, Clock, FileText, Headphones,
+    Disc, TrendingUp,
 } from 'lucide-react';
 import { Seo } from '@/components/Seo';
 import { Section } from '@/components/Section';
@@ -12,7 +13,7 @@ import { ZoneCalculator } from '@/components/ZoneCalculator';
 import { Notice } from '@/components/Notice';
 import { CTAButton } from '@/components/CTAButton';
 import { siteConfig } from '@/config/site';
-import { trackEvent } from '@/lib/analytics';
+import { trackBookNowClick, trackPhoneLead, trackWhatsAppLead } from '@/lib/analytics';
 import { OptimizedImage } from '@/components/OptimizedImage';
 
 /* ── Intersection Observer for scroll-reveal ─────────── */
@@ -197,6 +198,94 @@ const serviceCategories = [
             },
         ],
     },
+    {
+        title: 'Mercedes Van Servicing',
+        subtitle: 'Planned maintenance for Sprinter, Vito, and Citan — minor and major packages at your yard or workplace.',
+        services: [
+            {
+                title: 'Mercedes Van Servicing',
+                description: 'Overview of minor and major service packages for Mercedes vans. Oil, filters, inspections, and stamp-ready records.',
+                icon: <Wrench className="h-6 w-6" />,
+                href: '/services/mercedes-van-servicing',
+                fromPrice: getPrice('mercedes-van-minor-service', 175),
+            },
+            {
+                title: 'Sprinter Servicing',
+                description: 'W906 and W907 service schedules. Oil service, major service, and brake add-ons at your location.',
+                icon: <Truck className="h-6 w-6" />,
+                href: '/services/sprinter-servicing',
+                fromPrice: getPrice('sprinter-servicing', 175),
+            },
+            {
+                title: 'Vito Servicing',
+                description: 'W447 planned maintenance — minor and major packages with clear inclusions.',
+                icon: <Truck className="h-6 w-6" />,
+                href: '/services/vito-servicing',
+                fromPrice: getPrice('vito-servicing', 175),
+            },
+            {
+                title: 'Citan Servicing',
+                description: 'W415 / W420 servicing with Mercedes-approved fluids and checks.',
+                icon: <Truck className="h-6 w-6" />,
+                href: '/services/citan-servicing',
+                fromPrice: getPrice('citan-servicing', 175),
+            },
+        ],
+    },
+    {
+        title: 'Mobile Brakes',
+        subtitle: 'Fixed-price brake packages for Mercedes vans — pads, discs, and labour at your location.',
+        services: [
+            {
+                title: 'Sprinter Brakes',
+                description: 'Front and rear brake packages for W906 and W907. Transparent pricing by zone.',
+                icon: <Disc className="h-6 w-6" />,
+                href: '/services/sprinter-brakes',
+                fromPrice: getPrice('sprinter-brakes', 149),
+            },
+            {
+                title: 'Vito Brakes',
+                description: 'W447 brake jobs — pads, discs, and packaged pricing.',
+                icon: <Disc className="h-6 w-6" />,
+                href: '/services/vito-brakes',
+                fromPrice: getPrice('vito-brakes', 169),
+            },
+            {
+                title: 'Citan Brakes',
+                description: 'W415 / W420 mobile brake service with clear scope.',
+                icon: <Disc className="h-6 w-6" />,
+                href: '/services/citan-brakes',
+                fromPrice: getPrice('citan-brakes', 169),
+            },
+        ],
+    },
+    {
+        title: 'Commercial Van Tuning',
+        subtitle: 'Stage-style calibrations with a diagnostic pre-check — loaded performance, economy, or fleet days.',
+        services: [
+            {
+                title: 'Van Load & Driveability Tune',
+                description: 'Better loaded pull and drivability after a full diagnostic pre-check.',
+                icon: <TrendingUp className="h-6 w-6" />,
+                href: '/services/van-load-driveability-tune',
+                fromPrice: getPrice('van-load-driveability-tune', 199),
+            },
+            {
+                title: 'Van Economy Tune',
+                description: 'Economy-oriented calibration for high-mileage and route vans.',
+                icon: <Gauge className="h-6 w-6" />,
+                href: '/services/van-economy-tune',
+                fromPrice: getPrice('van-economy-tune', 199),
+            },
+            {
+                title: 'Fleet Van Tuning',
+                description: 'Site-day fleet tuning with volume pricing and consistent maps across vehicles.',
+                icon: <Users className="h-6 w-6" />,
+                href: '/services/fleet-van-tuning',
+                fromPrice: getPrice('fleet-van-tuning', 199),
+            },
+        ],
+    },
 ];
 
 /* ── Component ───────────────────────────────────────── */
@@ -208,7 +297,7 @@ export function ServicesPage() {
         <div ref={scrollRef}>
             <Seo
                 title="Services"
-                description="Mobile vehicle diagnostic services across Kent & SE London. 11 specialist services from general diagnostics to emissions, Sprinter limp mode, fleet health checks, and more."
+                description="Mobile vehicle diagnostics, Mercedes van servicing, brakes, and van tuning across Kent & SE London. Diagnostics, emissions, pre-purchase checks, Sprinter/Vito/Citan packages, and fleet tuning."
                 canonical="/services"
             />
 
@@ -226,7 +315,7 @@ export function ServicesPage() {
                         </p>
                         <div className="mt-8 flex flex-wrap justify-center gap-8 reveal" style={{ transitionDelay: '0.1s' }}>
                             {[
-                                { value: '11', label: 'Specialist services' },
+                                { value: '21+', label: 'Service offerings' },
                                 { value: '60min', label: 'Coverage radius' },
                                 { value: '£120+', label: 'Diagnostics from' },
                                 { value: '100%', label: 'Written outcomes' },
@@ -438,7 +527,7 @@ export function ServicesPage() {
                             Get a proper diagnosis at your door. Book online or reach out on WhatsApp for a quick chat.
                         </p>
                         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-                            <CTAButton href="/booking" variant="secondary" size="lg" onClick={() => trackEvent('click_book_now', { location: 'services' })}>
+                            <CTAButton href="/booking" variant="secondary" size="lg" onClick={() => trackBookNowClick('services')}>
                                 Book a Diagnostic
                             </CTAButton>
                             <CTAButton
@@ -448,7 +537,7 @@ export function ServicesPage() {
                                 external
                                 icon={<MessageCircle className="h-5 w-5" />}
                                 className="text-white hover:text-white hover:bg-white/10"
-                                onClick={() => trackEvent('click_whatsapp', { location: 'services' })}
+                                onClick={() => trackWhatsAppLead('services')}
                             >
                                 WhatsApp Us
                             </CTAButton>
@@ -459,7 +548,7 @@ export function ServicesPage() {
                                 external
                                 icon={<Phone className="h-5 w-5" />}
                                 className="text-white hover:text-white hover:bg-white/10"
-                                onClick={() => trackEvent('click_phone_header', { location: 'services' })}
+                                onClick={() => trackPhoneLead('services')}
                             >
                                 {siteConfig.contact.phoneDisplay}
                             </CTAButton>

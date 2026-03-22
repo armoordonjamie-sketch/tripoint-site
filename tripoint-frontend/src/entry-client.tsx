@@ -1,3 +1,4 @@
+import './lib/google-tag-init';
 import { StrictMode } from 'react';
 import { createRoot, hydrateRoot } from 'react-dom/client';
 import { HelmetProvider } from 'react-helmet-async';

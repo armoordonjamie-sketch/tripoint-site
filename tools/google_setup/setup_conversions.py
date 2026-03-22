@@ -3,12 +3,14 @@
 TriPoint Diagnostics - Google Ads + GA4 Setup CLI
 
 Usage:
-    python setup_conversions.py auth                    # Authenticate
+    python setup_conversions.py auth                    # Authenticate (Google Ads API OAuth)
     python setup_conversions.py run --config config.yaml  # Create conversions
+    python setup_conversions.py export-env --config config.yaml  # Dump VITE_* from Ads API
     python setup_conversions.py status --config config.yaml  # Check current state
 """
 
 import json
+import re
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -275,6 +277,28 @@ def ads_create_conversion_action(ads_client, customer_id: str, conv_config: dict
         return {"name": conv_config["name"], "status": "error", "error": error_msg}
 
 
+def _parse_send_to_from_snippet(event_snippet: str) -> str | None:
+    """Extract AW-xxx/label from gtag conversion snippet."""
+    if not event_snippet:
+        return None
+    for pattern in (
+        r"['\"]send_to['\"]:\s*['\"]([^'\"]+)['\"]",
+        r"'send_to':\s*'([^']+)'",
+        r"send_to['\"]?\s*:\s*['\"](AW-[^'\"]+)['\"]",
+    ):
+        m = re.search(pattern, event_snippet)
+        if m:
+            return m.group(1).strip()
+    return None
+
+
+def label_from_send_to(send_to: str | None) -> str | None:
+    """Label segment only (after last /), for VITE_GOOGLE_ADS_CONV_*."""
+    if not send_to or "/" not in send_to:
+        return None
+    return send_to.split("/")[-1].strip()
+
+
 def ads_list_conversion_actions(ads_client, customer_id: str) -> list[dict]:
     """List existing conversion actions."""
     service = ads_client.get_service("GoogleAdsService")
@@ -298,16 +322,13 @@ def ads_list_conversion_actions(ads_client, customer_id: str) -> list[dict]:
         response = service.search(customer_id=cid, query=query)
         for row in response:
             ca = row.conversion_action
-            # Try to extract the send_to label from tag_snippets
             send_to = None
             if ca.tag_snippets:
                 for snippet in ca.tag_snippets:
                     if snippet.event_snippet and "send_to" in snippet.event_snippet:
-                        # Parse send_to from the JS snippet
-                        import re
-                        match = re.search(r"'send_to':\s*'([^']+)'", snippet.event_snippet)
-                        if match:
-                            send_to = match.group(1)
+                        send_to = _parse_send_to_from_snippet(snippet.event_snippet)
+                        if send_to:
+                            break
 
             results.append({
                 "id": ca.id,
@@ -321,6 +342,28 @@ def ads_list_conversion_actions(ads_client, customer_id: str) -> list[dict]:
     except Exception as e:
         click.echo(f"  Warning: Could not list conversions: {e}")
     return results
+
+
+# Substrings in conversion action name (lowercase) -> VITE env key (first match wins)
+_ADS_NAME_TO_VITE: list[tuple[tuple[str, ...], str]] = [
+    (("whatsapp",), "VITE_GOOGLE_ADS_CONV_WHATSAPP"),
+    (("contact form",), "VITE_GOOGLE_ADS_CONV_CONTACT"),
+    (("phone call", "phone"), "VITE_GOOGLE_ADS_CONV_PHONE"),
+    (("email",), "VITE_GOOGLE_ADS_CONV_EMAIL"),
+    (("availability",), "VITE_GOOGLE_ADS_CONV_BOOKING_AVAILABILITY"),
+    (("slot",), "VITE_GOOGLE_ADS_CONV_BOOKING_SLOT"),
+    (("job paid", "payment", "deposit"), "VITE_GOOGLE_ADS_CONV_PAYMENT"),
+    (("booking confirmed",), "VITE_GOOGLE_ADS_CONV_BOOKING"),
+    (("book now",), "VITE_GOOGLE_ADS_CONV_BOOK_NOW"),
+]
+
+
+def match_conversion_name_to_vite_key(name: str) -> str | None:
+    nl = name.lower()
+    for keywords, vite_key in _ADS_NAME_TO_VITE:
+        if any(k in nl for k in keywords):
+            return vite_key
+    return None
 
 
 # ---------------------------------------------------------------------------
@@ -342,18 +385,58 @@ def auth():
     if success:
         click.echo("\nNext steps:")
         click.echo("  1. Set GOOGLE_ADS_DEVELOPER_TOKEN env var")
-        click.echo("  2. Copy config.example.yaml → config.yaml and fill in IDs")
+        click.echo("  2. Copy config.example.yaml -> config.yaml and fill in IDs")
         click.echo("  3. Run: python setup_conversions.py run --config config.yaml")
+
+
+@cli.command("auth-ga4")
+@click.option("--config", "config_path", required=True, help="Path to config.yaml (uses ga4.property_id)")
+def auth_ga4_cmd(config_path: str):
+    """Verify GA4 Admin API access. Set GA4_SERVICE_ACCOUNT_JSON to the service account JSON path."""
+    from google_auth import get_ga4_credentials, _service_account_json_path
+
+    path = _service_account_json_path()
+    if path:
+        click.echo(f"Using service account JSON: {path}")
+    else:
+        click.echo("No GA4_SERVICE_ACCOUNT_JSON / GOOGLE_APPLICATION_CREDENTIALS - will use OAuth (token.json).")
+
+    config = load_config(config_path)
+    property_id = (config.get("ga4") or {}).get("property_id", "").strip()
+    if not property_id:
+        click.echo("ERROR: Set ga4.property_id in config.yaml")
+        raise SystemExit(1)
+
+    creds = get_ga4_credentials()
+    click.echo(f"Fetching GA4 property {property_id}...")
+    try:
+        prop = ga4_get_property(creds, property_id)
+        click.echo(f"  OK: {prop['display_name']} ({prop['time_zone']})")
+    except Exception as e:
+        click.echo(f"  FAILED: {e}")
+        click.echo(
+            "  -> Add the service account email in GA4: Admin -> Property access management (Editor+)."
+        )
+        raise SystemExit(1)
 
 
 @cli.command()
 @click.option("--config", "config_path", required=True, help="Path to config.yaml")
-def run(config_path: str):
+@click.option(
+    "--ga4-only",
+    "ga4_only",
+    is_flag=True,
+    help="Skip Google Ads API (no OAuth). GA4 key events + GA4<->Ads link use service account only.",
+)
+def run(config_path: str, ga4_only: bool):
     """Create GA4 key events, Google Ads conversions, and link accounts."""
-    from google_auth import get_oauth_credentials, get_google_ads_config
+    from google_auth import get_ga4_credentials, get_google_ads_client_config, google_ads_auth_mode_message
 
     config = load_config(config_path)
-    creds = get_oauth_credentials()
+    creds_ga4 = get_ga4_credentials()
+
+    if ga4_only:
+        click.echo("\n  Mode: --ga4-only (no Google Ads API / OAuth)")
 
     report = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
@@ -377,11 +460,11 @@ def run(config_path: str):
 
         click.echo(f"\n  Fetching property {property_id}...")
         try:
-            prop_info = ga4_get_property(creds, property_id)
+            prop_info = ga4_get_property(creds_ga4, property_id)
             report["ga4"]["property"] = prop_info
-            click.echo(f"  ✓ {prop_info['display_name']} ({prop_info['time_zone']})")
+            click.echo(f"  [OK] {prop_info['display_name']} ({prop_info['time_zone']})")
         except Exception as e:
-            click.echo(f"  ✗ Could not fetch property: {e}")
+            click.echo(f"  [ERR] Could not fetch property: {e}")
             report["ga4"]["property"] = {"error": str(e)}
 
         # Key Events
@@ -390,19 +473,19 @@ def run(config_path: str):
         key_events_results = []
 
         # List existing first
-        existing_ke = ga4_list_key_events(creds, property_id)
+        existing_ke = ga4_list_key_events(creds_ga4, property_id)
         existing_names = {ke["event_name"] for ke in existing_ke}
 
         for event_name in key_events_config:
             if event_name in existing_names:
-                click.echo(f"    ✓ '{event_name}' already marked as key event")
+                click.echo(f"    [OK] '{event_name}' already marked as key event")
                 key_events_results.append({
                     "event_name": event_name,
                     "status": "already_exists",
                 })
             else:
                 click.echo(f"    Creating key event '{event_name}'...")
-                result = ga4_create_key_event(creds, property_id, event_name)
+                result = ga4_create_key_event(creds_ga4, property_id, event_name)
                 if result:
                     key_events_results.append(result)
 
@@ -417,19 +500,30 @@ def run(config_path: str):
     ads_config = config.get("google_ads", {})
     customer_id = ads_config.get("customer_id", "")
 
-    if customer_id:
+    if customer_id and ga4_only:
+        click.echo(f"\n{'='*60}")
+        click.echo("Step 2: Google Ads Conversions - SKIPPED (--ga4-only)")
+        click.echo(f"{'='*60}")
+        click.echo(
+            "  Run later: python setup_conversions.py run --config config.yaml\n"
+            "  (needs GOOGLE_ADS_DEVELOPER_TOKEN; same service-account JSON as GA4 is OK — no browser OAuth)"
+        )
+        report["manual_steps"].append(
+            "Google Ads conversion actions: re-run `run` without --ga4-only (developer token + SA JSON or OAuth)"
+        )
+
+    if customer_id and not ga4_only:
         click.echo(f"\n{'='*60}")
         click.echo("Step 2: Google Ads Conversions")
         click.echo(f"{'='*60}")
 
+        for line in google_ads_auth_mode_message().split("\n"):
+            click.echo(f"  {line}")
+
         try:
             from google.ads.googleads.client import GoogleAdsClient
 
-            ads_client_config = get_google_ads_config(creds)
-            login_cid = ads_config.get("login_customer_id", "")
-            if login_cid:
-                ads_client_config["login_customer_id"] = clean_customer_id(login_cid)
-
+            ads_client_config = get_google_ads_client_config(ads_config)
             ads_client = GoogleAdsClient.load_from_dict(ads_client_config)
 
             # List existing
@@ -449,7 +543,7 @@ def run(config_path: str):
                     existing_entry = next(
                         (c for c in existing if c["name"] == name), {}
                     )
-                    click.echo(f"    ✓ '{name}' already exists")
+                    click.echo(f"    [OK] '{name}' already exists")
                     conversions_results.append({
                         "name": name,
                         "status": "already_exists",
@@ -477,18 +571,18 @@ def run(config_path: str):
             report["google_ads"]["send_to_map"] = send_to_map
 
         except EnvironmentError as e:
-            click.echo(f"\n  ✗ {e}")
+            click.echo(f"\n  [ERR] {e}")
             report["google_ads"]["error"] = str(e)
             report["manual_steps"].append("Set GOOGLE_ADS_DEVELOPER_TOKEN env var")
         except ImportError:
-            click.echo("\n  ✗ google-ads package not installed")
+            click.echo("\n  [ERR] google-ads package not installed")
             click.echo("    Run: pip install google-ads")
             report["google_ads"]["error"] = "google-ads not installed"
         except Exception as e:
-            click.echo(f"\n  ✗ Google Ads API error: {e}")
+            click.echo(f"\n  [ERR] Google Ads API error: {e}")
             report["google_ads"]["error"] = str(e)
 
-    else:
+    elif not customer_id:
         click.echo("\n  Skipping Google Ads (no customer_id in config)")
         report["manual_steps"].append("Set google_ads.customer_id in config.yaml")
 
@@ -497,24 +591,24 @@ def run(config_path: str):
     # -----------------------------------------------------------------------
     if property_id and customer_id:
         click.echo(f"\n{'='*60}")
-        click.echo("Step 3: Link Google Ads ↔ GA4")
+        click.echo("Step 3: Link Google Ads <-> GA4")
         click.echo(f"{'='*60}")
 
         # Check existing links
-        existing_links = ga4_list_google_ads_links(creds, property_id)
+        existing_links = ga4_list_google_ads_links(creds_ga4, property_id)
         linked_cids = {link["customer_id"] for link in existing_links}
         clean_cid = clean_customer_id(customer_id)
 
         if clean_cid in linked_cids:
-            click.echo(f"  ✓ Link already exists (GA4 ↔ AW-{clean_cid})")
+            click.echo(f"  [OK] Link already exists (GA4 <-> AW-{clean_cid})")
             report["links"]["status"] = "already_linked"
         else:
-            click.echo(f"  Creating link GA4 property {property_id} ↔ AW-{clean_cid}...")
-            result = ga4_create_google_ads_link(creds, property_id, customer_id)
+            click.echo(f"  Creating link GA4 property {property_id} <-> AW-{clean_cid}...")
+            result = ga4_create_google_ads_link(creds_ga4, property_id, customer_id)
             report["links"]["result"] = result
             if result and result.get("status") != "error":
                 report["links"]["status"] = "linked"
-                click.echo("  ✓ Link created successfully")
+                click.echo("  [OK] Link created successfully")
             else:
                 report["links"]["status"] = "failed"
 
@@ -527,9 +621,12 @@ def run(config_path: str):
     click.echo("Setup Report")
     click.echo(f"{'='*60}")
 
-    # Determine IDs
+    # Determine IDs (measurement ID is from GA4 Admin -> Data streams, NOT property_id)
     ads_id = f"AW-{clean_customer_id(customer_id)}" if customer_id else "AW-XXXX"
-    ga4_tag = f"G-{property_id}" if property_id else "G-XXXX"
+    ga4_cfg = config.get("ga4", {})
+    measurement_id = (ga4_cfg.get("measurement_id") or "").strip()
+    if not measurement_id:
+        measurement_id = "(set ga4.measurement_id in config.yaml — e.g. G-M8NGL90Z1R from Data streams)"
 
     # Try to find send_to labels
     send_to = report.get("google_ads", {}).get("send_to_map", {})
@@ -543,8 +640,8 @@ def run(config_path: str):
             label_booking = st.split("/")[-1] if "/" in st else st
 
     env_vars = {
-        "VITE_GOOGLE_TAG_ID": ads_id,
-        "VITE_GOOGLE_GA4_ID": ga4_tag,
+        "VITE_GOOGLE_ADS_ID": ads_id,
+        "VITE_GA4_MEASUREMENT_ID": measurement_id,
         "VITE_GOOGLE_ADS_LABEL_CONTACT": label_contact or "(check Google Ads UI)",
         "VITE_GOOGLE_ADS_LABEL_BOOKING": label_booking or "(check Google Ads UI)",
     }
@@ -578,10 +675,14 @@ def run(config_path: str):
 @click.option("--config", "config_path", required=True, help="Path to config.yaml")
 def status(config_path: str):
     """Check current state of GA4 and Google Ads setup."""
-    from google_auth import get_oauth_credentials, get_google_ads_config
+    from google_auth import (
+        get_ga4_credentials,
+        get_google_ads_client_config,
+        google_ads_auth_mode_message,
+    )
 
     config = load_config(config_path)
-    creds = get_oauth_credentials()
+    creds_ga4 = get_ga4_credentials()
 
     ga4_config = config.get("ga4", {})
     ads_config = config.get("google_ads", {})
@@ -595,26 +696,26 @@ def status(config_path: str):
         click.echo(f"{'='*60}")
 
         try:
-            prop = ga4_get_property(creds, property_id)
+            prop = ga4_get_property(creds_ga4, property_id)
             click.echo(f"  Property: {prop['display_name']}")
             click.echo(f"  Timezone: {prop['time_zone']}")
         except Exception as e:
             click.echo(f"  Error: {e}")
 
         click.echo("\n  Key Events:")
-        key_events = ga4_list_key_events(creds, property_id)
+        key_events = ga4_list_key_events(creds_ga4, property_id)
         if key_events:
             for ke in key_events:
-                click.echo(f"    • {ke['event_name']} (created: {ke['create_time'][:10]})")
+                click.echo(f"    - {ke['event_name']} (created: {ke['create_time'][:10]})")
         else:
             click.echo("    (none found)")
 
         click.echo("\n  Google Ads Links:")
-        links = ga4_list_google_ads_links(creds, property_id)
+        links = ga4_list_google_ads_links(creds_ga4, property_id)
         if links:
             for link in links:
                 click.echo(
-                    f"    • AW-{link['customer_id']} "
+                    f"    - AW-{link['customer_id']} "
                     f"(personalization: {link['ads_personalization_enabled']})"
                 )
         else:
@@ -625,22 +726,20 @@ def status(config_path: str):
         click.echo(f"\n{'='*60}")
         click.echo("Google Ads Conversion Actions")
         click.echo(f"{'='*60}")
+        for line in google_ads_auth_mode_message().split("\n"):
+            click.echo(f"  {line}")
 
         try:
             from google.ads.googleads.client import GoogleAdsClient
 
-            ads_client_config = get_google_ads_config(creds)
-            login_cid = ads_config.get("login_customer_id", "")
-            if login_cid:
-                ads_client_config["login_customer_id"] = clean_customer_id(login_cid)
-
+            ads_client_config = get_google_ads_client_config(ads_config)
             ads_client = GoogleAdsClient.load_from_dict(ads_client_config)
             conversions = ads_list_conversion_actions(ads_client, customer_id)
 
             if conversions:
                 for c in conversions:
-                    primary = "★" if c.get("primary_for_goal") else " "
-                    send = f" → {c['send_to']}" if c.get("send_to") else ""
+                    primary = "*" if c.get("primary_for_goal") else " "
+                    send = f" -> {c['send_to']}" if c.get("send_to") else ""
                     click.echo(f"  {primary} {c['name']} ({c['type']}, {c['category']}){send}")
             else:
                 click.echo("  (no enabled conversions found)")
@@ -653,6 +752,121 @@ def status(config_path: str):
         click.echo(f"\n  Last report: {REPORT_PATH}")
         report = json.loads(REPORT_PATH.read_text())
         click.echo(f"  Generated: {report.get('generated_at', 'unknown')}")
+
+
+@cli.command("export-env")
+@click.option("--config", "config_path", required=True, help="Path to config.yaml")
+@click.option(
+    "--output",
+    "-o",
+    "output_path",
+    default=None,
+    help="Write env fragment to this file (e.g. ../../config/frontend.env)",
+)
+def export_env_cmd(config_path: str, output_path: str | None):
+    """
+    Google Ads API: list conversion actions, map names to VITE_GOOGLE_ADS_CONV_* and print.
+
+    Requires: GOOGLE_ADS_DEVELOPER_TOKEN. Uses same service-account JSON as GA4 when set, else OAuth.
+    """
+    from google_auth import get_google_ads_client_config, google_ads_auth_mode_message
+
+    config = load_config(config_path)
+    ads_config = config.get("google_ads", {})
+    customer_id = ads_config.get("customer_id", "").strip()
+    if not customer_id:
+        click.echo("ERROR: Set google_ads.customer_id in config.yaml")
+        raise SystemExit(1)
+
+    ga4_cfg = config.get("ga4", {})
+    measurement_id = (ga4_cfg.get("measurement_id") or "").strip()
+
+    for line in google_ads_auth_mode_message().split("\n"):
+        click.echo(line)
+    click.echo("")
+
+    try:
+        from google.ads.googleads.client import GoogleAdsClient
+
+        ads_client_config = get_google_ads_client_config(ads_config)
+        ads_client = GoogleAdsClient.load_from_dict(ads_client_config)
+        conversions = ads_list_conversion_actions(ads_client, customer_id)
+    except Exception as e:
+        click.echo(f"ERROR: {e}")
+        raise SystemExit(1)
+
+    awid = f"AW-{clean_customer_id(customer_id)}"
+    lines = [
+        "# Generated by: python setup_conversions.py export-env --config config.yaml",
+        "# Paste into config/frontend.env (deploy) or tripoint-frontend/.env.production, then rebuild.",
+        "",
+        f"VITE_GOOGLE_ADS_ID={awid}",
+    ]
+    if measurement_id:
+        lines.append(f"VITE_GA4_MEASUREMENT_ID={measurement_id}")
+    else:
+        lines.append("# VITE_GA4_MEASUREMENT_ID=G-XXXXXXXXXX   # add ga4.measurement_id to config.yaml")
+
+    lines.append("")
+    lines.append("# Conversion labels (after AW-.../) — from Google Ads API")
+
+    mapped: dict[str, str] = {}
+    unmapped: list[dict] = []
+
+    for c in conversions:
+        send_to = c.get("send_to")
+        label = label_from_send_to(send_to) if send_to else None
+        name = c.get("name") or ""
+        vk = match_conversion_name_to_vite_key(name)
+        if vk and label:
+            if vk not in mapped:
+                mapped[vk] = label
+            else:
+                click.echo(
+                    f"  Note: duplicate {vk} from '{name}', keeping first label {mapped[vk]}",
+                    err=True,
+                )
+        elif not send_to or not label:
+            unmapped.append({"name": name, "reason": "no send_to in tag_snippets (open in Ads UI)"})
+        else:
+            unmapped.append({"name": name, "send_to": send_to, "reason": "name not matched; edit export-env rules"})
+
+    vite_order = [
+        "VITE_GOOGLE_ADS_CONV_WHATSAPP",
+        "VITE_GOOGLE_ADS_CONV_EMAIL",
+        "VITE_GOOGLE_ADS_CONV_PHONE",
+        "VITE_GOOGLE_ADS_CONV_CONTACT",
+        "VITE_GOOGLE_ADS_CONV_BOOKING_AVAILABILITY",
+        "VITE_GOOGLE_ADS_CONV_BOOKING_SLOT",
+        "VITE_GOOGLE_ADS_CONV_PAYMENT",
+        "VITE_GOOGLE_ADS_CONV_BOOKING",
+        "VITE_GOOGLE_ADS_CONV_BOOK_NOW",
+    ]
+    for vk in vite_order:
+        if vk in mapped:
+            lines.append(f"{vk}={mapped[vk]}")
+
+    for vk, lab in sorted(mapped.items()):
+        if vk not in vite_order:
+            lines.append(f"{vk}={lab}")
+
+    text = "\n".join(lines) + "\n"
+
+    click.echo("\n" + "=" * 60)
+    click.echo("Vite env fragment (Google Ads API)")
+    click.echo("=" * 60 + "\n")
+    click.echo(text)
+
+    if unmapped:
+        click.echo("Unmapped or missing tag (fix in Ads UI or name matching rules):\n")
+        for u in unmapped:
+            click.echo(f"  - {u}")
+
+    if output_path:
+        out = Path(output_path).expanduser().resolve()
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(text, encoding="utf-8")
+        click.echo(f"Wrote: {out}\n")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TriPoint Photo Shot List</title>
+    <style>
+        :root {
+            --brand: #0ea5e9;
+            --brand-light: #38bdf8;
+            --surface: #0f172a;
+            --surface-alt: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --border: #334155;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: var(--surface);
+            color: var(--text-primary);
+            line-height: 1.5;
+            padding: 1rem;
+            margin: 0;
+            padding-bottom: 4rem;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--brand-light);
+        }
+
+        p.intro {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .category {
+            background-color: var(--surface-alt);
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .category h2 {
+            font-size: 1.25rem;
+            margin-top: 0;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px dashed var(--border);
+        }
+
+        .item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .checkbox-wrapper {
+            padding-top: 0.2rem;
+        }
+
+        input[type="checkbox"] {
+            width: 1.25rem;
+            height: 1.25rem;
+            accent-color: var(--brand);
+            cursor: pointer;
+        }
+
+        .content {
+            flex: 1;
+        }
+
+        .title {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            display: block;
+        }
+
+        .tag {
+            display: inline-block;
+            background-color: rgba(14, 165, 233, 0.15);
+            color: var(--brand-light);
+            border: 1px solid rgba(14, 165, 233, 0.3);
+            font-size: 0.7rem;
+            padding: 0.1rem 0.4rem;
+            border-radius: 0.25rem;
+            margin-right: 0.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .tag.hero {
+            background-color: rgba(245, 158, 11, 0.15);
+            color: #fbbf24;
+            border-color: rgba(245, 158, 11, 0.3);
+        }
+
+        .filename {
+            display: inline-flex;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            background-color: rgba(0,0,0,0.2);
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            margin-top: 0.4rem;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* Strikethrough for checked items */
+        .item.checked .content {
+            opacity: 0.5;
+            text-decoration: line-through;
+        }
+
+        .progress-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--surface-alt);
+            border-top: 1px solid var(--border);
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .reset-btn {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 0.4rem 0.8rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .reset-btn:hover {
+            color: white;
+            border-color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>📸 Photo Checklist</h1>
+    <p class="intro">Shoot Hero images in <strong>Landscape</strong> (wide). Gallery images can be a mix of portrait and landscape. Include the van badge/logo where possible.</p>
+
+    <div id="checklist-container"></div>
+
+    <div class="progress-bar">
+        <span id="progress-text">0 / 63 Completed</span>
+        <button class="reset-btn" onclick="resetChecklist()">Reset All</button>
+    </div>
+
+    <script>
+        const shotList = [
+            {
+                page: "1. Sprinter Brakes",
+                shots: [
+                    { id: "sb-1", type: "Hero", title: "Caliper Assembly (Wide)", desc: "Close-up of Sprinter front brake assembly with new pads + disc visible, caliper open, wheel removed. Van visible in background.", filename: "sprinter-brakes-hero.jpg" },
+                    { id: "sb-2", type: "Gallery", title: "Old vs New Pads", desc: "Old worn brake pad next to new pad — side-by-side on a clean surface.", filename: "sprinter-brakes-01.jpg" },
+                    { id: "sb-3", type: "Gallery", title: "Measuring Disc", desc: "Digital vernier caliper measuring brake disc thickness.", filename: "sprinter-brakes-02.jpg" },
+                    { id: "sb-4", type: "Gallery", title: "Slider Pins", desc: "Brake caliper slider pins being cleaned or greased.", filename: "sprinter-brakes-03.jpg" },
+                    { id: "sb-5", type: "Gallery", title: "Completed Assembly", desc: "Completed front brake assembly — new pads fitted, wheel off.", filename: "sprinter-brakes-04.jpg" },
+                    { id: "sb-6", type: "Gallery", title: "Road Test", desc: "Hands on steering wheel, van on the ground driving (passenger taking photo).", filename: "sprinter-brakes-05.jpg" },
+                    { id: "sb-7", type: "Gallery", title: "Wear Sensor", desc: "Brake wear sensor close-up (old corroded vs new).", filename: "sprinter-brakes-06.jpg" }
+                ]
+            },
+            {
+                page: "2. Sprinter Servicing",
+                shots: [
+                    { id: "ss-1", type: "Hero", title: "Engine Bay Open (Wide)", desc: "Sprinter engine bay open from the front, oil filler cap visible, tools laid out. Bonnet up, van visible.", filename: "sprinter-servicing-hero.jpg" },
+                    { id: "ss-2", type: "Gallery", title: "Oil Draining", desc: "Oil draining from sump into collection tray — under the van.", filename: "sprinter-servicing-01.jpg" },
+                    { id: "ss-3", type: "Gallery", title: "Old vs New Oil Filter", desc: "New oil filter next to old dirty one — side-by-side.", filename: "sprinter-servicing-02.jpg" },
+                    { id: "ss-4", type: "Gallery", title: "Old vs New Air Filter", desc: "Air filter comparison — new vs old clogged one.", filename: "sprinter-servicing-03.jpg" },
+                    { id: "ss-5", type: "Gallery", title: "Fuel Filter", desc: "Fuel filter change — old filter removed for Sprinter.", filename: "sprinter-servicing-04.jpg" },
+                    { id: "ss-6", type: "Gallery", title: "Fluid Levels", desc: "Checking fluid levels — coolant/brake fluid reservoirs.", filename: "sprinter-servicing-05.jpg" },
+                    { id: "ss-7", type: "Gallery", title: "Torquing Sump", desc: "Torque wrench on sump plug — showing proper procedure.", filename: "sprinter-servicing-06.jpg" }
+                ]
+            },
+            {
+                page: "3. Vito Brakes",
+                shots: [
+                    { id: "vb-1", type: "Hero", title: "Brake Assembly (Wide)", desc: "Vito front wheel removed, brake assembly visible, tool in hand. Vito badge or body line visible.", filename: "vito-brakes-hero.jpg" },
+                    { id: "vb-2", type: "Gallery", title: "Old vs New Pads", desc: "Old vs new Vito brake pads side-by-side.", filename: "vito-brakes-01.jpg" },
+                    { id: "vb-3", type: "Gallery", title: "Scored Disc", desc: "Brake disc surface — scored/worn disc close-up.", filename: "vito-brakes-02.jpg" },
+                    { id: "vb-4", type: "Gallery", title: "Slider Pins", desc: "Caliper cleaning and slider pin lubrication.", filename: "vito-brakes-03.jpg" },
+                    { id: "vb-5", type: "Gallery", title: "Completed Vito Brakes", desc: "Completed Vito brake job — wheel off, new components fitted.", filename: "vito-brakes-04.jpg" }
+                ]
+            },
+            {
+                page: "4. Vito Servicing",
+                shots: [
+                    { id: "vs-1", type: "Hero", title: "Vito Engine Bay (Wide)", desc: "Vito engine bay from front angle, bonnet up, oil cap area.", filename: "vito-servicing-hero.jpg" },
+                    { id: "vs-2", type: "Gallery", title: "Oil Catch Tray", desc: "Oil drain in progress — catch tray under Vito.", filename: "vito-servicing-01.jpg" },
+                    { id: "vs-3", type: "Gallery", title: "Air Filter", desc: "Vito air filter comparison — new vs dirty.", filename: "vito-servicing-02.jpg" },
+                    { id: "vs-4", type: "Gallery", title: "Fluid Levels", desc: "Checking Vito fluid levels.", filename: "vito-servicing-03.jpg" },
+                    { id: "vs-5", type: "Gallery", title: "Cabin Filter", desc: "Interior cabin filter — new vs old (dusty/dirty).", filename: "vito-servicing-04.jpg" },
+                    { id: "vs-6", type: "Gallery", title: "Service Record", desc: "Service sticker or digital service record update on laptop.", filename: "vito-servicing-05.jpg" }
+                ]
+            },
+            {
+                page: "5. Citan Brakes",
+                shots: [
+                    { id: "cb-1", type: "Hero", title: "Citan Brakes (Wide)", desc: "Citan with front wheel removed showing brake assembly. Citan body or badge visible.", filename: "citan-brakes-hero.jpg" },
+                    { id: "cb-2", type: "Gallery", title: "Citan Pads", desc: "Old vs new Citan brake pads.", filename: "citan-brakes-01.jpg" },
+                    { id: "cb-3", type: "Gallery", title: "Measuring Citan Disc", desc: "Measuring Citan disc with vernier caliper.", filename: "citan-brakes-02.jpg" },
+                    { id: "cb-4", type: "Gallery", title: "Caliper Service", desc: "Slider pin service close-up.", filename: "citan-brakes-03.jpg" },
+                    { id: "cb-5", type: "Gallery", title: "Completed Job", desc: "Completed job — new pads/discs on Citan.", filename: "citan-brakes-04.jpg" }
+                ]
+            },
+            {
+                page: "6. Citan Servicing",
+                shots: [
+                    { id: "cs-1", type: "Hero", title: "Citan Engine (Wide)", desc: "Citan engine bay open, tools ready.", filename: "citan-servicing-hero.jpg" },
+                    { id: "cs-2", type: "Gallery", title: "Oil Catch Tray", desc: "Oil drain — catch tray under Citan.", filename: "citan-servicing-01.jpg" },
+                    { id: "cs-3", type: "Gallery", title: "Oil Filter", desc: "Citan oil filter change close-up.", filename: "citan-servicing-02.jpg" },
+                    { id: "cs-4", type: "Gallery", title: "Air Filter", desc: "Air filter comparison — new vs dirty.", filename: "citan-servicing-03.jpg" },
+                    { id: "cs-5", type: "Gallery", title: "Under-Bonnet Fluids", desc: "Under-bonnet fluid level checks.", filename: "citan-servicing-04.jpg" },
+                    { id: "cs-6", type: "Gallery", title: "Job Done", desc: "Completed service — bonnet down, van clean, tools packed.", filename: "citan-servicing-05.jpg" }
+                ]
+            },
+            {
+                page: "7. Mercedes Van Servicing (Hub)",
+                shots: [
+                    { id: "hub-1", type: "Hero", title: "Van Setup (Wide)", desc: "Wide shot of a Mercedes van with bonnet open, TriPoint branding/tools visible. Driveway location.", filename: "merc-van-servicing-hero.jpg" },
+                    { id: "hub-2", type: "Gallery", title: "Tool Layout", desc: "Toolbox / kit laid out beside van — shows professionalism.", filename: "merc-van-servicing-01.jpg" },
+                    { id: "hub-3", type: "Gallery", title: "Pouring Oil", desc: "Oil being poured into engine — fresh oil going in.", filename: "merc-van-servicing-02.jpg" },
+                    { id: "hub-4", type: "Gallery", title: "Under-Van View", desc: "Under-van work — creeper or jack, visible from side.", filename: "merc-van-servicing-03.jpg" },
+                    { id: "hub-5", type: "Gallery", title: "XENTRY Reset", desc: "XENTRY / laptop plugged into OBD port for service reset.", filename: "merc-van-servicing-04.jpg" },
+                    { id: "hub-6", type: "Gallery", title: "Customer Handover", desc: "Handing over paperwork or showing report on phone/tablet.", filename: "merc-van-servicing-05.jpg" },
+                    { id: "hub-7", type: "Gallery", title: "Van Driving Away", desc: "Van leaving driveway — 'job done' shot.", filename: "merc-van-servicing-06.jpg" }
+                ]
+            },
+            {
+                page: "8. Van Load & Driveability Tune",
+                shots: [
+                    { id: "load-1", type: "Hero", title: "Loaded Van on Hill (Wide)", desc: "Sprinter/van on a road or slight hill, loaded (roof rack, tools visible). Dynamic angle.", filename: "van-tune-hero.jpg" },
+                    { id: "load-2", type: "Gallery", title: "Laptop on OBD", desc: "Laptop connected to OBD port — tuning software on screen.", filename: "van-tune-01.jpg" },
+                    { id: "load-3", type: "Gallery", title: "Live Data Screen", desc: "Before/after dyno-style screen or live data showing torque/power numbers.", filename: "van-tune-02.jpg" },
+                    { id: "load-4", type: "Gallery", title: "Sensors/Turbo", desc: "Engine bay with MAP sensor or turbo area visible.", filename: "van-tune-03.jpg" },
+                    { id: "load-5", type: "Gallery", title: "Work Gear Load", desc: "Van loaded with work gear — shelving, tools, weight visible.", filename: "van-tune-04.jpg" },
+                    { id: "load-6", type: "Gallery", title: "Road Test", desc: "Road test shot — driving, hands on wheel, dashboard visible.", filename: "van-tune-05.jpg" },
+                    { id: "load-7", type: "Gallery", title: "Tune Report", desc: "Written tune report on laptop or phone screen.", filename: "van-tune-06.jpg" }
+                ]
+            },
+            {
+                page: "9. Van Economy Tune",
+                shots: [
+                    { id: "eco-1", type: "Hero", title: "Motorway/Fueling (Wide)", desc: "Van on a motorway/dual carriageway or at a fuel station. Suggests economy/miles.", filename: "van-economy-hero.jpg" },
+                    { id: "eco-2", type: "Gallery", title: "MPG Dash", desc: "Dashboard showing MPG / trip computer reading.", filename: "van-economy-01.jpg" },
+                    { id: "eco-3", type: "Gallery", title: "Laptop Tuning", desc: "Laptop plugged in — economy tune software visible.", filename: "van-economy-02.jpg" },
+                    { id: "eco-4", type: "Gallery", title: "Fuel Gauge", desc: "Fuel gauge close-up or fueling the van.", filename: "van-economy-03.jpg" },
+                    { id: "eco-5", type: "Gallery", title: "Intake Area", desc: "Engine bay — throttle body / intake area.", filename: "van-economy-04.jpg" },
+                    { id: "eco-6", type: "Gallery", title: "Cruising Dash", desc: "Road test — van cruising, speed visible on dash.", filename: "van-economy-05.jpg" }
+                ]
+            },
+            {
+                page: "10. Fleet Van Tuning",
+                shots: [
+                    { id: "fleet-1", type: "Hero", title: "Multiple Vans (Wide)", desc: "Multiple vans parked together at a depot or yard. 2–3+ Mercedes vans in frame.", filename: "fleet-tuning-hero.jpg" },
+                    { id: "fleet-2", type: "Gallery", title: "Fleet Lineup", desc: "Row of fleet vans — depot yard with multiple vehicles.", filename: "fleet-tuning-01.jpg" },
+                    { id: "fleet-3", type: "Gallery", title: "OBD Queue", desc: "Laptop connected to one van, another van queued behind.", filename: "fleet-tuning-02.jpg" },
+                    { id: "fleet-4", type: "Gallery", title: "Multi-Report", desc: "Per-vehicle report on laptop screen.", filename: "fleet-tuning-03.jpg" },
+                    { id: "fleet-5", type: "Gallery", title: "Walking with Tools", desc: "Moving between vans — walking with laptop/tools.", filename: "fleet-tuning-04.jpg" },
+                    { id: "fleet-6", type: "Gallery", title: "Batch Cable Setup", desc: "Multiple OBD cables/tools laid out for batch work.", filename: "fleet-tuning-05.jpg" },
+                    { id: "fleet-7", type: "Gallery", title: "Fleet Manager", desc: "Fleet manager handover — clipboard/tablet with reports.", filename: "fleet-tuning-06.jpg" }
+                ]
+            }
+        ];
+
+        const container = document.getElementById('checklist-container');
+        const progressText = document.getElementById('progress-text');
+        
+        let totalItems = 0;
+        let checkedItems = 0;
+
+        // Load saved state from localStorage
+        const savedState = JSON.parse(localStorage.getItem('tripoint-shots')) || {};
+
+        function updateProgress() {
+            checkedItems = document.querySelectorAll('input[type="checkbox"]:checked').length;
+            progressText.textContent = `${checkedItems} / ${totalItems} Completed`;
+            localStorage.setItem('tripoint-shots', JSON.stringify(savedState));
+        }
+
+        function toggleItem(id, itemDiv) {
+            const checkbox = document.getElementById(id);
+            if (checkbox.checked) {
+                itemDiv.classList.add('checked');
+                savedState[id] = true;
+            } else {
+                itemDiv.classList.remove('checked');
+                savedState[id] = false;
+            }
+            updateProgress();
+        }
+
+        function renderChecklist() {
+            container.innerHTML = '';
+            
+            shotList.forEach(category => {
+                const catDiv = document.createElement('div');
+                catDiv.className = 'category';
+                catDiv.innerHTML = `<h2>${category.page}</h2>`;
+
+                category.shots.forEach(shot => {
+                    totalItems++;
+                    const isChecked = savedState[shot.id] === true;
+                    
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = `item ${isChecked ? 'checked' : ''}`;
+                    
+                    const tagClass = shot.type.toLowerCase() === 'hero' ? 'tag hero' : 'tag';
+
+                    itemDiv.innerHTML = `
+                        <div class="checkbox-wrapper">
+                            <input type="checkbox" id="${shot.id}" ${isChecked ? 'checked' : ''}>
+                        </div>
+                        <label class="content" for="${shot.id}">
+                            <span class="title"><span class="${tagClass}">${shot.type}</span>${shot.title}</span>
+                            <span class="desc">${shot.desc}</span>
+                            ${shot.filename ? `<span class="filename">💾 ${shot.filename}</span>` : ''}
+                        </label>
+                    `;
+                    
+                    const checkbox = itemDiv.querySelector('input');
+                    checkbox.addEventListener('change', () => toggleItem(shot.id, itemDiv));
+                    
+                    catDiv.appendChild(itemDiv);
+                });
+
+                container.appendChild(catDiv);
+            });
+            
+            updateProgress();
+        }
+
+        function resetChecklist() {
+            if (confirm("Are you sure you want to reset all progress?")) {
+                for (let key in savedState) delete savedState[key];
+                renderChecklist();
+            }
+        }
+
+        // Initialize
+        renderChecklist();
+    </script>
+</body>
+</html>

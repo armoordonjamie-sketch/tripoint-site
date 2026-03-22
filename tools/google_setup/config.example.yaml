@@ -7,15 +7,21 @@ google_ads:
 
 ga4:
   property_id: "123456789"              # GA4 property ID (numbers only)
+  measurement_id: "G-XXXXXXXXXX"       # Admin -> Data streams -> Web (same as VITE_GA4_MEASUREMENT_ID)
 
 site:
   domain: "tripointdiagnostics.co.uk"
   timezone: "Europe/London"
 
-# Events to mark as Key Events in GA4
+# Events to mark as Key Events in GA4 (match tripoint-frontend/src/lib/analytics.ts)
 ga4_key_events:
   - submit_contact_form
+  - submit_booking_request
   - confirm_booking
+  - payment_completed
+  - click_whatsapp
+  - booking_availability_ok
+  - booking_slot_selected
 
 # Google Ads conversion actions to create
 google_ads_conversions:

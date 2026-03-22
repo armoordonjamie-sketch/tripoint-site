@@ -2,6 +2,56 @@
 
 Programmatically creates GA4 key events, Google Ads conversion actions, and links them together for TriPoint Diagnostics.
 
+## Security
+
+**Never commit** service account JSON keys or paste private keys in chat. If a key was exposed, **delete it** in Google Cloud → IAM → Service Accounts → Keys → Add a new key → rotate.
+
+---
+
+## GA4 Admin API via service account (recommended for automation)
+
+The site’s **browser tag** (`G-M8NGL90Z1R`) is unchanged. Service account auth is only for **`tools/google_setup`** (CLI) calling the **GA4 Admin API** (key events, links), so you can run `run` / `status` **without browser OAuth** for GA4 when a JSON key is configured.
+
+### 1. Google Cloud
+
+1. Same or linked project: enable **Google Analytics Admin API** ([enable link](https://console.cloud.google.com/apis/library/analyticsadmin.googleapis.com)).
+2. Use your existing service account (e.g. `tripoint-admin@….iam.gserviceaccount.com`) or create one.
+3. **Keys → Add key → JSON** and download the **full** `.json` file (not a short hex string — that is not the credential file).
+
+### 2. Grant access in GA4 (required)
+
+In **Google Analytics** → **Admin** (gear) → **Property access management** → **Add users** → paste the **service account email** → role **Administrator** or **Editor** → Add.
+
+Without this step, API calls return **403 permission denied**. See `GA4_SERVICE_ACCOUNT.md` in this folder.
+
+### 3. Point the CLI at the key file
+
+```bash
+# Linux / macOS
+export GA4_SERVICE_ACCOUNT_JSON="/path/to/your-service-account.json"
+
+# Windows PowerShell
+$env:GA4_SERVICE_ACCOUNT_JSON = "C:\path\to\your-service-account.json"
+```
+
+Alternatively: `GOOGLE_APPLICATION_CREDENTIALS` (same path) works the same way.
+
+### 4. Google Ads parts still use OAuth
+
+Creating conversion actions in **Google Ads** still needs **OAuth** (`python setup_conversions.py auth`) plus `GOOGLE_ADS_DEVELOPER_TOKEN`. Only the **GA4** steps use the service account when `GA4_SERVICE_ACCOUNT_JSON` is set.
+
+### 5. Smoke test
+
+```bash
+cd tools/google_setup
+export GA4_SERVICE_ACCOUNT_JSON="/path/to/key.json"   # or set in env
+python setup_conversions.py auth-ga4 --config config.yaml
+```
+
+Should print the property display name. If it fails with permission denied, add the service account in GA4 property access (step 2 above).
+
+---
+
 ## Prerequisites
 
 ### 1. Google Cloud Project
@@ -54,15 +104,35 @@ cp config.example.yaml config.yaml
 ## Usage
 
 ### Step 1: Authenticate
+
+**Google Ads (conversion actions):** OAuth — run once:
+
 ```bash
 python setup_conversions.py auth
 ```
+
 Opens a browser for Google sign-in. Saves `token.json` locally.
 
+**GA4 only:** you can skip browser auth if `GA4_SERVICE_ACCOUNT_JSON` is set; verify with:
+
+```bash
+python setup_conversions.py auth-ga4 --config config.yaml
+```
+
 ### Step 2: Run Setup
+
+**GA4 only** (service account, no browser OAuth — key events + GA4↔Ads link):
+
+```bash
+python setup_conversions.py run --config config.yaml --ga4-only
+```
+
+**Full** (also Google Ads conversion actions — needs `auth` + `GOOGLE_ADS_DEVELOPER_TOKEN`):
+
 ```bash
 python setup_conversions.py run --config config.yaml
 ```
+
 Creates:
 - GA4 key events (submit_contact_form, confirm_booking)
 - Google Ads conversion actions (Contact Form, Booking, Phone Call, Offline)
@@ -76,6 +146,22 @@ python setup_conversions.py status --config config.yaml
 ```
 Shows current state of GA4 key events, Google Ads conversions, and account links.
 
+### Export `VITE_*` for the website (Google Ads API)
+
+After `auth` and `GOOGLE_ADS_DEVELOPER_TOKEN` are set, pull conversion labels from the API and print a ready-to-paste env block:
+
+```bash
+python setup_conversions.py export-env --config config.yaml
+```
+
+Write straight to your server env file (example path):
+
+```bash
+python setup_conversions.py export-env --config config.yaml -o ../../config/frontend.env
+```
+
+Names are matched by keywords (e.g. "Contact Form" -> `VITE_GOOGLE_ADS_CONV_CONTACT`). Unmapped rows are listed so you can rename in Ads or extend `match_conversion_name_to_vite_key` in `setup_conversions.py`.
+
 ## Output: report.json
 
 Contains:
@@ -84,6 +170,12 @@ Contains:
 - `send_to` strings for gtag (e.g. `AW-XXXXXXX/XXXXXXXXXXX`)
 - Environment variables to set in `.env`
 - Manual steps remaining
+
+### OAuth `invalid_grant` / refresh fails
+
+Your `token.json` refresh token was **revoked** or doesn’t match `client_secret.json` (e.g. OAuth client recreated in Cloud Console). The script now **deletes** `token.json` and opens the browser again when refresh fails.
+
+Or manually: delete `tools/google_setup/token.json`, then run `python setup_conversions.py auth` again.
 
 ## Files (gitignored)
 

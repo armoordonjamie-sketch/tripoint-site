@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Phone, MessageCircle, CalendarDays } from 'lucide-react';
 import { siteConfig } from '@/config/site';
-import { trackEvent } from '@/lib/analytics';
+import { trackBookNowClick, trackPhoneLead, trackWhatsAppLead } from '@/lib/analytics';
 
 export function MobileStickyCTA() {
     return (
@@ -10,7 +10,7 @@ export function MobileStickyCTA() {
                 href={`tel:${siteConfig.contact.phoneE164}`}
                 className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-brand py-3 text-sm font-semibold text-brand transition-colors hover:bg-brand hover:text-white"
                 aria-label={`Call us on ${siteConfig.contact.phoneDisplay}`}
-                onClick={() => trackEvent('click_phone_header', { location: 'sticky_cta' })}
+                onClick={() => trackPhoneLead('sticky_cta')}
             >
                 <Phone className="h-5 w-5" />
                 Call
@@ -20,7 +20,7 @@ export function MobileStickyCTA() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-success bg-success/10 py-3 text-sm font-semibold text-success transition-colors hover:bg-success/20"
-                onClick={() => trackEvent('click_whatsapp', { location: 'sticky_cta' })}
+                onClick={() => trackWhatsAppLead('sticky_cta')}
             >
                 <MessageCircle className="h-5 w-5" />
                 WhatsApp
@@ -28,7 +28,7 @@ export function MobileStickyCTA() {
             <Link
                 to="/booking"
                 className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-brand py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-light"
-                onClick={() => trackEvent('click_book_now', { location: 'sticky_cta' })}
+                onClick={() => trackBookNowClick('sticky_cta')}
             >
                 <CalendarDays className="h-4 w-4" />
                 Book Now

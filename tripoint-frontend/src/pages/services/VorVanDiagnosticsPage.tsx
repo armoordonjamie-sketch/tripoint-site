@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Seo } from '@/components/Seo';
-import { trackEvent } from '@/lib/analytics';
+import { trackBookNowClick, trackPhoneLead, trackWhatsAppLead } from '@/lib/analytics';
 import { Section } from '@/components/Section';
 import { CTAButton } from '@/components/CTAButton';
 import { PhotoGallery } from '@/components/PhotoGallery';
@@ -37,7 +37,7 @@ function useScrollReveal() {
     return ref;
 }
 
-const vorService = siteConfig.pricing.services.find((s) => s.slug === 'vor-triage');
+const vorService = siteConfig.pricing.services.find((s) => s.slug === 'vor-van-diagnostics');
 const zoneA = vorService?.zoneA ?? 160;
 const zoneB = vorService?.zoneB ?? 175;
 const zoneC = vorService?.zoneC ?? 190;
@@ -50,8 +50,8 @@ const faqs = [
 ];
 
 const crossSell = [
-    { title: 'Diagnostic Callout', desc: 'Standard diagnostic - no urgency', href: '/services/diagnostic-callout' },
-    { title: 'Emissions Diagnostics', desc: 'AdBlue, DPF, NOx diagnosis and repair', href: '/services/emissions-diagnostics' },
+    { title: 'Standard Diagnosis', desc: 'Not urgent? Standard covers all faults.', href: '/services/diagnostic-callout' },
+    { title: 'Pre-Purchase Health Check', desc: 'Buying a used vehicle? Check before you commit.', href: '/services/pre-purchase-digital-health-check' },
 ];
 
 export function VorVanDiagnosticsPage() {
@@ -60,12 +60,12 @@ export function VorVanDiagnosticsPage() {
     return (
         <div ref={scrollRef}>
             <Seo
-                title="VOR Van Diagnostics"
+                title="VOR Diagnosis - Priority Commercial Vehicle Diagnostics"
                 description="Vehicle Off Road priority diagnostic for vans and commercial vehicles. Fast triage and back-on-road decisions. Fleet, hire, depot. From £160."
                 canonical="/services/vor-van-diagnostics"
             />
-            <ServiceSchema name="VOR Van Diagnostics" description="Vehicle Off Road priority diagnostic for vans and commercial vehicles. Fast triage, back-on-road decisions. Fleet, hire, depot." url="/services/vor-van-diagnostics" priceFrom={zoneA} />
-            <BreadcrumbSchema items={[{ name: 'Home', url: '/' }, { name: 'Services', url: '/services' }, { name: 'VOR Van Diagnostics', url: '/services/vor-van-diagnostics' }]} />
+            <ServiceSchema name="VOR Diagnosis" description="Vehicle Off Road priority diagnostic for vans and commercial vehicles. Fast triage, back-on-road decisions. Fleet, hire, depot." url="/services/vor-van-diagnostics" priceFrom={zoneA} />
+            <BreadcrumbSchema items={[{ name: 'Home', url: '/' }, { name: 'Services', url: '/services' }, { name: 'VOR Diagnosis', url: '/services/vor-van-diagnostics' }]} />
             <FaqPageSchema items={faqs} />
 
             <section className="relative h-56 sm:h-72 overflow-hidden">
@@ -74,7 +74,7 @@ export function VorVanDiagnosticsPage() {
                 <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-10">
                     <div className="mx-auto max-w-3xl">
                         <p className="text-sm font-semibold uppercase tracking-widest text-brand mb-2">Priority / Fleet</p>
-                        <h1 className="text-4xl font-extrabold text-text-primary sm:text-5xl">VOR Van Diagnostics</h1>
+                        <h1 className="text-4xl font-extrabold text-text-primary sm:text-5xl">VOR Diagnosis</h1>
                     </div>
                 </div>
             </section>
@@ -100,7 +100,7 @@ export function VorVanDiagnosticsPage() {
                     <div className="mt-10 rounded-2xl border border-brand/20 bg-brand/5 p-6 reveal">
                         <h2 className="text-lg font-bold text-text-primary">Is this the right service for you?</h2>
                         <p className="mt-2 text-text-secondary">
-                            Yes, if your van or commercial vehicle is off the road and you need a fast back-on-road decision. Owner-driver couriers, delivery fleets, hire branches, depot operators - if downtime costs you money, this is the one. If you have a warning light but the vehicle is still drivable, our standard <Link to="/services/diagnostic-callout" className="text-brand hover:underline">Diagnostic Callout</Link> may be enough. For AdBlue or emissions faults, see <Link to="/services/emissions-diagnostics" className="text-brand hover:underline">Emissions Diagnostics</Link>.
+                            Yes, if your van or commercial vehicle is off the road and you need a fast back-on-road decision. Owner-driver couriers, delivery fleets, hire branches, depot operators - if downtime costs you money, this is the one. If you have a warning light but the vehicle is still drivable, our <Link to="/services/diagnostic-callout" className="text-brand hover:underline">Standard Diagnosis</Link> may be enough. AdBlue, DPF, and emissions faults are all covered under Standard Diagnosis.
                         </p>
                     </div>
 
@@ -141,7 +141,7 @@ export function VorVanDiagnosticsPage() {
                         <h2 className="text-2xl font-bold text-text-primary">What&apos;s Included</h2>
                         <ul className="mt-4 space-y-2">
                             {[
-                                'Everything in Standard Diagnostic Callout',
+                                'Everything in Standard Diagnosis',
                                 'Priority scheduling - confirmed as the next available slot',
                                 '"Back-on-road" triage decision: fix now / parts needed / workshop referral',
                                 'Clear documented outcome with repair timeline',
@@ -156,8 +156,8 @@ export function VorVanDiagnosticsPage() {
                     </div>
 
                     <div className="mt-10 flex flex-wrap gap-3 reveal">
-                        <CTAButton href={`https://wa.me/${siteConfig.contact.whatsappE164}`} size="md" external icon={<MessageCircle className="h-4 w-4" />} onClick={() => trackEvent('click_whatsapp', { location: 'vor_van_mid' })}>WhatsApp for Fast Response</CTAButton>
-                        <CTAButton href="/booking" variant="outline" size="md" onClick={() => trackEvent('click_book_now', { location: 'vor_van_mid' })}>Book Online</CTAButton>
+                        <CTAButton href={`https://wa.me/${siteConfig.contact.whatsappE164}`} size="md" external icon={<MessageCircle className="h-4 w-4" />} onClick={() => trackWhatsAppLead('vor_van_mid')}>WhatsApp for Fast Response</CTAButton>
+                        <CTAButton href="/booking" variant="outline" size="md" onClick={() => trackBookNowClick('vor_van_mid')}>Book Online</CTAButton>
                     </div>
 
                     <div className="mt-10 reveal">
@@ -207,9 +207,9 @@ export function VorVanDiagnosticsPage() {
                             <table className="min-w-full">
                                 <thead><tr className="border-b border-border-default bg-surface-alt"><th className="px-4 py-3 text-left text-sm font-semibold text-text-primary">Zone</th><th className="px-4 py-3 text-left text-sm font-semibold text-text-primary">Drive time</th><th className="px-4 py-3 text-right text-sm font-semibold text-text-primary">Price</th></tr></thead>
                                 <tbody>
-                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Zone A</td><td className="px-4 py-3 text-text-secondary">0–25 mins</td><td className="px-4 py-3 text-right font-semibold text-brand-light">£{zoneA}</td></tr>
-                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Zone B</td><td className="px-4 py-3 text-text-secondary">25–45 mins</td><td className="px-4 py-3 text-right font-semibold text-brand-light">£{zoneB}</td></tr>
-                                    <tr><td className="px-4 py-3 text-text-secondary">Zone C</td><td className="px-4 py-3 text-text-secondary">45–60 mins</td><td className="px-4 py-3 text-right font-semibold text-brand-light">£{zoneC}</td></tr>
+                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Zone A</td><td className="px-4 py-3 text-text-secondary">0-25 mins</td><td className="px-4 py-3 text-right font-semibold text-brand-light">£{zoneA}</td></tr>
+                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Zone B</td><td className="px-4 py-3 text-text-secondary">25-45 mins</td><td className="px-4 py-3 text-right font-semibold text-brand-light">£{zoneB}</td></tr>
+                                    <tr><td className="px-4 py-3 text-text-secondary">Zone C</td><td className="px-4 py-3 text-text-secondary">45-60 mins</td><td className="px-4 py-3 text-right font-semibold text-brand-light">£{zoneC}</td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -225,9 +225,9 @@ export function VorVanDiagnosticsPage() {
                         <p className="text-2xl font-bold text-text-primary">From <span className="text-brand-light">£{zoneA}</span></p>
                         <p className="mt-1 text-sm text-text-secondary">Zone-based pricing - includes priority scheduling and up to 75 mins on-site</p>
                         <div className="mt-4 flex flex-wrap justify-center gap-3">
-                            <CTAButton href={`https://wa.me/${siteConfig.contact.whatsappE164}`} size="sm" external icon={<MessageCircle className="h-4 w-4" />} onClick={() => trackEvent('click_whatsapp', { location: 'vor_van' })}>WhatsApp for Fast Response</CTAButton>
+                            <CTAButton href={`https://wa.me/${siteConfig.contact.whatsappE164}`} size="sm" external icon={<MessageCircle className="h-4 w-4" />} onClick={() => trackWhatsAppLead('vor_van')}>WhatsApp for Fast Response</CTAButton>
                             <CTAButton href="/pricing" variant="outline" size="sm" icon={<ArrowRight className="h-4 w-4" />}>Full Pricing</CTAButton>
-                            <CTAButton href="/booking" variant="outline" size="sm" onClick={() => trackEvent('click_book_now', { location: 'vor_van' })}>Book Online</CTAButton>
+                            <CTAButton href="/booking" variant="outline" size="sm" onClick={() => trackBookNowClick('vor_van')}>Book Online</CTAButton>
                         </div>
                     </div>
 
@@ -259,9 +259,9 @@ export function VorVanDiagnosticsPage() {
                         <h2 className="text-3xl font-bold text-white sm:text-4xl md:text-5xl">Van off the road?</h2>
                         <p className="mx-auto mt-4 max-w-xl text-lg text-white/80">WhatsApp us for the fastest response - we&apos;ll get you a priority slot.</p>
                         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-                            <CTAButton href={`https://wa.me/${siteConfig.contact.whatsappE164}`} variant="secondary" size="lg" external icon={<MessageCircle className="h-5 w-5" />} onClick={() => trackEvent('click_whatsapp', { location: 'vor_van_footer' })}>WhatsApp Us</CTAButton>
-                            <CTAButton href="/booking" variant="ghost" size="lg" className="text-white hover:text-white hover:bg-white/10" onClick={() => trackEvent('click_book_now', { location: 'vor_van_footer' })}>Book Online</CTAButton>
-                            <CTAButton href={`tel:${siteConfig.contact.phoneE164}`} variant="ghost" size="lg" external icon={<Phone className="h-5 w-5" />} className="text-white hover:text-white hover:bg-white/10" onClick={() => trackEvent('click_phone_header', { location: 'vor_van' })}>{siteConfig.contact.phoneDisplay}</CTAButton>
+                            <CTAButton href={`https://wa.me/${siteConfig.contact.whatsappE164}`} variant="secondary" size="lg" external icon={<MessageCircle className="h-5 w-5" />} onClick={() => trackWhatsAppLead('vor_van_footer')}>WhatsApp Us</CTAButton>
+                            <CTAButton href="/booking" variant="ghost" size="lg" className="text-white hover:text-white hover:bg-white/10" onClick={() => trackBookNowClick('vor_van_footer')}>Book Online</CTAButton>
+                            <CTAButton href={`tel:${siteConfig.contact.phoneE164}`} variant="ghost" size="lg" external icon={<Phone className="h-5 w-5" />} className="text-white hover:text-white hover:bg-white/10" onClick={() => trackPhoneLead('vor_van')}>{siteConfig.contact.phoneDisplay}</CTAButton>
                         </div>
                     </div>
                 </div>

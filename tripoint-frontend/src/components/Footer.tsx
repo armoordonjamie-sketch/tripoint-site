@@ -1,21 +1,23 @@
 import { Link } from 'react-router-dom';
 import { Phone, MessageCircle, Mail, MapPin, Clock } from 'lucide-react';
 import { siteConfig } from '@/config/site';
-import { trackEvent } from '@/lib/analytics';
+import { trackEmailLead, trackEvent, trackPhoneLead, trackWhatsAppLead } from '@/lib/analytics';
 import { OptimizedLogo } from '@/components/OptimizedLogo';
 
 const footerServices = [
-    { label: 'Diagnostic Callout', href: '/services/diagnostic-callout' },
-    { label: 'VOR Van Diagnostics', href: '/services/vor-van-diagnostics' },
-    { label: 'Emissions Diagnostics', href: '/services/emissions-diagnostics' },
-    { label: 'Pre-Purchase Digital Health Check', href: '/services/pre-purchase-digital-health-check' },
-    { label: 'Sprinter Limp Mode', href: '/services/sprinter-limp-mode' },
-    { label: 'AdBlue Countdown', href: '/services/adblue-countdown' },
-    { label: 'NOx / SCR Diagnostics', href: '/services/nox-scr-diagnostics' },
-    { label: 'DPF Warning Light', href: '/services/dpf-regeneration-decision' },
-    { label: 'Mercedes Xentry Diagnostics', href: '/services/mercedes-xentry-diagnostics-coding' },
-    { label: 'Intermittent Electrical', href: '/services/intermittent-electrical-faults' },
-    { label: 'Fleet Health Check', href: '/services/fleet-health-check' },
+    { label: 'Standard Diagnosis', href: '/services/diagnostic-callout' },
+    { label: 'VOR Diagnosis', href: '/services/vor-van-diagnostics' },
+    { label: 'Pre-Purchase Health Check', href: '/services/pre-purchase-digital-health-check' },
+    { label: 'Mercedes Van Servicing', href: '/services/mercedes-van-servicing' },
+    { label: 'Sprinter Servicing', href: '/services/sprinter-servicing' },
+    { label: 'Vito Servicing', href: '/services/vito-servicing' },
+    { label: 'Citan Servicing', href: '/services/citan-servicing' },
+    { label: 'Sprinter Brakes', href: '/services/sprinter-brakes' },
+    { label: 'Vito Brakes', href: '/services/vito-brakes' },
+    { label: 'Citan Brakes', href: '/services/citan-brakes' },
+    { label: 'Load & Driveability Tune', href: '/services/van-load-driveability-tune' },
+    { label: 'Economy Tune', href: '/services/van-economy-tune' },
+    { label: 'Fleet Van Tuning', href: '/services/fleet-van-tuning' },
 ];
 
 export function Footer() {
@@ -138,7 +140,7 @@ export function Footer() {
                                 <a
                                     href={`tel:${siteConfig.contact.phoneE164}`}
                                     className="flex items-center gap-2 text-sm text-text-secondary transition-colors hover:text-brand-light"
-                                    onClick={() => trackEvent('click_phone_footer')}
+                                    onClick={() => trackPhoneLead('footer')}
                                 >
                                     <Phone className="h-4 w-4 shrink-0" />
                                     {siteConfig.contact.phoneDisplay}
@@ -150,7 +152,7 @@ export function Footer() {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="flex items-center gap-2 text-sm text-text-secondary transition-colors hover:text-brand-light"
-                                    onClick={() => trackEvent('click_whatsapp', { location: 'footer' })}
+                                    onClick={() => trackWhatsAppLead('footer')}
                                 >
                                     <MessageCircle className="h-4 w-4 shrink-0" />
                                     WhatsApp
@@ -160,6 +162,7 @@ export function Footer() {
                                 <a
                                     href={`mailto:${siteConfig.contact.email}`}
                                     className="flex items-center gap-2 text-sm text-text-secondary transition-colors hover:text-brand-light"
+                                    onClick={() => trackEmailLead('footer')}
                                 >
                                     <Mail className="h-4 w-4 shrink-0" />
                                     {siteConfig.contact.email}

@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useState, useRef } from 'react';
 import { Loader2, AlertCircle, CheckCircle2, ChevronLeft, ChevronRight, Calendar, Search, MapPin, Car, Wrench, User, CreditCard } from 'lucide-react';
 import { CTAButton } from './CTAButton';
-import { trackEvent, trackConversion, CONVERSIONS } from '@/lib/analytics';
+import { trackEvent, trackConversion, CONVERSIONS, trackWhatsAppLead } from '@/lib/analytics';
 import { getAttribution } from '@/lib/attribution';
+import { siteConfig } from '@/config/site';
 
 /* ---------- types ---------- */
 interface Service {
@@ -260,6 +261,12 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
     const [calendarOpen, setCalendarOpen] = useState(false);
     const calendarRef = useRef<HTMLDivElement>(null);
     const [prevStep, setPrevStep] = useState<1 | 2 | 3>(1);
+    const availabilityConversionTracked = useRef(false);
+    const slotConversionForIso = useRef<string | null>(null);
+
+    useEffect(() => {
+        trackEvent('view_booking_form');
+    }, []);
 
     // Derive step from state
     const currentStep: 1 | 2 | 3 = availability && !availability.manual_review_required
@@ -297,6 +304,21 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
             setBooking((prev) => ({ ...prev, postcode: zoneCalcPostcode }));
         }
     }, [zoneCalcPostcode]);
+
+    /* booking funnel: availability loaded (step 1 → 2) */
+    useEffect(() => {
+        if (!availability) {
+            availabilityConversionTracked.current = false;
+            return;
+        }
+        if (availabilityConversionTracked.current) return;
+        const hasPath =
+            (availability.slots && availability.slots.length > 0) || availability.manual_review_required;
+        if (!hasPath) return;
+        availabilityConversionTracked.current = true;
+        trackEvent('booking_availability_ok', { zone: availability.zone });
+        trackConversion(CONVERSIONS.bookingAvailability);
+    }, [availability]);
 
     /* fetch availability */
     const fetchAvailability = async (postcode: string, serviceIds: string[]) => {
@@ -397,12 +419,14 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
         setAvailability(null);
         setSelectedSlot('');
         setPriceInfo(null);
+        slotConversionForIso.current = null;
     };
 
     /* go back to step 2 */
     const goBackToStep2 = () => {
         setSelectedSlot('');
         setPriceInfo(null);
+        slotConversionForIso.current = null;
     };
 
     /* submit booking */
@@ -444,11 +468,12 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
             const json = await response.json();
             if (!response.ok) throw new Error(json.detail || 'Booking failed');
             trackEvent('confirm_booking', { flow: 'booking' });
-            trackConversion(CONVERSIONS.bookAppointment);
             if (json.status === 'pending_deposit' && json.payment_url) {
+                // Deposit: conversion fires on /pay/.../success only (avoid duplicate with paymentCompleted)
                 window.location.href = json.payment_url;
                 return;
             }
+            trackConversion(CONVERSIONS.bookingConfirmed);
             if (json.status === 'pending_manual_review') {
                 setStatus(json.message || 'We\'ll contact you with a quote.');
                 setBooking(INITIAL_BOOKING);
@@ -536,7 +561,17 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
                                 </p>
                             )}
                             <p className="mt-1.5 text-xs text-text-muted">
-                                Not sure which service? <a href="/services" className="text-brand hover:text-brand-light underline">View all services</a> or <a href="https://wa.me/message/NROKKGS6QK54G1" target="_blank" rel="noopener noreferrer" className="text-brand hover:text-brand-light underline">message us on WhatsApp</a>.
+                                Not sure which service? <a href="/services" className="text-brand hover:text-brand-light underline">View all services</a> or{' '}
+                                <a
+                                    href={`https://wa.me/${siteConfig.contact.whatsappE164}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-brand hover:text-brand-light underline"
+                                    onClick={() => trackWhatsAppLead('booking_form_inline')}
+                                >
+                                    message us on WhatsApp
+                                </a>
+                                .
                             </p>
                         </div>
 
@@ -687,6 +722,11 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
                                                 if (!isAvailable) return;
                                                 setSelectedSlot(slot.iso);
                                                 void fetchSlotPrice(slot.iso);
+                                                if (slotConversionForIso.current !== slot.iso) {
+                                                    slotConversionForIso.current = slot.iso;
+                                                    trackEvent('booking_slot_selected');
+                                                    trackConversion(CONVERSIONS.bookingSlotSelected);
+                                                }
                                             }}
                                             title={!isAvailable ? 'Taken' : `Available - ${timeStr}`}
                                         >

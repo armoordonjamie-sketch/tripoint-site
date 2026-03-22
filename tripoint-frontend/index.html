@@ -19,25 +19,6 @@
 <body>
   <div id="root"><!--app-html--></div>
   <script type="module" src="/src/entry-client.tsx"></script>
-  <script>
-    (function(){
-      function loadGtag(){
-        var s=document.createElement('script');
-        s.async=true;
-        s.src='https://www.googletagmanager.com/gtag/js?id=AW-17966741863';
-        document.head.appendChild(s);
-        window.dataLayer=window.dataLayer||[];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js',new Date());
-        gtag('config','AW-17966741863');
-      }
-      if('requestIdleCallback' in window){
-        requestIdleCallback(loadGtag,{timeout:3000});
-      }else{
-        window.addEventListener('load',function(){setTimeout(loadGtag,0);});
-      }
-    })();
-  </script>
 </body>
 
 </html>

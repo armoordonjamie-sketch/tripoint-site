@@ -8,7 +8,7 @@ import { CTAButton } from '@/components/CTAButton';
 import { siteConfig } from '@/config/site';
 import { Link } from 'react-router-dom';
 import { Phone, MessageCircle, Mail, CheckCircle2, Calendar } from 'lucide-react';
-import { trackEvent, trackConversion, CONVERSIONS } from '@/lib/analytics';
+import { CONVERSIONS, trackBookNowClick, trackConversion, trackEvent, trackPhoneLead, trackWhatsAppLead } from '@/lib/analytics';
 import { getAttribution } from '@/lib/attribution';
 
 const contactSchema = z.object({
@@ -67,7 +67,7 @@ export function ContactPage() {
                 throw new Error(message);
             }
             trackEvent('submit_contact_form', { form: 'contact' });
-            trackConversion(CONVERSIONS.bookAppointment);
+            trackConversion(CONVERSIONS.contactForm);
             setSubmitted(true);
         } catch (err) {
             setSubmitError(err instanceof Error ? err.message : 'Failed to send message. Please try again.');
@@ -90,7 +90,7 @@ export function ContactPage() {
             <Section>
                 <div className="text-center">
                     <h1 className="text-4xl font-extrabold text-text-primary sm:text-5xl">
-                        Book Your Mobile Diagnostic
+                        Contact
                     </h1>
                     <p className="mx-auto mt-4 max-w-2xl text-lg text-text-secondary">
                         Kent and South East London -- we come to you. Call, WhatsApp, or send your details below and we will get back to you to confirm your slot.
@@ -113,7 +113,7 @@ export function ContactPage() {
                         <a
                             href={`tel:${siteConfig.contact.phoneE164}`}
                             className="flex items-center gap-4 rounded-2xl border border-border-default bg-surface-alt p-5 transition-all hover:border-brand/50 hover:shadow-lg hover:shadow-brand/10"
-                            onClick={() => trackEvent('click_phone_header', { location: 'contact_page' })}
+                            onClick={() => trackPhoneLead('contact_page')}
                         >
                             <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand/10 text-brand">
                                 <Phone className="h-6 w-6" />
@@ -129,7 +129,7 @@ export function ContactPage() {
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center gap-4 rounded-2xl border border-border-default bg-surface-alt p-5 transition-all hover:border-success/50 hover:shadow-lg hover:shadow-success/10"
-                            onClick={() => trackEvent('click_whatsapp', { location: 'contact_page' })}
+                            onClick={() => trackWhatsAppLead('contact_page')}
                         >
                             <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-success/10 text-success">
                                 <MessageCircle className="h-6 w-6" />
@@ -155,7 +155,7 @@ export function ContactPage() {
 
                         <Link
                             to="/booking"
-                            onClick={() => trackEvent('click_book_now', { location: 'contact_page' })}
+                            onClick={() => trackBookNowClick('contact_page')}
                             className="flex items-center gap-4 rounded-2xl border-2 border-brand bg-brand/10 p-5 transition-all hover:border-brand hover:bg-brand hover:shadow-lg hover:shadow-brand/20"
                         >
                             <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand text-white">

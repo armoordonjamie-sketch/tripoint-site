@@ -5,7 +5,7 @@
 
 const RESPONSIVE_BASES = new Set([
     'work-48', 'work-03', 'work-46', 'sprinter-specialist', 'cta-bg', 'coverage-map',
-    'diagnostic-callout', 'emissions-diagnostics', 'pre-purchase', 'vor-triage',
+    'diagnostic-callout', 'pre-purchase', 'vor-van-diagnostics',
 ]);
 
 function getOptimizedPaths(src: string): { webp: string; webpSrcset?: string; jpg: string } {

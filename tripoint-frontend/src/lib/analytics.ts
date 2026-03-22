@@ -1,3 +1,4 @@
+import { GOOGLE_ADS_CUSTOMER_ID } from '@/config/analyticsPublic';
 import { getAttribution } from './attribution';
 
 declare global {
@@ -18,20 +19,29 @@ const DEBUG =
 // ---------------------------------------------------------------------------
 type QueuedEvent = { name: string; params: Record<string, string> };
 const queue: QueuedEvent[] = [];
-let flushed = false;
+const conversionQueue: string[] = [];
 
-function flush() {
-    if (flushed) return;
+function flushConversions() {
     if (typeof window === 'undefined' || !window.gtag) return;
-    flushed = true;
+    while (conversionQueue.length) {
+        const sendTo = conversionQueue.shift()!;
+        window.gtag('event', 'conversion', { send_to: sendTo });
+        if (DEBUG) console.log('[track:conversion:flushed]', sendTo);
+    }
+}
+
+/** Drain queued events + conversions (call whenever gtag is available) */
+function flush() {
+    if (typeof window === 'undefined' || !window.gtag) return;
     while (queue.length) {
         const ev = queue.shift()!;
         window.gtag('event', ev.name, ev.params);
         if (DEBUG) console.log('[track:flushed]', ev.name, ev.params);
     }
+    flushConversions();
 }
 
-// Poll for gtag readiness (gtag loads async from index.html)
+// Poll for gtag readiness (gtag loads async from google-tag-init.ts)
 if (typeof window !== 'undefined') {
     const interval = setInterval(() => {
         if (window.gtag) {
@@ -39,7 +49,6 @@ if (typeof window !== 'undefined') {
             clearInterval(interval);
         }
     }, 200);
-    // Safety: stop polling after 10s
     setTimeout(() => clearInterval(interval), 10_000);
 }
 
@@ -50,12 +59,50 @@ function eventId(): string {
     if (typeof crypto !== 'undefined' && crypto.randomUUID) {
         return crypto.randomUUID();
     }
-    // Fallback
     return `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
 }
 
 // ---------------------------------------------------------------------------
-// Typed event names (Google Ads conversion goals)
+// Google Ads conversion send_to (AW-XXXXX/label)
+// Create one conversion action per goal in Google Ads → Goals → Conversions.
+// ---------------------------------------------------------------------------
+const AW = GOOGLE_ADS_CUSTOMER_ID;
+const DEFAULT_BOOKING_LABEL = 'cJwYCL_clPwbEOfymvdC';
+
+function buildSendTo(label: string | undefined): string | null {
+    if (!label || !label.trim()) return null;
+    return `${AW}/${label.trim()}`;
+}
+
+/** Resolved booking/payment primary send_to (always has a value for core funnel) */
+const bookingSendToResolved =
+    buildSendTo(import.meta.env.VITE_GOOGLE_ADS_CONV_BOOKING) ?? `${AW}/${DEFAULT_BOOKING_LABEL}`;
+
+/**
+ * All conversion labels — set env vars to the label segment AFTER AW-XXXXX/
+ * WhatsApp defaults to booking label until you create a dedicated “WhatsApp lead” action.
+ */
+export const CONVERSIONS = {
+    /** Primary lead: WhatsApp (falls back to booking label until VITE_GOOGLE_ADS_CONV_WHATSAPP is set) */
+    whatsappLead: buildSendTo(import.meta.env.VITE_GOOGLE_ADS_CONV_WHATSAPP) ?? bookingSendToResolved,
+    emailLead: buildSendTo(import.meta.env.VITE_GOOGLE_ADS_CONV_EMAIL),
+    phoneCall: buildSendTo(import.meta.env.VITE_GOOGLE_ADS_CONV_PHONE),
+    contactForm: buildSendTo(import.meta.env.VITE_GOOGLE_ADS_CONV_CONTACT),
+    /** User reached slot calendar (postcode + service validated) */
+    bookingAvailability: buildSendTo(import.meta.env.VITE_GOOGLE_ADS_CONV_BOOKING_AVAILABILITY),
+    /** User picked a time slot */
+    bookingSlotSelected: buildSendTo(import.meta.env.VITE_GOOGLE_ADS_CONV_BOOKING_SLOT),
+    /** Booking API success without redirect to payment (manual review or confirmed without deposit gateway) */
+    bookingConfirmed: bookingSendToResolved,
+    /** Deposit / card payment completed */
+    paymentCompleted:
+        buildSendTo(import.meta.env.VITE_GOOGLE_ADS_CONV_PAYMENT) ?? bookingSendToResolved,
+    /** “Book now” CTAs site-wide — optional micro-conversion */
+    bookNowClick: buildSendTo(import.meta.env.VITE_GOOGLE_ADS_CONV_BOOK_NOW),
+} as const;
+
+// ---------------------------------------------------------------------------
+// Typed event names (GA4 + Google Ads audience / key events)
 // ---------------------------------------------------------------------------
 export type AnalyticsEvent =
     | 'click_book_now'
@@ -71,20 +118,15 @@ export type AnalyticsEvent =
     | 'confirm_booking'
     | 'view_service'
     | 'view_booking_form'
+    | 'booking_availability_ok'
+    | 'booking_slot_selected'
+    | 'payment_completed'
     | 'zone_check';
 
 // ---------------------------------------------------------------------------
 // Main tracking function
 // ---------------------------------------------------------------------------
 
-/**
- * Fire a custom GA4 / Google Ads event.
- *
- * - Merges stored attribution params (gclid, utm_*) automatically.
- * - Adds a unique event_id for deduplication.
- * - If gtag hasn't loaded yet, events are queued and flushed once ready.
- * - With ?debug_tracking=1, logs every call to console.
- */
 export const trackEvent = (
     eventName: AnalyticsEvent,
     props?: Record<string, string | number | boolean>,
@@ -97,12 +139,12 @@ export const trackEvent = (
         ),
         ...(props
             ? Object.entries(props).reduce(
-                (acc, [key, value]) => {
-                    acc[key] = String(value);
-                    return acc;
-                },
-                {} as Record<string, string>,
-            )
+                  (acc, [key, value]) => {
+                      acc[key] = String(value);
+                      return acc;
+                  },
+                  {} as Record<string, string>,
+              )
             : {}),
     };
 
@@ -111,7 +153,7 @@ export const trackEvent = (
     }
 
     if (typeof window !== 'undefined' && window.gtag) {
-        flush(); // flush any queued events first
+        flush(); // drain any pre-gtag queue first
         window.gtag('event', eventName, eventParams);
     } else {
         queue.push({ name: eventName, params: eventParams });
@@ -120,20 +162,45 @@ export const trackEvent = (
 };
 
 // ---------------------------------------------------------------------------
-// Google Ads conversion measurement
+// Google Ads conversion measurement (queued until gtag ready)
 // ---------------------------------------------------------------------------
 
-/**
- * Fire a Google Ads conversion event (send_to format: AW-XXXXX/YYYYY).
- */
-export const trackConversion = (sendTo: string) => {
+export const trackConversion = (sendTo: string | null | undefined) => {
+    if (!sendTo) {
+        if (DEBUG) console.log('[track:conversion]', 'skipped (no send_to)');
+        return;
+    }
     if (typeof window !== 'undefined' && window.gtag) {
+        flush();
         window.gtag('event', 'conversion', { send_to: sendTo });
         if (DEBUG) console.log('[track:conversion]', sendTo);
+    } else {
+        conversionQueue.push(sendTo);
+        if (DEBUG) console.log('[track:conversion:queued]', sendTo);
     }
 };
 
-// Conversion IDs from Google Ads
-export const CONVERSIONS = {
-    bookAppointment: 'AW-17966741863/cJwYCL_clPwbEOfymvdC',
-} as const;
+/** tel: — GA event + Ads phone conversion when label configured */
+export function trackPhoneLead(place: 'footer' | (string & {})) {
+    if (place === 'footer') trackEvent('click_phone_footer');
+    else trackEvent('click_phone_header', { location: place });
+    trackConversion(CONVERSIONS.phoneCall);
+}
+
+/** WhatsApp — primary lead path; fires Ads conversion (defaults to booking label until WHATSAPP env set) */
+export function trackWhatsAppLead(location: string) {
+    trackEvent('click_whatsapp', { location });
+    trackConversion(CONVERSIONS.whatsappLead);
+}
+
+/** Email mailto — footer / contact */
+export function trackEmailLead(location: string) {
+    trackEvent('click_email_footer', { location });
+    trackConversion(CONVERSIONS.emailLead);
+}
+
+/** Book Online CTAs — optional Ads micro-conversion if VITE_GOOGLE_ADS_CONV_BOOK_NOW set */
+export function trackBookNowClick(location: string) {
+    trackEvent('click_book_now', { location });
+    trackConversion(CONVERSIONS.bookNowClick);
+}

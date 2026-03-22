@@ -122,6 +122,7 @@ class ServiceDef:
     travel_buffer_minutes: int
     min_notice_hours: int
     zone_price: dict[str, int]
+    public: bool = True  # False = hidden alias for old bookings, not shown in booking dropdown
 
 
 @dataclass
@@ -132,13 +133,116 @@ class PriceBreakdownItem:
 
 
 SERVICE_CATALOG: dict[str, ServiceDef] = {
+    # ── Public bookable services (shown in booking dropdown) ──
     "diagnostic-callout": ServiceDef(
         id="diagnostic-callout",
-        label="Diagnostic Callout (Standard)",
+        label="Standard Diagnosis",
         duration_minutes=60,
         travel_buffer_minutes=20,
         min_notice_hours=24,
         zone_price={"A": 120, "B": 135, "C": 150},
+    ),
+    "vor-van-diagnostics": ServiceDef(
+        id="vor-van-diagnostics",
+        label="VOR Diagnosis (Priority)",
+        duration_minutes=75,
+        travel_buffer_minutes=30,
+        min_notice_hours=0,
+        zone_price={"A": 160, "B": 175, "C": 190},
+    ),
+    "pre-purchase-health-check": ServiceDef(
+        id="pre-purchase-health-check",
+        label="Pre-Purchase Health Check",
+        duration_minutes=75,
+        travel_buffer_minutes=30,
+        min_notice_hours=24,
+        zone_price={"A": 160, "B": 175, "C": 190},
+    ),
+    "mercedes-van-minor-service": ServiceDef(
+        id="mercedes-van-minor-service",
+        label="Mercedes Van Minor Service",
+        duration_minutes=120,
+        travel_buffer_minutes=30,
+        min_notice_hours=48,
+        zone_price={"A": 175, "B": 190, "C": 205},
+    ),
+    "mercedes-van-major-service": ServiceDef(
+        id="mercedes-van-major-service",
+        label="Mercedes Van Major Service",
+        duration_minutes=180,
+        travel_buffer_minutes=30,
+        min_notice_hours=48,
+        zone_price={"A": 295, "B": 310, "C": 325},
+    ),
+    # ── Brakes (online bookable — per-model pricing) ──
+    "sprinter-brakes": ServiceDef(
+        id="sprinter-brakes",
+        label="Sprinter Brakes",
+        duration_minutes=180,
+        travel_buffer_minutes=30,
+        min_notice_hours=48,
+        zone_price={"A": 149, "B": 164, "C": 179},
+    ),
+    "vito-brakes": ServiceDef(
+        id="vito-brakes",
+        label="Vito Brakes",
+        duration_minutes=180,
+        travel_buffer_minutes=30,
+        min_notice_hours=48,
+        zone_price={"A": 169, "B": 184, "C": 199},
+    ),
+    "citan-brakes": ServiceDef(
+        id="citan-brakes",
+        label="Citan Brakes",
+        duration_minutes=180,
+        travel_buffer_minutes=30,
+        min_notice_hours=48,
+        zone_price={"A": 169, "B": 184, "C": 199},
+    ),
+    # ── Hidden alias for old mercedes-van-front-brakes bookings ──
+    "mercedes-van-front-brakes": ServiceDef(
+        id="mercedes-van-front-brakes",
+        label="Mercedes Van Front Brakes",
+        duration_minutes=180,
+        travel_buffer_minutes=30,
+        min_notice_hours=48,
+        zone_price={"A": 149, "B": 164, "C": 179},
+        public=False,
+    ),
+    # ── Tuning (online bookable) ──
+    "van-load-driveability-tune": ServiceDef(
+        id="van-load-driveability-tune",
+        label="Van Load & Driveability Tune",
+        duration_minutes=120,
+        travel_buffer_minutes=30,
+        min_notice_hours=72,
+        zone_price={"A": 199, "B": 214, "C": 229},
+    ),
+    "van-economy-tune": ServiceDef(
+        id="van-economy-tune",
+        label="Van Economy Tune",
+        duration_minutes=120,
+        travel_buffer_minutes=30,
+        min_notice_hours=72,
+        zone_price={"A": 199, "B": 214, "C": 229},
+    ),
+    "fleet-van-tuning": ServiceDef(
+        id="fleet-van-tuning",
+        label="Fleet Van Tuning",
+        duration_minutes=120,
+        travel_buffer_minutes=30,
+        min_notice_hours=72,
+        zone_price={"A": 199, "B": 214, "C": 229},
+    ),
+    # ── Hidden aliases (existing bookings still process, not shown in dropdown) ──
+    "mercedes-van-servicing": ServiceDef(
+        id="mercedes-van-servicing",
+        label="Mercedes Van Servicing",
+        duration_minutes=120,
+        travel_buffer_minutes=30,
+        min_notice_hours=48,
+        zone_price={"A": 175, "B": 175, "C": 175},
+        public=False,
     ),
     "vor-priority-triage": ServiceDef(
         id="vor-priority-triage",
@@ -147,14 +251,7 @@ SERVICE_CATALOG: dict[str, ServiceDef] = {
         travel_buffer_minutes=30,
         min_notice_hours=0,
         zone_price={"A": 160, "B": 175, "C": 190},
-    ),
-    "vor-van-diagnostics": ServiceDef(
-        id="vor-van-diagnostics",
-        label="VOR Van Diagnostics",
-        duration_minutes=75,
-        travel_buffer_minutes=30,
-        min_notice_hours=0,
-        zone_price={"A": 160, "B": 175, "C": 190},
+        public=False,
     ),
     "emissions-fault-decision": ServiceDef(
         id="emissions-fault-decision",
@@ -163,6 +260,7 @@ SERVICE_CATALOG: dict[str, ServiceDef] = {
         travel_buffer_minutes=35,
         min_notice_hours=24,
         zone_price={"A": 170, "B": 185, "C": 200},
+        public=False,
     ),
     "adblue-countdown": ServiceDef(
         id="adblue-countdown",
@@ -171,6 +269,7 @@ SERVICE_CATALOG: dict[str, ServiceDef] = {
         travel_buffer_minutes=35,
         min_notice_hours=24,
         zone_price={"A": 170, "B": 185, "C": 200},
+        public=False,
     ),
     "dpf-regeneration-decision": ServiceDef(
         id="dpf-regeneration-decision",
@@ -179,6 +278,7 @@ SERVICE_CATALOG: dict[str, ServiceDef] = {
         travel_buffer_minutes=35,
         min_notice_hours=24,
         zone_price={"A": 170, "B": 185, "C": 200},
+        public=False,
     ),
     "nox-scr-diagnostics": ServiceDef(
         id="nox-scr-diagnostics",
@@ -187,6 +287,7 @@ SERVICE_CATALOG: dict[str, ServiceDef] = {
         travel_buffer_minutes=35,
         min_notice_hours=24,
         zone_price={"A": 170, "B": 185, "C": 200},
+        public=False,
     ),
     "sprinter-limp-mode": ServiceDef(
         id="sprinter-limp-mode",
@@ -195,6 +296,7 @@ SERVICE_CATALOG: dict[str, ServiceDef] = {
         travel_buffer_minutes=20,
         min_notice_hours=24,
         zone_price={"A": 120, "B": 135, "C": 150},
+        public=False,
     ),
     "intermittent-electrical-faults": ServiceDef(
         id="intermittent-electrical-faults",
@@ -203,6 +305,7 @@ SERVICE_CATALOG: dict[str, ServiceDef] = {
         travel_buffer_minutes=20,
         min_notice_hours=24,
         zone_price={"A": 120, "B": 135, "C": 150},
+        public=False,
     ),
     "mercedes-xentry-diagnostics": ServiceDef(
         id="mercedes-xentry-diagnostics",
@@ -211,14 +314,7 @@ SERVICE_CATALOG: dict[str, ServiceDef] = {
         travel_buffer_minutes=20,
         min_notice_hours=24,
         zone_price={"A": 120, "B": 135, "C": 150},
-    ),
-    "pre-purchase-health-check": ServiceDef(
-        id="pre-purchase-health-check",
-        label="Pre-Purchase Digital Health Check",
-        duration_minutes=75,
-        travel_buffer_minutes=30,
-        min_notice_hours=24,
-        zone_price={"A": 160, "B": 175, "C": 190},
+        public=False,
     ),
     "fleet-health-check": ServiceDef(
         id="fleet-health-check",
@@ -227,6 +323,7 @@ SERVICE_CATALOG: dict[str, ServiceDef] = {
         travel_buffer_minutes=20,
         min_notice_hours=24,
         zone_price={"A": 120, "B": 135, "C": 150},
+        public=False,
     ),
 }
 
@@ -661,7 +758,9 @@ def _calc_price_breakdown(
     # Time-band add-ons (only when a slot time is known)
     if include_time_addons and start_local is not None:
         hour = start_local.hour
-        if hour >= 21 and any(s.id in {"diagnostic-callout", "sprinter-limp-mode", "intermittent-electrical-faults"} for s in services):
+        # Late call add-on: diagnostics only, not servicing/brakes/tuning
+        diag_ids = {"diagnostic-callout", "pre-purchase-health-check", "sprinter-limp-mode", "intermittent-electrical-faults", "mercedes-xentry-diagnostics", "fleet-health-check", "emissions-fault-decision", "adblue-countdown", "dpf-regeneration-decision", "nox-scr-diagnostics"}
+        if hour >= 21 and any(s.id in diag_ids for s in services):
             items.append(PriceBreakdownItem("Late call (9 PM start)", 40, is_addon=True))
         elif hour < 8 or hour >= 19:
             items.append(PriceBreakdownItem("Early-bird / evening time band", 20, is_addon=True))
@@ -835,6 +934,7 @@ async def get_services():
             zone_price=service.zone_price,
         )
         for service in SERVICE_CATALOG.values()
+        if service.public
     ]
 
 

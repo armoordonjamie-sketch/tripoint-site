@@ -119,12 +119,12 @@ const faqCategories: FaqCategory[] = [
                 answer: 'No - fault codes are a starting point, not a diagnosis. We go beyond codes with live data capture, requested vs actual comparisons, guided component tests, and physical inspection. A code tells you what the ECU detected. Proper diagnostics tells you why.',
             },
             {
-                question: 'What\'s the difference between a Diagnostic Callout and a specialist service?',
-                answer: 'A Diagnostic Callout is our general fault-finding visit - ideal for warning lights, unknown symptoms, or when you\'re not sure what\'s wrong. Specialist services (Sprinter Limp Mode, AdBlue Countdown, DPF, etc.) are focused visits designed around specific fault patterns, with extended on-site time and targeted test procedures.',
+                question: 'Do you have separate services for emissions, limp mode, or electrical faults?',
+                answer: 'No — Standard Diagnosis covers all fault types in one visit: warning lights, emissions (AdBlue, DPF, NOx), limp mode, electrical faults, and more. There are no separate specialist tiers. VOR Diagnosis is only different in that it provides priority scheduling for vehicles that are off the road.',
             },
             {
                 question: 'Can you diagnose intermittent faults?',
-                answer: 'Yes - intermittent faults are one of our specialities. We use live data logging, connector inspection, wiring checks at known rub points, and systematic testing to catch faults that come and go. We have a dedicated Intermittent Electrical Fault Diagnostic service for this.',
+                answer: 'Yes - intermittent faults are one of our specialities. We use live data logging, connector inspection, wiring checks at known rub points, and systematic testing to catch faults that come and go. These are covered under Standard Diagnosis.',
             },
             {
                 question: 'What if you can\'t find the fault?',

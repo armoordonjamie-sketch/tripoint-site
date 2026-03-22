@@ -7,7 +7,7 @@ import { getSeoForPath } from '@/routes';
 import { getAreaData } from '@/data/areas';
 import { siteConfig } from '@/config/site';
 import { CheckCircle2, MessageCircle, Phone, MapPin } from 'lucide-react';
-import { trackEvent } from '@/lib/analytics';
+import { trackBookNowClick, trackPhoneLead, trackWhatsAppLead } from '@/lib/analytics';
 
 function formatSlug(slug: string): string {
     return slug
@@ -24,10 +24,10 @@ const WHY_CHOOSE = [
 ];
 
 const TOP_SERVICES = [
-    { name: 'Mercedes XENTRY Diagnostics', href: '/services/mercedes-xentry-diagnostics-coding' },
-    { name: 'Mobile Fault Finding', href: '/services/mobile-fault-finding' },
-    { name: 'DPF Regeneration', href: '/services/dpf-regeneration-and-diagnostics' },
-    { name: 'AdBlue/SCR Diagnostics', href: '/services/adblue-scr-diagnostics' },
+    { name: 'Standard Diagnosis', href: '/services/diagnostic-callout' },
+    { name: 'VOR Diagnosis', href: '/services/vor-van-diagnostics' },
+    { name: 'Pre-Purchase Health Check', href: '/services/pre-purchase-digital-health-check' },
+    { name: 'Mercedes Van Servicing', href: '/services/mercedes-van-servicing' },
 ];
 
 export function AreaPage() {
@@ -73,7 +73,7 @@ export function AreaPage() {
                             href={`tel:${siteConfig.contact.phoneE164}`}
                             external
                             icon={<Phone className="h-4 w-4" />}
-                            onClick={() => trackEvent('click_phone_header', { location: `area_${town.toLowerCase()}` })}
+                            onClick={() => trackPhoneLead(`area_${town.toLowerCase()}`)}
                         >
                             Call {siteConfig.contact.phoneDisplay}
                         </CTAButton>
@@ -82,14 +82,14 @@ export function AreaPage() {
                             variant="outline"
                             external
                             icon={<MessageCircle className="h-4 w-4" />}
-                            onClick={() => trackEvent('click_whatsapp', { location: `area_${town.toLowerCase()}` })}
+                            onClick={() => trackWhatsAppLead(`area_${town.toLowerCase()}`)}
                         >
                             WhatsApp Us
                         </CTAButton>
                         <CTAButton
                             href="/booking"
                             variant="outline"
-                            onClick={() => trackEvent('click_book_now', { location: `area_${town.toLowerCase()}` })}
+                            onClick={() => trackBookNowClick(`area_${town.toLowerCase()}`)}
                         >
                             Book Online
                         </CTAButton>

@@ -17,11 +17,21 @@ function BlogHeroImage({ src, alt }: { src: string; alt: string }) {
 }
 
 const serviceSlugToHref: Record<string, string> = {
-    'sprinter-limp-mode': '/services/sprinter-limp-mode',
+    'sprinter-limp-mode': '/services/diagnostic-callout?from=merged',
     'diagnostic-callout': '/services/diagnostic-callout',
-    'adblue-countdown': '/services/adblue-countdown',
-    'emissions-diagnostics': '/services/emissions-diagnostics',
-    'dpf-regeneration-decision': '/services/dpf-regeneration-decision',
+    'adblue-countdown': '/services/diagnostic-callout?from=merged',
+    'emissions-diagnostics': '/services/diagnostic-callout?from=merged',
+    'dpf-regeneration-decision': '/services/diagnostic-callout?from=merged',
+    'mercedes-van-servicing': '/services/mercedes-van-servicing',
+    'sprinter-servicing': '/services/sprinter-servicing',
+    'vito-servicing': '/services/vito-servicing',
+    'citan-servicing': '/services/citan-servicing',
+    'sprinter-brakes': '/services/sprinter-brakes',
+    'vito-brakes': '/services/vito-brakes',
+    'citan-brakes': '/services/citan-brakes',
+    'van-load-driveability-tune': '/services/van-load-driveability-tune',
+    'van-economy-tune': '/services/van-economy-tune',
+    'fleet-van-tuning': '/services/fleet-van-tuning',
 };
 
 const serviceSlugToLabel: Record<string, string> = {
@@ -30,6 +40,16 @@ const serviceSlugToLabel: Record<string, string> = {
     'adblue-countdown': 'AdBlue Countdown',
     'emissions-diagnostics': 'Emissions Diagnostics',
     'dpf-regeneration-decision': 'DPF Regeneration Decision',
+    'mercedes-van-servicing': 'Mercedes Van Servicing',
+    'sprinter-servicing': 'Sprinter Servicing',
+    'vito-servicing': 'Vito Servicing',
+    'citan-servicing': 'Citan Servicing',
+    'sprinter-brakes': 'Sprinter Brakes',
+    'vito-brakes': 'Vito Brakes',
+    'citan-brakes': 'Citan Brakes',
+    'van-load-driveability-tune': 'Van Load & Driveability Tune',
+    'van-economy-tune': 'Van Economy Tune',
+    'fleet-van-tuning': 'Fleet Van Tuning',
 };
 
 export function BlogPostPage() {
@@ -73,7 +93,7 @@ export function BlogPostPage() {
         headline: post.title,
         description: post.description,
         datePublished: post.publishedAt,
-        dateModified: post.publishedAt,
+        dateModified: post.updatedAt ?? post.publishedAt,
         wordCount,
         articleSection: post.category,
         inLanguage: 'en-GB',

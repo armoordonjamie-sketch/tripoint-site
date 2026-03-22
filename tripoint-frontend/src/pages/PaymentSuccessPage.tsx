@@ -4,11 +4,12 @@ import { Seo } from '@/components/Seo';
 import { Section } from '@/components/Section';
 import { CTAButton } from '@/components/CTAButton';
 import { CheckCircle2 } from 'lucide-react';
-import { trackConversion, CONVERSIONS } from '@/lib/analytics';
+import { trackConversion, CONVERSIONS, trackEvent } from '@/lib/analytics';
 
 export function PaymentSuccessPage() {
     useEffect(() => {
-        trackConversion(CONVERSIONS.bookAppointment);
+        trackEvent('payment_completed');
+        trackConversion(CONVERSIONS.paymentCompleted);
     }, []);
 
     return (

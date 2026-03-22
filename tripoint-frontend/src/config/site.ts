@@ -58,7 +58,7 @@ export const siteConfig = {
     pricing: {
         services: [
             {
-                name: 'Diagnostic Callout (Standard)',
+                name: 'Standard Diagnosis',
                 slug: 'diagnostic-callout',
                 zoneA: 120,
                 zoneB: 135,
@@ -66,20 +66,12 @@ export const siteConfig = {
                 included: 'Up to 60 mins on-site time',
             },
             {
-                name: 'VOR / Priority Triage (Commercial)',
-                slug: 'vor-triage',
+                name: 'VOR Diagnosis (Commercial)',
+                slug: 'vor-van-diagnostics',
                 zoneA: 160,
                 zoneB: 175,
                 zoneC: 190,
                 included: 'Up to 75 mins on-site time',
-            },
-            {
-                name: 'Emissions Fault Decision Visit (AdBlue/SCR/DPF/NOx)',
-                slug: 'emissions-diagnostics',
-                zoneA: 170,
-                zoneB: 185,
-                zoneC: 200,
-                included: 'Up to 90 mins on-site time',
             },
             {
                 name: 'Pre-Purchase Digital Health Check',
@@ -88,6 +80,73 @@ export const siteConfig = {
                 zoneB: 175,
                 zoneC: 190,
                 included: 'Up to 75 mins on-site time',
+            },
+            // Mercedes Van Servicing
+            {
+                name: 'Mercedes Van Minor Service',
+                slug: 'mercedes-van-minor-service',
+                zoneA: 175,
+                zoneB: 190,
+                zoneC: 205,
+                included: 'Full minor service at your location',
+            },
+            {
+                name: 'Mercedes Van Major Service',
+                slug: 'mercedes-van-major-service',
+                zoneA: 295,
+                zoneB: 310,
+                zoneC: 325,
+                included: 'Full major service at your location',
+            },
+            // Mercedes Van Brakes (per-model)
+            {
+                name: 'Sprinter Brakes',
+                slug: 'sprinter-brakes',
+                zoneA: 149,
+                zoneB: 164,
+                zoneC: 179,
+                included: 'Mobile brake service — front pads from £149',
+            },
+            {
+                name: 'Vito Brakes',
+                slug: 'vito-brakes',
+                zoneA: 169,
+                zoneB: 184,
+                zoneC: 199,
+                included: 'Mobile brake service — front pads from £169',
+            },
+            {
+                name: 'Citan Brakes',
+                slug: 'citan-brakes',
+                zoneA: 169,
+                zoneB: 184,
+                zoneC: 199,
+                included: 'Mobile brake service — front pads from £169',
+            },
+            // Commercial Van Tuning
+            {
+                name: 'Van Load & Driveability Tune',
+                slug: 'van-load-driveability-tune',
+                zoneA: 199,
+                zoneB: 214,
+                zoneC: 229,
+                included: 'Diagnostic pre-check + Stage 1 calibration',
+            },
+            {
+                name: 'Van Economy Tune',
+                slug: 'van-economy-tune',
+                zoneA: 199,
+                zoneB: 214,
+                zoneC: 229,
+                included: 'Diagnostic pre-check + economy calibration',
+            },
+            {
+                name: 'Fleet Van Tuning',
+                slug: 'fleet-van-tuning',
+                zoneA: 199,
+                zoneB: 214,
+                zoneC: 229,
+                included: 'Fleet-day tuning with diagnostic pre-check',
             },
         ],
         addOns: [

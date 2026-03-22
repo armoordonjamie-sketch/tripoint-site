@@ -23,7 +23,16 @@ const SERVICE_TYPES = [
     'Fault finding',
     'DPF diagnostics and regeneration',
     'AdBlue/SCR diagnostics',
+    'Mercedes van servicing (Sprinter, Vito, Citan)',
+    'Mobile brake service',
+    'Commercial van tuning',
 ];
+
+const sameAsSocial = [
+    siteConfig.social.facebook,
+    siteConfig.social.instagram,
+    siteConfig.social.google,
+].filter((u) => u && !u.includes('REPLACE_ME'));
 
 /* ── LocalBusiness (AutoRepair) schema ───────────────────────── */
 export function LocalBusinessSchema() {
@@ -31,6 +40,7 @@ export function LocalBusinessSchema() {
         '@context': 'https://schema.org',
         '@type': 'AutoRepair' as const,
         '@id': `${siteConfig.url}/#business`,
+        parentOrganization: { '@id': `${siteConfig.url}/#organization` },
         name: siteConfig.brandName,
         description: siteConfig.description,
         url: siteConfig.url,
@@ -54,14 +64,10 @@ export function LocalBusinessSchema() {
         openingHoursSpecification: {
             '@type': 'OpeningHoursSpecification' as const,
             dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-            opens: '08:00',
-            closes: '18:00',
+            opens: '06:00',
+            closes: '22:00',
         },
-        sameAs: [
-            siteConfig.social.facebook,
-            siteConfig.social.instagram,
-            siteConfig.social.google,
-        ].filter((u) => u && !u.includes('REPLACE_ME')),
+        sameAs: sameAsSocial,
     };
 
     return (
@@ -71,6 +77,36 @@ export function LocalBusinessSchema() {
                 __html: JSON.stringify(schema).replace(/£/g, '\\u00a3'),
             }}
         />
+    );
+}
+
+/* ── Organization + WebSite (site-wide) ───────────────────── */
+export function OrganizationWebsiteSchema() {
+    const organization = {
+        '@context': 'https://schema.org',
+        '@type': 'Organization' as const,
+        '@id': `${siteConfig.url}/#organization`,
+        name: siteConfig.brandName,
+        url: siteConfig.url,
+        logo: `${siteConfig.url}/favicon.svg`,
+        email: siteConfig.contact.email,
+        telephone: siteConfig.contact.phoneE164,
+        sameAs: sameAsSocial,
+    };
+    const website = {
+        '@context': 'https://schema.org',
+        '@type': 'WebSite' as const,
+        '@id': `${siteConfig.url}/#website`,
+        url: siteConfig.url,
+        name: siteConfig.brandName,
+        inLanguage: 'en-GB',
+        publisher: { '@id': `${siteConfig.url}/#organization` },
+    };
+    return (
+        <>
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organization) }} />
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(website) }} />
+        </>
     );
 }
 
@@ -106,7 +142,7 @@ export function ServiceSchema({ name, description, url, priceFrom, priceCurrency
             '@type': 'Offer',
             priceCurrency,
             price: priceFrom,
-            priceValidUntil: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+            priceValidUntil: '2030-12-31',
         },
     };
 

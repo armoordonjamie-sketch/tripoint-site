@@ -134,7 +134,32 @@ async function main() {
             }
         }
     }
+
+    await ensureOgDefault();
+
     console.log('Done.');
+}
+
+/** Default Open Graph / Twitter image (1200×630) — social previews when page has no custom og:image */
+async function ensureOgDefault() {
+    const outPath = join(PUBLIC, 'og-default.jpg');
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0ea5e9"/>
+      <stop offset="100%" style="stop-color:#0f172a"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#g)"/>
+  <text x="600" y="280" text-anchor="middle" fill="#ffffff" font-family="system-ui,sans-serif" font-size="52" font-weight="700">TriPoint Diagnostics</text>
+  <text x="600" y="340" text-anchor="middle" fill="#94a3b8" font-family="system-ui,sans-serif" font-size="22">Mobile diagnostics &amp; repairs · Kent &amp; SE London</text>
+</svg>`;
+    try {
+        await sharp(Buffer.from(svg)).jpeg({ quality: 88 }).toFile(outPath);
+        console.log('  ✓ og-default.jpg');
+    } catch (err) {
+        console.error('  ✗ og-default.jpg:', err.message);
+    }
 }
 
 main();

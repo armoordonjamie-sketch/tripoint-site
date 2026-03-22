@@ -23,6 +23,10 @@ env/
 .env
 .env.*
 !.env.example
+!.env.production.example
+
+# Production frontend secrets (deploy copies config/frontend.env → tripoint-frontend/.env.production)
+config/frontend.env
 
 # Google service account credentials
 python-scripts/*.json

@@ -3,13 +3,14 @@ import { Section } from '@/components/Section';
 import { BookingScheduler } from '@/components/BookingScheduler';
 import { Phone, MessageCircle, Clock, Shield } from 'lucide-react';
 import { siteConfig } from '@/config/site';
+import { trackPhoneLead, trackWhatsAppLead } from '@/lib/analytics';
 
 export function BookingPage() {
     return (
         <>
             <Seo
-                title="Book a Diagnostic"
-                description="Book your mobile diagnostic appointment with TriPoint Diagnostics. Pick your service, check live availability, and confirm your fixed price online."
+                title="Book Online"
+                description="Book a diagnostic, servicing, or health check online with TriPoint Diagnostics. Pick your service, check live availability, and confirm your fixed price. Kent & SE London."
                 canonical="/booking"
             />
 
@@ -17,10 +18,10 @@ export function BookingPage() {
                 {/* Hero */}
                 <div className="text-center mb-10">
                     <h1 className="text-4xl font-extrabold text-text-primary sm:text-5xl">
-                        Book Your Diagnostic
+                        Book Online
                     </h1>
                     <p className="mx-auto mt-4 max-w-2xl text-lg text-text-secondary">
-                        Select your service, enter your postcode, choose a slot - done. Fixed pricing, no surprises.
+                        Book a diagnostic, van servicing, brakes, tuning, or pre-purchase health check. Fixed pricing, no surprises.
                     </p>
 
                     {/* Trust badges */}
@@ -48,6 +49,7 @@ export function BookingPage() {
                         <a
                             href={`tel:${siteConfig.contact.phoneE164}`}
                             className="inline-flex items-center gap-2 text-brand hover:text-brand-light transition-colors"
+                            onClick={() => trackPhoneLead('booking')}
                         >
                             <Phone className="h-4 w-4" />
                             {siteConfig.contact.phoneDisplay}
@@ -57,6 +59,7 @@ export function BookingPage() {
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-2 text-success hover:text-success/80 transition-colors"
+                            onClick={() => trackWhatsAppLead('booking')}
                         >
                             <MessageCircle className="h-4 w-4" />
                             WhatsApp

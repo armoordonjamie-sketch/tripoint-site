@@ -1,0 +1,330 @@
+TriPoint Diagnostics - Internal planning document
+TriPoint Diagnostics - Expansion Plan
+Servicing and maintenance for Mercedes vans, plus commercial van tuning focused on work-use benefits
+This document sets out a practical expansion plan for two new revenue streams under the TriPoint 
+Diagnostics brand: (1) Mercedes van servicing and brake work, and (2) van tuning focused on load-
+carrying drivability, torque delivery, and route efficiency rather than generic 'more power' 
+marketing. The goal is to add repeatable work, improve customer lifetime value, and create a broader 
+offer stack without diluting the diagnostics-first identity of the business.
+1. Executive summary
+Expansion
+Why it fits
+Best use
+Priority
+Mercedes van 
+servicing and brakes
+Creates repeat annual 
+work and easier 
+scheduled jobs for 
+existing van customers
+Retention, cross-sell, 
+predictable diary 
+filling
+Launch first
+Commercial van 
+tuning
+Higher-ticket add-on 
+with broad market 
+reach across all makes 
+if marketed around 
+work-use benefits
+Upsell, fleet ROI offer, 
+selective paid traffic
+Launch second
+Recommended rollout order: launch servicing first as the lower-risk repeat-revenue arm, then add 
+tuning as a premium add-on once the pricing, booking workflow, and customer qualification process 
+are in place.
+2. Expansion A - Mercedes van servicing and brake work
+Proposed focus: scheduled servicing, inspection-led maintenance, and brake work for Mercedes vans 
+only. Target models: Vito W447, Sprinter W906 and W907/W910, and Citan W415/W420.
+2.1 Positioning
+
+Mobile Mercedes van servicing for owner-drivers, sole traders, and small fleets.
+
+Planned maintenance done at home, yard, or workplace - built around convenience and less 
+downtime.
+
+A premium independent alternative to dealer servicing for routine maintenance jobs.
+
+Separate this offer from diagnostics in the menu, but use diagnostics as the trust anchor.
+2.2 Best jobs to offer
+
+Minor (A-style) oil service packages.
+
+Major (B-style) service packages once the checklist is fully standardised.
+
+Front brake pads and front pads plus discs packages.
+
+Rear brake work only with strong quoting rules and condition qualifiers.
+
+Service plus visual vehicle health check as an upsell.
+2.3 Jobs to avoid or tightly control
+
+Anything needing ramp-level access or extensive underbody stripping.
+
+TriPoint Diagnostics - Internal planning document
+
+Heavily corroded rear brake jobs without a clear contingency surcharge.
+
+Large repair jobs disguised as 'just a service' without pre-qualification.
+
+Generic all-makes servicing ads that drag in low-margin price shoppers.
+2.4 Recommended retail pricing
+Offer
+Citan
+Vito W447
+Sprinter
+Notes
+Minor service
+GBP145-165
+GBP175-205
+GBP195-235
+Entry-point 
+service, easiest to 
+standardise
+Major service
+GBP245-285
+GBP295-345
+GBP345-425
+Only after process 
+is fully locked 
+down
+Front pads only
+GBP150-180
+GBP160-190
+GBP180-220
+Keep wear sensor 
+as optional extra
+Front pads + discs
+GBP280-340
+GBP290-360
+GBP360-450
+High-demand, 
+strong packaged 
+offer
+Rear pads only
+GBP145-175
+GBP150-190
+GBP190-240
+Use strict 
+condition 
+qualifiers
+Rear pads + discs
+GBP320-420
+GBP320-420
+GBP380-500
+Only with 
+contingency 
+language
+Suggested add-ons: brake wear sensor GBP15-35, seized slider clean-up GBP20-40, severe corrosion 
+extra time GBP30-60, brake fluid service GBP75-110, and fixed zone travel surcharges rather than ad-
+hoc travel pricing.
+2.5 Why it is commercially attractive
+
+Creates annual and semi-annual repeat work instead of relying only on urgent faults.
+
+Lower cognitive load than complex diagnostics, so it helps fill planned slots in the diary.
+
+Strong cross-sell potential from existing Mercedes van diagnostics customers.
+
+Makes your business more 'sticky' because customers who trust you with servicing are more likely 
+to return for diagnostics and repairs.
+2.6 Recommended advertising funnel
+
+Do not lead with generic 'car servicing' or 'brakes near me' PPC.
+
+Build model-specific pages first: Mercedes van servicing, Sprinter service, Vito service, Citan 
+service, and matching brake pages.
+
+Use fixed 'from' pricing and clear inclusions so customers self-qualify before contacting you.
+
+Primary acquisition channels: Google Business Profile services, existing customer upsell, reminder 
+campaigns, local SEO pages, then tightly-targeted Google Ads.
+
+Best initial PPC themes: 'Mercedes van service', 'Sprinter service', 'Vito service', 'Sprinter brake 
+pads and discs'.
+2.7 Suggested website and offer stack
+
+Core page: Mercedes Van Servicing.
+
+TriPoint Diagnostics - Internal planning document
+
+Sub-pages: Sprinter Service, Vito Service, Citan Service, Sprinter Brakes, Vito Brakes, Citan Brakes.
+
+Lead CTA: 'Book Minor Service from GBP199' or 'Get a fixed brake quote'.
+
+Pre-qualification fields: reg, mileage, front/rear, model, service due, warning lights, any supplied 
+parts.
+3. Expansion B - Commercial van tuning
+This expansion should be positioned as a work-van optimisation service, not a boy-racer tuning 
+product. The strongest commercial message is improved real-world drivability for loaded vans: 
+stronger mid-range pull, easier overtakes, better hill performance, less frequent downshifts, and 
+smoother daily use.
+3.1 Positioning
+
+Lead with 'load and driveability', not headline bhp claims.
+
+Talk about usable torque, route performance, and driving feel under payload.
+
+Use Stage 1 remap as the technical descriptor, not the front-end sales headline.
+
+Keep this section separate from diagnostics and separate again from any future 
+enthusiast/performance work.
+3.2 Product names that fit the brand
+
+Van Load and Driveability Tune
+
+Commercial Van Torque Optimisation
+
+Van Economy and Driveability Calibration
+
+Fleet Torque and Economy Tune
+3.3 Recommended offer stack
+Offer
+Best customer
+Core benefit
+Price guide
+Load and Driveability 
+Tune
+Trades, couriers, 
+loaded work vans
+Stronger low/mid-
+range torque and 
+easier loaded driving
+See vehicle size pricing
+Economy Tune
+High-mileage owner-
+drivers and route-
+heavy fleets
+Smoother cruising and 
+potential fuel savings if 
+driven the same way
+See vehicle size pricing
+Fleet Van Calibration
+Small fleets and trade 
+accounts
+Consistency, better 
+drivability, fleet-day 
+pricing
+3+ vehicle discount or 
+site-day rate
+3.4 Recommended retail pricing
+Vehicle class
+Examples
+Recommended retail
+Notes
+Small vans
+Citan, Connect, 
+Berlingo, Kangoo
+GBP199-249
+Good entry point
+Medium vans
+Vito, Transit Custom, 
+Trafic, Vivaro
+GBP249-299
+Do not underprice
+Large vans
+Sprinter, Crafter, 
+Transit, Boxer, Daily
+GBP299-399
+Premium work-van 
+tuning slot
+Fleet suggestion: for 3 or more vans, offer a 10-15% volume saving or a fixed site-day rate instead of 
+ad-hoc one-off pricing.
+
+TriPoint Diagnostics - Internal planning document
+3.5 Qualification process
+
+Collect reg, make/model, engine, gearbox, mileage, typical load, route type, and any current faults 
+before quoting.
+
+Build a mandatory pre-check or diagnostic screen before any tune is sold.
+
+Do not promise fixed mpg gains; discuss potential economy benefits depending on route, load, and 
+driving style.
+
+Add a handover note reminding customers to check insurance or fleet policy requirements for 
+modifications.
+3.6 Best advertising funnel
+
+Do not lead with generic 'stage 1 remap' messaging.
+
+Lead with work-use outcomes: pulls better when loaded, stronger mid-range torque, better hill 
+performance, smoother on route.
+
+Build dedicated pages: Van Load and Driveability Tune, Van Economy Tune, Fleet Van Tuning.
+
+Use a quote-first CTA: reg + engine + load/use pattern + postcode.
+
+Best PPC themes: 'van economy tune', 'van torque tune', 'transit custom economy remap', 'sprinter 
+torque tune', 'fleet van tuning'.
+
+Keep tuning campaigns separate from diagnostics campaigns to avoid polluting search terms and 
+audience intent.
+3.7 Why it is commercially attractive
+
+Higher ticket than routine servicing.
+
+Broadens your market beyond Mercedes while still staying van-first.
+
+Strong upsell from existing van customers who already trust your technical ability.
+
+Easy to frame around business outcomes rather than vanity performance.
+4. Combined rollout strategy
+4.1 First 30 days
+
+Launch Mercedes van servicing as the first expansion.
+
+Publish a simple fixed-price menu for minor service, major service, and front brake packages.
+
+Add these offers to the website, GBP services, and WhatsApp quick-reply templates.
+
+Build a reminder workflow for existing customers: annual service reminders and brake checks.
+4.2 Days 31-60
+
+Track time-on-job, parts margin, and conversion rates on service/brake enquiries.
+
+Add rear brake jobs only if your quoting process and contingency surcharges are working.
+
+Start SEO pages for model-specific service and brake offers.
+4.3 Days 61-90
+
+Launch van tuning with a diagnostics/pre-check gate.
+
+Publish three tuning pages: load and driveability, economy, and fleet tuning.
+
+Run tuning as a separate ad funnel and separate offer family.
+
+TriPoint Diagnostics - Internal planning document
+
+Cross-sell tuning only to suitable vehicles and established customers first.
+4.4 Priority recommendation
+If only one expansion is launched immediately, choose servicing first. It offers more predictable 
+scheduling, easier customer education, and better repeat revenue. Tuning should follow once your 
+admin, quoting, and qualification process are mature enough to support it without distracting from 
+diagnostics.
+5. Simple profit logic
+
+Servicing makes sense because it fills quieter planned slots and improves retention.
+
+Brake work makes sense because packaged front brake jobs are easy to understand and easy to 
+sell.
+
+Tuning makes sense because it is a higher-ticket add-on with strong business-use messaging when 
+sold correctly.
+
+Diagnostics should remain the trust anchor and the premium front-end offer.
+
+The biggest risk is mixing too many audiences in one funnel. Keep diagnostics, servicing, and 
+tuning distinct in your messaging and advertising.
+6. Immediate next actions
+
+Publish pricing pages for Mercedes van servicing and brake packages.
+
+Create model-specific booking forms with the right pre-qualification fields.
+
+Add a separate van tuning section with quote-first workflows.
+
+Build separate Google Ads / landing pages for diagnostics vs servicing vs tuning.
+
+Use existing customer base first before scaling paid traffic.

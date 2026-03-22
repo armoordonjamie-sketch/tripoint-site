@@ -4,6 +4,8 @@ export interface BlogPost {
     description: string;
     category: string;
     publishedAt: string;
+    /** ISO date when content was materially updated (optional; defaults to publishedAt in schema) */
+    updatedAt?: string;
     content: string;
     relatedServices: string[];
     ogImage?: string;
@@ -21,7 +23,7 @@ export const blogPosts: BlogPost[] = [
         ogImage: '/images/blog/om654-turbo-failure/om654-turbo-compressor-split.jpeg',
         thumbnail: '/images/blog/om654-turbo-failure/om654-turbo-compressor-split.jpeg',
         author: 'TriPoint Diagnostics',
-        relatedServices: ['sprinter-limp-mode', 'diagnostic-callout', 'emissions-diagnostics'],
+        relatedServices: ['diagnostic-callout'],
         content: `
             <div class="blog-lead">
                 At TriPoint Diagnostics Ltd (covering Kent and London), we're seeing a clear pattern: OM654 turbo failures are disproportionately common in commercial vans - especially the Sprinter (W907/VS30) and Vito (W447) - compared with passenger-car applications. The root cause isn't a defective turbocharger. It's emissions-driven thermal stress combined with lubrication degradation.
@@ -233,7 +235,7 @@ export const blogPosts: BlogPost[] = [
 
             <div class="blog-cta-box">
                 <p><strong>Hearing whining, seeing oil in boost pipes, or getting underboost/limp mode on a W907 Sprinter or W447 Vito?</strong></p>
-                <p>The best money you'll spend is a proper diagnostic before it escalates. Book a <a href="/services/diagnostic-callout">Diagnostic Callout</a> or our <a href="/services/sprinter-limp-mode">Sprinter Limp Mode Triage</a>.</p>
+                <p>The best money you'll spend is a proper diagnostic before it escalates. Book a <a href="/services/diagnostic-callout">Standard Diagnosis</a> — we cover all limp mode, emissions, and turbo-related faults in one visit.</p>
             </div>
         `,
     },
@@ -244,7 +246,7 @@ export const blogPosts: BlogPost[] = [
         category: 'Mercedes',
         publishedAt: '2025-01-15',
         thumbnail: '/images/gallery/work-31.jpg',
-        relatedServices: ['sprinter-limp-mode', 'diagnostic-callout'],
+        relatedServices: ['diagnostic-callout'],
         content: `
             <div class="blog-lead">
                 Sprinter limp mode is frustrating for one reason: it turns a working van into a liability. You feel it immediately - reduced power, limited revs, poor pull, sometimes a speed limiter, and a dashboard that looks like a Christmas tree.
@@ -405,7 +407,7 @@ export const blogPosts: BlogPost[] = [
 
             <div class="blog-cta-box">
                 <p><strong>Want this done properly?</strong></p>
-                <p>If your Sprinter is in limp mode, book our <a href="/services/sprinter-limp-mode">Sprinter Limp Mode Triage</a> or use our <a href="/services/diagnostic-callout">Diagnostic Callout</a> for general fault finding.</p>
+                <p>If your Sprinter is in limp mode, book a <a href="/services/diagnostic-callout">Standard Diagnosis</a> — we cover all limp mode faults including turbo, boost, EGR, and electrical issues in one visit.</p>
             </div>
         `,
     },
@@ -416,7 +418,7 @@ export const blogPosts: BlogPost[] = [
         category: 'Emissions',
         publishedAt: '2025-01-20',
         thumbnail: '/images/gallery/work-30.jpg',
-        relatedServices: ['adblue-countdown', 'emissions-diagnostics'],
+        relatedServices: ['diagnostic-callout'],
         content: `
             <div class="blog-lead">
                 An AdBlue countdown is one of the most stressful warnings you can get because it creates urgency. You're not just looking at a light - you're watching a timer that feels like it's closing in.
@@ -526,7 +528,7 @@ export const blogPosts: BlogPost[] = [
 
             <div class="blog-cta-box">
                 <p><strong>Got an AdBlue countdown?</strong></p>
-                <p>Book our <a href="/services/adblue-countdown">AdBlue Countdown Diagnostic</a> service or visit the <a href="/services/emissions-diagnostics">Emissions Diagnostics Hub</a>.</p>
+                <p>Book a <a href="/services/diagnostic-callout">Standard Diagnosis</a> — we cover all AdBlue, SCR, and emissions faults in one visit.</p>
             </div>
         `,
     },
@@ -537,7 +539,7 @@ export const blogPosts: BlogPost[] = [
         category: 'Emissions',
         publishedAt: '2025-01-25',
         thumbnail: '/images/gallery/work-14.jpg',
-        relatedServices: ['dpf-regeneration-decision', 'emissions-diagnostics'],
+        relatedServices: ['diagnostic-callout'],
         content: `
             <div class="blog-lead">
                 DPF warning lights cause a predictable reaction: "Can you just force a regen?" Sometimes yes - a regen is the right move and it gets you back on the road quickly. But sometimes forcing a regen is either unsafe, pointless, or it hides a deeper problem that will bring the warning straight back.
@@ -656,7 +658,7 @@ export const blogPosts: BlogPost[] = [
 
             <div class="blog-cta-box">
                 <p><strong>DPF light on?</strong></p>
-                <p>Book our <a href="/services/dpf-regeneration-decision">DPF Diagnostic / Decision Visit</a> or visit the <a href="/services/emissions-diagnostics">Emissions Diagnostics Hub</a>.</p>
+                <p>Book a <a href="/services/diagnostic-callout">Standard Diagnosis</a> — we cover all DPF, regen, and emissions faults in one visit.</p>
             </div>
         `,
     },

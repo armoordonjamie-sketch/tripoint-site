@@ -4,7 +4,7 @@ import { Section } from '@/components/Section';
 import { CTAButton } from '@/components/CTAButton';
 import { Notice } from '@/components/Notice';
 import { siteConfig } from '@/config/site';
-import { trackEvent } from '@/lib/analytics';
+import { trackBookNowClick, trackPhoneLead, trackWhatsAppLead } from '@/lib/analytics';
 import { CheckCircle2, XCircle, ClipboardCheck, Search, FileText, Phone, MessageCircle } from 'lucide-react';
 
 function useScrollReveal() {
@@ -137,7 +137,7 @@ export function ProcessPage() {
                     </div>
 
                     <div className="mt-12 flex flex-wrap gap-4 reveal">
-                        <CTAButton href="/booking" size="lg" onClick={() => trackEvent('click_book_now', { location: 'process' })}>
+                        <CTAButton href="/booking" size="lg" onClick={() => trackBookNowClick('process')}>
                             Book a Diagnostic
                         </CTAButton>
                         <CTAButton
@@ -146,7 +146,7 @@ export function ProcessPage() {
                             size="lg"
                             external
                             icon={<MessageCircle className="h-5 w-5" />}
-                            onClick={() => trackEvent('click_whatsapp', { location: 'process' })}
+                            onClick={() => trackWhatsAppLead('process')}
                         >
                             WhatsApp Us
                         </CTAButton>
@@ -156,7 +156,7 @@ export function ProcessPage() {
                             size="lg"
                             external
                             icon={<Phone className="h-5 w-5" />}
-                            onClick={() => trackEvent('click_phone_header', { location: 'process' })}
+                            onClick={() => trackPhoneLead('process')}
                         >
                             {siteConfig.contact.phoneDisplay}
                         </CTAButton>
