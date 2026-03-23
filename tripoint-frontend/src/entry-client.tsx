@@ -4,11 +4,12 @@ import { HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter } from 'react-router-dom';
 import { AppRoutes } from './App';
 import { RouteTracker } from '@/components/RouteTracker';
-import { initAnalytics } from '@/lib/analytics';
+import { initAnalytics, registerGa4Test } from '@/lib/analytics';
 import { captureAttributionFromUrl } from '@/lib/attribution';
 import './index.css';
 
 initAnalytics();
+registerGa4Test();
 captureAttributionFromUrl();
 
 const root = document.getElementById('root')!;

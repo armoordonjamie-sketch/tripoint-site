@@ -10,7 +10,7 @@ Programmatically creates GA4 key events, Google Ads conversion actions, and link
 
 ## GA4 Admin API via service account (recommended for automation)
 
-The site’s **browser tag** (`G-M8NGL90Z1R`) is unchanged. Service account auth is only for **`tools/google_setup`** (CLI) calling the **GA4 Admin API** (key events, links), so you can run `run` / `status` **without browser OAuth** for GA4 when a JSON key is configured.
+The site’s **browser tag** (`G-TE618HYTQ2`) is unchanged. Service account auth is only for **`tools/google_setup`** (CLI) calling the **GA4 Admin API** (key events, links), so you can run `run` / `status` **without browser OAuth** for GA4 when a JSON key is configured.
 
 ### 1. Google Cloud
 

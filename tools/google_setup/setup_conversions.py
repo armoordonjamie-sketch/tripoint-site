@@ -626,7 +626,7 @@ def run(config_path: str, ga4_only: bool):
     ga4_cfg = config.get("ga4", {})
     measurement_id = (ga4_cfg.get("measurement_id") or "").strip()
     if not measurement_id:
-        measurement_id = "(set ga4.measurement_id in config.yaml — e.g. G-M8NGL90Z1R from Data streams)"
+        measurement_id = "(set ga4.measurement_id in config.yaml — e.g. G-TE618HYTQ2 from Data streams)"
 
     # Try to find send_to labels
     send_to = report.get("google_ads", {}).get("send_to_map", {})

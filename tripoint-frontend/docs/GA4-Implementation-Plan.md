@@ -24,7 +24,7 @@ npm install react-ga4
 
 ```ts
 export const GA4_MEASUREMENT_ID =
-    (import.meta.env.VITE_GA4_MEASUREMENT_ID as string | undefined) ?? 'G-M8NGL90Z1R';
+    (import.meta.env.VITE_GA4_MEASUREMENT_ID as string | undefined) ?? 'G-TE618HYTQ2';
 ```
 
 - **[src/entry-client.tsx](tripoint-frontend/src/entry-client.tsx)** – Remove `import './lib/google-tag-init';`.

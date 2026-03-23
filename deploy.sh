@@ -40,15 +40,15 @@ fi
 echo ">>> Building frontend..."
 cd "$FRONTEND_DIR"
 
-# Vite build-time env: GA4 + Google Ads (VITE_*). Prefer repo-level config on the server.
+# Vite build-time env: VITE_GA4_MEASUREMENT_ID required for GA4. Prefer repo-level config on the server.
 if [ -f "$APP_DIR/config/frontend.env" ]; then
     cp "$APP_DIR/config/frontend.env" "$FRONTEND_DIR/.env.production"
     echo ">>> Loaded Vite env from $APP_DIR/config/frontend.env"
 elif [ -f "$FRONTEND_DIR/.env.production" ]; then
     echo ">>> Using existing $FRONTEND_DIR/.env.production"
 else
-    echo ">>> WARNING: No config/frontend.env or tripoint-frontend/.env.production — GA4/Ads use defaults in code."
-    echo ">>> Copy tripoint-frontend/.env.production.example or config/frontend.env.example and fill."
+    echo ">>> WARNING: No config/frontend.env or tripoint-frontend/.env.production — GA4 will be DISABLED."
+    echo ">>> Set VITE_GA4_MEASUREMENT_ID. Copy tripoint-frontend/.env.production.example and fill."
 fi
 
 npm install --legacy-peer-deps
