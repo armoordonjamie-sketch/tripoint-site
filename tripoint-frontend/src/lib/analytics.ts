@@ -6,6 +6,7 @@ const GA_ID = GA4_MEASUREMENT_ID;
 let initialized = false;
 
 function isDebugMode(): boolean {
+    if (import.meta.env.PROD) return false;
     return typeof window !== 'undefined' && new URLSearchParams(window.location.search).has('debug_tracking');
 }
 
@@ -35,7 +36,7 @@ export function initAnalytics() {
     if (initialized) return;
     initialized = true;
 
-    const debug = isDebugMode();
+    const debug = import.meta.env.PROD ? false : isDebugMode();
     ReactGA.initialize(GA_ID, {
         testMode: false,
         gaOptions: {
@@ -45,11 +46,13 @@ export function initAnalytics() {
         gtagOptions: debug ? { debug_mode: true } : undefined,
     });
 
-    console.log('[GA4] Initialised', {
-        measurementId: GA_ID,
-        testModeEnabled: false,
-        debug_mode: debug,
-    });
+    if (import.meta.env.DEV) {
+        console.log('[GA4] Initialised', {
+            measurementId: GA_ID,
+            testModeEnabled: false,
+            debug_mode: debug,
+        });
+    }
 }
 
 export interface Ga4Info {
@@ -166,14 +169,11 @@ export function trackSocialClick(platform: string, clickLocation = 'footer') {
 }
 
 /**
- * Self-test utility for dev/debug. Call from console: window.__tripointGa4Test?.()
- * Only available when import.meta.env.DEV or ?debug_tracking=1
+ * Self-test utility for dev. Call from console: window.__tripointGa4Test?.()
+ * Only available in development (not in production)
  */
 export function registerGa4Test() {
-    if (typeof window === 'undefined') return;
-    const isDev = import.meta.env.DEV;
-    const hasDebugParam = new URLSearchParams(window.location.search).has('debug_tracking');
-    if (!isDev && !hasDebugParam) return;
+    if (typeof window === 'undefined' || import.meta.env.PROD) return;
 
     (window as unknown as { __tripointGa4Test?: () => void }).__tripointGa4Test = () => {
         console.log('[GA4] Running self-test events...');
