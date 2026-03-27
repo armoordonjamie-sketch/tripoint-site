@@ -58,7 +58,7 @@ export function ContactPage() {
                     vehicle_registration: data.vehicleReg || null,
                     message: data.message,
                     safe_location_confirmed: data.safeLocation,
-                    ...(data.serviceInterest && data.serviceInterest !== ''
+                    ...(data.serviceInterest
                         ? { service_interest_category: data.serviceInterest }
                         : {}),
                     // Attribution / click-ID data for conversion tracking
@@ -75,8 +75,7 @@ export function ContactPage() {
                         : 'Failed to send message. Please try again.';
                 throw new Error(message);
             }
-            const interest =
-                data.serviceInterest && data.serviceInterest !== '' ? data.serviceInterest : 'general';
+            const interest = data.serviceInterest ? data.serviceInterest : 'general';
             trackContactFormSuccess(interest);
             setSubmitted(true);
         } catch (err) {
