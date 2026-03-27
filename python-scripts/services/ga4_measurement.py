@@ -121,8 +121,9 @@ def send_admin_qualification_ga4(event_name: str, row: dict[str, Any]) -> tuple[
     'measurement_protocol_failed' if request failed (see logs).
     """
     if not ga4_mp_is_configured():
-        logger.info(
-            "GA4 MP not configured (GA4_MEASUREMENT_ID / GA4_API_SECRET); skipping event=%s event_id=%s",
+        logger.warning(
+            "GA4 MP not configured — set GA4_MEASUREMENT_ID and GA4_API_SECRET in python-scripts/.env "
+            "(GA4 Admin > Data stream > Measurement Protocol API secrets). Skipping event=%s event_id=%s",
             event_name,
             _s(row.get("event_id"), 40),
         )

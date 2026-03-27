@@ -69,6 +69,12 @@ WazeRouteCalculator.WazeRouteCalculator.COORD_SERVERS["EU"] = "SearchServer/mozi
 
 logger = logging.getLogger("tripoint.api")
 logger.setLevel(logging.INFO)
+for _log in (
+    "tripoint.admin_leads",
+    "tripoint.ga4_mp",
+    "tripoint.sheets_leads",
+):
+    logging.getLogger(_log).setLevel(logging.INFO)
 
 # Email template service - resolve path from this file so it works regardless of CWD
 _templates_dir = os.getenv("EMAIL_TEMPLATES_DIR") or str(
@@ -83,6 +89,19 @@ app = FastAPI(title="TriPoint Booking API")
 
 @app.on_event("startup")
 async def startup_event():
+    try:
+        from services.ga4_measurement import ga4_mp_is_configured
+
+        if ga4_mp_is_configured():
+            logger.info("GA4 Measurement Protocol enabled (admin qualification events will POST to GA).")
+        else:
+            logger.warning(
+                "GA4 Measurement Protocol disabled: set GA4_MEASUREMENT_ID and GA4_API_SECRET in "
+                "python-scripts/.env (create secret under GA4 > Admin > Data streams > Measurement Protocol API secrets)."
+            )
+    except Exception as e:  # pragma: no cover
+        logger.debug("GA4 MP startup check skipped: %s", e)
+
     await init_db()
     # Mount media storage for report uploads
     from pathlib import Path

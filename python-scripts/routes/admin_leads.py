@@ -537,6 +537,13 @@ async def patch_lead(event_id: str, body: LeadPatchBody, _: dict = Depends(verif
         if str(r.get("event_id") or "").strip() == event_id:
             new_row = dict(r)
             ga4_sync = _ga4_qualification_sync_single(old_row, new_row)
+            logger.info(
+                "PATCH lead ga4_qualification_sync event_id=%s old_q=%s new_q=%s sync=%s",
+                event_id,
+                str(old_row.get("qualification_status") or "").strip(),
+                str(new_row.get("qualification_status") or "").strip(),
+                ga4_sync,
+            )
             return {"ok": True, "lead": enrich_lead_row(new_row), "ga4_qualification_sync": ga4_sync}
     return {"ok": True, "ga4_qualification_sync": {"event": None, "measurement_protocol_sent": None, "skipped_reason": "lead_row_missing_after_update", "error": None}}
 
