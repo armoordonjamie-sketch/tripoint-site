@@ -5,6 +5,7 @@ import json
 import logging
 import os
 import re
+import sys
 from pathlib import Path
 from urllib.parse import quote
 from dataclasses import dataclass
@@ -66,6 +67,25 @@ except Exception:  # pragma: no cover - runtime dependency guard
 
 # Patch EU search server to use the working US endpoint
 WazeRouteCalculator.WazeRouteCalculator.COORD_SERVERS["EU"] = "SearchServer/mozi"
+
+
+def _configure_tripoint_logging() -> None:
+    """
+    Emit tripoint.* INFO/WARNING to stderr so systemd/journalctl shows them.
+    Python's root logger defaults to WARNING, so INFO was previously dropped before reaching journald.
+    """
+    tri = logging.getLogger("tripoint")
+    if tri.handlers:
+        return
+    tri.setLevel(logging.INFO)
+    h = logging.StreamHandler(sys.stderr)
+    h.setLevel(logging.INFO)
+    h.setFormatter(logging.Formatter("%(levelname)s:%(name)s:%(message)s"))
+    tri.addHandler(h)
+    tri.propagate = False
+
+
+_configure_tripoint_logging()
 
 logger = logging.getLogger("tripoint.api")
 logger.setLevel(logging.INFO)
