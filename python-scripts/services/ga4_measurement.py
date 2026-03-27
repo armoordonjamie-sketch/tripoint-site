@@ -2,8 +2,8 @@
 GA4 Measurement Protocol — optional server-side events (e.g. lead_qualified).
 Not wired by default; set GA4_MEASUREMENT_ID + GA4_API_SECRET to enable.
 
-Requires ga_client_id and ga_session_id on the lead row (from web capture) for
-session linkage and Realtime visibility.
+Requires ga_client_id on the lead row. ga_session_id is required for MP sends
+(policy: skip when absent so Realtime / DebugView can attach to the web session).
 """
 from __future__ import annotations
 
@@ -12,12 +12,14 @@ import logging
 import os
 import time
 from typing import Any
+from urllib.parse import urlencode, urlparse
 
 import requests
 
 logger = logging.getLogger("tripoint.ga4_mp")
 
 _MAX_PARAM_STR = 500
+_MAX_DEBUG_BODY_LOG = 800
 _MP_COLLECT = "https://www.google-analytics.com/mp/collect"
 _MP_DEBUG = "https://www.google-analytics.com/debug/mp/collect"
 
@@ -32,6 +34,81 @@ def _mp_debug_enabled() -> bool:
     return (os.getenv("GA4_MP_DEBUG") or "").strip().lower() in ("1", "true", "yes")
 
 
+def build_ga4_mp_payload(
+    *,
+    client_id: str,
+    event_name: str,
+    event_params: dict[str, Any] | None = None,
+    timestamp_micros: int | None = None,
+) -> dict[str, Any]:
+    """Canonical JSON body for GA4 Measurement Protocol (single event)."""
+    ts = int(time.time() * 1_000_000) if timestamp_micros is None else int(timestamp_micros)
+    return {
+        "client_id": client_id,
+        "timestamp_micros": str(ts),
+        "non_personalized_ads": True,
+        "events": [{"name": event_name, "params": dict(event_params or {})}],
+    }
+
+
+def build_ga4_mp_url(base: str, measurement_id: str, api_secret: str) -> str:
+    """POST target with query params only (measurement_id, api_secret); values URL-encoded."""
+    q = urlencode(
+        {
+            "measurement_id": measurement_id.strip(),
+            "api_secret": api_secret.strip(),
+        }
+    )
+    return f"{base.rstrip('/')}?{q}"
+
+
+def parse_ga4_debug_validation_messages(text: str) -> tuple[list[str], bool]:
+    """
+    Parse debug/mp/collect JSON body.
+    Returns (messages, parsed_as_json_object).
+    """
+    raw = (text or "").strip()
+    if not raw:
+        return [], False
+    try:
+        data = json.loads(raw)
+    except json.JSONDecodeError:
+        return [], False
+    if not isinstance(data, dict):
+        return [], True
+    out: list[str] = []
+    for vm in data.get("validationMessages") or []:
+        if isinstance(vm, dict):
+            desc = str(vm.get("description") or vm.get("fieldPath") or vm)
+        else:
+            desc = str(vm)
+        if desc:
+            out.append(desc)
+    return out, True
+
+
+def _log_malformed_debug_response(
+    *,
+    url_for_path_only: str,
+    status_code: int,
+    response_text: str,
+    had_query_params: bool,
+    json_body_sent: bool,
+) -> None:
+    """Log non-JSON or unexpected debug responses; never log secrets (path has no query)."""
+    path = urlparse(url_for_path_only).path or url_for_path_only
+    preview = (response_text or "")[:_MAX_DEBUG_BODY_LOG]
+    logger.warning(
+        "GA4 MP debug response not usable JSON: status=%s endpoint_path=%s "
+        "query_params_on_request=%s json_body_sent=%s body_truncated=%r",
+        status_code,
+        path,
+        had_query_params,
+        json_body_sent,
+        preview,
+    )
+
+
 def send_measurement_event(
     name: str,
     params: dict[str, Any] | None = None,
@@ -43,8 +120,13 @@ def send_measurement_event(
     POST a single event to GA4 Measurement Protocol.
     client_id is required (no synthetic fallback).
 
-    If GA4_MP_DEBUG=1, also POSTs to /debug/mp/collect and logs validationMessages
-    (2xx on production collect does not guarantee GA4 accepted the hit).
+    Uses one canonical payload (build_ga4_mp_payload) for both:
+    - https://www.google-analytics.com/mp/collect
+    - https://www.google-analytics.com/debug/mp/collect
+
+    POST, query params measurement_id + api_secret, Content-Type application/json, JSON body.
+
+    If GA4_MP_DEBUG=1, also POSTs to debug/mp/collect before collect and logs validationMessages.
 
     Returns (success, failure_reason_or_none, validation_messages_from_debug).
     """
@@ -54,57 +136,77 @@ def send_measurement_event(
         logger.debug("GA4 MP skipped: GA4_MEASUREMENT_ID or GA4_API_SECRET not set")
         return False, "ga4_not_configured", []
 
-    ts_micros = str(int(time.time() * 1_000_000))
-    body: dict[str, Any] = {
-        "client_id": client_id,
-        "timestamp_micros": ts_micros,
-        "non_personalized_ads": True,
-        "events": [{"name": name, "params": params or {}}],
-    }
+    body = build_ga4_mp_payload(client_id=client_id, event_name=name, event_params=params)
+    collect_url = build_ga4_mp_url(_MP_COLLECT, mid, secret)
+    debug_url = build_ga4_mp_url(_MP_DEBUG, mid, secret)
+    headers = {"Content-Type": "application/json"}
 
     validation_messages: list[str] = []
 
-    def _parse_debug_messages(text: str) -> None:
-        try:
-            data = json.loads(text)
-        except json.JSONDecodeError:
-            return
-        for vm in data.get("validationMessages") or []:
-            if isinstance(vm, dict):
-                desc = str(vm.get("description") or vm.get("fieldPath") or vm)
-            else:
-                desc = str(vm)
-            if desc:
-                validation_messages.append(desc)
-
-    base = _MP_DEBUG if validate_only else _MP_COLLECT
-    url = f"{base}?measurement_id={mid}&api_secret={secret}"
+    def run_debug_hit() -> requests.Response:
+        return requests.post(debug_url, json=body, headers=headers, timeout=10)
 
     if _mp_debug_enabled() and not validate_only:
         try:
-            dr = requests.post(_MP_DEBUG, json=body, timeout=10)
-            _parse_debug_messages(dr.text or "")
-            if validation_messages:
-                logger.info(
-                    "GA4 MP debug validation (event=%s): %s",
-                    name,
-                    validation_messages,
+            dr = run_debug_hit()
+            msgs, json_ok = parse_ga4_debug_validation_messages(dr.text or "")
+            validation_messages.extend(msgs)
+            if not json_ok:
+                _log_malformed_debug_response(
+                    url_for_path_only=debug_url,
+                    status_code=dr.status_code,
+                    response_text=dr.text or "",
+                    had_query_params=True,
+                    json_body_sent=True,
                 )
             elif dr.status_code not in (200, 204):
-                logger.warning("GA4 MP debug unexpected status %s: %s", dr.status_code, (dr.text or "")[:500])
+                logger.warning(
+                    "GA4 MP debug unexpected HTTP status %s: body_truncated=%r",
+                    dr.status_code,
+                    (dr.text or "")[:_MAX_DEBUG_BODY_LOG],
+                )
+            logger.info(
+                "GA4 MP debug validation (event=%s): messages=%s",
+                name,
+                validation_messages if validation_messages else [],
+            )
         except Exception as e:
             logger.warning("GA4 MP debug request failed: %s", e)
 
     try:
-        r = requests.post(url, json=body, timeout=10)
         if validate_only:
-            _parse_debug_messages(r.text or "")
-            ok = r.status_code in (200, 204)
-            return ok, None if ok else "debug_validation_failed", validation_messages
+            r = run_debug_hit()
+            msgs, json_ok = parse_ga4_debug_validation_messages(r.text or "")
+            validation_messages = msgs
+            logger.info(
+                "GA4 MP debug validation (validate_only event=%s): messages=%s",
+                name,
+                validation_messages if validation_messages else [],
+            )
+            if not json_ok:
+                _log_malformed_debug_response(
+                    url_for_path_only=debug_url,
+                    status_code=r.status_code,
+                    response_text=r.text or "",
+                    had_query_params=True,
+                    json_body_sent=True,
+                )
+                return False, "debug_validation_failed", validation_messages
+            if r.status_code not in (200, 204):
+                logger.warning(
+                    "GA4 MP debug validate_only unexpected status %s: body_truncated=%r",
+                    r.status_code,
+                    (r.text or "")[:_MAX_DEBUG_BODY_LOG],
+                )
+                return False, "debug_validation_failed", validation_messages
+            if validation_messages:
+                return False, "debug_validation_failed", validation_messages
+            return True, None, validation_messages
 
+        r = requests.post(collect_url, json=body, headers=headers, timeout=10)
         if r.status_code in (200, 204):
             return True, None, validation_messages
-        logger.warning("GA4 MP unexpected status %s: %s", r.status_code, (r.text or "")[:500])
+        logger.warning("GA4 MP unexpected status %s: %s", r.status_code, (r.text or "")[:_MAX_DEBUG_BODY_LOG])
         return False, "measurement_protocol_failed", validation_messages
     except Exception as e:
         logger.exception("GA4 MP request failed: %s", e)
@@ -180,15 +282,25 @@ def qualification_event_name_for_transition(old_status: str, new_status: str) ->
 def send_admin_qualification_ga4(event_name: str, row: dict[str, Any]) -> dict[str, Any]:
     """
     Send a qualification event via Measurement Protocol.
-    Returns dict with attempted, sent, skipped_reason, validation_messages.
+    Returns dict with attempted, sent, skipped_reason, validation_messages, session_id_policy.
     """
     event_id = _s(row.get("event_id"), 40)
-    empty: dict[str, Any] = {
-        "attempted": False,
-        "sent": False,
-        "skipped_reason": None,
-        "validation_messages": [],
-    }
+
+    def pack(
+        *,
+        attempted: bool,
+        sent: bool,
+        skipped_reason: str | None,
+        validation_messages: list[str],
+        session_id_policy: str | None,
+    ) -> dict[str, Any]:
+        return {
+            "attempted": attempted,
+            "sent": sent,
+            "skipped_reason": skipped_reason,
+            "validation_messages": validation_messages,
+            "session_id_policy": session_id_policy,
+        }
 
     if not ga4_mp_is_configured():
         logger.warning(
@@ -197,41 +309,51 @@ def send_admin_qualification_ga4(event_name: str, row: dict[str, Any]) -> dict[s
             event_name,
             event_id,
         )
-        return {**empty, "skipped_reason": "ga4_not_configured"}
+        return pack(
+            attempted=False,
+            sent=False,
+            skipped_reason="ga4_not_configured",
+            validation_messages=[],
+            session_id_policy="not_applicable",
+        )
 
     cid_raw = str(row.get("ga_client_id") or "").strip()
     if not cid_raw:
         logger.info("GA4 MP skipped: missing_ga_client_id event_id=%s", event_id)
-        return {
-            "attempted": True,
-            "sent": False,
-            "skipped_reason": "missing_ga_client_id",
-            "validation_messages": [],
-        }
+        return pack(
+            attempted=True,
+            sent=False,
+            skipped_reason="missing_ga_client_id",
+            validation_messages=[],
+            session_id_policy="not_applicable",
+        )
 
     sid_raw = str(row.get("ga_session_id") or "").strip()
     if not sid_raw:
         logger.info(
-            "GA4 MP skipped: missing_ga_session_id event_id=%s (required for Realtime / session linkage)",
+            "GA4 MP policy: ga_session_id is required on the lead row for Realtime/DebugView session "
+            "linkage; skipping send when absent. event_id=%s",
             event_id,
         )
-        return {
-            "attempted": True,
-            "sent": False,
-            "skipped_reason": "missing_ga_session_id",
-            "validation_messages": [],
-        }
+        return pack(
+            attempted=True,
+            sent=False,
+            skipped_reason="missing_ga_session_id",
+            validation_messages=[],
+            session_id_policy="required_skipped_missing_ga_session_id",
+        )
 
     params = build_lead_qualification_mp_params(row)
     ok, err, val_msgs = send_measurement_event(event_name, params, client_id=cid_raw)
     if ok:
         logger.info("GA4 MP qualification event sent: %s event_id=%s", event_name, event_id)
-        return {
-            "attempted": True,
-            "sent": True,
-            "skipped_reason": None,
-            "validation_messages": val_msgs,
-        }
+        return pack(
+            attempted=True,
+            sent=True,
+            skipped_reason=None,
+            validation_messages=val_msgs,
+            session_id_policy="included_in_event_params",
+        )
 
     logger.warning(
         "GA4 MP qualification event failed: %s event_id=%s reason=%s (sheet update already saved)",
@@ -239,9 +361,10 @@ def send_admin_qualification_ga4(event_name: str, row: dict[str, Any]) -> dict[s
         event_id,
         err,
     )
-    return {
-        "attempted": True,
-        "sent": False,
-        "skipped_reason": err or "measurement_protocol_failed",
-        "validation_messages": val_msgs,
-    }
+    return pack(
+        attempted=True,
+        sent=False,
+        skipped_reason=err or "measurement_protocol_failed",
+        validation_messages=val_msgs,
+        session_id_policy="included_in_event_params",
+    )

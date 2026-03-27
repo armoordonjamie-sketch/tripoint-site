@@ -333,6 +333,10 @@ export function LeadDetailDrawer({ lead, open, onClose, onSaved }: LeadDetailDra
                                 <span className="text-text-muted">ga4_sync_skipped_reason:</span>{' '}
                                 {lastGa4Sync.ga4_sync_skipped_reason ?? lastGa4Sync.skipped_reason ?? '—'}
                             </p>
+                            <p>
+                                <span className="text-text-muted">ga4_sync_session_id_policy:</span>{' '}
+                                {lastGa4Sync.ga4_sync_session_id_policy ?? '—'}
+                            </p>
                             {lastGa4Sync.ga4_sync_validation_messages &&
                                 lastGa4Sync.ga4_sync_validation_messages.length > 0 && (
                                     <div>

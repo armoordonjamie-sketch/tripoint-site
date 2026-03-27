@@ -204,6 +204,7 @@ def _ga4_mp_result_to_sync_payload(ename: str, res: dict[str, Any]) -> dict[str,
         "ga4_sync_sent": sent,
         "ga4_sync_skipped_reason": sr or None,
         "ga4_sync_validation_messages": list(res.get("validation_messages") or []),
+        "ga4_sync_session_id_policy": res.get("session_id_policy"),
     }
 
 
@@ -218,6 +219,7 @@ def _ga4_qualification_sync_single(old_row: dict[str, Any], new_row: dict[str, A
         "ga4_sync_sent": False,
         "ga4_sync_skipped_reason": "no_qualification_transition",
         "ga4_sync_validation_messages": [],
+        "ga4_sync_session_id_policy": None,
     }
     old_qs = str(old_row.get("qualification_status") or "").strip().lower()
     new_qs = str(new_row.get("qualification_status") or "").strip().lower()
@@ -580,6 +582,7 @@ async def patch_lead(event_id: str, body: LeadPatchBody, _: dict = Depends(verif
             "ga4_sync_sent": False,
             "ga4_sync_skipped_reason": "lead_row_missing_after_update",
             "ga4_sync_validation_messages": [],
+            "ga4_sync_session_id_policy": None,
         },
     }
 
@@ -675,6 +678,7 @@ async def bulk_update(body: BulkUpdateBody, _: dict = Depends(verify_admin_sessi
             "ga4_sync_sent": ok,
             "ga4_sync_skipped_reason": reason,
             "ga4_sync_validation_messages": list(res.get("validation_messages") or []),
+            "ga4_sync_session_id_policy": res.get("session_id_policy"),
         }
         if reason == "ga4_not_configured":
             ga4_summary["skipped_ga4_not_configured"] += 1

@@ -12,7 +12,7 @@ This document records the **GA4 + Measurement Protocol–ready frontend**, **non
 2. **Consistent parameters** – Core events merge **pathname-derived context** so admin-defined dimensions map cleanly.
 3. **No PII to GA4** – No full postcode, reg, VIN, phone, email, message body, or raw slot identifiers in GA4 events.
 4. **Lead pipeline** – `phone_click`, `whatsapp_click`, and `generate_lead` success paths also **POST** to `POST /api/leads/track` for **Google Sheets** (and optional future server analytics).
-5. **Backend** – Idempotent **`event_id`** (per-request UUID) in SQLite; session grouping via **`journey_id`** in the payload; Sheets append with a fixed column schema; optional **GA4 Measurement Protocol** helper (not wired to user flows).
+5. **Backend** – Idempotent **`event_id`** (per-request UUID) in SQLite; session grouping via **`journey_id`** in the payload; Sheets append with a fixed column schema; optional **GA4 Measurement Protocol** for **admin qualification** transitions (`lead_qualified` / `lead_disqualified` / `lead_won`) when `GA4_MEASUREMENT_ID` + `GA4_API_SECRET` are set and the lead row has web **`ga_client_id`** / **`ga_session_id`**.
 
 ---
 
@@ -118,10 +118,12 @@ This document records the **GA4 + Measurement Protocol–ready frontend**, **non
 - Fixed column order (see §6).
 - **Operational:** If an existing **Leads** tab still has the old header (`lead_id` first), auto-detection will not match the new schema. Point **`GOOGLE_SHEETS_LEADS_TAB`** at a new tab (e.g. `Leads_v2`) for a clean header, or add a new sheet / header row manually once, then appends continue.
 
-### 3.4 `python-scripts/services/ga4_measurement.py` (new, optional)
+### 3.4 `python-scripts/services/ga4_measurement.py` (optional)
 
-- **`send_measurement_event(name, params, client_id=None)`** – POST to `https://www.google-analytics.com/mp/collect` using `GA4_MEASUREMENT_ID` and `GA4_API_SECRET`.
-- **Not called** from booking/contact routes; scaffold for future `lead_qualified` / `lead_disqualified` style server events.
+- **`build_ga4_mp_payload(...)`** – Canonical JSON body: `client_id`, `timestamp_micros` (string, Unix µs), `non_personalized_ads`, `events[{ name, params }]`.
+- **`build_ga4_mp_url(base, measurement_id, api_secret)`** – `measurement_id` and `api_secret` as **URL-encoded query params** (avoids broken requests when the secret contains reserved characters).
+- **`send_measurement_event(...)`** – POST JSON to **`/mp/collect`** with that URL shape; if `GA4_MP_DEBUG=1`, also POST the **same body** to **`/debug/mp/collect`** using the **same query pattern** (both require `measurement_id` + `api_secret` on the URL).
+- **`send_admin_qualification_ga4`** – Called from admin lead PATCH / bulk-update when qualification transitions to `qualified` / `disqualified` / `won`; skips without synthetic IDs when `ga_client_id` or `ga_session_id` is missing on the row.
 
 ### 3.5 `python-scripts/requirements.txt`
 
@@ -352,13 +354,16 @@ Optional tabs: `GoogleAds_Qualified_Export`, `GoogleAds_Adjustments_Export`, `Go
 
 ### 12.3 Measurement Protocol qualification events (`services/ga4_measurement.py`)
 
-- **Requires** non-empty `ga_client_id` and `ga_session_id` on the sheet row; otherwise the send is skipped with `skipped_reason` `missing_ga_client_id` or `missing_ga_session_id` (no synthetic `client_id`).
-- **Payload (shape):** Top-level `client_id`, `timestamp_micros` (Unix microseconds string), `non_personalized_ads: true`, `events: [{ name: lead_qualified | lead_disqualified | lead_won, params: { session_id, engagement_time_msec: 1, event_id, journey_id, lead_quality, … } }]`.
-- **Debug validation:** Set `GA4_MP_DEBUG=1` in `python-scripts/.env` to POST a copy to `https://www.google-analytics.com/debug/mp/collect` before the production collect; validation messages are logged and returned to the admin UI when present. A 2xx from `/mp/collect` alone does not prove GA4 accepted the event.
+- **Requires** non-empty `ga_client_id` and `ga_session_id` on the sheet row; otherwise the send is skipped with `skipped_reason` `missing_ga_client_id` or `missing_ga_session_id` (no synthetic `client_id`). **`ga_session_id` policy:** required for Realtime / DebugView session linkage; skips are logged explicitly; responses include **`ga4_sync_session_id_policy`** (e.g. `included_in_event_params`, `required_skipped_missing_ga_session_id`, `not_applicable`).
+- **HTTP contract:** `POST`, `Content-Type: application/json`, **JSON body** (not form-encoded). Query string only: `measurement_id`, `api_secret` (built via **`urlencode`**).
+- **Payload (shape):** Built once by **`build_ga4_mp_payload`**: top-level `client_id`, `timestamp_micros` (Unix microseconds as string), `non_personalized_ads: true`, `events: [{ name: lead_qualified | lead_disqualified | lead_won, params: { session_id, engagement_time_msec: 1, event_id, journey_id, lead_quality, disqualify_reason, vehicle_make, vehicle_model, service_interest, service_category, service_name, lead_value, qualified_lead_value, … } }]`.
+- **Debug validation:** Set `GA4_MP_DEBUG=1` in `python-scripts/.env` to POST to **`/debug/mp/collect`** (with the **same encoded query params and body** as collect) before **`/mp/collect`**. Parsed **`validationMessages`** are logged at INFO and surfaced in admin as `ga4_sync_validation_messages`. If the debug response is not JSON, logs include HTTP status, **path only** (no secrets), truncated body, and flags for query params / JSON body presence.
+- **Fix (2025-03-27):** Earlier, debug validation POSTed to `/debug/mp/collect` **without** `measurement_id` and `api_secret` on the URL, which produced GA4’s *“Unable to process malformed HTTP request.”* Production collect already had query params; debug now uses the same **`build_ga4_mp_url`** helper.
 
 ### 12.4 Admin API / UI
 
-- **PATCH `/admin/leads/{event_id}`** response `ga4_qualification_sync` includes `ga4_sync_attempted`, `ga4_sync_sent`, `ga4_sync_skipped_reason`, `ga4_sync_validation_messages` (plus legacy `measurement_protocol_sent`, `skipped_reason`).
+- **PATCH `/admin/leads/{event_id}`** response `ga4_qualification_sync` includes `ga4_sync_attempted`, `ga4_sync_sent`, `ga4_sync_skipped_reason`, `ga4_sync_validation_messages`, **`ga4_sync_session_id_policy`** (plus legacy `measurement_protocol_sent`, `skipped_reason`). Bulk **`POST /admin/leads/bulk-update`** echoes `ga4_sync_session_id_policy` per event where applicable.
+- **Lead detail drawer** shows last sync fields including **`ga4_sync_session_id_policy`** (`tripoint-frontend` `LeadDetailDrawer.tsx`, `adminApi.ts` types).
 - **Leads list** supports filters `identifier_type` (`gclid` | `wbraid` | `gbraid` | `none`) and `google_ads_eligible` (boolean, matches computed `ads_exportable`).
 - **Table:** “Click ID” column uses enriched `identifier_type`; “Ads OK” uses exportability badges and tooltips.
 

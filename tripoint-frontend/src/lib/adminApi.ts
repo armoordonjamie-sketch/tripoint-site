@@ -83,6 +83,8 @@ export interface Ga4QualificationSync {
     ga4_sync_sent?: boolean;
     ga4_sync_skipped_reason?: string | null;
     ga4_sync_validation_messages?: string[];
+    /** How ga_session_id was handled for MP (e.g. included vs skipped for Realtime). */
+    ga4_sync_session_id_policy?: string | null;
 }
 
 export async function updateLead(
@@ -124,6 +126,11 @@ export async function bulkUpdateLeads(payload: BulkUpdatePayload): Promise<{
             event: string;
             measurement_protocol_sent: boolean;
             skipped_reason: string | null;
+            ga4_sync_attempted?: boolean;
+            ga4_sync_sent?: boolean;
+            ga4_sync_skipped_reason?: string | null;
+            ga4_sync_validation_messages?: string[];
+            ga4_sync_session_id_policy?: string | null;
         }>;
     };
 }> {
