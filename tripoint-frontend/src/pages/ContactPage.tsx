@@ -18,7 +18,10 @@ const contactSchema = z.object({
     postcode: z.string().min(3, 'Postcode is required'),
     vehicleReg: z.string().optional(),
     serviceInterest: z
-        .enum(['', 'diagnostics', 'servicing', 'brakes', 'tuning', 'other'])
+        .union([
+            z.literal(''),
+            z.enum(['diagnostics', 'servicing', 'brakes', 'tuning', 'other']),
+        ])
         .optional(),
     message: z.string().min(10, 'Please include a message'),
     safeLocation: z.boolean().refine((v) => v, {
