@@ -1,7 +1,0 @@
-### INSTRUCTIONS ###,,,,
-"# IMPORTANT: Remember to set the TimeZone value in the ""parameters"" row and/or in your Conversion Time column",,,,
-# For instructions on how to set your timezones visit http://goo.gl/T1C5Ov,,,,
-,,,,
-### TEMPLATE ###,,,,
-Parameters:TimeZone=<insert_TZ>,,,,
-Google Click ID,Conversion Name,Conversion Time,Conversion Value,Conversion Currency,Ad User Data,Ad Personalization

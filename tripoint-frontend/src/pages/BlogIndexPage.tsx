@@ -7,6 +7,7 @@ import { CTAButton } from '@/components/CTAButton';
 import { OptimizedImage } from '@/components/OptimizedImage';
 import { BookOpen, ArrowRight } from 'lucide-react';
 import { blogPosts, getPostThumbnail } from '@/data/blogPosts';
+import { trackSelectContent } from '@/lib/analytics';
 import { siteConfig } from '@/config/site';
 
 function BlogThumbnail({ src, alt, className, priority }: { src: string; alt: string; className?: string; priority?: boolean }) {
@@ -100,6 +101,7 @@ export function BlogIndexPage() {
                             {/* Featured post - first/latest */}
                             <Link
                                 to={`/blog/${filtered[0].slug}`}
+                                onClick={() => trackSelectContent('blog_post', filtered[0].slug)}
                                 className="blog-index-featured group flex flex-col overflow-hidden rounded-2xl border border-border-default bg-surface-alt transition-all hover:border-brand/30 hover:bg-brand/5 sm:flex-row"
                             >
                                 <div className="relative aspect-video w-full shrink-0 sm:w-1/2 sm:aspect-[4/3] lg:w-2/5">
@@ -140,6 +142,7 @@ export function BlogIndexPage() {
                                         <Link
                                             key={post.slug}
                                             to={`/blog/${post.slug}`}
+                                            onClick={() => trackSelectContent('blog_post', post.slug)}
                                             className="blog-index-card group overflow-hidden rounded-2xl border border-border-default bg-surface-alt transition-all hover:-translate-y-0.5 hover:border-brand/30 hover:bg-brand/5"
                                         >
                                             <div className="relative aspect-video w-full overflow-hidden rounded-t-2xl">

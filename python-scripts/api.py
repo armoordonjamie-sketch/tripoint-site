@@ -9,7 +9,7 @@ from pathlib import Path
 from urllib.parse import quote
 from dataclasses import dataclass
 from datetime import date, datetime, time, timedelta, timezone
-from typing import Any
+from typing import Any, Literal
 
 import requests
 import smtplib
@@ -42,6 +42,8 @@ from db import (
     get_booking_by_token,
     init_db,
     insert_booking,
+    delete_lead_track_dedupe,
+    insert_lead_track_if_new,
     payment_event_exists,
     record_payment_event,
     set_stripe_balance_session,
@@ -529,6 +531,9 @@ class MediaPatchRequest(BaseModel):
     caption: str | None = None
 
 
+ServiceInterestCategory = Literal["diagnostics", "servicing", "brakes", "tuning", "other"]
+
+
 class ContactSubmitRequest(BaseModel):
     name: str = Field(min_length=2)
     email: EmailStr
@@ -537,6 +542,45 @@ class ContactSubmitRequest(BaseModel):
     message: str = Field(min_length=10)
     safe_location_confirmed: bool
     vehicle_registration: str | None = None
+    service_interest_category: ServiceInterestCategory | None = Field(
+        default=None,
+        description="Optional user-selected interest (matches contact form dropdown)",
+    )
+
+
+class LeadTrackRequest(BaseModel):
+    journey_id: str = Field(min_length=1, max_length=80)
+    event_id: str = Field(min_length=36, max_length=80)
+    event_name: str = Field(min_length=1, max_length=120)
+    occurred_at: str = Field(min_length=1, max_length=80)
+    lead_channel: str = Field(min_length=1, max_length=40)
+    click_location: str | None = None
+    nav_label: str | None = None
+    nav_target: str | None = None
+    contact_method: str | None = None
+    lead_type: str | None = None
+    form_name: str | None = None
+    service_interest: str | None = None
+    payment_completed: bool | None = None
+    page: str | None = None
+    title: str | None = None
+    page_type: str | None = None
+    service_category: str | None = None
+    service_name: str | None = None
+    area_slug: str | None = None
+    booking_step: str | None = None
+    zone_result: str | None = None
+    content_type: str | None = None
+    content_id: str | None = None
+    lead_value: float | None = None
+    gclid: str | None = None
+    gbraid: str | None = None
+    wbraid: str | None = None
+    utm_source: str | None = None
+    utm_medium: str | None = None
+    utm_campaign: str | None = None
+    utm_content: str | None = None
+    utm_term: str | None = None
 
 
 def get_zone(minutes: float) -> str:
@@ -1207,6 +1251,24 @@ async def reschedule_booking(payload: RescheduleRequest):
     return {"status": "rescheduled", "event_id": updated.get("id"), "start": start.isoformat()}
 
 
+@app.post("/leads/track")
+async def leads_track(payload: LeadTrackRequest):
+    """Idempotent lead event logging (SQLite) + optional Google Sheets append."""
+    from services.sheets_leads import try_append_lead_row
+
+    is_new = await insert_lead_track_if_new(payload.event_id)
+    if not is_new:
+        return {"ok": True, "duplicate": True, "sheets": False, "message": None}
+
+    row = payload.model_dump()
+    for k in ("qualification_status", "disqualify_reason", "vehicle_make", "vehicle_model", "notes"):
+        row.setdefault(k, "")
+    sheets_ok, err = try_append_lead_row(row)
+    if not sheets_ok:
+        await delete_lead_track_dedupe(payload.event_id)
+    return {"ok": True, "duplicate": False, "sheets": sheets_ok, "message": err}
+
+
 @app.post("/contact/submit")
 async def contact_submit(payload: ContactSubmitRequest):
     if not payload.safe_location_confirmed:
@@ -1240,12 +1302,18 @@ async def contact_submit(payload: ContactSubmitRequest):
     )
 
     vehicle_line = f"<br/><strong>Vehicle:</strong> {html.escape(vehicle_reg)}" if vehicle_reg != "-" else ""
+    interest_raw = (payload.service_interest_category or "").strip()
+    interest_line = (
+        f"<br/><strong>Service interest:</strong> {html.escape(interest_raw)}"
+        if interest_raw
+        else ""
+    )
     internal_html = (
         f"<p><strong>New contact form submission</strong></p>"
         f"<p><strong>Name:</strong> {html.escape(payload.name)}<br/>"
         f"<strong>Email:</strong> {html.escape(payload.email)}<br/>"
         f"<strong>Phone:</strong> {html.escape(payload.phone)}<br/>"
-        f"<strong>Postcode:</strong> {html.escape(payload.postcode)}{vehicle_line}</p>"
+        f"<strong>Postcode:</strong> {html.escape(payload.postcode)}{vehicle_line}{interest_line}</p>"
         f"<p><strong>Message:</strong></p><p>{html.escape(payload.message)}</p>"
     )
     _send_zoho_email(
@@ -1867,6 +1935,7 @@ async def get_payment_details(token: str):
         "status": status,
         "full_name": booking["full_name"],
         "service_name": service_labels,
+        "service_ids": [s for s in service_ids if s in SERVICE_CATALOG],
         "slot_start": slot_start.isoformat(),
         "slot_end": slot_end.isoformat(),
         "booking_date": slot_start.strftime("%A %d %B %Y"),

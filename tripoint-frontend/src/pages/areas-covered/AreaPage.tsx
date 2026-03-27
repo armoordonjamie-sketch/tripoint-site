@@ -7,7 +7,7 @@ import { getSeoForPath } from '@/routes';
 import { getAreaData } from '@/data/areas';
 import { siteConfig } from '@/config/site';
 import { CheckCircle2, MessageCircle, Phone, MapPin } from 'lucide-react';
-import { trackNavClick, trackPhoneClick, trackWhatsAppClick } from '@/lib/analytics';
+import { trackNavClick, trackPhoneClick, trackWhatsAppClick, trackSelectContent } from '@/lib/analytics';
 
 function formatSlug(slug: string): string {
     return slug
@@ -170,6 +170,7 @@ export function AreaPage() {
                             <Link
                                 key={s}
                                 to={`/areas-covered/${s}`}
+                                onClick={() => trackSelectContent('area_link', s)}
                                 className="rounded-lg border border-border-default bg-surface-alt px-4 py-2 text-sm font-medium text-text-secondary transition-colors hover:border-brand/30 hover:bg-brand/5 hover:text-brand"
                             >
                                 {formatSlug(s)}

@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ChevronDown, Search } from 'lucide-react';
 import { Seo } from '@/components/Seo';
 import { FaqPageSchema } from '@/components/JsonLd';
 import { Section } from '@/components/Section';
 import { CTAButton } from '@/components/CTAButton';
 import { cn } from '@/lib/utils';
+import { trackSearch } from '@/lib/analytics';
 
 interface FaqItem {
     question: string;
@@ -323,6 +324,15 @@ function FaqAccordionItem({ item }: { item: FaqItem }) {
 
 export function FaqPage() {
     const [searchQuery, setSearchQuery] = useState('');
+
+    useEffect(() => {
+        const q = searchQuery.trim();
+        if (q.length < 2) return;
+        const t = window.setTimeout(() => {
+            trackSearch(q, 'faq');
+        }, 500);
+        return () => window.clearTimeout(t);
+    }, [searchQuery]);
 
     const filteredCategories = searchQuery.trim()
         ? faqCategories

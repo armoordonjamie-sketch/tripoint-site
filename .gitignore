@@ -28,6 +28,9 @@ env/
 # Production frontend secrets (deploy copies config/frontend.env → tripoint-frontend/.env.production)
 config/frontend.env
 
+# Secrets (never commit)
+business-docs/google-ads/GA4-API-KEY
+
 # Google service account credentials
 python-scripts/*.json
 

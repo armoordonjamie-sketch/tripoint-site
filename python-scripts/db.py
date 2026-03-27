@@ -181,6 +181,11 @@ CREATE INDEX IF NOT EXISTS idx_vehicles_report ON report_vehicles(report_id);
 CREATE INDEX IF NOT EXISTS idx_faults_vehicle ON vehicle_faults(vehicle_id);
 CREATE INDEX IF NOT EXISTS idx_tests_vehicle ON fault_tests(vehicle_id);
 CREATE INDEX IF NOT EXISTS idx_media_report ON media_assets(report_id);
+
+CREATE TABLE IF NOT EXISTS lead_track_event_dedupe (
+    event_id TEXT PRIMARY KEY,
+    created_at TEXT NOT NULL
+);
 """
 
 
@@ -205,6 +210,34 @@ def generate_payment_token() -> str:
     return secrets.token_urlsafe(32)
 
 
+async def insert_lead_track_if_new(event_id: str) -> bool:
+    """Return True if this event_id was inserted; False if duplicate (replay)."""
+    _require_aiosqlite()
+    now = _now_iso()
+    async with aiosqlite.connect(DB_PATH) as conn:
+        await conn.execute(
+            """
+            INSERT OR IGNORE INTO lead_track_event_dedupe (event_id, created_at)
+            VALUES (?, ?)
+            """,
+            (event_id, now),
+        )
+        await conn.commit()
+        async with conn.execute("SELECT changes()") as cur:
+            row = await cur.fetchone()
+            return bool(row and row[0] > 0)
+
+
+async def delete_lead_track_dedupe(event_id: str) -> None:
+    _require_aiosqlite()
+    async with aiosqlite.connect(DB_PATH) as conn:
+        await conn.execute(
+            "DELETE FROM lead_track_event_dedupe WHERE event_id = ?",
+            (event_id,),
+        )
+        await conn.commit()
+
+
 async def init_db() -> None:
     """Create tables if they don't exist."""
     _require_aiosqlite()
@@ -225,6 +258,12 @@ async def init_db() -> None:
         # Migration: add price_breakdown_json to bookings (if missing)
         try:
             await conn.execute("ALTER TABLE bookings ADD COLUMN price_breakdown_json TEXT")
+            await conn.commit()
+        except Exception:
+            pass
+        # Retire legacy lead dedupe table (replaced by event_id-only dedupe)
+        try:
+            await conn.execute("DROP TABLE IF EXISTS lead_track_dedupe")
             await conn.commit()
         except Exception:
             pass

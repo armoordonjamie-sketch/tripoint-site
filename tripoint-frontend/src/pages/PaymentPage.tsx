@@ -11,6 +11,7 @@ interface PaymentDetails {
     status: string;
     full_name: string;
     service_name: string;
+    service_ids?: string[];
     booking_date: string;
     booking_time_window: string;
     vehicle_reg: string;

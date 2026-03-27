@@ -11,7 +11,7 @@ import {
 } from '@/config/servicesCatalog';
 import { CTAButton } from '@/components/CTAButton';
 import { cn } from '@/lib/utils';
-import { trackNavClick } from '@/lib/analytics';
+import { trackNavClick, trackSelectContent } from '@/lib/analytics';
 
 interface ServicePickerProps {
     title?: string;
@@ -77,7 +77,10 @@ export function ServicePicker({ title, subtitle, badges }: ServicePickerProps) {
                                 type="button"
                                 role="tab"
                                 aria-selected={active}
-                                onClick={() => setCategoryId(id)}
+                                onClick={() => {
+                                    setCategoryId(id);
+                                    trackSelectContent('service_category', id);
+                                }}
                                 className={cn(
                                     'flex flex-1 items-center justify-center gap-1.5 rounded-md px-3 py-2 text-sm font-semibold transition-all min-w-0',
                                     active
@@ -108,6 +111,7 @@ export function ServicePicker({ title, subtitle, badges }: ServicePickerProps) {
                                 <div className="flex gap-3 p-3">
                                     <Link
                                         to={s.href}
+                                        onClick={() => trackSelectContent('service', s.priceSlug, { nav_target: s.href })}
                                         className={cn(
                                             'relative flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-gradient-to-br text-brand transition-transform duration-200 group-hover:scale-105',
                                             !s.thumbnailSrc && meta.accent[0],
@@ -142,6 +146,7 @@ export function ServicePicker({ title, subtitle, badges }: ServicePickerProps) {
                                 <div className="mt-2.5 flex gap-2 border-t border-border-default/60 pt-2.5">
                                     <Link
                                         to={s.href}
+                                        onClick={() => trackSelectContent('service', s.priceSlug, { nav_target: s.href })}
                                         className={cn(
                                             'inline-flex flex-1 items-center justify-center gap-1 rounded-md px-2.5 py-1.5 text-xs font-semibold transition-colors',
                                             'border border-border-default bg-surface-alt text-text-primary hover:border-brand/40 hover:bg-brand/5',

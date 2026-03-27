@@ -17,6 +17,9 @@ const contactSchema = z.object({
     phone: z.string().min(10, 'Valid phone number required'),
     postcode: z.string().min(3, 'Postcode is required'),
     vehicleReg: z.string().optional(),
+    serviceInterest: z
+        .enum(['', 'diagnostics', 'servicing', 'brakes', 'tuning', 'other'])
+        .optional(),
     message: z.string().min(10, 'Please include a message'),
     safeLocation: z.boolean().refine((v) => v, {
         message: 'Please confirm the vehicle is in a safe working location',
@@ -34,7 +37,7 @@ export function ContactPage() {
         formState: { errors, isSubmitting },
     } = useForm<ContactFormData>({
         resolver: zodResolver(contactSchema),
-        defaultValues: { safeLocation: false },
+        defaultValues: { safeLocation: false, serviceInterest: '' },
     });
 
     const onSubmit = async (data: ContactFormData) => {
@@ -52,6 +55,9 @@ export function ContactPage() {
                     vehicle_registration: data.vehicleReg || null,
                     message: data.message,
                     safe_location_confirmed: data.safeLocation,
+                    ...(data.serviceInterest && data.serviceInterest !== ''
+                        ? { service_interest_category: data.serviceInterest }
+                        : {}),
                     // Attribution / click-ID data for conversion tracking
                     ...(Object.keys(attribution).length > 0 && { attribution }),
                 }),
@@ -66,7 +72,9 @@ export function ContactPage() {
                         : 'Failed to send message. Please try again.';
                 throw new Error(message);
             }
-            trackContactFormSuccess();
+            const interest =
+                data.serviceInterest && data.serviceInterest !== '' ? data.serviceInterest : 'general';
+            trackContactFormSuccess(interest);
             setSubmitted(true);
         } catch (err) {
             setSubmitError(err instanceof Error ? err.message : 'Failed to send message. Please try again.');
@@ -222,6 +230,23 @@ export function ContactPage() {
                                     <div>
                                         <label htmlFor="vehicleReg" className={labelClass}>Vehicle reg (optional)</label>
                                         <input id="vehicleReg" {...register('vehicleReg')} className={inputClass} placeholder="e.g. AB12 CDE" />
+                                    </div>
+                                    <div className="sm:col-span-2">
+                                        <label htmlFor="serviceInterest" className={labelClass}>
+                                            What are you interested in? (optional)
+                                        </label>
+                                        <select
+                                            id="serviceInterest"
+                                            {...register('serviceInterest')}
+                                            className={inputClass}
+                                        >
+                                            <option value="">Select…</option>
+                                            <option value="diagnostics">Diagnostics</option>
+                                            <option value="servicing">Servicing</option>
+                                            <option value="brakes">Brakes</option>
+                                            <option value="tuning">Tuning</option>
+                                            <option value="other">Other</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div className="mt-4">

@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Loader2, Search, AlertCircle, CheckCircle2 } from 'lucide-react';
 import { CTAButton } from './CTAButton';
+import { trackZoneLookup } from '@/lib/analytics';
 
 const schema = z.object({
     postcode: z.string().min(3, 'Enter a valid postcode').regex(/^[A-Z]{1,2}[0-9][0-9A-Z]?\s?[0-9][A-Z]{2}$/i, 'Invalid postcode format'),
@@ -43,6 +44,10 @@ export function ZoneCalculator({ onZoneChecked }: ZoneCalculatorProps) {
 
             const json = await res.json();
             setResult(json);
+            const z = json.zone as string;
+            const zoneResult =
+                z === 'Out of area' ? 'out_of_area' : z === 'A' || z === 'B' || z === 'C' ? z : 'unknown';
+            trackZoneLookup(zoneResult);
             onZoneChecked?.(data.postcode.replace(/\s+/g, '').toUpperCase());
         } catch (err) {
             setError(err instanceof Error ? err.message : 'An error occurred');

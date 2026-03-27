@@ -1,7 +1,11 @@
 import { useEffect, useMemo, useState, useRef } from 'react';
 import { Loader2, AlertCircle, CheckCircle2, ChevronLeft, ChevronRight, Calendar, Search, MapPin, Car, Wrench, User, CreditCard, Shield, Cog, TrendingUp } from 'lucide-react';
 import { CTAButton } from './CTAButton';
-import { trackBookingConfirmation } from '@/lib/analytics';
+import {
+    trackBookingConfirmation,
+    trackBookingFunnelEvent,
+    trackSelectContent,
+} from '@/lib/analytics';
 import { getAttribution } from '@/lib/attribution';
 
 /* ---------- types ---------- */
@@ -318,7 +322,7 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
     const [prevStep, setPrevStep] = useState<1 | 2 | 3>(1);
     const availabilityConversionTracked = useRef(false);
     const slotConversionForIso = useRef<string | null>(null);
-
+    const lastBookingStepKey = useRef<string>('');
 
     // Derive step from state
     const currentStep: 1 | 2 | 3 = availability && !availability.manual_review_required
@@ -332,6 +336,32 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
             setPrevStep(currentStep);
         }
     }, [currentStep, prevStep]);
+
+    useEffect(() => {
+        trackBookingFunnelEvent('booking_start', { booking_step: 'scheduler_mount' });
+    }, []);
+
+    useEffect(() => {
+        const lead =
+            priceInfo?.total_gbp ??
+            availability?.fixed_price_gbp ??
+            undefined;
+        const stepKey = `${currentStep}|${subStep}|${selectedCategory ?? ''}|${booking.service_ids.join(',')}`;
+        if (lastBookingStepKey.current === stepKey) return;
+        lastBookingStepKey.current = stepKey;
+        trackBookingFunnelEvent('booking_step_view', {
+            booking_step: `step${currentStep}_${subStep}`,
+            service_interest: booking.service_ids[0],
+            lead_value: lead,
+        });
+    }, [
+        currentStep,
+        subStep,
+        selectedCategory,
+        booking.service_ids,
+        availability?.fixed_price_gbp,
+        priceInfo?.total_gbp,
+    ]);
 
     /* load services */
     useEffect(() => {
@@ -519,8 +549,30 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
             });
             const json = await response.json();
             if (!response.ok) throw new Error(json.detail || 'Booking failed');
-            trackBookingConfirmation(selectedCategory ?? undefined);
+            const primaryService = booking.service_ids[0] ?? 'general';
+            const leadVal = priceInfo?.total_gbp ?? availability?.fixed_price_gbp ?? undefined;
+            trackBookingFunnelEvent('booking_reserve_submit', {
+                booking_step: 'submit',
+                service_interest: primaryService,
+                lead_value: leadVal,
+            });
+            trackBookingConfirmation(primaryService, {
+                serviceInterest: primaryService,
+                leadValue: leadVal,
+                valueGbp: leadVal,
+            });
             if (json.status === 'pending_deposit' && json.payment_url) {
+                try {
+                    sessionStorage.setItem(
+                        'tripoint_payment_context',
+                        JSON.stringify({
+                            service_interest: booking.service_ids.join(','),
+                            lead_value_gbp: leadVal ?? null,
+                        }),
+                    );
+                } catch {
+                    /* ignore */
+                }
                 window.location.href = json.payment_url;
                 return;
             }
@@ -613,6 +665,11 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
                                             // Reset nested selections
                                             setBooking((p) => ({ ...p, service_ids: [] }));
                                             setSubStep('service');
+                                            trackSelectContent('service_category', cat.id);
+                                            trackBookingFunnelEvent('booking_service_select', {
+                                                booking_step: 'category_pick',
+                                                service_interest: cat.id,
+                                            });
                                         }}
                                         className="flex text-left items-start gap-4 rounded-xl border border-border-default bg-surface p-4 transition-all hover:border-brand/40 hover:bg-brand/5 hover:shadow-md group"
                                     >
@@ -675,7 +732,13 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
                                                         value={service.id}
                                                         checked={isSelected}
                                                         onChange={(e) => {
-                                                            setBooking((p) => ({ ...p, service_ids: [e.target.value] }));
+                                                            const id = e.target.value;
+                                                            setBooking((p) => ({ ...p, service_ids: [id] }));
+                                                            trackSelectContent('service', id);
+                                                            trackBookingFunnelEvent('booking_service_select', {
+                                                                booking_step: 'service_pick',
+                                                                service_interest: id,
+                                                            });
                                                         }}
                                                         className="h-4 w-4 border-border-default text-brand focus:ring-brand bg-surface"
                                                     />
@@ -732,6 +795,11 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
                                                         setServicingModel(model);
                                                         setSubStepDirection('forward');
                                                         setSubStep('brake-config');
+                                                        trackSelectContent('service', s.id);
+                                                        trackBookingFunnelEvent('booking_service_select', {
+                                                            booking_step: 'brake_model_pick',
+                                                            service_interest: s.id,
+                                                        });
                                                     }
                                                 }}
                                                 className="flex flex-col items-center justify-center gap-2 rounded-xl border border-border-default bg-surface p-4 transition-all hover:border-brand/40 hover:bg-brand/5 group"
@@ -1014,6 +1082,12 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
                                                 if (slotConversionForIso.current !== slot.iso) {
                                                     slotConversionForIso.current = slot.iso;
                                                 }
+                                                const lv = priceInfo?.total_gbp ?? availability?.fixed_price_gbp ?? undefined;
+                                                trackBookingFunnelEvent('booking_slot_select', {
+                                                    booking_step: 'time_slot',
+                                                    service_interest: booking.service_ids[0],
+                                                    lead_value: lv,
+                                                });
                                             }}
                                             title={!isAvailable ? 'Taken' : `Available - ${timeStr}`}
                                         >

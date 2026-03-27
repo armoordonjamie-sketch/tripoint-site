@@ -7,6 +7,7 @@ import { OptimizedImage } from '@/components/OptimizedImage';
 import { BookOpen, ArrowRight } from 'lucide-react';
 import { getBlogPost, getPostThumbnail } from '@/data/blogPosts';
 import { siteConfig } from '@/config/site';
+import { trackSelectContent } from '@/lib/analytics';
 
 function BlogHeroImage({ src, alt }: { src: string; alt: string }) {
     const isGallery = src.startsWith('/images/gallery/');
@@ -33,6 +34,16 @@ const serviceSlugToHref: Record<string, string> = {
     'van-economy-tune': '/services/van-economy-tune',
     'fleet-van-tuning': '/services/fleet-van-tuning',
 };
+
+function serviceHrefToContentId(href: string): string {
+    try {
+        const p = new URL(href, siteConfig.url).pathname;
+        const seg = p.match(/\/services\/([^/?]+)/);
+        return seg ? seg[1] : href;
+    } catch {
+        return href;
+    }
+}
 
 const serviceSlugToLabel: Record<string, string> = {
     'sprinter-limp-mode': 'Sprinter Limp Mode',
@@ -205,7 +216,14 @@ export function BlogPostPage() {
                             </p>
                             <div className="mt-4 flex flex-wrap gap-3">
                                 {relatedLinks.map((r) => (
-                                    <CTAButton key={r.href} href={r.href} variant="outline" size="sm" icon={<ArrowRight className="h-4 w-4" />}>
+                                    <CTAButton
+                                        key={r.href}
+                                        href={r.href}
+                                        variant="outline"
+                                        size="sm"
+                                        icon={<ArrowRight className="h-4 w-4" />}
+                                        onClick={() => trackSelectContent('blog_related_service', serviceHrefToContentId(r.href))}
+                                    >
                                         {r.label}
                                     </CTAButton>
                                 ))}
@@ -221,7 +239,11 @@ export function BlogPostPage() {
                             <ul className="mt-4 space-y-2">
                                 {relatedLinks.map((r) => (
                                     <li key={r.href}>
-                                        <Link to={r.href} className="text-sm text-brand hover:underline">
+                                        <Link
+                                            to={r.href}
+                                            className="text-sm text-brand hover:underline"
+                                            onClick={() => trackSelectContent('blog_related_service', serviceHrefToContentId(r.href))}
+                                        >
                                             {r.label} →
                                         </Link>
                                     </li>

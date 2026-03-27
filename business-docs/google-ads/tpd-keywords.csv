@@ -1,0 +1,414 @@
+Search keyword report
+All time
+Keyword status,Keyword,Match type,Campaign,Ad group,Status,Status reasons,Final URL,Impr.,CTR,Currency code,Cost,Clicks,Conv. rate,Conversions,Avg. CPC,Cost / conv.
+Enabled,[tripoint mercedes diagnostics],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Brand | TriPoint,Not eligible,rarely served; campaign removed,https://www.tripointdiagnostics.co.uk/booking,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter major service""",Phrase match,Search | Servicing & Brakes | Kent + SE London,Sprinter Servicing,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[tripointdiagnostics],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Brand | TriPoint,Not eligible,rarely served; campaign removed,https://www.tripointdiagnostics.co.uk/booking,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,mercedes van service,Broad match,Search | Servicing & Brakes | Kent + SE London,Mercedes Van Servicing & Brakes,Eligible,,,4,0.00%,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,sprinter service b,Broad match,Search | Servicing & Brakes | Kent + SE London,Sprinter Servicing,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""fault finding near me""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Intermittent Electrical | CAN Faults,Not eligible,campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[vehicle electrical diagnostics],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Intermittent Electrical | CAN Faults,Not eligible,campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""mobile auto electrician""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Intermittent Electrical | CAN Faults,Not eligible,campaign removed,,226,7.08%,GBP,39.03,16,0.00%,0.00,2.44,0.00
+Enabled,"""sprinter van service""",Phrase match,Search | Servicing & Brakes | Kent + SE London,Sprinter Servicing,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[auto electrician near me],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Intermittent Electrical | CAN Faults,Not eligible,low quality; campaign removed,,263,11.41%,GBP,72.26,30,0.00%,0.00,2.41,0.00
+Enabled,mobile mercedes servicing,Broad match,Search | Servicing & Brakes | Kent + SE London,Mercedes Van Servicing & Brakes,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,mobile sprinter service,Broad match,Search | Servicing & Brakes | Kent + SE London,Sprinter Servicing,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,van brakes near me,Broad match,Search | Servicing & Brakes | Kent + SE London,Mercedes Van Servicing & Brakes,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""tripoint diagnostics booking""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Brand | TriPoint,Not eligible,rarely served; campaign removed,https://www.tripointdiagnostics.co.uk/booking,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter wiring fault""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Intermittent Electrical | CAN Faults,Not eligible,rarely served; campaign removed,https://www.tripointdiagnostics.co.uk/services/intermittent-electrical-faults,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[mobile mercedes van service],Exact match,Search | Servicing & Brakes | Kent + SE London,Mercedes Van Servicing & Brakes,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter can fault""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Intermittent Electrical | CAN Faults,Not eligible,campaign removed,https://www.tripointdiagnostics.co.uk/services/intermittent-electrical-faults,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,sprinter service near me,Broad match,Search | Servicing & Brakes | Kent + SE London,Sprinter Servicing,Eligible,,,8,12.50%,GBP,1.71,1,0.00%,0.00,1.71,0.00
+Enabled,mercedes commercial vehicle service,Broad match,Search | Servicing & Brakes | Kent + SE London,Mercedes Van Servicing & Brakes,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,mercedes sprinter service,Broad match,Search | Servicing & Brakes | Kent + SE London,Sprinter Servicing,Eligible,,,46,6.52%,GBP,12.41,3,100.00%,3.00,4.14,4.14
+Removed,"""mercedes van service""",Phrase match,Search | Servicing & Brakes | Kent + SE London,Mercedes Van Servicing & Brakes,Removed,removed,,3,0.00%,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter oil service""",Phrase match,Search | Servicing & Brakes | Kent + SE London,Sprinter Servicing,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""tripoint diagnostics""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Brand | TriPoint,Not eligible,campaign removed,https://www.tripointdiagnostics.co.uk/booking,3,0.00%,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter service cost""",Phrase match,Search | Servicing & Brakes | Kent + SE London,Sprinter Servicing,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter communication fault""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Intermittent Electrical | CAN Faults,Not eligible,rarely served; campaign removed,https://www.tripointdiagnostics.co.uk/services/intermittent-electrical-faults,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""tripoint diagnostics ltd""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Brand | TriPoint,Not eligible,campaign removed,https://www.tripointdiagnostics.co.uk/booking,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[sprinter communication fault],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Intermittent Electrical | CAN Faults,Not eligible,rarely served; campaign removed,https://www.tripointdiagnostics.co.uk/services/intermittent-electrical-faults,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""mobile mercedes van service""",Phrase match,Search | Servicing & Brakes | Kent + SE London,Mercedes Van Servicing & Brakes,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[sprinter intermittent fault],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Intermittent Electrical | CAN Faults,Not eligible,rarely served; campaign removed,https://www.tripointdiagnostics.co.uk/services/intermittent-electrical-faults,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,mobile van service near me,Broad match,Search | Servicing & Brakes | Kent + SE London,Mercedes Van Servicing & Brakes,Eligible,,,4,0.00%,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter canbus fault""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Intermittent Electrical | CAN Faults,Not eligible,rarely served; campaign removed,https://www.tripointdiagnostics.co.uk/services/intermittent-electrical-faults,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[tripoint diagnostics booking],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Brand | TriPoint,Not eligible,rarely served; campaign removed,https://www.tripointdiagnostics.co.uk/booking,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""auto electrician near me""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Intermittent Electrical | CAN Faults,Not eligible,low quality; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,sprinter service a,Broad match,Search | Servicing & Brakes | Kent + SE London,Sprinter Servicing,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Removed,[sprinter service near me],Exact match,Search | Servicing & Brakes | Kent + SE London,Sprinter Servicing,Removed,removed,,4,0.00%,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""mercedes van brake pads""",Phrase match,Search | Servicing & Brakes | Kent + SE London,Mercedes Van Servicing & Brakes,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[mobile sprinter service],Exact match,Search | Servicing & Brakes | Kent + SE London,Sprinter Servicing,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter electrical fault""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Intermittent Electrical | CAN Faults,Not eligible,campaign removed,https://www.tripointdiagnostics.co.uk/services/intermittent-electrical-faults,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[sprinter wiring fault diagnosis],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Intermittent Electrical | CAN Faults,Not eligible,rarely served; campaign removed,https://www.tripointdiagnostics.co.uk/services/intermittent-electrical-faults,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,mercedes van brakes,Broad match,Search | Servicing & Brakes | Kent + SE London,Mercedes Van Servicing & Brakes,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[vito electrical fault diagnosis],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Intermittent Electrical | CAN Faults,Not eligible,rarely served; campaign removed,https://www.tripointdiagnostics.co.uk/services/intermittent-electrical-faults,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""vito electrical fault""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Intermittent Electrical | CAN Faults,Not eligible,rarely served; campaign removed,https://www.tripointdiagnostics.co.uk/services/intermittent-electrical-faults,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[tripoint diagnostics ltd],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Brand | TriPoint,Not eligible,campaign removed,https://www.tripointdiagnostics.co.uk/booking,1,0.00%,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[sprinter can fault],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Intermittent Electrical | CAN Faults,Not eligible,campaign removed,https://www.tripointdiagnostics.co.uk/services/intermittent-electrical-faults,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter intermittent fault""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Intermittent Electrical | CAN Faults,Not eligible,rarely served; campaign removed,https://www.tripointdiagnostics.co.uk/services/intermittent-electrical-faults,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,mobile mercedes van service,Broad match,Search | Servicing & Brakes | Kent + SE London,Mercedes Van Servicing & Brakes,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[mobile auto electrician],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Intermittent Electrical | CAN Faults,Not eligible,campaign removed,,107,13.08%,GBP,34.12,14,0.00%,0.00,2.44,0.00
+Enabled,[tripoint diagnostics],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Brand | TriPoint,Not eligible,campaign removed,https://www.tripointdiagnostics.co.uk/booking,21,0.00%,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,sprinter servicing,Broad match,Search | Servicing & Brakes | Kent + SE London,Sprinter Servicing,Eligible,,,16,0.00%,GBP,0.00,0,0.00%,0.00,0,0.00
+Removed,[sprinter servicing],Exact match,Search | Servicing & Brakes | Kent + SE London,Sprinter Servicing,Removed,removed,,2,0.00%,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[sprinter electrical fault diagnosis],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Intermittent Electrical | CAN Faults,Not eligible,rarely served; campaign removed,https://www.tripointdiagnostics.co.uk/services/intermittent-electrical-faults,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Removed,"""vehicle electrical diagnostics""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Intermittent Electrical | CAN Faults,Removed,removed; campaign removed,,126,9.52%,GBP,29.87,12,0.00%,0.00,2.49,0.00
+Enabled,"""mobile mercedes sprinter service""",Phrase match,Search | Servicing & Brakes | Kent + SE London,Sprinter Servicing,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[sprinter canbus fault],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Intermittent Electrical | CAN Faults,Not eligible,rarely served; campaign removed,https://www.tripointdiagnostics.co.uk/services/intermittent-electrical-faults,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""mobile mercedes servicing""",Phrase match,Search | Servicing & Brakes | Kent + SE London,Mercedes Van Servicing & Brakes,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,van servicing near me,Broad match,Search | Servicing & Brakes | Kent + SE London,Mercedes Van Servicing & Brakes,Eligible,,,4,0.00%,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""mercedes van service near me""",Phrase match,Search | Servicing & Brakes | Kent + SE London,Mercedes Van Servicing & Brakes,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[fault finding near me],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Intermittent Electrical | CAN Faults,Not eligible,campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Paused,[sprinter dpf regeneration],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Emissions Diagnostics | AdBlue/SCR/DPF,Paused,paused; campaign removed,https://www.tripointdiagnostics.co.uk/services/emissions-diagnostics,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Paused,[sprinter scr fault],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Emissions Diagnostics | AdBlue/SCR/DPF,Paused,paused; rarely served; campaign removed,https://www.tripointdiagnostics.co.uk/services/emissions-diagnostics,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Paused,[sprinter emissions fault],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Emissions Diagnostics | AdBlue/SCR/DPF,Paused,paused; rarely served; campaign removed,https://www.tripointdiagnostics.co.uk/services/emissions-diagnostics,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""w420 citan service""",Phrase match,Search | Servicing & Brakes | Kent + SE London,Citan Servicing,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Paused,[sprinter nox sensor fault],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Emissions Diagnostics | AdBlue/SCR/DPF,Paused,paused; campaign removed,https://www.tripointdiagnostics.co.uk/services/emissions-diagnostics,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Paused,[vito adblue fault],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Emissions Diagnostics | AdBlue/SCR/DPF,Paused,paused; campaign removed,https://www.tripointdiagnostics.co.uk/services/emissions-diagnostics,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Paused,"""sprinter dpf regen""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Emissions Diagnostics | AdBlue/SCR/DPF,Paused,paused; campaign removed,https://www.tripointdiagnostics.co.uk/services/emissions-diagnostics,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Paused,"""vito adblue fault""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Emissions Diagnostics | AdBlue/SCR/DPF,Paused,paused; campaign removed,https://www.tripointdiagnostics.co.uk/services/emissions-diagnostics,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,mercedes citan service,Broad match,Search | Servicing & Brakes | Kent + SE London,Citan Servicing,Eligible,,,2,0.00%,GBP,0.00,0,0.00%,0.00,0,0.00
+Paused,"""sprinter nox fault""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Emissions Diagnostics | AdBlue/SCR/DPF,Paused,paused; campaign removed,https://www.tripointdiagnostics.co.uk/services/emissions-diagnostics,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Paused,"""sprinter adblue countdown""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Emissions Diagnostics | AdBlue/SCR/DPF,Paused,paused; campaign removed,https://www.tripointdiagnostics.co.uk/services/emissions-diagnostics,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Paused,[sprinter dpf regen],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Emissions Diagnostics | AdBlue/SCR/DPF,Paused,paused; campaign removed,https://www.tripointdiagnostics.co.uk/services/emissions-diagnostics,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Paused,"""mercedes van emissions fault""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Emissions Diagnostics | AdBlue/SCR/DPF,Paused,paused; rarely served; campaign removed,https://www.tripointdiagnostics.co.uk/services/emissions-diagnostics,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Paused,"""sprinter scr fault""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Emissions Diagnostics | AdBlue/SCR/DPF,Paused,paused; rarely served; campaign removed,https://www.tripointdiagnostics.co.uk/services/emissions-diagnostics,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Paused,[sprinter adblue countdown],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Emissions Diagnostics | AdBlue/SCR/DPF,Paused,paused; campaign removed,https://www.tripointdiagnostics.co.uk/services/emissions-diagnostics,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""mercedes coding""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Xentry / SCN / Module Coding,Not eligible,campaign removed,,77,9.09%,GBP,16.44,7,0.00%,0.00,2.35,0.00
+Enabled,[citan brake discs],Exact match,Search | Servicing & Brakes | Kent + SE London,Citan Brakes,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""mercedes programming and coding""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Xentry / SCN / Module Coding,Not eligible,campaign removed,https://www.tripointdiagnostics.co.uk/services/mercedes-xentry-diagnostics-coding,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""xentry diagnostics""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Xentry / SCN / Module Coding,Not eligible,campaign removed,,12,8.33%,GBP,2.33,1,0.00%,0.00,2.33,0.00
+Enabled,"""sprinter brake replacement""",Phrase match,Search | Servicing & Brakes | Kent + SE London,Sprinter Brakes,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,citan brake discs,Broad match,Search | Servicing & Brakes | Kent + SE London,Citan Brakes,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[mercedes module coding],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Xentry / SCN / Module Coding,Not eligible,campaign removed,https://www.tripointdiagnostics.co.uk/services/mercedes-xentry-diagnostics-coding,2,0.00%,GBP,0.00,0,0.00%,0.00,0,0.00
+Removed,[sprinter brake discs],Exact match,Search | Servicing & Brakes | Kent + SE London,Sprinter Brakes,Removed,removed,,1,0.00%,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,sprinter brake discs,Broad match,Search | Servicing & Brakes | Kent + SE London,Sprinter Brakes,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[mercedes coding],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Xentry / SCN / Module Coding,Not eligible,campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""star coding""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Xentry / SCN / Module Coding,Not eligible,campaign removed,https://www.tripointdiagnostics.co.uk/services/mercedes-xentry-diagnostics-coding,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter brake repair""",Phrase match,Search | Servicing & Brakes | Kent + SE London,Sprinter Brakes,Eligible,,,1,0.00%,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""star diagnosis""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Xentry / SCN / Module Coding,Not eligible,campaign removed,,1,0.00%,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[citan brake pads],Exact match,Search | Servicing & Brakes | Kent + SE London,Citan Brakes,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter front brake discs""",Phrase match,Search | Servicing & Brakes | Kent + SE London,Sprinter Brakes,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter front brake pads""",Phrase match,Search | Servicing & Brakes | Kent + SE London,Sprinter Brakes,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter rear brake pads""",Phrase match,Search | Servicing & Brakes | Kent + SE London,Sprinter Brakes,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,citan brake pads,Broad match,Search | Servicing & Brakes | Kent + SE London,Citan Brakes,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,sprinter brake pads,Broad match,Search | Servicing & Brakes | Kent + SE London,Sprinter Brakes,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,sprinter brakes,Broad match,Search | Servicing & Brakes | Kent + SE London,Sprinter Brakes,Eligible,,,1,0.00%,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[mercedes variant coding],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Xentry / SCN / Module Coding,Not eligible,campaign removed,https://www.tripointdiagnostics.co.uk/services/mercedes-xentry-diagnostics-coding,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""xentry coding""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Xentry / SCN / Module Coding,Not eligible,campaign removed,https://www.tripointdiagnostics.co.uk/services/mercedes-xentry-diagnostics-coding,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[scn coding],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Xentry / SCN / Module Coding,Not eligible,campaign removed,https://www.tripointdiagnostics.co.uk/services/mercedes-xentry-diagnostics-coding,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""variant coding sprinter""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Xentry / SCN / Module Coding,Not eligible,campaign removed,https://www.tripointdiagnostics.co.uk/services/mercedes-xentry-diagnostics-coding,2,0.00%,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[xentry diagnostics],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Xentry / SCN / Module Coding,Not eligible,campaign removed,,30,3.33%,GBP,1.95,1,0.00%,0.00,1.95,0.00
+Enabled,[sprinter module coding],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Xentry / SCN / Module Coding,Not eligible,rarely served; campaign removed,https://www.tripointdiagnostics.co.uk/services/mercedes-xentry-diagnostics-coding,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[mercedes coding and adaptations],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Xentry / SCN / Module Coding,Not eligible,rarely served; campaign removed,https://www.tripointdiagnostics.co.uk/services/mercedes-xentry-diagnostics-coding,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[mercedes sprinter brake service],Exact match,Search | Servicing & Brakes | Kent + SE London,Sprinter Brakes,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter brake pads and discs""",Phrase match,Search | Servicing & Brakes | Kent + SE London,Sprinter Brakes,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[xentry coding],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Xentry / SCN / Module Coding,Not eligible,campaign removed,https://www.tripointdiagnostics.co.uk/services/mercedes-xentry-diagnostics-coding,2,0.00%,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[sprinter scn coding],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Xentry / SCN / Module Coding,Not eligible,campaign removed,https://www.tripointdiagnostics.co.uk/services/mercedes-xentry-diagnostics-coding,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""w906 sprinter brakes""",Phrase match,Search | Servicing & Brakes | Kent + SE London,Sprinter Brakes,Not eligible,rarely served,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[star diagnosis],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Xentry / SCN / Module Coding,Not eligible,campaign removed,,10,10.00%,GBP,2.41,1,0.00%,0.00,2.41,0.00
+Enabled,"""sprinter control unit coding""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Xentry / SCN / Module Coding,Not eligible,rarely served; campaign removed,https://www.tripointdiagnostics.co.uk/services/mercedes-xentry-diagnostics-coding,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""scn coding sprinter""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Xentry / SCN / Module Coding,Not eligible,campaign removed,https://www.tripointdiagnostics.co.uk/services/mercedes-xentry-diagnostics-coding,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""mercedes module coding""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Xentry / SCN / Module Coding,Not eligible,campaign removed,https://www.tripointdiagnostics.co.uk/services/mercedes-xentry-diagnostics-coding,2,50.00%,GBP,2.02,1,0.00%,0.00,2.02,0.00
+Enabled,[star diagnosis coding],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Xentry / SCN / Module Coding,Not eligible,rarely served; campaign removed,https://www.tripointdiagnostics.co.uk/services/mercedes-xentry-diagnostics-coding,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[sprinter turbo actuator fault],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Sprinter Limp Mode | Reduced Power,Not eligible,campaign removed,https://www.tripointdiagnostics.co.uk/services/sprinter-limp-mode,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""mobile sprinter diagnostics""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Mercedes Vans | Diagnostics (Core),Not eligible,rarely served; campaign removed,https://www.tripointdiagnostics.co.uk/services/mercedes-xentry-diagnostics-coding,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[vito reduced power],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Sprinter Limp Mode | Reduced Power,Not eligible,rarely served; campaign removed,https://www.tripointdiagnostics.co.uk/services/sprinter-limp-mode,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[mercedes van diagnostics],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Mercedes Vans | Diagnostics (Core),Not eligible,campaign removed,https://www.tripointdiagnostics.co.uk/services/mercedes-xentry-diagnostics-coding,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[loss of power diagnosis],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Sprinter Limp Mode | Reduced Power,Not eligible,campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[sprinter limp mode],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Sprinter Limp Mode | Reduced Power,Not eligible,campaign removed,https://www.tripointdiagnostics.co.uk/services/sprinter-limp-mode,2,0.00%,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[van limp mode],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Sprinter Limp Mode | Reduced Power,Not eligible,campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""turbo fault diagnosis""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Sprinter Limp Mode | Reduced Power,Not eligible,campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,vito brake discs,Broad match,Search | Servicing & Brakes | Kent + SE London,Vito Brakes,Eligible,,,4,0.00%,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""mobile mercedes diagnostics""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Mercedes Vans | Diagnostics (Core),Not eligible,campaign removed,https://www.tripointdiagnostics.co.uk/services/mercedes-xentry-diagnostics-coding,24,16.67%,GBP,8.89,4,0.00%,0.00,2.22,0.00
+Enabled,[turbo fault diagnosis],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Sprinter Limp Mode | Reduced Power,Not eligible,campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter engine power reduced""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Sprinter Limp Mode | Reduced Power,Not eligible,campaign removed,https://www.tripointdiagnostics.co.uk/services/sprinter-limp-mode,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[vito limp mode],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Sprinter Limp Mode | Reduced Power,Not eligible,campaign removed,https://www.tripointdiagnostics.co.uk/services/sprinter-limp-mode,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[sprinter loss of power],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Sprinter Limp Mode | Reduced Power,Not eligible,campaign removed,https://www.tripointdiagnostics.co.uk/services/sprinter-limp-mode,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[mercedes diagnostics near me],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Mercedes Vans | Diagnostics (Core),Not eligible,campaign removed,,11,0.00%,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter no boost""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Sprinter Limp Mode | Reduced Power,Not eligible,campaign removed,https://www.tripointdiagnostics.co.uk/services/sprinter-limp-mode,3,0.00%,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""engine diagnostics near me""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Mercedes Vans | Diagnostics (Core),Not eligible,campaign removed,,25,20.00%,GBP,13.12,5,0.00%,0.00,2.62,0.00
+Enabled,[engine diagnostics near me],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Mercedes Vans | Diagnostics (Core),Not eligible,campaign removed,,39,5.13%,GBP,4.20,2,0.00%,0.00,2.10,0.00
+Enabled,"""mercedes sprinter diagnostics""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Mercedes Vans | Diagnostics (Core),Not eligible,campaign removed,https://www.tripointdiagnostics.co.uk/services/mercedes-xentry-diagnostics-coding,28,3.57%,GBP,3.44,1,0.00%,0.00,3.44,0.00
+Enabled,"""vito brake pads and discs""",Phrase match,Search | Servicing & Brakes | Kent + SE London,Vito Brakes,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[sprinter engine power reduced],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Sprinter Limp Mode | Reduced Power,Not eligible,campaign removed,https://www.tripointdiagnostics.co.uk/services/sprinter-limp-mode,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter fault finding""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Mercedes Vans | Diagnostics (Core),Not eligible,rarely served; campaign removed,https://www.tripointdiagnostics.co.uk/services/mercedes-xentry-diagnostics-coding,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[sprinter no boost],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Sprinter Limp Mode | Reduced Power,Not eligible,campaign removed,https://www.tripointdiagnostics.co.uk/services/sprinter-limp-mode,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""w447 vito brakes""",Phrase match,Search | Servicing & Brakes | Kent + SE London,Vito Brakes,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[sprinter diagnostics near me],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Mercedes Vans | Diagnostics (Core),Not eligible,campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[vito diagnostics],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Mercedes Vans | Diagnostics (Core),Not eligible,campaign removed,https://www.tripointdiagnostics.co.uk/services/mercedes-xentry-diagnostics-coding,1,0.00%,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""vito front brake pads""",Phrase match,Search | Servicing & Brakes | Kent + SE London,Vito Brakes,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter diagnostic""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Mercedes Vans | Diagnostics (Core),Not eligible,campaign removed,https://www.tripointdiagnostics.co.uk/services/mercedes-xentry-diagnostics-coding,1,0.00%,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""loss of power diagnosis""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Sprinter Limp Mode | Reduced Power,Not eligible,campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter no turbo""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Sprinter Limp Mode | Reduced Power,Not eligible,campaign removed,https://www.tripointdiagnostics.co.uk/services/sprinter-limp-mode,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""mercedes van diagnostics""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Mercedes Vans | Diagnostics (Core),Not eligible,campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[vito fault code diagnosis],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Mercedes Vans | Diagnostics (Core),Not eligible,rarely served; campaign removed,https://www.tripointdiagnostics.co.uk/services/mercedes-xentry-diagnostics-coding,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[sprinter fault code diagnosis],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Mercedes Vans | Diagnostics (Core),Not eligible,rarely served; campaign removed,https://www.tripointdiagnostics.co.uk/services/mercedes-xentry-diagnostics-coding,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[sprinter diagnostics],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Mercedes Vans | Diagnostics (Core),Not eligible,campaign removed,https://www.tripointdiagnostics.co.uk/services/mercedes-xentry-diagnostics-coding,4,0.00%,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[mercedes sprinter diagnostics],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Mercedes Vans | Diagnostics (Core),Not eligible,campaign removed,https://www.tripointdiagnostics.co.uk/services/mercedes-xentry-diagnostics-coding,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""vito brake replacement""",Phrase match,Search | Servicing & Brakes | Kent + SE London,Vito Brakes,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[mobile mercedes diagnostics],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Mercedes Vans | Diagnostics (Core),Not eligible,campaign removed,https://www.tripointdiagnostics.co.uk/services/mercedes-xentry-diagnostics-coding,11,0.00%,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""mercedes vito diagnostics""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Mercedes Vans | Diagnostics (Core),Not eligible,campaign removed,https://www.tripointdiagnostics.co.uk/services/mercedes-xentry-diagnostics-coding,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""mercedes diagnostics near me""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Mercedes Vans | Diagnostics (Core),Not eligible,campaign removed,,2,0.00%,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""vehicle diagnostics near me""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Mercedes Vans | Diagnostics (Core),Not eligible,campaign removed,,73,8.22%,GBP,13.54,6,0.00%,0.00,2.26,0.00
+Enabled,"""vito front brake discs""",Phrase match,Search | Servicing & Brakes | Kent + SE London,Vito Brakes,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""vito diagnostics near me""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Mercedes Vans | Diagnostics (Core),Not eligible,rarely served; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[sprinter reduced power],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Sprinter Limp Mode | Reduced Power,Not eligible,campaign removed,https://www.tripointdiagnostics.co.uk/services/sprinter-limp-mode,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""w639 vito brakes""",Phrase match,Search | Servicing & Brakes | Kent + SE London,Vito Brakes,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter reduced power""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Sprinter Limp Mode | Reduced Power,Not eligible,campaign removed,https://www.tripointdiagnostics.co.uk/services/sprinter-limp-mode,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter limp mode""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Sprinter Limp Mode | Reduced Power,Not eligible,campaign removed,https://www.tripointdiagnostics.co.uk/services/sprinter-limp-mode,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[mercedes van fault finding],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Mercedes Vans | Diagnostics (Core),Not eligible,rarely served; campaign removed,https://www.tripointdiagnostics.co.uk/services/mercedes-xentry-diagnostics-coding,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""mercedes van diagnostics mobile""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Mercedes Vans | Diagnostics (Core),Not eligible,rarely served; campaign removed,https://www.tripointdiagnostics.co.uk/services/mercedes-xentry-diagnostics-coding,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter loss of power""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Sprinter Limp Mode | Reduced Power,Not eligible,campaign removed,https://www.tripointdiagnostics.co.uk/services/sprinter-limp-mode,3,0.00%,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,vito brakes,Broad match,Search | Servicing & Brakes | Kent + SE London,Vito Brakes,Eligible,,,1,0.00%,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[vehicle diagnostics near me],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Mercedes Vans | Diagnostics (Core),Not eligible,campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""vito rear brake pads""",Phrase match,Search | Servicing & Brakes | Kent + SE London,Vito Brakes,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""vito fault finding""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Mercedes Vans | Diagnostics (Core),Not eligible,rarely served; campaign removed,https://www.tripointdiagnostics.co.uk/services/mercedes-xentry-diagnostics-coding,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,diesel van remap,Broad match,Search | Tuning | Commercial Vans | Kent + SE London,Fleet Van Tuning,Eligible,,,9,0.00%,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,mobile van tuning,Broad match,Search | Tuning | Commercial Vans | Kent + SE London,Van Economy Tune,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,vito van tuning,Broad match,Search | Tuning | Commercial Vans | Kent + SE London,Van Economy Tune,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,sprinter van remap,Broad match,Search | Tuning | Commercial Vans | Kent + SE London,Van Economy Tune,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,stage 1 tuning,Broad match,Search | Tuning | Commercial Vans | Kent + SE London,Van Economy Tune,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,mobile van remap,Broad match,Search | Tuning | Commercial Vans | Kent + SE London,Van Economy Tune,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,van remap near me,Broad match,Search | Tuning | Commercial Vans | Kent + SE London,Van Economy Tune,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,van remap,Broad match,Search | Tuning | Commercial Vans | Kent + SE London,Van Economy Tune,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,transit van tuning,Broad match,Search | Tuning | Commercial Vans | Kent + SE London,Van Economy Tune,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,sprinter van tuning,Broad match,Search | Tuning | Commercial Vans | Kent + SE London,Van Economy Tune,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,stage 1 remap,Broad match,Search | Tuning | Commercial Vans | Kent + SE London,Van Economy Tune,Eligible,,,3,0.00%,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,engine remap,Broad match,Search | Tuning | Commercial Vans | Kent + SE London,Van Economy Tune,Eligible,,,18,0.00%,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,van tuning,Broad match,Search | Tuning | Commercial Vans | Kent + SE London,Van Economy Tune,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,mobile remap,Broad match,Search | Tuning | Commercial Vans | Kent + SE London,Van Economy Tune,Eligible,,,3,0.00%,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,van tuning near me,Broad match,Search | Tuning | Commercial Vans | Kent + SE London,Van Economy Tune,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,stage 1 van remap,Broad match,Search | Tuning | Commercial Vans | Kent + SE London,Van Economy Tune,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,diesel remap,Broad match,Search | Tuning | Commercial Vans | Kent + SE London,Van Economy Tune,Eligible,,,6,16.67%,GBP,2.71,1,0.00%,0.00,2.71,0.00
+Enabled,remap near me,Broad match,Search | Tuning | Commercial Vans | Kent + SE London,Van Economy Tune,Eligible,,,13,0.00%,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,ecu remap,Broad match,Search | Tuning | Commercial Vans | Kent + SE London,Van Economy Tune,Eligible,,,10,10.00%,GBP,0.64,1,0.00%,0.00,0.64,0.00
+Enabled,[sprinter scn coding],Exact match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter van diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[sprinter van diagnostics],Exact match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""w907 sprinter diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,rarely served; ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter wont rev""",Phrase match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,rarely served; ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[star diagnosis sprinter],Exact match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""mercedes van diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[mobile sprinter diagnostics],Exact match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,rarely served; ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[mercedes van diagnostics],Exact match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter diagnostics kent""",Phrase match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,rarely served; ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter engine light""",Phrase match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[sprinter warning lights],Exact match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""mobile mercedes van diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,rarely served; ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[sprinter diagnostics],Exact match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter dpf light""",Phrase match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[sprinter diagnostics kent],Exact match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,rarely served; ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[sprinter reduced power],Exact match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,rarely served; ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[sprinter limp mode],Exact match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter module coding""",Phrase match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter reduced power""",Phrase match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,rarely served; ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[sprinter regeneration],Exact match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""mercedes sprinter diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[sprinter dpf light],Exact match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[sprinter turbo underboost],Exact match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[sprinter wont rev],Exact match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,rarely served; ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[w907 sprinter diagnostics],Exact match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,rarely served; ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""w910 sprinter diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,rarely served; ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter turbo underboost""",Phrase match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[sprinter boost leak],Exact match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[sprinter module coding],Exact match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[sprinter diagnostics london],Exact match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,rarely served; ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[mobile mercedes van diagnostics],Exact match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,rarely served; ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter boost leak""",Phrase match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter diagnostics london""",Phrase match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,rarely served; ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[sprinter loss of power],Exact match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[mercedes sprinter diagnostics],Exact match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter warning lights""",Phrase match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[xentry diagnostics sprinter],Exact match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,rarely served; ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""xentry diagnostics sprinter""",Phrase match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,rarely served; ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[w906 sprinter diagnostics],Exact match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,rarely served; ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""star diagnosis sprinter""",Phrase match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter limp mode""",Phrase match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter egr fault""",Phrase match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,rarely served; ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[w910 sprinter diagnostics],Exact match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,rarely served; ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[sprinter engine light],Exact match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""w906 sprinter diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,rarely served; ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter loss of power""",Phrase match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter fault finding""",Phrase match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,rarely served; ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[sprinter egr fault],Exact match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,rarely served; ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter scn coding""",Phrase match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter regeneration""",Phrase match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""mobile sprinter diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,rarely served; ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[sprinter fault finding],Exact match,VOR & Mercedes Van Diagnostics,Mercedes Sprinter Diagnostics (General),Not eligible,rarely served; ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[van tuning],Exact match,Search | Tuning | Commercial Vans | Kent + SE London,Van Load & Driveability Tune,Eligible,,,3,0.00%,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,transit van remap,Broad match,Search | Tuning | Commercial Vans | Kent + SE London,Van Load & Driveability Tune,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[van remap],Exact match,Search | Tuning | Commercial Vans | Kent + SE London,Van Load & Driveability Tune,Eligible,,,2,0.00%,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,trafic van tuning,Broad match,Search | Tuning | Commercial Vans | Kent + SE London,Van Load & Driveability Tune,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,vito van tuning,Broad match,Search | Tuning | Commercial Vans | Kent + SE London,Van Load & Driveability Tune,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,sprinter van remap,Broad match,Search | Tuning | Commercial Vans | Kent + SE London,Van Load & Driveability Tune,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,sprinter van tuning,Broad match,Search | Tuning | Commercial Vans | Kent + SE London,Van Load & Driveability Tune,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,transit van tuning,Broad match,Search | Tuning | Commercial Vans | Kent + SE London,Van Load & Driveability Tune,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[sprinter van remap],Exact match,Search | Tuning | Commercial Vans | Kent + SE London,Van Load & Driveability Tune,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""module diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter van diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""mobile mercedes diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""w910 sprinter diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,rarely served; ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""mercedes sprinter diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""can bus diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""vito limp mode""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Sprinter Limp Mode | Reduced Power,Not eligible,campaign removed,https://www.tripointdiagnostics.co.uk/services/sprinter-limp-mode,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter diagnostics near me""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Mercedes Vans | Diagnostics (Core),Not eligible,campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[mercedes vito diagnostics],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Mercedes Vans | Diagnostics (Core),Not eligible,campaign removed,https://www.tripointdiagnostics.co.uk/services/mercedes-xentry-diagnostics-coding,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""van limp mode""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,Sprinter Limp Mode | Reduced Power,Not eligible,campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,vito brake pads,Broad match,Search | Servicing & Brakes | Kent + SE London,Vito Brakes,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[vito diagnostics near me],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,Mercedes Vans | Diagnostics (Core),Not eligible,rarely served; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[sprinter breakdown diagnostics],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,VOR | Urgent Triage,Not eligible,rarely served; campaign removed,https://www.tripointdiagnostics.co.uk/services/vor-van-diagnostics,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[vito wont start],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,VOR | Urgent Triage,Not eligible,campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,vito servicing,Broad match,Search | Servicing & Brakes | Kent + SE London,Vito Servicing,Eligible,,,1,0.00%,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[van cranks but wont start],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,VOR | Urgent Triage,Not eligible,campaign removed,,2,0.00%,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[van wont start],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,VOR | Urgent Triage,Not eligible,campaign removed,,5,20.00%,GBP,2.49,1,0.00%,0.00,2.49,0.00
+Enabled,"""vito wont start""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,VOR | Urgent Triage,Not eligible,campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[urgent sprinter diagnostics],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,VOR | Urgent Triage,Not eligible,rarely served; campaign removed,https://www.tripointdiagnostics.co.uk/services/vor-van-diagnostics,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,mobile vito service,Broad match,Search | Servicing & Brakes | Kent + SE London,Vito Servicing,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""urgent sprinter diagnostics""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,VOR | Urgent Triage,Not eligible,rarely served; campaign removed,https://www.tripointdiagnostics.co.uk/services/vor-van-diagnostics,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""w639 vito service""",Phrase match,Search | Servicing & Brakes | Kent + SE London,Vito Servicing,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[mobile sprinter diagnostics],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,VOR | Urgent Triage,Not eligible,rarely served; campaign removed,https://www.tripointdiagnostics.co.uk/services/vor-van-diagnostics,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""vito van service""",Phrase match,Search | Servicing & Brakes | Kent + SE London,Vito Servicing,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""van cranks but wont start""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,VOR | Urgent Triage,Not eligible,campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[mobile vito service],Exact match,Search | Servicing & Brakes | Kent + SE London,Vito Servicing,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[same day sprinter diagnostics],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,VOR | Urgent Triage,Not eligible,rarely served; campaign removed,https://www.tripointdiagnostics.co.uk/services/vor-van-diagnostics,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[sprinter breakdown diagnosis],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,VOR | Urgent Triage,Not eligible,rarely served; campaign removed,https://www.tripointdiagnostics.co.uk/services/vor-van-diagnostics,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[van not starting],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,VOR | Urgent Triage,Not eligible,campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter roadside diagnosis""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,VOR | Urgent Triage,Not eligible,rarely served; campaign removed,https://www.tripointdiagnostics.co.uk/services/vor-van-diagnostics,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""w447 vito service""",Phrase match,Search | Servicing & Brakes | Kent + SE London,Vito Servicing,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter breakdown diagnosis""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,VOR | Urgent Triage,Not eligible,rarely served; campaign removed,https://www.tripointdiagnostics.co.uk/services/vor-van-diagnostics,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""mobile mercedes vito service""",Phrase match,Search | Servicing & Brakes | Kent + SE London,Vito Servicing,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[sprinter wont start],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,VOR | Urgent Triage,Not eligible,campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""vor van diagnostics""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,VOR | Urgent Triage,Not eligible,rarely served; campaign removed,https://www.tripointdiagnostics.co.uk/services/vor-van-diagnostics,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""vito oil service""",Phrase match,Search | Servicing & Brakes | Kent + SE London,Vito Servicing,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter wont start""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,VOR | Urgent Triage,Not eligible,campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""same day sprinter diagnostics""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,VOR | Urgent Triage,Not eligible,rarely served; campaign removed,https://www.tripointdiagnostics.co.uk/services/vor-van-diagnostics,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,vito service near me,Broad match,Search | Servicing & Brakes | Kent + SE London,Vito Servicing,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""van wont start""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,VOR | Urgent Triage,Not eligible,campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,[vor van diagnostics],Exact match,TriPoint | Search | Mercedes Vans | Kent + SE London,VOR | Urgent Triage,Not eligible,rarely served; campaign removed,https://www.tripointdiagnostics.co.uk/services/vor-van-diagnostics,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,mercedes vito service,Broad match,Search | Servicing & Brakes | Kent + SE London,Vito Servicing,Eligible,,,25,0.00%,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""van not starting""",Phrase match,TriPoint | Search | Mercedes Vans | Kent + SE London,VOR | Urgent Triage,Not eligible,campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""vor diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,rarely served; ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""star diagnosis""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter fault finding""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,rarely served; ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter reduced power""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,rarely served; ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""engine light diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""ecu diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""on site diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""van diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter nox sensor fault""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""intermittent fault diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,rarely served; ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""mercedes van diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter dpf light""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""roadside diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter engine light""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""dealer level diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""mercedes xentry diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""fleet diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""vehicle diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter adblue warning""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""w910 diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,rarely served; ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""coding and diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter boost leak""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""warning light diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""scn coding""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""wiring fault diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter loss of power""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""fleet van diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,rarely served; ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter scn coding""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""van vor""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""mobile diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""mercedes vito diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""w907 limp mode""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,rarely served; ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""vehicle coding""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""vito diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""fleet fault finding""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,rarely served; ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""advanced diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""mercedes scn coding""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""same day diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""mercedes module coding""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""dealer alternative diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,rarely served; ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""engine diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""mercedes programming""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""auto electrician""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""w907 sprinter diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,rarely served; ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter limp mode""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""commercial van diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,rarely served; ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter egr fault""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,rarely served; ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter dpf regeneration""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""mobile van diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""vehicle off road diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""mercedes star diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter warning lights""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter scr fault""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,rarely served; ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""vito w447 diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,rarely served; ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter wont rev""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,rarely served; ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""xentry diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter programming""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""w907 diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,rarely served; ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""mercedes coding service""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""mobile auto electrician""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""ecu coding""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""w447 diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,rarely served; ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter turbo underboost""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""mobile vehicle diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""urgent diagnostics""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""fault finding""",Phrase match,VOR & Mercedes Van Diagnostics,Ad group 1,Not eligible,ad group removed; campaign removed,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,used van diagnostic check,Broad match,Search | Diagnostics & VOR | Kent + SE London,Pre-Purchase Van Check,Not eligible,rarely served,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,pre purchase vehicle check,Broad match,Search | Diagnostics & VOR | Kent + SE London,Pre-Purchase Van Check,Eligible,,,10,0.00%,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,pre purchase digital health check,Broad match,Search | Diagnostics & VOR | Kent + SE London,Pre-Purchase Van Check,Not eligible,rarely served,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""pre purchase vehicle check""",Phrase match,Search | Diagnostics & VOR | Kent + SE London,Pre-Purchase Van Check,Eligible,,,15,33.33%,GBP,5.13,5,60.00%,3.00,1.03,1.71
+Enabled,used van check near me,Broad match,Search | Diagnostics & VOR | Kent + SE London,Pre-Purchase Van Check,Not eligible,rarely served,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,pre purchase van inspection,Broad match,Search | Diagnostics & VOR | Kent + SE London,Pre-Purchase Van Check,Eligible,,,3,0.00%,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,dealer van inspection,Broad match,Search | Diagnostics & VOR | Kent + SE London,Pre-Purchase Van Check,Not eligible,rarely served,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,used van inspection mobile,Broad match,Search | Diagnostics & VOR | Kent + SE London,Pre-Purchase Van Check,Not eligible,rarely served,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,limp mode van,Broad match,Search | Diagnostics & VOR | Kent + SE London,Limp Mode / Derate,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""sprinter reduced power""",Phrase match,Search | Diagnostics & VOR | Kent + SE London,Limp Mode / Derate,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,vito limp mode,Broad match,Search | Diagnostics & VOR | Kent + SE London,Limp Mode / Derate,Eligible,,,2,100.00%,GBP,20.32,2,0.00%,0.00,10.16,0.00
+Enabled,sprinter reduced power,Broad match,Search | Diagnostics & VOR | Kent + SE London,Limp Mode / Derate,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,sprinter limp mode,Broad match,Search | Diagnostics & VOR | Kent + SE London,Limp Mode / Derate,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,derate diagnosis sprinter,Broad match,Search | Diagnostics & VOR | Kent + SE London,Limp Mode / Derate,Not eligible,rarely served,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,turbo fault diagnosis van,Broad match,Search | Diagnostics & VOR | Kent + SE London,Limp Mode / Derate,Not eligible,rarely served,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,vito wont start,Broad match,Search | Diagnostics & VOR | Kent + SE London,VOR / Urgent Van Diagnostics,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,van breakdown diagnosis,Broad match,Search | Diagnostics & VOR | Kent + SE London,VOR / Urgent Van Diagnostics,Not eligible,rarely served,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,commercial vehicle diagnostics urgent,Broad match,Search | Diagnostics & VOR | Kent + SE London,VOR / Urgent Van Diagnostics,Not eligible,rarely served,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,vor diagnostics near me,Broad match,Search | Diagnostics & VOR | Kent + SE London,VOR / Urgent Van Diagnostics,Not eligible,rarely served,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,same day vehicle diagnostics,Broad match,Search | Diagnostics & VOR | Kent + SE London,VOR / Urgent Van Diagnostics,Not eligible,rarely served,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,sprinter wont start,Broad match,Search | Diagnostics & VOR | Kent + SE London,VOR / Urgent Van Diagnostics,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,adblue warning van,Broad match,Search | Diagnostics & VOR | Kent + SE London,AdBlue / DPF / Emissions,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""adblue warning van""",Phrase match,Search | Diagnostics & VOR | Kent + SE London,AdBlue / DPF / Emissions,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,adblue countdown sprinter,Broad match,Search | Diagnostics & VOR | Kent + SE London,AdBlue / DPF / Emissions,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""adblue fault van""",Phrase match,Search | Diagnostics & VOR | Kent + SE London,AdBlue / DPF / Emissions,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,adblue fault diagnosis,Broad match,Search | Diagnostics & VOR | Kent + SE London,AdBlue / DPF / Emissions,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,adblue fault van,Broad match,Search | Diagnostics & VOR | Kent + SE London,AdBlue / DPF / Emissions,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""adblue countdown sprinter""",Phrase match,Search | Diagnostics & VOR | Kent + SE London,AdBlue / DPF / Emissions,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,nox sensor diagnosis,Broad match,Search | Diagnostics & VOR | Kent + SE London,AdBlue / DPF / Emissions,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,sprinter adblue fault,Broad match,Search | Diagnostics & VOR | Kent + SE London,AdBlue / DPF / Emissions,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,sprinter dpf fault,Broad match,Search | Diagnostics & VOR | Kent + SE London,AdBlue / DPF / Emissions,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,mercedes van diagnostics,Broad match,Search | Diagnostics & VOR | Kent + SE London,Standard Diagnosis,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,sprinter diagnostics,Broad match,Search | Diagnostics & VOR | Kent + SE London,Standard Diagnosis,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""commercial vehicle diagnostics""",Phrase match,Search | Diagnostics & VOR | Kent + SE London,Standard Diagnosis,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,mobile van diagnostics,Broad match,Search | Diagnostics & VOR | Kent + SE London,Standard Diagnosis,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,mobile diagnostics near me,Broad match,Search | Diagnostics & VOR | Kent + SE London,Standard Diagnosis,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,van diagnostics near me,Broad match,Search | Diagnostics & VOR | Kent + SE London,Standard Diagnosis,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,mobile mercedes diagnostics,Broad match,Search | Diagnostics & VOR | Kent + SE London,Standard Diagnosis,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,commercial vehicle diagnostics,Broad match,Search | Diagnostics & VOR | Kent + SE London,Standard Diagnosis,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,vito diagnostics,Broad match,Search | Diagnostics & VOR | Kent + SE London,Standard Diagnosis,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,mobile warning light diagnosis,Broad match,Search | Diagnostics & VOR | Kent + SE London,Standard Diagnosis,Not eligible,rarely served,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,sprinter diagnostics near me,Broad match,Search | Diagnostics & VOR | Kent + SE London,Standard Diagnosis,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,mercedes diagnostics near me,Broad match,Search | Diagnostics & VOR | Kent + SE London,Standard Diagnosis,Eligible,,,7,14.29%,GBP,0.43,1,0.00%,0.00,0.43,0.00
+Enabled,"""mercedes diagnostics near me""",Phrase match,Search | Diagnostics & VOR | Kent + SE London,Standard Diagnosis,Eligible,,,1,0.00%,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,"""mobile diagnostics near me""",Phrase match,Search | Diagnostics & VOR | Kent + SE London,Standard Diagnosis,Eligible,,,13,15.38%,GBP,14.79,2,0.00%,0.00,7.40,0.00
+Enabled,"""van diagnostics near me""",Phrase match,Search | Diagnostics & VOR | Kent + SE London,Standard Diagnosis,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Enabled,warning light diagnosis,Broad match,Search | Diagnostics & VOR | Kent + SE London,Standard Diagnosis,Eligible,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+Removed,[mobile mercedes diagnostics],Exact match,Search | Diagnostics & VOR | Kent + SE London,Standard Diagnosis,Removed,removed,,1,100.00%,GBP,1.47,1,0.00%,0.00,1.47,0.00
+ --,,Total: Keywords, --, --, --,,,"1,365",8.72%,GBP,305.71,119,5.04%,6.00,2.57,50.95
+,,Total: Keywords in your account,,,,,,"1,365",8.72%,GBP,305.71,119,5.04%,6.00,2.57,50.95
+,,Total: Your keywords,,,,,,"1,361",8.67%,GBP,297.14,118,5.08%,6.00,2.52,49.52
+,,Total: AI Max expanded matches,,,,,,4,25.00%,GBP,8.57,1,0.00%,0.00,8.57,0.00
+,,Total: AI Max landing page matches,,,,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+,,Total: URL inclusions in your account,,,,,,0, --,GBP,0.00,0,0.00%,0.00,0,0.00
+,,Total: Account,,,,,,"1,365",8.72%,GBP,305.71,119,5.04%,6.00,2.57,50.95
+,,Total: Search,,,,,,"1,365",8.72%,GBP,305.71,119,5.04%,6.00,2.57,50.95
