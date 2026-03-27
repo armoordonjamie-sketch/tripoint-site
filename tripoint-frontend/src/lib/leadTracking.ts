@@ -12,6 +12,9 @@ import { getPageAnalyticsContext, type PageAnalyticsContext } from '@/lib/analyt
 const JOURNEY_ID_KEY = 'tripoint_journey_id';
 /** Legacy session key (pre–journey_id model); migrated once into JOURNEY_ID_KEY. */
 const LEGACY_SESSION_LEAD_ID_KEY = 'tripoint_lead_id';
+/** Session cache for GA4 IDs when gtag resolves after cookie write (MP linkage). */
+const GA_CLIENT_STORAGE_KEY = 'tripoint_ga_client_id';
+const GA_SESSION_STORAGE_KEY = 'tripoint_ga_session_id';
 const API_PATH = '/api/leads/track';
 
 export type LeadChannel = 'phone' | 'whatsapp' | 'contact_form' | 'booking' | 'payment';
@@ -66,11 +69,7 @@ function measurementIdToCookieSuffix(measurementId: string): string {
     return measurementId.replace(/^G-/i, '');
 }
 
-/**
- * Read GA4 web stream identifiers from first-party cookies (set by gtag/react-ga4).
- * No PII — numeric IDs only.
- */
-export function getGa4WebIds(): { ga_client_id?: string; ga_session_id?: string } {
+function readGa4IdsFromCookies(): { ga_client_id?: string; ga_session_id?: string } {
     if (typeof document === 'undefined') return {};
 
     const ga = getCookie('_ga');
@@ -95,6 +94,76 @@ export function getGa4WebIds(): { ga_client_id?: string; ga_session_id?: string 
     const out: { ga_client_id?: string; ga_session_id?: string } = {};
     if (ga_client_id) out.ga_client_id = ga_client_id;
     if (ga_session_id) out.ga_session_id = ga_session_id;
+    return out;
+}
+
+function readGa4IdsFromSessionStorage(): { ga_client_id?: string; ga_session_id?: string } {
+    if (typeof sessionStorage === 'undefined') return {};
+    try {
+        const c = sessionStorage.getItem(GA_CLIENT_STORAGE_KEY)?.trim();
+        const s = sessionStorage.getItem(GA_SESSION_STORAGE_KEY)?.trim();
+        const out: { ga_client_id?: string; ga_session_id?: string } = {};
+        if (c) out.ga_client_id = c;
+        if (s) out.ga_session_id = s;
+        return out;
+    } catch {
+        return {};
+    }
+}
+
+/**
+ * Ask gtag for client_id / session_id and cache in sessionStorage (callbacks are async).
+ * Call after ReactGA.initialize so MP payloads have IDs even if _ga is not written yet.
+ */
+function hydrateGa4IdsViaGtag(measurementId: string): void {
+    if (typeof window === 'undefined' || !measurementId) return;
+    const gtag = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag;
+    if (typeof gtag !== 'function') return;
+    try {
+        gtag('get', measurementId, 'client_id', (cid: unknown) => {
+            const v = cid != null ? String(cid).trim() : '';
+            if (!v) return;
+            try {
+                sessionStorage.setItem(GA_CLIENT_STORAGE_KEY, v);
+            } catch {
+                /* ignore */
+            }
+        });
+        gtag('get', measurementId, 'session_id', (sid: unknown) => {
+            const v = sid != null ? String(sid).trim() : '';
+            if (!v) return;
+            try {
+                sessionStorage.setItem(GA_SESSION_STORAGE_KEY, v);
+            } catch {
+                /* ignore */
+            }
+        });
+    } catch {
+        /* ignore */
+    }
+}
+
+/**
+ * Schedule gtag hydration (immediate + delayed retries while the tag finishes loading).
+ */
+export function scheduleGa4WebIdHydration(measurementId: string): void {
+    if (typeof window === 'undefined' || !measurementId) return;
+    const run = () => hydrateGa4IdsViaGtag(measurementId);
+    run();
+    window.setTimeout(run, 250);
+    window.setTimeout(run, 1500);
+}
+
+/**
+ * Read GA4 web stream identifiers: cookies first, then sessionStorage from gtag hydration.
+ * No PII — opaque IDs only.
+ */
+export function getGa4WebIds(): { ga_client_id?: string; ga_session_id?: string } {
+    const fromCookies = readGa4IdsFromCookies();
+    const fromStore = readGa4IdsFromSessionStorage();
+    const out: { ga_client_id?: string; ga_session_id?: string } = {};
+    out.ga_client_id = fromCookies.ga_client_id ?? fromStore.ga_client_id;
+    out.ga_session_id = fromCookies.ga_session_id ?? fromStore.ga_session_id;
     return out;
 }
 

@@ -8,7 +8,7 @@ import {
     type PageType,
     type ServiceCategoryAnalytics,
 } from '@/lib/analyticsContext';
-import { trackLeadToBackend } from '@/lib/leadTracking';
+import { scheduleGa4WebIdHydration, trackLeadToBackend } from '@/lib/leadTracking';
 
 const GA_ID = GA4_MEASUREMENT_ID;
 
@@ -96,6 +96,8 @@ export function initAnalytics() {
         },
         gtagOptions: debug ? { debug_mode: true } : undefined,
     });
+
+    scheduleGa4WebIdHydration(GA_ID);
 
     if (import.meta.env.DEV) {
         console.log('[GA4] Initialised', {
