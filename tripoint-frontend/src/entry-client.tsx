@@ -6,12 +6,19 @@ import { AppRoutes } from './App';
 import { ToastProvider } from '@/components/toast-context';
 import { RouteTracker } from '@/components/RouteTracker';
 import { initAnalytics, registerGa4Test } from '@/lib/analytics';
-import { captureAttributionFromUrl } from '@/lib/attribution';
+import { captureAttributionFromUrl, getAttributionDebug, registerAttributionDebugHelpers } from '@/lib/attribution';
 import './index.css';
 
 initAnalytics();
 registerGa4Test();
 captureAttributionFromUrl();
+registerAttributionDebugHelpers();
+if (import.meta.env.DEV) {
+    const d = getAttributionDebug();
+    if (Object.keys(d.attribution).length > 0 || d.capturedAt) {
+        console.log('[Attribution] stored after capture', d);
+    }
+}
 
 const root = document.getElementById('root')!;
 const app = (

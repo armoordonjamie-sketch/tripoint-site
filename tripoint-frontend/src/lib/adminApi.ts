@@ -46,6 +46,9 @@ export async function fetchLeads(filters: LeadFilters): Promise<LeadsListRespons
     }
     if (filters.page_type) params.set('page_type', filters.page_type);
     if (filters.search) params.set('search', filters.search);
+    if (filters.identifier_type) params.set('identifier_type', filters.identifier_type);
+    if (filters.google_ads_eligible === true) params.set('google_ads_eligible', 'true');
+    if (filters.google_ads_eligible === false) params.set('google_ads_eligible', 'false');
     const q = params.toString();
     return adminFetchJson<LeadsListResponse>(`/admin/leads${q ? `?${q}` : ''}`);
 }
@@ -76,6 +79,10 @@ export interface Ga4QualificationSync {
     measurement_protocol_sent: boolean | null;
     skipped_reason: string | null;
     error: string | null;
+    ga4_sync_attempted?: boolean;
+    ga4_sync_sent?: boolean;
+    ga4_sync_skipped_reason?: string | null;
+    ga4_sync_validation_messages?: string[];
 }
 
 export async function updateLead(

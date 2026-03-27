@@ -28,6 +28,58 @@ function trunc(s: string, n: number): string {
     return s.length <= n ? s : `${s.slice(0, n)}…`;
 }
 
+function isLeadExported(row: LeadWithMeta): boolean {
+    const ex = (row.google_ads_export_status || '').toLowerCase();
+    const batch = (row.google_ads_export_batch_id || '').trim();
+    return ex === 'exported' || ex === 'adjustment_exported' || Boolean(batch);
+}
+
+function adsExportBadge(row: LeadWithMeta): { label: string; className: string; title: string } {
+    const reason = row.ineligible_reason || '';
+    const exported = isLeadExported(row);
+    if (row.ads_exportable && exported) {
+        return {
+            label: 'Exported',
+            className: 'text-sky-300',
+            title: 'Marked exported or has export batch id',
+        };
+    }
+    if (row.ads_exportable && !exported) {
+        return {
+            label: 'Exportable',
+            className: 'text-success',
+            title: 'Eligible for Google Ads offline conversion export',
+        };
+    }
+    if (reason === 'missing_click_identifier') {
+        return {
+            label: 'No click ID',
+            className: 'text-amber-200',
+            title:
+                'This lead cannot be exported to Google Ads because no gclid/wbraid/gbraid was captured on the original visit.',
+        };
+    }
+    if (reason === 'qualification_not_exportable') {
+        return {
+            label: 'Not qualified',
+            className: 'text-text-muted',
+            title: 'Only qualified or won leads are exportable',
+        };
+    }
+    if (reason === 'missing_conversion_name') {
+        return {
+            label: 'No conversion',
+            className: 'text-amber-200',
+            title: 'Missing conversion name for export',
+        };
+    }
+    return {
+        label: 'No',
+        className: 'text-text-muted',
+        title: reason || 'Not exportable',
+    };
+}
+
 interface LeadTableProps {
     leads: LeadWithMeta[];
     loading: boolean;
@@ -120,7 +172,7 @@ export function LeadTable({
                         {th('service_name', 'Service')}
                         {th('click_location', 'Click loc.')}
                         {th('page', 'Page')}
-                        <th className="px-2 py-2 text-left font-semibold">GCLID</th>
+                        <th className="px-2 py-2 text-left font-semibold">Click ID</th>
                         {th('lead_value', 'Value')}
                         <th className="px-2 py-2 text-left font-semibold">Ads OK</th>
                         {th('journey_id', 'Journey')}
@@ -167,9 +219,13 @@ export function LeadTable({
                                 <td className="max-w-[100px] truncate px-2 py-2">{row.click_location || '—'}</td>
                                 <td className="max-w-[140px] truncate px-2 py-2 text-text-muted">{row.page || '—'}</td>
                                 <td className="px-2 py-2 text-center">
-                                    {row.gclid ? (
-                                        <span className="text-success" title={row.gclid}>
-                                            ●
+                                    {row.has_click_id && row.identifier_type ? (
+                                        <span
+                                            className="inline-flex items-center gap-1 text-success"
+                                            title={row.identifier_value || row.identifier_type}
+                                        >
+                                            <span>●</span>
+                                            <span className="text-[10px] uppercase">{row.identifier_type}</span>
                                         </span>
                                     ) : (
                                         '—'
@@ -177,13 +233,14 @@ export function LeadTable({
                                 </td>
                                 <td className="px-2 py-2">{row.lead_value || '—'}</td>
                                 <td className="px-2 py-2">
-                                    {row.ads_exportable ? (
-                                        <span className="text-success">Yes</span>
-                                    ) : (
-                                        <span className="text-text-muted" title={row.ineligible_reason || ''}>
-                                            No
-                                        </span>
-                                    )}
+                                    {(() => {
+                                        const b = adsExportBadge(row);
+                                        return (
+                                            <span className={`font-medium ${b.className}`} title={b.title}>
+                                                {b.label}
+                                            </span>
+                                        );
+                                    })()}
                                 </td>
                                 <td className="px-2 py-2 font-mono text-[10px]">
                                     <span className="inline-flex items-center gap-1">

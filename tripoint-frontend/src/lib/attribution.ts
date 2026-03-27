@@ -1,14 +1,19 @@
 /**
  * Attribution / Click-ID capture for Google Ads conversion tracking.
  *
- * Captures gclid, gbraid, wbraid, and utm_* parameters from the landing URL
- * and persists them in localStorage + cookie fallback so they survive page
- * navigations within the SPA and are available for conversion events.
+ * Policy: latest-touch with non-blank preservation — new URL params merge into storage;
+ * keys not in the URL keep prior values. Visits with no tracked params do not change storage.
+ * Expiry: 90 days from last capture (when URL params were merged).
+ *
+ * Persists in localStorage + cookie fallback so data survives SPA navigation and is
+ * available for phone/WhatsApp/contact/booking/payment lead events.
  */
 
 const STORAGE_KEY = 'tp_attribution';
 const COOKIE_NAME = 'tp_attribution';
-const EXPIRY_DAYS = 30;
+const CAPTURED_AT_KEY = '_captured_at';
+/** Google Ads–aligned window for first-party attribution storage */
+export const EXPIRY_DAYS = 90;
 
 /** The params we care about. */
 const ATTRIBUTION_KEYS = [
@@ -24,13 +29,23 @@ const ATTRIBUTION_KEYS = [
 
 export type AttributionData = Partial<Record<(typeof ATTRIBUTION_KEYS)[number], string>>;
 
+type RawStored = AttributionData & { [CAPTURED_AT_KEY]?: string };
+
+export type AttributionDebugInfo = {
+    attribution: AttributionData;
+    capturedAt: string | null;
+    storageSource: 'localStorage' | 'cookie' | 'none';
+    expired: boolean;
+};
+
 // ---------------------------------------------------------------------------
 // Cookie helpers (fallback when localStorage is unavailable / private mode)
 // ---------------------------------------------------------------------------
 
 function setCookie(name: string, value: string, days: number) {
     const expires = new Date(Date.now() + days * 864e5).toUTCString();
-    document.cookie = `${name}=${encodeURIComponent(value)};expires=${expires};path=/;SameSite=Lax`;
+    const secure = typeof window !== 'undefined' && window.location?.protocol === 'https:' ? ';Secure' : '';
+    document.cookie = `${name}=${encodeURIComponent(value)};expires=${expires};path=/;SameSite=Lax${secure}`;
 }
 
 function getCookie(name: string): string | null {
@@ -38,12 +53,71 @@ function getCookie(name: string): string | null {
     return match ? decodeURIComponent(match[1]) : null;
 }
 
+function deleteCookie(name: string) {
+    document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;SameSite=Lax`;
+}
+
 // ---------------------------------------------------------------------------
-// Persistence
+// Internal load / save
 // ---------------------------------------------------------------------------
 
-function save(data: AttributionData) {
-    const json = JSON.stringify(data);
+function stripInternal(raw: RawStored): AttributionData {
+    const { [CAPTURED_AT_KEY]: _c, ...rest } = raw;
+    return rest;
+}
+
+function isExpired(capturedAt: string | undefined): boolean {
+    if (!capturedAt) return false;
+    const t = Date.parse(capturedAt);
+    if (Number.isNaN(t)) return false;
+    return Date.now() - t > EXPIRY_DAYS * 864e5;
+}
+
+function clearAllStorage() {
+    try {
+        localStorage.removeItem(STORAGE_KEY);
+    } catch {
+        /* ignore */
+    }
+    deleteCookie(COOKIE_NAME);
+}
+
+function parseRaw(json: string): RawStored | null {
+    try {
+        return JSON.parse(json) as RawStored;
+    } catch {
+        return null;
+    }
+}
+
+/** Load raw blob + which source won (localStorage preferred). */
+function loadRawWithSource(): { raw: RawStored; source: 'localStorage' | 'cookie' | 'none' } {
+    if (typeof window === 'undefined') {
+        return { raw: {}, source: 'none' };
+    }
+    try {
+        const ls = localStorage.getItem(STORAGE_KEY);
+        if (ls) {
+            const raw = parseRaw(ls);
+            if (raw) return { raw, source: 'localStorage' };
+        }
+    } catch {
+        /* ignore */
+    }
+    const ck = getCookie(COOKIE_NAME);
+    if (ck) {
+        const raw = parseRaw(ck);
+        if (raw) return { raw, source: 'cookie' };
+    }
+    return { raw: {}, source: 'none' };
+}
+
+function loadRaw(): RawStored {
+    return loadRawWithSource().raw;
+}
+
+function saveRaw(raw: RawStored) {
+    const json = JSON.stringify(raw);
     try {
         localStorage.setItem(STORAGE_KEY, json);
     } catch {
@@ -52,22 +126,18 @@ function save(data: AttributionData) {
     setCookie(COOKIE_NAME, json, EXPIRY_DAYS);
 }
 
+/**
+ * Returns public attribution fields, or {} if expired or empty.
+ */
 function load(): AttributionData {
-    try {
-        const ls = localStorage.getItem(STORAGE_KEY);
-        if (ls) return JSON.parse(ls) as AttributionData;
-    } catch {
-        /* ignore */
+    const { raw, source } = loadRawWithSource();
+    if (source === 'none') return {};
+    const at = raw[CAPTURED_AT_KEY];
+    if (isExpired(at)) {
+        clearAllStorage();
+        return {};
     }
-    const ck = getCookie(COOKIE_NAME);
-    if (ck) {
-        try {
-            return JSON.parse(ck) as AttributionData;
-        } catch {
-            /* ignore */
-        }
-    }
-    return {};
+    return stripInternal(raw);
 }
 
 // ---------------------------------------------------------------------------
@@ -75,11 +145,11 @@ function load(): AttributionData {
 // ---------------------------------------------------------------------------
 
 /**
- * Call once on app bootstrap (main.tsx).
- * Reads attribution params from the current URL and merges them into storage.
- * New params overwrite old ones; existing params not present in the URL are kept.
+ * Call once on app bootstrap.
+ * Reads attribution params from the current URL and merges into storage.
  */
 export function captureAttributionFromUrl() {
+    if (typeof window === 'undefined') return;
     const params = new URLSearchParams(window.location.search);
     const incoming: AttributionData = {};
     let found = false;
@@ -92,18 +162,63 @@ export function captureAttributionFromUrl() {
         }
     }
 
-    if (found) {
-        // Merge: new values win, old values are preserved for missing keys
-        const existing = load();
-        save({ ...existing, ...incoming });
+    if (!found) return;
+
+    let existing = loadRaw();
+    const at = existing[CAPTURED_AT_KEY];
+    if (isExpired(at)) {
+        existing = {};
     }
+    const merged: RawStored = {
+        ...stripInternal(existing),
+        ...incoming,
+        [CAPTURED_AT_KEY]: new Date().toISOString(),
+    };
+    saveRaw(merged);
 }
 
 /**
- * Returns the stored attribution data (or an empty object if none).
+ * Returns stored attribution (no internal keys). Empty if expired or unset.
  */
 export function getAttribution(): AttributionData {
     return load();
+}
+
+/** Remove all stored attribution (testing). */
+export function clearAttribution() {
+    if (typeof window === 'undefined') return;
+    clearAllStorage();
+}
+
+/** Debug snapshot: public fields, capture time, storage source, expiry flag. */
+export function getAttributionDebug(): AttributionDebugInfo {
+    if (typeof window === 'undefined') {
+        return { attribution: {}, capturedAt: null, storageSource: 'none', expired: false };
+    }
+    const { raw, source } = loadRawWithSource();
+    const at = raw[CAPTURED_AT_KEY];
+    const expired = isExpired(at);
+    if (expired && source !== 'none') {
+        clearAllStorage();
+    }
+    const attribution = expired ? {} : stripInternal(raw);
+    return {
+        attribution,
+        capturedAt: at ?? null,
+        storageSource: source,
+        expired,
+    };
+}
+
+/** Attach window helpers for console debugging. */
+export function registerAttributionDebugHelpers() {
+    if (typeof window === 'undefined') return;
+    const w = window as unknown as {
+        __tripointAttributionDebug?: () => AttributionDebugInfo;
+        __tripointAttributionClear?: () => void;
+    };
+    w.__tripointAttributionDebug = () => getAttributionDebug();
+    w.__tripointAttributionClear = () => clearAttribution();
 }
 
 /**
@@ -124,7 +239,6 @@ export function decorateUrl(url: string): string {
         }
         return u.toString();
     } catch {
-        // Non-URL string (e.g. tel: link) - return as-is
         return url;
     }
 }

@@ -37,6 +37,7 @@ from services.google_ads_export import (
     new_batch_id,
     qualified_export_csv_string,
     adjustment_export_csv_string,
+    resolve_click_identifier,
     sheet_rows_for_adjustments,
     sheet_rows_for_qualified,
 )
@@ -92,6 +93,8 @@ def _row_matches_filters(
     exported_to_google_ads: str | None,
     page_type: str | None,
     search: str | None,
+    identifier_type: str | None,
+    google_ads_eligible: bool | None,
 ) -> bool:
     def s(v: Any) -> str:
         return str(v or "").strip()
@@ -157,6 +160,21 @@ def _row_matches_filters(
         ]
         if not any(q in b.lower() for b in blobs):
             return False
+    if identifier_type:
+        it, _iv = resolve_click_identifier(row)
+        want = identifier_type.strip().lower()
+        if want == "none":
+            if it is not None:
+                return False
+        elif (it or "").lower() != want:
+            return False
+    if google_ads_eligible is not None:
+        enr = enrich_lead_row(dict(row))
+        ads_ok = bool(enr.get("ads_exportable"))
+        if google_ads_eligible and not ads_ok:
+            return False
+        if not google_ads_eligible and ads_ok:
+            return False
     return True
 
 
@@ -173,40 +191,42 @@ def _row_for_ga4_qualification(row: dict[str, Any]) -> dict[str, Any]:
     return out
 
 
+def _ga4_mp_result_to_sync_payload(ename: str, res: dict[str, Any]) -> dict[str, Any]:
+    sent = bool(res.get("sent"))
+    sr = None if sent else str(res.get("skipped_reason") or "")
+    benign = sr in ("ga4_not_configured", "missing_ga_client_id", "missing_ga_session_id", "")
+    return {
+        "event": ename,
+        "measurement_protocol_sent": sent,
+        "skipped_reason": sr or None,
+        "error": None if sent or benign else sr,
+        "ga4_sync_attempted": bool(res.get("attempted")),
+        "ga4_sync_sent": sent,
+        "ga4_sync_skipped_reason": sr or None,
+        "ga4_sync_validation_messages": list(res.get("validation_messages") or []),
+    }
+
+
 def _ga4_qualification_sync_single(old_row: dict[str, Any], new_row: dict[str, Any]) -> dict[str, Any]:
     """Response fragment for PATCH; never raises."""
+    no_transition = {
+        "event": None,
+        "measurement_protocol_sent": None,
+        "skipped_reason": "no_qualification_transition",
+        "error": None,
+        "ga4_sync_attempted": False,
+        "ga4_sync_sent": False,
+        "ga4_sync_skipped_reason": "no_qualification_transition",
+        "ga4_sync_validation_messages": [],
+    }
     old_qs = str(old_row.get("qualification_status") or "").strip().lower()
     new_qs = str(new_row.get("qualification_status") or "").strip().lower()
     ename = qualification_event_name_for_transition(old_qs, new_qs)
     if not ename:
-        return {
-            "event": None,
-            "measurement_protocol_sent": None,
-            "skipped_reason": "no_qualification_transition",
-            "error": None,
-        }
+        return no_transition
     row_mp = _row_for_ga4_qualification(new_row)
-    ok, reason = send_admin_qualification_ga4(ename, row_mp)
-    if reason == "ga4_not_configured":
-        return {
-            "event": ename,
-            "measurement_protocol_sent": False,
-            "skipped_reason": "ga4_not_configured",
-            "error": None,
-        }
-    if ok:
-        return {
-            "event": ename,
-            "measurement_protocol_sent": True,
-            "skipped_reason": None,
-            "error": None,
-        }
-    return {
-        "event": ename,
-        "measurement_protocol_sent": False,
-        "skipped_reason": "measurement_protocol_failed",
-        "error": reason,
-    }
+    res = send_admin_qualification_ga4(ename, row_mp)
+    return _ga4_mp_result_to_sync_payload(ename, res)
 
 
 def _sort_key(row: dict[str, Any], sort_by: str) -> Any:
@@ -450,6 +470,8 @@ async def list_leads(
     exported_to_google_ads: str | None = None,
     page_type: str | None = None,
     search: str | None = None,
+    identifier_type: str | None = None,
+    google_ads_eligible: bool | None = None,
 ):
     spreadsheet_id, tab = get_spreadsheet_config()
     if not spreadsheet_id:
@@ -475,6 +497,8 @@ async def list_leads(
             exported_to_google_ads=exported_to_google_ads,
             page_type=page_type,
             search=search,
+            identifier_type=identifier_type,
+            google_ads_eligible=google_ads_eligible,
         )
     ]
     allowed_sort = {
@@ -545,7 +569,19 @@ async def patch_lead(event_id: str, body: LeadPatchBody, _: dict = Depends(verif
                 ga4_sync,
             )
             return {"ok": True, "lead": enrich_lead_row(new_row), "ga4_qualification_sync": ga4_sync}
-    return {"ok": True, "ga4_qualification_sync": {"event": None, "measurement_protocol_sent": None, "skipped_reason": "lead_row_missing_after_update", "error": None}}
+    return {
+        "ok": True,
+        "ga4_qualification_sync": {
+            "event": None,
+            "measurement_protocol_sent": None,
+            "skipped_reason": "lead_row_missing_after_update",
+            "error": None,
+            "ga4_sync_attempted": False,
+            "ga4_sync_sent": False,
+            "ga4_sync_skipped_reason": "lead_row_missing_after_update",
+            "ga4_sync_validation_messages": [],
+        },
+    }
 
 
 @router.post("/bulk-update")
@@ -609,6 +645,8 @@ async def bulk_update(body: BulkUpdateBody, _: dict = Depends(verify_admin_sessi
         "measurement_protocol_succeeded": 0,
         "measurement_protocol_failed": 0,
         "skipped_ga4_not_configured": 0,
+        "skipped_missing_ga_client_id": 0,
+        "skipped_missing_ga_session_id": 0,
         "skipped_no_qualification_transition": 0,
     }
     ga4_events: list[dict[str, Any]] = []
@@ -626,15 +664,27 @@ async def bulk_update(body: BulkUpdateBody, _: dict = Depends(verify_admin_sessi
             continue
         ga4_summary["qualification_transitions"] += 1
         row_mp = _row_for_ga4_qualification(new)
-        ok, reason = send_admin_qualification_ga4(ename, row_mp)
+        res = send_admin_qualification_ga4(ename, row_mp)
+        ok = bool(res.get("sent"))
+        reason = res.get("skipped_reason") if not ok else None
         ev: dict[str, Any] = {
             "event_id": eid_s,
             "event": ename,
             "measurement_protocol_sent": ok,
+            "ga4_sync_attempted": res.get("attempted"),
+            "ga4_sync_sent": ok,
+            "ga4_sync_skipped_reason": reason,
+            "ga4_sync_validation_messages": list(res.get("validation_messages") or []),
         }
         if reason == "ga4_not_configured":
             ga4_summary["skipped_ga4_not_configured"] += 1
             ev["skipped_reason"] = "ga4_not_configured"
+        elif reason == "missing_ga_client_id":
+            ga4_summary["skipped_missing_ga_client_id"] += 1
+            ev["skipped_reason"] = reason
+        elif reason == "missing_ga_session_id":
+            ga4_summary["skipped_missing_ga_session_id"] += 1
+            ev["skipped_reason"] = reason
         elif ok:
             ga4_summary["measurement_protocol_succeeded"] += 1
             ev["skipped_reason"] = None

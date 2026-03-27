@@ -255,6 +255,47 @@ export function LeadFilters({ filters, onChange, sticky }: LeadFiltersProps) {
                         <option value="no">No</option>
                     </select>
                 </label>
+                <label className="flex flex-col gap-1 text-xs">
+                    <span className="text-text-muted">Click ID type</span>
+                    <select
+                        value={filters.identifier_type ?? ''}
+                        onChange={(e) =>
+                            set({
+                                identifier_type: e.target.value || undefined,
+                            })
+                        }
+                        className="rounded-lg border border-border-default bg-surface px-2 py-1.5 text-sm text-text-primary"
+                    >
+                        <option value="">Any</option>
+                        <option value="gclid">gclid</option>
+                        <option value="wbraid">wbraid</option>
+                        <option value="gbraid">gbraid</option>
+                        <option value="none">none</option>
+                    </select>
+                </label>
+                <label className="flex flex-col gap-1 text-xs">
+                    <span className="text-text-muted">Ads exportable</span>
+                    <select
+                        value={
+                            filters.google_ads_eligible === true
+                                ? 'yes'
+                                : filters.google_ads_eligible === false
+                                  ? 'no'
+                                  : ''
+                        }
+                        onChange={(e) => {
+                            const v = e.target.value;
+                            set({
+                                google_ads_eligible: v === 'yes' ? true : v === 'no' ? false : undefined,
+                            });
+                        }}
+                        className="rounded-lg border border-border-default bg-surface px-2 py-1.5 text-sm text-text-primary"
+                    >
+                        <option value="">Any</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </label>
             </div>
             <div className="flex justify-end">
                 <button

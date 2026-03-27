@@ -88,8 +88,8 @@ GOOGLE_ADS_EXTRA_COLUMNS: list[str] = [
     "google_ads_identifier_value",
 ]
 
-# Optional: GA client_id for Measurement Protocol continuity (future client-side capture)
-LEAD_ATTRIBUTION_EXTRA_COLUMNS: list[str] = ["ga_client_id"]
+# GA4 web stream IDs for Measurement Protocol session linkage (captured on lead track)
+LEAD_ATTRIBUTION_EXTRA_COLUMNS: list[str] = ["ga_client_id", "ga_session_id"]
 
 # Full header row for the Leads tab (append path uses this)
 LEADS_COLUMNS: list[str] = (

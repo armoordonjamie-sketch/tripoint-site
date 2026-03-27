@@ -333,4 +333,39 @@ Optional tabs: `GoogleAds_Qualified_Export`, `GoogleAds_Adjustments_Export`, `Go
 
 ---
 
+## 12. Attribution persistence, GA4 web IDs on leads, and Measurement Protocol (2025-03)
+
+### 12.1 First-party attribution (click IDs and UTMs)
+
+- **Where captured:** `tripoint-frontend/src/lib/attribution.ts` reads `gclid`, `gbraid`, `wbraid`, and `utm_*` from `window.location.search` once at bootstrap (`entry-client.tsx` → `captureAttributionFromUrl()`).
+- **Policy:** Latest-touch merge with non-blank preservation — a visit with tracked query params merges into storage; keys not present in the URL keep prior values. Visits with no tracked params do not change stored data.
+- **Where stored:** `localStorage` key `tp_attribution` plus first-party cookie `tp_attribution` (JSON blob includes internal `_captured_at` ISO timestamp).
+- **Expiry:** 90 days from last merge that included URL attribution params (`EXPIRY_DAYS` in `attribution.ts`). Expired blobs are cleared on read.
+- **Flow into leads:** `leadTracking.ts` `basePayload()` merges `getAttribution()` into every `POST /api/leads/track` payload (phone, WhatsApp, contact, booking, payment). **Source of truth is stored state**, not the URL at click time.
+- **Debug (any environment):** `window.__tripointAttributionDebug()` and `window.__tripointAttributionClear()` (registered in `registerAttributionDebugHelpers()`). In dev, the client logs a snapshot after capture when data exists.
+
+### 12.2 GA4 `ga_client_id` and `ga_session_id` on lead rows
+
+- **Purpose:** Link admin-driven qualification events sent via **Measurement Protocol** to the same GA4 client/session as the web stream (Realtime / key events).
+- **Capture:** `leadTracking.ts` `getGa4WebIds()` reads first-party cookies — `_ga` → `ga_client_id` (segment after `GA1.x.`), `_ga_<STREAM>` (stream suffix from `G-…` in `analyticsPublic.ts`) → `ga_session_id` (first numeric segment after `GS1.` / `GS2.`).
+- **Payload / sheet:** Optional fields on `LeadTrackRequest` and Leads sheet columns `ga_client_id`, `ga_session_id` (`LEAD_ATTRIBUTION_EXTRA_COLUMNS` in `lead_constants.py`). Header merge appends missing columns on older sheets.
+
+### 12.3 Measurement Protocol qualification events (`services/ga4_measurement.py`)
+
+- **Requires** non-empty `ga_client_id` and `ga_session_id` on the sheet row; otherwise the send is skipped with `skipped_reason` `missing_ga_client_id` or `missing_ga_session_id` (no synthetic `client_id`).
+- **Payload (shape):** Top-level `client_id`, `timestamp_micros` (Unix microseconds string), `non_personalized_ads: true`, `events: [{ name: lead_qualified | lead_disqualified | lead_won, params: { session_id, engagement_time_msec: 1, event_id, journey_id, lead_quality, … } }]`.
+- **Debug validation:** Set `GA4_MP_DEBUG=1` in `python-scripts/.env` to POST a copy to `https://www.google-analytics.com/debug/mp/collect` before the production collect; validation messages are logged and returned to the admin UI when present. A 2xx from `/mp/collect` alone does not prove GA4 accepted the event.
+
+### 12.4 Admin API / UI
+
+- **PATCH `/admin/leads/{event_id}`** response `ga4_qualification_sync` includes `ga4_sync_attempted`, `ga4_sync_sent`, `ga4_sync_skipped_reason`, `ga4_sync_validation_messages` (plus legacy `measurement_protocol_sent`, `skipped_reason`).
+- **Leads list** supports filters `identifier_type` (`gclid` | `wbraid` | `gbraid` | `none`) and `google_ads_eligible` (boolean, matches computed `ads_exportable`).
+- **Table:** “Click ID” column uses enriched `identifier_type`; “Ads OK” uses exportability badges and tooltips.
+
+### 12.5 Migration
+
+- **Existing rows** without `ga_client_id` / `ga_session_id` will not receive MP sends until new site traffic repopulates them; qualification changes still save to Sheets.
+
+---
+
 *Document generated to capture the GA4 + lead tracking + Sheets implementation. Update this file when behaviour or env vars change.*

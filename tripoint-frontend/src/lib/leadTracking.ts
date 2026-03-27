@@ -5,6 +5,7 @@
  * journey_id: one UUID per browser session (grouping).
  * event_id: fresh UUID per request (idempotency key; repeat actions in-session are allowed).
  */
+import { GA4_MEASUREMENT_ID } from '@/config/analyticsPublic';
 import { getAttribution } from '@/lib/attribution';
 import { getPageAnalyticsContext, type PageAnalyticsContext } from '@/lib/analyticsContext';
 
@@ -48,6 +49,53 @@ export interface LeadTrackPayload {
     utm_content?: string;
     utm_term?: string;
     lead_value?: number;
+    /** GA4 web client_id from _ga cookie (Measurement Protocol linkage) */
+    ga_client_id?: string;
+    /** GA4 session id from _ga_<STREAM> cookie */
+    ga_session_id?: string;
+}
+
+function getCookie(name: string): string | null {
+    if (typeof document === 'undefined') return null;
+    const match = document.cookie.match(new RegExp(`(?:^|; )${name}=([^;]*)`));
+    return match ? decodeURIComponent(match[1]) : null;
+}
+
+/** G-XXXX → suffix for _ga_XXXX cookie name */
+function measurementIdToCookieSuffix(measurementId: string): string {
+    return measurementId.replace(/^G-/i, '');
+}
+
+/**
+ * Read GA4 web stream identifiers from first-party cookies (set by gtag/react-ga4).
+ * No PII — numeric IDs only.
+ */
+export function getGa4WebIds(): { ga_client_id?: string; ga_session_id?: string } {
+    if (typeof document === 'undefined') return {};
+
+    const ga = getCookie('_ga');
+    let ga_client_id: string | undefined;
+    if (ga) {
+        const parts = ga.split('.');
+        if (parts.length >= 4 && parts[0].startsWith('GA')) {
+            ga_client_id = parts.slice(2).join('.');
+        }
+    }
+
+    const stream = measurementIdToCookieSuffix(GA4_MEASUREMENT_ID);
+    const sessionCookie = getCookie(`_ga_${stream}`);
+    let ga_session_id: string | undefined;
+    if (sessionCookie) {
+        const parts = sessionCookie.split('.');
+        if (parts.length >= 3 && (parts[0] === 'GS1' || parts[0] === 'GS2')) {
+            ga_session_id = parts[2];
+        }
+    }
+
+    const out: { ga_client_id?: string; ga_session_id?: string } = {};
+    if (ga_client_id) out.ga_client_id = ga_client_id;
+    if (ga_session_id) out.ga_session_id = ga_session_id;
+    return out;
 }
 
 export function getSessionJourneyId(): string {
@@ -76,12 +124,20 @@ export function getEventId(): string {
     return crypto.randomUUID();
 }
 
+function resolveClickIdType(attr: ReturnType<typeof getAttribution>): string {
+    if (attr.gclid) return 'gclid';
+    if (attr.wbraid) return 'wbraid';
+    if (attr.gbraid) return 'gbraid';
+    return 'none';
+}
+
 function basePayload(
     event_name: string,
     lead_channel: LeadChannel,
     ctx: PageAnalyticsContext,
 ): LeadTrackPayload {
     const attr = getAttribution();
+    const ga4 = getGa4WebIds();
     const title = typeof document !== 'undefined' ? document.title : '';
     return {
         journey_id: getSessionJourneyId(),
@@ -103,6 +159,8 @@ function basePayload(
         utm_campaign: attr.utm_campaign,
         utm_content: attr.utm_content,
         utm_term: attr.utm_term,
+        ga_client_id: ga4.ga_client_id,
+        ga_session_id: ga4.ga_session_id,
     };
 }
 
@@ -115,13 +173,23 @@ export function buildLeadTrackPayload(
     const ctx = contextOverride ?? getPageAnalyticsContext();
     const base = basePayload(event_name, lead_channel, ctx);
     const { journey_id: _j, event_id: _e, ...safeExtras } = extras as Partial<LeadTrackPayload>;
-    return {
+    const payload: LeadTrackPayload = {
         ...base,
         ...safeExtras,
         journey_id: base.journey_id,
         event_id: base.event_id,
         occurred_at: extras.occurred_at ?? base.occurred_at,
     };
+
+    if (import.meta.env.DEV) {
+        const attr = getAttribution();
+        const clickType = resolveClickIdType(attr);
+        console.log(
+            `[LeadTracking] payload for ${event_name}: click_id=${clickType} | ga_client_id=${payload.ga_client_id ? 'yes' : 'no'} | ga_session_id=${payload.ga_session_id ? 'yes' : 'no'}`,
+        );
+    }
+
+    return payload;
 }
 
 function sendPayload(payload: LeadTrackPayload, blocking: boolean): void {

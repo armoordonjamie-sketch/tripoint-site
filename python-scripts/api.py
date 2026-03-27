@@ -624,6 +624,8 @@ class LeadTrackRequest(BaseModel):
     utm_campaign: str | None = None
     utm_content: str | None = None
     utm_term: str | None = None
+    ga_client_id: str | None = None
+    ga_session_id: str | None = None
 
 
 def get_zone(minutes: float) -> str:
@@ -1302,6 +1304,24 @@ async def leads_track(payload: LeadTrackRequest):
     is_new = await insert_lead_track_if_new(payload.event_id)
     if not is_new:
         return {"ok": True, "duplicate": True, "sheets": False, "message": None}
+
+    gclid = (payload.gclid or "").strip()
+    wbraid = (payload.wbraid or "").strip()
+    gbraid = (payload.gbraid or "").strip()
+    utm = (payload.utm_source or "").strip()
+    ga_c = (payload.ga_client_id or "").strip()
+    ga_s = (payload.ga_session_id or "").strip()
+    logger.debug(
+        "leads_track event_id=%s event_name=%s gclid=%s wbraid=%s gbraid=%s utm_source=%s ga_client_id_present=%s ga_session_id_present=%s",
+        payload.event_id,
+        payload.event_name,
+        bool(gclid),
+        bool(wbraid),
+        bool(gbraid),
+        bool(utm),
+        bool(ga_c),
+        bool(ga_s),
+    )
 
     row = payload.model_dump()
     for k in ("qualification_status", "disqualify_reason", "vehicle_make", "vehicle_model", "notes"):

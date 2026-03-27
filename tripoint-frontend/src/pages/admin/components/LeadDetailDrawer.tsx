@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { X, Copy, Check, Loader2 } from 'lucide-react';
-import { fetchJourney, updateLead } from '@/lib/adminApi';
+import { fetchJourney, updateLead, type Ga4QualificationSync } from '@/lib/adminApi';
 import { useToast } from '@/hooks/useToast';
 import {
     DISQUALIFY_REASON_OPTIONS,
@@ -53,6 +53,7 @@ export function LeadDetailDrawer({ lead, open, onClose, onSaved }: LeadDetailDra
     const [journeyEvents, setJourneyEvents] = useState<LeadWithMeta[]>([]);
     const [copied, setCopied] = useState<string | null>(null);
     const [saving, setSaving] = useState(false);
+    const [lastGa4Sync, setLastGa4Sync] = useState<Ga4QualificationSync | null>(null);
 
     const {
         register,
@@ -100,6 +101,10 @@ export function LeadDetailDrawer({ lead, open, onClose, onSaved }: LeadDetailDra
         };
     }, [lead?.journey_id, open]);
 
+    useEffect(() => {
+        setLastGa4Sync(null);
+    }, [lead?.event_id, open]);
+
     const copy = (label: string, text: string) => {
         void navigator.clipboard.writeText(text);
         setCopied(label);
@@ -130,12 +135,19 @@ export function LeadDetailDrawer({ lead, open, onClose, onSaved }: LeadDetailDra
             const res = await updateLead(lead.event_id, payload);
             toast('Lead saved', 'success');
             const g4 = res.ga4_qualification_sync;
-            if (g4?.event && g4.measurement_protocol_sent === true) {
-                toast(`GA4: ${g4.event} sent`, 'info');
+            setLastGa4Sync(g4 ?? null);
+            if (g4?.ga4_sync_sent) {
+                toast(`GA4: ${g4.event ?? 'event'} sent via Measurement Protocol`, 'info');
+            } else if (g4?.skipped_reason === 'no_qualification_transition') {
+                /* no MP for this save */
             } else if (g4?.skipped_reason === 'ga4_not_configured') {
-                toast('GA4 Measurement Protocol not configured (set GA4_MEASUREMENT_ID + GA4_API_SECRET on server)', 'info');
+                toast('GA4 MP not configured (set GA4_MEASUREMENT_ID + GA4_API_SECRET on server)', 'info');
+            } else if (g4?.skipped_reason === 'missing_ga_client_id') {
+                toast('GA4 MP skipped: lead row has no ga_client_id (capture from site after deploy)', 'info');
+            } else if (g4?.skipped_reason === 'missing_ga_session_id') {
+                toast('GA4 MP skipped: lead row has no ga_session_id (needed for Realtime/session linkage)', 'info');
             } else if (g4?.event && g4.measurement_protocol_sent === false) {
-                toast('Lead saved; GA4 sync failed (see server logs)', 'error');
+                toast('Lead saved; GA4 sync failed (see drawer + server logs)', 'error');
             }
             onSaved();
         } catch (e) {
@@ -211,10 +223,46 @@ export function LeadDetailDrawer({ lead, open, onClose, onSaved }: LeadDetailDra
                         </p>
                     </section>
 
-                    <section className="mb-6 space-y-2">
+                    <section className="mb-6 space-y-3 rounded-lg border border-border-default bg-surface-alt p-3">
                         <h3 className="text-xs font-semibold uppercase tracking-wide text-text-muted">
-                            Attribution
+                            Attribution &amp; Google Ads
                         </h3>
+                        <div className="flex flex-wrap gap-2 text-xs">
+                            <span
+                                className={`rounded px-2 py-0.5 font-medium ${lead.has_click_id ? 'bg-success/20 text-success' : 'bg-surface text-text-muted'}`}
+                            >
+                                Has click ID: {lead.has_click_id ? 'yes' : 'no'}
+                            </span>
+                            <span
+                                className={`rounded px-2 py-0.5 font-medium ${lead.ads_exportable ? 'bg-success/20 text-success' : 'bg-surface text-text-muted'}`}
+                            >
+                                Ads exportable: {lead.ads_exportable ? 'yes' : 'no'}
+                            </span>
+                        </div>
+                        <p className="text-xs text-text-muted">
+                            <span className="text-text-muted">Resolved identifier:</span>{' '}
+                            <span className="font-mono text-text-primary">
+                                {lead.identifier_type || '—'} {lead.identifier_value ? `· ${lead.identifier_value}` : ''}
+                            </span>
+                        </p>
+                        {lead.ineligible_reason === 'missing_click_identifier' && (
+                            <p className="text-xs text-amber-200/90">
+                                This lead cannot be exported to Google Ads because no gclid/wbraid/gbraid was captured on
+                                the original visit.
+                            </p>
+                        )}
+                        {lead.ineligible_reason &&
+                            lead.ineligible_reason !== 'missing_click_identifier' &&
+                            !lead.ads_exportable && (
+                                <p className="text-xs text-text-muted">Ineligible: {lead.ineligible_reason}</p>
+                            )}
+                        <p className="text-xs text-text-muted">
+                            Export status: {lead.google_ads_export_status || '—'} · batch:{' '}
+                            {lead.google_ads_export_batch_id || '—'}
+                        </p>
+                        <h4 className="pt-1 text-[10px] font-semibold uppercase tracking-wide text-text-muted">
+                            Raw attribution (sheet)
+                        </h4>
                         {(
                             [
                                 ['gclid', lead.gclid],
@@ -233,7 +281,7 @@ export function LeadDetailDrawer({ lead, open, onClose, onSaved }: LeadDetailDra
                                 {v ? (
                                     <button
                                         type="button"
-                                        className="shrink-0 rounded p-1 hover:bg-surface-alt"
+                                        className="shrink-0 rounded p-1 hover:bg-surface"
                                         onClick={() => copy(k, v)}
                                     >
                                         {copied === k ? (
@@ -246,6 +294,58 @@ export function LeadDetailDrawer({ lead, open, onClose, onSaved }: LeadDetailDra
                             </div>
                         ))}
                     </section>
+
+                    <section className="mb-6 space-y-2 rounded-lg border border-border-default bg-surface-alt p-3">
+                        <h3 className="text-xs font-semibold uppercase tracking-wide text-text-muted">
+                            GA4 web identifiers (Measurement Protocol)
+                        </h3>
+                        <p className="font-mono text-xs break-all">
+                            <span className="text-text-muted">ga_client_id:</span>{' '}
+                            {lead.ga_client_id?.trim() || (
+                                <span className="text-text-muted">not captured on this lead</span>
+                            )}
+                        </p>
+                        <p className="font-mono text-xs break-all">
+                            <span className="text-text-muted">ga_session_id:</span>{' '}
+                            {lead.ga_session_id?.trim() || (
+                                <span className="text-text-muted">not captured on this lead</span>
+                            )}
+                        </p>
+                    </section>
+
+                    {lastGa4Sync && (
+                        <section className="mb-6 space-y-2 rounded-lg border border-border-default bg-surface-alt p-3 text-xs">
+                            <h3 className="text-xs font-semibold uppercase tracking-wide text-text-muted">
+                                Last GA4 sync (after save)
+                            </h3>
+                            <p>
+                                <span className="text-text-muted">Event:</span> {lastGa4Sync.event ?? '—'}
+                            </p>
+                            <p>
+                                <span className="text-text-muted">ga4_sync_attempted:</span>{' '}
+                                {lastGa4Sync.ga4_sync_attempted ? 'yes' : 'no'}
+                            </p>
+                            <p>
+                                <span className="text-text-muted">ga4_sync_sent:</span>{' '}
+                                {lastGa4Sync.ga4_sync_sent ? 'yes' : 'no'}
+                            </p>
+                            <p>
+                                <span className="text-text-muted">ga4_sync_skipped_reason:</span>{' '}
+                                {lastGa4Sync.ga4_sync_skipped_reason ?? lastGa4Sync.skipped_reason ?? '—'}
+                            </p>
+                            {lastGa4Sync.ga4_sync_validation_messages &&
+                                lastGa4Sync.ga4_sync_validation_messages.length > 0 && (
+                                    <div>
+                                        <span className="text-text-muted">Validation messages (debug MP):</span>
+                                        <ul className="mt-1 list-inside list-disc text-amber-200/90">
+                                            {lastGa4Sync.ga4_sync_validation_messages.map((m) => (
+                                                <li key={m}>{m}</li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                )}
+                        </section>
+                    )}
 
                     <form onSubmit={handleSubmit(onSubmit)} className="mb-6 space-y-4">
                         <h3 className="text-xs font-semibold uppercase tracking-wide text-text-muted">
@@ -337,30 +437,6 @@ export function LeadDetailDrawer({ lead, open, onClose, onSaved }: LeadDetailDra
                                 className="rounded-lg border border-border-default bg-surface-alt px-3 py-2 text-text-primary"
                             />
                         </label>
-
-                        <div className="rounded-lg border border-border-default bg-surface-alt p-3 text-xs">
-                            <p>
-                                <span className="text-text-muted">ads_exportable:</span>{' '}
-                                {lead.ads_exportable ? 'yes' : 'no'}
-                                {lead.ineligible_reason ? ` (${lead.ineligible_reason})` : ''}
-                            </p>
-                            <p>
-                                <span className="text-text-muted">has_click_id:</span>{' '}
-                                {lead.has_click_id ? 'yes' : 'no'}
-                            </p>
-                            <p>
-                                <span className="text-text-muted">identifier:</span> {lead.identifier_type || '—'}{' '}
-                                {lead.identifier_value || ''}
-                            </p>
-                            <p>
-                                <span className="text-text-muted">export status:</span>{' '}
-                                {lead.google_ads_export_status || '—'}
-                            </p>
-                            <p>
-                                <span className="text-text-muted">batch:</span>{' '}
-                                {lead.google_ads_export_batch_id || '—'}
-                            </p>
-                        </div>
 
                         <button
                             type="submit"

@@ -159,6 +159,17 @@ export function AdminLeadsPage() {
 
     const leadIds = useMemo(() => Array.from(selectedIds), [selectedIds]);
 
+    const pageStats = useMemo(() => {
+        const withClick = leads.filter((l) => l.has_click_id).length;
+        const exportable = leads.filter((l) => l.ads_exportable).length;
+        const exported = leads.filter((l) => {
+            const ex = (l.google_ads_export_status || '').toLowerCase();
+            const batch = (l.google_ads_export_batch_id || '').trim();
+            return ex === 'exported' || ex === 'adjustment_exported' || Boolean(batch);
+        }).length;
+        return { withClick, exportable, exported, pageRows: leads.length };
+    }, [leads]);
+
     return (
         <>
             <Seo title="Admin — Leads" noIndex />
@@ -200,6 +211,26 @@ export function AdminLeadsPage() {
                     </div>
 
                     <LeadFiltersBar filters={filters} onChange={setFilters} sticky />
+
+                    {!loading && !error && leads.length > 0 && (
+                        <div className="flex flex-wrap gap-3 rounded-xl border border-border-default bg-surface-alt px-4 py-3 text-xs text-text-secondary">
+                            <span>
+                                <span className="text-text-muted">This page:</span> {pageStats.pageRows} rows
+                            </span>
+                            <span>
+                                <span className="text-text-muted">With click ID:</span> {pageStats.withClick}
+                            </span>
+                            <span>
+                                <span className="text-text-muted">Ads-exportable:</span> {pageStats.exportable}
+                            </span>
+                            <span>
+                                <span className="text-text-muted">Exported:</span> {pageStats.exported}
+                            </span>
+                            <span className="text-text-muted">
+                                Total matching filters: <strong className="text-text-primary">{total}</strong>
+                            </span>
+                        </div>
+                    )}
 
                     <GoogleAdsExportPanel selectedIds={leadIds} onExported={() => void loadLeads()} />
 

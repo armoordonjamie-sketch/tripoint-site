@@ -72,8 +72,10 @@ export interface LeadRow {
     google_ads_eligible: string;
     google_ads_identifier_type: string;
     google_ads_identifier_value: string;
-    /** Optional; future client capture for MP continuity */
+    /** GA4 web client_id (Measurement Protocol) */
     ga_client_id: string;
+    /** GA4 session id from web stream cookie */
+    ga_session_id: string;
 }
 
 /** Computed fields returned by API */
@@ -119,6 +121,10 @@ export interface LeadFilters {
     exported_to_google_ads?: 'yes' | 'no' | '';
     page_type?: string;
     search?: string;
+    /** Resolved click id: gclid | wbraid | gbraid | none */
+    identifier_type?: string;
+    /** Filter by computed ads_exportable (qualified/won + click id + conversion name) */
+    google_ads_eligible?: boolean;
 }
 
 export interface GoogleAdsExportRecord {
