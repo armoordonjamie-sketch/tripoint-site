@@ -94,6 +94,54 @@ def _ensure_sheet_exists(spreadsheet_id: str, title: str, service: Any) -> None:
     ).execute()
 
 
+def _ensure_column_capacity(service: Any, spreadsheet_id: str, tab: str, min_columns: int) -> None:
+    """
+    Grow the sheet grid so the API allows writes up to min_columns columns (1-based width).
+    Without this, values.update to e.g. AY1 fails with "exceeds grid limits" when the tab
+    was created or resized to fewer columns than LEADS_COLUMNS.
+    """
+    if min_columns <= 0:
+        return
+    meta = (
+        service.spreadsheets()
+        .get(
+            spreadsheetId=spreadsheet_id,
+            fields="sheets(properties(sheetId,title,gridProperties(columnCount)))",
+        )
+        .execute()
+    )
+    sheet_id: int | None = None
+    current = 0
+    for s in meta.get("sheets", []):
+        props = s.get("properties") or {}
+        if (props.get("title") or "") != tab:
+            continue
+        sheet_id = props.get("sheetId")
+        grid = props.get("gridProperties") or {}
+        current = int(grid.get("columnCount") or 0)
+        break
+    if sheet_id is None:
+        return
+    if current >= min_columns:
+        return
+    need = min_columns - current
+    service.spreadsheets().batchUpdate(
+        spreadsheetId=spreadsheet_id,
+        body={
+            "requests": [
+                {
+                    "appendDimension": {
+                        "sheetId": sheet_id,
+                        "dimension": "COLUMNS",
+                        "length": need,
+                    }
+                }
+            ]
+        },
+    ).execute()
+    logger.info("Expanded sheet %r column grid: %s -> %s", tab, current, current + need)
+
+
 def _col_index_to_a1(col_idx: int) -> str:
     """0-based column index to A1 letters."""
     n = col_idx + 1
@@ -145,6 +193,7 @@ def ensure_leads_headers(service: Any, spreadsheet_id: str, tab: str) -> dict[st
     )[0]
     names_in_order = [str(c).strip() for c in full]
     if not names_in_order or not names_in_order[0]:
+        _ensure_column_capacity(service, spreadsheet_id, tab, len(LEADS_COLUMNS))
         service.spreadsheets().values().update(
             spreadsheetId=spreadsheet_id,
             range=f"{qtab}!A1",
@@ -156,6 +205,9 @@ def ensure_leads_headers(service: Any, spreadsheet_id: str, tab: str) -> dict[st
     missing = [c for c in LEADS_COLUMNS if c not in names_in_order]
     if not missing:
         return {n: i for i, n in enumerate(names_in_order) if n}
+
+    required = max(len(LEADS_COLUMNS), len(names_in_order) + len(missing))
+    _ensure_column_capacity(service, spreadsheet_id, tab, required)
 
     start_col = len(names_in_order)
     end_col = start_col + len(missing) - 1
