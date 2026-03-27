@@ -256,10 +256,6 @@ def build_lead_qualification_mp_params(row: dict[str, Any]) -> dict[str, Any]:
         "service_interest": _s(row.get("service_interest"), 120),
         "service_category": _s(row.get("service_category"), 80),
         "service_name": _s(row.get("service_name"), 120),
-        "page_type": _s(row.get("page_type"), 80),
-        "page": _s(row.get("page"), _MAX_PARAM_STR),
-        "google_ads_identifier_type": _s(row.get("google_ads_identifier_type"), 40),
-        "google_ads_identifier_value": _s(row.get("google_ads_identifier_value"), 200),
     }
     if lv is not None:
         params["lead_value"] = lv

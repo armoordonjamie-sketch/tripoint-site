@@ -316,6 +316,8 @@ Columns written in order (header row auto-created):
 
 `google_ads_export_status`, `google_ads_export_type`, `google_ads_conversion_name`, `google_ads_conversion_value`, `google_ads_currency`, `google_ads_exported_at`, `google_ads_export_batch_id`, `google_ads_adjustment_type`, `google_ads_adjustment_value`, `google_ads_last_error`, `google_ads_eligible`, `google_ads_identifier_type`, `google_ads_identifier_value`.
 
+These columns (including click identifiers) support admin listing, filters, and Google Ads CSV export; they are **not** copied into GA4 Measurement Protocol under `google_*` parameter names (GA4 forbids that prefix on custom event params).
+
 Optional tabs: `GoogleAds_Qualified_Export`, `GoogleAds_Adjustments_Export`, `GoogleAds_Export_Log`.
 
 ### 11.5 Environment variables (see `.env.example`)
@@ -356,9 +358,12 @@ Optional tabs: `GoogleAds_Qualified_Export`, `GoogleAds_Adjustments_Export`, `Go
 
 - **Requires** non-empty `ga_client_id` and `ga_session_id` on the sheet row; otherwise the send is skipped with `skipped_reason` `missing_ga_client_id` or `missing_ga_session_id` (no synthetic `client_id`). **`ga_session_id` policy:** required for Realtime / DebugView session linkage; skips are logged explicitly; responses include **`ga4_sync_session_id_policy`** (e.g. `included_in_event_params`, `required_skipped_missing_ga_session_id`, `not_applicable`).
 - **HTTP contract:** `POST`, `Content-Type: application/json`, **JSON body** (not form-encoded). Query string only: `measurement_id`, `api_secret` (built via **`urlencode`**).
-- **Payload (shape):** Built once by **`build_ga4_mp_payload`**: top-level `client_id`, `timestamp_micros` (Unix microseconds as string), `non_personalized_ads: true`, `events: [{ name: lead_qualified | lead_disqualified | lead_won, params: { session_id, engagement_time_msec: 1, event_id, journey_id, lead_quality, disqualify_reason, vehicle_make, vehicle_model, service_interest, service_category, service_name, lead_value, qualified_lead_value, … } }]`.
+- **Payload (shape):** Built once by **`build_ga4_mp_payload`**: top-level `client_id`, `timestamp_micros` (Unix microseconds as string), `non_personalized_ads: true`, and one event whose `name` is `lead_qualified` | `lead_disqualified` | `lead_won` (see next bullet for `params`).
+- **Payload (event `params`, closed set):** From **`build_lead_qualification_mp_params`**: always `session_id`, `engagement_time_msec` (`1`), `event_id`, `journey_id`, `lead_channel`, `lead_quality`, `disqualify_reason`, `vehicle_make`, `vehicle_model`, `service_interest`, `service_category`, `service_name`; plus `lead_value` and `qualified_lead_value` only when numeric values exist on the row (`qualified_lead_value` uses **`google_ads_conversion_value`** when set, otherwise **`lead_value`**).
+- **Reserved parameter names (GA4):** Custom MP parameter names must not start with `google_`, `ga_`, `firebase_`, a leading `_`, or `gtag.`. Qualification MP therefore does **not** send `google_ads_identifier_type`, `google_ads_identifier_value`, `page`, or `page_type` as event parameters (identifiers and page context stay on the sheet / admin path only).
 - **Debug validation:** Set `GA4_MP_DEBUG=1` in `python-scripts/.env` to POST to **`/debug/mp/collect`** (with the **same encoded query params and body** as collect) before **`/mp/collect`**. Parsed **`validationMessages`** are logged at INFO and surfaced in admin as `ga4_sync_validation_messages`. If the debug response is not JSON, logs include HTTP status, **path only** (no secrets), truncated body, and flags for query params / JSON body presence.
-- **Fix (2025-03-27):** Earlier, debug validation POSTed to `/debug/mp/collect` **without** `measurement_id` and `api_secret` on the URL, which produced GA4’s *“Unable to process malformed HTTP request.”* Production collect already had query params; debug now uses the same **`build_ga4_mp_url`** helper.
+- **Fix (2025-03-27, debug URL):** Earlier, debug validation POSTed to `/debug/mp/collect` **without** `measurement_id` and `api_secret` on the URL, which produced GA4’s *“Unable to process malformed HTTP request.”* Production collect already had query params; debug now uses the same **`build_ga4_mp_url`** helper.
+- **Fix (2025-03-27, MP event params):** Removed `google_ads_identifier_*` and `page` / `page_type` from qualification event params so GA4 debug validation no longer reports reserved-prefix errors on those names.
 
 ### 12.4 Admin API / UI
 
