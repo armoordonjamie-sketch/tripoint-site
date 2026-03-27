@@ -26,6 +26,10 @@ from lead_constants import (
 )
 from services.auth import verify_admin_session
 from services import sheets_leads
+from services.ga4_measurement import (
+    qualification_event_name_for_transition,
+    send_admin_qualification_ga4,
+)
 from services.google_ads_export import (
     build_adjustment_export_rows,
     build_qualified_export_rows,
@@ -154,6 +158,55 @@ def _row_matches_filters(
         if not any(q in b.lower() for b in blobs):
             return False
     return True
+
+
+def _row_for_ga4_qualification(row: dict[str, Any]) -> dict[str, Any]:
+    """Merge sheet row with computed click identifiers for MP params (no PII)."""
+    e = enrich_lead_row(dict(row))
+    out = dict(row)
+    out["google_ads_identifier_type"] = str(
+        e.get("identifier_type") or out.get("google_ads_identifier_type") or ""
+    ).strip()
+    out["google_ads_identifier_value"] = str(
+        e.get("identifier_value") or out.get("google_ads_identifier_value") or ""
+    ).strip()
+    return out
+
+
+def _ga4_qualification_sync_single(old_row: dict[str, Any], new_row: dict[str, Any]) -> dict[str, Any]:
+    """Response fragment for PATCH; never raises."""
+    old_qs = str(old_row.get("qualification_status") or "").strip().lower()
+    new_qs = str(new_row.get("qualification_status") or "").strip().lower()
+    ename = qualification_event_name_for_transition(old_qs, new_qs)
+    if not ename:
+        return {
+            "event": None,
+            "measurement_protocol_sent": None,
+            "skipped_reason": "no_qualification_transition",
+            "error": None,
+        }
+    row_mp = _row_for_ga4_qualification(new_row)
+    ok, reason = send_admin_qualification_ga4(ename, row_mp)
+    if reason == "ga4_not_configured":
+        return {
+            "event": ename,
+            "measurement_protocol_sent": False,
+            "skipped_reason": "ga4_not_configured",
+            "error": None,
+        }
+    if ok:
+        return {
+            "event": ename,
+            "measurement_protocol_sent": True,
+            "skipped_reason": None,
+            "error": None,
+        }
+    return {
+        "event": ename,
+        "measurement_protocol_sent": False,
+        "skipped_reason": "measurement_protocol_failed",
+        "error": reason,
+    }
 
 
 def _sort_key(row: dict[str, Any], sort_by: str) -> Any:
@@ -471,14 +524,21 @@ async def patch_lead(event_id: str, body: LeadPatchBody, _: dict = Depends(verif
     if not updates:
         raise HTTPException(status_code=400, detail="No valid fields to update")
     svc = _service()
+    rows, _ = read_all_lead_rows(svc, spreadsheet_id, tab)
+    old_row = next((dict(r) for r in rows if str(r.get("event_id") or "").strip() == event_id), None)
+    if not old_row:
+        raise HTTPException(status_code=404, detail="Lead not found")
+
     ok = update_row_by_event_id(svc, spreadsheet_id, tab, event_id, updates)
     if not ok:
         raise HTTPException(status_code=404, detail="Lead not found")
     rows, _ = read_all_lead_rows(svc, spreadsheet_id, tab)
     for r in rows:
         if str(r.get("event_id") or "").strip() == event_id:
-            return {"ok": True, "lead": enrich_lead_row(dict(r))}
-    return {"ok": True}
+            new_row = dict(r)
+            ga4_sync = _ga4_qualification_sync_single(old_row, new_row)
+            return {"ok": True, "lead": enrich_lead_row(new_row), "ga4_qualification_sync": ga4_sync}
+    return {"ok": True, "ga4_qualification_sync": {"event": None, "measurement_protocol_sent": None, "skipped_reason": "lead_row_missing_after_update", "error": None}}
 
 
 @router.post("/bulk-update")
@@ -524,8 +584,66 @@ async def bulk_update(body: BulkUpdateBody, _: dict = Depends(verify_admin_sessi
         if k not in allowed_bulk:
             merged.pop(k, None)
 
+    rows_before, _ = read_all_lead_rows(svc, spreadsheet_id, tab)
+    eid_set = {str(x).strip() for x in body.event_ids}
+    before_map = {
+        str(r.get("event_id") or "").strip(): dict(r)
+        for r in rows_before
+        if str(r.get("event_id") or "").strip() in eid_set
+    }
+
     result = bulk_update_rows_by_event_ids(svc, spreadsheet_id, tab, body.event_ids, merged)
-    return {"ok": True, **result}
+
+    rows_after, _ = read_all_lead_rows(svc, spreadsheet_id, tab)
+    after_map = {str(r.get("event_id") or "").strip(): dict(r) for r in rows_after}
+
+    ga4_summary = {
+        "qualification_transitions": 0,
+        "measurement_protocol_succeeded": 0,
+        "measurement_protocol_failed": 0,
+        "skipped_ga4_not_configured": 0,
+        "skipped_no_qualification_transition": 0,
+    }
+    ga4_events: list[dict[str, Any]] = []
+    for eid in body.event_ids:
+        eid_s = str(eid).strip()
+        old = before_map.get(eid_s)
+        new = after_map.get(eid_s)
+        if not old or not new:
+            continue
+        old_qs = str(old.get("qualification_status") or "").strip().lower()
+        new_qs = str(new.get("qualification_status") or "").strip().lower()
+        ename = qualification_event_name_for_transition(old_qs, new_qs)
+        if not ename:
+            ga4_summary["skipped_no_qualification_transition"] += 1
+            continue
+        ga4_summary["qualification_transitions"] += 1
+        row_mp = _row_for_ga4_qualification(new)
+        ok, reason = send_admin_qualification_ga4(ename, row_mp)
+        ev: dict[str, Any] = {
+            "event_id": eid_s,
+            "event": ename,
+            "measurement_protocol_sent": ok,
+        }
+        if reason == "ga4_not_configured":
+            ga4_summary["skipped_ga4_not_configured"] += 1
+            ev["skipped_reason"] = "ga4_not_configured"
+        elif ok:
+            ga4_summary["measurement_protocol_succeeded"] += 1
+            ev["skipped_reason"] = None
+        else:
+            ga4_summary["measurement_protocol_failed"] += 1
+            ev["skipped_reason"] = reason or "measurement_protocol_failed"
+        ga4_events.append(ev)
+
+    return {
+        "ok": True,
+        **result,
+        "ga4_qualification_sync": {
+            "summary": ga4_summary,
+            "events": ga4_events[:100],
+        },
+    }
 
 
 @router.post("/sync-sheet-validations")

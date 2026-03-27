@@ -127,8 +127,16 @@ export function LeadDetailDrawer({ lead, open, onClose, onSaved }: LeadDetailDra
                 const n = parseFloat(data.google_ads_conversion_value);
                 if (!Number.isNaN(n)) payload.google_ads_conversion_value = n;
             }
-            await updateLead(lead.event_id, payload);
+            const res = await updateLead(lead.event_id, payload);
             toast('Lead saved', 'success');
+            const g4 = res.ga4_qualification_sync;
+            if (g4?.event && g4.measurement_protocol_sent === true) {
+                toast(`GA4: ${g4.event} sent`, 'info');
+            } else if (g4?.skipped_reason === 'ga4_not_configured') {
+                toast('GA4 Measurement Protocol not configured (set GA4_MEASUREMENT_ID + GA4_API_SECRET on server)', 'info');
+            } else if (g4?.event && g4.measurement_protocol_sent === false) {
+                toast('Lead saved; GA4 sync failed (see server logs)', 'error');
+            }
             onSaved();
         } catch (e) {
             toast(e instanceof Error ? e.message : 'Save failed', 'error');

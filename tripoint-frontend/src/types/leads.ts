@@ -72,6 +72,8 @@ export interface LeadRow {
     google_ads_eligible: string;
     google_ads_identifier_type: string;
     google_ads_identifier_value: string;
+    /** Optional; future client capture for MP continuity */
+    ga_client_id: string;
 }
 
 /** Computed fields returned by API */

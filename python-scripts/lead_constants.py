@@ -88,8 +88,13 @@ GOOGLE_ADS_EXTRA_COLUMNS: list[str] = [
     "google_ads_identifier_value",
 ]
 
+# Optional: GA client_id for Measurement Protocol continuity (future client-side capture)
+LEAD_ATTRIBUTION_EXTRA_COLUMNS: list[str] = ["ga_client_id"]
+
 # Full header row for the Leads tab (append path uses this)
-LEADS_COLUMNS: list[str] = list(BASE_LEADS_COLUMNS) + list(GOOGLE_ADS_EXTRA_COLUMNS)
+LEADS_COLUMNS: list[str] = (
+    list(BASE_LEADS_COLUMNS) + list(GOOGLE_ADS_EXTRA_COLUMNS) + list(LEAD_ATTRIBUTION_EXTRA_COLUMNS)
+)
 
 EXPORT_LOG_TAB = "GoogleAds_Export_Log"
 EXPORT_LOG_COLUMNS: list[str] = [

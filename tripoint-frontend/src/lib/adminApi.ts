@@ -71,14 +71,24 @@ export interface LeadPatchPayload {
     google_ads_conversion_name?: string;
 }
 
+export interface Ga4QualificationSync {
+    event: string | null;
+    measurement_protocol_sent: boolean | null;
+    skipped_reason: string | null;
+    error: string | null;
+}
+
 export async function updateLead(
     eventId: string,
     payload: LeadPatchPayload
-): Promise<{ ok: boolean; lead: LeadWithMeta }> {
-    return adminFetchJson<{ ok: boolean; lead: LeadWithMeta }>(`/admin/leads/${encodeURIComponent(eventId)}`, {
-        method: 'PATCH',
-        body: JSON.stringify(payload),
-    });
+): Promise<{ ok: boolean; lead: LeadWithMeta; ga4_qualification_sync?: Ga4QualificationSync }> {
+    return adminFetchJson<{ ok: boolean; lead: LeadWithMeta; ga4_qualification_sync?: Ga4QualificationSync }>(
+        `/admin/leads/${encodeURIComponent(eventId)}`,
+        {
+            method: 'PATCH',
+            body: JSON.stringify(payload),
+        }
+    );
 }
 
 export interface BulkUpdatePayload {
@@ -94,6 +104,21 @@ export async function bulkUpdateLeads(payload: BulkUpdatePayload): Promise<{
     ok: boolean;
     updated: number;
     missing_event_ids: string[];
+    ga4_qualification_sync?: {
+        summary: {
+            qualification_transitions: number;
+            measurement_protocol_succeeded: number;
+            measurement_protocol_failed: number;
+            skipped_ga4_not_configured: number;
+            skipped_no_qualification_transition: number;
+        };
+        events: Array<{
+            event_id: string;
+            event: string;
+            measurement_protocol_sent: boolean;
+            skipped_reason: string | null;
+        }>;
+    };
 }> {
     return adminFetchJson(`/admin/leads/bulk-update`, {
         method: 'POST',
