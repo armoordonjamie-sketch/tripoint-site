@@ -9,6 +9,10 @@ import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import sharp from 'sharp';
 
+// Lower peak RAM on small VPS (OOM "Killed" during deploy); re-reads source per output.
+sharp.cache(false);
+sharp.concurrency(1);
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 const PUBLIC = join(ROOT, 'public');
@@ -49,23 +53,19 @@ async function optimizeImage(fullPath, relPath) {
 
     mkdirSync(baseDir, { recursive: true });
 
-    const img = sharp(fullPath);
-    const meta = await img.metadata();
+    const meta = await sharp(fullPath).metadata();
     const w = meta.width ?? 1920;
-    const h = meta.height ?? 1080;
 
     if (needsResponsive) {
         for (const width of WIDTHS) {
             const outPath = join(baseDir, `${fileName}-${width}.webp`);
-            await img
-                .clone()
+            await sharp(fullPath)
                 .resize(width, null, { withoutEnlargement: true })
                 .webp({ quality: WEBP_QUALITY })
                 .toFile(outPath);
         }
         const fallbackPath = join(baseDir, `${fileName}-1536.jpg`);
-        await img
-            .clone()
+        await sharp(fullPath)
             .resize(1536, null, { withoutEnlargement: true })
             .jpeg({ quality: JPG_QUALITY })
             .toFile(fallbackPath);
@@ -73,13 +73,11 @@ async function optimizeImage(fullPath, relPath) {
         const maxW = Math.min(1536, w);
         const outWebp = join(baseDir, `${fileName}.webp`);
         const outJpg = join(baseDir, `${fileName}.jpg`);
-        await img
-            .clone()
+        await sharp(fullPath)
             .resize(maxW, null, { withoutEnlargement: true })
             .webp({ quality: WEBP_QUALITY })
             .toFile(outWebp);
-        await img
-            .clone()
+        await sharp(fullPath)
             .resize(maxW, null, { withoutEnlargement: true })
             .jpeg({ quality: JPG_QUALITY })
             .toFile(outJpg);

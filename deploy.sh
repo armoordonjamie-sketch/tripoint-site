@@ -52,6 +52,7 @@ else
 fi
 
 npm install --legacy-peer-deps
+# SKIP_IMAGE_OPTIMIZE=1 is handled by tripoint-frontend/scripts/run-build-ssg.mjs (skips sharp).
 npm run build:ssg
 
 # 5. Configure Nginx
