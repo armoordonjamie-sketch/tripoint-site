@@ -33,6 +33,7 @@ const PaymentSuccessPage = lazy(() => import('@/pages/PaymentSuccessPage').then(
 const AdminLoginPage = lazy(() => import('@/pages/admin/AdminLoginPage').then((m) => ({ default: m.AdminLoginPage })));
 const AdminDashboardPage = lazy(() => import('@/pages/admin/AdminDashboardPage').then((m) => ({ default: m.AdminDashboardPage })));
 const AdminReportsPage = lazy(() => import('@/pages/admin/AdminReportsPage').then((m) => ({ default: m.AdminReportsPage })));
+const AdminLeadsPage = lazy(() => import('@/pages/admin/AdminLeadsPage').then((m) => ({ default: m.AdminLeadsPage })));
 const AdminReportEditorPage = lazy(() => import('@/pages/admin/AdminReportEditorPage').then((m) => ({ default: m.AdminReportEditorPage })));
 const ReportViewerPage = lazy(() => import('@/pages/ReportViewerPage').then((m) => ({ default: m.ReportViewerPage })));
 const ContactPage = lazy(() => import('@/pages/ContactPage').then((m) => ({ default: m.ContactPage })));
@@ -105,6 +106,7 @@ export function AppRoutes() {
                     <Route path="report/:shareToken" element={<ReportViewerPage />} />
                     <Route path="admin" element={<AdminDashboardPage />} />
                     <Route path="admin/login" element={<AdminLoginPage />} />
+                    <Route path="admin/leads" element={<AdminLeadsPage />} />
                     <Route path="admin/reports" element={<AdminReportsPage />} />
                     <Route path="admin/reports/:reportId" element={<AdminReportEditorPage />} />
                     <Route path="contact" element={<ContactPage />} />

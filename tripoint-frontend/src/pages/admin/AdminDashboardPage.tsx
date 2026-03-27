@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Seo } from '@/components/Seo';
 import { Section } from '@/components/Section';
-import { CTAButton } from '@/components/CTAButton';
-import { Loader2, LogOut, AlertCircle, Copy, CheckCircle2, Link2, Banknote, FileText } from 'lucide-react';
+import { AdminNav } from '@/pages/admin/AdminNav';
+import { Loader2, AlertCircle, Copy, CheckCircle2, Link2, Banknote, FileText } from 'lucide-react';
 
 const API_BASE = '/api';
 
@@ -182,19 +182,7 @@ export function AdminDashboardPage() {
                 <div className="mx-auto max-w-6xl">
                     <div className="flex items-center justify-between gap-4 mb-6">
                         <h1 className="text-2xl font-bold text-text-primary">Admin Dashboard</h1>
-                        <div className="flex items-center gap-2">
-                            <Link
-                                to="/admin/reports"
-                                className="inline-flex items-center gap-2 rounded-lg border border-border-default bg-surface-alt px-4 py-2 text-sm font-medium text-text-primary hover:bg-surface"
-                            >
-                                <FileText className="h-4 w-4" />
-                                Reports
-                            </Link>
-                            <CTAButton variant="outline" onClick={handleLogout} className="flex items-center gap-2">
-                                <LogOut className="h-4 w-4" />
-                                Log out
-                            </CTAButton>
-                        </div>
+                        <AdminNav onLogout={handleLogout} />
                     </div>
 
                     <div className="mb-4 flex items-center gap-2">

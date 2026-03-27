@@ -275,4 +275,62 @@ Columns written in order (header row auto-created):
 
 ---
 
+## 11. Admin Leads tab, Sheets read/update, and Google Ads export (March 2025)
+
+**Goal:** Internal **Leads** admin surface on top of the existing **Google Sheets** lead pipeline (`journey_id` + `event_id`), without exposing service account credentials to the browser or changing public `POST /leads/track` behaviour.
+
+### 11.1 Frontend (`tripoint-frontend`)
+
+- **Route:** `/admin/leads` — lazy-loaded `AdminLeadsPage`.
+- **Navigation:** Shared **`AdminNav`** (Bookings | Leads | Reports | Log out) on admin dashboard, reports, and leads pages.
+- **Features:** Server-backed table (filters, sort, pagination), row selection, bulk actions bar, detail drawer (attribution, qualification edits, journey history by `journey_id`), **Google Ads export** panel (qualified + adjustment CSV flows, export history downloads), optional **CSV export** of the visible table, toast notifications (`toast-context` + `useToast`).
+- **API client:** `src/lib/adminApi.ts` — typed `fetch` to `/api/admin/leads/*` with credentials.
+- **Types:** `src/types/leads.ts` — mirrors backend enums (`qualification_status`, `disqualify_reason`, `vehicle_make`) and sheet column names.
+
+### 11.2 Backend (`python-scripts`)
+
+- **Router:** `routes/admin_leads.py` — included from `api.py`; all routes use **`verify_admin_session`** (cookie).
+- **Sheets:** `services/sheets_leads.py` — retains append + idempotent dedupe path; adds read-all, header merge for new columns, update by `event_id`, bulk update, optional **data validation** + frozen header (`apply_leads_sheet_formatting`), export log append, dedicated export tab writes.
+- **Constants:** `lead_constants.py` — column lists, dropdown values, export tab names, `ads_config()` defaults from env.
+- **Google Ads helpers:** `services/google_ads_export.py` — eligibility (`ads_exportable`, click-id priority gclid → wbraid → gbraid), qualified/adjustment CSV row builders.
+- **SQLite:** `google_ads_exports` table stores **export_id → CSV** for `GET /admin/leads/google-ads/exports/{export_id}` downloads (history list via `GET .../exports`).
+
+### 11.3 New / noteworthy HTTP endpoints
+
+| Method | Path | Purpose |
+|--------|------|---------|
+| GET | `/admin/leads` | List + filter + paginate (query params) |
+| GET | `/admin/leads/{event_id}` | Single lead + computed enrichment |
+| GET | `/admin/leads/journey/{journey_id}` | All events for journey |
+| PATCH | `/admin/leads/{event_id}` | Editable qualification / Google Ads override fields |
+| POST | `/admin/leads/bulk-update` | Bulk updates + presets (mark exported, queue adjustment, etc.) |
+| POST | `/admin/leads/sync-sheet-validations` | Sheet dropdowns + header formatting |
+| POST | `/admin/leads/google-ads/export-qualified` | Qualified/won export + optional Sheet tab |
+| POST | `/admin/leads/google-ads/export-adjustments` | Adjustment export (RETRACTION/RESTATEMENT rows) |
+| GET | `/admin/leads/google-ads/exports` | Export history metadata |
+| GET | `/admin/leads/google-ads/exports/{export_id}` | Download CSV |
+
+### 11.4 Sheet schema extensions (appended columns)
+
+`google_ads_export_status`, `google_ads_export_type`, `google_ads_conversion_name`, `google_ads_conversion_value`, `google_ads_currency`, `google_ads_exported_at`, `google_ads_export_batch_id`, `google_ads_adjustment_type`, `google_ads_adjustment_value`, `google_ads_last_error`, `google_ads_eligible`, `google_ads_identifier_type`, `google_ads_identifier_value`.
+
+Optional tabs: `GoogleAds_Qualified_Export`, `GoogleAds_Adjustments_Export`, `GoogleAds_Export_Log`.
+
+### 11.5 Environment variables (see `.env.example`)
+
+| Variable | Purpose |
+|----------|---------|
+| `GOOGLE_SHEETS_URL` | Optional “open in browser” link from admin Leads |
+| `GOOGLE_ADS_QUALIFIED_CONVERSION_NAME` | Default conversion name for `qualified` |
+| `GOOGLE_ADS_WON_CONVERSION_NAME` | Default for `won` |
+| `GOOGLE_ADS_DEFAULT_CURRENCY` | e.g. `GBP` |
+| `GOOGLE_ADS_DEFAULT_QUALIFIED_VALUE` / `GOOGLE_ADS_DEFAULT_WON_VALUE` | Fallback values when none in sheet |
+
+### 11.6 Operational notes
+
+- **Listing** reads the full Leads sheet in memory and filters in Python — acceptable for typical volumes; scale-up may need caching or archival.
+- **Public lead capture** unchanged: `POST /leads/track` still dedupes on `event_id` and appends rows; new columns default empty via `LEADS_COLUMNS` alignment.
+
+---
+
 *Document generated to capture the GA4 + lead tracking + Sheets implementation. Update this file when behaviour or env vars change.*

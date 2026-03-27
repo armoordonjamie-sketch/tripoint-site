@@ -3,6 +3,7 @@ import { createRoot, hydrateRoot } from 'react-dom/client';
 import { HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter } from 'react-router-dom';
 import { AppRoutes } from './App';
+import { ToastProvider } from '@/components/toast-context';
 import { RouteTracker } from '@/components/RouteTracker';
 import { initAnalytics, registerGa4Test } from '@/lib/analytics';
 import { captureAttributionFromUrl } from '@/lib/attribution';
@@ -17,8 +18,10 @@ const app = (
     <StrictMode>
         <HelmetProvider>
             <BrowserRouter>
-                <RouteTracker />
-                <AppRoutes />
+                <ToastProvider>
+                    <RouteTracker />
+                    <AppRoutes />
+                </ToastProvider>
             </BrowserRouter>
         </HelmetProvider>
     </StrictMode>

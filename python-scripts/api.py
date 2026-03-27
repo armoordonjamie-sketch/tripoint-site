@@ -100,6 +100,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+from routes.admin_leads import router as admin_leads_router
+
+app.include_router(admin_leads_router)
+
 BASES = {
     "Tonbridge": "TN9 1PP",
     "Eltham": "SE9 4HA",

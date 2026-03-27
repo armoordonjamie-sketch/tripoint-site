@@ -3,7 +3,8 @@ import { useNavigate, Link } from 'react-router-dom';
 import { Seo } from '@/components/Seo';
 import { Section } from '@/components/Section';
 import { CTAButton } from '@/components/CTAButton';
-import { Loader2, LogOut, AlertCircle, Copy, CheckCircle2, Pencil, Archive, Plus } from 'lucide-react';
+import { AdminNav } from '@/pages/admin/AdminNav';
+import { Loader2, AlertCircle, Copy, CheckCircle2, Pencil, Archive, Plus } from 'lucide-react';
 
 const API_BASE = '/api';
 
@@ -162,7 +163,7 @@ export function AdminReportsPage() {
                                 ← Back to bookings
                             </Link>
                         </div>
-                        <div className="flex items-center gap-2">
+                        <div className="flex flex-wrap items-center gap-2">
                             <CTAButton
                                 onClick={() => setCreateModalOpen(true)}
                                 className="flex items-center gap-2"
@@ -170,10 +171,7 @@ export function AdminReportsPage() {
                                 <Plus className="h-4 w-4" />
                                 Create Report
                             </CTAButton>
-                            <CTAButton variant="outline" onClick={handleLogout} className="flex items-center gap-2">
-                                <LogOut className="h-4 w-4" />
-                                Log out
-                            </CTAButton>
+                            <AdminNav onLogout={handleLogout} />
                         </div>
                     </div>
 

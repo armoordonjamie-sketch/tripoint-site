@@ -186,6 +186,20 @@ CREATE TABLE IF NOT EXISTS lead_track_event_dedupe (
     event_id TEXT PRIMARY KEY,
     created_at TEXT NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS google_ads_exports (
+    id                  TEXT PRIMARY KEY,
+    created_at          TEXT NOT NULL,
+    export_type         TEXT NOT NULL,
+    row_count           INTEGER NOT NULL DEFAULT 0,
+    target              TEXT,
+    csv_content         TEXT NOT NULL,
+    sheet_tab_written   TEXT,
+    status              TEXT NOT NULL DEFAULT 'success',
+    error_message       TEXT
+);
+
+CREATE INDEX IF NOT EXISTS idx_google_ads_exports_created ON google_ads_exports(created_at DESC);
 """
 
 
@@ -626,3 +640,67 @@ async def list_bookings(
         ) as cursor:
             rows = await cursor.fetchall()
             return [dict(r) for r in rows]
+
+
+async def insert_google_ads_export(
+    export_id: str,
+    export_type: str,
+    row_count: int,
+    csv_content: str,
+    target: str | None = None,
+    sheet_tab_written: str | None = None,
+    status: str = "success",
+    error_message: str | None = None,
+) -> None:
+    _require_aiosqlite()
+    now = _now_iso()
+    async with aiosqlite.connect(DB_PATH) as conn:
+        await conn.execute(
+            """
+            INSERT INTO google_ads_exports (
+                id, created_at, export_type, row_count, target, csv_content,
+                sheet_tab_written, status, error_message
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            (
+                export_id,
+                now,
+                export_type,
+                row_count,
+                target,
+                csv_content,
+                sheet_tab_written,
+                status,
+                error_message,
+            ),
+        )
+        await conn.commit()
+
+
+async def list_google_ads_exports(limit: int = 100) -> list[dict[str, Any]]:
+    _require_aiosqlite()
+    async with aiosqlite.connect(DB_PATH) as conn:
+        conn.row_factory = aiosqlite.Row
+        async with conn.execute(
+            """
+            SELECT id, created_at, export_type, row_count, target, sheet_tab_written, status, error_message
+            FROM google_ads_exports
+            ORDER BY created_at DESC
+            LIMIT ?
+            """,
+            (limit,),
+        ) as cur:
+            rows = await cur.fetchall()
+            return [dict(r) for r in rows]
+
+
+async def get_google_ads_export(export_id: str) -> dict[str, Any] | None:
+    _require_aiosqlite()
+    async with aiosqlite.connect(DB_PATH) as conn:
+        conn.row_factory = aiosqlite.Row
+        async with conn.execute(
+            "SELECT * FROM google_ads_exports WHERE id = ?",
+            (export_id,),
+        ) as cur:
+            row = await cur.fetchone()
+            return dict(row) if row else None
