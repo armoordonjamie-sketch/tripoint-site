@@ -72,6 +72,8 @@ export interface LeadPatchPayload {
     lead_value?: number | null;
     google_ads_conversion_value?: number | string | null;
     google_ads_conversion_name?: string;
+    /** `exclude` = never include in google_ads_offline_export */
+    google_ads_export_override?: string;
 }
 
 export interface Ga4QualificationSync {

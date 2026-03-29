@@ -72,6 +72,8 @@ export interface LeadRow {
     google_ads_eligible: string;
     google_ads_identifier_type: string;
     google_ads_identifier_value: string;
+    /** Set to `exclude` to skip offline export tab for this row (manual override). */
+    google_ads_export_override?: string;
     /** GA4 web client_id (Measurement Protocol) */
     ga_client_id: string;
     /** GA4 session id from web stream cookie */

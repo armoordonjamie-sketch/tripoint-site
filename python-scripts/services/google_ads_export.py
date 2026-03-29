@@ -108,6 +108,43 @@ def enrich_lead_row(row: dict[str, Any]) -> dict[str, Any]:
     return out
 
 
+def _sheet_conversion_value_empty(row: dict[str, Any]) -> bool:
+    v = row.get("google_ads_conversion_value")
+    if v is None:
+        return True
+    if isinstance(v, str) and not v.strip():
+        return True
+    return False
+
+
+def compute_ads_enrichment_fields(row: dict[str, Any]) -> dict[str, Any]:
+    """
+    Sheet columns to persist when qualification (or related context) changes.
+    Disqualified rows are never eligible for the offline export tab; qualified/won rows
+    get google_ads_eligible TRUE only when enrich_lead_row says ads_exportable.
+    """
+    qs = _s(row.get("qualification_status")).lower()
+    if qs == "disqualified":
+        return {"google_ads_eligible": "FALSE"}
+
+    en = enrich_lead_row(dict(row))
+    if not en.get("ads_exportable"):
+        return {"google_ads_eligible": "FALSE"}
+
+    out: dict[str, Any] = {
+        "google_ads_eligible": "TRUE",
+        "google_ads_identifier_type": _s(en.get("identifier_type")),
+        "google_ads_identifier_value": _s(en.get("identifier_value")),
+    }
+    if not _s(row.get("google_ads_conversion_name")):
+        out["google_ads_conversion_name"] = _s(en.get("computed_conversion_name"))
+    if _sheet_conversion_value_empty(row):
+        out["google_ads_conversion_value"] = str(en.get("computed_conversion_value") or 0)
+    if not _s(row.get("google_ads_currency")):
+        out["google_ads_currency"] = _s(en.get("computed_currency"))
+    return out
+
+
 def adjustment_fields_for_exported_disqualify(old_row: dict[str, Any]) -> dict[str, Any] | None:
     """
     When a lead was already uploaded to Google Ads (sheet status exported) as qualified/won and

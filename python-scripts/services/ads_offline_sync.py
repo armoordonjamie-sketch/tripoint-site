@@ -154,6 +154,7 @@ def build_offline_export_set(
     stats: dict[str, int] = {
         "skipped_not_ads_exportable": 0,
         "skipped_not_google_ads_eligible": 0,
+        "skipped_export_override_exclude": 0,
         "skipped_duplicate_export_key": 0,
     }
 
@@ -165,6 +166,10 @@ def build_offline_export_set(
             continue
         if not google_ads_eligible_truthy(row.get("google_ads_eligible")):
             stats["skipped_not_google_ads_eligible"] += 1
+            continue
+        override = _s(row.get("google_ads_export_override")).lower()
+        if override == "exclude":
+            stats["skipped_export_override_exclude"] += 1
             continue
         ts = _occurred_at_sort_ts(row)
         ek = build_export_key(row, enriched)

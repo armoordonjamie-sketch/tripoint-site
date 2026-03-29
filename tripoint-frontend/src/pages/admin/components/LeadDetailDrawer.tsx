@@ -21,6 +21,7 @@ const schema = z.object({
     lead_value: z.string().optional(),
     google_ads_conversion_name: z.string().optional(),
     google_ads_conversion_value: z.string().optional(),
+    google_ads_export_override: z.string().optional(),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -79,6 +80,7 @@ export function LeadDetailDrawer({ lead, open, onClose, onSaved }: LeadDetailDra
                 lead.google_ads_conversion_value != null && lead.google_ads_conversion_value !== ''
                     ? String(lead.google_ads_conversion_value)
                     : '',
+            google_ads_export_override: lead.google_ads_export_override || '',
         });
     }, [lead, open, reset]);
 
@@ -131,6 +133,9 @@ export function LeadDetailDrawer({ lead, open, onClose, onSaved }: LeadDetailDra
             if (data.google_ads_conversion_value !== undefined && data.google_ads_conversion_value !== '') {
                 const n = parseFloat(data.google_ads_conversion_value);
                 if (!Number.isNaN(n)) payload.google_ads_conversion_value = n;
+            }
+            if (data.google_ads_export_override !== undefined) {
+                payload.google_ads_export_override = data.google_ads_export_override;
             }
             const res = await updateLead(lead.event_id, payload);
             toast('Lead saved', 'success');
@@ -425,6 +430,19 @@ export function LeadDetailDrawer({ lead, open, onClose, onSaved }: LeadDetailDra
                         <h3 className="pt-2 text-xs font-semibold uppercase tracking-wide text-text-muted">
                             Google Ads overrides
                         </h3>
+                        <label className="flex flex-col gap-1">
+                            <span className="text-text-muted">Offline export override</span>
+                            <select
+                                {...register('google_ads_export_override')}
+                                className="rounded-lg border border-border-default bg-surface-alt px-3 py-2 text-text-primary"
+                            >
+                                <option value="">Default (auto)</option>
+                                <option value="exclude">Exclude from offline export tab</option>
+                            </select>
+                            <span className="text-[10px] text-text-muted">
+                                Use exclude only for edge cases; qualified/won leads are auto-enriched for export.
+                            </span>
+                        </label>
                         <label className="flex flex-col gap-1">
                             <span className="text-text-muted">google_ads_conversion_name</span>
                             <input

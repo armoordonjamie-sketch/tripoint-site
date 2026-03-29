@@ -10,13 +10,14 @@
 ## Behaviour (summary)
 
 1. Read all rows from the Leads tab.
-2. Keep rows that pass [`enrich_lead_row`](../python-scripts/services/google_ads_export.py) (`ads_exportable`: `qualified` or `won`, click id present, conversion name resolvable) **and** have truthy `google_ads_eligible` (`true` / `1` / `yes`, case-insensitive).
-3. **Dedupe** by `export_key` (see below). If several source rows share the same key, the row with the **latest** `occurred_at` wins.
-4. **Rewrite** the entire export tab (clear + replace). Idempotent: re-running produces the same set for the same source data.
-5. **Source updates:** For each row written to the export tab, set `google_ads_export_status=ready`, `google_ads_export_type=offline_export`, `google_ads_export_batch_id`, identifier columns, clear `google_ads_last_error` — unless the source row is already `ready` or `exported` and `force` is false.
-6. **Stale `ready` cleanup:** Source rows still marked **`ready`** but **not** present in the rebuilt export set (e.g. disqualified, lost click id, or no longer `google_ads_eligible`) get **`google_ads_export_status=disqualified_removed`**, batch id cleared. Rows marked **`exported`** or **`adjustment_required`** are not altered by this step.
-7. **Exported lead later disqualified:** When admin sets **`qualification_status`** to **`disqualified`** and the row was previously **`google_ads_export_status=exported`** with **`qualified`** or **`won`**, **`PATCH`** / **`bulk-update`** automatically merge **`google_ads_export_status=adjustment_required`**, **`google_ads_adjustment_type=RETRACTION`**, ensure **`google_ads_conversion_name`** is set for the adjustment CSV, and clear **`google_ads_adjustment_value`**. Run **`POST /admin/leads/google-ads/export-adjustments`** to produce the retraction file. This does not remove the conversion inside Google Ads until you import that adjustment.
-8. Append a row to `GoogleAds_Export_Log` with `export_type` `offline_export`.
+2. Keep rows that pass [`enrich_lead_row`](../python-scripts/services/google_ads_export.py) (`ads_exportable`: `qualified` or `won`, click id present, conversion name resolvable) **and** have truthy `google_ads_eligible` (`true` / `1` / `yes`, case-insensitive). Rows with **`google_ads_export_override`** set to **`exclude`** (case-insensitive) are skipped (`skipped_export_override_exclude`).
+3. **Auto-enrich on qualification:** When **`qualification_status`** changes via **`PATCH /admin/leads/{event_id}`** or **`POST /admin/leads/bulk-update`**, the server merges [`compute_ads_enrichment_fields`](../python-scripts/services/google_ads_export.py) into the source row **before** the offline sync: sets **`google_ads_eligible`** to **`TRUE`** or **`FALSE`**, fills **`google_ads_identifier_type`** / **`google_ads_identifier_value`**, and fills conversion name / value / currency when those sheet cells are empty (manual overrides preserved). **`disqualified`** rows get **`google_ads_eligible=FALSE`** only. Use **`google_ads_export_override=exclude`** in the sheet or PATCH to block export for edge cases without turning off automation.
+4. **Dedupe** by `export_key` (see below). If several source rows share the same key, the row with the **latest** `occurred_at` wins.
+5. **Rewrite** the entire export tab (clear + replace). Idempotent: re-running produces the same set for the same source data.
+6. **Source updates:** For each row written to the export tab, set `google_ads_export_status=ready`, `google_ads_export_type=offline_export`, `google_ads_export_batch_id`, identifier columns, clear `google_ads_last_error` — unless the source row is already `ready` or `exported` and `force` is false.
+7. **Stale `ready` cleanup:** Source rows still marked **`ready`** but **not** present in the rebuilt export set (e.g. disqualified, lost click id, or no longer `google_ads_eligible`) get **`google_ads_export_status=disqualified_removed`**, batch id cleared. Rows marked **`exported`** or **`adjustment_required`** are not altered by this step.
+8. **Exported lead later disqualified:** When admin sets **`qualification_status`** to **`disqualified`** and the row was previously **`google_ads_export_status=exported`** with **`qualified`** or **`won`**, **`PATCH`** / **`bulk-update`** automatically merge **`google_ads_export_status=adjustment_required`**, **`google_ads_adjustment_type=RETRACTION`**, ensure **`google_ads_conversion_name`** is set for the adjustment CSV, and clear **`google_ads_adjustment_value`**. Run **`POST /admin/leads/google-ads/export-adjustments`** to produce the retraction file. This does not remove the conversion inside Google Ads until you import that adjustment.
+9. Append a row to `GoogleAds_Export_Log` with `export_type` `offline_export`.
 
 ## Export key
 
@@ -75,9 +76,9 @@ Or call the admin API after logging in.
 
 ## Backfill
 
-1. Ensure Leads sheet has new headers (`qualified_at`, `won_at`) — they are merged automatically on next read via `ensure_leads_headers`.
-2. Set `google_ads_eligible` to `true` for rows that should appear in the export tab.
-3. Run `POST .../sync-offline-export` once (or with `"force": true` if you need to refresh `ready` metadata on rows already marked exported).
+1. Ensure Leads sheet has new headers (`qualified_at`, `won_at`, **`google_ads_export_override`**) — they are merged automatically on next read via `ensure_leads_headers`.
+2. For existing qualified/won rows, either run **`POST .../sync-offline-export`** with **`force: true`**, or touch **`qualification_status`** once in admin (same value) so PATCH re-runs auto-enrich + sync — either path repopulates **`google_ads_eligible`** and related fields for exportable leads.
+3. Optional: run `POST .../sync-offline-export` on a schedule or after bulk sheet edits outside the admin API.
 
 ## Tests
 

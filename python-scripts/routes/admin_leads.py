@@ -36,6 +36,7 @@ from services.google_ads_export import (
     adjustment_fields_for_exported_disqualify,
     build_adjustment_export_rows,
     build_qualified_export_rows,
+    compute_ads_enrichment_fields,
     enrich_lead_row,
     new_batch_id,
     qualified_export_csv_string,
@@ -184,6 +185,19 @@ def _row_matches_filters(
 _OFFLINE_EXPORT_SYNC_STATUSES = frozenset({"qualified", "won", "disqualified"})
 
 
+def _merge_qualification_ads_enrichment(old_row: dict[str, Any], updates: dict[str, Any]) -> None:
+    """When qualification_status is in updates, persist derived Google Ads sheet fields (in-place)."""
+    if "qualification_status" not in updates:
+        return
+    preview = {**old_row, **updates}
+    extra = compute_ads_enrichment_fields(preview)
+    for k, v in extra.items():
+        if k == "google_ads_eligible":
+            updates[k] = v
+        else:
+            updates.setdefault(k, v)
+
+
 def _maybe_sync_offline_export(
     svc: Any,
     spreadsheet_id: str,
@@ -285,6 +299,7 @@ class LeadPatchBody(BaseModel):
     lead_value: float | None = None
     google_ads_conversion_value: float | str | None = None
     google_ads_conversion_name: str | None = None
+    google_ads_export_override: str | None = None
     qualified_at: str | None = None
     won_at: str | None = None
 
@@ -625,6 +640,7 @@ async def patch_lead(event_id: str, body: LeadPatchBody, _: dict = Depends(verif
             adj = adjustment_fields_for_exported_disqualify(old_row)
             if adj:
                 updates.update(adj)
+        _merge_qualification_ads_enrichment(old_row, updates)
 
     ok = update_row_by_event_id(svc, spreadsheet_id, tab, event_id, updates)
     if not ok:
@@ -712,6 +728,10 @@ async def bulk_update(body: BulkUpdateBody, _: dict = Depends(verify_admin_sessi
         "google_ads_export_batch_id",
         "google_ads_adjustment_type",
         "google_ads_adjustment_value",
+        "google_ads_eligible",
+        "google_ads_identifier_type",
+        "google_ads_identifier_value",
+        "google_ads_currency",
         "qualified_at",
         "won_at",
     }
@@ -745,6 +765,8 @@ async def bulk_update(body: BulkUpdateBody, _: dict = Depends(verify_admin_sessi
                 adj = adjustment_fields_for_exported_disqualify(old)
                 if adj:
                     per_updates.update(adj)
+            if old:
+                _merge_qualification_ads_enrichment(old, per_updates)
         if update_row_by_event_id(svc, spreadsheet_id, tab, eid_s, per_updates):
             updated += 1
         else:

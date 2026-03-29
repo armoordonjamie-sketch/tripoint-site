@@ -29,6 +29,7 @@ EDITABLE_LEAD_FIELDS: list[str] = [
     "lead_value",
     "google_ads_conversion_value",
     "google_ads_conversion_name",
+    "google_ads_export_override",
     "qualified_at",
     "won_at",
 ]
@@ -88,6 +89,7 @@ GOOGLE_ADS_EXTRA_COLUMNS: list[str] = [
     "google_ads_eligible",
     "google_ads_identifier_type",
     "google_ads_identifier_value",
+    "google_ads_export_override",
 ]
 
 # GA4 web stream IDs for Measurement Protocol session linkage (captured on lead track)

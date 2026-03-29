@@ -96,6 +96,29 @@ def test_disqualified_row_excluded() -> None:
     assert stats["skipped_not_ads_exportable"] >= 1
 
 
+def test_skipped_when_google_ads_eligible_blank() -> None:
+    """Without truthy google_ads_eligible, exportable rows are skipped (pre-auto-enrich edge)."""
+    row = _base_row(google_ads_eligible="")
+    rows, stats = build_offline_export_set([row], batch_id="x")
+    assert rows == []
+    assert stats["skipped_not_google_ads_eligible"] == 1
+
+
+def test_auto_eligible_row_included() -> None:
+    """Row with google_ads_eligible TRUE appears in export set (post-enrich sheet state)."""
+    row = _base_row(google_ads_eligible="TRUE")
+    rows, stats = build_offline_export_set([row], batch_id="x")
+    assert len(rows) == 1
+    assert stats["skipped_not_google_ads_eligible"] == 0
+
+
+def test_export_override_exclude_skips_row() -> None:
+    row = _base_row(google_ads_export_override="exclude", event_id="e-exc")
+    rows, stats = build_offline_export_set([row], batch_id="x")
+    assert rows == []
+    assert stats["skipped_export_override_exclude"] == 1
+
+
 def test_disqualified_after_qualified_excluded() -> None:
     """Same lead data: when status flips to disqualified, it drops out of the export set."""
     qualified = _base_row(
