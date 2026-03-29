@@ -76,6 +76,10 @@ export interface LeadRow {
     ga_client_id: string;
     /** GA4 session id from web stream cookie */
     ga_session_id: string;
+    /** Set when lead becomes qualified (offline conversion time); absent until column exists / set */
+    qualified_at?: string;
+    /** Set when lead becomes won */
+    won_at?: string;
 }
 
 /** Computed fields returned by API */

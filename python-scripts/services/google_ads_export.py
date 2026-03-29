@@ -108,6 +108,33 @@ def enrich_lead_row(row: dict[str, Any]) -> dict[str, Any]:
     return out
 
 
+def adjustment_fields_for_exported_disqualify(old_row: dict[str, Any]) -> dict[str, Any] | None:
+    """
+    When a lead was already uploaded to Google Ads (sheet status exported) as qualified/won and
+    admin sets qualification to disqualified, queue an offline RETRACTION and surface ops state.
+
+    Call with the pre-update row (still qualified/won + exported). Returns fields to merge into PATCH/bulk.
+    """
+    old_qs = _s(old_row.get("qualification_status")).lower()
+    if old_qs not in ("qualified", "won"):
+        return None
+    ex = _s(old_row.get("google_ads_export_status")).lower()
+    if ex != "exported":
+        return None
+    cfg = ads_config()
+    en = enrich_lead_row(dict(old_row))
+    conv = _s(old_row.get("google_ads_conversion_name")) or _s(en.get("computed_conversion_name"))
+    if not conv:
+        conv = str(cfg["qualified_conversion_name"]) if old_qs == "qualified" else str(cfg["won_conversion_name"])
+    return {
+        "google_ads_export_status": "adjustment_required",
+        "google_ads_adjustment_type": "RETRACTION",
+        "google_ads_adjustment_value": "",
+        "google_ads_conversion_name": conv,
+        "google_ads_last_error": "",
+    }
+
+
 def _occurred_at_to_london_dt(row: dict[str, Any]) -> datetime | None:
     raw = _s(row.get("occurred_at"))
     if not raw:
@@ -176,7 +203,10 @@ def build_adjustment_export_rows(rows: list[dict[str, Any]]) -> list[dict[str, A
         conv_name = _s(row.get("google_ads_conversion_name")) or _s(row.get("computed_conversion_name"))
         if not conv_name:
             qs = _s(row.get("qualification_status")).lower()
-            conv_name = str(cfg["qualified_conversion_name"]) if qs == "qualified" else str(cfg["won_conversion_name"])
+            if qs == "qualified":
+                conv_name = str(cfg["qualified_conversion_name"])
+            elif qs == "won":
+                conv_name = str(cfg["won_conversion_name"])
         restated = _parse_float(row.get("google_ads_adjustment_value"))
         if adj_type == "RETRACTION":
             adj_val = 0.0

@@ -29,6 +29,8 @@ EDITABLE_LEAD_FIELDS: list[str] = [
     "lead_value",
     "google_ads_conversion_value",
     "google_ads_conversion_name",
+    "qualified_at",
+    "won_at",
 ]
 
 # Original tracking columns (before Google Ads ops extensions)
@@ -91,9 +93,15 @@ GOOGLE_ADS_EXTRA_COLUMNS: list[str] = [
 # GA4 web stream IDs for Measurement Protocol session linkage (captured on lead track)
 LEAD_ATTRIBUTION_EXTRA_COLUMNS: list[str] = ["ga_client_id", "ga_session_id"]
 
+# Set when admin moves lead to qualified / won (offline conversion time source)
+QUALIFICATION_TIMESTAMP_COLUMNS: list[str] = ["qualified_at", "won_at"]
+
 # Full header row for the Leads tab (append path uses this)
 LEADS_COLUMNS: list[str] = (
-    list(BASE_LEADS_COLUMNS) + list(GOOGLE_ADS_EXTRA_COLUMNS) + list(LEAD_ATTRIBUTION_EXTRA_COLUMNS)
+    list(BASE_LEADS_COLUMNS)
+    + list(GOOGLE_ADS_EXTRA_COLUMNS)
+    + list(LEAD_ATTRIBUTION_EXTRA_COLUMNS)
+    + list(QUALIFICATION_TIMESTAMP_COLUMNS)
 )
 
 EXPORT_LOG_TAB = "GoogleAds_Export_Log"
@@ -111,6 +119,47 @@ EXPORT_LOG_COLUMNS: list[str] = [
 
 QUALIFIED_EXPORT_TAB = "GoogleAds_Qualified_Export"
 ADJUSTMENTS_EXPORT_TAB = "GoogleAds_Adjustments_Export"
+
+# Deduped rows ready for Google Ads offline import (synced from Leads tab)
+OFFLINE_EXPORT_TAB: str = (
+    os.getenv("GOOGLE_ADS_OFFLINE_EXPORT_TAB", "google_ads_offline_export").strip() or "google_ads_offline_export"
+)
+
+# Column order for OFFLINE_EXPORT_TAB (import-friendly + audit context)
+OFFLINE_EXPORT_COLUMNS: list[str] = [
+    "export_key",
+    "journey_id",
+    "source_event_id",
+    "source_event_name",
+    "qualification_status",
+    "conversion_name",
+    "conversion_time",
+    "conversion_value",
+    "currency",
+    "identifier_type",
+    "identifier_value",
+    "gclid",
+    "gbraid",
+    "wbraid",
+    "ga_client_id",
+    "ga_session_id",
+    "lead_channel",
+    "contact_method",
+    "click_location",
+    "form_name",
+    "service_interest",
+    "vehicle_make",
+    "vehicle_model",
+    "page",
+    "utm_source",
+    "utm_medium",
+    "utm_campaign",
+    "notes",
+    "source_row_status",
+    "exported_at",
+    "export_batch_id",
+    "export_ready",
+]
 
 
 def ads_config() -> dict[str, str | float]:

@@ -21,9 +21,11 @@ from db import (
 from lead_constants import (
     ADJUSTMENTS_EXPORT_TAB,
     EDITABLE_LEAD_FIELDS,
+    OFFLINE_EXPORT_TAB,
     QUALIFIED_EXPORT_TAB,
     ads_config,
 )
+from services.ads_offline_sync import run_offline_export_sync
 from services.auth import verify_admin_session
 from services import sheets_leads
 from services.ga4_measurement import (
@@ -31,6 +33,7 @@ from services.ga4_measurement import (
     send_admin_qualification_ga4,
 )
 from services.google_ads_export import (
+    adjustment_fields_for_exported_disqualify,
     build_adjustment_export_rows,
     build_qualified_export_rows,
     enrich_lead_row,
@@ -44,7 +47,6 @@ from services.google_ads_export import (
 from services.sheets_leads import (
     append_export_log_row,
     apply_leads_sheet_formatting,
-    bulk_update_rows_by_event_ids,
     get_spreadsheet_config,
     read_all_lead_rows,
     read_rows_by_journey_id,
@@ -178,6 +180,38 @@ def _row_matches_filters(
     return True
 
 
+# Qualification transitions that should rebuild the offline export tab (full sheet resync).
+_OFFLINE_EXPORT_SYNC_STATUSES = frozenset({"qualified", "won", "disqualified"})
+
+
+def _maybe_sync_offline_export(
+    svc: Any,
+    spreadsheet_id: str,
+    tab: str,
+    old_qs: str,
+    new_qs: str,
+    *,
+    triggered_by: str,
+) -> dict[str, Any] | None:
+    """
+    If qualification_status changed and either side is export-relevant, rebuild google_ads_offline_export.
+    Never raises — failures are logged and returned in the dict.
+    """
+    o = str(old_qs or "").strip().lower()
+    n = str(new_qs or "").strip().lower()
+    if o == n:
+        return None
+    if o not in _OFFLINE_EXPORT_SYNC_STATUSES and n not in _OFFLINE_EXPORT_SYNC_STATUSES:
+        return None
+    try:
+        return run_offline_export_sync(
+            svc, spreadsheet_id, tab, force=True, triggered_by=triggered_by
+        )
+    except Exception as e:
+        logger.exception("offline export auto-sync failed (%s): %s", triggered_by, e)
+        return {"ok": False, "error": str(e), "tab": OFFLINE_EXPORT_TAB}
+
+
 def _row_for_ga4_qualification(row: dict[str, Any]) -> dict[str, Any]:
     """Merge sheet row with computed click identifiers for MP params (no PII)."""
     e = enrich_lead_row(dict(row))
@@ -251,6 +285,8 @@ class LeadPatchBody(BaseModel):
     lead_value: float | None = None
     google_ads_conversion_value: float | str | None = None
     google_ads_conversion_name: str | None = None
+    qualified_at: str | None = None
+    won_at: str | None = None
 
 
 class BulkUpdateBody(BaseModel):
@@ -272,6 +308,10 @@ class ExportQualifiedBody(BaseModel):
 class ExportAdjustmentsBody(BaseModel):
     event_ids: list[str] | None = None
     write_to_sheet: bool = False
+
+
+class SyncOfflineExportBody(BaseModel):
+    force: bool = False
 
 
 @router.get("/google-ads/exports")
@@ -439,6 +479,24 @@ async def export_adjustments(payload: ExportAdjustmentsBody, _: dict = Depends(v
     }
 
 
+@router.post("/google-ads/sync-offline-export")
+async def sync_offline_export(payload: SyncOfflineExportBody, _: dict = Depends(verify_admin_session)):
+    spreadsheet_id, tab = get_spreadsheet_config()
+    if not spreadsheet_id:
+        raise HTTPException(status_code=503, detail="Sheets not configured")
+    svc = _service()
+    result = run_offline_export_sync(
+        svc,
+        spreadsheet_id,
+        tab,
+        force=payload.force,
+        triggered_by="admin_api",
+    )
+    if not result.get("ok"):
+        raise HTTPException(status_code=500, detail=result.get("errors") or ["sync failed"])
+    return {"offline_export_tab": OFFLINE_EXPORT_TAB, **result}
+
+
 @router.get("/journey/{journey_id}")
 async def get_journey(journey_id: str, _: dict = Depends(verify_admin_session)):
     spreadsheet_id, tab = get_spreadsheet_config()
@@ -555,6 +613,19 @@ async def patch_lead(event_id: str, body: LeadPatchBody, _: dict = Depends(verif
     if not old_row:
         raise HTTPException(status_code=404, detail="Lead not found")
 
+    if "qualification_status" in updates:
+        new_qs = str(updates.get("qualification_status") or "").strip().lower()
+        old_qs = str(old_row.get("qualification_status") or "").strip().lower()
+        now_ts = datetime.now(LONDON).isoformat()
+        if new_qs == "qualified" and old_qs != "qualified":
+            updates.setdefault("qualified_at", now_ts)
+        if new_qs == "won" and old_qs != "won":
+            updates.setdefault("won_at", now_ts)
+        if new_qs == "disqualified":
+            adj = adjustment_fields_for_exported_disqualify(old_row)
+            if adj:
+                updates.update(adj)
+
     ok = update_row_by_event_id(svc, spreadsheet_id, tab, event_id, updates)
     if not ok:
         raise HTTPException(status_code=404, detail="Lead not found")
@@ -570,7 +641,22 @@ async def patch_lead(event_id: str, body: LeadPatchBody, _: dict = Depends(verif
                 str(new_row.get("qualification_status") or "").strip(),
                 ga4_sync,
             )
-            return {"ok": True, "lead": enrich_lead_row(new_row), "ga4_qualification_sync": ga4_sync}
+            offline_export_sync = None
+            if "qualification_status" in updates:
+                offline_export_sync = _maybe_sync_offline_export(
+                    svc,
+                    spreadsheet_id,
+                    tab,
+                    str(old_row.get("qualification_status") or ""),
+                    str(new_row.get("qualification_status") or ""),
+                    triggered_by="admin_patch",
+                )
+            return {
+                "ok": True,
+                "lead": enrich_lead_row(new_row),
+                "ga4_qualification_sync": ga4_sync,
+                "offline_export_sync": offline_export_sync,
+            }
     return {
         "ok": True,
         "ga4_qualification_sync": {
@@ -584,6 +670,7 @@ async def patch_lead(event_id: str, body: LeadPatchBody, _: dict = Depends(verif
             "ga4_sync_validation_messages": [],
             "ga4_sync_session_id_policy": None,
         },
+        "offline_export_sync": None,
     }
 
 
@@ -625,6 +712,8 @@ async def bulk_update(body: BulkUpdateBody, _: dict = Depends(verify_admin_sessi
         "google_ads_export_batch_id",
         "google_ads_adjustment_type",
         "google_ads_adjustment_value",
+        "qualified_at",
+        "won_at",
     }
     for k in list(merged.keys()):
         if k not in allowed_bulk:
@@ -638,7 +727,29 @@ async def bulk_update(body: BulkUpdateBody, _: dict = Depends(verify_admin_sessi
         if str(r.get("event_id") or "").strip() in eid_set
     }
 
-    result = bulk_update_rows_by_event_ids(svc, spreadsheet_id, tab, body.event_ids, merged)
+    now_ts = datetime.now(LONDON).isoformat()
+    updated = 0
+    missing: list[str] = []
+    for eid in body.event_ids:
+        eid_s = str(eid).strip()
+        per_updates = dict(merged)
+        old = before_map.get(eid_s)
+        if old and "qualification_status" in per_updates:
+            new_qs = str(per_updates.get("qualification_status") or "").strip().lower()
+            old_qs = str(old.get("qualification_status") or "").strip().lower()
+            if new_qs == "qualified" and old_qs != "qualified":
+                per_updates.setdefault("qualified_at", now_ts)
+            if new_qs == "won" and old_qs != "won":
+                per_updates.setdefault("won_at", now_ts)
+            if new_qs == "disqualified" and old:
+                adj = adjustment_fields_for_exported_disqualify(old)
+                if adj:
+                    per_updates.update(adj)
+        if update_row_by_event_id(svc, spreadsheet_id, tab, eid_s, per_updates):
+            updated += 1
+        else:
+            missing.append(eid_s)
+    result = {"updated": updated, "missing_event_ids": missing}
 
     rows_after, _ = read_all_lead_rows(svc, spreadsheet_id, tab)
     after_map = {str(r.get("event_id") or "").strip(): dict(r) for r in rows_after}
@@ -697,6 +808,16 @@ async def bulk_update(body: BulkUpdateBody, _: dict = Depends(verify_admin_sessi
             ev["skipped_reason"] = reason or "measurement_protocol_failed"
         ga4_events.append(ev)
 
+    offline_export_sync = None
+    if "qualification_status" in merged:
+        try:
+            offline_export_sync = run_offline_export_sync(
+                svc, spreadsheet_id, tab, force=True, triggered_by="admin_bulk"
+            )
+        except Exception as e:
+            logger.exception("offline export bulk auto-sync failed: %s", e)
+            offline_export_sync = {"ok": False, "error": str(e), "tab": OFFLINE_EXPORT_TAB}
+
     return {
         "ok": True,
         **result,
@@ -704,6 +825,7 @@ async def bulk_update(body: BulkUpdateBody, _: dict = Depends(verify_admin_sessi
             "summary": ga4_summary,
             "events": ga4_events[:100],
         },
+        "offline_export_sync": offline_export_sync,
     }
 
 

@@ -287,14 +287,15 @@ Columns written in order (header row auto-created):
 - **Navigation:** Shared **`AdminNav`** (Bookings | Leads | Reports | Log out) on admin dashboard, reports, and leads pages.
 - **Features:** Server-backed table (filters, sort, pagination), row selection, bulk actions bar, detail drawer (attribution, qualification edits, journey history by `journey_id`), **Google Ads export** panel (qualified + adjustment CSV flows, export history downloads), optional **CSV export** of the visible table, toast notifications (`toast-context` + `useToast`).
 - **API client:** `src/lib/adminApi.ts` — typed `fetch` to `/api/admin/leads/*` with credentials.
-- **Types:** `src/types/leads.ts` — mirrors backend enums (`qualification_status`, `disqualify_reason`, `vehicle_make`) and sheet column names.
+- **Types:** `src/types/leads.ts` — mirrors backend enums (`qualification_status`, `disqualify_reason`, `vehicle_make`) and sheet column names; optional **`qualified_at`** / **`won_at`** for offline conversion timestamps.
 
 ### 11.2 Backend (`python-scripts`)
 
 - **Router:** `routes/admin_leads.py` — included from `api.py`; all routes use **`verify_admin_session`** (cookie).
 - **Sheets:** `services/sheets_leads.py` — retains append + idempotent dedupe path; adds read-all, header merge for new columns, update by `event_id`, bulk update, optional **data validation** + frozen header (`apply_leads_sheet_formatting`), export log append, dedicated export tab writes.
-- **Constants:** `lead_constants.py` — column lists, dropdown values, export tab names, `ads_config()` defaults from env.
+- **Constants:** `lead_constants.py` — column lists, dropdown values, export tab names, `ads_config()` defaults from env, **`OFFLINE_EXPORT_TAB`** / **`OFFLINE_EXPORT_COLUMNS`** for the deduped offline-import sheet.
 - **Google Ads helpers:** `services/google_ads_export.py` — eligibility (`ads_exportable`, click-id priority gclid → wbraid → gbraid), qualified/adjustment CSV row builders.
+- **Offline export tab sync:** `services/ads_offline_sync.py` — rebuilds **`google_ads_offline_export`** from the Leads tab (filter: `ads_exportable` + truthy **`google_ads_eligible`**, dedupe by **`export_key`**); updates source rows to **`google_ads_export_status=ready`** (unless already `ready`/`exported`, or **`force`** on the API). Developer doc: **`docs/google_ads_offline_export.md`**.
 - **SQLite:** `google_ads_exports` table stores **export_id → CSV** for `GET /admin/leads/google-ads/exports/{export_id}` downloads (history list via `GET .../exports`).
 
 ### 11.3 New / noteworthy HTTP endpoints
@@ -309,6 +310,7 @@ Columns written in order (header row auto-created):
 | POST | `/admin/leads/sync-sheet-validations` | Sheet dropdowns + header formatting |
 | POST | `/admin/leads/google-ads/export-qualified` | Qualified/won export + optional Sheet tab |
 | POST | `/admin/leads/google-ads/export-adjustments` | Adjustment export (RETRACTION/RESTATEMENT rows) |
+| POST | `/admin/leads/google-ads/sync-offline-export` | Rebuild deduped **`google_ads_offline_export`** tab from Leads; body `{ "force": false }` |
 | GET | `/admin/leads/google-ads/exports` | Export history metadata |
 | GET | `/admin/leads/google-ads/exports/{export_id}` | Download CSV |
 
@@ -318,7 +320,9 @@ Columns written in order (header row auto-created):
 
 These columns (including click identifiers) support admin listing, filters, and Google Ads CSV export; they are **not** copied into GA4 Measurement Protocol under `google_*` parameter names (GA4 forbids that prefix on custom event params).
 
-Optional tabs: `GoogleAds_Qualified_Export`, `GoogleAds_Adjustments_Export`, `GoogleAds_Export_Log`.
+**Additional Leads columns (after `ga_session_id`):** **`qualified_at`**, **`won_at`** — appended via header merge; set automatically when admin sets **`qualification_status`** to **`qualified`** or **`won`** via PATCH or bulk-update (ISO timestamp), for use as offline **conversion time** in the export tab (fallback: **`occurred_at`**).
+
+Optional tabs: `GoogleAds_Qualified_Export`, `GoogleAds_Adjustments_Export`, `GoogleAds_Export_Log`, **`google_ads_offline_export`** (deduped import-ready rows; tab name overridable via **`GOOGLE_ADS_OFFLINE_EXPORT_TAB`**).
 
 ### 11.5 Environment variables (see `.env.example`)
 
@@ -329,11 +333,21 @@ Optional tabs: `GoogleAds_Qualified_Export`, `GoogleAds_Adjustments_Export`, `Go
 | `GOOGLE_ADS_WON_CONVERSION_NAME` | Default for `won` |
 | `GOOGLE_ADS_DEFAULT_CURRENCY` | e.g. `GBP` |
 | `GOOGLE_ADS_DEFAULT_QUALIFIED_VALUE` / `GOOGLE_ADS_DEFAULT_WON_VALUE` | Fallback values when none in sheet |
+| `GOOGLE_ADS_OFFLINE_EXPORT_TAB` | Optional override for offline export sheet tab name (default `google_ads_offline_export`) |
 
 ### 11.6 Operational notes
 
 - **Listing** reads the full Leads sheet in memory and filters in Python — acceptable for typical volumes; scale-up may need caching or archival.
 - **Public lead capture** unchanged: `POST /leads/track` still dedupes on `event_id` and appends rows; new columns default empty via `LEADS_COLUMNS` alignment.
+
+### 11.7 Google Ads offline export layer (`google_ads_offline_export`)
+
+- **Purpose:** A clean, deduplicated tab for Google Ads **offline conversion import** (CSV workflow unchanged elsewhere). Raw Leads remains the audit log.
+- **Export key (dedupe):** `{journey_id}:{qualification_status}:{conversion_name}:{identifier_value}`; if multiple source rows match, the one with the **latest** **`occurred_at`** wins. Full column list: **`OFFLINE_EXPORT_COLUMNS`** in `lead_constants.py` (includes **`source_event_name`** for audit; **`conversion_name`** is the Ads action, not `phone_click` / `whatsapp_click`).
+- **Sync:** Idempotent full tab rewrite (`write_export_tab`). Successful runs set source **`google_ads_export_status`** to **`ready`**, **`google_ads_export_type`** to **`offline_export`**, batch + identifier fields, and append **`GoogleAds_Export_Log`** with `export_type` **`offline_export`**.
+- **Auto-sync on qualification edits:** **`PATCH /admin/leads/{event_id}`** runs offline export sync when **`qualification_status`** is in the patch and the old/new values differ with at least one side in **`qualified` / `won` / `disqualified`**. **`POST /admin/leads/bulk-update`** runs one sync when **`qualification_status`** is in the merged updates. Both use **`force: true`** so existing **`ready`** rows refresh. Response field **`offline_export_sync`** carries the sync summary (or an error object); sync failures do not roll back the sheet edit.
+- **Disqualified / no longer exportable:** Rebuild drops those rows from the export tab; source rows stuck in **`ready`** get **`disqualified_removed`**. Rows that were **`exported`** as **`qualified`** / **`won`** and are then set to **`disqualified`** via PATCH or bulk-update get **`google_ads_export_status=adjustment_required`**, **`google_ads_adjustment_type=RETRACTION`**, and **`google_ads_conversion_name`** filled for the adjustments CSV — then use **`POST /admin/leads/google-ads/export-adjustments`** to retract in Google Ads.
+- **Tests:** `python-scripts/tests/test_ads_offline_sync.py`, `python-scripts/tests/test_google_ads_export.py` (`pytest` from `python-scripts`).
 
 ---
 
