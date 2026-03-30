@@ -3,6 +3,7 @@ import { Section } from '@/components/Section';
 import { PricingTable } from '@/components/PricingTable';
 import { CTAButton } from '@/components/CTAButton';
 import { Notice } from '@/components/Notice';
+import { ExpandableReportImage } from '@/components/ExpandableReportImage';
 import { siteConfig } from '@/config/site';
 import { trackNavClick } from '@/lib/analytics';
 import { ZoneCalculator } from '@/components/ZoneCalculator';
@@ -92,6 +93,35 @@ export function PricingPage() {
                     <Notice variant="info">
                         <strong>VOR Priority Dispatch:</strong> Limited slots available. WhatsApp us for the fastest response if your vehicle is off the road.
                     </Notice>
+                </div>
+
+                <div className="mx-auto mt-12 max-w-3xl">
+                    <div className="flex flex-col gap-6 overflow-hidden rounded-2xl border border-border-default bg-surface-alt p-6 sm:flex-row sm:items-center sm:p-8">
+                        <div className="shrink-0 overflow-hidden rounded-lg border border-border-default sm:w-52">
+                            <ExpandableReportImage
+                                src="/images/sample-report/08_recommendation_bullets.png"
+                                alt="Recommendation bullets excerpt from a written diagnostic report"
+                                className="overflow-hidden rounded-lg"
+                            />
+                        </div>
+                        <div className="min-w-0 flex-1">
+                            <h3 className="text-xl font-bold text-text-primary">Why pay for diagnosis?</h3>
+                            <p className="mt-2 text-sm text-text-secondary leading-relaxed">
+                                The real cost is often guessing wrong: the wrong part, the wrong repair, or repeating the same visit.
+                                A proper diagnostic fee buys a written outcome and a clearer path before you spend more.
+                            </p>
+                            <div className="mt-4">
+                                <CTAButton
+                                    href="/sample-diagnostic-report"
+                                    variant="outline"
+                                    size="sm"
+                                    onClick={() => trackNavClick('/sample-diagnostic-report', 'See a real diagnostic report', 'pricing')}
+                                >
+                                    See a real diagnostic report
+                                </CTAButton>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 {/* CTA */}

@@ -131,6 +131,22 @@ const faqCategories: FaqCategory[] = [
                 question: 'What if you can\'t find the fault?',
                 answer: 'It\'s rare, but some faults require extended monitoring, road testing, or stripping that isn\'t possible mobile. If we can\'t definitively identify the root cause on site, we\'ll tell you honestly - along with exactly what the next diagnostic step should be. You\'ll never be charged for guesswork.',
             },
+            {
+                question: 'Do I get a written report after every diagnostic visit?',
+                answer: 'Yes. Every Standard Diagnosis ends with a written outcome: what we found, what we checked, the most likely root cause, and recommended next steps. A redacted walkthrough of one real visit is on our Sample Diagnostic Report page (linked from Standard Diagnosis, Pricing, and the homepage).',
+            },
+            {
+                question: 'Is a diagnostic visit just a code scan?',
+                answer: 'No. Fault codes are a starting point. We use live data, plausibility checks, guided tests where appropriate, and physical checks when needed. The goal is a reasoned conclusion you can act on—not a list of codes with a guess.',
+            },
+            {
+                question: 'Can you help if I need workshop-only work afterwards?',
+                answer: 'Yes. If the repair needs equipment we cannot use safely on site, you still leave with documented findings and a clear next step. Many customers use that write-up to get the right repair done elsewhere without paying twice for guesswork.',
+            },
+            {
+                question: 'Will you recommend deletes or bypasses for AdBlue / DPF faults?',
+                answer: 'No. We are compliance-first. We do not offer or recommend emissions deletes, bypasses, or defeat devices. We diagnose and repair emissions systems properly and explain the compliant repair path.',
+            },
         ],
     },
     {
@@ -140,6 +156,10 @@ const faqCategories: FaqCategory[] = [
             {
                 question: 'Do you do AdBlue/DPF/EGR deletes?',
                 answer: 'No - never. Removing or defeating emissions systems is illegal for road vehicles. It causes MOT failure, ULEZ non-compliance, and can invalidate insurance. We diagnose and repair emissions systems properly and compliantly.',
+            },
+            {
+                question: 'Where can I see how you document an emissions-related diagnosis?',
+                answer: 'Emissions work gets the same written outcome as any other diagnostic visit: what was checked, what the data showed, ruled-out causes where relevant, and compliant next steps. A redacted walkthrough from one real visit is on our Sample Diagnostic Report page (linked from Standard Diagnosis, Pricing, and the homepage).',
             },
             {
                 question: 'Can you clear an AdBlue countdown?',

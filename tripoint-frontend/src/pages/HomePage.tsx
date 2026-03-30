@@ -16,6 +16,7 @@ import { galleryImages } from '@/data/galleryImages';
 import { blogPosts, getPostThumbnail } from '@/data/blogPosts';
 import { useScrollReveal } from '@/lib/useScrollReveal';
 import { OptimizedImage } from '@/components/OptimizedImage';
+import { ExpandableReportImage } from '@/components/ExpandableReportImage';
 
 /* ── Intersection Observer for scroll-reveal ─────────── */
 
@@ -327,6 +328,40 @@ export function HomePage() {
                     <CTAButton href="/about" variant="outline" size="sm" icon={<ArrowRight className="h-4 w-4" />}>
                         About TriPoint
                     </CTAButton>
+                </div>
+            </Section>
+
+            {/* ── SAMPLE REPORT PROOF ─────────────────────────── */}
+            <Section>
+                <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-12">
+                    <div className="reveal">
+                        <p className="text-sm font-semibold uppercase tracking-widest text-brand mb-3">Real Diagnostic Proof</p>
+                        <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">
+                            See What Your Written Diagnostic Outcome Looks Like
+                        </h2>
+                        <p className="mt-4 text-text-secondary leading-relaxed">
+                            Every diagnostic visit ends with a written outcome: what we checked, what we found, and what to do next.
+                            Here is a real example of how that can look—plain English, evidence, and clear next steps.
+                        </p>
+                        <div className="mt-6">
+                            <CTAButton
+                                href="/sample-diagnostic-report"
+                                icon={<ArrowRight className="h-4 w-4" />}
+                                onClick={() => trackNavClick('/sample-diagnostic-report', 'See a Real Diagnostic Report', 'home')}
+                            >
+                                See a Real Diagnostic Report
+                            </CTAButton>
+                        </div>
+                    </div>
+                    <div className="reveal">
+                        <div className="overflow-hidden rounded-2xl border border-border-default bg-surface-alt shadow-lg">
+                            <ExpandableReportImage
+                                src="/images/sample-report/01_plain_english_summary.png"
+                                alt="Plain-English conclusion excerpt from a real TriPoint diagnostic report"
+                                className="overflow-hidden rounded-2xl"
+                            />
+                        </div>
+                    </div>
                 </div>
             </Section>
 

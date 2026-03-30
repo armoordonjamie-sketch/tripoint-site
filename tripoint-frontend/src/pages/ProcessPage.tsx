@@ -3,6 +3,7 @@ import { Seo } from '@/components/Seo';
 import { Section } from '@/components/Section';
 import { CTAButton } from '@/components/CTAButton';
 import { Notice } from '@/components/Notice';
+import { ExpandableReportImage } from '@/components/ExpandableReportImage';
 import { siteConfig } from '@/config/site';
 import { trackNavClick, trackPhoneClick, trackWhatsAppClick } from '@/lib/analytics';
 import { CheckCircle2, XCircle, ClipboardCheck, Search, FileText, Phone, MessageCircle } from 'lucide-react';
@@ -79,7 +80,54 @@ export function ProcessPage() {
 
                     {/* 3-step workflow */}
                     <div className="mt-12 space-y-10">
-                        {steps.map((step) => (
+                        {steps.slice(0, 2).map((step) => (
+                            <div key={step.num} className="reveal flex gap-6">
+                                <div className="step-number shrink-0">{step.num}</div>
+                                <div>
+                                    <h2 className="text-xl font-bold text-text-primary flex items-center gap-2">
+                                        <step.icon className="h-5 w-5 text-brand" />
+                                        {step.title}
+                                    </h2>
+                                    <p className="mt-2 text-text-secondary">{step.desc}</p>
+                                </div>
+                            </div>
+                        ))}
+
+                        <div className="reveal rounded-2xl border border-brand/20 bg-brand/5 p-6 sm:p-8">
+                            <p className="text-sm font-semibold uppercase tracking-widest text-brand">Written report + options</p>
+                            <p className="mt-2 text-text-secondary">
+                                Step 3 is where findings become a document you can use: next steps, options, and workshop referral when needed.
+                                Here is a glimpse from one real visit—measured checks and a clear recommendation block.
+                            </p>
+                            <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                                <div className="overflow-hidden rounded-lg border border-border-default bg-surface-alt">
+                                    <ExpandableReportImage
+                                        src="/images/sample-report/05_voltage_proof_photos.png"
+                                        alt="Photo evidence and voltage reading from a diagnostic visit"
+                                        className="overflow-hidden rounded-lg"
+                                    />
+                                </div>
+                                <div className="overflow-hidden rounded-lg border border-border-default bg-surface-alt">
+                                    <ExpandableReportImage
+                                        src="/images/sample-report/07_next_steps_section.png"
+                                        alt="Next steps section from a written diagnostic report"
+                                        className="overflow-hidden rounded-lg"
+                                    />
+                                </div>
+                            </div>
+                            <div className="mt-4">
+                                <CTAButton
+                                    href="/sample-diagnostic-report"
+                                    variant="outline"
+                                    size="sm"
+                                    onClick={() => trackNavClick('/sample-diagnostic-report', 'See sample diagnostic report', 'process')}
+                                >
+                                    See a full report example
+                                </CTAButton>
+                            </div>
+                        </div>
+
+                        {steps.slice(2).map((step) => (
                             <div key={step.num} className="reveal flex gap-6">
                                 <div className="step-number shrink-0">{step.num}</div>
                                 <div>

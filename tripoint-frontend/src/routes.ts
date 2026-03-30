@@ -378,6 +378,16 @@ export const routeManifest: RouteEntry[] = [
         indexable: true,
     },
     {
+        path: '/sample-diagnostic-report',
+        title: 'Sample Diagnostic Report | What You Get After a Proper Vehicle Diagnosis',
+        description:
+            'See what a real written diagnostic report looks like from TriPoint Diagnostics. Plain-English findings, evidence from live data and guided tests, and clear next steps.',
+        canonicalPath: '/sample-diagnostic-report',
+        priority: 0.7,
+        changefreq: 'monthly',
+        indexable: true,
+    },
+    {
         path: '/our-work',
         title: 'Our Work',
         description:

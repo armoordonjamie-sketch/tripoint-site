@@ -45,6 +45,9 @@ const DisclaimerPage = lazy(() => import('@/pages/legal/DisclaimerPage').then((m
 const AccessibilityPage = lazy(() => import('@/pages/legal/AccessibilityPage').then((m) => ({ default: m.AccessibilityPage })));
 const OurWorkPage = lazy(() => import('@/pages/OurWorkPage').then((m) => ({ default: m.OurWorkPage })));
 const ProcessPage = lazy(() => import('@/pages/ProcessPage').then((m) => ({ default: m.ProcessPage })));
+const SampleDiagnosticReportPage = lazy(() =>
+    import('@/pages/SampleDiagnosticReportPage').then((m) => ({ default: m.SampleDiagnosticReportPage })),
+);
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage').then((m) => ({ default: m.NotFoundPage })));
 
 export function AppRoutes() {
@@ -99,6 +102,7 @@ export function AppRoutes() {
                     <Route path="about" element={<AboutPage />} />
                     <Route path="our-work" element={<OurWorkPage />} />
                     <Route path="process" element={<ProcessPage />} />
+                    <Route path="sample-diagnostic-report" element={<SampleDiagnosticReportPage />} />
                     <Route path="faq" element={<FaqPage />} />
                     <Route path="booking" element={<BookingPage />} />
                     <Route path="pay/:token" element={<PaymentPage />} />

@@ -38,7 +38,11 @@ interface OptimizedImageProps extends React.ImgHTMLAttributes<HTMLImageElement> 
 
 /** Use raw public URLs - no /images/optimized/ mirror (avoids 404 if optimize-images not run on host). */
 function useOriginalAsset(src: string): boolean {
-    return src.startsWith('/images/new-images/') || src.startsWith('/images/services/');
+    return (
+        src.startsWith('/images/new-images/') ||
+        src.startsWith('/images/services/') ||
+        src.startsWith('/images/sample-report/')
+    );
 }
 
 export function OptimizedImage({ src, priority, alt = '', className, style, ...rest }: OptimizedImageProps) {

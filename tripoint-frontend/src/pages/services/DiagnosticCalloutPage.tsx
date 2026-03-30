@@ -13,6 +13,7 @@ import { galleryImages } from '@/data/galleryImages';
 import { siteConfig } from '@/config/site';
 import { ServiceSchema, BreadcrumbSchema, FaqPageSchema } from '@/components/JsonLd';
 import { OptimizedImage } from '@/components/OptimizedImage';
+import { ExpandableReportImage } from '@/components/ExpandableReportImage';
 
 const diagnosticPhotos = [
     galleryImages[22],
@@ -266,6 +267,36 @@ export function DiagnosticCalloutPage() {
                                 </li>
                             ))}
                         </ul>
+                    </div>
+
+                    <div className="mt-12 reveal">
+                        <h2 className="text-2xl font-bold text-text-primary">What Your Written Outcome Looks Like</h2>
+                        <p className="mt-2 text-text-secondary">
+                            Every Standard Diagnosis ends with a documented written outcome. Below is a glimpse from one real visit—
+                            see the full walkthrough for how plain English, ruled-out causes, live data, and next steps fit together.
+                        </p>
+                        <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-4">
+                            {[
+                                { src: '/images/sample-report/01_plain_english_summary.png', alt: 'Plain-English summary from a diagnostic report' },
+                                { src: '/images/sample-report/02_dpf_checks_table.png', alt: 'DPF and related checks table from a diagnostic report' },
+                                { src: '/images/sample-report/03_scr_live_data_section.png', alt: 'SCR live data section from a diagnostic report' },
+                                { src: '/images/sample-report/06_technical_diagnosis_box.png', alt: 'Technical diagnosis summary from a written report' },
+                            ].map((img) => (
+                                <div key={img.src} className="overflow-hidden rounded-lg border border-border-default bg-surface-alt">
+                                    <ExpandableReportImage src={img.src} alt={img.alt} className="overflow-hidden rounded-lg" />
+                                </div>
+                            ))}
+                        </div>
+                        <div className="mt-6">
+                            <CTAButton
+                                href="/sample-diagnostic-report"
+                                variant="outline"
+                                icon={<ArrowRight className="h-4 w-4" />}
+                                onClick={() => trackNavClick('/sample-diagnostic-report', 'See the Full Report Example', 'standard_diagnosis')}
+                            >
+                                See the Full Report Example
+                            </CTAButton>
+                        </div>
                     </div>
 
                     {/* Mid-page CTA */}
