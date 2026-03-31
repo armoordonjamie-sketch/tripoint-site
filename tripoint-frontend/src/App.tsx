@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Layout } from '@/components/Layout';
+import { RouteLoadingFallback } from '@/components/RouteLoadingFallback';
 
 // Static import for LCP (landing page)
 import { HomePage } from '@/pages/HomePage';
@@ -52,7 +53,7 @@ const NotFoundPage = lazy(() => import('@/pages/NotFoundPage').then((m) => ({ de
 
 export function AppRoutes() {
     return (
-        <Suspense fallback={<div className="min-h-screen" />}>
+        <Suspense fallback={<RouteLoadingFallback />}>
             <Routes>
                 <Route element={<Layout />}>
                     {/* Public pages */}

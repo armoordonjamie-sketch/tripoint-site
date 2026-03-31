@@ -1,4 +1,4 @@
-import { createContext, useCallback, useMemo, useState, type ReactNode } from 'react';
+import { createContext, useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { X } from 'lucide-react';
 
 type ToastType = 'success' | 'error' | 'info';
@@ -22,7 +22,13 @@ const TYPE_STYLES: Record<ToastType, string> = {
 };
 
 export function ToastProvider({ children }: { children: ReactNode }) {
+    const [mounted, setMounted] = useState(false);
     const [items, setItems] = useState<ToastItem[]>([]);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
     const toast = useCallback((message: string, type: ToastType = 'info') => {
         const id = Date.now() + Math.random();
         setItems((prev) => [...prev, { id, message, type }]);
@@ -40,24 +46,26 @@ export function ToastProvider({ children }: { children: ReactNode }) {
     return (
         <ToastContext.Provider value={value}>
             {children}
-            <div className="fixed bottom-4 right-4 z-[100] flex max-w-sm flex-col gap-2 pointer-events-none">
-                {items.map((t) => (
-                    <div
-                        key={t.id}
-                        className={`pointer-events-auto flex items-start gap-2 rounded-lg border px-4 py-3 text-sm shadow-lg ${TYPE_STYLES[t.type]}`}
-                    >
-                        <p className="flex-1">{t.message}</p>
-                        <button
-                            type="button"
-                            onClick={() => dismiss(t.id)}
-                            className="shrink-0 rounded p-0.5 hover:bg-surface/50"
-                            aria-label="Dismiss"
+            {mounted && (
+                <div className="pointer-events-none fixed bottom-4 right-4 z-[100] flex max-w-sm flex-col gap-2">
+                    {items.map((t) => (
+                        <div
+                            key={t.id}
+                            className={`pointer-events-auto flex items-start gap-2 rounded-lg border px-4 py-3 text-sm shadow-lg ${TYPE_STYLES[t.type]}`}
                         >
-                            <X className="h-4 w-4" />
-                        </button>
-                    </div>
-                ))}
-            </div>
+                            <p className="flex-1">{t.message}</p>
+                            <button
+                                type="button"
+                                onClick={() => dismiss(t.id)}
+                                className="shrink-0 rounded p-0.5 hover:bg-surface/50"
+                                aria-label="Dismiss"
+                            >
+                                <X className="h-4 w-4" />
+                            </button>
+                        </div>
+                    ))}
+                </div>
+            )}
         </ToastContext.Provider>
     );
 }

@@ -29,7 +29,7 @@ const pageFaqs = [
     {
         question: 'Is this just a code scan?',
         answer:
-            'No. Fault codes are a starting point, not a diagnosis. We use live data, plausibility checks, guided tests where appropriate, and physical checks when needed. The goal is a reasoned conclusion you can act on—not a list of codes with a guess.',
+            'No. Fault codes are a starting point, not a diagnosis. We use live data, plausibility checks, guided tests where appropriate, and physical checks when needed. The goal is a reasoned conclusion you can act on, not a list of codes with a guess.',
     },
     {
         question: 'Can you still help if it needs workshop-only work afterwards?',
@@ -52,7 +52,7 @@ const strengthCards = [
     {
         icon: ListChecks,
         title: 'Ruled-out causes',
-        desc: 'Evidence that major components were not condemned without support—so spend goes where it belongs.',
+        desc: 'Evidence that major components were not condemned without support, so spend goes where it belongs.',
     },
     {
         icon: Activity,
@@ -62,7 +62,7 @@ const strengthCards = [
     {
         icon: Zap,
         title: 'Electrical confirmation',
-        desc: 'Guided checks where wiring, supply, or sensor behaviour needs to be proved—not assumed.',
+        desc: 'Guided checks where wiring, supply, or sensor behaviour needs to be proved, not assumed.',
     },
     {
         icon: Route,
@@ -85,7 +85,7 @@ const evidenceItems = [
     {
         src: `${base}/03_scr_live_data_section.png`,
         alt: 'SCR live data section with supporting diagnostic screenshots',
-        caption: 'Live data and context for the emissions path—not a single code in isolation.',
+        caption: 'Live data and context for the emissions path, not a single code in isolation.',
     },
     {
         src: `${base}/04_electrical_confirmation_table.png`,
@@ -100,7 +100,7 @@ const evidenceItems = [
     {
         src: `${base}/06_technical_diagnosis_box.png`,
         alt: 'Technical diagnosis summary box from a written report',
-        caption: 'Technical detail for those who want it—still tied to the same reasoning chain.',
+        caption: 'Technical detail for those who want it, still tied to the same reasoning chain.',
     },
     {
         src: `${base}/07_next_steps_section.png`,
@@ -214,7 +214,7 @@ export function SampleDiagnosticReportPage() {
                         A cheap code read tells you what the ECU has logged. It does not tell you whether that code is the whole story, whether another fault is driving it, or whether a major component is truly at fault. Proper diagnosis is time spent reasoning: checking plausibility, ruling out misleading paths, and recording what was tested.
                     </p>
                     <p className="mt-4 text-text-secondary leading-relaxed">
-                        You are paying for a written outcome—findings, ruled-out causes where relevant, and next steps—so you can make decisions without paying twice for the wrong part or the wrong repair.
+                        You are paying for a written outcome: findings, ruled-out causes where relevant, and next steps, so you can make decisions without paying twice for the wrong part or the wrong repair.
                     </p>
                 </div>
             </Section>
@@ -223,10 +223,10 @@ export function SampleDiagnosticReportPage() {
                 <div className="mx-auto max-w-3xl rounded-2xl border border-border-default bg-surface-alt p-6 sm:p-8">
                     <h2 className="text-2xl font-bold text-text-primary">A real example (one recent visit)</h2>
                     <p className="mt-4 text-text-secondary leading-relaxed">
-                        In a recent diagnostic visit, the vehicle had an intermittent engine management light with no obvious loss of power. The evidence pointed to a failed upstream NOx sensor rather than condemning the DPF or SCR hardware at that stage. Live data and guided electrical checks supported that conclusion. The documented next step was sensor replacement, correct reset or teach-in where required, and retest—not a shortcut around emissions compliance.
+                        In a recent diagnostic visit, the vehicle had an intermittent engine management light with no obvious loss of power. The evidence pointed to a failed upstream NOx sensor rather than condemning the DPF or SCR hardware at that stage. Live data and guided electrical checks supported that conclusion. The documented next step was sensor replacement, correct reset or teach-in where required, and retest, not a shortcut around emissions compliance.
                     </p>
                     <p className="mt-4 text-sm text-text-muted">
-                        We keep the focus on process: the same approach applies across makes and symptoms—scan and codes are only the start.
+                        We keep the focus on process: the same approach applies across makes and symptoms, where scan and codes are only the start.
                     </p>
                 </div>
             </Section>
@@ -235,7 +235,7 @@ export function SampleDiagnosticReportPage() {
                 <div className="text-center">
                     <h2 className="text-2xl font-bold text-text-primary sm:text-3xl">Why this diagnosis was strong</h2>
                     <p className="mx-auto mt-3 max-w-2xl text-text-secondary">
-                        The report is useful because it combines plain language with traceable evidence—not because it lists the most codes.
+                        The report is useful because it combines plain language with traceable evidence, not because it lists the most codes.
                     </p>
                 </div>
                 <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
@@ -317,7 +317,7 @@ export function SampleDiagnosticReportPage() {
                     <h2 className="text-2xl font-bold text-text-primary">Why diagnosis is worth paying for</h2>
                     <p className="mt-4 text-text-secondary leading-relaxed">
                         Standard Diagnosis starts from <span className="font-semibold text-brand-light">£{zoneA}</span> in Zone A
-                        (travel and up to 60 minutes on-site included). That fee is not about “reading codes”—it is about time,
+                        (travel and up to 60 minutes on-site included). That fee is not about &ldquo;reading codes&rdquo;; it is about time,
                         tooling, and judgement used to narrow the fault properly.
                     </p>
                     <p className="mt-4 text-text-secondary leading-relaxed">
@@ -370,7 +370,7 @@ export function SampleDiagnosticReportPage() {
                 <div className="mx-auto max-w-2xl text-center">
                     <h2 className="text-2xl font-bold text-text-primary sm:text-3xl">Ready for a proper answer?</h2>
                     <p className="mt-3 text-text-secondary">
-                        Book Standard Diagnosis and get a written outcome tailored to your vehicle—not a generic code printout.
+                        Book Standard Diagnosis and get a written outcome tailored to your vehicle, not a generic code printout.
                     </p>
                     <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
                         <CTAButton

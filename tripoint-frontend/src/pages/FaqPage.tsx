@@ -137,7 +137,7 @@ const faqCategories: FaqCategory[] = [
             },
             {
                 question: 'Is a diagnostic visit just a code scan?',
-                answer: 'No. Fault codes are a starting point. We use live data, plausibility checks, guided tests where appropriate, and physical checks when needed. The goal is a reasoned conclusion you can act on—not a list of codes with a guess.',
+                answer: 'No. Fault codes are a starting point. We use live data, plausibility checks, guided tests where appropriate, and physical checks when needed. The goal is a reasoned conclusion you can act on, not a list of codes with a guess.',
             },
             {
                 question: 'Can you help if I need workshop-only work afterwards?',

@@ -180,7 +180,7 @@ export function GoogleAdsExportPanel({ selectedIds, onExported }: GoogleAdsExpor
                                                 <td className="px-2 py-1">{ex.export_type}</td>
                                                 <td className="px-2 py-1">{ex.row_count}</td>
                                                 <td className="max-w-[120px] truncate px-2 py-1" title={ex.target || ''}>
-                                                    {ex.target || '—'}
+                                                    {ex.target || '-'}
                                                 </td>
                                                 <td className="px-2 py-1">{ex.status}</td>
                                                 <td className="px-2 py-1">

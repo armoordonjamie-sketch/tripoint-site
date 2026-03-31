@@ -10,7 +10,7 @@ import { getAttribution } from '@/lib/attribution';
 import { getPageAnalyticsContext, type PageAnalyticsContext } from '@/lib/analyticsContext';
 
 const JOURNEY_ID_KEY = 'tripoint_journey_id';
-/** Legacy session key (pre–journey_id model); migrated once into JOURNEY_ID_KEY. */
+/** Legacy session key (pre-journey_id model); migrated once into JOURNEY_ID_KEY. */
 const LEGACY_SESSION_LEAD_ID_KEY = 'tripoint_lead_id';
 /** Session cache for GA4 IDs when gtag resolves after cookie write (MP linkage). */
 const GA_CLIENT_STORAGE_KEY = 'tripoint_ga_client_id';
@@ -156,7 +156,7 @@ export function scheduleGa4WebIdHydration(measurementId: string): void {
 
 /**
  * Read GA4 web stream identifiers: cookies first, then sessionStorage from gtag hydration.
- * No PII — opaque IDs only.
+ * No PII; opaque IDs only.
  */
 export function getGa4WebIds(): { ga_client_id?: string; ga_session_id?: string } {
     const fromCookies = readGa4IdsFromCookies();

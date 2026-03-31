@@ -1,7 +1,7 @@
 /**
  * Attribution / Click-ID capture for Google Ads conversion tracking.
  *
- * Policy: latest-touch with non-blank preservation — new URL params merge into storage;
+ * Policy: latest-touch with non-blank preservation; new URL params merge into storage;
  * keys not in the URL keep prior values. Visits with no tracked params do not change storage.
  * Expiry: 90 days from last capture (when URL params were merged).
  *
@@ -12,7 +12,7 @@
 const STORAGE_KEY = 'tp_attribution';
 const COOKIE_NAME = 'tp_attribution';
 const CAPTURED_AT_KEY = '_captured_at';
-/** Google Ads–aligned window for first-party attribution storage */
+/** Google Ads-aligned window for first-party attribution storage */
 export const EXPIRY_DAYS = 90;
 
 /** The params we care about. */

@@ -27,7 +27,7 @@ const schema = z.object({
 type FormValues = z.infer<typeof schema>;
 
 function formatOccurredLondon(iso: string): string {
-    if (!iso) return '—';
+    if (!iso) return '-';
     const d = new Date(iso);
     if (Number.isNaN(d.getTime())) return iso;
     return d.toLocaleString('en-GB', {
@@ -190,13 +190,13 @@ export function LeadDetailDrawer({ lead, open, onClose, onSaved }: LeadDetailDra
                             Lead info
                         </h3>
                         <p>
-                            <span className="text-text-muted">event_name:</span> {lead.event_name || '—'}
+                            <span className="text-text-muted">event_name:</span> {lead.event_name || '-'}
                         </p>
                         <p>
-                            <span className="text-text-muted">lead_channel:</span> {lead.lead_channel || '—'}
+                            <span className="text-text-muted">lead_channel:</span> {lead.lead_channel || '-'}
                         </p>
                         <p>
-                            <span className="text-text-muted">click_location:</span> {lead.click_location || '—'}
+                            <span className="text-text-muted">click_location:</span> {lead.click_location || '-'}
                         </p>
                         <p>
                             <span className="text-text-muted">occurred_at (London):</span>{' '}
@@ -209,22 +209,22 @@ export function LeadDetailDrawer({ lead, open, onClose, onSaved }: LeadDetailDra
                             Page context
                         </h3>
                         <p className="break-all">
-                            <span className="text-text-muted">page:</span> {lead.page || '—'}
+                            <span className="text-text-muted">page:</span> {lead.page || '-'}
                         </p>
                         <p>
-                            <span className="text-text-muted">title:</span> {lead.title || '—'}
+                            <span className="text-text-muted">title:</span> {lead.title || '-'}
                         </p>
                         <p>
-                            <span className="text-text-muted">page_type:</span> {lead.page_type || '—'}
+                            <span className="text-text-muted">page_type:</span> {lead.page_type || '-'}
                         </p>
                         <p>
-                            <span className="text-text-muted">service_category:</span> {lead.service_category || '—'}
+                            <span className="text-text-muted">service_category:</span> {lead.service_category || '-'}
                         </p>
                         <p>
-                            <span className="text-text-muted">service_name:</span> {lead.service_name || '—'}
+                            <span className="text-text-muted">service_name:</span> {lead.service_name || '-'}
                         </p>
                         <p>
-                            <span className="text-text-muted">area_slug:</span> {lead.area_slug || '—'}
+                            <span className="text-text-muted">area_slug:</span> {lead.area_slug || '-'}
                         </p>
                     </section>
 
@@ -247,7 +247,7 @@ export function LeadDetailDrawer({ lead, open, onClose, onSaved }: LeadDetailDra
                         <p className="text-xs text-text-muted">
                             <span className="text-text-muted">Resolved identifier:</span>{' '}
                             <span className="font-mono text-text-primary">
-                                {lead.identifier_type || '—'} {lead.identifier_value ? `· ${lead.identifier_value}` : ''}
+                                {lead.identifier_type || '-'} {lead.identifier_value ? `· ${lead.identifier_value}` : ''}
                             </span>
                         </p>
                         {lead.ineligible_reason === 'missing_click_identifier' && (
@@ -262,8 +262,8 @@ export function LeadDetailDrawer({ lead, open, onClose, onSaved }: LeadDetailDra
                                 <p className="text-xs text-text-muted">Ineligible: {lead.ineligible_reason}</p>
                             )}
                         <p className="text-xs text-text-muted">
-                            Export status: {lead.google_ads_export_status || '—'} · batch:{' '}
-                            {lead.google_ads_export_batch_id || '—'}
+                            Export status: {lead.google_ads_export_status || '-'} · batch:{' '}
+                            {lead.google_ads_export_batch_id || '-'}
                         </p>
                         <h4 className="pt-1 text-[10px] font-semibold uppercase tracking-wide text-text-muted">
                             Raw attribution (sheet)
@@ -282,7 +282,7 @@ export function LeadDetailDrawer({ lead, open, onClose, onSaved }: LeadDetailDra
                         ).map(([k, v]) => (
                             <div key={k} className="flex items-center gap-2 font-mono text-xs">
                                 <span className="w-28 shrink-0 text-text-muted">{k}</span>
-                                <span className="min-w-0 flex-1 truncate">{v || '—'}</span>
+                                <span className="min-w-0 flex-1 truncate">{v || '-'}</span>
                                 {v ? (
                                     <button
                                         type="button"
@@ -324,7 +324,7 @@ export function LeadDetailDrawer({ lead, open, onClose, onSaved }: LeadDetailDra
                                 Last GA4 sync (after save)
                             </h3>
                             <p>
-                                <span className="text-text-muted">Event:</span> {lastGa4Sync.event ?? '—'}
+                                <span className="text-text-muted">Event:</span> {lastGa4Sync.event ?? '-'}
                             </p>
                             <p>
                                 <span className="text-text-muted">ga4_sync_attempted:</span>{' '}
@@ -336,11 +336,11 @@ export function LeadDetailDrawer({ lead, open, onClose, onSaved }: LeadDetailDra
                             </p>
                             <p>
                                 <span className="text-text-muted">ga4_sync_skipped_reason:</span>{' '}
-                                {lastGa4Sync.ga4_sync_skipped_reason ?? lastGa4Sync.skipped_reason ?? '—'}
+                                {lastGa4Sync.ga4_sync_skipped_reason ?? lastGa4Sync.skipped_reason ?? '-'}
                             </p>
                             <p>
                                 <span className="text-text-muted">ga4_sync_session_id_policy:</span>{' '}
-                                {lastGa4Sync.ga4_sync_session_id_policy ?? '—'}
+                                {lastGa4Sync.ga4_sync_session_id_policy ?? '-'}
                             </p>
                             {lastGa4Sync.ga4_sync_validation_messages &&
                                 lastGa4Sync.ga4_sync_validation_messages.length > 0 && (
@@ -366,7 +366,7 @@ export function LeadDetailDrawer({ lead, open, onClose, onSaved }: LeadDetailDra
                                 {...register('qualification_status')}
                                 className="rounded-lg border border-border-default bg-surface-alt px-3 py-2 text-text-primary"
                             >
-                                <option value="">—</option>
+                                <option value="">-</option>
                                 {QUALIFICATION_STATUS_OPTIONS.map((o) => (
                                     <option key={o} value={o}>
                                         {o}
@@ -380,7 +380,7 @@ export function LeadDetailDrawer({ lead, open, onClose, onSaved }: LeadDetailDra
                                 {...register('disqualify_reason')}
                                 className="rounded-lg border border-border-default bg-surface-alt px-3 py-2 text-text-primary"
                             >
-                                <option value="">—</option>
+                                <option value="">-</option>
                                 {DISQUALIFY_REASON_OPTIONS.map((o) => (
                                     <option key={o} value={o}>
                                         {o}
@@ -394,7 +394,7 @@ export function LeadDetailDrawer({ lead, open, onClose, onSaved }: LeadDetailDra
                                 {...register('vehicle_make')}
                                 className="rounded-lg border border-border-default bg-surface-alt px-3 py-2 text-text-primary"
                             >
-                                <option value="">—</option>
+                                <option value="">-</option>
                                 {VEHICLE_MAKE_OPTIONS.map((o) => (
                                     <option key={o} value={o}>
                                         {o}

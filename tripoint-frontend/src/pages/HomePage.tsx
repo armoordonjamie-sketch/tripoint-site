@@ -47,7 +47,7 @@ const serviceLanes = [
         desc: 'Pads, discs, sensors, and park brake shoes. Fixed pricing per axle with genuine Mercedes parts.',
         icon: <Shield className="h-6 w-6" />,
         href: '/services/sprinter-brakes',
-        price: 120,
+        price: getPrice('sprinter-brakes', 149),
         tags: ['Front', 'Rear', 'Pads + Discs'],
     },
     {
@@ -55,7 +55,7 @@ const serviceLanes = [
         desc: 'ECU remaps for load performance or fuel economy. Fleet day rates available for 3+ vehicles.',
         icon: <TrendingUp className="h-6 w-6" />,
         href: '/services/van-load-driveability-tune',
-        price: 169,
+        price: getPrice('van-load-driveability-tune', 199),
         tags: ['Load & Driveability', 'Economy', 'Fleet Rates'],
     },
 ];
@@ -341,7 +341,7 @@ export function HomePage() {
                         </h2>
                         <p className="mt-4 text-text-secondary leading-relaxed">
                             Every diagnostic visit ends with a written outcome: what we checked, what we found, and what to do next.
-                            Here is a real example of how that can look—plain English, evidence, and clear next steps.
+                            Here is a real example of how that can look: plain English, evidence, and clear next steps.
                         </p>
                         <div className="mt-6">
                             <CTAButton
@@ -516,10 +516,14 @@ export function HomePage() {
                         <p className="mx-auto mt-3 max-w-xl text-text-secondary text-sm">
                             Fixed prices confirmed upfront. No hidden fees. Deposit secures your slot. Parts and follow-on labour quoted separately.
                         </p>
+                        <p className="mx-auto mt-2 max-w-xl text-xs text-text-muted">
+                            Shown below are Zone A prices — Zones B and C are slightly higher. See full pricing for all zones.
+                        </p>
                         <div className="mt-6 flex flex-wrap justify-center gap-6">
                             {siteConfig.pricing.services.slice(0, 3).map((s) => (
                                 <div key={s.slug} className="text-center">
                                     <p className="text-xl font-bold text-brand-light">£{s.zoneA}</p>
+                                    <p className="text-[10px] font-medium uppercase tracking-wide text-text-muted">Zone A</p>
                                     <p className="text-xs text-text-muted mt-1">{s.name.split('(')[0].trim()}</p>
                                 </div>
                             ))}

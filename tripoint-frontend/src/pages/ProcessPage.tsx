@@ -97,7 +97,7 @@ export function ProcessPage() {
                             <p className="text-sm font-semibold uppercase tracking-widest text-brand">Written report + options</p>
                             <p className="mt-2 text-text-secondary">
                                 Step 3 is where findings become a document you can use: next steps, options, and workshop referral when needed.
-                                Here is a glimpse from one real visit—measured checks and a clear recommendation block.
+                                Here is a glimpse from one real visit, with measured checks and a clear recommendation block.
                             </p>
                             <div className="mt-4 grid gap-4 sm:grid-cols-2">
                                 <div className="overflow-hidden rounded-lg border border-border-default bg-surface-alt">

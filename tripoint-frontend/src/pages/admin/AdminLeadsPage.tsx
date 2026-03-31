@@ -172,7 +172,7 @@ export function AdminLeadsPage() {
 
     return (
         <>
-            <Seo title="Admin — Leads" noIndex />
+            <Seo title="Admin - Leads" noIndex />
             <Section>
                 <div className="mx-auto max-w-[1600px] space-y-4">
                     <div className="flex flex-wrap items-center justify-between gap-4">
@@ -251,7 +251,7 @@ export function AdminLeadsPage() {
 
                     <div className="flex flex-wrap items-center justify-between gap-2 text-sm text-text-muted">
                         <span>
-                            Page {filters.page ?? 1} of {totalPages} — {total} total rows
+                            Page {filters.page ?? 1} of {totalPages}, {total} total rows
                         </span>
                         <div className="flex gap-2">
                             <button

@@ -9,7 +9,7 @@ const Q_BADGE: Record<string, string> = {
 };
 
 function formatOccurredLondon(iso: string): string {
-    if (!iso) return '—';
+    if (!iso) return '-';
     const d = new Date(iso);
     if (Number.isNaN(d.getTime())) return iso;
     return d.toLocaleString('en-GB', {
@@ -24,7 +24,7 @@ function formatOccurredLondon(iso: string): string {
 }
 
 function trunc(s: string, n: number): string {
-    if (!s) return '—';
+    if (!s) return '-';
     return s.length <= n ? s : `${s.slice(0, n)}…`;
 }
 
@@ -200,24 +200,24 @@ export function LeadTable({
                                 <td className="whitespace-nowrap px-2 py-2 text-text-secondary">
                                     {formatOccurredLondon(row.occurred_at)}
                                 </td>
-                                <td className="px-2 py-2">{row.lead_channel || '—'}</td>
-                                <td className="max-w-[120px] truncate px-2 py-2">{row.event_name || '—'}</td>
+                                <td className="px-2 py-2">{row.lead_channel || '-'}</td>
+                                <td className="max-w-[120px] truncate px-2 py-2">{row.event_name || '-'}</td>
                                 <td className="px-2 py-2">
                                     <span className={`inline-flex rounded px-1.5 py-0.5 font-medium ${badge}`}>
-                                        {row.qualification_status || '—'}
+                                        {row.qualification_status || '-'}
                                     </span>
                                 </td>
                                 <td className="max-w-[100px] truncate px-2 py-2 text-text-muted">
-                                    {row.disqualify_reason || '—'}
+                                    {row.disqualify_reason || '-'}
                                 </td>
                                 <td className="max-w-[120px] truncate px-2 py-2">
-                                    {[row.vehicle_make, row.vehicle_model].filter(Boolean).join(' ') || '—'}
+                                    {[row.vehicle_make, row.vehicle_model].filter(Boolean).join(' ') || '-'}
                                 </td>
-                                <td className="max-w-[80px] truncate px-2 py-2">{row.service_interest || '—'}</td>
-                                <td className="max-w-[80px] truncate px-2 py-2">{row.service_category || '—'}</td>
-                                <td className="max-w-[120px] truncate px-2 py-2">{row.service_name || '—'}</td>
-                                <td className="max-w-[100px] truncate px-2 py-2">{row.click_location || '—'}</td>
-                                <td className="max-w-[140px] truncate px-2 py-2 text-text-muted">{row.page || '—'}</td>
+                                <td className="max-w-[80px] truncate px-2 py-2">{row.service_interest || '-'}</td>
+                                <td className="max-w-[80px] truncate px-2 py-2">{row.service_category || '-'}</td>
+                                <td className="max-w-[120px] truncate px-2 py-2">{row.service_name || '-'}</td>
+                                <td className="max-w-[100px] truncate px-2 py-2">{row.click_location || '-'}</td>
+                                <td className="max-w-[140px] truncate px-2 py-2 text-text-muted">{row.page || '-'}</td>
                                 <td className="px-2 py-2 text-center">
                                     {row.has_click_id && row.identifier_type ? (
                                         <span
@@ -228,10 +228,10 @@ export function LeadTable({
                                             <span className="text-[10px] uppercase">{row.identifier_type}</span>
                                         </span>
                                     ) : (
-                                        '—'
+                                        '-'
                                     )}
                                 </td>
-                                <td className="px-2 py-2">{row.lead_value || '—'}</td>
+                                <td className="px-2 py-2">{row.lead_value || '-'}</td>
                                 <td className="px-2 py-2">
                                     {(() => {
                                         const b = adsExportBadge(row);

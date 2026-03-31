@@ -5,6 +5,8 @@ set -euo pipefail
 APP_DIR="/var/www/tripoint"
 FRONTEND_DIR="$APP_DIR/tripoint-frontend"
 LOG_FILE="/var/log/tripoint_deploy.log"
+DOMAIN="tripointdiagnostics.co.uk"
+EMAIL="admin@${DOMAIN}"
 LOCK_FILE="/var/lock/tripoint_deploy.lock"
 
 exec 1>>"$LOG_FILE" 2>&1
@@ -28,6 +30,14 @@ if [ "$LOCAL" != "$REMOTE" ]; then
 
     # Pull changes
     git pull origin main
+
+    # Point nginx at repo fragment (one-time migrate) so future pulls update location / without hand-edits
+    echo ">>> Syncing Nginx with repo fragment..."
+    if [ -f "$FRONTEND_DIR/deploy/migrate_nginx_include.py" ] && [ -f /etc/nginx/sites-available/tripoint ]; then
+        python3 "$FRONTEND_DIR/deploy/migrate_nginx_include.py" \
+            /etc/nginx/sites-available/tripoint \
+            "$FRONTEND_DIR/deploy/nginx-location-root.conf"
+    fi
 
     # Update Python dependencies
     echo ">>> Installing Python dependencies..."
@@ -62,10 +72,9 @@ if [ "$LOCAL" != "$REMOTE" ]; then
         systemctl reload nginx
 
         # Check if SSL is still active in the config (prevents resets from losing SSL)
-        DOMAIN="tripointdiagnostics.co.uk"
         if ! grep -q "443 ssl" /etc/nginx/sites-enabled/tripoint; then
             echo ">>> [$(date)] SSL config missing from Nginx. Re-applying..."
-            certbot --nginx -d "$DOMAIN" -d "www.$DOMAIN" --non-interactive --agree-tos --redirect --expand
+            certbot --nginx -d "$DOMAIN" -d "www.$DOMAIN" --non-interactive --agree-tos -m "$EMAIL" --redirect --expand
             systemctl reload nginx
         fi
 

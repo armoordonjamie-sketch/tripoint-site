@@ -71,13 +71,10 @@ server {
     gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript image/svg+xml;
     gzip_vary on;
 
-    # Pre-rendered HTML: no aggressive caching
-    location / {
-        try_files \$uri \$uri/index.html \$uri.html =404;
-        add_header Cache-Control "no-cache, no-store, must-revalidate";
-    }
+    # Prerender + SPA fallback: fragment lives in repo; git pull + nginx reload updates behaviour
+    include $FRONTEND_DIR/deploy/nginx-location-root.conf;
 
-    # Custom 404
+    # Custom 404 (served by React Router when no route matches)
     error_page 404 /404.html;
     location = /404.html {
         internal;

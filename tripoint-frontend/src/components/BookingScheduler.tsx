@@ -313,6 +313,8 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
     const [, setLoadingPrice] = useState(false);
     const [status, setStatus] = useState<string>('');
     const [error, setError] = useState<string>('');
+    const [servicesLoadError, setServicesLoadError] = useState('');
+    const [servicesFetchKey, setServicesFetchKey] = useState(0);
     const [loadingServices, setLoadingServices] = useState(false);
     const [loadingAvailability, setLoadingAvailability] = useState(false);
     const [submitting, setSubmitting] = useState(false);
@@ -365,20 +367,28 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
 
     /* load services */
     useEffect(() => {
+        let cancelled = false;
         const loadServices = async () => {
             setLoadingServices(true);
+            setServicesLoadError('');
             try {
                 const response = await fetch('/api/booking/services');
                 if (!response.ok) throw new Error('Could not load services');
-                setServices(await response.json());
+                const data: Service[] = await response.json();
+                if (!cancelled) setServices(data);
             } catch (err) {
-                setError(err instanceof Error ? err.message : 'Failed to load services');
+                if (!cancelled) {
+                    setServicesLoadError(err instanceof Error ? err.message : 'Failed to load services');
+                }
             } finally {
-                setLoadingServices(false);
+                if (!cancelled) setLoadingServices(false);
             }
         };
         void loadServices();
-    }, []);
+        return () => {
+            cancelled = true;
+        };
+    }, [servicesFetchKey]);
 
     /* sync postcode from zone calculator */
     useEffect(() => {
@@ -647,6 +657,22 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
                         <div className="mb-6 flex items-center gap-2 text-sm text-text-muted">
                             <Loader2 className="h-4 w-4 animate-spin" />
                             Loading services...
+                        </div>
+                    )}
+
+                    {servicesLoadError && !loadingServices && (
+                        <div className="mb-6 flex flex-col gap-3 rounded-lg border border-danger/20 bg-danger/5 p-4 text-sm text-danger">
+                            <div className="flex items-start gap-2">
+                                <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
+                                <p>{servicesLoadError}</p>
+                            </div>
+                            <button
+                                type="button"
+                                onClick={() => setServicesFetchKey((k) => k + 1)}
+                                className="self-start rounded-lg border border-danger/30 bg-surface px-4 py-2 text-sm font-semibold text-text-primary transition-colors hover:border-danger/50 hover:bg-danger/10"
+                            >
+                                Retry
+                            </button>
                         </div>
                     )}
 

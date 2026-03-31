@@ -272,8 +272,8 @@ export function DiagnosticCalloutPage() {
                     <div className="mt-12 reveal">
                         <h2 className="text-2xl font-bold text-text-primary">What Your Written Outcome Looks Like</h2>
                         <p className="mt-2 text-text-secondary">
-                            Every Standard Diagnosis ends with a documented written outcome. Below is a glimpse from one real visit—
-                            see the full walkthrough for how plain English, ruled-out causes, live data, and next steps fit together.
+                            Every Standard Diagnosis ends with a documented written outcome. Below is a glimpse from one real visit.
+                            See the full walkthrough for how plain English, ruled-out causes, live data, and next steps fit together.
                         </p>
                         <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-4">
                             {[

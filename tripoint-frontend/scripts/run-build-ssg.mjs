@@ -12,7 +12,7 @@ const script = skip ? 'build:ssg:skip-images' : 'build:ssg:full';
 
 if (skip) {
     console.log(
-        '>>> SKIP_IMAGE_OPTIMIZE=1 — skipping npm run optimize-images (ensure public/images/optimized and public/optimized exist).'
+        '>>> SKIP_IMAGE_OPTIMIZE=1 - skipping npm run optimize-images (ensure public/images/optimized and public/optimized exist).'
     );
 }
 
