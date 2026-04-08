@@ -8,6 +8,7 @@ import csv
 import io
 import logging
 import math
+import re
 import uuid
 from datetime import datetime
 from typing import Any
@@ -24,6 +25,90 @@ def _s(v: Any) -> str:
     if v is None:
         return ""
     return str(v).strip()
+
+
+_SHA256_HEX_RE = re.compile(r"^[a-fA-F0-9]{64}$")
+
+
+def _looks_like_sha256_hex(value: str) -> bool:
+    return bool(_SHA256_HEX_RE.match(value))
+
+
+def repair_common_leads_sheet_misalignment(row: dict[str, Any]) -> dict[str, Any]:
+    """
+    Undo a common Sheets corruption: five empty cells were omitted before qualification_status,
+    so qualified/won/disqualified sits in user_agent, export status in qualification_status, etc.
+    gclid/gbraid/wbraid in BASE columns (left of user_agent) stay correct.
+    """
+    r = dict(row)
+    ua_raw = _s(r.get("user_agent"))
+    ua = ua_raw.lower()
+    qs_cell = _s(r.get("qualification_status")).lower()
+    qual_tokens = frozenset({"qualified", "won", "disqualified"})
+    export_qs_tokens = frozenset(
+        {"ready", "exported", "disqualified_removed", "adjustment_required", "adjustment_pending"}
+    )
+
+    if ua not in qual_tokens:
+        return r
+    if qs_cell not in export_qs_tokens:
+        return r
+    # Real browser UAs are long; qualification tokens are short.
+    if len(ua_raw) > 80:
+        return r
+
+    old_export_status = _s(r.get("qualification_status"))
+    old_export_type_slot = _s(r.get("disqualify_reason"))
+    r["qualification_status"] = ua_raw
+    r["user_agent"] = ""
+    r["disqualify_reason"] = ""
+    r["google_ads_export_status"] = old_export_status or _s(r.get("google_ads_export_status"))
+    if old_export_type_slot == "offline_export":
+        r["google_ads_export_type"] = "offline_export"
+
+    he = _s(r.get("hashed_email"))
+    hp = _s(r.get("hashed_phone"))
+    if he and not _looks_like_sha256_hex(he):
+        if not _s(r.get("vehicle_make")):
+            r["vehicle_make"] = he
+        r["hashed_email"] = ""
+    if hp and not _looks_like_sha256_hex(hp):
+        if not _s(r.get("vehicle_model")):
+            r["vehicle_model"] = hp
+        r["hashed_phone"] = ""
+
+    cfg = ads_config()
+    qname = _s(cfg["qualified_conversion_name"])
+    wname = _s(cfg["won_conversion_name"])
+    conv_aliases = frozenset({qname, wname, "Qualified Lead", "Won Job", "Won Lead"})
+    vmk = _s(r.get("vehicle_make"))
+    vma = _s(r.get("vehicle_model"))
+    nt = _s(r.get("notes"))
+
+    if vmk and vmk in conv_aliases and not _s(r.get("google_ads_conversion_name")):
+        r["google_ads_conversion_name"] = vmk
+        r["vehicle_make"] = ""
+        vmk = ""
+
+    val_num = _parse_float(vma)
+    if val_num is not None and not _s(r.get("google_ads_conversion_value")):
+        r["google_ads_conversion_value"] = vma
+        r["vehicle_model"] = ""
+        vma = ""
+
+    if nt in ("GBP", "USD", "EUR") and not _s(r.get("google_ads_currency")):
+        r["google_ads_currency"] = nt
+        r["notes"] = ""
+
+    ge = _s(r.get("google_ads_eligible")).upper()
+    if ge not in ("TRUE", "1", "YES", "FALSE", "0", "NO"):
+        qsf = _s(r.get("qualification_status")).lower()
+        if qsf in ("qualified", "won") and _s(r.get("gclid")):
+            r["google_ads_eligible"] = "TRUE"
+        elif qsf == "disqualified":
+            r["google_ads_eligible"] = "FALSE"
+
+    return r
 
 
 def _parse_float(v: Any) -> float | None:

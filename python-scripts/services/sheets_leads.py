@@ -18,6 +18,7 @@ from lead_constants import (
     QUALIFICATION_STATUS_OPTIONS,
     VEHICLE_MAKE_OPTIONS,
 )
+from services.google_ads_export import repair_common_leads_sheet_misalignment
 from services.google_sa_file import require_service_account_file_exists
 
 logger = logging.getLogger("tripoint.sheets_leads")
@@ -277,6 +278,7 @@ def read_all_lead_rows(service: Any, spreadsheet_id: str, tab: str) -> tuple[lis
             if name in d:
                 continue
             d[name] = raw[i] if i < len(raw) else ""
+        d = repair_common_leads_sheet_misalignment(d)
         eid = str(d.get("event_id") or "").strip()
         if eid:
             out.append(d)

@@ -6,6 +6,8 @@ from routes.admin_leads import _merge_qualification_ads_enrichment
 from services.google_ads_export import (
     adjustment_fields_for_exported_disqualify,
     compute_ads_enrichment_fields,
+    enrich_lead_row,
+    repair_common_leads_sheet_misalignment,
 )
 
 
@@ -151,3 +153,46 @@ def test_merge_respects_explicit_conversion_in_same_patch() -> None:
     _merge_qualification_ads_enrichment(old, updates)
     assert updates["google_ads_conversion_name"] == "Manual Name"
     assert updates["google_ads_eligible"] == "TRUE"
+
+
+def test_repair_shifted_qualification_block_restores_exportability() -> None:
+    gclid = "EAIaIQobChMI17qI_qHHkwMVV5lQBh3oJA4wEAAYAyAAEgJ9MPD_BwE"
+    corrupt = {
+        "user_agent": "qualified",
+        "qualification_status": "ready",
+        "disqualify_reason": "offline_export",
+        "hashed_email": "Mercedes",
+        "hashed_phone": "A class",
+        "vehicle_make": "",
+        "vehicle_model": "50",
+        "notes": "GBP",
+        "gclid": gclid,
+        "google_ads_eligible": "2026-03-30T11:56:11.668491+01:00",
+        "google_ads_conversion_name": "",
+        "google_ads_conversion_value": "",
+        "google_ads_currency": "",
+        "lead_value": "",
+        "wbraid": "",
+        "gbraid": "",
+    }
+    fixed = repair_common_leads_sheet_misalignment(corrupt)
+    assert fixed["qualification_status"] == "qualified"
+    assert fixed["user_agent"] == ""
+    assert fixed["google_ads_export_status"] == "ready"
+    assert fixed["google_ads_export_type"] == "offline_export"
+    assert fixed["vehicle_make"] == "Mercedes"
+    assert fixed["vehicle_model"] == ""
+    assert fixed["google_ads_conversion_value"] == "50"
+    assert fixed["google_ads_currency"] == "GBP"
+    assert fixed["google_ads_eligible"] == "TRUE"
+    assert enrich_lead_row(fixed).get("ads_exportable") is True
+
+
+def test_repair_does_not_touch_normal_rows() -> None:
+    normal = {
+        "user_agent": "Mozilla/5.0",
+        "qualification_status": "qualified",
+        "gclid": "x",
+        "google_ads_eligible": "TRUE",
+    }
+    assert repair_common_leads_sheet_misalignment(normal) == normal
