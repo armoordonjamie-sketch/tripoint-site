@@ -364,3 +364,95 @@ def send_admin_qualification_ga4(event_name: str, row: dict[str, Any]) -> dict[s
         validation_messages=val_msgs,
         session_id_policy="included_in_event_params",
     )
+
+
+def build_stripe_purchase_mp_params(
+    booking: dict[str, Any],
+    *,
+    payment_type: str,
+    amount_pence: int,
+) -> dict[str, Any]:
+    """Params for server-side purchase after Stripe checkout.session.completed."""
+    sid_raw = str(booking.get("ga_session_id") or "").strip()
+    session_id_param: int | str
+    if sid_raw.isdigit():
+        session_id_param = int(sid_raw)
+    else:
+        session_id_param = sid_raw
+
+    value_gbp = round(float(amount_pence) / 100.0, 2)
+    bid = _s(booking.get("id"), 40)
+    txn = _s(f"{bid}_{payment_type}", 80)
+
+    params: dict[str, Any] = {
+        "session_id": session_id_param,
+        "engagement_time_msec": 1,
+        "transaction_id": txn,
+        "value": value_gbp,
+        "currency": "GBP",
+        "payment_type": _s(payment_type, 20),
+        "booking_id": bid,
+    }
+    svc = _s(booking.get("service_ids"), 120)
+    if svc:
+        params["service_interest"] = svc
+    return params
+
+
+def send_stripe_purchase_ga4(
+    booking: dict[str, Any],
+    *,
+    payment_type: str,
+    amount_pence: int,
+) -> dict[str, Any]:
+    """
+    Send GA4 purchase event when Stripe payment completes (deposit or balance).
+    Skips if GA4 MP not configured or booking row lacks ga_client_id / ga_session_id.
+    """
+    event_id = _s(booking.get("id"), 40)
+
+    def pack(
+        *,
+        attempted: bool,
+        sent: bool,
+        skipped_reason: str | None,
+        validation_messages: list[str],
+    ) -> dict[str, Any]:
+        return {
+            "attempted": attempted,
+            "sent": sent,
+            "skipped_reason": skipped_reason,
+            "validation_messages": validation_messages,
+        }
+
+    if not ga4_mp_is_configured():
+        logger.debug("GA4 MP purchase skipped: not configured booking_id=%s", event_id)
+        return pack(attempted=False, sent=False, skipped_reason="ga4_not_configured", validation_messages=[])
+
+    cid_raw = str(booking.get("ga_client_id") or "").strip()
+    if not cid_raw:
+        logger.info("GA4 MP purchase skipped: missing_ga_client_id booking_id=%s", event_id)
+        return pack(attempted=True, sent=False, skipped_reason="missing_ga_client_id", validation_messages=[])
+
+    sid_raw = str(booking.get("ga_session_id") or "").strip()
+    if not sid_raw:
+        logger.info("GA4 MP purchase skipped: missing_ga_session_id booking_id=%s", event_id)
+        return pack(attempted=True, sent=False, skipped_reason="missing_ga_session_id", validation_messages=[])
+
+    params = build_stripe_purchase_mp_params(booking, payment_type=payment_type, amount_pence=amount_pence)
+    ok, err, val_msgs = send_measurement_event("purchase", params, client_id=cid_raw)
+    if ok:
+        logger.info("GA4 MP purchase sent booking_id=%s payment_type=%s", event_id, payment_type)
+        return pack(attempted=True, sent=True, skipped_reason=None, validation_messages=val_msgs)
+
+    logger.warning(
+        "GA4 MP purchase failed booking_id=%s reason=%s",
+        event_id,
+        err,
+    )
+    return pack(
+        attempted=True,
+        sent=False,
+        skipped_reason=err or "measurement_protocol_failed",
+        validation_messages=val_msgs,
+    )

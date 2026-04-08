@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Seo } from '@/components/Seo';
 import { Section } from '@/components/Section';
 import { siteConfig } from '@/config/site';
+import { trackNavClick, trackPhoneClick } from '@/lib/analytics';
 import { Loader2, Car, AlertTriangle, FileText, Wrench, CheckCircle2 } from 'lucide-react';
 
 interface Fault {
@@ -526,10 +527,20 @@ export function ReportViewerPage() {
                             If you have any questions about this report or would like to book a follow-up visit, please contact us.
                         </p>
                         <div className="mt-4 flex flex-wrap gap-4 text-sm">
-                            <a href={`mailto:${siteConfig.contact.email}`} className="text-primary hover:underline">
+                            <a
+                                href={`mailto:${siteConfig.contact.email}`}
+                                className="text-primary hover:underline"
+                                onClick={() =>
+                                    trackNavClick(`mailto:${siteConfig.contact.email}`, 'Email', 'report_viewer')
+                                }
+                            >
                                 {siteConfig.contact.email}
                             </a>
-                            <a href={`tel:${siteConfig.contact.phoneE164}`} className="text-primary hover:underline">
+                            <a
+                                href={`tel:${siteConfig.contact.phoneE164}`}
+                                className="text-primary hover:underline"
+                                onClick={() => trackPhoneClick('report_viewer')}
+                            >
                                 {siteConfig.contact.phoneDisplay}
                             </a>
                         </div>

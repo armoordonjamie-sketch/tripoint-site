@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { trackFaqOpen } from '@/lib/analytics';
 
 export interface FaqItem {
     question: string;
@@ -18,7 +19,12 @@ function FaqAccordionItem({ item }: { item: FaqItem }) {
     return (
         <div className="rounded-xl border border-border-default bg-surface-alt overflow-hidden">
             <button
-                onClick={() => setOpen(!open)}
+                onClick={() => {
+                    setOpen((prev) => {
+                        if (!prev) trackFaqOpen(item.question);
+                        return !prev;
+                    });
+                }}
                 className="flex w-full items-center justify-between px-5 py-4 text-left transition-colors hover:bg-surface-elevated"
                 aria-expanded={open}
             >

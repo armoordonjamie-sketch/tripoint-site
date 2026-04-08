@@ -5,7 +5,10 @@ import {
     trackBookingConfirmation,
     trackBookingFunnelEvent,
     trackSelectContent,
+    fireGoogleAdsContactConversion,
 } from '@/lib/analytics';
+import { normalizeAndHashEmail, normalizeAndHashPhone } from '@/lib/hashUserData';
+import { getSessionJourneyId, getEventId, getGa4WebIds } from '@/lib/leadTracking';
 import { getAttribution } from '@/lib/attribution';
 
 /* ---------- types ---------- */
@@ -96,6 +99,13 @@ const DEFAULT_SERVICE = 'diagnostic-callout';
 
 function getServiceHelper(id: string): string {
     return SERVICE_HELPERS[id] ?? id.replace(/-/g, ' ');
+}
+
+/** Outward code only (privacy-friendly) for analytics. */
+function ukPostcodeOutward(pc: string): string {
+    const t = pc.trim().toUpperCase();
+    const parts = t.split(/\s+/).filter(Boolean);
+    return parts[0] || 'unknown';
 }
 
 const SERVICE_CATEGORIES = [
@@ -325,6 +335,8 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
     const availabilityConversionTracked = useRef(false);
     const slotConversionForIso = useRef<string | null>(null);
     const lastBookingStepKey = useRef<string>('');
+    const lastAbandonStepRef = useRef('scheduler_mount');
+    const bookingSubmittedRef = useRef(false);
 
     // Derive step from state
     const currentStep: 1 | 2 | 3 = availability && !availability.manual_review_required
@@ -351,6 +363,7 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
         const stepKey = `${currentStep}|${subStep}|${selectedCategory ?? ''}|${booking.service_ids.join(',')}`;
         if (lastBookingStepKey.current === stepKey) return;
         lastBookingStepKey.current = stepKey;
+        lastAbandonStepRef.current = `step${currentStep}_${subStep}`;
         trackBookingFunnelEvent('booking_step_view', {
             booking_step: `step${currentStep}_${subStep}`,
             service_interest: booking.service_ids[0],
@@ -364,6 +377,22 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
         availability?.fixed_price_gbp,
         priceInfo?.total_gbp,
     ]);
+
+    useEffect(() => {
+        const onBeforeUnload = () => {
+            if (bookingSubmittedRef.current) return;
+            const hasProgress =
+                availability !== null ||
+                booking.service_ids.length > 0 ||
+                booking.postcode.trim().length > 0 ||
+                booking.full_name.trim().length > 0 ||
+                currentStep > 1;
+            if (!hasProgress) return;
+            trackBookingFunnelEvent('booking_abandoned', { booking_step: lastAbandonStepRef.current });
+        };
+        window.addEventListener('beforeunload', onBeforeUnload);
+        return () => window.removeEventListener('beforeunload', onBeforeUnload);
+    }, [availability, booking.service_ids, booking.postcode, booking.full_name, currentStep]);
 
     /* load services */
     useEffect(() => {
@@ -424,9 +453,36 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
             const response = await fetch(`/api/booking/availability?${params.toString()}`);
             const json = await response.json();
             if (!response.ok) throw new Error(json.detail || 'Failed to fetch availability');
+
+            const outward = ukPostcodeOutward(postcode);
+            trackBookingFunnelEvent('booking_check_availability', {
+                booking_step: `postcode_${outward}`,
+                service_interest: serviceIds[0],
+            });
+
+            const slots = json.slots || [];
+            const anyAvail = slots.some((s: SlotItem) => s.available);
+            if (!json.manual_review_required && slots.length > 0 && !anyAvail) {
+                trackBookingFunnelEvent('booking_no_availability', {
+                    booking_step: 'slots_all_taken',
+                    service_interest: serviceIds[0],
+                    error_detail: outward,
+                });
+            }
+            if (!json.manual_review_required && slots.length === 0) {
+                trackBookingFunnelEvent('booking_no_availability', {
+                    booking_step: 'no_slots_returned',
+                    service_interest: serviceIds[0],
+                });
+            }
+
             setAvailability(json);
             setSelectedDateIndex(0);
         } catch (err) {
+            trackBookingFunnelEvent('booking_form_error', {
+                booking_step: 'availability_fetch',
+                error_detail: err instanceof Error ? err.message : 'unknown',
+            });
             setError(err instanceof Error ? err.message : 'Availability lookup failed');
         } finally {
             setLoadingAvailability(false);
@@ -541,26 +597,53 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
         }
 
         if (missing.length > 0) {
+            trackBookingFunnelEvent('booking_form_error', {
+                booking_step: 'submit_validation',
+                error_detail: missing.slice(0, 6).join(';'),
+            });
             setError(`Please fill in: ${missing.join(', ')}`);
             return;
         }
 
         if (!booking.safe_location_confirmed) {
+            trackBookingFunnelEvent('booking_form_error', { booking_step: 'safe_location_not_confirmed' });
             setError('Please confirm the vehicle is in a safe working location.');
             return;
         }
 
         setSubmitting(true);
         try {
+            const ga = getGa4WebIds();
             const response = await fetch('/api/booking/reserve', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ ...booking, slot_start_iso: selectedSlot, attribution: getAttribution() }),
+                body: JSON.stringify({
+                    ...booking,
+                    slot_start_iso: selectedSlot,
+                    attribution: getAttribution(),
+                    ga_client_id: ga.ga_client_id ?? undefined,
+                    ga_session_id: ga.ga_session_id ?? undefined,
+                }),
             });
             const json = await response.json();
             if (!response.ok) throw new Error(json.detail || 'Booking failed');
             const primaryService = booking.service_ids[0] ?? 'general';
             const leadVal = priceInfo?.total_gbp ?? availability?.fixed_price_gbp ?? undefined;
+            const journeyId = getSessionJourneyId();
+            const bookingEventId = getEventId();
+
+            const [hashedEmail, hashedPhone] = await Promise.all([
+                normalizeAndHashEmail(booking.email),
+                normalizeAndHashPhone(booking.phone),
+            ]);
+
+            fireGoogleAdsContactConversion({
+                valueGbp: leadVal ?? 0,
+                transactionId: journeyId,
+                hashedEmailHex: hashedEmail,
+                hashedPhoneHex: hashedPhone,
+            });
+
             trackBookingFunnelEvent('booking_reserve_submit', {
                 booking_step: 'submit',
                 service_interest: primaryService,
@@ -570,14 +653,30 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
                 serviceInterest: primaryService,
                 leadValue: leadVal,
                 valueGbp: leadVal,
+                orderId: journeyId,
+                eventId: bookingEventId,
+                hashedEmail,
+                hashedPhone,
+                vehicleMake: booking.vehicle_make.trim() || undefined,
+                vehicleModel: booking.vehicle_model.trim() || undefined,
             });
+            bookingSubmittedRef.current = true;
             if (json.status === 'pending_deposit' && json.payment_url) {
                 try {
+                    const gaPay = getGa4WebIds();
                     sessionStorage.setItem(
                         'tripoint_payment_context',
                         JSON.stringify({
                             service_interest: booking.service_ids.join(','),
                             lead_value_gbp: leadVal ?? null,
+                            journey_id: journeyId,
+                            hashed_email: hashedEmail,
+                            hashed_phone: hashedPhone,
+                            booking_id: json.booking_id ?? null,
+                            ga_client_id: gaPay.ga_client_id ?? null,
+                            ga_session_id: gaPay.ga_session_id ?? null,
+                            vehicle_make: booking.vehicle_make.trim() || null,
+                            vehicle_model: booking.vehicle_model.trim() || null,
                         }),
                     );
                 } catch {
@@ -604,6 +703,10 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
             setSubStep('category');
             setSelectedCategory(null);
         } catch (err) {
+            trackBookingFunnelEvent('booking_form_error', {
+                booking_step: 'reserve_failed',
+                error_detail: err instanceof Error ? err.message : 'unknown',
+            });
             setError(err instanceof Error ? err.message : 'Could not create booking');
         } finally {
             setSubmitting(false);

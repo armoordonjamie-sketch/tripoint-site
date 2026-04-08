@@ -129,9 +129,19 @@ def compute_ads_enrichment_fields(row: dict[str, Any]) -> dict[str, Any]:
 
     en = enrich_lead_row(dict(row))
     if not en.get("ads_exportable"):
-        return {"google_ads_eligible": "FALSE"}
+        # Still persist conversion name/value/currency for the Leads sheet and admin UI.
+        # Offline export / Google import rows remain gated on click id in enrich_lead_row.
+        out: dict[str, Any] = {"google_ads_eligible": "FALSE"}
+        if qs in ("qualified", "won"):
+            if not _s(row.get("google_ads_conversion_name")):
+                out["google_ads_conversion_name"] = _s(en.get("computed_conversion_name"))
+            if _sheet_conversion_value_empty(row):
+                out["google_ads_conversion_value"] = str(en.get("computed_conversion_value") or 0)
+            if not _s(row.get("google_ads_currency")):
+                out["google_ads_currency"] = _s(en.get("computed_currency"))
+        return out
 
-    out: dict[str, Any] = {
+    out = {
         "google_ads_eligible": "TRUE",
         "google_ads_identifier_type": _s(en.get("identifier_type")),
         "google_ads_identifier_value": _s(en.get("identifier_value")),

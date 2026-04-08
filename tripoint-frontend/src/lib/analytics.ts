@@ -1,5 +1,5 @@
 import ReactGA from 'react-ga4';
-import { GA4_MEASUREMENT_ID } from '@/config/analyticsPublic';
+import { GA4_MEASUREMENT_ID, GOOGLE_ADS_CONVERSION_SEND_TO, GOOGLE_ADS_MEASUREMENT_ID } from '@/config/analyticsPublic';
 import {
     getPageAnalyticsContext,
     getPageAnalyticsContextFromPath,
@@ -66,6 +66,7 @@ function mergeGaParams(
         out[k] = typeof v === 'string' || typeof v === 'number' || typeof v === 'boolean' ? v : String(v);
     }
     out.page = c.page;
+    out.page_path = c.page;
     out.page_type = c.page_type;
     out.service_category = c.service_category;
     if (c.service_name) out.service_name = c.service_name;
@@ -99,12 +100,65 @@ export function initAnalytics() {
 
     scheduleGa4WebIdHydration(GA_ID);
 
+    const awId = GOOGLE_ADS_MEASUREMENT_ID;
+    if (awId) {
+        safeGa(() => {
+            const gtag = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag;
+            if (typeof gtag !== 'function') return;
+            gtag('config', awId, {
+                allow_enhanced_conversions: true,
+                send_page_view: false,
+            });
+        });
+        if (import.meta.env.DEV) {
+            console.log('[Google Ads] gtag config', { measurementId: awId, allow_enhanced_conversions: true });
+        }
+    }
+
     if (import.meta.env.DEV) {
         console.log('[GA4] Initialised', {
             measurementId: GA_ID,
             testModeEnabled: false,
             debug_mode: debug,
         });
+    }
+}
+
+export type GoogleAdsContactConversionParams = {
+    valueGbp: number;
+    transactionId: string;
+    hashedEmailHex: string;
+    hashedPhoneHex: string;
+};
+
+/**
+ * Tag-side enhanced conversions for leads: set hashed user_data then fire conversion.
+ * No-op if VITE_GOOGLE_ADS_CONVERSION_SEND_TO is unset (recommended for local dev).
+ */
+export function fireGoogleAdsContactConversion(params: GoogleAdsContactConversionParams): void {
+    const sendTo = GOOGLE_ADS_CONVERSION_SEND_TO;
+    if (!sendTo) {
+        if (import.meta.env.DEV || isDebugMode()) {
+            console.warn('[Google Ads] Skipping conversion: VITE_GOOGLE_ADS_CONVERSION_SEND_TO not set');
+        }
+        return;
+    }
+    safeGa(() => {
+        const gtag = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag;
+        if (typeof gtag !== 'function') return;
+        gtag('set', 'user_data', {
+            sha256_email_address: params.hashedEmailHex,
+            sha256_phone_number: params.hashedPhoneHex,
+        });
+        gtag('event', 'conversion', {
+            send_to: sendTo,
+            value: params.valueGbp,
+            currency: 'GBP',
+            transaction_id: params.transactionId,
+        });
+    });
+    if (isDebugMode()) {
+        console.log('[Google Ads] conversion fired', { send_to: sendTo, transaction_id: params.transactionId });
     }
 }
 
@@ -138,6 +192,7 @@ export function trackPageView(path?: string, title?: string) {
         ReactGA.send({
             hitType: 'pageview',
             page: ctx.page,
+            page_path: ctx.page,
             title: resolvedTitle,
             page_type: ctx.page_type,
             service_category: ctx.service_category,
@@ -231,6 +286,13 @@ export interface GenerateLeadOptions {
     vehicleMake?: string;
     vehicleModel?: string;
     qualifiedLeadValue?: number;
+    /** Matches gtag transaction_id / Google Ads order_id (typically session journey_id). */
+    orderId?: string;
+    /** Override auto-generated event_id for this lead row (contact form). */
+    eventId?: string;
+    /** SHA-256 hex (enhanced conversions / API upload). */
+    hashedEmail?: string;
+    hashedPhone?: string;
 }
 
 export function trackContactFormSuccess(serviceInterest?: string, options?: GenerateLeadOptions) {
@@ -252,8 +314,10 @@ export function trackContactFormSuccess(serviceInterest?: string, options?: Gene
         );
         safeGa(() => {
             ReactGA.event('generate_lead', params);
+            ReactGA.event('lead_contact_form', params);
         });
     }
+    const ua = typeof navigator !== 'undefined' ? navigator.userAgent : undefined;
     trackLeadToBackend(
         'generate_lead',
         'contact_form',
@@ -261,8 +325,12 @@ export function trackContactFormSuccess(serviceInterest?: string, options?: Gene
             lead_type: 'contact_form',
             form_name: 'contact_form',
             service_interest: interest,
+            ...(options?.orderId ? { order_id: options.orderId } : {}),
+            ...(ua ? { user_agent: ua } : {}),
+            ...(options?.hashedEmail ? { hashed_email: options.hashedEmail } : {}),
+            ...(options?.hashedPhone ? { hashed_phone: options.hashedPhone } : {}),
         },
-        { blocking: true, context: options?.context },
+        { blocking: true, context: options?.context, eventId: options?.eventId },
     );
     if (isDebugMode()) console.log('[GA4] generate_lead contact_form', { service_interest: interest });
 }
@@ -277,13 +345,17 @@ export function trackBookingConfirmation(serviceInterest?: string, options?: Gen
                 service_interest: interest,
                 ...(options?.leadValue != null ? { lead_value: options.leadValue } : {}),
                 ...(options?.valueGbp != null ? { value: options.valueGbp, currency: 'GBP' } : {}),
+                ...(options?.vehicleMake ? { vehicle_make: options.vehicleMake } : {}),
+                ...(options?.vehicleModel ? { vehicle_model: options.vehicleModel } : {}),
             },
             options?.context,
         );
         safeGa(() => {
             ReactGA.event('generate_lead', params);
+            ReactGA.event('lead_booking_request', params);
         });
     }
+    const ua = typeof navigator !== 'undefined' ? navigator.userAgent : undefined;
     trackLeadToBackend(
         'generate_lead',
         'booking',
@@ -293,8 +365,12 @@ export function trackBookingConfirmation(serviceInterest?: string, options?: Gen
             service_interest: interest,
             payment_completed: options?.paymentCompleted,
             lead_value: options?.leadValue ?? options?.valueGbp,
+            ...(options?.orderId ? { order_id: options.orderId } : {}),
+            ...(ua ? { user_agent: ua } : {}),
+            ...(options?.hashedEmail ? { hashed_email: options.hashedEmail } : {}),
+            ...(options?.hashedPhone ? { hashed_phone: options.hashedPhone } : {}),
         },
-        { blocking: true, context: options?.context },
+        { blocking: true, context: options?.context, eventId: options?.eventId },
     );
     if (isDebugMode()) console.log('[GA4] generate_lead booking_request', { service_interest: interest });
 }
@@ -310,13 +386,17 @@ export function trackPaymentSuccess(serviceInterest?: string, options?: Generate
                 service_interest: interest,
                 ...(options?.valueGbp != null ? { value: options.valueGbp, currency: 'GBP' } : {}),
                 ...(options?.leadValue != null ? { lead_value: options.leadValue } : {}),
+                ...(options?.vehicleMake ? { vehicle_make: options.vehicleMake } : {}),
+                ...(options?.vehicleModel ? { vehicle_model: options.vehicleModel } : {}),
             },
             options?.context,
         );
         safeGa(() => {
             ReactGA.event('generate_lead', params);
+            ReactGA.event('booking_paid', params);
         });
     }
+    const ua = typeof navigator !== 'undefined' ? navigator.userAgent : undefined;
     trackLeadToBackend(
         'generate_lead',
         'payment',
@@ -326,8 +406,12 @@ export function trackPaymentSuccess(serviceInterest?: string, options?: Generate
             payment_completed: true,
             service_interest: interest,
             lead_value: options?.leadValue ?? options?.valueGbp,
+            ...(options?.orderId ? { order_id: options.orderId } : {}),
+            ...(ua ? { user_agent: ua } : {}),
+            ...(options?.hashedEmail ? { hashed_email: options.hashedEmail } : {}),
+            ...(options?.hashedPhone ? { hashed_phone: options.hashedPhone } : {}),
         },
-        { blocking: true, context: options?.context },
+        { blocking: true, context: options?.context, eventId: options?.eventId },
     );
     if (isDebugMode()) console.log('[GA4] generate_lead payment_completed', { service_interest: interest });
 }
@@ -390,7 +474,11 @@ export type BookingFunnelEventName =
     | 'booking_step_view'
     | 'booking_service_select'
     | 'booking_slot_select'
-    | 'booking_reserve_submit';
+    | 'booking_reserve_submit'
+    | 'booking_check_availability'
+    | 'booking_no_availability'
+    | 'booking_form_error'
+    | 'booking_abandoned';
 
 export function trackBookingFunnelEvent(
     eventName: BookingFunnelEventName,
@@ -398,6 +486,8 @@ export function trackBookingFunnelEvent(
         booking_step: string;
         service_interest?: string;
         lead_value?: number;
+        /** For booking_no_availability / booking_form_error */
+        error_detail?: string;
         context?: PageAnalyticsContext;
     },
 ) {
@@ -407,11 +497,31 @@ export function trackBookingFunnelEvent(
             booking_step: opts.booking_step,
             ...(opts.service_interest ? { service_interest: opts.service_interest } : {}),
             ...(opts.lead_value != null ? { lead_value: opts.lead_value } : {}),
+            ...(opts.error_detail ? { error_detail: opts.error_detail.slice(0, 120) } : {}),
         },
         opts.context,
     );
     safeGa(() => {
         ReactGA.event(eventName, params);
+    });
+}
+
+/** Scroll depth milestone (25 / 50 / 75 / 100) for engagement reporting. */
+export function trackScrollDepth(percent: number, context?: PageAnalyticsContext) {
+    if (!GA_ID) return;
+    const params = mergeGaParams({ scroll_depth_percent: percent }, context);
+    safeGa(() => {
+        ReactGA.event('scroll_depth', params);
+    });
+}
+
+/** FAQ accordion opened (question text truncated for GA4 param limits). */
+export function trackFaqOpen(question: string, context?: PageAnalyticsContext) {
+    if (!GA_ID) return;
+    const q = question.length > 120 ? `${question.slice(0, 117)}...` : question;
+    const params = mergeGaParams({ question: q, content_type: 'faq' }, context);
+    safeGa(() => {
+        ReactGA.event('faq_open', params);
     });
 }
 

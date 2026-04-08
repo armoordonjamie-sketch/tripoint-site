@@ -10,9 +10,13 @@ interface PhotoGalleryProps {
     className?: string;
     /** Show max N images, with a "+X more" button */
     maxVisible?: number;
+    /** Fires when user opens the lightbox from the grid */
+    onOpenLightbox?: (index: number, image: GalleryImage) => void;
+    /** Fires when user expands "Show all" */
+    onShowAll?: () => void;
 }
 
-export function PhotoGallery({ images, columns = 3, className, maxVisible }: PhotoGalleryProps) {
+export function PhotoGallery({ images, columns = 3, className, maxVisible, onOpenLightbox, onShowAll }: PhotoGalleryProps) {
     const [lightboxIdx, setLightboxIdx] = useState<number | null>(null);
     const [showAll, setShowAll] = useState(!maxVisible);
 
@@ -33,7 +37,10 @@ export function PhotoGallery({ images, columns = 3, className, maxVisible }: Pho
                 {visibleImages.map((img, i) => (
                     <button
                         key={img.src}
-                        onClick={() => openLightbox(i)}
+                        onClick={() => {
+                            openLightbox(i);
+                            onOpenLightbox?.(i, img);
+                        }}
                         className="group relative block w-full aspect-square overflow-hidden rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-brand"
                     >
                         <OptimizedImage
@@ -53,7 +60,10 @@ export function PhotoGallery({ images, columns = 3, className, maxVisible }: Pho
             {hasMore && (
                 <div className="mt-6 text-center">
                     <button
-                        onClick={() => setShowAll(true)}
+                        onClick={() => {
+                            setShowAll(true);
+                            onShowAll?.();
+                        }}
                         className="rounded-full border border-brand/20 bg-brand/5 px-6 py-2 text-sm font-semibold text-brand-light transition-all hover:bg-brand/10 hover:border-brand/30"
                     >
                         Show all {images.length} photos

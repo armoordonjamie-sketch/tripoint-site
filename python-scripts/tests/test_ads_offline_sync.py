@@ -1,12 +1,14 @@
 """Unit tests for Google Ads offline export tab builder (no Sheets API)."""
 from __future__ import annotations
 
-from lead_constants import OFFLINE_EXPORT_COLUMNS
+from lead_constants import GOOGLE_ADS_IMPORT_COLUMNS, OFFLINE_EXPORT_COLUMNS
 from services.ads_offline_sync import (
     build_export_key,
+    build_google_ads_import_row,
     build_offline_export_row,
     build_offline_export_set,
     google_ads_eligible_truthy,
+    offline_export_row_has_plausible_click_id,
 )
 
 
@@ -205,3 +207,50 @@ def test_build_export_key_stable() -> None:
     assert "j1" in k1
     assert "qualified" in k1
     assert "CjwKabc" in k1
+
+
+def test_offline_export_plausible_gclid() -> None:
+    long_gclid = (
+        "Cj0KCQjwp7jOBhDGARIsABe7C4d_5tUJeEwnrU5doICIw4HlfuOGq95pzOTa64Y34TJ_G6nxsaTjhtgaAk-8EALw_wcB"
+    )
+    assert offline_export_row_has_plausible_click_id(
+        {"identifier_type": "gclid", "identifier_value": long_gclid},
+    )
+    assert offline_export_row_has_plausible_click_id(
+        {"identifier_type": "", "identifier_value": "", "gclid": long_gclid},
+    )
+
+
+def test_offline_export_rejects_test123() -> None:
+    assert not offline_export_row_has_plausible_click_id(
+        {"identifier_type": "gclid", "identifier_value": "test123"},
+    )
+
+
+def test_offline_export_rejects_short_gclid_placeholder() -> None:
+    assert not offline_export_row_has_plausible_click_id(
+        {"identifier_type": "gclid", "identifier_value": "CjwKabc"},
+    )
+
+
+def test_build_google_ads_import_row_columns_and_timezone() -> None:
+    from services.google_ads_export import enrich_lead_row
+
+    row = _base_row(
+        user_agent="Mozilla/5.0",
+        ip_address="203.0.113.1",
+        hashed_email="ab" * 32,
+        hashed_phone="cd" * 32,
+        order_id="ord-1",
+        occurred_at="2025-03-15T10:00:00+00:00",
+    )
+    en = enrich_lead_row(row)
+    export = build_offline_export_row(row, en, batch_id="b")
+    line = build_google_ads_import_row(export)
+    assert len(line) == len(GOOGLE_ADS_IMPORT_COLUMNS)
+    assert line[0] == "Europe/London"
+    assert line[1] == "CjwKabc"
+    assert str(line[3]).endswith("Europe/London")
+    assert line[11] == "Mozilla/5.0"
+    assert line[12] == "203.0.113.1"
+    assert isinstance(line[13], str) and len(line[13]) > 0

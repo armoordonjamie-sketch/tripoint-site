@@ -54,6 +54,11 @@ export interface LeadRow {
     utm_campaign: string;
     utm_content: string;
     utm_term: string;
+    user_agent: string;
+    ip_address: string;
+    hashed_email: string;
+    hashed_phone: string;
+    order_id: string;
     qualification_status: string;
     disqualify_reason: string;
     vehicle_make: string;

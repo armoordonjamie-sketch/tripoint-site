@@ -4,9 +4,26 @@ import { Seo } from '@/components/Seo';
 import { Section } from '@/components/Section';
 import { CTAButton } from '@/components/CTAButton';
 import { CheckCircle2 } from 'lucide-react';
-import { trackPaymentSuccess } from '@/lib/analytics';
+import {
+    fireGoogleAdsContactConversion,
+    trackPaymentSuccess,
+} from '@/lib/analytics';
+import { getEventId } from '@/lib/leadTracking';
 
 const PAYMENT_CTX_KEY = 'tripoint_payment_context';
+
+interface PaymentContextStored {
+    service_interest?: string;
+    lead_value_gbp?: number | null;
+    journey_id?: string | null;
+    hashed_email?: string | null;
+    hashed_phone?: string | null;
+    booking_id?: string | null;
+    ga_client_id?: string | null;
+    ga_session_id?: string | null;
+    vehicle_make?: string | null;
+    vehicle_model?: string | null;
+}
 
 export function PaymentSuccessPage() {
     const { token } = useParams<{ token: string }>();
@@ -17,15 +34,26 @@ export function PaymentSuccessPage() {
         async function run() {
             let serviceInterest = 'general';
             let valueGbp: number | undefined;
+            let journeyId = '';
+            let hashedEmail = '';
+            let hashedPhone = '';
+            let vehicleMake = '';
+            let vehicleModel = '';
+            const paymentEventId = getEventId();
 
             try {
                 const raw = sessionStorage.getItem(PAYMENT_CTX_KEY);
                 if (raw) {
-                    const p = JSON.parse(raw) as { service_interest?: string; lead_value_gbp?: number | null };
+                    const p = JSON.parse(raw) as PaymentContextStored;
                     if (p.service_interest) serviceInterest = p.service_interest;
                     if (p.lead_value_gbp != null && p.lead_value_gbp !== undefined) {
                         valueGbp = p.lead_value_gbp ?? undefined;
                     }
+                    if (p.journey_id) journeyId = p.journey_id;
+                    if (p.hashed_email) hashedEmail = p.hashed_email;
+                    if (p.hashed_phone) hashedPhone = p.hashed_phone;
+                    if (p.vehicle_make) vehicleMake = p.vehicle_make;
+                    if (p.vehicle_model) vehicleModel = p.vehicle_model;
                 }
             } catch {
                 /* ignore */
@@ -38,12 +66,18 @@ export function PaymentSuccessPage() {
                         const d = (await r.json()) as {
                             total_gbp?: number | null;
                             service_ids?: string[];
+                            booking_id?: string;
+                            vehicle_make?: string;
+                            vehicle_model?: string;
                         };
                         if (!cancelled) {
                             if (d.service_ids?.length) {
                                 serviceInterest = d.service_ids.join(',');
                             }
                             if (d.total_gbp != null) valueGbp = d.total_gbp;
+                            if (!journeyId && d.booking_id) journeyId = d.booking_id;
+                            if (!vehicleMake && d.vehicle_make) vehicleMake = d.vehicle_make;
+                            if (!vehicleModel && d.vehicle_model) vehicleModel = d.vehicle_model;
                         }
                     }
                 } catch {
@@ -52,10 +86,25 @@ export function PaymentSuccessPage() {
             }
 
             if (!cancelled) {
+                const orderId = journeyId || paymentEventId;
+                if (hashedEmail && hashedPhone) {
+                    fireGoogleAdsContactConversion({
+                        valueGbp: valueGbp ?? 0,
+                        transactionId: orderId,
+                        hashedEmailHex: hashedEmail,
+                        hashedPhoneHex: hashedPhone,
+                    });
+                }
                 trackPaymentSuccess(serviceInterest, {
                     serviceInterest,
                     valueGbp,
                     leadValue: valueGbp,
+                    orderId,
+                    eventId: paymentEventId,
+                    ...(hashedEmail ? { hashedEmail } : {}),
+                    ...(hashedPhone ? { hashedPhone } : {}),
+                    ...(vehicleMake ? { vehicleMake } : {}),
+                    ...(vehicleModel ? { vehicleModel } : {}),
                 });
             }
 

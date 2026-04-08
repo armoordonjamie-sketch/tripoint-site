@@ -64,6 +64,16 @@ export function CTAButton({
         );
     }
 
+    const isProtoHref = Boolean(href && (href.startsWith('tel:') || href.startsWith('mailto:')));
+    if (href && isProtoHref) {
+        return (
+            <a href={href} className={classes} onClick={onClick as unknown as MouseEventHandler<HTMLAnchorElement>}>
+                {icon}
+                {children}
+            </a>
+        );
+    }
+
     if (href) {
         return (
             <Link to={href} className={classes} onClick={onClick as unknown as MouseEventHandler<HTMLAnchorElement>}>

@@ -5,6 +5,7 @@ import { Section } from '@/components/Section';
 import { CTAButton } from '@/components/CTAButton';
 import { siteConfig } from '@/config/site';
 import { Loader2, AlertCircle, CheckCircle2, CreditCard } from 'lucide-react';
+import { trackNavClick } from '@/lib/analytics';
 
 interface PaymentDetails {
     booking_id: string;
@@ -55,6 +56,7 @@ export function PaymentPage() {
             const json = await res.json();
             if (!res.ok) throw new Error(json.detail || 'Failed to create payment');
             if (json.checkout_url) {
+                trackNavClick(json.checkout_url, 'Pay deposit (Stripe)', 'pay_page');
                 window.location.href = json.checkout_url;
                 return;
             }
@@ -79,6 +81,7 @@ export function PaymentPage() {
             const json = await res.json();
             if (!res.ok) throw new Error(json.detail || 'Failed to create payment');
             if (json.checkout_url) {
+                trackNavClick(json.checkout_url, 'Pay balance (Stripe)', 'pay_page');
                 window.location.href = json.checkout_url;
                 return;
             }

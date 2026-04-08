@@ -68,6 +68,11 @@ BASE_LEADS_COLUMNS: list[str] = [
     "utm_campaign",
     "utm_content",
     "utm_term",
+    "user_agent",
+    "ip_address",
+    "hashed_email",
+    "hashed_phone",
+    "order_id",
     "qualification_status",
     "disqualify_reason",
     "vehicle_make",
@@ -107,6 +112,31 @@ LEADS_COLUMNS: list[str] = (
 )
 
 EXPORT_LOG_TAB = "GoogleAds_Export_Log"
+
+# Tab connected to Google Ads "Import conversions" — column names must match Google's exact format
+GOOGLE_ADS_IMPORT_TAB: str = (
+    os.getenv("GOOGLE_ADS_IMPORT_TAB", "GoogleAds_Import").strip() or "GoogleAds_Import"
+)
+
+# Exact column headers for the GoogleAds_Import sheet tab (Data Manager / scheduled import mapping).
+# Match names to Goals > Data manager field labels where possible (User agent, User IP address, Session attributes).
+# Ref: https://support.google.com/google-ads-data-manager/answer/14184381
+GOOGLE_ADS_IMPORT_COLUMNS: list[str] = [
+    "Parameters:TimeZone",
+    "Google Click ID",
+    "Conversion Name",
+    "Conversion Time",
+    "Conversion Value",
+    "Conversion Currency",
+    "Hashed Email",
+    "Hashed Phone Number",
+    "Order ID",
+    "WBRAID",
+    "GBRAID",
+    "User agent",
+    "User IP address",
+    "Session attributes",
+]
 EXPORT_LOG_COLUMNS: list[str] = [
     "batch_id",
     "created_at",
@@ -145,6 +175,11 @@ OFFLINE_EXPORT_COLUMNS: list[str] = [
     "wbraid",
     "ga_client_id",
     "ga_session_id",
+    "user_agent",
+    "ip_address",
+    "hashed_email",
+    "hashed_phone",
+    "order_id",
     "lead_channel",
     "contact_method",
     "click_location",

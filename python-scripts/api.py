@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import asyncio
 import html
 import json
 import logging
@@ -123,6 +124,13 @@ async def startup_event():
         logger.debug("GA4 MP startup check skipped: %s", e)
 
     await init_db()
+
+    try:
+        from services.ads_offline_sync import maybe_purge_offline_export_test_rows_on_startup
+
+        await asyncio.to_thread(maybe_purge_offline_export_test_rows_on_startup)
+    except Exception as e:  # pragma: no cover
+        logger.debug("Offline export startup purge skipped: %s", e)
     # Mount media storage for report uploads
     from pathlib import Path
     from services.media_storage import MEDIA_DIR
@@ -439,6 +447,8 @@ class BookingRequest(BaseModel):
     symptoms: str = Field(min_length=2)
     safe_location_confirmed: bool
     additional_notes: str | None = None
+    ga_client_id: str | None = None
+    ga_session_id: str | None = None
 
 
 class BookingResponse(BaseModel):
@@ -626,6 +636,20 @@ class LeadTrackRequest(BaseModel):
     utm_term: str | None = None
     ga_client_id: str | None = None
     ga_session_id: str | None = None
+    user_agent: str | None = None
+    ip_address: str | None = None
+    hashed_email: str | None = None
+    hashed_phone: str | None = None
+    order_id: str | None = None
+
+
+def _client_ip_from_request(request: Request) -> str:
+    xff = (request.headers.get("X-Forwarded-For") or "").strip()
+    if xff:
+        return xff.split(",")[0].strip()
+    if request.client:
+        return request.client.host or ""
+    return ""
 
 
 def get_zone(minutes: float) -> str:
@@ -1191,6 +1215,8 @@ async def reserve_booking(payload: BookingRequest):
         deposit_amount=deposit_pence,
         balance_due=balance_pence,
         price_breakdown_json=breakdown_json,
+        ga_client_id=payload.ga_client_id,
+        ga_session_id=payload.ga_session_id,
     )
 
     tech_name = os.getenv("TECH_NAME", "TriPoint Team")
@@ -1297,7 +1323,7 @@ async def reschedule_booking(payload: RescheduleRequest):
 
 
 @app.post("/leads/track")
-async def leads_track(payload: LeadTrackRequest):
+async def leads_track(payload: LeadTrackRequest, request: Request):
     """Idempotent lead event logging (SQLite) + optional Google Sheets append."""
     from services.sheets_leads import try_append_lead_row
 
@@ -1324,6 +1350,12 @@ async def leads_track(payload: LeadTrackRequest):
     )
 
     row = payload.model_dump()
+    ip = _client_ip_from_request(request)
+    if ip:
+        row["ip_address"] = ip
+    ua_hdr = (request.headers.get("User-Agent") or "").strip()
+    if ua_hdr and not (row.get("user_agent") or "").strip():
+        row["user_agent"] = ua_hdr
     for k in ("qualification_status", "disqualify_reason", "vehicle_make", "vehicle_model", "notes"):
         row.setdefault(k, "")
     sheets_ok, err = try_append_lead_row(row)
@@ -2004,6 +2036,8 @@ async def get_payment_details(token: str):
         "booking_date": slot_start.strftime("%A %d %B %Y"),
         "booking_time_window": f"{slot_start.strftime('%H:%M')} – {slot_end.strftime('%H:%M')}",
         "vehicle_reg": booking.get("vehicle_reg") or "",
+        "vehicle_make": (booking.get("vehicle_make") or "").strip(),
+        "vehicle_model": (booking.get("vehicle_model") or "").strip(),
         "vehicle_make_model": f"{booking.get('vehicle_make') or ''} {booking.get('vehicle_model') or ''}".strip(),
         "deposit_gbp": deposit_pence // 100,
         "balance_gbp": balance_pence // 100,
@@ -2072,6 +2106,7 @@ async def stripe_webhook(request: Request, stripe_signature: str | None = Header
     """Handle Stripe webhooks. Must receive raw body for signature verification."""
     from services.stripe_service import verify_webhook_signature
     from services.calendar_service import create_booking_event, update_event_colour
+    from services.ga4_measurement import send_stripe_purchase_ga4
 
     payload = await request.body()
     event = verify_webhook_signature(payload, stripe_signature)
@@ -2119,6 +2154,8 @@ async def stripe_webhook(request: Request, stripe_signature: str | None = Header
             stripe_customer_id=session.get("customer") or (session.get("customer_details") or {}).get("email"),
             calendar_event_id=event_id,
         )
+        fresh_booking = await get_booking_by_id(booking_id) or booking
+        send_stripe_purchase_ga4(fresh_booking, payment_type="deposit", amount_pence=int(amount or 0))
         tech_name = os.getenv("TECH_NAME", "TriPoint Team")
         client_first_name = (booking.get("full_name") or "").strip().split()[0] or "there"
         vehicle_make_model = f"{booking.get('vehicle_make') or ''} {booking.get('vehicle_model') or ''}".strip() or "-"
@@ -2165,6 +2202,8 @@ async def stripe_webhook(request: Request, stripe_signature: str | None = Header
         if not inserted:
             return {"received": True}
         await update_booking_balance_paid(booking_id=booking_id, stripe_balance_session_id=session_id)
+        fresh_booking = await get_booking_by_id(booking_id) or booking
+        send_stripe_purchase_ga4(fresh_booking, payment_type="balance", amount_pence=int(amount or 0))
         event_id = booking.get("calendar_event_id")
         if event_id:
             try:

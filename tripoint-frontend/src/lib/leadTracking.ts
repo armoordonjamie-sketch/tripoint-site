@@ -56,6 +56,12 @@ export interface LeadTrackPayload {
     ga_client_id?: string;
     /** GA4 session id from _ga_<STREAM> cookie */
     ga_session_id?: string;
+    user_agent?: string;
+    /** Google Ads order_id / gtag transaction_id (e.g. session journey_id). */
+    order_id?: string;
+    /** SHA-256 hex for enhanced conversions (no raw PII). */
+    hashed_email?: string;
+    hashed_phone?: string;
 }
 
 function getCookie(name: string): string | null {
@@ -208,6 +214,7 @@ function basePayload(
     const attr = getAttribution();
     const ga4 = getGa4WebIds();
     const title = typeof document !== 'undefined' ? document.title : '';
+    const ua = typeof navigator !== 'undefined' ? navigator.userAgent : '';
     return {
         journey_id: getSessionJourneyId(),
         event_id: getEventId(),
@@ -230,6 +237,7 @@ function basePayload(
         utm_term: attr.utm_term,
         ga_client_id: ga4.ga_client_id,
         ga_session_id: ga4.ga_session_id,
+        ...(ua ? { user_agent: ua } : {}),
     };
 }
 
@@ -238,6 +246,7 @@ export function buildLeadTrackPayload(
     lead_channel: LeadChannel,
     extras: Partial<Omit<LeadTrackPayload, 'journey_id' | 'event_id'>> = {},
     contextOverride?: PageAnalyticsContext,
+    options?: { eventId?: string },
 ): LeadTrackPayload {
     const ctx = contextOverride ?? getPageAnalyticsContext();
     const base = basePayload(event_name, lead_channel, ctx);
@@ -246,7 +255,7 @@ export function buildLeadTrackPayload(
         ...base,
         ...safeExtras,
         journey_id: base.journey_id,
-        event_id: base.event_id,
+        event_id: options?.eventId?.trim() || base.event_id,
         occurred_at: extras.occurred_at ?? base.occurred_at,
     };
 
@@ -298,10 +307,12 @@ export function trackLeadToBackend(
     event_name: string,
     lead_channel: LeadChannel,
     extras?: Partial<Omit<LeadTrackPayload, 'journey_id' | 'event_id'>>,
-    options?: { blocking?: boolean; context?: PageAnalyticsContext },
+    options?: { blocking?: boolean; context?: PageAnalyticsContext; eventId?: string },
 ): void {
     try {
-        const payload = buildLeadTrackPayload(event_name, lead_channel, extras ?? {}, options?.context);
+        const payload = buildLeadTrackPayload(event_name, lead_channel, extras ?? {}, options?.context, {
+            eventId: options?.eventId,
+        });
         sendPayload(payload, options?.blocking ?? false);
     } catch {
         /* never break UX */

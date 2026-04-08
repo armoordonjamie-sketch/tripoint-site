@@ -1,5 +1,9 @@
 # Google Ads offline export sheet (`google_ads_offline_export`)
 
+## Startup purge (test click IDs)
+
+On API startup, if `GOOGLE_SHEETS_SPREADSHEET_ID` is set, the server rewrites **`google_ads_offline_export`** and **drops** any row whose `identifier_value` / `gclid` / `wbraid` / `gbraid` fails plausibility checks (e.g. `test123`, short placeholders). Real **GCLIDs** (typically 40+ chars, alphanumeric + `_`) and substantial **wbraid/gbraid** values are kept. Set **`GOOGLE_ADS_SKIP_OFFLINE_EXPORT_PURGE_ON_STARTUP=1`** to disable (recommended for some local dev setups).
+
 ## Where sync runs
 
 - **HTTP:** `POST /admin/leads/google-ads/sync-offline-export` (admin session required). Body: `{ "force": false }`.
@@ -18,6 +22,27 @@
 7. **Stale `ready` cleanup:** Source rows still marked **`ready`** but **not** present in the rebuilt export set (e.g. disqualified, lost click id, or no longer `google_ads_eligible`) get **`google_ads_export_status=disqualified_removed`**, batch id cleared. Rows marked **`exported`** or **`adjustment_required`** are not altered by this step.
 8. **Exported lead later disqualified:** When admin sets **`qualification_status`** to **`disqualified`** and the row was previously **`google_ads_export_status=exported`** with **`qualified`** or **`won`**, **`PATCH`** / **`bulk-update`** automatically merge **`google_ads_export_status=adjustment_required`**, **`google_ads_adjustment_type=RETRACTION`**, ensure **`google_ads_conversion_name`** is set for the adjustment CSV, and clear **`google_ads_adjustment_value`**. Run **`POST /admin/leads/google-ads/export-adjustments`** to produce the retraction file. This does not remove the conversion inside Google Ads until you import that adjustment.
 9. Append a row to `GoogleAds_Export_Log` with `export_type` `offline_export`.
+10. Rewrite the **`GoogleAds_Import`** tab (see `GOOGLE_ADS_IMPORT_TAB`) with one row per `export_ready` lead, using headers in `GOOGLE_ADS_IMPORT_COLUMNS` ([`lead_constants.py`](../python-scripts/lead_constants.py)). After a deploy that changes this list, re-check **Data manager** column mappings in Google Ads.
+
+### `GoogleAds_Import` tab (scheduled upload / Data manager)
+
+Columns are written in this order:
+
+| Column | Source |
+|--------|--------|
+| `Parameters:TimeZone` | Always `Europe/London` (aligns with conversion time interpretation). |
+| `Google Click ID` | `gclid` from the lead row. |
+| `Conversion Name` | Resolved conversion action name. |
+| `Conversion Time` | `qualified_at` / `won_at` / `occurred_at`, formatted as `YYYY-MM-DD HH:MM:SS Europe/London` when no offset was present. |
+| `Conversion Value` / `Conversion Currency` | From enrichment / sheet. |
+| `Hashed Email` / `Hashed Phone Number` | From lead track payload (SHA-256 hex). |
+| `Order ID` | Lead `order_id` when set. |
+| `WBRAID` / `GBRAID` | From attribution. |
+| `User agent` | Browser UA from lead track (or request header fallback on `/api/leads/track`). |
+| `User IP address` | Client IP from the tracking request (`X-Forwarded-For` aware). Google may not use IP for matching in the UK/EEA/CH; see [offline import policy](https://support.google.com/google-ads/answer/2998031). |
+| `Session attributes` | Optional base64 JSON (`landing_page_user_agent`, `landing_page_url` from `SITE_URL` + `page`, `session_start_time_usec` from `occurred_at`). Empty if nothing could be built. |
+
+**Recording on ingest:** `/api/leads/track` already persists `gclid`, `wbraid`, `gbraid`, `hashed_email`, `hashed_phone`, `order_id`, `user_agent`, `ip_address`, `ga_client_id`, `ga_session_id`, and UTM fields into the **Leads** sheet. Hashed PII is only present when the frontend sends it (e.g. contact/booking flows that hash and include those fields).
 
 ## Export key
 

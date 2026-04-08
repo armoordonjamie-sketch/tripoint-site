@@ -106,7 +106,10 @@ export function Header() {
                                                                                 : 'text-text-secondary hover:bg-surface-elevated hover:text-text-primary',
                                                                         )
                                                                     }
-                                                                    onClick={closeServices}
+                                                                    onClick={() => {
+                                                                        trackNavClick(item.href, item.title, 'header_services');
+                                                                        closeServices();
+                                                                    }}
                                                                 >
                                                                     {item.title}
                                                                 </NavLink>
@@ -121,7 +124,10 @@ export function Header() {
                                         <NavLink
                                             to="/services"
                                             className="flex items-center justify-center gap-1 text-sm font-semibold text-brand-light transition-colors hover:text-brand"
-                                            onClick={closeServices}
+                                            onClick={() => {
+                                                trackNavClick('/services', 'View all services', 'header_services');
+                                                closeServices();
+                                            }}
                                         >
                                             View all services
                                             <ChevronRight className="h-4 w-4" />
@@ -137,11 +143,7 @@ export function Header() {
                             key={link.href}
                             to={link.href}
                             className={({ isActive }) => navLinkClass(isActive)}
-                            onClick={
-                                link.href === '/contact'
-                                    ? () => trackNavClick('/contact', 'Contact', 'header')
-                                    : undefined
-                            }
+                            onClick={() => trackNavClick(link.href, link.label, 'header')}
                         >
                             {link.label}
                         </NavLink>
@@ -230,7 +232,10 @@ export function Header() {
                                                                         : 'text-text-muted hover:bg-surface-elevated hover:text-text-secondary',
                                                                 )
                                                             }
-                                                            onClick={closeMobile}
+                                                            onClick={() => {
+                                                                trackNavClick(item.href, item.title, 'header_services_mobile');
+                                                                closeMobile();
+                                                            }}
                                                         >
                                                             {item.title}
                                                         </NavLink>
@@ -243,7 +248,10 @@ export function Header() {
                                 <NavLink
                                     to="/services"
                                     className="mt-2 flex items-center justify-center gap-1 rounded-lg border border-brand/30 bg-brand/5 px-3 py-2 text-sm font-semibold text-brand-light"
-                                    onClick={closeMobile}
+                                    onClick={() => {
+                                        trackNavClick('/services', 'View all services', 'header_services_mobile');
+                                        closeMobile();
+                                    }}
                                 >
                                     View all services
                                     <ChevronRight className="h-4 w-4" />
@@ -257,7 +265,7 @@ export function Header() {
                                 to={link.href}
                                 className={({ isActive }) => cn('block', navLinkClass(isActive))}
                                 onClick={() => {
-                                    if (link.href === '/contact') trackNavClick('/contact', 'Contact', 'header');
+                                    trackNavClick(link.href, link.label, 'header_mobile');
                                     closeMobile();
                                 }}
                             >

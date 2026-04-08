@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { Header } from './Header';
 import { Footer } from './Footer';
 import { MobileStickyCTA } from './MobileStickyCTA';
+import { ScrollDepthTracker } from './ScrollDepthTracker';
 import { LocalBusinessSchema, OrganizationWebsiteSchema } from './JsonLd';
 
 export function Layout() {
@@ -23,6 +24,7 @@ export function Layout() {
             </a>
             <LocalBusinessSchema />
             <OrganizationWebsiteSchema />
+            <ScrollDepthTracker />
             <Header />
             <main
                 id="main-content"

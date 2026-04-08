@@ -167,6 +167,15 @@ export async function exportAdjustments(body: {
     });
 }
 
+export async function uploadGoogleAdsApiConversions(body: {
+    event_ids?: string[];
+}): Promise<{ ok: boolean; count: number; results: unknown[] }> {
+    return adminFetchJson(`/admin/leads/google-ads/upload-conversions`, {
+        method: 'POST',
+        body: JSON.stringify(body),
+    });
+}
+
 export async function fetchGoogleAdsExports(): Promise<{ exports: GoogleAdsExportRecord[] }> {
     return adminFetchJson(`/admin/leads/google-ads/exports`);
 }

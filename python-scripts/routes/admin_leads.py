@@ -32,6 +32,11 @@ from services.ga4_measurement import (
     qualification_event_name_for_transition,
     send_admin_qualification_ga4,
 )
+from services.google_ads_api import (
+    google_ads_api_is_configured,
+    upload_enhanced_click_conversion_for_lead,
+    upload_enhanced_conversion_for_web,
+)
 from services.google_ads_export import (
     adjustment_fields_for_exported_disqualify,
     build_adjustment_export_rows,
@@ -191,11 +196,23 @@ def _merge_qualification_ads_enrichment(old_row: dict[str, Any], updates: dict[s
         return
     preview = {**old_row, **updates}
     extra = compute_ads_enrichment_fields(preview)
+    explicit_gcv = "google_ads_conversion_value" in updates
+    explicit_gcn = "google_ads_conversion_name" in updates
     for k, v in extra.items():
         if k == "google_ads_eligible":
             updates[k] = v
         else:
+            if k == "google_ads_conversion_value" and explicit_gcv:
+                continue
+            if k == "google_ads_conversion_name" and explicit_gcn:
+                continue
             updates.setdefault(k, v)
+
+    new_qs = str(updates.get("qualification_status") or "").strip().lower()
+    if new_qs in ("qualified", "won") and not explicit_gcv:
+        en = enrich_lead_row(preview)
+        cv = en.get("computed_conversion_value")
+        updates["google_ads_conversion_value"] = "" if cv is None else str(cv)
 
 
 def _maybe_sync_offline_export(
@@ -279,6 +296,75 @@ def _ga4_qualification_sync_single(old_row: dict[str, Any], new_row: dict[str, A
     return _ga4_mp_result_to_sync_payload(ename, res)
 
 
+def _google_ads_api_qualification_sync_single(
+    svc: Any,
+    spreadsheet_id: str,
+    tab: str,
+    event_id: str,
+    old_row: dict[str, Any],
+    new_row: dict[str, Any],
+) -> dict[str, Any]:
+    """Upload offline click conversion + optional web enhancement; update sheet; never raises."""
+    base: dict[str, Any] = {
+        "google_ads_api_attempted": False,
+        "google_ads_api_click_sent": False,
+        "google_ads_api_click_error": None,
+        "google_ads_api_web_attempted": False,
+        "google_ads_api_web_sent": False,
+        "google_ads_api_web_error": None,
+        "skipped_reason": None,
+    }
+    try:
+        old_qs = str(old_row.get("qualification_status") or "").strip().lower()
+        new_qs = str(new_row.get("qualification_status") or "").strip().lower()
+        ename = qualification_event_name_for_transition(old_qs, new_qs)
+        if ename not in ("lead_qualified", "lead_won"):
+            base["skipped_reason"] = "not_lead_qualified_or_won_transition"
+            return base
+        if not google_ads_api_is_configured():
+            base["skipped_reason"] = "google_ads_api_not_configured"
+            return base
+
+        ads_qs = "qualified" if ename == "lead_qualified" else "won"
+        res = upload_enhanced_click_conversion_for_lead(dict(new_row), ads_qs)
+        base["google_ads_api_attempted"] = bool(res.get("attempted"))
+        base["google_ads_api_click_sent"] = bool(res.get("sent"))
+        base["google_ads_api_click_error"] = res.get("error")
+
+        web_res: dict[str, Any] | None = None
+        if (os.getenv("GOOGLE_ADS_WEB_ENHANCEMENT_ENABLED") or "").strip().lower() in ("1", "true", "yes"):
+            web_res = upload_enhanced_conversion_for_web(dict(new_row))
+            base["google_ads_api_web_attempted"] = bool(web_res.get("attempted"))
+            base["google_ads_api_web_sent"] = bool(web_res.get("sent"))
+            base["google_ads_api_web_error"] = web_res.get("error")
+
+        sheet_updates: dict[str, Any] = {}
+        if res.get("sent"):
+            sheet_updates.update(
+                {
+                    "google_ads_export_status": "exported",
+                    "google_ads_export_type": "google_ads_api_upload",
+                    "google_ads_exported_at": datetime.now(LONDON).isoformat(),
+                    "google_ads_last_error": "",
+                }
+            )
+        elif res.get("attempted") and res.get("error"):
+            sheet_updates["google_ads_last_error"] = str(res["error"])[:500]
+
+        if web_res and web_res.get("attempted") and not web_res.get("sent") and web_res.get("error"):
+            prev = str(sheet_updates.get("google_ads_last_error") or "")
+            werr = f"web_enhancement: {web_res['error']}"[:400]
+            sheet_updates["google_ads_last_error"] = (prev + "; " + werr if prev else werr)[:500]
+
+        if sheet_updates:
+            update_row_by_event_id(svc, spreadsheet_id, tab, event_id, sheet_updates)
+    except Exception as e:
+        logger.exception("Google Ads API qualification sync failed: %s", e)
+        base["google_ads_api_attempted"] = True
+        base["google_ads_api_click_error"] = str(e)[:500]
+    return base
+
+
 def _sort_key(row: dict[str, Any], sort_by: str) -> Any:
     if sort_by == "occurred_at":
         return _parse_occurred(row) or datetime.min.replace(tzinfo=timezone.utc)
@@ -327,6 +413,12 @@ class ExportAdjustmentsBody(BaseModel):
 
 class SyncOfflineExportBody(BaseModel):
     force: bool = False
+
+
+class UploadApiConversionsBody(BaseModel):
+    """Batch-upload qualified/won rows via Google Ads API (enhanced conversions for leads)."""
+
+    event_ids: list[str] | None = None
 
 
 @router.get("/google-ads/exports")
@@ -512,6 +604,52 @@ async def sync_offline_export(payload: SyncOfflineExportBody, _: dict = Depends(
     return {"offline_export_tab": OFFLINE_EXPORT_TAB, **result}
 
 
+@router.post("/google-ads/upload-conversions")
+async def google_ads_api_upload_conversions(
+    body: UploadApiConversionsBody, _: dict = Depends(verify_admin_session)
+):
+    if not google_ads_api_is_configured():
+        raise HTTPException(status_code=503, detail="Google Ads API not configured")
+    spreadsheet_id, tab = get_spreadsheet_config()
+    if not spreadsheet_id:
+        raise HTTPException(status_code=503, detail="Sheets not configured")
+    svc = _service()
+    rows, _ = read_all_lead_rows(svc, spreadsheet_id, tab)
+    if body.event_ids:
+        want = {str(x).strip() for x in body.event_ids}
+        rows = [r for r in rows if str(r.get("event_id") or "").strip() in want]
+    results: list[dict[str, Any]] = []
+    for r in rows:
+        qs = str(r.get("qualification_status") or "").strip().lower()
+        if qs not in ("qualified", "won"):
+            continue
+        eid = str(r.get("event_id") or "").strip()
+        res = upload_enhanced_click_conversion_for_lead(dict(r), qs)
+        web_res = None
+        if (os.getenv("GOOGLE_ADS_WEB_ENHANCEMENT_ENABLED") or "").strip().lower() in ("1", "true", "yes"):
+            web_res = upload_enhanced_conversion_for_web(dict(r))
+        sheet_updates: dict[str, Any] = {}
+        if res.get("sent"):
+            sheet_updates.update(
+                {
+                    "google_ads_export_status": "exported",
+                    "google_ads_export_type": "google_ads_api_upload",
+                    "google_ads_exported_at": datetime.now(LONDON).isoformat(),
+                    "google_ads_last_error": "",
+                }
+            )
+        elif res.get("attempted") and res.get("error"):
+            sheet_updates["google_ads_last_error"] = str(res["error"])[:500]
+        if web_res and web_res.get("attempted") and not web_res.get("sent") and web_res.get("error"):
+            prev = str(sheet_updates.get("google_ads_last_error") or "")
+            werr = f"web_enhancement: {web_res['error']}"[:400]
+            sheet_updates["google_ads_last_error"] = (prev + "; " + werr if prev else werr)[:500]
+        if sheet_updates and eid:
+            update_row_by_event_id(svc, spreadsheet_id, tab, eid, sheet_updates)
+        results.append({"event_id": eid, "click": res, "web_enhancement": web_res})
+    return {"ok": True, "count": len(results), "results": results[:500]}
+
+
 @router.get("/journey/{journey_id}")
 async def get_journey(journey_id: str, _: dict = Depends(verify_admin_session)):
     spreadsheet_id, tab = get_spreadsheet_config()
@@ -667,11 +805,22 @@ async def patch_lead(event_id: str, body: LeadPatchBody, _: dict = Depends(verif
                     str(new_row.get("qualification_status") or ""),
                     triggered_by="admin_patch",
                 )
+            google_ads_api_sync = None
+            if "qualification_status" in updates:
+                rows2, _ = read_all_lead_rows(svc, spreadsheet_id, tab)
+                fresh = next(
+                    (dict(x) for x in rows2 if str(x.get("event_id") or "").strip() == event_id),
+                    new_row,
+                )
+                google_ads_api_sync = _google_ads_api_qualification_sync_single(
+                    svc, spreadsheet_id, tab, event_id, old_row, fresh
+                )
             return {
                 "ok": True,
                 "lead": enrich_lead_row(new_row),
                 "ga4_qualification_sync": ga4_sync,
                 "offline_export_sync": offline_export_sync,
+                "google_ads_api_sync": google_ads_api_sync,
             }
     return {
         "ok": True,
@@ -687,6 +836,7 @@ async def patch_lead(event_id: str, body: LeadPatchBody, _: dict = Depends(verif
             "ga4_sync_session_id_policy": None,
         },
         "offline_export_sync": None,
+        "google_ads_api_sync": None,
     }
 
 
@@ -830,6 +980,24 @@ async def bulk_update(body: BulkUpdateBody, _: dict = Depends(verify_admin_sessi
             ev["skipped_reason"] = reason or "measurement_protocol_failed"
         ga4_events.append(ev)
 
+    google_ads_api_events: list[dict[str, Any]] = []
+    if "qualification_status" in merged:
+        for eid in body.event_ids:
+            eid_s = str(eid).strip()
+            old = before_map.get(eid_s)
+            new = after_map.get(eid_s)
+            if not old or not new:
+                continue
+            old_qs = str(old.get("qualification_status") or "").strip().lower()
+            new_qs = str(new.get("qualification_status") or "").strip().lower()
+            ename = qualification_event_name_for_transition(old_qs, new_qs)
+            if ename not in ("lead_qualified", "lead_won"):
+                continue
+            ads_sync = _google_ads_api_qualification_sync_single(
+                svc, spreadsheet_id, tab, eid_s, old, new
+            )
+            google_ads_api_events.append({"event_id": eid_s, **ads_sync})
+
     offline_export_sync = None
     if "qualification_status" in merged:
         try:
@@ -847,6 +1015,7 @@ async def bulk_update(body: BulkUpdateBody, _: dict = Depends(verify_admin_sessi
             "summary": ga4_summary,
             "events": ga4_events[:100],
         },
+        "google_ads_api_sync": {"events": google_ads_api_events[:100]},
         "offline_export_sync": offline_export_sync,
     }
 

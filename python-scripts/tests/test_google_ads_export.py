@@ -1,6 +1,7 @@
 """Tests for Google Ads export helpers."""
 from __future__ import annotations
 
+from lead_constants import ads_config
 from routes.admin_leads import _merge_qualification_ads_enrichment
 from services.google_ads_export import (
     adjustment_fields_for_exported_disqualify,
@@ -67,7 +68,7 @@ def test_compute_qualified_with_gclid_sets_fields() -> None:
     assert out["google_ads_identifier_type"] == "gclid"
     assert out["google_ads_identifier_value"] == "gcl-xyz"
     assert out["google_ads_conversion_name"] == "Qualified Lead"
-    assert out["google_ads_conversion_value"] == "50.0"
+    assert out["google_ads_conversion_value"] == str(float(ads_config()["default_qualified_value"]))
     assert out["google_ads_currency"] == "GBP"
 
 
@@ -77,9 +78,16 @@ def test_compute_qualified_no_click_not_eligible() -> None:
         "gclid": "",
         "wbraid": "",
         "gbraid": "",
+        "google_ads_conversion_name": "",
+        "google_ads_conversion_value": "",
+        "google_ads_currency": "",
+        "lead_value": "",
     }
     out = compute_ads_enrichment_fields(row)
-    assert out == {"google_ads_eligible": "FALSE"}
+    assert out["google_ads_eligible"] == "FALSE"
+    assert out["google_ads_conversion_name"] == "Qualified Lead"
+    assert out["google_ads_conversion_value"] == str(float(ads_config()["default_qualified_value"]))
+    assert out["google_ads_currency"] == "GBP"
 
 
 def test_compute_preserves_manual_conversion_name() -> None:
@@ -113,6 +121,8 @@ def test_merge_patch_qualified_populates_updates() -> None:
     assert updates["google_ads_identifier_type"] == "gclid"
     assert updates["google_ads_identifier_value"] == "gid1"
     assert updates["qualification_status"] == "qualified"
+    assert updates["google_ads_conversion_value"] == str(float(ads_config()["default_qualified_value"]))
+    assert updates["google_ads_conversion_name"] == "Qualified Lead"
 
 
 def test_merge_patch_disqualified_sets_not_eligible() -> None:

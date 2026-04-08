@@ -7,7 +7,7 @@ import { OptimizedImage } from '@/components/OptimizedImage';
 import { BookOpen, ArrowRight } from 'lucide-react';
 import { getBlogPost, getPostThumbnail } from '@/data/blogPosts';
 import { siteConfig } from '@/config/site';
-import { trackSelectContent } from '@/lib/analytics';
+import { trackNavClick, trackSelectContent } from '@/lib/analytics';
 
 function BlogHeroImage({ src, alt }: { src: string; alt: string }) {
     const isGallery = src.startsWith('/images/gallery/');
@@ -222,7 +222,10 @@ export function BlogPostPage() {
                                         variant="outline"
                                         size="sm"
                                         icon={<ArrowRight className="h-4 w-4" />}
-                                        onClick={() => trackSelectContent('blog_related_service', serviceHrefToContentId(r.href))}
+                                        onClick={() => {
+                                            trackNavClick(r.href, r.label, 'blog_post_cta');
+                                            trackSelectContent('blog_related_service', serviceHrefToContentId(r.href));
+                                        }}
                                     >
                                         {r.label}
                                     </CTAButton>
@@ -250,7 +253,12 @@ export function BlogPostPage() {
                                 ))}
                             </ul>
                             <div className="mt-6">
-                                <CTAButton href="/booking" size="sm" className="w-full justify-center">
+                                <CTAButton
+                                    href="/booking"
+                                    size="sm"
+                                    className="w-full justify-center"
+                                    onClick={() => trackNavClick('/booking', 'Book Now', 'blog_post_sidebar')}
+                                >
                                     Book Now
                                 </CTAButton>
                             </div>

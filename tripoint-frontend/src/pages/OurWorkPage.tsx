@@ -3,6 +3,7 @@ import { Seo } from '@/components/Seo';
 import { Section } from '@/components/Section';
 import { PhotoGallery } from '@/components/PhotoGallery';
 import { galleryImages, getImagesByCategory } from '@/data/galleryImages';
+import { trackSelectContent } from '@/lib/analytics';
 
 const categories = [
     { id: 'all', label: 'All Work' },
@@ -52,7 +53,10 @@ export function OurWorkPage() {
                         return (
                             <button
                                 key={cat.id}
-                                onClick={() => setActiveCategory(cat.id)}
+                                onClick={() => {
+                                    setActiveCategory(cat.id);
+                                    trackSelectContent('gallery_category', cat.id);
+                                }}
                                 className={`rounded-full px-4 py-1.5 text-sm font-medium transition-all ${activeCategory === cat.id
                                         ? 'bg-brand text-white shadow-lg shadow-brand/25'
                                         : 'border border-brand/15 bg-brand/5 text-brand-light hover:bg-brand/10 hover:border-brand/30'
@@ -67,7 +71,14 @@ export function OurWorkPage() {
 
                 {/* Photo grid */}
                 <div className="mt-10">
-                    <PhotoGallery images={filtered} columns={3} />
+                    <PhotoGallery
+                        images={filtered}
+                        columns={3}
+                        onOpenLightbox={(_i, img) =>
+                            trackSelectContent('gallery_lightbox', img.src.replace(/^\/images\/gallery\//, '') || 'image')
+                        }
+                        onShowAll={() => trackSelectContent('gallery_show_all', activeCategory)}
+                    />
                 </div>
 
                 {filtered.length === 0 && (

@@ -37,6 +37,7 @@ __all__ = [
     "read_rows_by_journey_id",
     "apply_leads_sheet_formatting",
     "append_export_log_row",
+    "read_export_tab",
     "write_export_tab",
 ]
 
@@ -517,6 +518,45 @@ def append_export_log_row(
         insertDataOption="INSERT_ROWS",
         body={"values": [row]},
     ).execute()
+
+
+def read_export_tab(
+    service: Any,
+    spreadsheet_id: str,
+    tab_name: str,
+    *,
+    max_rows: int = 50000,
+) -> tuple[list[str], list[list[Any]]]:
+    """
+    Read an export-style tab: row 1 = headers, following rows = data.
+    Returns (headers, rows) where each row is padded to len(headers).
+    """
+    _ensure_sheet_exists(spreadsheet_id, tab_name, service)
+    q = _quote_sheet(tab_name)
+    end_col = _col_index_to_a1(99)
+    result = (
+        service.spreadsheets()
+        .values()
+        .get(
+            spreadsheetId=spreadsheet_id,
+            range=f"{q}!A1:{end_col}{max_rows}",
+        )
+        .execute()
+    )
+    vals = result.get("values") or []
+    if not vals or not vals[0]:
+        return [], []
+    headers = [str(h).strip() for h in vals[0]]
+    if not any(headers):
+        return [], []
+    n = len(headers)
+    data: list[list[Any]] = []
+    for raw in vals[1:]:
+        if not raw or not any(str(c).strip() for c in raw):
+            continue
+        padded = list(raw) + [""] * max(0, n - len(raw))
+        data.append(padded[:n])
+    return headers, data
 
 
 def write_export_tab(

@@ -187,7 +187,11 @@ export function AreaPage() {
                         Enter your postcode, pick a service, and we will confirm your zone and price.
                     </p>
                     <div className="mt-6 flex flex-wrap justify-center gap-4">
-                        <CTAButton href="tel:+442080586095" icon={<Phone className="h-5 w-5" />}>
+                        <CTAButton
+                            href="tel:+442080586095"
+                            icon={<Phone className="h-5 w-5" />}
+                            onClick={() => trackPhoneClick('area_body')}
+                        >
                             Call 020 8058 6095
                         </CTAButton>
                         <CTAButton
@@ -195,10 +199,13 @@ export function AreaPage() {
                             variant="outline"
                             external
                             icon={<MessageCircle className="h-5 w-5" />}
+                            onClick={() => trackWhatsAppClick('area_body')}
                         >
                             WhatsApp Us
                         </CTAButton>
-                        <CTAButton href="/booking">Book a Callout</CTAButton>
+                        <CTAButton href="/booking" onClick={() => trackNavClick('/booking', 'Book a Callout', 'area_body')}>
+                            Book a Callout
+                        </CTAButton>
                     </div>
                 </div>
             </Section>

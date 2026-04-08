@@ -568,7 +568,7 @@ export function HomePage() {
                             Book a diagnostic and get a proper answer - at your door.
                         </p>
                         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-                            <CTAButton href="/booking" variant="secondary" size="lg" onClick={() => trackNavClick('/booking', 'Book a Diagnostic', 'hero')}>
+                            <CTAButton href="/booking" variant="secondary" size="lg" onClick={() => trackNavClick('/booking', 'Book a Diagnostic', 'home_footer_cta')}>
                                 Book a Diagnostic
                             </CTAButton>
                             <CTAButton
@@ -578,7 +578,7 @@ export function HomePage() {
                                 external
                                 icon={<MessageCircle className="h-5 w-5" />}
                                 className="text-white hover:text-white hover:bg-white/10"
-                                onClick={() => trackWhatsAppClick('hero')}
+                                onClick={() => trackWhatsAppClick('home_footer_cta')}
                             >
                                 WhatsApp Us
                             </CTAButton>
@@ -589,7 +589,7 @@ export function HomePage() {
                                 external
                                 icon={<Phone className="h-5 w-5" />}
                                 className="text-white hover:text-white hover:bg-white/10"
-                                onClick={() => trackPhoneClick('hero')}
+                                onClick={() => trackPhoneClick('home_footer_cta')}
                             >
                                 {siteConfig.contact.phoneDisplay}
                             </CTAButton>

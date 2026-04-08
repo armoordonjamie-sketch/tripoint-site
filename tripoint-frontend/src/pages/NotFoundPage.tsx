@@ -2,6 +2,7 @@ import { Seo } from '@/components/Seo';
 import { Section } from '@/components/Section';
 import { CTAButton } from '@/components/CTAButton';
 import { AlertTriangle } from 'lucide-react';
+import { trackNavClick } from '@/lib/analytics';
 
 export function NotFoundPage() {
     return (
@@ -19,8 +20,14 @@ export function NotFoundPage() {
                         The page you&apos;re looking for doesn&apos;t exist or has been moved.
                     </p>
                     <div className="mt-8 flex flex-wrap justify-center gap-3">
-                        <CTAButton href="/">Back to Home</CTAButton>
-                        <CTAButton href="/contact" variant="outline">
+                        <CTAButton href="/" onClick={() => trackNavClick('/', 'Back to Home', 'not_found')}>
+                            Back to Home
+                        </CTAButton>
+                        <CTAButton
+                            href="/contact"
+                            variant="outline"
+                            onClick={() => trackNavClick('/contact', 'Contact Us', 'not_found')}
+                        >
                             Contact Us
                         </CTAButton>
                     </div>

@@ -5,7 +5,7 @@ import { FaqPageSchema } from '@/components/JsonLd';
 import { Section } from '@/components/Section';
 import { CTAButton } from '@/components/CTAButton';
 import { cn } from '@/lib/utils';
-import { trackSearch } from '@/lib/analytics';
+import { trackFaqOpen, trackNavClick, trackSearch } from '@/lib/analytics';
 
 interface FaqItem {
     question: string;
@@ -314,7 +314,12 @@ function FaqAccordionItem({ item }: { item: FaqItem }) {
     return (
         <div className="rounded-xl border border-border-default bg-surface-alt overflow-hidden transition-colors open:border-brand/20">
             <button
-                onClick={() => setOpen(!open)}
+                onClick={() => {
+                    setOpen((prev) => {
+                        if (!prev) trackFaqOpen(item.question);
+                        return !prev;
+                    });
+                }}
                 className="flex w-full items-center justify-between px-5 py-4 text-left transition-colors hover:bg-surface-elevated"
                 aria-expanded={open}
             >
@@ -428,7 +433,13 @@ export function FaqPage() {
                         <p className="text-lg text-text-secondary">No matching questions found.</p>
                         <p className="mt-2 text-sm text-text-muted">Try a different search term, or get in touch directly.</p>
                         <div className="mt-6">
-                            <CTAButton href="/contact" variant="outline">Get in Touch</CTAButton>
+                            <CTAButton
+                                href="/contact"
+                                variant="outline"
+                                onClick={() => trackNavClick('/contact', 'Get in Touch', 'faq_no_results')}
+                            >
+                                Get in Touch
+                            </CTAButton>
                         </div>
                     </div>
                 )}
@@ -456,8 +467,16 @@ export function FaqPage() {
                             We&apos;re happy to help. WhatsApp us for a quick answer or use our contact page.
                         </p>
                         <div className="mt-6 flex flex-wrap justify-center gap-3">
-                            <CTAButton href="/contact">Get in Touch</CTAButton>
-                            <CTAButton href="/booking" variant="outline">Book a Diagnostic</CTAButton>
+                            <CTAButton href="/contact" onClick={() => trackNavClick('/contact', 'Get in Touch', 'faq_bottom')}>
+                                Get in Touch
+                            </CTAButton>
+                            <CTAButton
+                                href="/booking"
+                                variant="outline"
+                                onClick={() => trackNavClick('/booking', 'Book a Diagnostic', 'faq_bottom')}
+                            >
+                                Book a Diagnostic
+                            </CTAButton>
                         </div>
                     </div>
                 </div>

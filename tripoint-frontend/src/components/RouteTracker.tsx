@@ -1,17 +1,16 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { trackPageView } from '@/lib/analytics';
+import { captureAttributionFromUrl } from '@/lib/attribution';
 
 export function RouteTracker() {
     const location = useLocation();
-    const isFirst = useRef(true);
 
     useEffect(() => {
-        if (isFirst.current) {
-            isFirst.current = false;
-            trackPageView(location.pathname + location.search, document.title);
-            return;
-        }
+        captureAttributionFromUrl();
+    }, [location.search]);
+
+    useEffect(() => {
         trackPageView(location.pathname + location.search, document.title);
     }, [location.pathname, location.search]);
 

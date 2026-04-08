@@ -8,8 +8,10 @@ import { CTAButton } from '@/components/CTAButton';
 import { siteConfig } from '@/config/site';
 import { Link } from 'react-router-dom';
 import { Phone, MessageCircle, Mail, CheckCircle2, Calendar } from 'lucide-react';
-import { trackContactFormSuccess, trackNavClick, trackPhoneClick, trackWhatsAppClick } from '@/lib/analytics';
+import { fireGoogleAdsContactConversion, trackContactFormSuccess, trackNavClick, trackPhoneClick, trackWhatsAppClick } from '@/lib/analytics';
 import { getAttribution } from '@/lib/attribution';
+import { normalizeAndHashEmail, normalizeAndHashPhone } from '@/lib/hashUserData';
+import { getSessionJourneyId } from '@/lib/leadTracking';
 
 const contactSchema = z.object({
     name: z.string().min(2, 'Name is required'),
@@ -46,6 +48,10 @@ export function ContactPage() {
     const onSubmit = async (data: ContactFormData) => {
         setSubmitError(null);
         try {
+            const journeyId = getSessionJourneyId();
+            const contactEventId = crypto.randomUUID();
+            const hashedEmail = await normalizeAndHashEmail(data.email);
+            const hashedPhone = await normalizeAndHashPhone(data.phone);
             const attribution = getAttribution();
             const response = await fetch('/api/contact/submit', {
                 method: 'POST',
@@ -76,7 +82,18 @@ export function ContactPage() {
                 throw new Error(message);
             }
             const interest = data.serviceInterest ? data.serviceInterest : 'general';
-            trackContactFormSuccess(interest);
+            fireGoogleAdsContactConversion({
+                valueGbp: 50,
+                transactionId: journeyId,
+                hashedEmailHex: hashedEmail,
+                hashedPhoneHex: hashedPhone,
+            });
+            trackContactFormSuccess(interest, {
+                orderId: journeyId,
+                eventId: contactEventId,
+                hashedEmail,
+                hashedPhone,
+            });
             setSubmitted(true);
         } catch (err) {
             setSubmitError(err instanceof Error ? err.message : 'Failed to send message. Please try again.');
