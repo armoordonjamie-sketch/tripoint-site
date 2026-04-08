@@ -8,6 +8,7 @@ import json
 import logging
 import os
 import re
+import time
 from typing import Any
 
 from lead_constants import (
@@ -24,6 +25,11 @@ from services.google_sa_file import require_service_account_file_exists
 logger = logging.getLogger("tripoint.sheets_leads")
 
 SHEETS_SCOPE = "https://www.googleapis.com/auth/spreadsheets"
+
+# Cache ensure_leads_headers results so _ensure_sheet_exists / header reads don't
+# fire on every API request. Keyed by (spreadsheet_id, tab). TTL: 5 minutes.
+_HEADER_CACHE_TTL = 300.0
+_header_cache: dict[tuple[str, str], tuple[float, dict[str, int]]] = {}
 
 # Column index for each core lead field (append order). Row 1 headers can be dragged in the UI
 # without moving underlying cell data — reads/updates must use these indices, not header positions.
@@ -190,11 +196,26 @@ def get_header_map(service: Any, spreadsheet_id: str, tab: str) -> dict[str, int
     return {str(h).strip(): i for i, h in enumerate(row) if str(h).strip()}
 
 
+def _invalidate_header_cache(spreadsheet_id: str, tab: str) -> None:
+    """Evict a specific entry so the next call does a fresh API check."""
+    _header_cache.pop((spreadsheet_id, tab), None)
+
+
 def ensure_leads_headers(service: Any, spreadsheet_id: str, tab: str) -> dict[str, int]:
     """
     Ensure row 1 contains all LEADS_COLUMNS in order; append missing names to the right.
     Returns header name -> column index.
+
+    Results are cached for _HEADER_CACHE_TTL seconds to avoid hammering the
+    Sheets read-quota (60 reads/minute) on every API request.
     """
+    cache_key = (spreadsheet_id, tab)
+    cached = _header_cache.get(cache_key)
+    if cached is not None:
+        ts, header_map = cached
+        if time.monotonic() - ts < _HEADER_CACHE_TTL:
+            return header_map
+
     _ensure_sheet_exists(spreadsheet_id, tab, service)
     qtab = _quote_sheet(tab)
     full = (
@@ -205,6 +226,10 @@ def ensure_leads_headers(service: Any, spreadsheet_id: str, tab: str) -> dict[st
         .get("values")
         or [[]]
     )[0]
+    def _cache_and_return(hmap: dict[str, int]) -> dict[str, int]:
+        _header_cache[cache_key] = (time.monotonic(), hmap)
+        return hmap
+
     names_in_order = [str(c).strip() for c in full]
     if not names_in_order or not names_in_order[0]:
         _ensure_column_capacity(service, spreadsheet_id, tab, len(LEADS_COLUMNS))
@@ -214,11 +239,11 @@ def ensure_leads_headers(service: Any, spreadsheet_id: str, tab: str) -> dict[st
             valueInputOption="RAW",
             body={"values": [LEADS_COLUMNS]},
         ).execute()
-        return {name: i for i, name in enumerate(LEADS_COLUMNS)}
+        return _cache_and_return({name: i for i, name in enumerate(LEADS_COLUMNS)})
 
     missing = [c for c in LEADS_COLUMNS if c not in names_in_order]
     if not missing:
-        return {n: i for i, n in enumerate(names_in_order) if n}
+        return _cache_and_return({n: i for i, n in enumerate(names_in_order) if n})
 
     required = max(len(LEADS_COLUMNS), len(names_in_order) + len(missing))
     _ensure_column_capacity(service, spreadsheet_id, tab, required)
@@ -234,7 +259,7 @@ def ensure_leads_headers(service: Any, spreadsheet_id: str, tab: str) -> dict[st
         valueInputOption="RAW",
         body={"values": [missing]},
     ).execute()
-    return get_header_map(service, spreadsheet_id, tab)
+    return _cache_and_return(get_header_map(service, spreadsheet_id, tab))
 
 
 def read_all_lead_rows(service: Any, spreadsheet_id: str, tab: str) -> tuple[list[dict[str, Any]], dict[str, int]]:
