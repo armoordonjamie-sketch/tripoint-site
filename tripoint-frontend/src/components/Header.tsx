@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { Menu, X, ChevronDown, ChevronRight, Phone, MessageCircle } from 'lucide-react';
 import { siteConfig } from '@/config/site';
+import { getWhatsAppHref } from '@/lib/whatsappHref';
 import { CATEGORY_META, SERVICES_BY_CATEGORY, SERVICE_CATEGORY_ORDER } from '@/config/servicesCatalog';
 import { cn } from '@/lib/utils';
 import { trackNavClick, trackPhoneClick, trackWhatsAppClick } from '@/lib/analytics';
@@ -162,7 +163,7 @@ export function Header() {
                         <span className="hidden text-sm font-medium xl:inline">{siteConfig.contact.phoneDisplay}</span>
                     </a>
                     <a
-                        href={`https://wa.me/${siteConfig.contact.whatsappE164}`}
+                        href={getWhatsAppHref()}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="rounded-lg p-2 text-text-secondary transition-colors hover:bg-surface-alt hover:text-success"

@@ -12,6 +12,7 @@ import { Notice } from '@/components/Notice';
 import { FaqAccordion } from '@/components/FaqAccordion';
 import { siteConfig } from '@/config/site';
 import { trackNavClick, trackPhoneClick, trackWhatsAppClick } from '@/lib/analytics';
+import { getWhatsAppHref } from '@/lib/whatsappHref';
 import { OptimizedImage } from '@/components/OptimizedImage';
 
 // Lazy load CoverageMap - Leaflet accesses window at import time and crashes in SSR
@@ -240,7 +241,7 @@ export function CoveragePage() {
                         Check Your Zone &amp; Book
                     </CTAButton>
                     <CTAButton
-                        href={`https://wa.me/${siteConfig.contact.whatsappE164}`}
+                        href={getWhatsAppHref()}
                         variant="outline"
                         size="lg"
                         external
@@ -271,7 +272,7 @@ export function CoveragePage() {
                                 Book Now
                             </CTAButton>
                             <CTAButton
-                                href={`https://wa.me/${siteConfig.contact.whatsappE164}`}
+                                href={getWhatsAppHref()}
                                 variant="ghost"
                                 size="lg"
                                 external

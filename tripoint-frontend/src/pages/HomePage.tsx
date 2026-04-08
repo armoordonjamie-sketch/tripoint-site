@@ -12,6 +12,7 @@ import { CTAButton } from '@/components/CTAButton';
 import { TownChips } from '@/components/TownChips';
 import { siteConfig } from '@/config/site';
 import { trackNavClick, trackPhoneClick, trackWhatsAppClick } from '@/lib/analytics';
+import { getWhatsAppHref } from '@/lib/whatsappHref';
 import { galleryImages } from '@/data/galleryImages';
 import { blogPosts, getPostThumbnail } from '@/data/blogPosts';
 import { useScrollReveal } from '@/lib/useScrollReveal';
@@ -163,7 +164,7 @@ export function HomePage() {
                                     Book a Diagnostic
                                 </CTAButton>
                                 <CTAButton
-                                    href={`https://wa.me/${siteConfig.contact.whatsappE164}`}
+                                    href={getWhatsAppHref()}
                                     variant="outline"
                                     size="lg"
                                     external
@@ -572,7 +573,7 @@ export function HomePage() {
                                 Book a Diagnostic
                             </CTAButton>
                             <CTAButton
-                                href={`https://wa.me/${siteConfig.contact.whatsappE164}`}
+                                href={getWhatsAppHref()}
                                 variant="ghost"
                                 size="lg"
                                 external

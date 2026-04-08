@@ -16,7 +16,7 @@ const CAPTURED_AT_KEY = '_captured_at';
 export const EXPIRY_DAYS = 90;
 
 /** The params we care about. */
-const ATTRIBUTION_KEYS = [
+export const ATTRIBUTION_QUERY_KEYS = [
     'gclid',
     'gbraid',
     'wbraid',
@@ -27,7 +27,9 @@ const ATTRIBUTION_KEYS = [
     'utm_term',
 ] as const;
 
-export type AttributionData = Partial<Record<(typeof ATTRIBUTION_KEYS)[number], string>>;
+const ATTRIBUTION_KEYS = ATTRIBUTION_QUERY_KEYS;
+
+export type AttributionData = Partial<Record<(typeof ATTRIBUTION_QUERY_KEYS)[number], string>>;
 
 type RawStored = AttributionData & { [CAPTURED_AT_KEY]?: string };
 
@@ -225,6 +227,23 @@ export function registerAttributionDebugHelpers() {
  * Appends stored attribution params to a URL (for outbound links like WhatsApp).
  * Skips params already present in the URL.
  */
+/**
+ * Pathname + search with gclid / gbraid / wbraid / utm_* removed.
+ * Lead payloads should use this for `page` so click IDs and UTMs are not duplicated in the page column.
+ */
+export function pagePathWithoutAttributionQuery(fullPath: string): string {
+    const q = fullPath.indexOf('?');
+    const pathRaw = q < 0 ? fullPath : fullPath.slice(0, q);
+    const path = pathRaw.replace(/\/+$/, '') || '/';
+    if (q < 0) return path;
+    const params = new URLSearchParams(fullPath.slice(q + 1));
+    for (const key of ATTRIBUTION_QUERY_KEYS) {
+        params.delete(key);
+    }
+    const rest = params.toString();
+    return rest ? `${path}?${rest}` : path;
+}
+
 export function decorateUrl(url: string): string {
     const data = load();
     const entries = Object.entries(data).filter(([, v]) => v);

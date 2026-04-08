@@ -7,6 +7,7 @@ from __future__ import annotations
 import csv
 import io
 import logging
+import math
 import uuid
 from datetime import datetime
 from typing import Any
@@ -29,9 +30,12 @@ def _parse_float(v: Any) -> float | None:
     if v is None or v == "":
         return None
     try:
-        return float(v)
+        x = float(v)
     except (TypeError, ValueError):
         return None
+    if math.isnan(x) or math.isinf(x):
+        return None
+    return x
 
 
 def resolve_click_identifier(row: dict[str, Any]) -> tuple[str | None, str | None]:
@@ -75,6 +79,8 @@ def enrich_lead_row(row: dict[str, Any]) -> dict[str, Any]:
     elif lead_val is not None:
         value_for_export = lead_val
     else:
+        value_for_export = default_val
+    if isinstance(value_for_export, float) and (math.isnan(value_for_export) or math.isinf(value_for_export)):
         value_for_export = default_val
 
     ads_exportable = False

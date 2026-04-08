@@ -723,12 +723,16 @@ def _build_google_credentials():
     delegated_user = os.getenv("GOOGLE_DELEGATED_USER")
 
     if service_account_json or service_account_path:
-        info = json.loads(service_account_json) if service_account_json else None
-        creds = (
-            service_account.Credentials.from_service_account_info(info, scopes=scopes)
-            if info
-            else service_account.Credentials.from_service_account_file(service_account_path, scopes=scopes)
-        )
+        if service_account_json:
+            info = json.loads(service_account_json)
+            creds = service_account.Credentials.from_service_account_info(info, scopes=scopes)
+        else:
+            from services.google_sa_file import require_service_account_file_exists
+
+            require_service_account_file_exists(service_account_path or "")
+            creds = service_account.Credentials.from_service_account_file(
+                service_account_path, scopes=scopes
+            )
         return creds.with_subject(delegated_user) if delegated_user else creds
 
     client_id = os.getenv("GOOGLE_CLIENT_ID")

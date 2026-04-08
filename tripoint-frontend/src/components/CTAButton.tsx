@@ -1,5 +1,6 @@
 import type { ReactNode, ButtonHTMLAttributes, MouseEventHandler } from 'react';
 import { Link } from 'react-router-dom';
+import { decorateUrl } from '@/lib/attribution';
 import { cn } from '@/lib/utils';
 
 type Variant = 'primary' | 'secondary' | 'outline' | 'ghost';
@@ -50,9 +51,10 @@ export function CTAButton({
     );
 
     if (href && external) {
+        const outHref = href.includes('wa.me/') ? decorateUrl(href) : href;
         return (
             <a
-                href={href}
+                href={outHref}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={classes}

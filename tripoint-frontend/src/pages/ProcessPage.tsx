@@ -6,6 +6,7 @@ import { Notice } from '@/components/Notice';
 import { ExpandableReportImage } from '@/components/ExpandableReportImage';
 import { siteConfig } from '@/config/site';
 import { trackNavClick, trackPhoneClick, trackWhatsAppClick } from '@/lib/analytics';
+import { getWhatsAppHref } from '@/lib/whatsappHref';
 import { CheckCircle2, XCircle, ClipboardCheck, Search, FileText, Phone, MessageCircle } from 'lucide-react';
 
 function useScrollReveal() {
@@ -189,7 +190,7 @@ export function ProcessPage() {
                             Book a Diagnostic
                         </CTAButton>
                         <CTAButton
-                            href={`https://wa.me/${siteConfig.contact.whatsappE164}`}
+                            href={getWhatsAppHref()}
                             variant="outline"
                             size="lg"
                             external

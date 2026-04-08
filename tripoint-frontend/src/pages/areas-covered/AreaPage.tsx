@@ -8,6 +8,7 @@ import { getAreaData } from '@/data/areas';
 import { siteConfig } from '@/config/site';
 import { CheckCircle2, MessageCircle, Phone, MapPin } from 'lucide-react';
 import { trackNavClick, trackPhoneClick, trackWhatsAppClick, trackSelectContent } from '@/lib/analytics';
+import { getWhatsAppHref } from '@/lib/whatsappHref';
 
 function formatSlug(slug: string): string {
     return slug
@@ -78,7 +79,7 @@ export function AreaPage() {
                             Call {siteConfig.contact.phoneDisplay}
                         </CTAButton>
                         <CTAButton
-                            href={`https://wa.me/${siteConfig.contact.whatsappE164}`}
+                            href={getWhatsAppHref()}
                             variant="outline"
                             external
                             icon={<MessageCircle className="h-4 w-4" />}
@@ -195,7 +196,7 @@ export function AreaPage() {
                             Call 020 8058 6095
                         </CTAButton>
                         <CTAButton
-                            href={`https://wa.me/${siteConfig.contact.whatsappE164}`}
+                            href={getWhatsAppHref()}
                             variant="outline"
                             external
                             icon={<MessageCircle className="h-5 w-5" />}

@@ -218,14 +218,31 @@ export function LeadTable({
                                 <td className="max-w-[120px] truncate px-2 py-2">{row.service_name || '-'}</td>
                                 <td className="max-w-[100px] truncate px-2 py-2">{row.click_location || '-'}</td>
                                 <td className="max-w-[140px] truncate px-2 py-2 text-text-muted">{row.page || '-'}</td>
-                                <td className="px-2 py-2 text-center">
+                                <td className="max-w-[100px] px-2 py-2 text-center">
                                     {row.has_click_id && row.identifier_type ? (
                                         <span
-                                            className="inline-flex items-center gap-1 text-success"
-                                            title={row.identifier_value || row.identifier_type}
+                                            className="inline-flex flex-col items-center gap-0.5 text-success"
+                                            title={[
+                                                row.identifier_type && row.identifier_value
+                                                    ? `${row.identifier_type}: ${row.identifier_value}`
+                                                    : '',
+                                                row.gbraid?.trim() ? `gbraid: ${row.gbraid}` : '',
+                                                row.wbraid?.trim() ? `wbraid: ${row.wbraid}` : '',
+                                            ]
+                                                .filter(Boolean)
+                                                .join('\n')}
                                         >
-                                            <span>●</span>
-                                            <span className="text-[10px] uppercase">{row.identifier_type}</span>
+                                            <span className="inline-flex items-center gap-1">
+                                                <span>●</span>
+                                                <span className="text-[10px] uppercase">{row.identifier_type}</span>
+                                            </span>
+                                            {(row.gbraid?.trim() || row.wbraid?.trim()) && (
+                                                <span className="text-[9px] font-normal text-text-muted">
+                                                    {[row.gbraid?.trim() && 'gb', row.wbraid?.trim() && 'wb']
+                                                        .filter(Boolean)
+                                                        .join('+')}
+                                                </span>
+                                            )}
                                         </span>
                                     ) : (
                                         '-'

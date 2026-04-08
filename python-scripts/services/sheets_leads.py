@@ -18,10 +18,21 @@ from lead_constants import (
     QUALIFICATION_STATUS_OPTIONS,
     VEHICLE_MAKE_OPTIONS,
 )
+from services.google_sa_file import require_service_account_file_exists
 
 logger = logging.getLogger("tripoint.sheets_leads")
 
 SHEETS_SCOPE = "https://www.googleapis.com/auth/spreadsheets"
+
+# Column index for each core lead field (append order). Row 1 headers can be dragged in the UI
+# without moving underlying cell data — reads/updates must use these indices, not header positions.
+_LEAD_COL_INDEX: dict[str, int] = {name: i for i, name in enumerate(LEADS_COLUMNS)}
+
+
+def _canonical_col_index(column_name: str) -> int | None:
+    """0-based column index for columns defined in LEADS_COLUMNS."""
+    idx = _LEAD_COL_INDEX.get(column_name)
+    return idx if idx is not None else None
 
 # Re-export for callers that imported LEADS_COLUMNS from here historically
 __all__ = [
@@ -58,6 +69,7 @@ def _build_credentials():
         creds = service_account.Credentials.from_service_account_info(info, scopes=[SHEETS_SCOPE])
         return creds, build
     if path:
+        require_service_account_file_exists(path)
         creds = service_account.Credentials.from_service_account_file(path, scopes=[SHEETS_SCOPE])
         return creds, build
     raise RuntimeError(
@@ -225,11 +237,24 @@ def ensure_leads_headers(service: Any, spreadsheet_id: str, tab: str) -> dict[st
 
 
 def read_all_lead_rows(service: Any, spreadsheet_id: str, tab: str) -> tuple[list[dict[str, Any]], dict[str, int]]:
-    """Read all data rows (2+) as dicts keyed by header name."""
+    """Read all data rows (2+) as dicts keyed by header name.
+
+    Core columns use fixed indices matching LEADS_COLUMNS / append order, so row-1 header drag-and-drop
+    cannot mis-map values (e.g. user_agent into qualification_status).
+    """
     header_map = ensure_leads_headers(service, spreadsheet_id, tab)
     if not header_map:
         return [], {}
     qtab = _quote_sheet(tab)
+    hdr_row = (
+        service.spreadsheets()
+        .values()
+        .get(spreadsheetId=spreadsheet_id, range=f"{qtab}!1:1")
+        .execute()
+        .get("values")
+        or [[]]
+    )[0]
+    names_row = [str(c).strip() for c in hdr_row]
     result = (
         service.spreadsheets()
         .values()
@@ -237,21 +262,21 @@ def read_all_lead_rows(service: Any, spreadsheet_id: str, tab: str) -> tuple[lis
         .execute()
     )
     rows = result.get("values") or []
-    idx_to_name: dict[int, str] = {}
-    for name, idx in header_map.items():
-        idx_to_name[idx] = name
-    max_col = max(header_map.values()) if header_map else 0
     out: list[dict[str, Any]] = []
+    n_canonical = len(LEADS_COLUMNS)
     for raw in rows:
         if not raw or not any(str(c).strip() for c in raw):
             continue
         d: dict[str, Any] = {}
-        for i in range(max_col + 1):
-            name = idx_to_name.get(i)
-            if not name:
+        for i, name in enumerate(LEADS_COLUMNS):
+            d[name] = raw[i] if i < len(raw) else ""
+        for i in range(n_canonical, max(len(raw), len(names_row))):
+            if i >= len(names_row) or not names_row[i]:
                 continue
-            val = raw[i] if i < len(raw) else ""
-            d[name] = val
+            name = names_row[i]
+            if name in d:
+                continue
+            d[name] = raw[i] if i < len(raw) else ""
         eid = str(d.get("event_id") or "").strip()
         if eid:
             out.append(d)
@@ -259,12 +284,12 @@ def read_all_lead_rows(service: Any, spreadsheet_id: str, tab: str) -> tuple[lis
 
 
 def _find_row_number_for_event(
-    service: Any, spreadsheet_id: str, tab: str, header_map: dict[str, int], event_id: str
+    service: Any, spreadsheet_id: str, tab: str, _header_map: dict[str, int], event_id: str
 ) -> int | None:
     """1-based sheet row number, or None."""
-    if "event_id" not in header_map:
+    col = _canonical_col_index("event_id")
+    if col is None:
         return None
-    col = header_map["event_id"]
     col_letter = _col_index_to_a1(col)
     qtab = _quote_sheet(tab)
     # Read event_id column from row 2 down
@@ -290,9 +315,11 @@ def update_row_by_event_id(
         return False
     qtab = _quote_sheet(tab)
     for key, val in updates.items():
-        if key not in header_map:
+        col_idx = _canonical_col_index(key)
+        if col_idx is None:
+            col_idx = header_map.get(key)
+        if col_idx is None:
             continue
-        col_idx = header_map[key]
         col_letter = _col_index_to_a1(col_idx)
         cell = f"{qtab}!{col_letter}{row_num}"
         if val is None:
@@ -440,7 +467,9 @@ def apply_leads_sheet_formatting(service: Any, spreadsheet_id: str, tab: str) ->
     )
 
     def dv_for_col(col_name: str, allowed: list[str]) -> None:
-        idx = header_map.get(col_name)
+        idx = _canonical_col_index(col_name)
+        if idx is None:
+            idx = header_map.get(col_name)
         if idx is None:
             return
         requests.append(

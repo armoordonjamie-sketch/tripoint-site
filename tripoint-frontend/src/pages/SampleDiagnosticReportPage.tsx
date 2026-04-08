@@ -6,6 +6,7 @@ import { ExpandableReportImage } from '@/components/ExpandableReportImage';
 import { BreadcrumbSchema, FaqPageSchema } from '@/components/JsonLd';
 import { siteConfig } from '@/config/site';
 import { trackNavClick, trackWhatsAppClick } from '@/lib/analytics';
+import { getWhatsAppHref } from '@/lib/whatsappHref';
 import {
     FileText,
     ListChecks,
@@ -180,7 +181,7 @@ export function SampleDiagnosticReportPage() {
                                 Book Standard Diagnosis
                             </CTAButton>
                             <CTAButton
-                                href={`https://wa.me/${siteConfig.contact.whatsappE164}`}
+                                href={getWhatsAppHref()}
                                 variant="outline"
                                 size="lg"
                                 external

@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 import { Phone, MessageCircle, Mail, CheckCircle2, Calendar } from 'lucide-react';
 import { fireGoogleAdsContactConversion, trackContactFormSuccess, trackNavClick, trackPhoneClick, trackWhatsAppClick } from '@/lib/analytics';
 import { getAttribution } from '@/lib/attribution';
+import { getWhatsAppHref } from '@/lib/whatsappHref';
 import { normalizeAndHashEmail, normalizeAndHashPhone } from '@/lib/hashUserData';
 import { getSessionJourneyId } from '@/lib/leadTracking';
 
@@ -151,7 +152,7 @@ export function ContactPage() {
                         </a>
 
                         <a
-                            href={`https://wa.me/${siteConfig.contact.whatsappE164}`}
+                            href={getWhatsAppHref()}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center gap-4 rounded-2xl border border-border-default bg-surface-alt p-5 transition-all hover:border-success/50 hover:shadow-lg hover:shadow-success/10"

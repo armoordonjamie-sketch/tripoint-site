@@ -250,6 +250,56 @@ export function LeadDetailDrawer({ lead, open, onClose, onSaved }: LeadDetailDra
                                 {lead.identifier_type || '-'} {lead.identifier_value ? `· ${lead.identifier_value}` : ''}
                             </span>
                         </p>
+                        {(lead.gbraid?.trim() || lead.wbraid?.trim()) && (
+                            <p className="text-[10px] leading-relaxed text-text-muted">
+                                Google Ads export uses gclid first, then wbraid, then gbraid. Other IDs captured on this
+                                row are still stored:
+                                {lead.gbraid?.trim() ? (
+                                    <span className="mt-1 block font-mono text-text-secondary">
+                                        gbraid (stored): {lead.gbraid}
+                                    </span>
+                                ) : null}
+                                {lead.wbraid?.trim() ? (
+                                    <span className="mt-1 block font-mono text-text-secondary">
+                                        wbraid (stored): {lead.wbraid}
+                                    </span>
+                                ) : null}
+                            </p>
+                        )}
+                        <div className="space-y-1 border-t border-border-default pt-2 text-xs">
+                            <h4 className="text-[10px] font-semibold uppercase tracking-wide text-text-muted">
+                                Export preview (computed)
+                            </h4>
+                            <p>
+                                <span className="text-text-muted">computed_conversion_name:</span>{' '}
+                                <span className="font-mono text-text-primary">
+                                    {lead.computed_conversion_name?.trim() || '-'}
+                                </span>
+                            </p>
+                            <p>
+                                <span className="text-text-muted">computed_conversion_value:</span>{' '}
+                                <span className="font-mono text-text-primary">
+                                    {typeof lead.computed_conversion_value === 'number' &&
+                                    !Number.isNaN(lead.computed_conversion_value)
+                                        ? String(lead.computed_conversion_value)
+                                        : '-'}
+                                </span>
+                            </p>
+                            <p>
+                                <span className="text-text-muted">computed_currency:</span>{' '}
+                                <span className="font-mono text-text-primary">
+                                    {lead.computed_currency?.trim() || '-'}
+                                </span>
+                            </p>
+                            <p>
+                                <span className="text-text-muted">export_reason:</span>{' '}
+                                {lead.export_reason?.trim() || '-'}
+                            </p>
+                            <p>
+                                <span className="text-text-muted">needs_adjustment:</span>{' '}
+                                {lead.needs_adjustment ? 'yes' : 'no'}
+                            </p>
+                        </div>
                         {lead.ineligible_reason === 'missing_click_identifier' && (
                             <p className="text-xs text-amber-200/90">
                                 This lead cannot be exported to Google Ads because no gclid/wbraid/gbraid was captured on

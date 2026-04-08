@@ -5,6 +5,7 @@ import { ServicePicker } from '@/components/ServicePicker';
 import { CTAButton } from '@/components/CTAButton';
 import { siteConfig } from '@/config/site';
 import { trackNavClick, trackPhoneClick, trackWhatsAppClick } from '@/lib/analytics';
+import { getWhatsAppHref } from '@/lib/whatsappHref';
 
 export function ServicesPage() {
     return (
@@ -48,7 +49,7 @@ export function ServicesPage() {
                             Book online
                         </CTAButton>
                         <a
-                            href={`https://wa.me/${siteConfig.contact.whatsappE164}`}
+                            href={getWhatsAppHref()}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-2 rounded-lg border border-border-default px-3 py-2 text-sm font-medium text-text-primary transition-colors hover:border-brand/40 hover:bg-brand/5"

@@ -6,7 +6,7 @@
  * event_id: fresh UUID per request (idempotency key; repeat actions in-session are allowed).
  */
 import { GA4_MEASUREMENT_ID } from '@/config/analyticsPublic';
-import { getAttribution } from '@/lib/attribution';
+import { getAttribution, pagePathWithoutAttributionQuery } from '@/lib/attribution';
 import { getPageAnalyticsContext, type PageAnalyticsContext } from '@/lib/analyticsContext';
 
 const JOURNEY_ID_KEY = 'tripoint_journey_id';
@@ -221,7 +221,7 @@ function basePayload(
         event_name,
         occurred_at: new Date().toISOString(),
         lead_channel,
-        page: ctx.page,
+        page: pagePathWithoutAttributionQuery(ctx.page),
         title,
         page_type: ctx.page_type,
         service_category: ctx.service_category,

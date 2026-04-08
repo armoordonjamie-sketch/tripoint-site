@@ -3,6 +3,7 @@ import { Phone, MessageCircle, Mail, MapPin, Clock } from 'lucide-react';
 import { siteConfig } from '@/config/site';
 import { CATEGORY_META, SERVICES_BY_CATEGORY, SERVICE_CATEGORY_ORDER } from '@/config/servicesCatalog';
 import { trackNavClick, trackPhoneClick, trackSocialClick, trackWhatsAppClick } from '@/lib/analytics';
+import { getWhatsAppHref } from '@/lib/whatsappHref';
 import { OptimizedLogo } from '@/components/OptimizedLogo';
 import { CTAButton } from '@/components/CTAButton';
 import { cn } from '@/lib/utils';
@@ -27,7 +28,7 @@ export function Footer() {
                             Book online
                         </CTAButton>
                         <a
-                            href={`https://wa.me/${siteConfig.contact.whatsappE164}`}
+                            href={getWhatsAppHref()}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center gap-2 rounded-lg border border-border-default px-4 py-2.5 text-sm font-medium text-text-primary transition-colors hover:border-brand/40 hover:bg-brand/5"
@@ -250,7 +251,7 @@ export function Footer() {
                                 </li>
                                 <li>
                                     <a
-                                        href={`https://wa.me/${siteConfig.contact.whatsappE164}`}
+                                        href={getWhatsAppHref()}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="flex items-center gap-2 text-sm text-text-secondary transition-colors hover:text-brand-light"

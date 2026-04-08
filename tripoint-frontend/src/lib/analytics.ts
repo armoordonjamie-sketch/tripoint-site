@@ -14,9 +14,31 @@ const GA_ID = GA4_MEASUREMENT_ID;
 
 let initialized = false;
 
+/**
+ * Verbose logs + GA4 gtag `debug_mode` (shows hits in GA4 DebugView).
+ * - Local: add ?debug_tracking to the URL.
+ * - Production: add ?ga_debug=1 (or set sessionStorage tripoint_ga_debug = "1" then reload).
+ */
 function isDebugMode(): boolean {
-    if (import.meta.env.PROD) return false;
-    return typeof window !== 'undefined' && new URLSearchParams(window.location.search).has('debug_tracking');
+    if (typeof window === 'undefined') return false;
+    const sp = new URLSearchParams(window.location.search);
+    if (import.meta.env.PROD) {
+        const q = sp.get('ga_debug');
+        if (q === '1' || q === 'true' || sp.has('ga_debug')) {
+            try {
+                sessionStorage.setItem('tripoint_ga_debug', '1');
+            } catch {
+                /* ignore */
+            }
+            return true;
+        }
+        try {
+            return sessionStorage.getItem('tripoint_ga_debug') === '1';
+        } catch {
+            return false;
+        }
+    }
+    return sp.has('debug_tracking');
 }
 
 function safeGa<T>(fn: () => T): T | void {
@@ -88,7 +110,7 @@ export function initAnalytics() {
     if (initialized) return;
     initialized = true;
 
-    const debug = import.meta.env.PROD ? false : isDebugMode();
+    const debug = isDebugMode();
     ReactGA.initialize(GA_ID, {
         testMode: false,
         gaOptions: {
@@ -115,11 +137,14 @@ export function initAnalytics() {
         }
     }
 
-    if (import.meta.env.DEV) {
+    if (import.meta.env.DEV || debug) {
         console.log('[GA4] Initialised', {
             measurementId: GA_ID,
             testModeEnabled: false,
             debug_mode: debug,
+            hint: import.meta.env.PROD
+                ? 'Open GA4 Admin → Configure → DebugView while using ?ga_debug=1'
+                : 'Add ?debug_tracking for verbose logs + DebugView',
         });
     }
 }
@@ -530,9 +555,13 @@ export function trackFaqOpen(question: string, context?: PageAnalyticsContext) {
  * Only available in development (not in production)
  */
 export function registerGa4Test() {
-    if (typeof window === 'undefined' || import.meta.env.PROD) return;
+    if (typeof window === 'undefined') return;
 
     (window as unknown as { __tripointGa4Test?: () => void }).__tripointGa4Test = () => {
+        if (import.meta.env.PROD && !isDebugMode()) {
+            console.warn('[GA4] Load the site with ?ga_debug=1 (then reload if needed), open DebugView, then run __tripointGa4Test() again.');
+            return;
+        }
         console.log('[GA4] Running self-test events...');
         trackPhoneClick('self_test');
         trackWhatsAppClick('self_test');

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Seo } from '@/components/Seo';
 import { trackNavClick, trackPhoneClick, trackWhatsAppClick } from '@/lib/analytics';
+import { getWhatsAppHref } from '@/lib/whatsappHref';
 import { Section } from '@/components/Section';
 import { CTAButton } from '@/components/CTAButton';
 import { PhotoGallery } from '@/components/PhotoGallery';
@@ -305,7 +306,7 @@ export function DiagnosticCalloutPage() {
                             Book Now
                         </CTAButton>
                         <CTAButton
-                            href={`https://wa.me/${siteConfig.contact.whatsappE164}`}
+                            href={getWhatsAppHref()}
                             variant="outline"
                             size="md"
                             external
@@ -355,7 +356,7 @@ export function DiagnosticCalloutPage() {
                         </p>
                         <div className="mt-4">
                             <CTAButton
-                                href={`https://wa.me/${siteConfig.contact.whatsappE164}`}
+                                href={getWhatsAppHref()}
                                 variant="outline"
                                 size="sm"
                                 external
@@ -439,7 +440,7 @@ export function DiagnosticCalloutPage() {
                                 Book Now
                             </CTAButton>
                             <CTAButton
-                                href={`https://wa.me/${siteConfig.contact.whatsappE164}`}
+                                href={getWhatsAppHref()}
                                 variant="ghost"
                                 size="lg"
                                 external

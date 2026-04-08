@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Phone, MessageCircle, CalendarDays } from 'lucide-react';
 import { siteConfig } from '@/config/site';
 import { trackNavClick, trackPhoneClick, trackWhatsAppClick } from '@/lib/analytics';
+import { getWhatsAppHref } from '@/lib/whatsappHref';
 
 export function MobileStickyCTA() {
     return (
@@ -16,7 +17,7 @@ export function MobileStickyCTA() {
                 Call
             </a>
             <a
-                href={`https://wa.me/${siteConfig.contact.whatsappE164}`}
+                href={getWhatsAppHref()}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-success bg-success/10 py-3 text-sm font-semibold text-success transition-colors hover:bg-success/20"

@@ -1,7 +1,10 @@
+import { StrictMode } from 'react';
 import { renderToReadableStream } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { AppRoutes } from './App';
+import { ToastProvider } from '@/components/toast-context';
+import { RouteTracker } from '@/components/RouteTracker';
 
 // Required for SSR - prevents Helmet from assuming browser
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -29,11 +32,16 @@ export async function render(url: string) {
     const helmetContext: { helmet?: import('react-helmet-async').HelmetServerState } = {};
 
     const stream = await renderToReadableStream(
-        <HelmetProvider context={helmetContext}>
-            <StaticRouter location={url}>
-                <AppRoutes />
-            </StaticRouter>
-        </HelmetProvider>,
+        <StrictMode>
+            <HelmetProvider context={helmetContext}>
+                <StaticRouter location={url}>
+                    <ToastProvider>
+                        <RouteTracker />
+                        <AppRoutes />
+                    </ToastProvider>
+                </StaticRouter>
+            </HelmetProvider>
+        </StrictMode>,
         { onError: (err) => console.error('SSR error:', err) }
     );
 

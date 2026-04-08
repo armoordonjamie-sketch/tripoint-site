@@ -4,6 +4,7 @@ import { BookingScheduler } from '@/components/BookingScheduler';
 import { Phone, MessageCircle, Clock, Shield } from 'lucide-react';
 import { siteConfig } from '@/config/site';
 import { trackPhoneClick, trackWhatsAppClick } from '@/lib/analytics';
+import { getWhatsAppHref } from '@/lib/whatsappHref';
 
 export function BookingPage() {
     return (
@@ -55,7 +56,7 @@ export function BookingPage() {
                             {siteConfig.contact.phoneDisplay}
                         </a>
                         <a
-                            href={`https://wa.me/${siteConfig.contact.whatsappE164}`}
+                            href={getWhatsAppHref()}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-2 text-success hover:text-success/80 transition-colors"
