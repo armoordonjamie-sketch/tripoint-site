@@ -122,7 +122,6 @@ GOOGLE_ADS_IMPORT_TAB: str = (
 # Match names to Goals > Data manager field labels where possible (User agent, User IP address, Session attributes).
 # Ref: https://support.google.com/google-ads-data-manager/answer/14184381
 GOOGLE_ADS_IMPORT_COLUMNS: list[str] = [
-    "Parameters:TimeZone",
     "Google Click ID",
     "Conversion Name",
     "Conversion Time",

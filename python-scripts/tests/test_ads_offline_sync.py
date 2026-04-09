@@ -233,7 +233,7 @@ def test_offline_export_rejects_short_gclid_placeholder() -> None:
     )
 
 
-def test_build_google_ads_import_row_columns_and_timezone() -> None:
+def test_build_google_ads_import_row_columns() -> None:
     from services.google_ads_export import enrich_lead_row
 
     row = _base_row(
@@ -247,10 +247,17 @@ def test_build_google_ads_import_row_columns_and_timezone() -> None:
     en = enrich_lead_row(row)
     export = build_offline_export_row(row, en, batch_id="b")
     line = build_google_ads_import_row(export)
+    # Column count matches constant (Parameters:TimeZone removed — 13 columns)
     assert len(line) == len(GOOGLE_ADS_IMPORT_COLUMNS)
-    assert line[0] == "Europe/London"
-    assert line[1] == "CjwKabc"
-    assert str(line[3]).endswith("Europe/London")
-    assert line[11] == "Mozilla/5.0"
-    assert line[12] == "203.0.113.1"
-    assert isinstance(line[13], str) and len(line[13]) > 0
+    # index 0: Google Click ID (no longer Parameters:TimeZone)
+    assert line[0] == "CjwKabc"
+    # index 2: Conversion Time — timezone embedded in value
+    assert str(line[2]).endswith("Europe/London")
+    # index 3: Conversion Value — must be a float, not a string
+    assert isinstance(line[3], float)
+    # index 10: User agent
+    assert line[10] == "Mozilla/5.0"
+    # index 11: User IP address
+    assert line[11] == "203.0.113.1"
+    # index 12: Session attributes — non-empty base64 string
+    assert isinstance(line[12], str) and len(line[12]) > 0
