@@ -30,11 +30,10 @@ Columns are written in this order:
 
 | Column | Source |
 |--------|--------|
-| `Parameters:TimeZone` | Always `Europe/London` (aligns with conversion time interpretation). |
 | `Google Click ID` | `gclid` from the lead row. |
 | `Conversion Name` | Resolved conversion action name. |
-| `Conversion Time` | `qualified_at` / `won_at` / `occurred_at`, formatted as `YYYY-MM-DD HH:MM:SS Europe/London` when no offset was present. |
-| `Conversion Value` / `Conversion Currency` | From enrichment / sheet. |
+| `Conversion Time` | `qualified_at` / `won_at` / `occurred_at`, formatted as `YYYY-MM-DD HH:MM:SS Europe/London`. Timezone is embedded directly in the value; `Parameters:TimeZone` is not used for Sheets-based Data Manager connections. |
+| `Conversion Value` / `Conversion Currency` | From enrichment / sheet. Conversion Value is written as a numeric cell (float). |
 | `Hashed Email` / `Hashed Phone Number` | From lead track payload (SHA-256 hex). |
 | `Order ID` | Lead `order_id` when set. |
 | `WBRAID` / `GBRAID` | From attribution. |

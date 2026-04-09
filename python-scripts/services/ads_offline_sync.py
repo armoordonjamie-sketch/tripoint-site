@@ -214,28 +214,50 @@ def build_offline_export_row(
     }
 
 
+def _or_none(v: Any) -> Any:
+    """Return None instead of empty string so Sheets writes a truly empty cell."""
+    if v is None or (isinstance(v, str) and not v.strip()):
+        return None
+    return v
+
+
 def build_google_ads_import_row(export_row: dict[str, Any]) -> list[Any]:
     """
     Map one internal export row to Google Ads import format.
     Column order must match GOOGLE_ADS_IMPORT_COLUMNS exactly.
     Only rows where export_ready == 'true' are included.
+
+    Notes:
+    - Parameters:TimeZone is omitted: it is a CSV-only directive not recognised by
+      Sheets-based Data Manager connections. Timezone is embedded in Conversion Time.
+    - Conversion Value is written as float (or None) so Sheets stores it as a number,
+      avoiding mixed-type columns that cause Data Manager error 1044.
+    - Optional fields use None (empty cell) instead of "" to keep column types uniform.
     """
     conv_plain = _s(export_row.get("conversion_time", ""))
+
+    raw_cv = export_row.get("conversion_value", "")
+    cv: float | None = None
+    if raw_cv not in (None, ""):
+        try:
+            cv = float(raw_cv)
+        except (TypeError, ValueError):
+            cv = None
+
     return [
-        "Europe/London",
-        export_row.get("gclid", ""),
-        export_row.get("conversion_name", ""),
-        _conversion_time_for_google_ads_import(conv_plain),
-        export_row.get("conversion_value", ""),
-        export_row.get("currency", ""),
-        export_row.get("hashed_email", ""),
-        export_row.get("hashed_phone", ""),
-        export_row.get("order_id", ""),
-        export_row.get("wbraid", ""),
-        export_row.get("gbraid", ""),
-        _s(export_row.get("user_agent", "")),
-        _s(export_row.get("ip_address", "")),
-        _session_attributes_b64(export_row),
+        _or_none(export_row.get("gclid")),
+        _or_none(export_row.get("conversion_name")),
+        _or_none(_conversion_time_for_google_ads_import(conv_plain)),
+        cv,
+        _or_none(export_row.get("currency")),
+        _or_none(export_row.get("hashed_email")),
+        _or_none(export_row.get("hashed_phone")),
+        _or_none(export_row.get("order_id")),
+        _or_none(export_row.get("wbraid")),
+        _or_none(export_row.get("gbraid")),
+        _or_none(_s(export_row.get("user_agent", ""))),
+        _or_none(_s(export_row.get("ip_address", ""))),
+        _or_none(_session_attributes_b64(export_row)),
     ]
 
 
