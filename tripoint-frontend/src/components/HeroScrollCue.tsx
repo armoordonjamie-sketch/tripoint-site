@@ -46,7 +46,7 @@ export function HeroScrollCue() {
 
     return (
         <div
-            className="pointer-events-none absolute inset-x-0 z-20 flex justify-center transition-opacity duration-300 bottom-[max(6.5rem,calc(112px+max(12px,env(safe-area-inset-bottom,0px))))] sm:hidden"
+            className="pointer-events-none fixed inset-x-0 z-20 flex justify-center transition-opacity duration-300 bottom-[max(6.5rem,calc(112px+max(12px,env(safe-area-inset-bottom,0px))))] sm:hidden"
             style={{ opacity: visible ? 1 : 0 }}
             aria-hidden={!visible}
         >

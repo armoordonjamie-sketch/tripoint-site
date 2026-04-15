@@ -116,7 +116,7 @@ export function HomePage() {
             {/* ── HERO ──────────────────────────────────────── */}
             <section
                 data-hero
-                className="relative flex min-h-[85vh] flex-col items-center justify-center overflow-hidden max-sm:pb-[max(7.5rem,calc(112px+max(12px,env(safe-area-inset-bottom,0px))))] sm:flex-row sm:pb-0"
+                className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden max-sm:pb-[max(7.5rem,calc(112px+max(12px,env(safe-area-inset-bottom,0px))))] sm:min-h-[85vh] sm:flex-row sm:pb-0"
             >
                 {/* Rotating background images */}
                 <div className="absolute inset-0">
@@ -141,19 +141,19 @@ export function HomePage() {
 
                 <div className="relative z-10 mx-auto max-w-7xl px-4 py-16 sm:py-20 sm:px-6 lg:px-8">
                     <div className="max-w-3xl">
-                        <h1 className="reveal text-5xl font-extrabold leading-[1.1] tracking-tight text-text-primary sm:text-6xl md:text-7xl">
+                        <h1 className="reveal text-[clamp(1.9rem,8.5vw,3rem)] font-extrabold leading-[1.1] tracking-tight text-text-primary sm:text-6xl md:text-7xl">
                             Mobile Mercedes{' '}
                             <span className="text-gradient">Diagnostics</span>{' '}
                             <br className="hidden sm:block" />
                             & Repairs
                         </h1>
 
-                        <p className="reveal mt-6 max-w-xl text-lg text-text-secondary md:text-xl" style={{ transitionDelay: '0.1s' }}>
+                        <p className="reveal mt-4 max-w-xl text-[clamp(1rem,3.5vw,1.125rem)] text-text-secondary md:text-xl sm:mt-6" style={{ transitionDelay: '0.1s' }}>
                             Dealer-level diagnostic depth delivered to your driveway. Written findings,
                             root cause, clear next steps.
                         </p>
 
-                        <div className="reveal mt-10 flex flex-wrap gap-8 sm:mt-8" style={{ transitionDelay: '0.2s' }}>
+                        <div className="reveal mt-6 flex flex-wrap gap-6 sm:mt-8 sm:gap-8" style={{ transitionDelay: '0.2s' }}>
                             {([
                                 { value: 'Mercedes', label: 'Specialist' },
                                 { value: 'Up to 60 min', label: 'Drive time covered' },
