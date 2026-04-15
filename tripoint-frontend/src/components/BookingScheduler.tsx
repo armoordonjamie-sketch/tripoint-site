@@ -122,45 +122,6 @@ const BRAKE_PRICING: Record<string, any> = {
     citan: { label: 'Citan', options: { front: { pads: 100, 'pads-discs': 190 }, rear: { pads: 100, 'pads-discs': 190, 'pads-discs-shoes': 240 }, both: { pads: 200, 'pads-discs': 380, 'pads-discs-shoes': 430 } } },
 };
 
-/* ---------- step indicator ---------- */
-const STEPS = [
-    { num: 1, label: 'Service & Location', icon: Wrench },
-    { num: 2, label: 'Choose Slot', icon: Calendar },
-    { num: 3, label: 'Your Details', icon: User },
-] as const;
-
-function StepIndicator({ current }: { current: 1 | 2 | 3 }) {
-    return (
-        <div className="flex items-center justify-center gap-0 mb-8">
-            {STEPS.map((s, i) => {
-                const done = current > s.num;
-                const active = current === s.num;
-                const Icon = s.icon;
-                return (
-                    <div key={s.num} className="flex items-center">
-                        {i > 0 && (
-                            <div className={`hidden sm:block w-12 h-0.5 mx-1 transition-all duration-500 ${done ? 'bg-brand' : 'bg-border-default'}`} />
-                        )}
-                        <div className="flex items-center gap-2">
-                            <div className={`flex h-9 w-9 items-center justify-center rounded-full text-sm font-bold transition-all duration-300 ${done
-                                ? 'bg-brand text-white scale-90'
-                                : active
-                                    ? 'bg-brand text-white ring-4 ring-brand/20 scale-105'
-                                    : 'bg-surface-elevated text-text-muted border border-border-default'
-                                }`}>
-                                {done ? <CheckCircle2 className="h-4 w-4" /> : <Icon className="h-4 w-4" />}
-                            </div>
-                            <span className={`hidden sm:inline text-sm font-medium transition-colors duration-300 ${active ? 'text-text-primary' : done ? 'text-brand' : 'text-text-muted'}`}>
-                                {s.label}
-                            </span>
-                        </div>
-                    </div>
-                );
-            })}
-        </div>
-    );
-}
-
 /* ---------- slot calendar ---------- */
 function SlotCalendar({
     dateKeys, dateAvailability, selectedDateKey, onSelectDate,
@@ -178,7 +139,7 @@ function SlotCalendar({
     const cells = [...Array(firstDow).fill(null), ...dateKeys];
 
     return (
-        <div className="min-w-[280px]">
+        <div className="min-w-0 w-full max-w-[min(100vw-2rem,320px)]">
             <p className="mb-3 text-center text-sm font-semibold text-text-primary">
                 {(() => {
                     const last = new Date(dateKeys[dateKeys.length - 1]);
@@ -274,12 +235,107 @@ function SubStepPanel({ active, direction, children }: { active: boolean; direct
     );
 }
 
-function SubStepDots({ current, total }: { current: number; total: number }) {
+type BookingSubStep = 'category' | 'service' | 'brake-config' | 'postcode';
+
+function BookingFunnelProgress({
+    availability,
+    selectedSlot,
+    currentStep,
+    subStep,
+    selectedCategory,
+}: {
+    availability: AvailabilityResponse | null;
+    selectedSlot: string;
+    currentStep: 1 | 2 | 3;
+    subStep: BookingSubStep;
+    selectedCategory: string | null;
+}) {
+    const manual = availability?.manual_review_required ?? false;
+    const displayStep: 1 | 2 | 3 = !availability ? 1 : manual ? 3 : selectedSlot ? 3 : 2;
+
+    const mainSteps: { num: 1 | 2 | 3; label: string }[] = [
+        { num: 1, label: 'Service' },
+        { num: 2, label: 'Slot' },
+        { num: 3, label: 'Details' },
+    ];
+
+    const brakesPath = selectedCategory === 'brakes';
+    const subOrder: BookingSubStep[] = brakesPath
+        ? ['category', 'service', 'brake-config', 'postcode']
+        : ['category', 'service', 'postcode'];
+    const subLabels: Record<BookingSubStep, string> = {
+        category: 'Category',
+        service: brakesPath ? 'Model' : 'Service',
+        'brake-config': 'Configure',
+        postcode: 'Location',
+    };
+    const subIndex = subOrder.indexOf(subStep);
+
+    const mainPillClass = (num: 1 | 2 | 3) => {
+        const skipped = num === 2 && manual && displayStep === 3;
+        const done =
+            (num === 1 && !!availability) ||
+            (num === 2 && !manual && !!selectedSlot && !!availability) ||
+            skipped;
+        const current = displayStep === num && !skipped;
+        if (skipped) {
+            return 'border-border-default bg-surface text-text-muted line-through decoration-text-muted/60';
+        }
+        if (current) {
+            return 'border-brand bg-brand/10 text-brand-light ring-1 ring-brand/30';
+        }
+        if (done) {
+            return 'border-success/30 bg-success/5 text-text-primary';
+        }
+        return 'border-border-default bg-surface text-text-muted';
+    };
+
+    const subPillClass = (idx: number) => {
+        if (idx < subIndex) {
+            return 'border-success/25 bg-success/5 text-text-secondary';
+        }
+        if (idx === subIndex) {
+            return 'border-brand bg-brand/10 text-brand-light ring-1 ring-brand/25';
+        }
+        return 'border-border-default bg-surface-alt text-text-muted';
+    };
+
     return (
-        <div className="flex items-center gap-1.5 justify-center mt-6">
-            {Array.from({ length: total }).map((_, i) => (
-                <div key={i} className={`h-1.5 rounded-full transition-all duration-300 ${i === current ? 'w-6 bg-brand' : i < current ? 'w-2 bg-brand/40' : 'w-2 bg-border-default'}`} />
-            ))}
+        <div
+            className="mb-3 rounded-xl border border-border-default bg-surface p-2 sm:mb-4 sm:p-4"
+            role="navigation"
+            aria-label="Booking progress"
+        >
+            <ol className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-3">
+                {mainSteps.map((s, i) => (
+                    <li key={s.num} className="flex items-center gap-1.5 sm:gap-3">
+                        <span
+                            className={`inline-flex min-h-[1.75rem] items-center rounded-lg border px-2 py-0.5 text-[11px] font-semibold sm:min-h-[2rem] sm:px-3 sm:py-1 sm:text-sm ${mainPillClass(s.num)}`}
+                            aria-current={displayStep === s.num && !(s.num === 2 && manual && displayStep === 3) ? 'step' : undefined}
+                        >
+                            <span className="text-text-muted mr-1 font-bold tabular-nums">{s.num}</span>
+                            {s.label}
+                        </span>
+                        {i < mainSteps.length - 1 && (
+                            <span className="hidden text-text-muted sm:inline" aria-hidden>
+                                →
+                            </span>
+                        )}
+                    </li>
+                ))}
+            </ol>
+            {currentStep === 1 && (
+                <ol className="mt-2 flex flex-wrap items-center justify-center gap-1 border-t border-border-default pt-2 sm:mt-3 sm:gap-1.5 sm:pt-3" aria-label="Service and location steps">
+                    {subOrder.map((id, idx) => (
+                        <li key={id} className="flex items-center gap-1.5">
+                            <span className={`rounded-md border px-2 py-0.5 text-[11px] font-medium sm:text-xs ${subPillClass(idx)}`}>
+                                {subLabels[id]}
+                            </span>
+                            {idx < subOrder.length - 1 && <span className="text-text-muted/50" aria-hidden>/</span>}
+                        </li>
+                    ))}
+                </ol>
+            )}
         </div>
     );
 }
@@ -721,21 +777,27 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
     const effectiveDeposit = priceInfo?.deposit_gbp ?? availability?.deposit_gbp;
 
     return (
-        <div className="space-y-0">
-            <StepIndicator current={currentStep} />
+        <div className="min-w-0 max-w-full space-y-0">
+            <BookingFunnelProgress
+                availability={availability}
+                selectedSlot={selectedSlot}
+                currentStep={currentStep}
+                subStep={subStep}
+                selectedCategory={selectedCategory}
+            />
 
             {/* Zone summary bar - persistent once fetched */}
             {availability && (
-                <div className="mb-4 grid grid-cols-2 sm:grid-cols-4 gap-2 animate-in fade-in slide-in-from-top-2 duration-500">
+                <div className="mb-4 grid grid-cols-2 gap-2 sm:grid-cols-4 animate-in fade-in slide-in-from-top-2 duration-500">
                     {[
                         { label: 'Zone', value: availability.zone, accent: true },
                         { label: 'Drive time', value: `${Math.round(availability.drive_time_minutes)} min` },
                         { label: 'Base price from', value: availability.fixed_price_gbp ? `£${availability.fixed_price_gbp}${vatSuffix}` : 'Quote', accent: true },
                         { label: 'Deposit', value: availability.deposit_gbp ? `£${availability.deposit_gbp}${vatSuffix}` : 'TBC' },
                     ].map((item) => (
-                        <div key={item.label} className="rounded-xl border border-brand/15 bg-brand/5 px-4 py-3 text-center">
-                            <p className="text-[11px] uppercase tracking-wider text-text-muted mb-0.5">{item.label}</p>
-                            <p className={`text-lg font-bold ${item.accent ? 'text-brand-light' : 'text-text-primary'}`}>{item.value}</p>
+                        <div key={item.label} className="rounded-xl border border-brand/15 bg-brand/5 px-2 py-2 text-center sm:px-4 sm:py-3">
+                            <p className="text-[10px] uppercase tracking-wider text-text-muted mb-0.5 sm:text-[11px]">{item.label}</p>
+                            <p className={`text-sm font-bold tabular-nums sm:text-lg ${item.accent ? 'text-brand-light' : 'text-text-primary'}`}>{item.value}</p>
                         </div>
                     ))}
                 </div>
@@ -743,9 +805,9 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
 
             {/* ===== STEP 1: Service & Location (Sub-steps) ===== */}
             <StepPanel active={currentStep === 1} direction={direction}>
-                <div className="rounded-2xl border border-border-default bg-surface-alt p-6 sm:p-8 overflow-hidden relative">
+                <div className="relative overflow-hidden rounded-2xl border border-border-default bg-surface-alt p-4 sm:p-6 lg:p-8">
                     {/* Header */}
-                    <div className="flex items-center gap-3 mb-6">
+                    <div className="mb-4 flex items-center gap-3 sm:mb-6">
                         <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand/10 text-brand">
                             <Wrench className="h-5 w-5" />
                         </div>
@@ -971,7 +1033,7 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
                             <div className="space-y-5">
                                 <div>
                                     <label className={labelClass}>Which axle?</label>
-                                    <div className="flex gap-3">
+                                    <div className="grid grid-cols-3 gap-2">
                                         {[
                                             { id: 'front', label: 'Front' },
                                             { id: 'rear', label: 'Rear' },
@@ -981,7 +1043,7 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
                                                 key={pos.id}
                                                 type="button"
                                                 onClick={() => setBrakePosition(pos.id as any)}
-                                                className={`flex-1 rounded-lg py-2 text-sm font-medium transition-colors border ${brakePosition === pos.id ? 'border-brand bg-brand/10 text-brand-light' : 'border-border-default bg-surface-alt text-text-muted hover:border-text-muted'}`}
+                                                className={`rounded-lg border px-1 py-2 text-xs font-medium transition-colors sm:px-2 sm:text-sm ${brakePosition === pos.id ? 'border-brand bg-brand/10 text-brand-light' : 'border-border-default bg-surface-alt text-text-muted hover:border-text-muted'}`}
                                             >
                                                 {pos.label}
                                             </button>
@@ -1099,19 +1161,14 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
                             </p>
                         )}
                     </SubStepPanel>
-
-                    <SubStepDots 
-                        current={subStep === 'category' ? 0 : subStep === 'service' ? 1 : subStep === 'brake-config' ? 2 : selectedCategory === 'brakes' ? 3 : 2} 
-                        total={selectedCategory === 'brakes' ? 4 : 3} 
-                    />
                 </div>
             </StepPanel>
 
             {/* ===== STEP 2: Choose a Slot ===== */}
             <StepPanel active={currentStep === 2} direction={direction}>
-                <div className="rounded-2xl border border-border-default bg-surface-alt p-6 sm:p-8">
-                    <div className="flex items-center justify-between mb-6">
-                        <div className="flex items-center gap-3">
+                <div className="rounded-2xl border border-border-default bg-surface-alt p-4 sm:p-6 lg:p-8">
+                    <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                        <div className="flex min-w-0 items-center gap-3">
                             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand/10 text-brand">
                                 <Calendar className="h-5 w-5" />
                             </div>
@@ -1123,7 +1180,7 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
                         <button
                             type="button"
                             onClick={goBackToStep1}
-                            className="flex items-center gap-1 text-xs text-text-muted hover:text-brand transition-colors"
+                            className="flex shrink-0 items-center gap-1 self-start text-xs text-text-muted transition-colors hover:text-brand sm:self-auto"
                         >
                             <ChevronLeft className="h-3.5 w-3.5" />
                             Change service
@@ -1157,17 +1214,17 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
                                 >
                                     <ChevronLeft className="h-5 w-5" />
                                 </button>
-                                <div className="relative" ref={calendarRef}>
+                                <div className="relative min-w-0 max-w-[min(100%,12rem)] flex-1 sm:max-w-none sm:flex-none" ref={calendarRef}>
                                     <button
                                         type="button"
                                         onClick={() => setCalendarOpen((o) => !o)}
-                                        className="flex items-center gap-2 rounded-lg px-4 py-2 font-semibold text-text-primary transition-all hover:bg-surface-alt"
+                                        className="flex w-full min-w-0 items-center justify-center gap-2 rounded-lg px-2 py-2 text-sm font-semibold text-text-primary transition-all hover:bg-surface-alt sm:w-auto sm:px-4"
                                     >
-                                        <Calendar className="h-4 w-4 text-brand" />
-                                        {groupedSlots[selectedDateIndex]?.label}
+                                        <Calendar className="h-4 w-4 shrink-0 text-brand" />
+                                        <span className="truncate">{groupedSlots[selectedDateIndex]?.label}</span>
                                     </button>
                                     {calendarOpen && (
-                                        <div className="absolute left-1/2 top-full z-10 mt-2 -translate-x-1/2 rounded-xl border border-border-default bg-surface-alt p-4 shadow-xl">
+                                        <div className="absolute left-1/2 top-full z-10 mt-2 w-max max-w-[min(100vw-1rem,340px)] -translate-x-1/2 rounded-xl border border-border-default bg-surface-alt p-3 shadow-xl sm:p-4">
                                             <SlotCalendar
                                                 dateKeys={dateKeys}
                                                 dateAvailability={dateAvailability}
@@ -1193,7 +1250,7 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
                             </div>
 
                             {/* Time grid */}
-                            <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-1.5">
+                            <div className="grid grid-cols-3 gap-1.5 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8">
                                 {groupedSlots[selectedDateIndex]?.slots.map((slot) => {
                                     const isSelected = selectedSlot === slot.iso;
                                     const isAvailable = slot.available;
@@ -1203,7 +1260,7 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
                                             key={slot.iso}
                                             type="button"
                                             disabled={!isAvailable}
-                                            className={`rounded-lg px-2 py-2 text-sm font-medium transition-all duration-200 ${!isAvailable
+                                            className={`rounded-lg px-1.5 py-2 text-xs font-medium transition-all duration-200 sm:px-2 sm:text-sm ${!isAvailable
                                                 ? 'border border-border-default bg-surface-alt text-text-muted/50 cursor-not-allowed line-through'
                                                 : isSelected
                                                     ? 'border-2 border-brand bg-brand text-white shadow-lg shadow-brand/25 scale-105'
@@ -1237,9 +1294,9 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
 
             {/* ===== STEP 3: Your Details ===== */}
             <StepPanel active={currentStep === 3 || !!availability?.manual_review_required} direction={direction}>
-                <div className="rounded-2xl border border-border-default bg-surface-alt p-6 sm:p-8">
-                    <div className="flex items-center justify-between mb-6">
-                        <div className="flex items-center gap-3">
+                <div className="rounded-2xl border border-border-default bg-surface-alt p-4 sm:p-6 lg:p-8">
+                    <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                        <div className="flex min-w-0 items-center gap-3">
                             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand/10 text-brand">
                                 <User className="h-5 w-5" />
                             </div>
@@ -1252,7 +1309,7 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
                             <button
                                 type="button"
                                 onClick={goBackToStep2}
-                                className="flex items-center gap-1 text-xs text-text-muted hover:text-brand transition-colors"
+                                className="flex shrink-0 items-center gap-1 self-start text-xs text-text-muted transition-colors hover:text-brand sm:self-auto"
                             >
                                 <ChevronLeft className="h-3.5 w-3.5" />
                                 Change slot

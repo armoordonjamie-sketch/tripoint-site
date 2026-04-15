@@ -32,7 +32,8 @@ export function Layout() {
                 id="main-content"
                 className={
                     showMobileSticky
-                        ? 'min-h-0 flex-1 w-full pb-[max(5.5rem,calc(88px+env(safe-area-inset-bottom,0px)))] pt-0 lg:pb-0'
+                        ? /* Clear expanded MobileStickyCTA (~80px) + safe-area; 88px was too tight */
+                          'min-h-0 flex-1 w-full pb-[max(8rem,calc(120px+env(safe-area-inset-bottom,0px)))] pt-0 lg:pb-0'
                         : 'min-h-0 w-full pb-8 pt-0 lg:pb-0'
                 }
             >
