@@ -157,7 +157,7 @@ export function HomePage() {
                             {([
                                 { value: 'Mercedes', label: 'Specialist' },
                                 { value: 'Up to 60 min', label: 'Drive time covered' },
-                                { value: (<>£120+<VatLabel /></>), label: 'Diagnostics from' },
+                                { value: (<>£120<VatLabel /></>), label: 'Diagnostics from' },
                             ] satisfies { value: ReactNode; label: string }[]).map((s) => (
                                 <div key={s.label}>
                                     <p className="text-2xl font-bold text-brand-light">{s.value}</p>
