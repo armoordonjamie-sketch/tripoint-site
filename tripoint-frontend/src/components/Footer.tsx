@@ -2,10 +2,9 @@ import { Link } from 'react-router-dom';
 import { Phone, MessageCircle, Mail, MapPin, Clock } from 'lucide-react';
 import { siteConfig } from '@/config/site';
 import { CATEGORY_META, SERVICES_BY_CATEGORY, SERVICE_CATEGORY_ORDER } from '@/config/servicesCatalog';
-import { trackNavClick, trackPhoneClick, trackSocialClick, trackWhatsAppClick } from '@/lib/analytics';
+import { trackPhoneClick, trackSocialClick, trackWhatsAppClick } from '@/lib/analytics';
 import { getWhatsAppHref } from '@/lib/whatsappHref';
 import { OptimizedLogo } from '@/components/OptimizedLogo';
-import { CTAButton } from '@/components/CTAButton';
 import { cn } from '@/lib/utils';
 
 const categoryHeadingClass: Record<string, string> = {
@@ -18,37 +17,10 @@ export function Footer() {
     const year = new Date().getFullYear();
 
     return (
-        <footer className="relative border-t border-border-default bg-surface pb-20 lg:pb-0" role="contentinfo">
-            {/* CTA strip */}
-            <div className="border-b border-border-default bg-surface-alt/70">
-                <div className="mx-auto flex max-w-7xl flex-col items-center justify-center gap-4 px-4 py-5 sm:flex-row sm:px-6 sm:py-6 lg:px-8">
-                    <span className="text-center text-sm font-medium text-text-secondary sm:text-left">Ready to book?</span>
-                    <div className="flex w-full max-w-md flex-wrap items-center justify-center gap-3 sm:w-auto sm:max-w-none">
-                        <CTAButton href="/booking" size="sm" onClick={() => trackNavClick('/booking', 'Book online', 'footer')}>
-                            Book online
-                        </CTAButton>
-                        <a
-                            href={getWhatsAppHref()}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center gap-2 rounded-lg border border-border-default px-4 py-2.5 text-sm font-medium text-text-primary transition-colors hover:border-brand/40 hover:bg-brand/5"
-                            onClick={() => trackWhatsAppClick('footer')}
-                        >
-                            <MessageCircle className="h-4 w-4" />
-                            WhatsApp
-                        </a>
-                        <a
-                            href={`tel:${siteConfig.contact.phoneE164}`}
-                            className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-lg border border-border-default px-4 py-2.5 text-sm font-medium text-text-primary transition-colors hover:border-brand/40 hover:bg-brand/5"
-                            onClick={() => trackPhoneClick('footer')}
-                        >
-                            <Phone className="h-4 w-4" />
-                            {siteConfig.contact.phoneDisplay}
-                        </a>
-                    </div>
-                </div>
-            </div>
-
+        <footer
+            className="relative border-t border-border-default bg-surface pb-[max(6rem,calc(88px+env(safe-area-inset-bottom,0px)))] lg:pb-0"
+            role="contentinfo"
+        >
             <div className="relative overflow-hidden">
                 <div className="pointer-events-none absolute inset-0 mesh-gradient opacity-20" aria-hidden />
 

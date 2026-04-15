@@ -43,6 +43,16 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
+      'lottie-web': 'lottie-web/build/player/lottie_light',
+    },
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          lottie: ['lottie-web', 'lottie-react'],
+        },
+      },
     },
   },
   ssr: {

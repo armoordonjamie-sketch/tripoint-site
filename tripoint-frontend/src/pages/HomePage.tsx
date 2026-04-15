@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from 'react';
+import { lazy, Suspense, useEffect, useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import {
     Wrench, Shield,
@@ -19,6 +19,10 @@ import { useScrollReveal } from '@/lib/useScrollReveal';
 import { OptimizedImage } from '@/components/OptimizedImage';
 import { ExpandableReportImage } from '@/components/ExpandableReportImage';
 import { VatLabel } from '@/components/VatLabel';
+
+const HeroScrollCue = lazy(() =>
+    import('@/components/HeroScrollCue').then((m) => ({ default: m.HeroScrollCue })),
+);
 
 /* ── Intersection Observer for scroll-reveal ─────────── */
 
@@ -110,7 +114,10 @@ export function HomePage() {
             <Seo canonical="/" />
 
             {/* ── HERO ──────────────────────────────────────── */}
-            <section data-hero className="relative min-h-[85vh] flex items-center overflow-hidden">
+            <section
+                data-hero
+                className="relative flex min-h-[85vh] flex-col items-center justify-center overflow-hidden max-sm:pb-[max(7.5rem,calc(112px+max(12px,env(safe-area-inset-bottom,0px))))] sm:flex-row sm:pb-0"
+            >
                 {/* Rotating background images */}
                 <div className="absolute inset-0">
                     {heroImages.map((img, i) => (
@@ -132,21 +139,21 @@ export function HomePage() {
 
                 <div className="absolute inset-0 mesh-gradient opacity-50" aria-hidden="true" />
 
-                <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+                <div className="relative z-10 mx-auto max-w-7xl px-4 py-16 sm:py-20 sm:px-6 lg:px-8">
                     <div className="max-w-3xl">
                         <h1 className="reveal text-5xl font-extrabold leading-[1.1] tracking-tight text-text-primary sm:text-6xl md:text-7xl">
-                            Mobile Vehicle{' '}
+                            Mobile Mercedes{' '}
                             <span className="text-gradient">Diagnostics</span>{' '}
                             <br className="hidden sm:block" />
                             & Repairs
                         </h1>
 
                         <p className="reveal mt-6 max-w-xl text-lg text-text-secondary md:text-xl" style={{ transitionDelay: '0.1s' }}>
-                            Dealer-level diagnostic depth delivered to your driveway. Written fix plans,
-                            proper process, no guesswork.
+                            Dealer-level diagnostic depth delivered to your driveway. Written findings,
+                            root cause, clear next steps.
                         </p>
 
-                        <div className="reveal mt-8 flex flex-wrap gap-8" style={{ transitionDelay: '0.2s' }}>
+                        <div className="reveal mt-10 flex flex-wrap gap-8 sm:mt-8" style={{ transitionDelay: '0.2s' }}>
                             {([
                                 { value: 'Mercedes', label: 'Specialist' },
                                 { value: 'Up to 60 min', label: 'Drive time covered' },
@@ -154,12 +161,15 @@ export function HomePage() {
                             ] satisfies { value: ReactNode; label: string }[]).map((s) => (
                                 <div key={s.label}>
                                     <p className="text-2xl font-bold text-brand-light">{s.value}</p>
-                                    <p className="text-xs text-text-muted uppercase tracking-wider">{s.label}</p>
+                                    <p className="text-sm text-text-secondary uppercase tracking-wider">{s.label}</p>
                                 </div>
                             ))}
                         </div>
 
-                        <div className="reveal mt-10 flex flex-wrap items-center gap-4" style={{ transitionDelay: '0.3s' }}>
+                        <div
+                            className="reveal mt-6 hidden flex-wrap items-center gap-4 sm:mt-10 sm:flex"
+                            style={{ transitionDelay: '0.3s' }}
+                        >
                             <div className="hidden sm:flex gap-4">
                                 <CTAButton href="/booking" size="lg" onClick={() => trackNavClick('/booking', 'Book a Diagnostic', 'hero')}>
                                     Book a Diagnostic
@@ -175,16 +185,19 @@ export function HomePage() {
                                     WhatsApp Us
                                 </CTAButton>
                             </div>
-                            <CTAButton href="/services" variant="ghost" size="lg">
+                            <CTAButton href="/services" variant="ghost" size="lg" className="hidden sm:inline-flex">
                                 Our Services <ChevronRight className="ml-1 h-4 w-4" />
                             </CTAButton>
                         </div>
                     </div>
                 </div>
+                <Suspense fallback={null}>
+                    <HeroScrollCue />
+                </Suspense>
             </section>
 
             {/* ── OUR SERVICES ─────────────────────────────── */}
-            <Section>
+            <Section id="home-services">
                 <div className="text-center reveal">
                     <p className="text-sm font-semibold uppercase tracking-widest text-brand mb-3">What We Do</p>
                     <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">Our Services</h2>
