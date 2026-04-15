@@ -12,6 +12,7 @@ import { galleryImages } from '@/data/galleryImages';
 import { siteConfig } from '@/config/site';
 import { ServiceSchema, BreadcrumbSchema, FaqPageSchema } from '@/components/JsonLd';
 import { OptimizedImage } from '@/components/OptimizedImage';
+import { VatLabel } from '@/components/VatLabel';
 
 const vorPhotos = [
     galleryImages[0],
@@ -46,7 +47,7 @@ const faqs = [
     { question: 'How fast can you get to me?', answer: 'VOR gets priority scheduling - we confirm you as the next available slot. For same-day or next-day triage, WhatsApp us first; we can often fit you in faster than the online booking form allows.' },
     { question: 'What if it needs parts?', answer: "We'll tell you straight away. Our triage decision is: fix now / parts needed / workshop referral. If parts are needed, we'll document exactly what's required and give you a timeline. No stringing you along." },
     { question: 'Do you cover fleet vehicles?', answer: 'Yes. We work with owner-driver couriers, SME fleets, hire branches, and depot operators. For fleets, we can discuss documented outcomes, rentable/not-rentable decisions, and preventive scan sweeps.' },
-    { question: "What's the deposit?", answer: 'VOR deposits are £50 for all zones (Zone A, B, and C). Reschedule free with 24 hours notice - your deposit carries over. Late cancellation or no-show retains the deposit.' },
+    { question: "What's the deposit?", answer: 'VOR deposits are £50 + VAT for all zones (Zone A, B, and C). Reschedule free with 24 hours notice - your deposit carries over. Late cancellation or no-show retains the deposit.' },
 ];
 
 const crossSell = [
@@ -61,7 +62,7 @@ export function VorVanDiagnosticsPage() {
         <div ref={scrollRef}>
             <Seo
                 title="VOR Diagnosis - Priority Commercial Vehicle Diagnostics"
-                description="Vehicle Off Road priority diagnostic for vans and commercial vehicles. Fast triage and back-on-road decisions. Fleet, hire, depot. From £160."
+                description="Vehicle Off Road priority diagnostic for vans and commercial vehicles. Fast triage and back-on-road decisions. Fleet, hire, depot. From £160 (ex. VAT)."
                 canonical="/services/vor-van-diagnostics"
             />
             <ServiceSchema name="VOR Diagnosis" description="Vehicle Off Road priority diagnostic for vans and commercial vehicles. Fast triage, back-on-road decisions. Fleet, hire, depot." url="/services/vor-van-diagnostics" priceFrom={zoneA} />
@@ -220,13 +221,13 @@ export function VorVanDiagnosticsPage() {
                             <table className="min-w-full">
                                 <thead><tr className="border-b border-border-default bg-surface-alt"><th className="px-4 py-3 text-left text-sm font-semibold text-text-primary">Zone</th><th className="px-4 py-3 text-left text-sm font-semibold text-text-primary">Drive time</th><th className="px-4 py-3 text-right text-sm font-semibold text-text-primary">Price</th></tr></thead>
                                 <tbody>
-                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Zone A</td><td className="px-4 py-3 text-text-secondary">0-25 mins</td><td className="px-4 py-3 text-right font-semibold text-brand-light">£{zoneA}</td></tr>
-                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Zone B</td><td className="px-4 py-3 text-text-secondary">25-45 mins</td><td className="px-4 py-3 text-right font-semibold text-brand-light">£{zoneB}</td></tr>
-                                    <tr><td className="px-4 py-3 text-text-secondary">Zone C</td><td className="px-4 py-3 text-text-secondary">45-60 mins</td><td className="px-4 py-3 text-right font-semibold text-brand-light">£{zoneC}</td></tr>
+                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Zone A</td><td className="px-4 py-3 text-text-secondary">0-25 mins</td><td className="px-4 py-3 text-right font-semibold text-brand-light">£{zoneA}<VatLabel /></td></tr>
+                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Zone B</td><td className="px-4 py-3 text-text-secondary">25-45 mins</td><td className="px-4 py-3 text-right font-semibold text-brand-light">£{zoneB}<VatLabel /></td></tr>
+                                    <tr><td className="px-4 py-3 text-text-secondary">Zone C</td><td className="px-4 py-3 text-text-secondary">45-60 mins</td><td className="px-4 py-3 text-right font-semibold text-brand-light">£{zoneC}<VatLabel /></td></tr>
                                 </tbody>
                             </table>
                         </div>
-                        <p className="mt-2 text-sm text-text-muted">Includes priority scheduling and up to 75 mins on-site. Deposit £50 for all zones. Reschedule free with 24 hours notice.</p>
+                        <p className="mt-2 text-sm text-text-muted">Includes priority scheduling and up to 75 mins on-site. Deposit £50 + VAT for all zones. Reschedule free with 24 hours notice.</p>
                     </div>
 
                     <div className="mt-12 reveal">
@@ -235,7 +236,7 @@ export function VorVanDiagnosticsPage() {
                     </div>
 
                     <div className="mt-12 rounded-2xl border border-brand/20 bg-brand/5 p-6 text-center reveal">
-                        <p className="text-2xl font-bold text-text-primary">From <span className="text-brand-light">£{zoneA}</span></p>
+                        <p className="text-2xl font-bold text-text-primary">From <span className="text-brand-light">£{zoneA}<VatLabel /></span></p>
                         <p className="mt-1 text-sm text-text-secondary">Zone-based pricing - includes priority scheduling and up to 75 mins on-site</p>
                         <div className="mt-4 flex flex-wrap justify-center gap-3">
                             <CTAButton href={`https://wa.me/${siteConfig.contact.whatsappE164}`} size="sm" external icon={<MessageCircle className="h-4 w-4" />} onClick={() => trackWhatsAppClick('vor_van')}>WhatsApp for Fast Response</CTAButton>
@@ -245,7 +246,7 @@ export function VorVanDiagnosticsPage() {
                     </div>
 
                     <div className="mt-8 reveal">
-                        <Notice variant="info">VOR deposits are £50 for all zones. Reschedule free with 24 hours notice.</Notice>
+                        <Notice variant="info">VOR deposits are £50 + VAT for all zones. Reschedule free with 24 hours notice.</Notice>
                     </div>
 
                     <div className="mt-12 reveal">

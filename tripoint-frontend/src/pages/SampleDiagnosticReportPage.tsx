@@ -7,6 +7,7 @@ import { BreadcrumbSchema, FaqPageSchema } from '@/components/JsonLd';
 import { siteConfig } from '@/config/site';
 import { trackNavClick, trackWhatsAppClick } from '@/lib/analytics';
 import { getWhatsAppHref } from '@/lib/whatsappHref';
+import { VatLabel } from '@/components/VatLabel';
 import {
     FileText,
     ListChecks,
@@ -317,7 +318,7 @@ export function SampleDiagnosticReportPage() {
                 <div className="mx-auto max-w-3xl rounded-2xl border border-brand/20 bg-brand/5 p-6 sm:p-8">
                     <h2 className="text-2xl font-bold text-text-primary">Why diagnosis is worth paying for</h2>
                     <p className="mt-4 text-text-secondary leading-relaxed">
-                        Standard Diagnosis starts from <span className="font-semibold text-brand-light">£{zoneA}</span> in Zone A
+                        Standard Diagnosis starts from <span className="font-semibold text-brand-light">£{zoneA}<VatLabel /></span> in Zone A
                         (travel and up to 60 minutes on-site included). That fee is not about &ldquo;reading codes&rdquo;; it is about time,
                         tooling, and judgement used to narrow the fault properly.
                     </p>

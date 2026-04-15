@@ -549,7 +549,7 @@ export function ReportViewerPage() {
                     {/* Legal footer */}
                     <div className="mt-8 pt-6 border-t border-border-default text-center text-sm text-text-secondary">
                         <p><strong className="text-text-primary">Tripoint Diagnostics Ltd</strong></p>
-                        <p>Company No: 17038307 | 476 Sidcup Road, Eltham, London</p>
+                        <p>Company No: 17038307 | VAT No: 515 7327 92 | 476 Sidcup Road, Eltham, London</p>
                     </div>
                 </div>
             </Section>

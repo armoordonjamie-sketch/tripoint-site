@@ -9,6 +9,7 @@ import { CheckCircle2, XCircle, ArrowRight, Phone, MessageCircle, AlertTriangle,
 import { siteConfig } from '@/config/site';
 import { ServiceSchema, BreadcrumbSchema, FaqPageSchema } from '@/components/JsonLd';
 import { OptimizedImage } from '@/components/OptimizedImage';
+import { VatLabel } from '@/components/VatLabel';
 
 function useScrollReveal() {
     const ref = useRef<HTMLDivElement>(null);
@@ -71,7 +72,7 @@ export function VanLoadDriveabilityTunePage() {
         <div ref={scrollRef}>
             <Seo
                 title="Van Load & Driveability Tune"
-                description="Van load tuning for better torque under payload, smoother throttle response, and reduced turbo lag. Diagnostic pre-check included. All van makes. From \u00a3199."
+                description="Van load tuning for better torque under payload, smoother throttle response, and reduced turbo lag. Diagnostic pre-check included. All van makes. From \u00a3199 (ex. VAT)."
                 canonical="/services/van-load-driveability-tune"
             />
             <ServiceSchema name="Van Load & Driveability Tune" description="Van load & driveability tuning - more torque under load, better throttle response, reduced turbo lag. All van makes." url="/services/van-load-driveability-tune" priceFrom={199} />
@@ -260,7 +261,7 @@ export function VanLoadDriveabilityTunePage() {
                             <table className="min-w-full">
                                 <thead><tr className="border-b border-border-default bg-surface-alt"><th className="px-4 py-3 text-left text-sm font-semibold text-text-primary">Package</th><th className="px-4 py-3 text-right text-sm font-semibold text-text-primary">Zone A</th><th className="px-4 py-3 text-right text-sm font-semibold text-text-primary">Zone B</th><th className="px-4 py-3 text-right text-sm font-semibold text-text-primary">Zone C</th></tr></thead>
                                 <tbody>
-                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Load &amp; Driveability Tune</td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;199</td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;214</td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;229</td></tr>
+                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Load &amp; Driveability Tune</td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;199<VatLabel /></td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;214<VatLabel /></td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;229<VatLabel /></td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -345,7 +346,7 @@ export function VanLoadDriveabilityTunePage() {
                 <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 md:py-20">
                     <div className="text-center reveal">
                         <h2 className="text-2xl font-bold text-white sm:text-3xl md:text-4xl lg:text-5xl">Make your loaded van drive like an empty one</h2>
-                        <p className="mx-auto mt-4 max-w-xl text-lg text-white/80">Load &amp; Driveability Tune from &pound;199 - more torque, better response, fully reversible.</p>
+                        <p className="mx-auto mt-4 max-w-xl text-lg text-white/80">Load &amp; Driveability Tune from &pound;199<VatLabel /> - more torque, better response, fully reversible.</p>
                         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
                             <CTAButton href="/booking" variant="secondary" size="lg" onClick={() => trackNavClick('/booking', 'Book Online', 'load_tune_footer')}>Book Online</CTAButton>
                             <CTAButton href={`https://wa.me/${siteConfig.contact.whatsappE164}`} variant="ghost" size="lg" external icon={<MessageCircle className="h-5 w-5" />} className="text-white hover:text-white hover:bg-white/10" onClick={() => trackWhatsAppClick('load_tune')}>WhatsApp Us</CTAButton>

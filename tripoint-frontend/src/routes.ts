@@ -104,7 +104,7 @@ export const routeManifest: RouteEntry[] = [
     {
         path: '/services/diagnostic-callout',
         title: 'Standard Diagnosis - Mobile Mercedes Diagnostics',
-        description: `Mobile diagnostic service for Mercedes cars and vans. Full-system scan with dealer tools (Xentry), live data, guided tests, and a written fix plan. From £${priceZoneA('diagnostic-callout', 120)} (Zone A).`,
+        description: `Mobile diagnostic service for Mercedes cars and vans. Full-system scan with dealer tools (Xentry), live data, guided tests, and a written fix plan. From £${priceZoneA('diagnostic-callout', 120)} (ex. VAT, Zone A).`,
         canonicalPath: '/services/diagnostic-callout',
         priority: 0.9,
         changefreq: 'weekly',
@@ -113,7 +113,7 @@ export const routeManifest: RouteEntry[] = [
     {
         path: '/services/vor-van-diagnostics',
         title: 'VOR Diagnosis - Priority Commercial Vehicle Diagnostics',
-        description: `Vehicle Off Road priority diagnostic for vans and commercial vehicles. Fast triage and back-on-road decisions. From £${priceZoneA('vor-van-diagnostics', 160)} (Zone A).`,
+        description: `Vehicle Off Road priority diagnostic for vans and commercial vehicles. Fast triage and back-on-road decisions. From £${priceZoneA('vor-van-diagnostics', 160)} (ex. VAT, Zone A).`,
         canonicalPath: '/services/vor-van-diagnostics',
         priority: 0.9,
         changefreq: 'weekly',

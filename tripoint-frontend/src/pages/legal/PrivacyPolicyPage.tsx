@@ -33,6 +33,7 @@ export function PrivacyPolicyPage() {
                             <ul className="mt-2 list-inside list-disc space-y-1">
                                 <li><strong>Company name:</strong> Tripoint Diagnostics Ltd</li>
                                 <li><strong>Company number:</strong> 17038307</li>
+                                <li><strong>VAT number:</strong> 515 7327 92</li>
                                 <li><strong>Registered address:</strong> 476 Sidcup Road, Eltham, London</li>
                                 <li><strong>Email:</strong> <a href={`mailto:${email}`} className="text-brand hover:underline">{email}</a></li>
                                 <li><strong>Phone:</strong> {phoneDisplay}</li>

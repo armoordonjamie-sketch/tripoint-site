@@ -4,6 +4,7 @@ import { Seo } from '@/components/Seo';
 import { Section } from '@/components/Section';
 import { AdminNav } from '@/pages/admin/AdminNav';
 import { Loader2, AlertCircle, Copy, CheckCircle2, Link2, Banknote, FileText } from 'lucide-react';
+import { VatLabel } from '@/components/VatLabel';
 
 const API_BASE = '/api';
 
@@ -242,8 +243,14 @@ export function AdminDashboardPage() {
                                                 </span>
                                             </td>
                                             <td className="px-4 py-3">
-                                                <div>£{(b.deposit_amount || 0) / 100} dep</div>
-                                                <div className="text-xs text-text-muted">£{(b.balance_due || 0) / 100} bal</div>
+                                                <div>
+                                                    £{(b.deposit_amount || 0) / 100}
+                                                    <VatLabel /> dep
+                                                </div>
+                                                <div className="text-xs text-text-muted">
+                                                    £{(b.balance_due || 0) / 100}
+                                                    <VatLabel /> bal
+                                                </div>
                                             </td>
                                             <td className="px-4 py-3">
                                                 <div className="flex flex-wrap gap-1">

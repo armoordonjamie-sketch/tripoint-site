@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { VatLabel } from './VatLabel';
 import type { ReactNode } from 'react';
 
 interface ServiceCardProps {
@@ -46,6 +47,7 @@ export function ServiceCard({
                 <div className="flex items-center justify-between">
                     <span className="rounded-full bg-brand/10 px-3 py-1 text-sm font-semibold text-brand-light">
                         From £{fromPrice}
+                        <VatLabel />
                     </span>
                     <span className="flex items-center gap-1 text-sm font-medium text-text-muted transition-all group-hover:text-brand group-hover:gap-2">
                         Learn more

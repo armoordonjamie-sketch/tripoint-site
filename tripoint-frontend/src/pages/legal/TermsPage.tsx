@@ -1,6 +1,7 @@
 import { Seo } from '@/components/Seo';
 import { Section } from '@/components/Section';
 import { siteConfig } from '@/config/site';
+import { VatLabel } from '@/components/VatLabel';
 
 export function TermsPage() {
     const { email, phoneDisplay } = siteConfig.contact;
@@ -28,7 +29,7 @@ export function TermsPage() {
                         <section>
                             <h2 className="text-xl font-bold text-text-primary">1. Introduction</h2>
                             <p className="mt-2">
-                                These Terms of Service (&ldquo;Terms&rdquo;) govern your use of the services provided by Tripoint Diagnostics Ltd (&ldquo;we&rdquo;, &ldquo;us&rdquo;, &ldquo;our&rdquo;), Company No. 17038307, registered at 476 Sidcup Road, Eltham, London.
+                                These Terms of Service (&ldquo;Terms&rdquo;) govern your use of the services provided by Tripoint Diagnostics Ltd (&ldquo;we&rdquo;, &ldquo;us&rdquo;, &ldquo;our&rdquo;), Company No. 17038307, VAT No. 515 7327 92, registered at 476 Sidcup Road, Eltham, London.
                             </p>
                             <p className="mt-2">
                                 By booking a service or using our website, you agree to these Terms. Please read them carefully before placing a booking.
@@ -70,10 +71,10 @@ export function TermsPage() {
                                         </tr>
                                     </thead>
                                     <tbody className="divide-y divide-border-default">
-                                        <tr><td className="px-4 py-2">Zone A (0-25 min drive)</td><td className="px-4 py-2">£30</td></tr>
-                                        <tr><td className="px-4 py-2">Zone B (25-45 min drive)</td><td className="px-4 py-2">£30</td></tr>
-                                        <tr><td className="px-4 py-2">Zone C (45-60 min drive)</td><td className="px-4 py-2">£50</td></tr>
-                                        <tr><td className="px-4 py-2">VOR / Priority bookings</td><td className="px-4 py-2">£50</td></tr>
+                                        <tr><td className="px-4 py-2">Zone A (0-25 min drive)</td><td className="px-4 py-2">£30<VatLabel /></td></tr>
+                                        <tr><td className="px-4 py-2">Zone B (25-45 min drive)</td><td className="px-4 py-2">£30<VatLabel /></td></tr>
+                                        <tr><td className="px-4 py-2">Zone C (45-60 min drive)</td><td className="px-4 py-2">£50<VatLabel /></td></tr>
+                                        <tr><td className="px-4 py-2">VOR / Priority bookings</td><td className="px-4 py-2">£50<VatLabel /></td></tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -120,7 +121,7 @@ export function TermsPage() {
 
                             <h3 className="mt-4 text-lg font-semibold text-text-primary">5.2 Follow-on work</h3>
                             <p className="mt-2">
-                                If additional labour is needed beyond the included on-site time, it is charged at £85/hour, billed in 15-minute increments. This will be discussed and agreed with you before any additional work begins.
+                                If additional labour is needed beyond the included on-site time, it is charged at £85/hour + VAT, billed in 15-minute increments. This will be discussed and agreed with you before any additional work begins.
                             </p>
 
                             <h3 className="mt-4 text-lg font-semibold text-text-primary">5.3 Parts</h3>
@@ -134,7 +135,7 @@ export function TermsPage() {
 
                             <h3 className="mt-4 text-lg font-semibold text-text-primary">5.4 Coding and adaptations</h3>
                             <p className="mt-2">
-                                Software coding, adaptations, or initialisations required as part of a repair are charged from £45, as detailed in our pricing page.
+                                Software coding, adaptations, or initialisations required as part of a repair are charged from £45 + VAT, as detailed in our pricing page.
                             </p>
                         </section>
 

@@ -9,6 +9,7 @@ import { siteConfig } from '@/config/site';
 import { CheckCircle2, MessageCircle, Phone, MapPin } from 'lucide-react';
 import { trackNavClick, trackPhoneClick, trackWhatsAppClick, trackSelectContent } from '@/lib/analytics';
 import { getWhatsAppHref } from '@/lib/whatsappHref';
+import { VatLabel } from '@/components/VatLabel';
 
 function formatSlug(slug: string): string {
     return slug
@@ -63,8 +64,8 @@ export function AreaPage() {
                             <MapPin className="h-4 w-4 text-brand shrink-0" />
                             Available Mon to Sat. Often same-day in core zones.
                         </span>
-                        <span className="inline-flex items-center gap-1.5 font-medium text-brand-light">
-                            Diagnostics from £120–£150 by zone (A/B/C) — confirmed when you book with your postcode.
+                        <span className="inline-flex flex-wrap items-baseline gap-x-0 font-medium text-brand-light">
+                            Diagnostics from £120–£150<VatLabel /> by zone (A/B/C) — confirmed when you book with your postcode.
                         </span>
                     </div>
 

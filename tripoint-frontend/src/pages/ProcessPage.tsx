@@ -175,7 +175,7 @@ export function ProcessPage() {
                     <div className="mt-10 rounded-2xl border border-brand/20 bg-brand/5 p-6 reveal">
                         <h2 className="text-lg font-bold text-text-primary">How Booking & Deposits Work</h2>
                         <p className="mt-2 text-text-secondary">
-                            A deposit secures your slot: £30 for Zone A/B, £50 for Zone C or VOR bookings. Rescheduling is free with 24 hours notice (deposit carries over). Late cancellation or no-show means the deposit is retained. Payment for the visit is due on completion.
+                            A deposit secures your slot: £30 + VAT for Zone A/B, £50 + VAT for Zone C or VOR bookings. Rescheduling is free with 24 hours notice (deposit carries over). Late cancellation or no-show means the deposit is retained. Payment for the visit is due on completion.
                         </p>
                     </div>
 

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { Seo } from '@/components/Seo';
 import { trackNavClick, trackPhoneClick, trackWhatsAppClick } from '@/lib/analytics';
@@ -10,6 +10,7 @@ import { CheckCircle2, XCircle, ArrowRight, Phone, MessageCircle, AlertTriangle,
 import { siteConfig } from '@/config/site';
 import { ServiceSchema, BreadcrumbSchema, FaqPageSchema } from '@/components/JsonLd';
 import { OptimizedImage } from '@/components/OptimizedImage';
+import { VatLabel } from '@/components/VatLabel';
 
 function useScrollReveal() {
     const ref = useRef<HTMLDivElement>(null);
@@ -72,7 +73,7 @@ export function VanEconomyTunePage() {
         <div ref={scrollRef}>
             <Seo
                 title="Van Economy Tune"
-                description="Van economy tuning for smoother cruising and potential fuel savings. Diagnostic pre-check included. All van makes. From \u00a3199."
+                description="Van economy tuning for smoother cruising and potential fuel savings. Diagnostic pre-check included. All van makes. From \u00a3199 (ex. VAT)."
                 canonical="/services/van-economy-tune"
             />
             <ServiceSchema name="Van Economy Tune" description="Van economy tuning - smoother power delivery, lower RPM cruising, potential fuel savings. All van makes." url="/services/van-economy-tune" priceFrom={199} />
@@ -147,11 +148,20 @@ export function VanEconomyTunePage() {
                     <h2 className="text-2xl sm:text-3xl font-bold text-text-primary text-center">Real-world impact</h2>
                     <p className="mt-2 text-text-secondary text-center max-w-2xl mx-auto">We don&apos;t promise specific MPG figures - anyone who does is guessing. What we can tell you is what changes and why.</p>
                     <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-6">
-                        {[
+                        {([
                             { stat: '2-4 MPG', label: 'Typical improvement range', detail: 'Varies by route, load, and driving style. High-mileage motorway drivers see the biggest difference.' },
-                            { stat: '\u00a3800-\u00a32,000', label: 'Potential annual saving', detail: 'Based on 30,000-50,000 miles/year at average diesel prices. Not guaranteed - illustrative only.' },
-                            { stat: '1-3 fills', label: 'Payback period', detail: 'At \u00a3199, most drivers recover the cost within the first few tanks if efficiency improves.' },
-                        ].map((item) => (
+                            {
+                                stat: (
+                                    <span className="inline-flex flex-wrap items-baseline justify-center gap-x-0">
+                                        £800–£2,000
+                                        <VatLabel />
+                                    </span>
+                                ),
+                                label: 'Potential annual saving',
+                                detail: 'Based on 30,000-50,000 miles/year at average diesel prices. Not guaranteed - illustrative only.',
+                            },
+                            { stat: '1-3 fills', label: 'Payback period', detail: 'At £199 + VAT, most drivers recover the cost within the first few tanks if efficiency improves.' },
+                        ] satisfies { stat: ReactNode; label: string; detail: string }[]).map((item) => (
                             <div key={item.label} className="rounded-2xl border border-border-default bg-surface p-6 text-center">
                                 <p className="text-3xl font-extrabold text-emerald-400">{item.stat}</p>
                                 <p className="mt-2 font-semibold text-text-primary text-sm">{item.label}</p>
@@ -280,7 +290,7 @@ export function VanEconomyTunePage() {
                             <table className="min-w-full">
                                 <thead><tr className="border-b border-border-default bg-surface-alt"><th className="px-4 py-3 text-left text-sm font-semibold text-text-primary">Package</th><th className="px-4 py-3 text-right text-sm font-semibold text-text-primary">Zone A</th><th className="px-4 py-3 text-right text-sm font-semibold text-text-primary">Zone B</th><th className="px-4 py-3 text-right text-sm font-semibold text-text-primary">Zone C</th></tr></thead>
                                 <tbody>
-                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Van Economy Tune</td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;199</td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;214</td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;229</td></tr>
+                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Van Economy Tune</td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;199<VatLabel /></td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;214<VatLabel /></td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;229<VatLabel /></td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -356,7 +366,7 @@ export function VanEconomyTunePage() {
                 <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 md:py-20">
                     <div className="text-center reveal">
                         <h2 className="text-2xl font-bold text-white sm:text-3xl md:text-4xl lg:text-5xl">Make every mile cheaper</h2>
-                        <p className="mx-auto mt-4 max-w-xl text-lg text-white/80">Economy tune from &pound;199 - smoother driving, potential fuel savings, fully reversible.</p>
+                        <p className="mx-auto mt-4 max-w-xl text-lg text-white/80">Economy tune from &pound;199<VatLabel /> - smoother driving, potential fuel savings, fully reversible.</p>
                         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
                             <CTAButton href="/booking" variant="secondary" size="lg" onClick={() => trackNavClick('/booking', 'Book Online', 'economy_tune_footer')}>Book Online</CTAButton>
                             <CTAButton href={`https://wa.me/${siteConfig.contact.whatsappE164}`} variant="ghost" size="lg" external icon={<MessageCircle className="h-5 w-5" />} className="text-white hover:text-white hover:bg-white/10" onClick={() => trackWhatsAppClick('economy_tune')}>WhatsApp Us</CTAButton>

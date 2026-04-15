@@ -10,6 +10,7 @@ import { CheckCircle2, XCircle, ArrowRight, Phone, MessageCircle, AlertTriangle 
 import { siteConfig } from '@/config/site';
 import { ServiceSchema, BreadcrumbSchema, FaqPageSchema } from '@/components/JsonLd';
 import { OptimizedImage } from '@/components/OptimizedImage';
+import { VatLabel } from '@/components/VatLabel';
 
 function useScrollReveal() {
     const ref = useRef<HTMLDivElement>(null);
@@ -45,7 +46,7 @@ const faqs = [
     },
     {
         question: 'What about the wear sensor?',
-        answer: 'Brake wear sensor replacement is an optional add-on (£15-35). We\'ll check the sensor during the job and recommend replacement if it\'s worn or damaged. Always better to replace it at the same time as the pads.',
+        answer: 'Brake wear sensor replacement is an optional add-on (£15-35 + VAT). We\'ll check the sensor during the job and recommend replacement if it\'s worn or damaged. Always better to replace it at the same time as the pads.',
     },
 ];
 
@@ -61,7 +62,7 @@ export function SprinterBrakesPage() {
         <div ref={scrollRef}>
             <Seo
                 title="Sprinter Brakes"
-                description="Mobile Sprinter brake service. Front pads from £149, front pads and discs from £329. Fixed-price brake packages for W906 and W907 at your location."
+                description="Mobile Sprinter brake service. Front pads from £149 (ex. VAT), front pads and discs from £329 (ex. VAT). Fixed-price brake packages for W906 and W907 at your location."
                 canonical="/services/sprinter-brakes"
             />
             <ServiceSchema name="Sprinter Brakes" description="Mobile Mercedes Sprinter brake service - front and rear pads and discs fitted at your location across Kent and SE London." url="/services/sprinter-brakes" priceFrom={149} />
@@ -215,11 +216,11 @@ export function SprinterBrakesPage() {
                             <table className="min-w-full">
                                 <thead><tr className="border-b border-border-default bg-surface-alt"><th className="px-4 py-3 text-left text-sm font-semibold text-text-primary">Package</th><th className="px-4 py-3 text-right text-sm font-semibold text-text-primary">Price</th></tr></thead>
                                 <tbody>
-                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Front Pads Only</td><td className="px-4 py-3 text-right font-semibold text-brand-light">from £149</td></tr>
-                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Front Pads + Discs</td><td className="px-4 py-3 text-right font-semibold text-brand-light">from £329</td></tr>
-                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Rear Pads Only</td><td className="px-4 py-3 text-right font-semibold text-brand-light">from £169</td></tr>
-                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Rear Pads + Discs</td><td className="px-4 py-3 text-right font-semibold text-brand-light">from £349</td></tr>
-                                    <tr><td className="px-4 py-3 text-text-secondary">Rear Pads + Discs + Shoes</td><td className="px-4 py-3 text-right font-semibold text-brand-light">from £449</td></tr>
+                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Front Pads Only</td><td className="px-4 py-3 text-right font-semibold text-brand-light">from £149<VatLabel /></td></tr>
+                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Front Pads + Discs</td><td className="px-4 py-3 text-right font-semibold text-brand-light">from £329<VatLabel /></td></tr>
+                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Rear Pads Only</td><td className="px-4 py-3 text-right font-semibold text-brand-light">from £169<VatLabel /></td></tr>
+                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Rear Pads + Discs</td><td className="px-4 py-3 text-right font-semibold text-brand-light">from £349<VatLabel /></td></tr>
+                                    <tr><td className="px-4 py-3 text-text-secondary">Rear Pads + Discs + Shoes</td><td className="px-4 py-3 text-right font-semibold text-brand-light">from £449<VatLabel /></td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -229,10 +230,10 @@ export function SprinterBrakesPage() {
                     <div className="mt-8 rounded-2xl border border-border-default bg-surface-alt p-6 reveal">
                         <h3 className="font-bold text-text-primary">Optional add-ons</h3>
                         <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2 text-sm text-text-secondary">
-                            <div className="flex justify-between"><span>Brake wear sensor replacement</span><span className="font-semibold text-brand-light">£15-35</span></div>
-                            <div className="flex justify-between"><span>Seized slider clean-up</span><span className="font-semibold text-brand-light">£20-40</span></div>
-                            <div className="flex justify-between"><span>Severe corrosion surcharge</span><span className="font-semibold text-brand-light">£30-60</span></div>
-                            <div className="flex justify-between"><span>Brake fluid service</span><span className="font-semibold text-brand-light">£75-110</span></div>
+                            <div className="flex justify-between"><span>Brake wear sensor replacement</span><span className="font-semibold text-brand-light">£15-35<VatLabel /></span></div>
+                            <div className="flex justify-between"><span>Seized slider clean-up</span><span className="font-semibold text-brand-light">£20-40<VatLabel /></span></div>
+                            <div className="flex justify-between"><span>Severe corrosion surcharge</span><span className="font-semibold text-brand-light">£30-60<VatLabel /></span></div>
+                            <div className="flex justify-between"><span>Brake fluid service</span><span className="font-semibold text-brand-light">£75-110<VatLabel /></span></div>
                         </div>
                     </div>
                 </div>
@@ -257,7 +258,7 @@ export function SprinterBrakesPage() {
                                     <div>
                                         <h3 className="font-bold text-text-primary">A note on rear brakes</h3>
                                         <p className="mt-1 text-sm text-text-secondary">
-                                            Sprinter rear brake assemblies can suffer from heavy corrosion, especially on older W906 models. We offer rear brake packages with strict condition qualifiers. If the assembly is heavily corroded, there may be an additional surcharge (£30-60) for extra time and tooling. We&apos;ll always assess and quote honestly before starting work.
+                                            Sprinter rear brake assemblies can suffer from heavy corrosion, especially on older W906 models. We offer rear brake packages with strict condition qualifiers. If the assembly is heavily corroded, there may be an additional surcharge (£30-60 + VAT) for extra time and tooling. We&apos;ll always assess and quote honestly before starting work.
                                         </p>
                                     </div>
                                 </div>

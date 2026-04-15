@@ -8,6 +8,7 @@ import { FaqAccordion } from '@/components/FaqAccordion';
 import { CheckCircle2, ArrowRight, Phone, MessageCircle, AlertTriangle, FileText, Shield, Wrench } from 'lucide-react';
 import { siteConfig } from '@/config/site';
 import { ServiceSchema, BreadcrumbSchema, FaqPageSchema } from '@/components/JsonLd';
+import { VatLabel } from '@/components/VatLabel';
 
 function useScrollReveal() {
     const ref = useRef<HTMLDivElement>(null);
@@ -70,7 +71,7 @@ export function FleetVanTuningPage() {
         <div ref={scrollRef}>
             <Seo
                 title="Fleet Van Tuning"
-                description="Fleet van tuning packages. Consistent drivability across your fleet with volume pricing and site-day rates. All van makes. From \u00a3199 per vehicle."
+                description="Fleet van tuning packages. Consistent drivability across your fleet with volume pricing and site-day rates. All van makes. From \u00a3199 (ex. VAT) per vehicle."
                 canonical="/services/fleet-van-tuning"
             />
             <ServiceSchema name="Fleet Van Tuning" description="Fleet van tuning - volume pricing, site-day rates, diagnostic pre-check included. All van makes." url="/services/fleet-van-tuning" priceFrom={199} />
@@ -252,10 +253,10 @@ export function FleetVanTuningPage() {
                             <table className="min-w-full">
                                 <thead><tr className="border-b border-border-default bg-surface-alt"><th className="px-4 py-3 text-left text-sm font-semibold text-text-primary">Option</th><th className="px-4 py-3 text-right text-sm font-semibold text-text-primary">Pricing</th></tr></thead>
                                 <tbody>
-                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Per vehicle (3-4 vans)</td><td className="px-4 py-3 text-right font-semibold text-brand-light">from &pound;179/van</td></tr>
-                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Per vehicle (5-10 vans)</td><td className="px-4 py-3 text-right font-semibold text-brand-light">from &pound;169/van</td></tr>
+                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Per vehicle (3-4 vans)</td><td className="px-4 py-3 text-right font-semibold text-brand-light">from &pound;179/van<VatLabel /></td></tr>
+                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Per vehicle (5-10 vans)</td><td className="px-4 py-3 text-right font-semibold text-brand-light">from &pound;169/van<VatLabel /></td></tr>
                                     <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Per vehicle (10+ vans)</td><td className="px-4 py-3 text-right font-semibold text-brand-light">contact for rate</td></tr>
-                                    <tr><td className="px-4 py-3 text-text-secondary">Site-day rate (depot visit)</td><td className="px-4 py-3 text-right font-semibold text-brand-light">from &pound;799/day</td></tr>
+                                    <tr><td className="px-4 py-3 text-text-secondary">Site-day rate (depot visit)</td><td className="px-4 py-3 text-right font-semibold text-brand-light">from &pound;799/day<VatLabel /></td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -276,7 +277,7 @@ export function FleetVanTuningPage() {
                     </div>
 
                     <div className="mt-6 rounded-2xl border border-brand/20 bg-brand/5 p-6 text-center reveal">
-                        <p className="text-xl font-bold text-text-primary">Fleet tuning from <span className="text-brand-light">&pound;169/van</span></p>
+                        <p className="text-xl font-bold text-text-primary">Fleet tuning from <span className="text-brand-light">&pound;169/van<VatLabel /></span></p>
                         <p className="mt-1 text-sm text-text-secondary">Volume pricing - we come to your depot - full documentation included</p>
                         <div className="mt-4 flex flex-wrap justify-center gap-3">
                             <CTAButton href="/booking" size="sm" onClick={() => trackNavClick('/booking', 'Get a Fleet Quote', 'fleet_tune_pricing')}>Get a Fleet Quote</CTAButton>

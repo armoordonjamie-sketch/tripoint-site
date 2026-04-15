@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Loader2, Search, AlertCircle, CheckCircle2 } from 'lucide-react';
 import { CTAButton } from './CTAButton';
+import { VatLabel } from './VatLabel';
 import { trackZoneLookup } from '@/lib/analytics';
 
 const schema = z.object({
@@ -104,6 +105,7 @@ export function ZoneCalculator({ onZoneChecked }: ZoneCalculatorProps) {
                                         Standard Callout:
                                         <span className="ml-1 text-brand-light">
                                             {result.zone === 'A' ? '£120' : result.zone === 'B' ? '£135' : '£150'}
+                                            <VatLabel />
                                         </span>
                                     </p>
                                 </div>

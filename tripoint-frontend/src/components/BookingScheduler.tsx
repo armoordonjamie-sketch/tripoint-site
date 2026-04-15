@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState, useRef } from 'react';
 import { Loader2, AlertCircle, CheckCircle2, ChevronLeft, ChevronRight, Calendar, Search, MapPin, Car, Wrench, User, CreditCard, Shield, Cog, TrendingUp } from 'lucide-react';
 import { CTAButton } from './CTAButton';
+import { VatLabel, vatSuffix } from './VatLabel';
 import {
     trackBookingConfirmation,
     trackBookingFunnelEvent,
@@ -729,8 +730,8 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
                     {[
                         { label: 'Zone', value: availability.zone, accent: true },
                         { label: 'Drive time', value: `${Math.round(availability.drive_time_minutes)} min` },
-                        { label: 'Base price from', value: availability.fixed_price_gbp ? `£${availability.fixed_price_gbp}` : 'Quote', accent: true },
-                        { label: 'Deposit', value: availability.deposit_gbp ? `£${availability.deposit_gbp}` : 'TBC' },
+                        { label: 'Base price from', value: availability.fixed_price_gbp ? `£${availability.fixed_price_gbp}${vatSuffix}` : 'Quote', accent: true },
+                        { label: 'Deposit', value: availability.deposit_gbp ? `£${availability.deposit_gbp}${vatSuffix}` : 'TBC' },
                     ].map((item) => (
                         <div key={item.label} className="rounded-xl border border-brand/15 bg-brand/5 px-4 py-3 text-center">
                             <p className="text-[11px] uppercase tracking-wider text-text-muted mb-0.5">{item.label}</p>
@@ -879,6 +880,7 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
                                                         </span>
                                                         <span className="text-sm font-bold text-text-primary">
                                                             from £{Object.values(service.zone_price)[0] ?? 120}
+                                                            <VatLabel />
                                                         </span>
                                                     </div>
                                                     <p className="mt-1 text-xs text-text-muted leading-relaxed">
@@ -1007,7 +1009,10 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
                                                 <div className="flex flex-1 justify-between items-center text-sm">
                                                     <span className={brakeType === type.id ? 'font-medium text-text-primary' : 'text-text-secondary'}>{type.label}</span>
                                                     {type.id !== 'not-sure' && (
-                                                        <span className="font-bold text-text-primary">£{BRAKE_PRICING[servicingModel]?.options[brakePosition][type.id]}</span>
+                                                        <span className="font-bold text-text-primary">
+                                                            £{BRAKE_PRICING[servicingModel]?.options[brakePosition][type.id]}
+                                                            <VatLabel />
+                                                        </span>
                                                     )}
                                                 </div>
                                             </label>
@@ -1419,11 +1424,11 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
                                 </div>
                                 <div>
                                     <p className="text-text-muted text-xs">Fixed Price</p>
-                                    <p className="font-bold text-brand-light text-lg">{availability.fixed_price_gbp ? `£${availability.fixed_price_gbp}` : 'Quote'}</p>
+                                    <p className="font-bold text-brand-light text-lg">{availability.fixed_price_gbp ? `£${availability.fixed_price_gbp}${vatSuffix}` : 'Quote'}</p>
                                 </div>
                                 <div>
                                     <p className="text-text-muted text-xs">Deposit Due</p>
-                                    <p className="font-bold text-text-primary text-lg">{availability.deposit_gbp ? `£${availability.deposit_gbp}` : 'TBC'}</p>
+                                    <p className="font-bold text-text-primary text-lg">{availability.deposit_gbp ? `£${availability.deposit_gbp}${vatSuffix}` : 'TBC'}</p>
                                 </div>
                             </div>
                         </div>
@@ -1439,7 +1444,7 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
                         {submitting ? (
                             <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Submitting&hellip;</>
                         ) : effectiveDeposit ? (
-                            `Confirm & Pay £${effectiveDeposit} Deposit`
+                            `Confirm & Pay £${effectiveDeposit} Deposit${vatSuffix}`
                         ) : (
                             'Confirm Booking'
                         )}

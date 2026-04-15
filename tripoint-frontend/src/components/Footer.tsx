@@ -286,6 +286,9 @@ export function Footer() {
                         <p>
                             &copy; {year} {siteConfig.brandName}. Independent service - not affiliated with vehicle manufacturers.
                         </p>
+                        <p className="mt-1">
+                            Company No. 17038307&nbsp;&nbsp;|&nbsp;&nbsp;VAT No. 515 7327 92
+                        </p>
                     </div>
                 </div>
             </div>

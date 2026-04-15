@@ -10,6 +10,7 @@ import {
     type ServiceCategoryId,
 } from '@/config/servicesCatalog';
 import { CTAButton } from '@/components/CTAButton';
+import { VatLabel } from '@/components/VatLabel';
 import { cn } from '@/lib/utils';
 import { trackNavClick, trackSelectContent } from '@/lib/analytics';
 
@@ -138,6 +139,7 @@ export function ServicePicker({ title, subtitle, badges }: ServicePickerProps) {
                                             </h3>
                                             <span className="rounded bg-brand/15 px-1.5 py-0.5 text-[11px] font-bold text-brand-light whitespace-nowrap">
                                                 £{price}
+                                                <VatLabel />
                                             </span>
                                         </div>
                                         <p className="mt-1 text-[11px] text-text-muted leading-relaxed line-clamp-2">{s.description}</p>
@@ -173,6 +175,7 @@ export function ServicePicker({ title, subtitle, badges }: ServicePickerProps) {
                     <p className="mt-3 text-[11px] text-text-muted">
                         {services.length} option{services.length !== 1 ? 's' : ''} · from £
                         {Math.min(...services.map((s) => getServicePrice(s.priceSlug, s.fallbackPrice)))}
+                        <VatLabel />
                     </p>
                 )}
             </div>

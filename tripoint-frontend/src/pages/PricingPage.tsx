@@ -7,6 +7,7 @@ import { ExpandableReportImage } from '@/components/ExpandableReportImage';
 import { siteConfig } from '@/config/site';
 import { trackNavClick } from '@/lib/analytics';
 import { ZoneCalculator } from '@/components/ZoneCalculator';
+import { VatLabel } from '@/components/VatLabel';
 
 export function PricingPage() {
     return (
@@ -87,12 +88,15 @@ export function PricingPage() {
                     <div>
                         <h2 className="text-2xl font-bold text-text-primary">How Booking &amp; Deposit Works</h2>
                         <p className="mt-4 text-text-secondary">
-                            A deposit secures your slot. Zone A/B: £30. Zone C and VOR: £50. Reschedule free with 24 hours notice - your deposit carries over. Late cancellation or no-show retains the deposit. We&apos;ll confirm your zone and final price when you book.
+                            A deposit secures your slot. Zone A/B: £30<VatLabel />. Zone C and VOR: £50<VatLabel />. Reschedule free with 24 hours notice - your deposit carries over. Late cancellation or no-show retains the deposit. We&apos;ll confirm your zone and final price when you book.
                         </p>
                     </div>
                     <Notice variant="info">
                         <strong>VOR Priority Dispatch:</strong> Limited slots available. WhatsApp us for the fastest response if your vehicle is off the road.
                     </Notice>
+                    <p className="mt-6 text-center text-xs text-text-muted">
+                        Company No. 17038307&nbsp;&nbsp;|&nbsp;&nbsp;VAT No. 515 7327 92
+                    </p>
                 </div>
 
                 <div className="mx-auto mt-12 max-w-3xl">

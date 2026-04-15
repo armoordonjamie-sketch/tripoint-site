@@ -13,6 +13,7 @@ import { galleryImages } from '@/data/galleryImages';
 import { siteConfig } from '@/config/site';
 import { ServiceSchema, BreadcrumbSchema, FaqPageSchema } from '@/components/JsonLd';
 import { OptimizedImage } from '@/components/OptimizedImage';
+import { VatLabel } from '@/components/VatLabel';
 
 const prePurchasePhotos = [
     galleryImages[29],
@@ -91,7 +92,7 @@ export function PrePurchaseHealthCheckPage() {
         <div ref={scrollRef}>
             <Seo
                 title="Pre-Purchase Digital Health Check"
-                description="Professional pre-purchase vehicle inspection with deep scan and buyer risk summary. Know what you're buying before you commit. From £160."
+                description="Professional pre-purchase vehicle inspection with deep scan and buyer risk summary. Know what you're buying before you commit. From £160 (ex. VAT)."
                 canonical="/services/pre-purchase-digital-health-check"
             />
             <ServiceSchema name="Pre-Purchase Digital Health Check" description="Professional pre-purchase vehicle inspection - deep scan, buyer risk summary. Know before you buy." url="/services/pre-purchase-digital-health-check" priceFrom={zoneA} />
@@ -292,13 +293,13 @@ export function PrePurchaseHealthCheckPage() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Zone A</td><td className="px-4 py-3 text-text-secondary">0-25 mins</td><td className="px-4 py-3 text-right font-semibold text-brand-light">£{zoneA}</td></tr>
-                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Zone B</td><td className="px-4 py-3 text-text-secondary">25-45 mins</td><td className="px-4 py-3 text-right font-semibold text-brand-light">£{zoneB}</td></tr>
-                                    <tr><td className="px-4 py-3 text-text-secondary">Zone C</td><td className="px-4 py-3 text-text-secondary">45-60 mins</td><td className="px-4 py-3 text-right font-semibold text-brand-light">£{zoneC}</td></tr>
+                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Zone A</td><td className="px-4 py-3 text-text-secondary">0-25 mins</td><td className="px-4 py-3 text-right font-semibold text-brand-light">£{zoneA}<VatLabel /></td></tr>
+                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Zone B</td><td className="px-4 py-3 text-text-secondary">25-45 mins</td><td className="px-4 py-3 text-right font-semibold text-brand-light">£{zoneB}<VatLabel /></td></tr>
+                                    <tr><td className="px-4 py-3 text-text-secondary">Zone C</td><td className="px-4 py-3 text-text-secondary">45-60 mins</td><td className="px-4 py-3 text-right font-semibold text-brand-light">£{zoneC}<VatLabel /></td></tr>
                                 </tbody>
                             </table>
                         </div>
-                        <p className="mt-2 text-sm text-text-muted">Includes travel and up to 75 mins on-site. Deposit £30 (Zone A/B) or £50 (Zone C).</p>
+                        <p className="mt-2 text-sm text-text-muted">Includes travel and up to 75 mins on-site. Deposit £30 + VAT (Zone A/B) or £50 + VAT (Zone C).</p>
                     </div>
 
                     {/* FAQ */}
@@ -312,7 +313,7 @@ export function PrePurchaseHealthCheckPage() {
                     {/* Pricing CTA */}
                     <div className="mt-12 rounded-2xl border border-brand/20 bg-brand/5 p-6 text-center reveal">
                         <p className="text-2xl font-bold text-text-primary">
-                            From <span className="text-brand-light">£{zoneA}</span>
+                            From <span className="text-brand-light">£{zoneA}<VatLabel /></span>
                         </p>
                         <p className="mt-1 text-sm text-text-secondary">Zone-based pricing - includes travel and up to 75 mins on-site</p>
                         <div className="mt-4 flex flex-wrap justify-center gap-3">

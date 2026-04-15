@@ -10,6 +10,7 @@ import { CheckCircle2, XCircle, ArrowRight, Phone, MessageCircle, AlertTriangle 
 import { siteConfig } from '@/config/site';
 import { ServiceSchema, BreadcrumbSchema, FaqPageSchema } from '@/components/JsonLd';
 import { OptimizedImage } from '@/components/OptimizedImage';
+import { VatLabel } from '@/components/VatLabel';
 
 function useScrollReveal() {
     const ref = useRef<HTMLDivElement>(null);
@@ -56,7 +57,7 @@ export function VitoBrakesPage() {
 
     return (
         <div ref={scrollRef}>
-            <Seo title="Vito Brakes" description="Mobile Vito W447 brake service. Front pads from £169, front pads and discs from £319. Fixed-price brake packages at your location." canonical="/services/vito-brakes" />
+            <Seo title="Vito Brakes" description="Mobile Vito W447 brake service. Front pads from £169 (ex. VAT), front pads and discs from £319 (ex. VAT). Fixed-price brake packages at your location." canonical="/services/vito-brakes" />
             <ServiceSchema name="Vito Brakes" description="Mobile Mercedes Vito W447 brake service - front and rear pads and discs fitted at your location." url="/services/vito-brakes" priceFrom={169} />
             <BreadcrumbSchema items={[{ name: 'Home', url: '/' }, { name: 'Services', url: '/services' }, { name: 'Mercedes Van Servicing', url: '/services/mercedes-van-servicing' }, { name: 'Vito Brakes', url: '/services/vito-brakes' }]} />
             <FaqPageSchema items={faqs} />
@@ -208,11 +209,11 @@ export function VitoBrakesPage() {
                             <table className="min-w-full">
                                 <thead><tr className="border-b border-border-default bg-surface-alt"><th className="px-4 py-3 text-left text-sm font-semibold text-text-primary">Package</th><th className="px-4 py-3 text-right text-sm font-semibold text-text-primary">Price</th></tr></thead>
                                 <tbody>
-                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Front Pads Only</td><td className="px-4 py-3 text-right font-semibold text-brand-light">from £169</td></tr>
-                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Front Pads + Discs</td><td className="px-4 py-3 text-right font-semibold text-brand-light">from £319</td></tr>
-                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Rear Pads Only</td><td className="px-4 py-3 text-right font-semibold text-brand-light">from £169</td></tr>
-                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Rear Pads + Discs</td><td className="px-4 py-3 text-right font-semibold text-brand-light">from £319</td></tr>
-                                    <tr><td className="px-4 py-3 text-text-secondary">Rear Pads + Discs + Shoes</td><td className="px-4 py-3 text-right font-semibold text-brand-light">from £399</td></tr>
+                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Front Pads Only</td><td className="px-4 py-3 text-right font-semibold text-brand-light">from £169<VatLabel /></td></tr>
+                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Front Pads + Discs</td><td className="px-4 py-3 text-right font-semibold text-brand-light">from £319<VatLabel /></td></tr>
+                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Rear Pads Only</td><td className="px-4 py-3 text-right font-semibold text-brand-light">from £169<VatLabel /></td></tr>
+                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Rear Pads + Discs</td><td className="px-4 py-3 text-right font-semibold text-brand-light">from £319<VatLabel /></td></tr>
+                                    <tr><td className="px-4 py-3 text-text-secondary">Rear Pads + Discs + Shoes</td><td className="px-4 py-3 text-right font-semibold text-brand-light">from £399<VatLabel /></td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -222,9 +223,9 @@ export function VitoBrakesPage() {
                     <div className="mt-8 rounded-2xl border border-border-default bg-surface-alt p-6 reveal">
                         <h3 className="font-bold text-text-primary">Optional add-ons</h3>
                         <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2 text-sm text-text-secondary">
-                            <div className="flex justify-between"><span>Brake wear sensor replacement</span><span className="font-semibold text-brand-light">£15-35</span></div>
-                            <div className="flex justify-between"><span>Seized slider clean-up</span><span className="font-semibold text-brand-light">£20-40</span></div>
-                            <div className="flex justify-between"><span>Brake fluid service</span><span className="font-semibold text-brand-light">£75-110</span></div>
+                            <div className="flex justify-between"><span>Brake wear sensor replacement</span><span className="font-semibold text-brand-light">£15-35<VatLabel /></span></div>
+                            <div className="flex justify-between"><span>Seized slider clean-up</span><span className="font-semibold text-brand-light">£20-40<VatLabel /></span></div>
+                            <div className="flex justify-between"><span>Brake fluid service</span><span className="font-semibold text-brand-light">£75-110<VatLabel /></span></div>
                         </div>
                     </div>
                 </div>

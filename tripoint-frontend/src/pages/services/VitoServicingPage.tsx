@@ -10,6 +10,7 @@ import { CheckCircle2, ArrowRight, Phone, MessageCircle, AlertTriangle, Clock, S
 import { siteConfig } from '@/config/site';
 import { ServiceSchema, BreadcrumbSchema, FaqPageSchema } from '@/components/JsonLd';
 import { OptimizedImage } from '@/components/OptimizedImage';
+import { VatLabel } from '@/components/VatLabel';
 
 function useScrollReveal() {
     const ref = useRef<HTMLDivElement>(null);
@@ -60,7 +61,7 @@ const faqs = [
 ];
 
 const crossSell = [
-    { title: 'Vito Brakes', desc: 'Front and rear brake packages from \u00a3169', href: '/services/vito-brakes' },
+    { title: 'Vito Brakes', desc: 'Front and rear brake packages from \u00a3169 + VAT', href: '/services/vito-brakes' },
     { title: 'Standard Diagnosis', desc: 'Warning light? We\u2019ll diagnose it.', href: '/services/diagnostic-callout' },
     { title: 'Mercedes Van Servicing', desc: 'All models - Sprinter, Vito, Citan', href: '/services/mercedes-van-servicing' },
 ];
@@ -72,7 +73,7 @@ export function VitoServicingPage() {
         <div ref={scrollRef}>
             <Seo
                 title="Vito Servicing"
-                description="Mobile Mercedes Vito servicing. Minor from \u00a3175, major from \u00a3295. Genuine parts, Xentry service reset, full inspection at your door. W639 and W447."
+                description="Mobile Mercedes Vito servicing. Minor from \u00a3175 (ex. VAT), major from \u00a3295 (ex. VAT). Genuine parts, Xentry service reset, full inspection at your door. W639 and W447."
                 canonical="/services/vito-servicing"
             />
             <ServiceSchema name="Vito Servicing" description="Mobile Mercedes Vito servicing - minor and major service packages for W639 and W447 at your location across Kent and SE London." url="/services/vito-servicing" priceFrom={175} />
@@ -358,8 +359,8 @@ export function VitoServicingPage() {
                             <table className="min-w-full">
                                 <thead><tr className="border-b border-border-default bg-surface-alt"><th className="px-4 py-3 text-left text-sm font-semibold text-text-primary">Package</th><th className="px-4 py-3 text-right text-sm font-semibold text-text-primary">Zone A</th><th className="px-4 py-3 text-right text-sm font-semibold text-text-primary">Zone B</th><th className="px-4 py-3 text-right text-sm font-semibold text-text-primary">Zone C</th></tr></thead>
                                 <tbody>
-                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Minor Service (A-Style)</td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;175</td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;190</td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;205</td></tr>
-                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Major Service (B-Style)</td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;295</td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;310</td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;325</td></tr>
+                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Minor Service (A-Style)</td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;175<VatLabel /></td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;190<VatLabel /></td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;205<VatLabel /></td></tr>
+                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Major Service (B-Style)</td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;295<VatLabel /></td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;310<VatLabel /></td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;325<VatLabel /></td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -368,11 +369,11 @@ export function VitoServicingPage() {
                     <div className="mt-8 rounded-2xl border border-border-default bg-surface p-6 reveal">
                         <h3 className="font-bold text-text-primary">Optional add-ons</h3>
                         <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2 text-sm text-text-secondary">
-                            <div className="flex justify-between"><span>AdBlue top-up (Euro 6)</span><span className="font-semibold text-brand-light">from &pound;25</span></div>
-                            <div className="flex justify-between"><span>Transmission fluid change</span><span className="font-semibold text-brand-light">from &pound;120</span></div>
+                            <div className="flex justify-between"><span>AdBlue top-up (Euro 6)</span><span className="font-semibold text-brand-light">from &pound;25<VatLabel /></span></div>
+                            <div className="flex justify-between"><span>Transmission fluid change</span><span className="font-semibold text-brand-light">from &pound;120<VatLabel /></span></div>
                             <div className="flex justify-between"><span>Brake check with measurement</span><span className="font-semibold text-brand-light">included</span></div>
                             <div className="flex justify-between"><span>Diagnostic fault scan</span><span className="font-semibold text-brand-light">included</span></div>
-                            <div className="flex justify-between"><span>Forced DPF regeneration</span><span className="font-semibold text-brand-light">from &pound;45</span></div>
+                            <div className="flex justify-between"><span>Forced DPF regeneration</span><span className="font-semibold text-brand-light">from &pound;45<VatLabel /></span></div>
 
                         </div>
                     </div>
@@ -417,7 +418,7 @@ export function VitoServicingPage() {
                 <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 md:py-20">
                     <div className="text-center reveal">
                         <h2 className="text-2xl font-bold text-white sm:text-3xl md:text-4xl lg:text-5xl">Keep your Vito earning</h2>
-                        <p className="mx-auto mt-4 max-w-xl text-lg text-white/80">Mobile servicing from &pound;175 - at your door, around your schedule.</p>
+                        <p className="mx-auto mt-4 max-w-xl text-lg text-white/80">Mobile servicing from &pound;175<VatLabel /> - at your door, around your schedule.</p>
                         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
                             <CTAButton href="/booking" variant="secondary" size="lg" onClick={() => trackNavClick('/booking', 'Book Online', 'vito_servicing_footer')}>Book Online</CTAButton>
                             <CTAButton href={`https://wa.me/${siteConfig.contact.whatsappE164}`} variant="ghost" size="lg" external icon={<MessageCircle className="h-5 w-5" />} className="text-white hover:text-white hover:bg-white/10" onClick={() => trackWhatsAppClick('vito_servicing')}>WhatsApp Us</CTAButton>

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { siteConfig } from '@/config/site';
 import { CTAButton } from './CTAButton';
+import { VatLabel } from './VatLabel';
 
 const slugToHref: Record<string, string> = {
     'diagnostic-callout': '/services/diagnostic-callout',
@@ -91,18 +92,21 @@ export function PricingTable({ compact = false, className }: PricingTableProps) 
                                             Zone A
                                         </span>
                                         £{service.zoneA}
+                                        <VatLabel />
                                     </td>
                                     <td className="px-4 py-4 text-center text-sm font-bold text-brand-light">
                                         <span className="mb-0.5 block text-[10px] font-semibold uppercase tracking-wide text-text-muted lg:hidden">
                                             Zone B
                                         </span>
                                         £{service.zoneB}
+                                        <VatLabel />
                                     </td>
                                     <td className="px-4 py-4 text-center text-sm font-bold text-brand-light">
                                         <span className="mb-0.5 block text-[10px] font-semibold uppercase tracking-wide text-text-muted lg:hidden">
                                             Zone C
                                         </span>
                                         £{service.zoneC}
+                                        <VatLabel />
                                     </td>
                                     {!compact && (
                                         <td className="hidden px-4 py-4 text-sm text-text-secondary lg:table-cell">
@@ -162,6 +166,7 @@ export function PricingTable({ compact = false, className }: PricingTableProps) 
                                             </td>
                                             <td className="px-4 py-3 text-right text-sm font-semibold text-brand-light">
                                                 {addon.price}
+                                                <VatLabel />
                                             </td>
                                         </tr>
                                     ))}
@@ -201,6 +206,7 @@ export function PricingTable({ compact = false, className }: PricingTableProps) 
                                             </td>
                                             <td className="px-4 py-3 text-right text-sm font-semibold text-brand-light">
                                                 {dep.amount}
+                                                <VatLabel />
                                             </td>
                                         </tr>
                                     ))}

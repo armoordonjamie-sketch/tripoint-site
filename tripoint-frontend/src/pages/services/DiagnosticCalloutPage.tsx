@@ -15,6 +15,7 @@ import { siteConfig } from '@/config/site';
 import { ServiceSchema, BreadcrumbSchema, FaqPageSchema } from '@/components/JsonLd';
 import { OptimizedImage } from '@/components/OptimizedImage';
 import { ExpandableReportImage } from '@/components/ExpandableReportImage';
+import { VatLabel } from '@/components/VatLabel';
 
 const diagnosticPhotos = [
     galleryImages[22],
@@ -94,12 +95,12 @@ const faqs = [
     {
         question: 'What happens if parts are needed?',
         answer:
-            'We\'ll quote you for the parts and labour before any work begins. We use genuine Mercedes parts. Follow-on labour after the included 60 minutes is £85/hour in 15-minute increments.',
+            'We\'ll quote you for the parts and labour before any work begins. We use genuine Mercedes parts. Follow-on labour after the included 60 minutes is £85/hour + VAT in 15-minute increments.',
     },
     {
         question: 'How long does it take?',
         answer:
-            'The diagnostic visit is up to 60 minutes on-site. If we need additional time to investigate a complex fault, we\'ll discuss it with you first. Extra diagnostic time is billed at £85/hour in 15-minute blocks.',
+            'The diagnostic visit is up to 60 minutes on-site. If we need additional time to investigate a complex fault, we\'ll discuss it with you first. Extra diagnostic time is billed at £85/hour + VAT in 15-minute blocks.',
     },
     {
         question: 'Do you diagnose cars as well as vans?',
@@ -138,7 +139,7 @@ export function DiagnosticCalloutPage() {
         <div ref={scrollRef}>
             <Seo
                 title="Standard Diagnosis - Mobile Mercedes Diagnostics"
-                description="Mobile diagnostic service for Mercedes cars and vans. Full-system scan with dealer tools (Xentry), live data, guided tests, and a written fix plan. From £120 - Kent & SE London."
+                description="Mobile diagnostic service for Mercedes cars and vans. Full-system scan with dealer tools (Xentry), live data, guided tests, and a written fix plan. From £120 (ex. VAT) - Kent & SE London."
                 canonical="/services/diagnostic-callout"
             />
             <ServiceSchema name="Standard Diagnosis" description="Mobile diagnostic service - full-system scan with Mercedes dealer tools, live data validation, guided tests, written fix plan. Kent & SE London." url="/services/diagnostic-callout" priceFrom={zoneA} />
@@ -156,7 +157,7 @@ export function DiagnosticCalloutPage() {
                             Standard Diagnosis
                         </h1>
                         <p className="mt-2 text-lg text-text-secondary">
-                            From <span className="font-bold text-brand-light">£{zoneA}</span> · Mercedes cars & vans · All faults
+                            From <span className="font-bold text-brand-light">£{zoneA}<VatLabel /></span> · Mercedes cars & vans · All faults
                         </p>
                     </div>
                 </div>
@@ -330,13 +331,13 @@ export function DiagnosticCalloutPage() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Zone A</td><td className="px-4 py-3 text-text-secondary">0-25 mins</td><td className="px-4 py-3 text-right font-semibold text-brand-light">£{zoneA}</td></tr>
-                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Zone B</td><td className="px-4 py-3 text-text-secondary">25-45 mins</td><td className="px-4 py-3 text-right font-semibold text-brand-light">£{zoneB}</td></tr>
-                                    <tr><td className="px-4 py-3 text-text-secondary">Zone C</td><td className="px-4 py-3 text-text-secondary">45-60 mins</td><td className="px-4 py-3 text-right font-semibold text-brand-light">£{zoneC}</td></tr>
+                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Zone A</td><td className="px-4 py-3 text-text-secondary">0-25 mins</td><td className="px-4 py-3 text-right font-semibold text-brand-light">£{zoneA}<VatLabel /></td></tr>
+                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Zone B</td><td className="px-4 py-3 text-text-secondary">25-45 mins</td><td className="px-4 py-3 text-right font-semibold text-brand-light">£{zoneB}<VatLabel /></td></tr>
+                                    <tr><td className="px-4 py-3 text-text-secondary">Zone C</td><td className="px-4 py-3 text-text-secondary">45-60 mins</td><td className="px-4 py-3 text-right font-semibold text-brand-light">£{zoneC}<VatLabel /></td></tr>
                                 </tbody>
                             </table>
                         </div>
-                        <p className="mt-2 text-sm text-text-muted">Includes travel and up to 60 mins on-site. Deposit £30 (Zone A/B) or £50 (Zone C). If additional diagnostic time is needed, it&apos;s billed at £85/hour in 15-minute blocks.</p>
+                        <p className="mt-2 text-sm text-text-muted">Includes travel and up to 60 mins on-site. Deposit £30 + VAT (Zone A/B) or £50 + VAT (Zone C). If additional diagnostic time is needed, it&apos;s billed at £85/hour + VAT in 15-minute blocks.</p>
                     </div>
 
                     {/* Examples from our work */}

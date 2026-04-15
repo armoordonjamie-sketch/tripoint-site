@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import {
     Wrench, Shield,
@@ -18,6 +18,7 @@ import { blogPosts, getPostThumbnail } from '@/data/blogPosts';
 import { useScrollReveal } from '@/lib/useScrollReveal';
 import { OptimizedImage } from '@/components/OptimizedImage';
 import { ExpandableReportImage } from '@/components/ExpandableReportImage';
+import { VatLabel } from '@/components/VatLabel';
 
 /* ── Intersection Observer for scroll-reveal ─────────── */
 
@@ -146,11 +147,11 @@ export function HomePage() {
                         </p>
 
                         <div className="reveal mt-8 flex flex-wrap gap-8" style={{ transitionDelay: '0.2s' }}>
-                            {[
+                            {([
                                 { value: 'Mercedes', label: 'Specialist' },
                                 { value: 'Up to 60 min', label: 'Drive time covered' },
-                                { value: '£120+', label: 'Diagnostics from' },
-                            ].map((s) => (
+                                { value: (<>£120+<VatLabel /></>), label: 'Diagnostics from' },
+                            ] satisfies { value: ReactNode; label: string }[]).map((s) => (
                                 <div key={s.label}>
                                     <p className="text-2xl font-bold text-brand-light">{s.value}</p>
                                     <p className="text-xs text-text-muted uppercase tracking-wider">{s.label}</p>
@@ -205,7 +206,10 @@ export function HomePage() {
                                 </div>
                                 <div>
                                     <h3 className="text-lg font-bold text-text-primary group-hover:text-brand-light transition-colors">{s.title}</h3>
-                                    <span className="text-sm font-semibold text-brand/70">from £{s.price}</span>
+                                    <span className="text-sm font-semibold text-brand/70">
+                                        from £{s.price}
+                                        <VatLabel />
+                                    </span>
                                 </div>
                             </div>
                             <p className="text-sm text-text-secondary leading-relaxed">{s.desc}</p>
@@ -523,7 +527,10 @@ export function HomePage() {
                         <div className="mt-6 flex flex-wrap justify-center gap-6">
                             {siteConfig.pricing.services.slice(0, 3).map((s) => (
                                 <div key={s.slug} className="text-center">
-                                    <p className="text-xl font-bold text-brand-light">£{s.zoneA}</p>
+                                    <p className="text-xl font-bold text-brand-light">
+                                        £{s.zoneA}
+                                        <VatLabel />
+                                    </p>
                                     <p className="text-[10px] font-medium uppercase tracking-wide text-text-muted">Zone A</p>
                                     <p className="text-xs text-text-muted mt-1">{s.name.split('(')[0].trim()}</p>
                                 </div>

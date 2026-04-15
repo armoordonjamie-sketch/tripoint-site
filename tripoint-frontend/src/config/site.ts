@@ -105,7 +105,7 @@ export const siteConfig = {
                 zoneA: 149,
                 zoneB: 164,
                 zoneC: 179,
-                included: 'Mobile brake service - front pads from £149',
+                included: 'Mobile brake service - front pads from £149 + VAT',
             },
             {
                 name: 'Vito Brakes',
@@ -113,7 +113,7 @@ export const siteConfig = {
                 zoneA: 169,
                 zoneB: 184,
                 zoneC: 199,
-                included: 'Mobile brake service - front pads from £169',
+                included: 'Mobile brake service - front pads from £169 + VAT',
             },
             {
                 name: 'Citan Brakes',
@@ -121,7 +121,7 @@ export const siteConfig = {
                 zoneA: 169,
                 zoneB: 184,
                 zoneC: 199,
-                included: 'Mobile brake service - front pads from £169',
+                included: 'Mobile brake service - front pads from £169 + VAT',
             },
             // Commercial Van Tuning
             {

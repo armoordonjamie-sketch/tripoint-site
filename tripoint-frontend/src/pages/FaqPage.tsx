@@ -71,7 +71,7 @@ const faqCategories: FaqCategory[] = [
             },
             {
                 question: 'How do deposits work?',
-                answer: 'A small deposit secures your booking slot: £30 for Zone A/B, £50 for Zone C or VOR bookings. You can reschedule free of charge with 24 hours\' notice - the deposit carries over. Late cancellation or no-show forfeits the deposit. The remaining balance is due on completion.',
+                answer: 'A small deposit secures your booking slot: £30 + VAT for Zone A/B, £50 + VAT for Zone C or VOR bookings. You can reschedule free of charge with 24 hours\' notice - the deposit carries over. Late cancellation or no-show forfeits the deposit. The remaining balance is due on completion.',
             },
             {
                 question: 'What payment methods do you accept?',
@@ -83,7 +83,7 @@ const faqCategories: FaqCategory[] = [
             },
             {
                 question: 'What if the job takes longer than expected?',
-                answer: 'Each service includes a set amount of on-site time (stated on each service page). If we need more time to complete the diagnosis, follow-on labour is billed at £85/hour in 15-minute increments - and we\'ll always discuss it with you before proceeding.',
+                answer: 'Each service includes a set amount of on-site time (stated on each service page). If we need more time to complete the diagnosis, follow-on labour is billed at £85/hour + VAT in 15-minute increments - and we\'ll always discuss it with you before proceeding.',
             },
             {
                 question: 'Do you offer discounts for multiple vehicles?',

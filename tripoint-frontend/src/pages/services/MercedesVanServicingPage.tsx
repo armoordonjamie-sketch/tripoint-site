@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { Seo } from '@/components/Seo';
 import { trackNavClick, trackPhoneClick, trackWhatsAppClick } from '@/lib/analytics';
@@ -10,6 +10,7 @@ import { CheckCircle2, ArrowRight, Phone, MessageCircle, AlertTriangle, Clock, S
 import { siteConfig } from '@/config/site';
 import { ServiceSchema, BreadcrumbSchema, FaqPageSchema } from '@/components/JsonLd';
 import { OptimizedImage } from '@/components/OptimizedImage';
+import { VatLabel } from '@/components/VatLabel';
 
 function useScrollReveal() {
     const ref = useRef<HTMLDivElement>(null);
@@ -93,7 +94,7 @@ export function MercedesVanServicingPage() {
         <div ref={scrollRef}>
             <Seo
                 title="Mercedes Van Servicing"
-                description="Mobile Mercedes van servicing for Sprinter, Vito, and Citan. Minor from \u00a3175, major from \u00a3295. Genuine parts, Xentry service reset. Kent and SE London."
+                description="Mobile Mercedes van servicing for Sprinter, Vito, and Citan. Minor from \u00a3175 (ex. VAT), major from \u00a3295 (ex. VAT). Genuine parts, Xentry service reset. Kent and SE London."
                 canonical="/services/mercedes-van-servicing"
             />
             <ServiceSchema name="Mercedes Van Servicing" description="Mobile Mercedes van servicing - Sprinter, Vito, and Citan. Minor and major packages at your location." url="/services/mercedes-van-servicing" priceFrom={175} />
@@ -213,17 +214,17 @@ export function MercedesVanServicingPage() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {[
+                                {([
                                     { feature: 'Location', dealer: 'Drop-off at workshop', us: 'At your door' },
                                     { feature: 'Diagnostic equipment', dealer: 'Xentry', us: 'Xentry' },
                                     { feature: 'Parts spec', dealer: 'Genuine Mercedes', us: 'Genuine Mercedes' },
                                     { feature: 'Service reset', dealer: 'Full ASSYST/FSS reset', us: 'Full ASSYST/FSS reset' },
-                                    { feature: 'Minor service price', dealer: '~\u00a3280-350', us: 'from \u00a3175' },
-                                    { feature: 'Major service price', dealer: '~\u00a3450-550', us: 'from \u00a3295' },
+                                    { feature: 'Minor service price', dealer: '~\u00a3280-350', us: <span className="inline-flex flex-wrap items-baseline justify-center">from &pound;175<VatLabel /></span> },
+                                    { feature: 'Major service price', dealer: '~\u00a3450-550', us: <span className="inline-flex flex-wrap items-baseline justify-center">from &pound;295<VatLabel /></span> },
                                     { feature: 'Vehicle downtime', dealer: 'Full day drop-off', us: '60-90 mins at your location' },
                                     { feature: 'Diagnostic scan included', dealer: 'Usually extra', us: 'Included with every service' },
                                     { feature: 'Written report', dealer: 'Sometimes', us: 'Always' },
-                                ].map((row) => (
+                                ] satisfies { feature: string; dealer: ReactNode; us: ReactNode }[]).map((row) => (
                                     <tr key={row.feature} className="border-b border-border-default">
                                         <td className="px-4 py-3 text-sm font-semibold text-text-primary">{row.feature}</td>
                                         <td className="px-4 py-3 text-center text-sm text-text-muted">{row.dealer}</td>
@@ -282,12 +283,12 @@ export function MercedesVanServicingPage() {
                             <div className="rounded-xl border border-border-default p-4">
                                 <h3 className="font-bold text-text-primary flex items-center gap-2"><span className="text-brand text-lg">A</span>Minor Service</h3>
                                 <p className="mt-1 text-sm text-text-secondary">Oil and filter change, visual health check, fluid levels, brake measurement, service reset. Typically every ~15,000 miles or 12 months.</p>
-                                <p className="mt-2 text-lg font-bold text-brand-light">from &pound;175</p>
+                                <p className="mt-2 text-lg font-bold text-brand-light">from &pound;175<VatLabel /></p>
                             </div>
                             <div className="rounded-xl border border-border-default p-4">
                                 <h3 className="font-bold text-text-primary flex items-center gap-2"><span className="text-brand text-lg">B</span>Major Service</h3>
                                 <p className="mt-1 text-sm text-text-secondary">Everything in minor, plus air filter, cabin filter, fuel filter, battery test, comprehensive inspection. Typically every ~30,000 miles or 24 months.</p>
-                                <p className="mt-2 text-lg font-bold text-brand-light">from &pound;295</p>
+                                <p className="mt-2 text-lg font-bold text-brand-light">from &pound;295<VatLabel /></p>
                             </div>
                         </div>
                     </div>
@@ -332,15 +333,15 @@ export function MercedesVanServicingPage() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Minor Service (all models)</td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;175</td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;190</td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;205</td></tr>
-                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Major Service (all models)</td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;295</td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;310</td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;325</td></tr>
+                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Minor Service (all models)</td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;175<VatLabel /></td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;190<VatLabel /></td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;205<VatLabel /></td></tr>
+                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Major Service (all models)</td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;295<VatLabel /></td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;310<VatLabel /></td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;325<VatLabel /></td></tr>
                                 </tbody>
                             </table>
                         </div>
                         <p className="mt-3 text-sm text-text-muted">V6 Sprinter (OM642) models may attract a supplement due to increased oil capacity.</p>
                     </div>
                     <div className="mt-6 rounded-2xl border border-brand/20 bg-brand/5 p-6 text-center reveal">
-                        <p className="text-xl font-bold text-text-primary">Mercedes van service from <span className="text-brand-light">&pound;175</span></p>
+                        <p className="text-xl font-bold text-text-primary">Mercedes van service from <span className="text-brand-light">&pound;175<VatLabel /></span></p>
                         <p className="mt-1 text-sm text-text-secondary">Fixed price - at your location - with Xentry service reset</p>
                         <div className="mt-4 flex flex-wrap justify-center gap-3">
                             <CTAButton href="/booking" size="sm" onClick={() => trackNavClick('/booking', 'Book Now', 'merc_servicing_pricing')}>Book Now</CTAButton>

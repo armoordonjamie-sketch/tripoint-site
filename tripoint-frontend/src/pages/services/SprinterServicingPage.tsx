@@ -10,6 +10,7 @@ import { CheckCircle2, XCircle, ArrowRight, Phone, MessageCircle, AlertTriangle,
 import { siteConfig } from '@/config/site';
 import { ServiceSchema, BreadcrumbSchema, FaqPageSchema } from '@/components/JsonLd';
 import { OptimizedImage } from '@/components/OptimizedImage';
+import { VatLabel } from '@/components/VatLabel';
 
 function useScrollReveal() {
     const ref = useRef<HTMLDivElement>(null);
@@ -65,7 +66,7 @@ const faqs = [
 ];
 
 const crossSell = [
-    { title: 'Sprinter Brakes', desc: 'Front and rear brake packages from \u00a3149', href: '/services/sprinter-brakes' },
+    { title: 'Sprinter Brakes', desc: 'Front and rear brake packages from \u00a3149 + VAT', href: '/services/sprinter-brakes' },
     { title: 'Standard Diagnosis', desc: 'Got a warning light? We\u2019ll read it.', href: '/services/diagnostic-callout' },
     { title: 'Mercedes Van Servicing', desc: 'All models - Vito, Citan, Sprinter', href: '/services/mercedes-van-servicing' },
 ];
@@ -77,7 +78,7 @@ export function SprinterServicingPage() {
         <div ref={scrollRef}>
             <Seo
                 title="Sprinter Servicing"
-                description="Mobile Mercedes Sprinter servicing. Minor from \u00a3175, major from \u00a3295. Genuine parts, Xentry service reset, and full inspection at your door. W906 and W907/W910."
+                description="Mobile Mercedes Sprinter servicing. Minor from \u00a3175 (ex. VAT), major from \u00a3295 (ex. VAT). Genuine parts, Xentry service reset, and full inspection at your door. W906 and W907/W910."
                 canonical="/services/sprinter-servicing"
             />
             <ServiceSchema name="Sprinter Servicing" description="Mobile Mercedes Sprinter servicing - minor and major service packages for W906 and W907/W910 at your location across Kent and SE London." url="/services/sprinter-servicing" priceFrom={175} />
@@ -305,8 +306,8 @@ export function SprinterServicingPage() {
                             <table className="min-w-full">
                                 <thead><tr className="border-b border-border-default bg-surface-alt"><th className="px-4 py-3 text-left text-sm font-semibold text-text-primary">Package</th><th className="px-4 py-3 text-right text-sm font-semibold text-text-primary">Zone A</th><th className="px-4 py-3 text-right text-sm font-semibold text-text-primary">Zone B</th><th className="px-4 py-3 text-right text-sm font-semibold text-text-primary">Zone C</th></tr></thead>
                                 <tbody>
-                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Minor Service (A-Style)</td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;175</td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;190</td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;205</td></tr>
-                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Major Service (B-Style)</td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;295</td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;310</td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;325</td></tr>
+                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Minor Service (A-Style)</td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;175<VatLabel /></td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;190<VatLabel /></td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;205<VatLabel /></td></tr>
+                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Major Service (B-Style)</td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;295<VatLabel /></td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;310<VatLabel /></td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;325<VatLabel /></td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -316,12 +317,12 @@ export function SprinterServicingPage() {
                     <div className="mt-8 rounded-2xl border border-border-default bg-surface-alt p-6 reveal">
                         <h3 className="font-bold text-text-primary">Optional add-ons</h3>
                         <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2 text-sm text-text-secondary">
-                            <div className="flex justify-between"><span>AdBlue top-up (Euro 6)</span><span className="font-semibold text-brand-light">from &pound;25</span></div>
+                            <div className="flex justify-between"><span>AdBlue top-up (Euro 6)</span><span className="font-semibold text-brand-light">from &pound;25<VatLabel /></span></div>
                             <div className="flex justify-between"><span>Brake check with measurement</span><span className="font-semibold text-brand-light">included</span></div>
                             <div className="flex justify-between"><span>Diagnostic fault scan</span><span className="font-semibold text-brand-light">included</span></div>
                             <div className="flex justify-between"><span>Battery condition test</span><span className="font-semibold text-brand-light">included (major)</span></div>
-                            <div className="flex justify-between"><span>Forced DPF regeneration</span><span className="font-semibold text-brand-light">from &pound;45</span></div>
-                            <div className="flex justify-between"><span>9G-TRONIC transmission fluid service</span><span className="font-semibold text-brand-light">from &pound;120</span></div>
+                            <div className="flex justify-between"><span>Forced DPF regeneration</span><span className="font-semibold text-brand-light">from &pound;45<VatLabel /></span></div>
+                            <div className="flex justify-between"><span>9G-TRONIC transmission fluid service</span><span className="font-semibold text-brand-light">from &pound;120<VatLabel /></span></div>
 
                         </div>
                     </div>
@@ -492,7 +493,7 @@ export function SprinterServicingPage() {
                 <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 md:py-20">
                     <div className="text-center reveal">
                         <h2 className="text-2xl font-bold text-white sm:text-3xl md:text-4xl lg:text-5xl">Keep your Sprinter on the road</h2>
-                        <p className="mx-auto mt-4 max-w-xl text-lg text-white/80">Mobile servicing from &pound;175 - fully equipped for your exact model.</p>
+                        <p className="mx-auto mt-4 max-w-xl text-lg text-white/80">Mobile servicing from &pound;175<VatLabel /> - fully equipped for your exact model.</p>
                         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
                             <CTAButton href="/booking" variant="secondary" size="lg" onClick={() => trackNavClick('/booking', 'Book Online', 'sprinter_servicing_footer')}>Book Online</CTAButton>
                             <CTAButton href={`https://wa.me/${siteConfig.contact.whatsappE164}`} variant="ghost" size="lg" external icon={<MessageCircle className="h-5 w-5" />} className="text-white hover:text-white hover:bg-white/10" onClick={() => trackWhatsAppClick('sprinter_servicing')}>WhatsApp Us</CTAButton>

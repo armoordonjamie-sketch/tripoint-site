@@ -6,6 +6,7 @@ import { CTAButton } from '@/components/CTAButton';
 import { siteConfig } from '@/config/site';
 import { Loader2, AlertCircle, CheckCircle2, CreditCard } from 'lucide-react';
 import { trackNavClick } from '@/lib/analytics';
+import { VatLabel } from '@/components/VatLabel';
 
 interface PaymentDetails {
     booking_id: string;
@@ -169,7 +170,8 @@ export function PaymentPage() {
                     {isPendingDeposit && details.deposit_gbp > 0 && (
                         <div className="mt-6">
                             <p className="text-sm text-text-secondary">
-                                Pay your deposit of £{details.deposit_gbp} to confirm your booking.
+                                Pay your deposit of £{details.deposit_gbp}
+                                <VatLabel /> to confirm your booking.
                             </p>
                             <CTAButton
                                 type="button"
@@ -185,7 +187,7 @@ export function PaymentPage() {
                                 ) : (
                                     <>
                                         <CreditCard className="mr-2 h-4 w-4" />
-                                        Pay Deposit (£{details.deposit_gbp})
+                                        Pay Deposit (£{details.deposit_gbp})<VatLabel />
                                     </>
                                 )}
                             </CTAButton>
@@ -203,6 +205,7 @@ export function PaymentPage() {
                         <div className="mt-6">
                             <p className="text-sm text-text-secondary">
                                 Remaining balance: £{details.balance_gbp}
+                                <VatLabel />
                             </p>
                             <CTAButton
                                 type="button"
@@ -218,7 +221,7 @@ export function PaymentPage() {
                                 ) : (
                                     <>
                                         <CreditCard className="mr-2 h-4 w-4" />
-                                        Pay Balance (£{details.balance_gbp})
+                                        Pay Balance (£{details.balance_gbp})<VatLabel />
                                     </>
                                 )}
                             </CTAButton>
