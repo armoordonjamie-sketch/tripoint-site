@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
 import { Phone, MessageCircle, CalendarDays, ChevronUp } from 'lucide-react';
@@ -22,6 +22,7 @@ const expandedShellHeight = `calc(${EXPANDED_SHELL_PX}px + ${safeBottom})`;
 const collapsedChromeHeight = `calc(${COLLAPSED_SHELL_PX}px + ${safeBottom})`;
 
 function readStoredCollapsed(): boolean {
+    if (typeof window === 'undefined') return false;
     try {
         return sessionStorage.getItem(STORAGE_KEY) === '1';
     } catch {
@@ -30,6 +31,7 @@ function readStoredCollapsed(): boolean {
 }
 
 function writeStoredCollapsed(collapsed: boolean) {
+    if (typeof window === 'undefined') return;
     try {
         if (collapsed) sessionStorage.setItem(STORAGE_KEY, '1');
         else sessionStorage.removeItem(STORAGE_KEY);
@@ -40,13 +42,12 @@ function writeStoredCollapsed(collapsed: boolean) {
 
 export function MobileStickyCTA() {
     const [mounted, setMounted] = useState(false);
-    const [collapsed, setCollapsed] = useState(readStoredCollapsed);
+    /** SSR + first client paint must match; hydrate from sessionStorage after commit. */
+    const [collapsed, setCollapsed] = useState(false);
     const [dragOffset, setDragOffset] = useState(0);
     const [isDragging, setIsDragging] = useState(false);
     const [justExpanded, setJustExpanded] = useState(false);
-    const [reducedMotion, setReducedMotion] = useState(
-        () => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches,
-    );
+    const [reducedMotion, setReducedMotion] = useState(false);
 
     const dragOffsetRef = useRef(0);
     const startYRef = useRef(0);
@@ -55,6 +56,8 @@ export function MobileStickyCTA() {
     const activePointerId = useRef<number | null>(null);
     const dragActiveRef = useRef(false);
     const justExpandedTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+    /** Skip persisting the initial false before useLayoutEffect restores sessionStorage. */
+    const skipPersistCollapsed = useRef(true);
 
     const markJustExpanded = useCallback(() => {
         if (justExpandedTimer.current) clearTimeout(justExpandedTimer.current);
@@ -69,11 +72,20 @@ export function MobileStickyCTA() {
         };
     }, []);
 
+    useLayoutEffect(() => {
+        setCollapsed(readStoredCollapsed());
+        setReducedMotion(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    }, []);
+
     useEffect(() => {
         collapsedRef.current = collapsed;
     }, [collapsed]);
 
     useEffect(() => {
+        if (skipPersistCollapsed.current) {
+            skipPersistCollapsed.current = false;
+            return;
+        }
         writeStoredCollapsed(collapsed);
     }, [collapsed]);
 
