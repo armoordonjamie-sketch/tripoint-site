@@ -13,6 +13,7 @@ import { getAttribution } from '@/lib/attribution';
 import { getWhatsAppHref } from '@/lib/whatsappHref';
 import { normalizeAndHashEmail, normalizeAndHashPhone } from '@/lib/hashUserData';
 import { getSessionJourneyId } from '@/lib/leadTracking';
+import { SocialLinks } from '@/components/SocialLinks';
 
 const contactSchema = z.object({
     name: z.string().min(2, 'Name is required'),
@@ -193,6 +194,8 @@ export function ContactPage() {
                                 <p className="text-sm text-text-secondary">Pick a slot online</p>
                             </div>
                         </Link>
+
+                        <SocialLinks clickLocation="contact_page" variant="cards" />
                     </div>
 
                     {/* Contact form */}

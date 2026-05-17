@@ -13,8 +13,8 @@ export const siteConfig = {
     },
 
     social: {
-        facebook: '',
-        instagram: '',
+        facebook: 'https://www.facebook.com/profile.php?id=61590194720293',
+        instagram: 'https://www.instagram.com/tripointdiagnostics',
         google: 'https://share.google/VzrAGFshBV7ITb7s2',
     },
 
