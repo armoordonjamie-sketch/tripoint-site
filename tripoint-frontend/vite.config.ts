@@ -19,7 +19,7 @@ function asyncCssPlugin() {
   }
 }
 
-export default defineConfig({
+export default defineConfig(({ isSsrBuild }) => ({
   plugins: [react(), tailwindcss(), asyncCssPlugin()],
   server: {
     host: true,
@@ -49,13 +49,16 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: {
-          lottie: ['lottie-web', 'lottie-react'],
-        },
+        // manualChunks conflicts with SSR externals (lottie-react is external in SSR)
+        manualChunks: isSsrBuild
+          ? undefined
+          : {
+              lottie: ['lottie-web', 'lottie-react'],
+            },
       },
     },
   },
   ssr: {
     noExternal: ['react-helmet-async'],
   },
-})
+}))
