@@ -11,6 +11,10 @@ import { siteConfig } from '@/config/site';
 import { ServiceSchema, BreadcrumbSchema, FaqPageSchema } from '@/components/JsonLd';
 import { OptimizedImage } from '@/components/OptimizedImage';
 import { VatLabel } from '@/components/VatLabel';
+import { ServicingHero } from '@/components/servicing/ServicingHero';
+import { ServicingPartsProof } from '@/components/servicing/ServicingPartsProof';
+import { ServicingFilterShowcase } from '@/components/servicing/ServicingFilterShowcase';
+import { ServicingProcessGallery } from '@/components/servicing/ServicingProcessGallery';
 
 function useScrollReveal() {
     const ref = useRef<HTMLDivElement>(null);
@@ -81,23 +85,17 @@ export function CitanServicingPage() {
             <FaqPageSchema items={faqs} />
 
             {/* \u2500\u2500\u2500 HERO \u2500\u2500\u2500 */}
-            <section className="relative h-72 sm:h-96 overflow-hidden">
-                <img
-                    src="/images/services/van-citan-w420-front.png"
-                    alt=""
-                    className="absolute inset-0 h-full w-full object-cover object-center"
-                    aria-hidden="true"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/80 to-surface/40" />
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(var(--color-brand-rgb),0.15),transparent_65%)]" />
-                <div className="absolute bottom-0 left-0 right-0 z-10 p-6 sm:p-10">
-                    <div className="mx-auto max-w-5xl">
-                        <p className="text-sm font-semibold uppercase tracking-widest text-brand mb-2">Mercedes Citan Specialist</p>
-                        <h1 className="text-4xl font-extrabold text-text-primary sm:text-5xl lg:text-6xl">Citan Servicing</h1>
-                        <p className="mt-3 max-w-xl text-lg text-text-secondary">W415 &bull; W420 &bull; K9K &bull; OM608 &bull; Renault-platform expertise</p>
-                    </div>
-                </div>
-            </section>
+            <ServicingHero
+                heroSrc="/images/servicing-work/hero-citan.jpg"
+                eyebrow="Mercedes Citan Specialist"
+                title="Citan Servicing"
+                subtitle="W415 • W420 • K9K • OM608 • Renault-platform expertise"
+                priceFrom={175}
+                bookLabel="Book Citan Service"
+                analyticsPrefix="citan_servicing"
+                objectPosition="center 45%"
+                mobileObjectPosition="center 55%"
+            />
 
             {/* \u2500\u2500\u2500 SECTION 1: Small van, big responsibilities \u2500\u2500\u2500 */}
             <Section>
@@ -114,7 +112,7 @@ export function CitanServicingPage() {
                             <p className="mt-3 text-text-secondary leading-relaxed">
                                 Whether you&apos;re running a W415 with the K9K diesel or a newer W420 with the OM608, we bring the right parts and tooling to your door.
                             </p>
-                            <div className="mt-6 flex flex-wrap gap-3">
+                            <div className="mt-6 hidden flex-wrap gap-3 sm:flex">
                                 <CTAButton href="/booking" size="md" onClick={() => trackNavClick('/booking', 'Book Online', 'citan_servicing_top')}>Book Online</CTAButton>
                                 <CTAButton href={`https://wa.me/${siteConfig.contact.whatsappE164}`} variant="outline" size="md" external icon={<MessageCircle className="h-4 w-4" />} onClick={() => trackWhatsAppClick('citan_servicing')}>WhatsApp Us</CTAButton>
                             </div>
@@ -141,6 +139,10 @@ export function CitanServicingPage() {
                     </div>
                 </div>
             </Section>
+
+            <ServicingPartsProof
+                body="Citan servicing uses genuine Mercedes parts with the correct oil and filter specification for your K9K, OM608, or ER30 engine. Because the Citan shares its platform with Renault, you need someone who understands both brands — we fit OEM Mercedes items and reset the service indicator with the right diagnostic tool for your generation."
+            />
 
             {/* \u2500\u2500\u2500 SECTION 2: What\u2019s included \u2500\u2500\u2500 */}
             <Section className="bg-surface-alt/50">
@@ -195,6 +197,7 @@ export function CitanServicingPage() {
                             </ul>
                         </div>
                     </div>
+                    <ServicingFilterShowcase />
                 </div>
             </Section>
 
@@ -234,6 +237,8 @@ export function CitanServicingPage() {
                 </div>
             </Section>
 
+            <ServicingProcessGallery />
+
             {/* \u2500\u2500\u2500 SECTION 3: Citan-specific quirks \u2500\u2500\u2500 */}
             <Section>
                 <div className="mx-auto max-w-5xl">
@@ -247,7 +252,7 @@ export function CitanServicingPage() {
                                 {[
                                     { issue: 'Timing belt vs chain', detail: 'The K9K 1.5 diesel can run either a belt or chain depending on the specific variant. A belt needs replacing at around 90,000 miles - a chain should last much longer but still needs inspecting. We check during every major service.' },
                                     { issue: 'Turbo actuator / wastegate', detail: 'The small turbo on K9K engines can suffer from sticking wastegate actuators. This shows as intermittent limp mode or reduced power. We can test this via diagnostics during any service visit.' },
-                                    { issue: 'Fuel filter location', detail: 'On W415 models the fuel filter is tucked under the bonnet in a tight space. Some garages skip it. We don\u2019t - it\u2019s included in every major service.' },
+                                    { issue: 'Fuel filter location', detail: 'On W415 models the fuel filter is tucked under the bonnet in a tight space. Some garages skip it. We don\u2019t — it\u2019s included in every major service, with genuine Mercedes housings.' },
                                     { issue: 'Service indicator access', detail: 'W415 Citans use a Renault-style service reset that requires specific diagnostic access. W420 models use Mercedes Xentry. We have both.' },
                                 ].map((item) => (
                                     <li key={item.issue} className="text-sm text-text-secondary">
@@ -272,6 +277,20 @@ export function CitanServicingPage() {
                                 </div>
                             </div>
 
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <figure className="overflow-hidden rounded-xl border border-border-default">
+                                    <div className="relative aspect-[4/3] h-36 sm:h-40">
+                                        <OptimizedImage src="/images/servicing-work/fuel-filter-old-vs-new.jpg" alt="Old and new Mercedes fuel filters side by side" className="absolute inset-0 h-full w-full object-cover" />
+                                    </div>
+                                    <figcaption className="border-t border-border-default bg-surface-alt px-3 py-2 text-xs text-text-secondary">Fuel filter replaced on every major — not skipped in a tight bay.</figcaption>
+                                </figure>
+                                <figure className="overflow-hidden rounded-xl border border-border-default">
+                                    <div className="relative aspect-[4/3] h-36 sm:h-40">
+                                        <OptimizedImage src="/images/servicing-work/genuine-mb-filter-box.jpg" alt="Genuine Mercedes filter box" className="absolute inset-0 h-full w-full object-cover" />
+                                    </div>
+                                    <figcaption className="border-t border-border-default bg-surface-alt px-3 py-2 text-xs text-text-secondary">Genuine Mercedes filter housings as standard.</figcaption>
+                                </figure>
+                            </div>
                             <div className="rounded-xl border border-border-default p-4">
                                 <h3 className="font-bold text-text-primary">Models covered</h3>
                                 <div className="mt-3 space-y-2">

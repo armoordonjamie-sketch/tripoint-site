@@ -11,6 +11,10 @@ import { siteConfig } from '@/config/site';
 import { ServiceSchema, BreadcrumbSchema, FaqPageSchema } from '@/components/JsonLd';
 import { OptimizedImage } from '@/components/OptimizedImage';
 import { VatLabel } from '@/components/VatLabel';
+import { ServicingHero } from '@/components/servicing/ServicingHero';
+import { ServicingPartsProof } from '@/components/servicing/ServicingPartsProof';
+import { ServicingFilterShowcase } from '@/components/servicing/ServicingFilterShowcase';
+import { ServicingProcessGallery } from '@/components/servicing/ServicingProcessGallery';
 
 function useScrollReveal() {
     const ref = useRef<HTMLDivElement>(null);
@@ -102,23 +106,18 @@ export function MercedesVanServicingPage() {
             <FaqPageSchema items={faqs} />
 
             {/* \u2500\u2500\u2500 HERO \u2500\u2500\u2500 */}
-            <section className="relative h-72 sm:h-96 overflow-hidden">
-                <img
-                    src="/images/services/van-sprinter-w907-front.png"
-                    alt=""
-                    className="absolute inset-0 h-full w-full object-cover object-center"
-                    aria-hidden="true"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/80 to-surface/40" />
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_80%,rgba(var(--color-brand-rgb),0.2),transparent_55%)]" />
-                <div className="absolute bottom-0 left-0 right-0 z-10 p-6 sm:p-10">
-                    <div className="mx-auto max-w-5xl">
-                        <p className="text-sm font-semibold uppercase tracking-widest text-brand mb-2">Servicing &amp; Brakes</p>
-                        <h1 className="text-4xl font-extrabold text-text-primary sm:text-5xl lg:text-6xl">Mercedes Van Servicing</h1>
-                        <p className="mt-3 max-w-xl text-lg text-text-secondary">Sprinter &bull; Vito &bull; Citan &bull; All models &bull; At your door</p>
-                    </div>
-                </div>
-            </section>
+            <ServicingHero
+                heroSrc="/images/servicing-work/hero-mercedes-parent.jpg"
+                eyebrow="Servicing & Brakes"
+                title="Mercedes Van Servicing"
+                subtitle="Sprinter • Vito • Citan • All models • At your door"
+                priceFrom={175}
+                bookLabel="Book a Service"
+                analyticsPrefix="merc_servicing"
+                objectPosition="center 40%"
+                mobileObjectPosition="center 50%"
+                pricingHref="/pricing"
+            />
 
             {/* \u2500\u2500\u2500 SECTION 1: Overview \u2500\u2500\u2500 */}
             <Section>
@@ -132,44 +131,28 @@ export function MercedesVanServicingPage() {
                             Whether you run a single Sprinter or a fleet of mixed Mercedes vans, we service them all with model-specific knowledge, the correct oil specs, and proper service system resets. No shortcuts, no generic tools.
                         </p>
                     </div>
-                    <div className="mt-8 flex flex-wrap gap-3">
+                    <div className="mt-8 hidden flex-wrap gap-3 sm:flex">
                         <CTAButton href="/booking" size="md" onClick={() => trackNavClick('/booking', 'Book a Service', 'merc_servicing_top')}>Book a Service</CTAButton>
                         <CTAButton href={`https://wa.me/${siteConfig.contact.whatsappE164}`} variant="outline" size="md" external icon={<MessageCircle className="h-4 w-4" />} onClick={() => trackWhatsAppClick('merc_servicing')}>WhatsApp Us</CTAButton>
                         <CTAButton href="/pricing" variant="outline" size="md" icon={<ArrowRight className="h-4 w-4" />}>Full Pricing</CTAButton>
                     </div>
-                    <h3 className="mt-10 text-lg font-semibold text-text-primary">What you&apos;ll see after a service</h3>
-                    <p className="mt-1 text-sm text-text-secondary">Your dash will show a fresh interval and correct oil level - here&apos;s what that looks like.</p>
-                    <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <figure className="overflow-hidden rounded-2xl border border-border-default">
-                            <div className="relative aspect-[16/10] min-h-[220px] sm:min-h-[280px]">
-                                <OptimizedImage
-                                    src="/images/new-images/assyst-reset-on-dash.jpg"
-                                    alt="Mercedes van dashboard showing ASSYST service interval remaining"
-                                    className="absolute inset-0 h-full w-full object-cover"
-                                />
-                            </div>
-                            <figcaption className="border-t border-border-default bg-surface-alt px-4 py-3 text-sm text-text-secondary">
-                                ASSYST / FSS on the dash - we reset with Xentry so your next interval matches how you actually drive.
-                            </figcaption>
-                        </figure>
-                        <figure className="overflow-hidden rounded-2xl border border-border-default">
-                            <div className="relative aspect-[16/10] min-h-[220px] sm:min-h-[280px]">
-                                <OptimizedImage
-                                    src="/images/new-images/mercedes-oil-level-on-dash.jpg"
-                                    alt="Mercedes instrument cluster showing electronic engine oil level readout"
-                                    className="absolute inset-0 h-full w-full object-cover"
-                                />
-                            </div>
-                            <figcaption className="border-t border-border-default bg-surface-alt px-4 py-3 text-sm text-text-secondary">
-                                Electronic oil level - verified after every service with the correct MB oil spec.
-                            </figcaption>
-                        </figure>
-                    </div>
                 </div>
             </Section>
 
-            {/* \u2500\u2500\u2500 SECTION 2: Model cards \u2500\u2500\u2500 */}
+            <ServicingPartsProof
+                body="Every Mercedes van service uses genuine parts with the correct oil specification for your engine — MB 229.51/229.52 on Sprinter and Vito diesels, model-specific filters, and fresh sump washers torqued to manufacturer values. We pre-order for your exact van before we arrive."
+            />
+
             <Section className="bg-surface-alt/50">
+                <div className="mx-auto max-w-5xl reveal">
+                    <ServicingFilterShowcase />
+                </div>
+            </Section>
+
+            <ServicingProcessGallery />
+
+            {/* \u2500\u2500\u2500 SECTION 2: Model cards \u2500\u2500\u2500 */}
+            <Section>
                 <div className="mx-auto max-w-5xl reveal">
                     <h2 className="text-2xl sm:text-3xl font-bold text-text-primary text-center">Choose your model</h2>
                     <p className="mt-2 text-text-secondary text-center">Each model has its own service page with specific technical detail and pricing.</p>
@@ -280,6 +263,20 @@ export function MercedesVanServicingPage() {
                             </p>
                         </div>
                         <div className="space-y-4">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <figure className="overflow-hidden rounded-xl border border-border-default">
+                                    <div className="relative aspect-[16/10] min-h-[180px]">
+                                        <OptimizedImage src="/images/new-images/assyst-reset-on-dash.jpg" alt="ASSYST service interval on dash" className="absolute inset-0 h-full w-full object-cover" />
+                                    </div>
+                                    <figcaption className="border-t border-border-default bg-surface-alt px-3 py-2 text-xs text-text-secondary">ASSYST reset via Xentry — correct next interval on the dash.</figcaption>
+                                </figure>
+                                <figure className="overflow-hidden rounded-xl border border-border-default">
+                                    <div className="relative aspect-[16/10] min-h-[180px]">
+                                        <OptimizedImage src="/images/new-images/mercedes-oil-level-on-dash.jpg" alt="Electronic oil level on dash" className="absolute inset-0 h-full w-full object-cover" />
+                                    </div>
+                                    <figcaption className="border-t border-border-default bg-surface-alt px-3 py-2 text-xs text-text-secondary">Electronic oil level verified after service.</figcaption>
+                                </figure>
+                            </div>
                             <div className="rounded-xl border border-border-default p-4">
                                 <h3 className="font-bold text-text-primary flex items-center gap-2"><span className="text-brand text-lg">A</span>Minor Service</h3>
                                 <p className="mt-1 text-sm text-text-secondary">Oil and filter change, visual health check, fluid levels, brake measurement, service reset. Typically every ~15,000 miles or 12 months.</p>

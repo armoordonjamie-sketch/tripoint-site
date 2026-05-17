@@ -1,4 +1,5 @@
 import { siteConfig } from '@/config/site';
+import { googleReviews, googleReviewsAggregate } from '@/data/googleReviews';
 
 const AREA_SERVED_TOWNS = [
     'Tonbridge',
@@ -196,6 +197,45 @@ interface BreadcrumbItem {
 
 interface BreadcrumbSchemaProps {
     items: BreadcrumbItem[];
+}
+
+/* ── Google reviews + aggregate rating, attached to LocalBusiness ── */
+export function GoogleReviewsSchema() {
+    const businessId = `${siteConfig.url}/#business`;
+    const schema = {
+        '@context': 'https://schema.org',
+        '@type': 'AutoRepair' as const,
+        '@id': businessId,
+        name: siteConfig.brandName,
+        url: siteConfig.url,
+        aggregateRating: {
+            '@type': 'AggregateRating' as const,
+            ratingValue: googleReviewsAggregate.ratingValue,
+            reviewCount: googleReviewsAggregate.reviewCount,
+            bestRating: 5,
+            worstRating: 1,
+        },
+        review: googleReviews.map((r) => ({
+            '@type': 'Review' as const,
+            author: { '@type': 'Person' as const, name: r.author },
+            datePublished: r.datePublished,
+            reviewBody: r.text,
+            reviewRating: {
+                '@type': 'Rating' as const,
+                ratingValue: r.rating,
+                bestRating: 5,
+                worstRating: 1,
+            },
+            publisher: { '@type': 'Organization' as const, name: 'Google' },
+        })),
+    };
+
+    return (
+        <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+    );
 }
 
 export function BreadcrumbSchema({ items }: BreadcrumbSchemaProps) {

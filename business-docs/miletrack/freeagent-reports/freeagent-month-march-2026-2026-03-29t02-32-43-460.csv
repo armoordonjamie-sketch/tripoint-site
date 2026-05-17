@@ -1,0 +1,3 @@
+claimant_name,DD/MM/YYYY,description,mileage,vehicle_type,engine_type,engine_size,reclaim_mileage,project_client,project_name,rebill_to_project,rebill_mileage_rate,have_vat_receipt
+Jamie Armoordon,28/03/2026,Travel to customer site to carry out Standard Diagnosis,31.63,Car,Diesel,Over 2000cc,1,,,,,
+Jamie Armoordon,28/03/2026,Return travel after completing customer Standard Diagnosis,6.84,Car,Diesel,Over 2000cc,1,,,,,

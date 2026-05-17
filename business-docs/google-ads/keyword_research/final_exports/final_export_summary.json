@@ -1,0 +1,73 @@
+{
+  "total_positive_rows": 1692,
+  "total_negative_rows": 880,
+  "total_rows_dropped_from_positive": 44,
+  "total_rows_promoted_to_negative": 44,
+  "totals_by_campaign_positive": {
+    "Search | Diagnostics & VOR | Kent + SE London": 660,
+    "Search | Tuning | Commercial Vans | Kent + SE London": 655,
+    "Search | Servicing & Brakes | Kent + SE London": 377
+  },
+  "totals_by_campaign_negative": {
+    "Search | Diagnostics & VOR | Kent + SE London": 383,
+    "Search | Servicing & Brakes | Kent + SE London": 305,
+    "Search | Tuning | Commercial Vans | Kent + SE London": 192
+  },
+  "totals_by_ad_group_positive": {
+    "Van Economy Tune": 327,
+    "Van Load & Driveability Tune": 264,
+    "AdBlue / DPF / Emissions": 240,
+    "Limp Mode / Derate": 174,
+    "Standard Diagnosis": 165,
+    "Mercedes Van Servicing & Brakes": 129,
+    "VOR / Urgent Van Diagnostics": 74,
+    "Sprinter Brakes": 73,
+    "Sprinter Servicing": 67,
+    "Fleet Van Tuning": 64,
+    "Vito Brakes": 58,
+    "Vito Servicing": 45,
+    "Pre-Purchase Van Check": 7,
+    "Citan Servicing": 5
+  },
+  "totals_by_ad_group_negative": {
+    "Standard Diagnosis": 272,
+    "Mercedes Van Servicing & Brakes": 175,
+    "Van Economy Tune": 157,
+    "(campaign_level_blank)": 60,
+    "Sprinter Servicing": 49,
+    "AdBlue / DPF / Emissions": 30,
+    "Vito Servicing": 25,
+    "Limp Mode / Derate": 23,
+    "Sprinter Brakes": 23,
+    "Pre-Purchase Van Check": 20,
+    "VOR / Urgent Van Diagnostics": 18,
+    "Vito Brakes": 13,
+    "Van Load & Driveability Tune": 10,
+    "Fleet Van Tuning": 5
+  },
+  "top_positive_drop_reasons": [
+    {
+      "reason": "generic_quality_filter",
+      "count": 31
+    },
+    {
+      "reason": "hard_exclusion",
+      "count": 13
+    }
+  ],
+  "top_negative_sources": [
+    {
+      "source": "master_exclude_negative",
+      "count": 873
+    },
+    {
+      "source": "promoted_quality_filter",
+      "count": 31
+    },
+    {
+      "source": "promoted_hard_exclusion",
+      "count": 13
+    }
+  ],
+  "blank_keyword_drops": 0
+}

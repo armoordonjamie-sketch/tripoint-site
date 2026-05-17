@@ -1,0 +1,16 @@
+campaign_family,ad_group_theme,include_now,review_high_priority,review_broad_test,future_test,exclude_negative,total
+Diagnostics & VOR,AdBlue / DPF / NOx,12,201,0,0,0,213
+Diagnostics & VOR,Limp Mode / Derate,8,136,0,0,0,144
+Diagnostics & VOR,Standard Diagnosis,17,116,0,0,11,144
+Diagnostics & VOR,VOR / Urgent Van Diagnostics,4,67,0,0,0,71
+Mercedes Van Servicing,Mercedes Van Servicing,23,124,0,0,3,150
+Mercedes Van Servicing,Sprinter Brakes,14,34,0,0,0,48
+Mercedes Van Servicing,Sprinter Servicing,6,34,0,0,14,54
+Mercedes Van Servicing,Vito Brakes,14,34,0,0,0,48
+Mercedes Van Servicing,Vito Servicing,2,14,0,0,0,16
+Van Tuning,Fleet Van Tuning,0,18,0,0,0,18
+Van Tuning,Mobile Van Remap,6,2,0,0,0,8
+Van Tuning,Sprinter Remap,10,10,0,0,0,20
+Van Tuning,Van Economy Tune,171,70,0,0,4,245
+Van Tuning,Van Load & Driveability Tune,22,69,0,0,0,91
+Van Tuning,Vito Remap,2,8,0,0,0,10

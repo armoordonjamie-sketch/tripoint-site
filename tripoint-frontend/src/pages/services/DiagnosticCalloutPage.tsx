@@ -9,22 +9,39 @@ import { PhotoGallery } from '@/components/PhotoGallery';
 import { Notice } from '@/components/Notice';
 import { FaqAccordion } from '@/components/FaqAccordion';
 import { Link } from 'react-router-dom';
+import { cn } from '@/lib/utils';
 import { CheckCircle2, XCircle, ArrowRight, Phone, MessageCircle, AlertTriangle, Zap, Gauge, Cpu, Truck } from 'lucide-react';
-import { galleryImages } from '@/data/galleryImages';
 import { siteConfig } from '@/config/site';
 import { ServiceSchema, BreadcrumbSchema, FaqPageSchema } from '@/components/JsonLd';
 import { OptimizedImage } from '@/components/OptimizedImage';
 import { ExpandableReportImage } from '@/components/ExpandableReportImage';
 import { VatLabel } from '@/components/VatLabel';
+import { ServicingHero } from '@/components/servicing/ServicingHero';
+import { DiagnosticProofStrip } from '@/components/services/DiagnosticProofStrip';
+import { ZonePriceCards } from '@/components/services/ZonePriceCards';
+import {
+    DiagnosticCoverageAccordion,
+    type DiagnosticCategory,
+} from '@/components/services/DiagnosticCoverageAccordion';
+import { pickDiagPhotos } from '@/data/diagPhotos';
 
-const diagnosticPhotos = [
-    galleryImages[22],
-    galleryImages[2],
-    galleryImages[47],
-    galleryImages[30],
-    galleryImages[4],
-    galleryImages[9],
-];
+const diagnosticProofItems = pickDiagPhotos([
+    'picoscope-multimeter',
+    'smoke-leak-test',
+    'multimeter-exhaust-pulse',
+]);
+
+const diagnosticPhotos = pickDiagPhotos([
+    'picoscope-multimeter',
+    'smoke-leak-test',
+    'intake-manifold-blocked',
+    'corroded-connector',
+    'egr-pipe-oil',
+    'intercooler-crack',
+    'multimeter-exhaust-pulse',
+    'can-piggyback-device',
+    'sensor-sooted',
+]);
 
 function useScrollReveal() {
     const ref = useRef<HTMLDivElement>(null);
@@ -46,37 +63,76 @@ const zoneA = diagnosticService?.zoneA ?? 120;
 const zoneB = diagnosticService?.zoneB ?? 135;
 const zoneC = diagnosticService?.zoneC ?? 150;
 
+const zonePriceRows = [
+    { zone: 'Zone A', driveTime: '0–25 mins', price: zoneA },
+    { zone: 'Zone B', driveTime: '25–45 mins', price: zoneB },
+    { zone: 'Zone C', driveTime: '45–60 mins', price: zoneC },
+];
+
+const symptomLinks = [
+    { label: 'Warning light', href: '#warning-lights' },
+    { label: 'AdBlue / DPF', href: '#emissions' },
+    { label: 'Limp mode', href: '#limp-mode' },
+    { label: 'Electrical', href: '#electrical' },
+    { label: 'Xentry / coding', href: '#xentry' },
+];
+
 /* ---------- What We Diagnose ---------- */
-const diagnosticCategories = [
+const diagnosticCategories: DiagnosticCategory[] = [
     {
         id: 'warning-lights',
         icon: AlertTriangle,
         title: 'Warning Lights & Fault Codes',
         desc: 'Engine management light, ABS, ESP, glow plug, battery, and any other dashboard warning. We scan every module - not just the engine - to find the root cause, not just clear codes.',
+        image: {
+            src: '/images/diag_photos/multimeter-in-use.jpg',
+            alt: 'Multimeter probing a sensor circuit on a Mercedes engine bay during live testing',
+            caption: 'Live circuit testing on the actual sensor — not just a code read.',
+        },
     },
     {
         id: 'emissions',
         icon: Gauge,
         title: 'Emissions, AdBlue & DPF',
         desc: 'AdBlue countdown, SCR/NOx sensor faults, DPF soot load and regen issues, EGR problems, and dosing unit failures. Live data testing, not just fault code reads - we identify whether you need a sensor, a regen, or a deeper repair.',
+        image: {
+            src: '/images/diag_photos/egr-pipe-oil.jpg',
+            alt: 'Oil-contaminated EGR pipe pulled from a Mercedes diesel during emissions diagnosis',
+            caption: 'Oil-contaminated EGR pipe — found via emissions diagnosis on a Mercedes diesel.',
+        },
     },
     {
         id: 'limp-mode',
         icon: Truck,
         title: 'Limp Mode & Derate',
         desc: 'Turbo boost faults, fuel rail pressure issues, injector drift, EGR valve failures, and wiring faults that cause derate. Systematic testing to isolate the root cause - especially on Sprinters (W906/W907/W910).',
+        image: {
+            src: '/images/diag_photos/intercooler-crack.jpg',
+            alt: 'Hairline crack found in a Sprinter intercooler — boost loss and limp mode cause',
+            caption: 'Hairline intercooler crack — root cause of boost loss and a limp-mode derate.',
+        },
     },
     {
         id: 'electrical',
         icon: Zap,
         title: 'Electrical & Wiring Faults',
         desc: 'Intermittent faults, parasitic battery drain, CAN network communication issues, connector corrosion, and random warning lights. We use oscilloscope and live data capture to replicate and trace faults.',
+        image: {
+            src: '/images/diag_photos/corroded-connector.jpg',
+            alt: 'Corroded multi-pin connector traced as the cause of an intermittent CAN-bus fault',
+            caption: 'Corroded multi-pin connector — root cause of an intermittent CAN-bus fault.',
+        },
     },
     {
         id: 'xentry',
         icon: Cpu,
         title: 'Mercedes Xentry & OEM Coding',
         desc: 'Dealer-level Xentry access for SCN coding, variant coding, module adaptations, DAS guided tests, and initialisation. Used as part of Standard Diagnosis when OEM-level access is required.',
+        image: {
+            src: '/images/new-images/xentry-on-mercedes-engine.jpg',
+            alt: 'Mercedes Xentry diagnostics connected to engine bay for guided tests and coding',
+            caption: 'Dealer-level Xentry on site — guided tests, coding, and module access when OEM-level work is needed.',
+        },
     },
 ];
 
@@ -146,23 +202,19 @@ export function DiagnosticCalloutPage() {
             <BreadcrumbSchema items={[{ name: 'Home', url: '/' }, { name: 'Services', url: '/services' }, { name: 'Standard Diagnosis', url: '/services/diagnostic-callout' }]} />
             <FaqPageSchema items={faqs} />
 
-            {/* Hero banner */}
-            <section className="relative h-56 sm:h-72 overflow-hidden">
-                <OptimizedImage src="/images/diagnostic-callout.jpg" alt="" className="h-full w-full object-cover" aria-hidden="true" />
-                <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/70 to-surface/30" />
-                <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-10">
-                    <div className="mx-auto max-w-3xl">
-                        <p className="text-sm font-semibold uppercase tracking-widest text-brand mb-2">Diagnostics</p>
-                        <h1 className="text-4xl font-extrabold text-text-primary sm:text-5xl">
-                            Standard Diagnosis
-                        </h1>
-                        <p className="mt-2 text-lg text-text-secondary">
-                            From <span className="font-bold text-brand-light">£{zoneA}<VatLabel /></span> · Mercedes cars & vans · All faults
-                        </p>
-                    </div>
-                </div>
-            </section>
-
+            <ServicingHero
+                heroSrc="/images/gallery/work-31.jpg"
+                eyebrow="Diagnostics"
+                title="Standard Diagnosis"
+                subtitle="Warning lights · Limp mode · AdBlue & DPF · Mercedes cars & vans"
+                priceFrom={zoneA}
+                bookLabel="Book diagnosis"
+                analyticsPrefix="standard_diagnosis"
+                pricingHref="/pricing"
+                ctaVariant="book-only"
+                objectPosition="center 35%"
+                mobileObjectPosition="center 42%"
+            />
             <Section>
                 <div className="mx-auto max-w-3xl">
                     {fromMerged && !dismissMerged && (
@@ -184,14 +236,45 @@ export function DiagnosticCalloutPage() {
                         </div>
                     )}
                     {/* Warm intro */}
-                    <p className="text-xl text-text-secondary leading-relaxed">
-                        Dashboard lit up? Engine light, limp mode, AdBlue warning, or something that just doesn&apos;t feel right? Standard Diagnosis is our core service - a thorough on-site visit with Mercedes dealer-level tooling, at your location. We identify the root cause and give you a clear written fix plan. No guesswork, no &ldquo;we&apos;ll have a look and see&rdquo;.
+                    <p className="text-base leading-relaxed text-text-secondary lg:text-xl">
+                        Dashboard lit up? We come to you with Mercedes dealer-level tooling, find the root cause, and leave you with a clear written fix plan — not guesswork.
                     </p>
 
+                    <DiagnosticProofStrip items={diagnosticProofItems} />
+
+                    <div className="mt-5 lg:hidden">
+                        <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-text-muted">Common faults we fix</p>
+                        <div className="flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                            {symptomLinks.map((link) => (
+                                <a
+                                    key={link.href}
+                                    href={link.href}
+                                    className="shrink-0 rounded-full border border-border-default bg-surface-alt px-3 py-1.5 text-xs font-medium text-text-secondary hover:border-brand/40 hover:text-brand-light"
+                                >
+                                    {link.label}
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+
                     {/* How It Works */}
-                    <div className="mt-10 reveal">
-                        <h2 className="text-2xl font-bold text-text-primary">How It Works</h2>
-                        <div className="mt-6 space-y-6">
+                    <div className="mt-8 reveal lg:mt-10">
+                        <h2 className="text-xl font-bold text-text-primary lg:text-2xl">How it works</h2>
+                        <div className="mt-4 grid grid-cols-2 gap-3 lg:hidden">
+                            {[
+                                { step: '01', title: 'Get in touch', desc: 'Postcode, vehicle & symptoms — fixed price confirmed.' },
+                                { step: '02', title: 'Book a slot', desc: 'We arrive with full diagnostic kit.' },
+                                { step: '03', title: 'On-site diagnosis', desc: 'Full scan & live data (up to 60 mins).' },
+                                { step: '04', title: 'Written fix plan', desc: 'Root cause & next steps — plain English.' },
+                            ].map((s) => (
+                                <div key={s.step} className="rounded-xl border border-border-default bg-surface-alt/60 p-3">
+                                    <span className="text-xs font-bold text-brand-light">{s.step}</span>
+                                    <h3 className="mt-1 text-sm font-semibold text-text-primary">{s.title}</h3>
+                                    <p className="mt-0.5 text-xs leading-snug text-text-secondary">{s.desc}</p>
+                                </div>
+                            ))}
+                        </div>
+                        <div className="mt-6 hidden space-y-6 lg:block">
                             {[
                                 { step: '01', title: 'Get in touch', desc: 'Tell us your postcode, vehicle, and symptoms. We confirm your zone and fixed price.' },
                                 { step: '02', title: 'Confirm your slot', desc: 'Pick a date and time that works for you. We arrive at your location with full diagnostic kit.' },
@@ -209,13 +292,24 @@ export function DiagnosticCalloutPage() {
                         </div>
                     </div>
 
+                    <div className="mt-10 reveal lg:mt-12">
+                        <h2 className="text-xl font-bold text-text-primary lg:text-2xl">Real faults we&apos;ve found</h2>
+                        <p className="mt-2 text-sm text-text-muted">Photos from real Mercedes diagnostic visits — tap any image to see the fault.</p>
+                        <div className="mt-4">
+                            <PhotoGallery images={diagnosticPhotos} columns={3} />
+                        </div>
+                    </div>
+
                     {/* What We Diagnose - structured grid */}
                     <div className="mt-12 reveal" id="what-we-diagnose">
-                        <h2 className="text-2xl font-bold text-text-primary">What We Diagnose</h2>
-                        <p className="mt-2 text-text-secondary">
-                            Standard Diagnosis covers all of these - one service, one price, no need to pick a specialist sub-type.
+                        <h2 className="text-xl font-bold text-text-primary lg:text-2xl">What we diagnose</h2>
+                        <p className="mt-2 text-sm text-text-secondary lg:text-base">
+                            One service, one price — all fault types below.
                         </p>
-                        <div className="mt-6 space-y-4">
+                        <div className="mt-4 lg:hidden">
+                            <DiagnosticCoverageAccordion categories={diagnosticCategories} />
+                        </div>
+                        <div className="mt-6 hidden space-y-4 lg:block">
                             {diagnosticCategories.map((cat) => {
                                 const Icon = cat.icon;
                                 return (
@@ -227,20 +321,20 @@ export function DiagnosticCalloutPage() {
                                             <div className="min-w-0 flex-1">
                                                 <h3 className="font-semibold text-text-primary">{cat.title}</h3>
                                                 <p className="mt-1 text-sm text-text-secondary leading-relaxed">{cat.desc}</p>
-                                                {cat.id === 'xentry' && (
+                                                {cat.image ? (
                                                     <figure className="mt-4 overflow-hidden rounded-lg border border-border-default">
                                                         <div className="relative aspect-[16/10] min-h-[200px] sm:min-h-[260px]">
                                                             <OptimizedImage
-                                                                src="/images/new-images/xentry-on-mercedes-engine.jpg"
-                                                                alt="Mercedes Xentry diagnostics connected to engine bay for guided tests and coding"
+                                                                src={cat.image.src}
+                                                                alt={cat.image.alt}
                                                                 className="absolute inset-0 h-full w-full object-cover"
                                                             />
                                                         </div>
                                                         <figcaption className="border-t border-border-default bg-surface-alt px-4 py-3 text-sm text-text-secondary">
-                                                            Dealer-level Xentry on site - guided tests, coding, and module access when OEM-level work is needed.
+                                                            {cat.image.caption}
                                                         </figcaption>
                                                     </figure>
-                                                )}
+                                                ) : null}
                                             </div>
                                         </div>
                                     </div>
@@ -277,14 +371,20 @@ export function DiagnosticCalloutPage() {
                             Every Standard Diagnosis ends with a documented written outcome. Below is a glimpse from one real visit.
                             See the full walkthrough for how plain English, ruled-out causes, live data, and next steps fit together.
                         </p>
-                        <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-4">
+                        <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
                             {[
                                 { src: '/images/sample-report/01_plain_english_summary.png', alt: 'Plain-English summary from a diagnostic report' },
                                 { src: '/images/sample-report/02_dpf_checks_table.png', alt: 'DPF and related checks table from a diagnostic report' },
                                 { src: '/images/sample-report/03_scr_live_data_section.png', alt: 'SCR live data section from a diagnostic report' },
                                 { src: '/images/sample-report/06_technical_diagnosis_box.png', alt: 'Technical diagnosis summary from a written report' },
-                            ].map((img) => (
-                                <div key={img.src} className="overflow-hidden rounded-lg border border-border-default bg-surface-alt">
+                            ].map((img, i) => (
+                                <div
+                                    key={img.src}
+                                    className={cn(
+                                        'overflow-hidden rounded-lg border border-border-default bg-surface-alt',
+                                        i >= 2 && 'hidden sm:block',
+                                    )}
+                                >
                                     <ExpandableReportImage src={img.src} alt={img.alt} className="overflow-hidden rounded-lg" />
                                 </div>
                             ))}
@@ -301,27 +401,14 @@ export function DiagnosticCalloutPage() {
                         </div>
                     </div>
 
-                    {/* Mid-page CTA */}
-                    <div className="mt-10 flex flex-wrap gap-3 reveal">
-                        <CTAButton href="/booking" size="md" onClick={() => trackNavClick('/booking', 'Book Online', 'standard_diagnosis_mid')}>
-                            Book Now
-                        </CTAButton>
-                        <CTAButton
-                            href={getWhatsAppHref()}
-                            variant="outline"
-                            size="md"
-                            external
-                            icon={<MessageCircle className="h-4 w-4" />}
-                            onClick={() => trackWhatsAppClick('standard_diagnosis')}
-                        >
-                            WhatsApp Us
-                        </CTAButton>
-                    </div>
-
                     {/* Pricing */}
-                    <div className="mt-12 reveal">
-                        <h2 className="text-2xl font-bold text-text-primary">Pricing</h2>
-                        <div className="mt-4 overflow-x-auto rounded-xl border border-border-default">
+                    <div className="mt-10 reveal lg:mt-12">
+                        <h2 className="text-xl font-bold text-text-primary lg:text-2xl">Pricing</h2>
+                        <ZonePriceCards
+                            rows={zonePriceRows}
+                            footnote="Includes travel and up to 60 mins on-site. Deposit £30 + VAT (Zone A/B) or £50 + VAT (Zone C). Extra time £85/hr + VAT in 15-min blocks."
+                        />
+                        <div className="mt-4 hidden overflow-x-auto rounded-xl border border-border-default lg:block">
                             <table className="min-w-full">
                                 <thead>
                                     <tr className="border-b border-border-default bg-surface-alt">
@@ -337,16 +424,7 @@ export function DiagnosticCalloutPage() {
                                 </tbody>
                             </table>
                         </div>
-                        <p className="mt-2 text-sm text-text-muted">Includes travel and up to 60 mins on-site. Deposit £30 + VAT (Zone A/B) or £50 + VAT (Zone C). If additional diagnostic time is needed, it&apos;s billed at £85/hour + VAT in 15-minute blocks.</p>
-                    </div>
-
-                    {/* Examples from our work */}
-                    <div className="mt-12 reveal">
-                        <h2 className="text-2xl font-bold text-text-primary">Examples From Our Work</h2>
-                        <p className="mt-2 text-sm text-text-muted">Real photos from real diagnostic visits</p>
-                        <div className="mt-4">
-                            <PhotoGallery images={diagnosticPhotos} columns={3} />
-                        </div>
+                        <p className="mt-2 hidden text-sm text-text-muted lg:block">Includes travel and up to 60 mins on-site. Deposit £30 + VAT (Zone A/B) or £50 + VAT (Zone C). If additional diagnostic time is needed, it&apos;s billed at £85/hour + VAT in 15-minute blocks.</p>
                     </div>
 
                     {/* Fleet */}
@@ -355,18 +433,16 @@ export function DiagnosticCalloutPage() {
                         <p className="mt-2 text-text-secondary">
                             We work with fleet operators, hire companies, and depot managers across Kent and South East London. If you have multiple vehicles needing diagnostic attention, we can arrange bulk visits with priority scheduling. Common fleet scenarios include proactive health checks, fault sweeps, and DPF/AdBlue status reviews across your fleet.
                         </p>
-                        <div className="mt-4">
-                            <CTAButton
+                        <p className="mt-4 text-sm">
+                            <a
                                 href={getWhatsAppHref()}
-                                variant="outline"
-                                size="sm"
-                                external
-                                icon={<MessageCircle className="h-4 w-4" />}
+                                className="inline-flex items-center gap-1.5 font-medium text-brand-light hover:underline"
                                 onClick={() => trackWhatsAppClick('standard_diagnosis_fleet')}
                             >
-                                Discuss fleet requirements
-                            </CTAButton>
-                        </div>
+                                <MessageCircle className="h-4 w-4 shrink-0" aria-hidden />
+                                Discuss fleet requirements on WhatsApp
+                            </a>
+                        </p>
                     </div>
 
                     {/* When Workshop Referral May Be Needed */}
@@ -436,17 +512,40 @@ export function DiagnosticCalloutPage() {
                         <p className="mx-auto mt-4 max-w-xl text-lg text-white/80">
                             Book a Standard Diagnosis and get a clear answer - at your door.
                         </p>
-                        <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-                            <CTAButton href="/booking" variant="secondary" size="lg" onClick={() => trackNavClick('/booking', 'Book Online', 'standard_diagnosis_footer')}>
+                        <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-4">
+                            <CTAButton
+                                href="/booking"
+                                variant="secondary"
+                                size="lg"
+                                className="w-full max-w-xs sm:w-auto"
+                                onClick={() => trackNavClick('/booking', 'Book Online', 'standard_diagnosis_footer')}
+                            >
                                 Book Now
                             </CTAButton>
+                            <p className="text-center text-sm text-white/85 sm:hidden">
+                                <a
+                                    href={getWhatsAppHref()}
+                                    className="font-medium text-white hover:underline"
+                                    onClick={() => trackWhatsAppClick('standard_diagnosis')}
+                                >
+                                    WhatsApp
+                                </a>
+                                <span className="text-white/60"> · </span>
+                                <a
+                                    href={`tel:${siteConfig.contact.phoneE164}`}
+                                    className="font-medium text-white hover:underline"
+                                    onClick={() => trackPhoneClick('standard_diagnosis')}
+                                >
+                                    {siteConfig.contact.phoneDisplay}
+                                </a>
+                            </p>
                             <CTAButton
                                 href={getWhatsAppHref()}
                                 variant="ghost"
                                 size="lg"
                                 external
                                 icon={<MessageCircle className="h-5 w-5" />}
-                                className="text-white hover:text-white hover:bg-white/10"
+                                className="hidden text-white hover:bg-white/10 hover:text-white sm:inline-flex"
                                 onClick={() => trackWhatsAppClick('standard_diagnosis')}
                             >
                                 WhatsApp Us
@@ -457,7 +556,7 @@ export function DiagnosticCalloutPage() {
                                 size="lg"
                                 external
                                 icon={<Phone className="h-5 w-5" />}
-                                className="text-white hover:text-white hover:bg-white/10"
+                                className="hidden text-white hover:bg-white/10 hover:text-white sm:inline-flex"
                                 onClick={() => trackPhoneClick('standard_diagnosis')}
                             >
                                 {siteConfig.contact.phoneDisplay}

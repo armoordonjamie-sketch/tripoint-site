@@ -1,0 +1,57 @@
+{
+  "total_input_rows": 3092,
+  "total_rows_after_repairs": 3051,
+  "total_rows_dropped_for_blank_keyword": 0,
+  "total_rows_dropped_for_hard_filter": 1,
+  "total_rows_remapped_from_non_live_ad_groups": 3,
+  "total_synthetic_citan_rows_added": 10,
+  "totals_by_final_decision": {
+    "include_now": 1745,
+    "exclude_negative": 873,
+    "review_broad_test": 220,
+    "review_high_priority": 147,
+    "future_test": 66
+  },
+  "totals_by_campaign": {
+    "Search | Diagnostics & VOR | Kent + SE London": 1231,
+    "Search | Tuning | Commercial Vans | Kent + SE London": 977,
+    "Search | Servicing & Brakes | Kent + SE London": 843
+  },
+  "totals_by_ad_group": {
+    "Van Economy Tune": 611,
+    "Standard Diagnosis": 566,
+    "Mercedes Van Servicing & Brakes": 405,
+    "AdBlue / DPF / Emissions": 300,
+    "Van Load & Driveability Tune": 293,
+    "Limp Mode / Derate": 223,
+    "Sprinter Servicing": 151,
+    "Sprinter Brakes": 121,
+    "VOR / Urgent Van Diagnostics": 99,
+    "Vito Brakes": 80,
+    "Vito Servicing": 76,
+    "Fleet Van Tuning": 73,
+    "Pre-Purchase Van Check": 43,
+    "Citan Servicing": 5,
+    "Citan Brakes": 5
+  },
+  "top_drop_reasons": [],
+  "top_repair_actions": [
+    {
+      "action": "dedupe_removed",
+      "count": 51
+    },
+    {
+      "action": "poor_fit_demote",
+      "count": 26
+    },
+    {
+      "action": "synthetic_citan_added",
+      "count": 10
+    },
+    {
+      "action": "hard_filter_override",
+      "count": 1
+    }
+  ],
+  "dedupe_removed": 51
+}

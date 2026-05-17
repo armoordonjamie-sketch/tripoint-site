@@ -11,6 +11,10 @@ import { siteConfig } from '@/config/site';
 import { ServiceSchema, BreadcrumbSchema, FaqPageSchema } from '@/components/JsonLd';
 import { OptimizedImage } from '@/components/OptimizedImage';
 import { VatLabel } from '@/components/VatLabel';
+import { ServicingHero } from '@/components/servicing/ServicingHero';
+import { ServicingPartsProof } from '@/components/servicing/ServicingPartsProof';
+import { ServicingFilterShowcase } from '@/components/servicing/ServicingFilterShowcase';
+import { ServicingProcessGallery } from '@/components/servicing/ServicingProcessGallery';
 
 function useScrollReveal() {
     const ref = useRef<HTMLDivElement>(null);
@@ -81,23 +85,17 @@ export function VitoServicingPage() {
             <FaqPageSchema items={faqs} />
 
             {/* \u2500\u2500\u2500 HERO \u2500\u2500\u2500 */}
-            <section className="relative h-72 sm:h-96 overflow-hidden">
-                <img
-                    src="/images/services/van-vito-w447-front.png"
-                    alt=""
-                    className="absolute inset-0 h-full w-full object-cover object-center"
-                    aria-hidden="true"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/80 to-surface/40" />
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(var(--color-brand-rgb),0.15),transparent_65%)]" />
-                <div className="absolute bottom-0 left-0 right-0 z-10 p-6 sm:p-10">
-                    <div className="mx-auto max-w-5xl">
-                        <p className="text-sm font-semibold uppercase tracking-widest text-brand mb-2">Mercedes Vito Specialist</p>
-                        <h1 className="text-4xl font-extrabold text-text-primary sm:text-5xl lg:text-6xl">Vito Servicing</h1>
-                        <p className="mt-3 max-w-xl text-lg text-text-secondary">W639 &bull; W447 &bull; OM651 &bull; OM622 &bull; OM654 &bull; Fitted at your door</p>
-                    </div>
-                </div>
-            </section>
+            <ServicingHero
+                heroSrc="/images/servicing-work/hero-vito.jpg"
+                eyebrow="Mercedes Vito Specialist"
+                title="Vito Servicing"
+                subtitle="W639 • W447 • OM651 • OM622 • OM654 • Fitted at your door"
+                priceFrom={175}
+                bookLabel="Book Vito Service"
+                analyticsPrefix="vito_servicing"
+                objectPosition="center 40%"
+                mobileObjectPosition="center 50%"
+            />
 
             {/* \u2500\u2500\u2500 SECTION 1: The Vito workhorse \u2500\u2500\u2500 */}
             <Section>
@@ -114,7 +112,7 @@ export function VitoServicingPage() {
                             <p className="mt-3 text-text-secondary leading-relaxed">
                                 No workshop drop-off. No lost working day. Fixed-price servicing you can budget for.
                             </p>
-                            <div className="mt-6 flex flex-wrap gap-3">
+                            <div className="mt-6 hidden flex-wrap gap-3 sm:flex">
                                 <CTAButton href="/booking" size="md" onClick={() => trackNavClick('/booking', 'Book Online', 'vito_servicing_top')}>Book Online</CTAButton>
                                 <CTAButton href={`https://wa.me/${siteConfig.contact.whatsappE164}`} variant="outline" size="md" external icon={<MessageCircle className="h-4 w-4" />} onClick={() => trackWhatsAppClick('vito_servicing')}>WhatsApp Us</CTAButton>
                             </div>
@@ -145,6 +143,10 @@ export function VitoServicingPage() {
                     </div>
                 </div>
             </Section>
+
+            <ServicingPartsProof
+                body="Vito servicing uses genuine Mercedes parts with the correct MB 229.51 oil specification for OM651, OM622, and OM654 engines. OEM filter housings, fresh sump washers, and pre-ordered parts for your exact W639 or W447 variant — so your high-mileage workhorse gets the same quality as a dealer visit, at your door."
+            />
 
             {/* \u2500\u2500\u2500 SECTION 2: What\u2019s included \u2500\u2500\u2500 */}
             <Section className="bg-surface-alt/50">
@@ -201,6 +203,7 @@ export function VitoServicingPage() {
                             </ul>
                         </div>
                     </div>
+                    <ServicingFilterShowcase />
                 </div>
             </Section>
 
@@ -239,6 +242,8 @@ export function VitoServicingPage() {
                     </div>
                 </div>
             </Section>
+
+            <ServicingProcessGallery />
 
             {/* \u2500\u2500\u2500 SECTION 3: Common Vito issues we catch \u2500\u2500\u2500 */}
             <Section>
@@ -281,25 +286,25 @@ export function VitoServicingPage() {
                                 <figure className="overflow-hidden rounded-xl border border-border-default">
                                     <div className="relative aspect-[16/10] h-44 sm:h-52">
                                         <OptimizedImage
-                                            src="/images/new-images/transmission-service-on-9g-merc.jpg"
-                                            alt="Automatic transmission during fluid service on Mercedes commercial vehicle"
+                                            src="/images/servicing-work/vehicle-jacked-up.jpg"
+                                            alt="Mercedes van safely jacked up for mobile servicing"
                                             className="absolute inset-0 h-full w-full object-cover"
                                         />
                                     </div>
                                     <figcaption className="border-t border-border-default bg-surface-alt px-3 py-2 text-xs text-text-secondary">
-                                        Transmission fluid service - correct spec for 7G-TRONIC / 9G-TRONIC.
+                                        Van safely lifted — correct access for engine and gearbox work.
                                     </figcaption>
                                 </figure>
                                 <figure className="overflow-hidden rounded-xl border border-border-default">
                                     <div className="relative aspect-[16/10] h-44 sm:h-52">
                                         <OptimizedImage
-                                            src="/images/new-images/using-torque-wrench-on-transmission.jpg"
-                                            alt="Torque wrench on transmission drain plug to manufacturer torque"
+                                            src="/images/servicing-work/gearbox-oil-draining.jpg"
+                                            alt="Gearbox oil being drained during transmission fluid service"
                                             className="absolute inset-0 h-full w-full object-cover"
                                         />
                                     </div>
                                     <figcaption className="border-t border-border-default bg-surface-alt px-3 py-2 text-xs text-text-secondary">
-                                        Plugs torqued to spec - no leaks, no rounded fasteners.
+                                        Gearbox fluid drained and refilled to correct spec when due.
                                     </figcaption>
                                 </figure>
                             </div>

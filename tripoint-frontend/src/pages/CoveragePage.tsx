@@ -1,6 +1,6 @@
 import { useEffect, useRef, lazy, Suspense } from 'react';
 import {
-    MapPin, Clock, Navigation, Phone, MessageCircle,
+    MapPin, Clock, Navigation, MessageCircle,
     Car, CheckCircle2,
 } from 'lucide-react';
 import { Seo } from '@/components/Seo';
@@ -11,9 +11,8 @@ import { CTAButton } from '@/components/CTAButton';
 import { Notice } from '@/components/Notice';
 import { FaqAccordion } from '@/components/FaqAccordion';
 import { siteConfig } from '@/config/site';
-import { trackNavClick, trackPhoneClick, trackWhatsAppClick } from '@/lib/analytics';
+import { trackNavClick, trackWhatsAppClick } from '@/lib/analytics';
 import { getWhatsAppHref } from '@/lib/whatsappHref';
-import { OptimizedImage } from '@/components/OptimizedImage';
 
 // Lazy load CoverageMap - Leaflet accesses window at import time and crashes in SSR
 const CoverageMap = lazy(() =>
@@ -252,51 +251,6 @@ export function CoveragePage() {
                     </CTAButton>
                 </div>
             </Section>
-
-            {/* ── FOOTER CTA BANNER ─────────────────────────── */}
-            <section className="relative overflow-hidden">
-                <div className="absolute inset-0">
-                    <OptimizedImage src="/images/cta-bg.jpg" alt="" className="h-full w-full object-cover" aria-hidden="true" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-brand-dark/90 to-brand/80" />
-                </div>
-                <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 md:py-20">
-                    <div className="text-center reveal">
-                        <h2 className="text-3xl font-bold text-white sm:text-4xl md:text-5xl">
-                            Ready to book?
-                        </h2>
-                        <p className="mx-auto mt-4 max-w-xl text-lg text-white/80">
-                            Enter your postcode, pick a service, and we’ll confirm your zone and price. Or WhatsApp us for a quick quote.
-                        </p>
-                        <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-                            <CTAButton href="/booking" variant="secondary" size="lg" onClick={() => trackNavClick('/booking', 'Book Now', 'coverage_footer')}>
-                                Book Now
-                            </CTAButton>
-                            <CTAButton
-                                href={getWhatsAppHref()}
-                                variant="ghost"
-                                size="lg"
-                                external
-                                icon={<MessageCircle className="h-5 w-5" />}
-                                className="text-white hover:text-white hover:bg-white/10"
-                                onClick={() => trackWhatsAppClick('coverage_footer')}
-                            >
-                                WhatsApp Us
-                            </CTAButton>
-                            <CTAButton
-                                href={`tel:${siteConfig.contact.phoneE164}`}
-                                variant="ghost"
-                                size="lg"
-                                external
-                                icon={<Phone className="h-5 w-5" />}
-                                className="text-white hover:text-white hover:bg-white/10"
-                                onClick={() => trackPhoneClick('coverage_footer')}
-                            >
-                                {siteConfig.contact.phoneDisplay}
-                            </CTAButton>
-                        </div>
-                    </div>
-                </div>
-            </section>
         </div>
     );
 }

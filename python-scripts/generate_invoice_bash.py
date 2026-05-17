@@ -24,8 +24,8 @@ line_items_html = """
                         </span>
                     </td>
                     <td style="text-align:center;">1</td>
-                    <td style="text-align:right;">&pound;120.00</td>
-                    <td style="text-align:right;">&pound;120.00</td>
+                    <td style="text-align:right;">&pound;100.00</td>
+                    <td style="text-align:right;">&pound;100.00</td>
                 </tr>
 """
 
@@ -50,16 +50,16 @@ replacements = {
     "[PO_NUMBER]": "-",
     "[TECH_NAME]": "Jamie Armoordon",
     "[LINE_ITEMS_HTML]": line_items_html,
-    "[SUBTOTAL]": "&pound;120.00",
-    "[DISCOUNT]": "&pound;0.00",
-    "[VAT_RATE]": "N/A - below VAT threshold",
-    "[VAT_AMOUNT]": "&pound;0.00",
+    "[SUBTOTAL]": "&pound;100.00",
+    "[DISCOUNT]": "None",
+    "[VAT_RATE]": "20%",
+    "[VAT_AMOUNT]": "&pound;20.00",
     "[TOTAL]": "&pound;120.00",
     "[AMOUNT_PAID]": "&pound;120.00",
     "[BALANCE_DUE]": "&pound;0.00",
     "[PAYMENT_METHODS]": "Pay securely online via the link below, or by bank transfer.",
     "[BANK_DETAILS]": f'<p style="font-size:13px;color:#374151;margin:0 0 4px 0;"><strong>Bank transfer:</strong></p>'
-        f'<p style="font-size:13px;color:#374151;margin:0;">Tripoint Diagnostics Ltd<br>Sort code: 04-06-05<br>Account: 45761336<br>Reference: {INVOICE_ID}</p>',
+        f'<p style="font-size:13px;color:#374151;margin:0;">Tripoint Diagnostics Ltd<br>Sort code: 04-06-05<br>Account: 30447065<br>Reference: {INVOICE_ID}</p>',
     "[PAYMENT_LINK]": '<p style="font-size:14px;font-weight:600;color:#065f46;">&#10003; Paid in full via Stripe (Mastercard - 5097) - thank you!</p>',
     "[NOTES]": f'<p><strong>Notes:</strong> Standard Diagnosis (&pound;120.00) paid via Stripe (Receipt #1526-0015) on 28 March 2026. Invoice settled in full.</p>',
     "[FOOTER_EXTRA]": "",
@@ -68,7 +68,7 @@ replacements = {
     "[PRIVACY_URL]": "https://tripointdiagnostics.co.uk/legal/privacy-policy",
     "[DISCLAIMER_URL]": "https://tripointdiagnostics.co.uk/legal/disclaimer",
     "[CURRENT_YEAR]": "2026",
-    "[VAT_NUMBER]": "",
+    "[VAT_NUMBER]": "<strong>VAT No.:</strong> 515 7327 92",
 }
 
 for placeholder, value in replacements.items():
@@ -106,7 +106,9 @@ print(f"[OK] PDF invoice saved: {pdf_path}")
 print(f"\n{'='*60}")
 print(f"INVOICE: {INVOICE_ID}")
 print(f"Customer: Bash Sesay | Vehicle: E-Class RF15UPA")
-print(f"Subtotal:     GBP120.00")
+print(f"Subtotal:     GBP100.00")
+print(f"VAT (20%):    GBP20.00")
+print(f"Total:        GBP120.00")
 print(f"Amount Paid:  GBP120.00 (FULLY PAID)")
 print(f"Balance Due:  GBP0.00")
 print(f"{'='*60}")

@@ -6,6 +6,7 @@
 const RESPONSIVE_BASES = new Set([
     'work-48', 'work-03', 'work-46', 'sprinter-specialist', 'cta-bg', 'coverage-map',
     'diagnostic-callout', 'pre-purchase', 'vor-triage',
+    'hero-sprinter', 'hero-vito', 'hero-citan', 'hero-mercedes-parent',
 ]);
 
 function getOptimizedPaths(src: string): { webp: string; webpSrcset?: string; jpg: string } {
@@ -30,6 +31,10 @@ function getOptimizedPaths(src: string): { webp: string; webpSrcset?: string; jp
     };
 }
 
+function isFillLayout(className?: string): boolean {
+    return Boolean(className?.includes('absolute') && className?.includes('inset-0'));
+}
+
 interface OptimizedImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
     src: string;
     /** Use for LCP hero - adds fetchpriority="high", loading="eager" */
@@ -41,7 +46,9 @@ function useOriginalAsset(src: string): boolean {
     return (
         src.startsWith('/images/new-images/') ||
         src.startsWith('/images/services/') ||
-        src.startsWith('/images/sample-report/')
+        src.startsWith('/images/sample-report/') ||
+        src.startsWith('/images/servicing-work/') ||
+        src.startsWith('/images/diag_photos/')
     );
 }
 
@@ -61,10 +68,11 @@ export function OptimizedImage({ src, priority, alt = '', className, style, ...r
     }
 
     const { webp, webpSrcset, jpg } = getOptimizedPaths(src);
+    const fill = isFillLayout(className);
 
     const imgProps = {
         alt,
-        className,
+        className: fill ? className : className,
         style,
         loading: priority ? ('eager' as const) : ('lazy' as const),
         fetchPriority: priority ? ('high' as const) : undefined,
@@ -73,8 +81,21 @@ export function OptimizedImage({ src, priority, alt = '', className, style, ...r
 
     if (webpSrcset) {
         return (
-            <picture className={className}>
-                <source type="image/webp" srcSet={webpSrcset} sizes="(max-width: 640px) 100vw, 1024px" />
+            <picture className={fill ? 'absolute inset-0 block h-full w-full' : className}>
+                <source
+                    type="image/webp"
+                    srcSet={webpSrcset}
+                    sizes={fill ? '100vw' : '(max-width: 640px) 100vw, 1024px'}
+                />
+                <img src={jpg} {...imgProps} />
+            </picture>
+        );
+    }
+
+    if (fill) {
+        return (
+            <picture className="absolute inset-0 block h-full w-full">
+                <source type="image/webp" srcSet={webp} />
                 <img src={jpg} {...imgProps} />
             </picture>
         );

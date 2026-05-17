@@ -107,7 +107,7 @@ replacements = {
     "[BALANCE_DUE]": "&pound;0.00",
     "[PAYMENT_METHODS]": "Pay securely online via the link below, or by bank transfer.",
     "[BANK_DETAILS]": f'<p style="font-size:13px;color:#374151;margin:0 0 4px 0;"><strong>Bank transfer:</strong></p>'
-        f'<p style="font-size:13px;color:#374151;margin:0;">Tripoint Diagnostics Ltd<br>Sort code: 04-06-05<br>Account: 45761336<br>Reference: {INVOICE_ID}</p>',
+        f'<p style="font-size:13px;color:#374151;margin:0;">Tripoint Diagnostics Ltd<br>Sort code: 04-06-05<br>Account: 30447065<br>Reference: {INVOICE_ID}</p>',
     "[PAYMENT_LINK]": '<p style="font-size:14px;font-weight:600;color:#065f46;">&#10003; Paid in full - thank you!</p>',
     "[NOTES]": f'<p><strong>Notes:</strong> Diagnostic callout (&pound;120.00) paid 2 March 2026. '
         f'Balance (&pound;217.50) paid via Stripe 7 March 2026. Invoice settled in full.</p>',

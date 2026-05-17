@@ -29,6 +29,10 @@ const RESPONSIVE_IMAGES = new Set([
     'gallery/work-48.jpg', 'gallery/work-03.jpg', 'gallery/work-46.jpg',
     'sprinter-specialist.jpg', 'cta-bg.jpg', 'coverage-map.jpg',
     'diagnostic-callout.jpg', 'emissions-diagnostics.jpg', 'pre-purchase.jpg', 'vor-triage.jpg',
+    'servicing-work/hero-sprinter.jpg',
+    'servicing-work/hero-vito.jpg',
+    'servicing-work/hero-citan.jpg',
+    'servicing-work/hero-mercedes-parent.jpg',
 ]);
 
 function* walkDir(dir, base = '') {

@@ -1,0 +1,185 @@
+{
+  "total_processed": 3092,
+  "by_final_decision": {
+    "exclude_negative": 856,
+    "include_now": 1795,
+    "review_high_priority": 151,
+    "review_broad_test": 222,
+    "future_test": 68
+  },
+  "totals": {
+    "include_now": 1795,
+    "review_high_priority": 151,
+    "review_broad_test": 222,
+    "future_test": 68,
+    "exclude_negative": 856
+  },
+  "by_campaign_family": {
+    "Diagnostics & VOR": 1245,
+    "Mercedes Van Servicing": 864,
+    "Van Tuning": 983
+  },
+  "by_ad_group": {
+    "Standard Diagnosis": 577,
+    "Limp Mode / Derate": 225,
+    "VOR / Urgent Van Diagnostics": 99,
+    "Pre-Purchase Van Check": 44,
+    "AdBlue / DPF / NOx": 300,
+    "Mercedes Van Servicing": 430,
+    "Sprinter Brakes": 122,
+    "Sprinter Servicing": 155,
+    "Vito Brakes": 81,
+    "Vito Servicing": 76,
+    "Van Load & Driveability Tune": 292,
+    "Van Economy Tune": 615,
+    "Sprinter Remap": 1,
+    "Fleet Van Tuning": 73,
+    "Mobile Van Remap": 2
+  },
+  "top_exclusion_reasons": [
+    {
+      "reason": "Hard rule: price/cost research intent",
+      "count": 67
+    },
+    {
+      "reason": "Hard rule: matched pattern '\\\\bmot\\\\b'",
+      "count": 56
+    },
+    {
+      "reason": "wrong_geography",
+      "count": 39
+    },
+    {
+      "reason": "Hard rule: matched pattern '\\\\breset\\\\b'",
+      "count": 35
+    },
+    {
+      "reason": "junk_intent",
+      "count": 30
+    },
+    {
+      "reason": "competitor_brand",
+      "count": 28
+    },
+    {
+      "reason": "Hard rule: matched pattern '\\\\bbest\\\\b'",
+      "count": 26
+    },
+    {
+      "reason": "wrong geography",
+      "count": 23
+    },
+    {
+      "reason": "junk",
+      "count": 19
+    },
+    {
+      "reason": "Hard rule: matched ' guide'",
+      "count": 19
+    },
+    {
+      "reason": "wrong_vehicle_type",
+      "count": 15
+    },
+    {
+      "reason": "junk_research_intent",
+      "count": 14
+    },
+    {
+      "reason": "generic parts shopping",
+      "count": 14
+    },
+    {
+      "reason": "junk_or_irrelevant",
+      "count": 11
+    },
+    {
+      "reason": "Hard rule: matched ' for sale'",
+      "count": 11
+    },
+    {
+      "reason": "DIY/Guide intent",
+      "count": 10
+    },
+    {
+      "reason": "Hard rule: matched 'free '",
+      "count": 9
+    },
+    {
+      "reason": "Hard rule: matched pattern '\\\\bcheap(est)?\\\\b'",
+      "count": 8
+    },
+    {
+      "reason": "generic_parts_shopping",
+      "count": 8
+    },
+    {
+      "reason": "Hard rule: matched 'pdf'",
+      "count": 8
+    }
+  ],
+  "top_rewrite_merges": [
+    {
+      "normalized": "sprinter service near me",
+      "count": 3
+    },
+    {
+      "normalized": "mobile mechanic sittingbourne",
+      "count": 2
+    },
+    {
+      "normalized": "mercedes-benz servicing repairs kent",
+      "count": 2
+    },
+    {
+      "normalized": "mercedes limp mode diagnostics",
+      "count": 2
+    },
+    {
+      "normalized": "mobile auto electrician ashford kent",
+      "count": 2
+    },
+    {
+      "normalized": "van limp mode no codes",
+      "count": 2
+    },
+    {
+      "normalized": "mobile van mechanic dartford kent",
+      "count": 2
+    },
+    {
+      "normalized": "mobile mechanic maidstone",
+      "count": 2
+    },
+    {
+      "normalized": "mercedes van brakes local",
+      "count": 2
+    },
+    {
+      "normalized": "mercedes vito ecu remap",
+      "count": 2
+    },
+    {
+      "normalized": "mobile fleet fuel economy remap",
+      "count": 2
+    },
+    {
+      "normalized": "mercedes sprinter tuning",
+      "count": 2
+    },
+    {
+      "normalized": "pre purchase van inspection",
+      "count": 2
+    },
+    {
+      "normalized": "van ecu remapping",
+      "count": 2
+    }
+  ],
+  "api_calls": 281,
+  "token_usage": {
+    "prompt_tokens": 668303,
+    "completion_tokens": 316654,
+    "total_estimated": 984957
+  }
+}

@@ -93,11 +93,14 @@ export function ZoneCalculator({ onZoneChecked }: ZoneCalculatorProps) {
                             <h4 className="font-bold text-text-primary">
                                 You are in <span className="text-brand-light">Zone {result.zone}</span>
                             </h4>
-                            <div className="mt-2 space-y-1 text-sm text-text-secondary">
+                            <div className="mt-2 hidden space-y-1 text-sm text-text-secondary sm:block">
                                 <p><strong>Time:</strong> {result.time_minutes} mins</p>
                                 <p><strong>Distance:</strong> {result.distance_km} km</p>
                                 <p className="text-xs text-text-muted">(from {result.best_base_name})</p>
                             </div>
+                            <p className="mt-2 text-sm text-text-secondary sm:hidden">
+                                Use the <strong>Zone {result.zone}</strong> column in the prices below.
+                            </p>
 
                             {result.zone !== 'Out of area' ? (
                                 <div className="mt-3">

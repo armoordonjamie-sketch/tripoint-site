@@ -11,6 +11,10 @@ import { siteConfig } from '@/config/site';
 import { ServiceSchema, BreadcrumbSchema, FaqPageSchema } from '@/components/JsonLd';
 import { OptimizedImage } from '@/components/OptimizedImage';
 import { VatLabel } from '@/components/VatLabel';
+import { ServicingHero } from '@/components/servicing/ServicingHero';
+import { ServicingPartsProof } from '@/components/servicing/ServicingPartsProof';
+import { ServicingFilterShowcase } from '@/components/servicing/ServicingFilterShowcase';
+import { ServicingProcessGallery } from '@/components/servicing/ServicingProcessGallery';
 
 function useScrollReveal() {
     const ref = useRef<HTMLDivElement>(null);
@@ -86,23 +90,17 @@ export function SprinterServicingPage() {
             <FaqPageSchema items={faqs} />
 
             {/* \u2500\u2500\u2500 HERO \u2500\u2500\u2500 */}
-            <section className="relative h-72 sm:h-96 overflow-hidden">
-                <img
-                    src="/images/services/van-sprinter-w907-front.png"
-                    alt=""
-                    className="absolute inset-0 h-full w-full object-cover object-center"
-                    aria-hidden="true"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/80 to-surface/40" />
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(var(--color-brand-rgb),0.18),transparent_65%)]" />
-                <div className="absolute bottom-0 left-0 right-0 z-10 p-6 sm:p-10">
-                    <div className="mx-auto max-w-5xl">
-                        <p className="text-sm font-semibold uppercase tracking-widest text-brand mb-2">Mercedes Sprinter Specialist</p>
-                        <h1 className="text-4xl font-extrabold text-text-primary sm:text-5xl lg:text-6xl">Sprinter Servicing</h1>
-                        <p className="mt-3 max-w-xl text-lg text-text-secondary">W906 &bull; W907/W910 &bull; OM651 &bull; OM654 &bull; Fitted at your door</p>
-                    </div>
-                </div>
-            </section>
+            <ServicingHero
+                heroSrc="/images/servicing-work/hero-sprinter.jpg"
+                eyebrow="Mercedes Sprinter Specialist"
+                title="Sprinter Servicing"
+                subtitle="W906 • W907/W910 • OM651 • OM654 • Fitted at your door"
+                priceFrom={175}
+                bookLabel="Book Sprinter Service"
+                analyticsPrefix="sprinter_servicing"
+                objectPosition="center 35%"
+                mobileObjectPosition="center 45%"
+            />
 
             {/* \u2500\u2500\u2500 SECTION 1: Why Sprinters need a specialist \u2500\u2500\u2500 */}
             <Section>
@@ -154,6 +152,10 @@ export function SprinterServicingPage() {
                     </div>
                 </div>
             </Section>
+
+            <ServicingPartsProof
+                body="Every Sprinter service uses genuine Mercedes parts — correct oil spec (MB 229.51 / 229.52 for OM651 and OM654), OEM filter housings, and replacement sump washers torqued to manufacturer values. Wrong oil or pattern filters accelerate DPF loading and wear on the ASSYST-monitored engine. We pre-order for your exact model before we arrive, so nothing is guessed on the day."
+            />
 
             {/* \u2500\u2500\u2500 SECTION 2: What\u2019s included \u2500\u2500\u2500 */}
             <Section className="bg-surface-alt/50">
@@ -214,7 +216,20 @@ export function SprinterServicingPage() {
                             </ul>
                         </div>
                     </div>
+                    <ServicingFilterShowcase />
                     <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch reveal">
+                        <figure className="overflow-hidden rounded-2xl border border-border-default">
+                            <div className="relative aspect-[16/10] min-h-[220px] sm:min-h-[280px]">
+                                <OptimizedImage
+                                    src="/images/servicing-work/dipstick-check.jpg"
+                                    alt="Engine oil level checked on dipstick after Sprinter service"
+                                    className="absolute inset-0 h-full w-full object-cover"
+                                />
+                            </div>
+                            <figcaption className="border-t border-border-default bg-surface-alt px-4 py-3 text-sm text-text-secondary">
+                                Dipstick check after every oil change — we confirm the fill before handover.
+                            </figcaption>
+                        </figure>
                         <figure className="overflow-hidden rounded-2xl border border-border-default">
                             <div className="relative aspect-[16/10] min-h-[220px] sm:min-h-[280px]">
                                 <OptimizedImage
@@ -224,14 +239,9 @@ export function SprinterServicingPage() {
                                 />
                             </div>
                             <figcaption className="border-t border-border-default bg-surface-alt px-4 py-3 text-sm text-text-secondary">
-                                Electronic oil level check on the dash - we verify correct fill and spec on every service.
+                                Electronic oil level on the dash — verified on models with a readout.
                             </figcaption>
                         </figure>
-                        <div className="rounded-2xl border border-border-default bg-surface-alt p-6 flex flex-col justify-center">
-                            <p className="text-text-secondary leading-relaxed">
-                                Every minor and major service includes fluid level checks with the correct MB oil specification. On models with an electronic oil level readout, we confirm the level after the oil change so you leave with a clean bill of health - not a guess.
-                            </p>
-                        </div>
                     </div>
                 </div>
             </Section>
@@ -274,6 +284,8 @@ export function SprinterServicingPage() {
                     </div>
                 </div>
             </Section>
+
+            <ServicingProcessGallery oilDrainSrc="/images/servicing-work/sprinter-oil-draining.jpg" />
 
             {/* \u2500\u2500\u2500 SECTION 4: How it works \u2500\u2500\u2500 */}
             <Section className="bg-surface-alt/50">

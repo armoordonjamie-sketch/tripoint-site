@@ -1,7 +1,7 @@
 import base64
 from pathlib import Path
 
-INVOICE_ID = "TPD-2026-0004"
+INVOICE_ID = "TPD-2026-0006"
 INVOICE_DATE = "3 April 2026"
 DUE_DATE = "3 April 2026"
 
@@ -27,8 +27,8 @@ line_items_html = """
                         </span>
                     </td>
                     <td style="text-align:center;">1</td>
-                    <td style="text-align:right;">&pound;228.00</td>
-                    <td style="text-align:right;">&pound;228.00</td>
+                    <td style="text-align:right;">&pound;190.00</td>
+                    <td style="text-align:right;">&pound;190.00</td>
                 </tr>
                 <tr>
                     <td>
@@ -38,8 +38,8 @@ line_items_html = """
                         </span>
                     </td>
                     <td style="text-align:center;">1</td>
-                    <td style="text-align:right;">&pound;34.80</td>
-                    <td style="text-align:right;">&pound;34.80</td>
+                    <td style="text-align:right;">&pound;29.00</td>
+                    <td style="text-align:right;">&pound;29.00</td>
                 </tr>
 """
 
@@ -64,16 +64,16 @@ replacements = {
     "[PO_NUMBER]": "-",
     "[TECH_NAME]": "Jamie Armoordon",
     "[LINE_ITEMS_HTML]": line_items_html,
-    "[SUBTOTAL]": "&pound;262.80",
-    "[DISCOUNT]": "&pound;0.00",
-    "[VAT_RATE]": "N/A - below VAT threshold",
-    "[VAT_AMOUNT]": "&pound;0.00",
+    "[SUBTOTAL]": "&pound;219.00",
+    "[DISCOUNT]": "None",
+    "[VAT_RATE]": "20%",
+    "[VAT_AMOUNT]": "&pound;43.80",
     "[TOTAL]": "&pound;262.80",
     "[AMOUNT_PAID]": "&pound;262.80",
     "[BALANCE_DUE]": "&pound;0.00",
     "[PAYMENT_METHODS]": "Pay securely online via the link below, or by bank transfer.",
     "[BANK_DETAILS]": f'<p style="font-size:13px;color:#374151;margin:0 0 4px 0;"><strong>Bank transfer:</strong></p>'
-        f'<p style="font-size:13px;color:#374151;margin:0;">Tripoint Diagnostics Ltd<br>Sort code: 04-06-05<br>Account: 45761336<br>Reference: {INVOICE_ID}</p>',
+        f'<p style="font-size:13px;color:#374151;margin:0;">Tripoint Diagnostics Ltd<br>Sort code: 04-06-05<br>Account: 30447065<br>Reference: {INVOICE_ID}</p>',
     "[PAYMENT_LINK]": '<p style="font-size:14px;font-weight:600;color:#065f46;">&#10003; Paid in full via Stripe (Mastercard &bull;&bull;&bull;&bull; 0347) &ndash; thank you!</p>',
     "[NOTES]": '<p><strong>Notes:</strong> VOR diagnostic callout and belt replacement (&pound;262.80) paid via Stripe on 3 April 2026. Invoice settled in full.</p>',
     "[FOOTER_EXTRA]": "",
@@ -82,7 +82,7 @@ replacements = {
     "[PRIVACY_URL]": "https://tripointdiagnostics.co.uk/legal/privacy-policy",
     "[DISCLAIMER_URL]": "https://tripointdiagnostics.co.uk/legal/disclaimer",
     "[CURRENT_YEAR]": "2026",
-    "[VAT_NUMBER]": "",
+    "[VAT_NUMBER]": "<strong>VAT No.:</strong> 515 7327 92",
 }
 
 for placeholder, value in replacements.items():
@@ -120,6 +120,8 @@ print(f"[OK] PDF invoice saved: {pdf_path}")
 print(f"\n{'='*60}")
 print(f"INVOICE: {INVOICE_ID}")
 print(f"Customer: TBC | Vehicle: E-Class W207 WF17VWD")
+print(f"Subtotal:     GBP219.00")
+print(f"VAT (20%):    GBP43.80")
 print(f"Total:        GBP262.80")
 print(f"Amount Paid:  GBP262.80 (FULLY PAID)")
 print(f"Balance Due:  GBP0.00")

@@ -23,8 +23,8 @@ line_items_html = """
                         </span>
                     </td>
                     <td style="text-align:center;">1</td>
-                    <td style="text-align:right;">&pound;772.80</td>
-                    <td style="text-align:right;">&pound;772.80</td>
+                    <td style="text-align:right;">&pound;644.00</td>
+                    <td style="text-align:right;">&pound;644.00</td>
                 </tr>
                 <tr>
                     <td>
@@ -34,8 +34,8 @@ line_items_html = """
                         </span>
                     </td>
                     <td style="text-align:center;">1 hr</td>
-                    <td style="text-align:right;">&pound;120.00</td>
-                    <td style="text-align:right;">&pound;120.00</td>
+                    <td style="text-align:right;">&pound;100.00</td>
+                    <td style="text-align:right;">&pound;100.00</td>
                 </tr>
                 <tr>
                     <td>
@@ -45,8 +45,8 @@ line_items_html = """
                         </span>
                     </td>
                     <td style="text-align:center;">0.6 hrs</td>
-                    <td style="text-align:right;">&pound;85.00/hr</td>
-                    <td style="text-align:right;">&pound;51.00</td>
+                    <td style="text-align:right;">&pound;70.83/hr</td>
+                    <td style="text-align:right;">&pound;42.50</td>
                 </tr>
                 <tr style="background:#f9fafb;">
                     <td colspan="4" style="padding:12px 12px 4px 24px;">
@@ -105,10 +105,10 @@ replacements = {
     "[PO_NUMBER]": "-",
     "[TECH_NAME]": "Jamie Armoordon",
     "[LINE_ITEMS_HTML]": line_items_html,
-    "[SUBTOTAL]": "&pound;943.80",
-    "[DISCOUNT]": "&pound;0.00",
-    "[VAT_RATE]": "N/A - below VAT threshold",
-    "[VAT_AMOUNT]": "&pound;0.00",
+    "[SUBTOTAL]": "&pound;786.50",
+    "[DISCOUNT]": "None",
+    "[VAT_RATE]": "20%",
+    "[VAT_AMOUNT]": "&pound;157.30",
     "[TOTAL]": "&pound;943.80",
     "[AMOUNT_PAID]": "&pound;0.00",
     "[BALANCE_DUE]": "&pound;943.80",
@@ -122,7 +122,7 @@ replacements = {
     "[PRIVACY_URL]": "https://tripointdiagnostics.co.uk/legal/privacy-policy",
     "[DISCLAIMER_URL]": "https://tripointdiagnostics.co.uk/legal/disclaimer",
     "[CURRENT_YEAR]": "2026",
-    "[VAT_NUMBER]": "",
+    "[VAT_NUMBER]": "<strong>VAT No.:</strong> 515 7327 92",
 }
 
 for placeholder, value in replacements.items():
@@ -164,5 +164,7 @@ print(f"[OK] PDF estimate saved: {pdf_path}")
 print(f"\n{'='*60}")
 print(f"ESTIMATE: {ESTIMATE_ID}")
 print(f"Vehicle: W207 E-Class")
-print(f"Total: GBP943.80")
+print(f"Subtotal:     GBP786.50")
+print(f"VAT (20%):    GBP157.30")
+print(f"Total:        GBP943.80")
 print(f"{'='*60}")

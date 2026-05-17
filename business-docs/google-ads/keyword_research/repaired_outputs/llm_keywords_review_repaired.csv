@@ -1,0 +1,148 @@
+campaign_family,ad_group_theme,keyword_candidate,recommended_match_type,reason
+Diagnostics & VOR,Limp Mode / Derate,sprinter brief power loss diagnostics,Phrase,Specific Mercedes Sprinter fault symptom; high relevance for diagnostics but could be informational.
+Diagnostics & VOR,AdBlue / DPF / Emissions,adblue system fault 1 start remaining,Exact,"Specific 'no start' countdown indicates urgent VOR diagnostic need, though model is missing."
+Diagnostics & VOR,Standard Diagnosis,van engine light diagnostic,Phrase,"While informational, it indicates a live problem with a van. Could be captured with an ad offering mobile diagnostics to solve the uncertainty."
+Diagnostics & VOR,AdBlue / DPF / Emissions,dpf fault diagnostic,Phrase,"Indicates a current DPF issue. High relevance to TriPoint's DPF services, even if the query is phrased as a question."
+Diagnostics & VOR,Standard Diagnosis,mobile van diagnostic check,Phrase,"Matches mobile/at-home service model, though 'car' is less specific than 'van'. Good for capturing local mobile intent."
+Diagnostics & VOR,VOR / Urgent Van Diagnostics,van not starting but battery is fine,Phrase,High intent for mobile diagnostic/repair service for non-starts.
+Diagnostics & VOR,VOR / Urgent Van Diagnostics,van won t start but has power,Phrase,Clear VOR/breakdown intent suitable for mobile diagnostics.
+Diagnostics & VOR,Standard Diagnosis,diagnostics medwayvanrepairs,Exact,"Medway is in Kent (target area), but query looks like a competitor brand or specific URL search."
+Diagnostics & VOR,AdBlue / DPF / Emissions,mercedes adblue countdown repair,Phrase,Specific symptom of Mercedes derate/limp mode; high intent for urgent repair.
+Diagnostics & VOR,Standard Diagnosis,expert car diagnostics in ashford kent,Phrase,"Correct geography (Kent) and service, but 'car' is less targeted than 'van'. Worth testing for local reach."
+Diagnostics & VOR,Limp Mode / Derate,mercedes limp mode diagnostics,Phrase,Informational query but specific to Mercedes and indicates a problem the business solves. High relevance for capturing users in need of urgent diagnostics. [deduped_rewrite_merge]
+Diagnostics & VOR,Standard Diagnosis,mercedes diagnostic check cost,Phrase,High intent but price-sensitive; good for capturing leads researching costs.
+Diagnostics & VOR,Standard Diagnosis,mercedes diagnostic cost near me,Phrase,Local intent combined with cost research; high priority for testing.
+Diagnostics & VOR,Standard Diagnosis,mercedes diagnostic cost uk,Phrase,Relevant service intent but 'cost' and 'uk' are slightly broad; worth testing for price-sensitive leads.
+Diagnostics & VOR,AdBlue / DPF / Emissions,mercedes sprinter dpf symptoms,Phrase,Slightly informational but often leads to a booking once symptoms are confirmed.
+Diagnostics & VOR,Limp Mode / Derate,mercedes sprinter van limp mode causes and solutions,Phrase,Informational intent ('solutions') but highly relevant to core service; worth testing for conversion.
+Diagnostics & VOR,Standard Diagnosis,mercedes vito w447 problems,Phrase,Informational intent but often leads to diagnostic service needs for specific van model.
+Diagnostics & VOR,AdBlue / DPF / Emissions,mobile fault finding nox,Phrase,"Relevant to emissions diagnostics, though slightly broad without a location."
+Diagnostics & VOR,Limp Mode / Derate,mobile fault finding reduced power,Phrase,"Strong symptom-based search for mobile diagnostics, highly relevant to VOR."
+Diagnostics & VOR,Standard Diagnosis,mobile mercedes mechanic reviews,Phrase,"Research intent, could be useful for capturing users looking for reputable specialists."
+Diagnostics & VOR,Standard Diagnosis,mobile mercedes specialist cost,Phrase,Relevant intent but price-sensitive; worth testing to capture leads looking for quotes.
+Diagnostics & VOR,Limp Mode / Derate,van limp mode no codes,Broad,Relevant symptom for diagnostics but lacks 'van' or 'mercedes' qualifier; worth testing for broad intent. [deduped_rewrite_merge]
+Diagnostics & VOR,Standard Diagnosis,peugeot boxer engine management light diagnostics,Phrase,Non-Mercedes but a standard commercial work van; diagnostics is a core service.
+Diagnostics & VOR,Standard Diagnosis,same day next day mobile van diagnostics,Phrase,"Strong mobile intent and urgency, but specifies 'car'. TriPoint is van-focused but may accept car work in SE London/Kent."
+Diagnostics & VOR,Limp Mode / Derate,says engine power reduced,Phrase,Indicates limp mode/derate issue; high diagnostic intent but slightly broad without 'van' or 'mercedes'.
+Diagnostics & VOR,AdBlue / DPF / Emissions,sprinter dpf regeneration,Exact,"Could be a DIY 'how-to' search, but often indicates a van in limp mode needing a forced regeneration service."
+Diagnostics & VOR,Limp Mode / Derate,sprinter limp mode no codes,Phrase,"Indicates a complex issue where professional mobile diagnostics are highly valuable, though could be a DIY search."
+Diagnostics & VOR,Limp Mode / Derate,sprinter reduced power fix,Phrase,"Strong intent but 'fix' can sometimes lean towards DIY; however, usually leads to professional service for complex van electronics."
+Diagnostics & VOR,VOR / Urgent Van Diagnostics,urgent van diagnostics cost,Phrase,Price-sensitive but high urgency; good for capturing immediate needs.
+Diagnostics & VOR,Standard Diagnosis,vito 1 6 engine problems,Phrase,Informational intent but high relevance to Mercedes Vito specialists; likely a precursor to needing a diagnostic visit.
+Diagnostics & VOR,Limp Mode / Derate,what causes a van to go into limp mode,Phrase,"Relevant diagnostic intent for vans, though not brand-specific."
+Diagnostics & VOR,Limp Mode / Derate,what happens when a mercedes goes into limp mode,Phrase,High relevance for Mercedes specialist; limp mode is a critical VOR (Vehicle Off Road) trigger for commercial users.
+Diagnostics & VOR,AdBlue / DPF / Emissions,what is the adblue mileage countdown,Phrase,AdBlue countdowns lead to non-start conditions; highly relevant for Mercedes Sprinter/Vito diagnostics.
+Diagnostics & VOR,Limp Mode / Derate,mercedes sprinter losing power diagnostics,Phrase,"High relevance to Mercedes Sprinter limp mode issues, though phrased as a question/scenario. Good for capturing VOR intent."
+Diagnostics & VOR,Limp Mode / Derate,mercedes sprinter power loss diagnostics,Phrase,Specific model and symptom (power loss/limp mode). High conversion potential for mobile diagnostics.
+Mercedes Van Servicing,Mercedes Van Servicing & Brakes,brake checks replacement kent surrey sussex,Phrase,Covers Kent (in-area) but also Surrey/Sussex which may be borderline; high service intent.
+Mercedes Van Servicing,Sprinter Servicing,sprinter service near me,Exact,"Dodge Sprinter is the US branding for the Mercedes Sprinter; while rare in the UK, the intent for Sprinter servicing is clear and relevant. [deduped_rewrite_merge]"
+Mercedes Van Servicing,Mercedes Van Servicing & Brakes,marshall mercedes-benz truck van - service,Phrase,Competitor (Marshall) query for Mercedes van service; high relevance but branded.
+Mercedes Van Servicing,Mercedes Van Servicing & Brakes,mercedes a service cost uk,Phrase,Relevant to Mercedes servicing but 'A service' is often car-specific; needs confirmation if user means van.
+Mercedes Van Servicing,Mercedes Van Servicing & Brakes,mercedes a1 service cost uk,Phrase,"Specific Mercedes service code, often car-related but applicable to some vans; high priority review."
+Mercedes Van Servicing,Mercedes Van Servicing & Brakes,mercedes ashford,Phrase,Ashford is in Kent (target area); keyword is broad but geographically perfect.
+Mercedes Van Servicing,Mercedes Van Servicing & Brakes,mercedes brake pads,Phrase,Relevant but could be shopping for parts; mobile service context helps but needs monitoring.
+Mercedes Van Servicing,Mercedes Van Servicing & Brakes,mercedes brake pads major,Phrase,Likely service intent but 'major' is slightly ambiguous; could be part size or service level.
+Mercedes Van Servicing,Mercedes Van Servicing & Brakes,mercedes brake pads minor,Phrase,Likely service intent but slightly ambiguous; monitor for parts-only shopping.
+Mercedes Van Servicing,Mercedes Van Servicing & Brakes,mercedes van brakes local,Phrase,Local intent combined with Mercedes brakes suggests service need. [deduped_rewrite_merge]
+Mercedes Van Servicing,Mercedes Van Servicing & Brakes,mercedes van major brake service,Phrase,Likely refers to major brake overhaul or service; high relevance for a specialist.
+Mercedes Van Servicing,Mercedes Van Servicing & Brakes,mercedes van minor brake service,Phrase,Likely refers to minor brake adjustments or pad changes; relevant for servicing.
+Mercedes Van Servicing,Mercedes Van Servicing & Brakes,mercedes van specialist near me,Phrase,Broad Mercedes service intent; 'garage' often implies fixed site but mobile services can capture this local intent.
+Mercedes Van Servicing,Mercedes Van Servicing & Brakes,mercedes service minor,Phrase,"Relevant but slightly broad as it could include cars; however, TriPoint is a Mercedes specialist."
+Mercedes Van Servicing,Mercedes Van Servicing & Brakes,mercedes specialist gearbox service,Phrase,Relevant to Mercedes servicing but gearbox specific; needs confirmation if mobile equipment supports full ATF flush.
+Mercedes Van Servicing,Mercedes Van Servicing & Brakes,mercedes specialist service cost,Phrase,High intent but price-sensitive; worth testing to capture users looking for quotes.
+Mercedes Van Servicing,Sprinter Servicing,mercedes sprinter service a cost,Phrase,Price-sensitive but high intent for specific service type.
+Mercedes Van Servicing,Sprinter Servicing,mercedes sprinter service b cost,Phrase,Price-sensitive but high intent for specific service type.
+Mercedes Van Servicing,Sprinter Servicing,mercedes sprinter service plan,Phrase,Ambiguous: could be looking for official Mercedes plans or an independent alternative.
+Mercedes Van Servicing,Mercedes Van Servicing & Brakes,mercedes van service heathrow,Phrase,Heathrow is West London; borderline for a Kent-based mobile service but potentially reachable for fleet work.
+Mercedes Van Servicing,Sprinter Brakes,mercedes-benz sprinter brake discs,Phrase,"Relevant to brake services, but could be part shopping. Worth testing as phrase."
+Mercedes Van Servicing,Sprinter Brakes,mercedes-benz sprinter brake discs rear and front,Phrase,"Specific brake component query, borderline parts shopping vs service intent."
+Mercedes Van Servicing,Mercedes Van Servicing & Brakes,mobile van brakes near me,Phrase,Good intent but generic 'van' needs monitoring to ensure it doesn't waste spend on non-Mercedes for brake work.
+Mercedes Van Servicing,Vito Servicing,mobile vito service cost,Phrase,Price-sensitive but high intent for a specific model serviced by the client.
+Mercedes Van Servicing,Vito Servicing,mobile vito service cost uk,Phrase,UK-specific price query for a core model.
+Mercedes Van Servicing,Vito Servicing,mobile vito service price,Phrase,Price-related query for a core service model.
+Mercedes Van Servicing,Mercedes Van Servicing & Brakes,mobilovan uk,Phrase,Mobilovan is a specific Mercedes roadside/service term; relevant but broad as a UK-wide term.
+Mercedes Van Servicing,Sprinter Brakes,sprinter brake major,Phrase,Slightly ambiguous but likely refers to major brake overhaul (discs and pads).
+Mercedes Van Servicing,Sprinter Brakes,sprinter brake major local,Phrase,Combines local intent with major service terminology.
+Mercedes Van Servicing,Sprinter Brakes,sprinter brake minor,Phrase,Likely refers to simple pad replacement; worth testing but slightly non-standard terminology.
+Mercedes Van Servicing,Sprinter Brakes,sprinter brake pad sensor,Phrase,Could be a part purchase intent or a repair intent; worth testing for service leads.
+Mercedes Van Servicing,Sprinter Brakes,sprinter brake pads replacement cost,Phrase,Price-sensitive but high intent for replacement service.
+Mercedes Van Servicing,Sprinter Servicing,sprinter major service cost,Phrase,Price-sensitive but high intent; useful for capturing users in the consideration phase.
+Mercedes Van Servicing,Sprinter Servicing,sprinter major service cost uk,Phrase,UK specific price query for core service.
+Mercedes Van Servicing,Sprinter Servicing,sprinter major service price,Phrase,Price discovery for core service.
+Mercedes Van Servicing,Sprinter Servicing,sprinter minor service cost,Phrase,Price discovery for minor service.
+Mercedes Van Servicing,Sprinter Servicing,sprinter minor service cost uk,Phrase,UK price discovery for minor service.
+Mercedes Van Servicing,Sprinter Servicing,sprinter service a cost,Exact,"Price research indicates high intent, though slightly informational. Good for capturing leads looking for quotes."
+Mercedes Van Servicing,Sprinter Servicing,sprinter service near me prices,Phrase,High intent but price-sensitive; useful for capturing leads comparing costs.
+Mercedes Van Servicing,Sprinter Brakes,sprinter van brake replacement cost,Phrase,Price-sensitive query but highly relevant to core service; worth capturing for lead gen.
+Mercedes Van Servicing,Vito Brakes,vito brake pads major,Phrase,Likely refers to a major service including brakes; slightly ambiguous but relevant.
+Mercedes Van Servicing,Vito Brakes,vito brake pads minor,Phrase,Likely refers to a minor service or simple pad swap; relevant to Vito specialist.
+Mercedes Van Servicing,Mercedes Van Servicing & Brakes,mercedes van major service,Phrase,High relevance to Mercedes specialist; user is researching the service they likely need.
+Mercedes Van Servicing,Sprinter Servicing,what is the difference between sprinter service a and b,Phrase,Informational but high relevance to Mercedes van owners researching service levels.
+Mercedes Van Servicing,Sprinter Servicing,what is the service schedule for a mercedes sprinter,Phrase,Informational query regarding maintenance intervals; potential lead for servicing.
+Mercedes Van Servicing,Sprinter Servicing,what s included in a sprinter service a and service b,Phrase,Specific service level inquiry for Sprinter; likely prospect for mobile servicing.
+Van Tuning,Van Economy Tune,celtic tuning kent,Phrase,Competitor brand in correct geography; high chance of van owners looking for local tuning.
+Van Tuning,Van Economy Tune,celtic tuning kent remapping - celtic tuning kent,Phrase,Competitor brand in correct geography; high chance of van owners looking for local tuning.
+Van Tuning,Van Economy Tune,commercial van remap cost,Phrase,High intent but price-sensitive; good for capturing research-phase commercial leads.
+Van Tuning,Van Economy Tune,commercial van remap reviews,Phrase,Informational intent but high relevance to commercial decision making; worth monitoring.
+Van Tuning,Van Economy Tune,commercial van tuning cost,Phrase,High intent but price-sensitive; useful for capturing users in the consideration phase.
+Van Tuning,Van Economy Tune,does a tune improve fuel economy,Phrase,"High relevance to the business's economy tuning service, though informational."
+Van Tuning,Van Load & Driveability Tune,mercedes vito ecu remap,Phrase,Highly specific to a core vehicle (Vito). The long-tail nature suggests a specific owner looking for service. [deduped_rewrite_merge]
+Van Tuning,Fleet Van Tuning,fleet commercial remapping,Phrase,Strong fleet intent but contains a competitor brand ('Top Gear Tuning'). Worth testing as a phrase if competitor name is removed.
+Van Tuning,Fleet Van Tuning,fleet van remap cost,Phrase,Commercial intent but price-sensitive; useful for capturing leads in the research phase.
+Van Tuning,Fleet Van Tuning,fleet van remap reviews,Phrase,Research intent; potentially useful but lower conversion probability than direct service queries.
+Van Tuning,Fleet Van Tuning,fleet van tuning cost,Phrase,Commercial research intent regarding pricing for fleet services.
+Van Tuning,Van Economy Tune,fuel economy remap uk,Phrase,Relevant but broad geography; useful if not excluded by specific negative locations.
+Van Tuning,Van Economy Tune,mercedes sprinter tuning,Broad,Specific model query; often indicates a user looking for specs or potential tuning for that specific low-bhp variant. Worth testing for economy tuning. [deduped_rewrite_merge]
+Van Tuning,Van Economy Tune,mobile ecu remapping sussex remapping burgess hill,Phrase,Sussex is adjacent to Kent/SE London; Burgess Hill is borderline but potentially reachable for high-value tuning work.
+Van Tuning,Van Economy Tune,mobile van remap cost,Phrase,High intent price research for van tuning services.
+Van Tuning,Van Economy Tune,mobile van remap reviews,Phrase,Research intent but highly relevant to mobile van tuning services.
+Van Tuning,Van Load & Driveability Tune,sprinter power upgrade,Phrase,Relevant but needs monitoring to ensure it doesn't attract 'stage 1' performance seekers.
+Van Tuning,Van Load & Driveability Tune,sprinter remap cost,Phrase,Price-sensitive but high intent for a specific commercial model.
+Van Tuning,Van Load & Driveability Tune,sprinter remap reviews,Phrase,Research intent; valuable for capturing top-of-funnel users looking for quality tuning.
+Van Tuning,Van Economy Tune,sprinter van remap cost,Phrase,Price-sensitive but high intent; good for capturing leads in the research phase.
+Van Tuning,Van Economy Tune,sprinter van remap price,Phrase,Price-sensitive but high intent; good for capturing leads in the research phase.
+Van Tuning,Van Load & Driveability Tune,van load tune cost,Phrase,High intent commercial query regarding pricing for load-based tuning.
+Van Tuning,Van Economy Tune,van remap cost,Phrase,Price-sensitive but high-intent commercial query.
+Van Tuning,Van Economy Tune,van remap near me cost,Phrase,Price-sensitive but local intent; good for capturing leads researching costs.
+Van Tuning,Van Economy Tune,van remap near me prices,Phrase,Price-sensitive but local intent; good for capturing leads researching costs.
+Van Tuning,Van Economy Tune,vito economy tune cost,Phrase,Price-sensitive but high-intent query for Vito tuning service.
+Van Tuning,Van Load & Driveability Tune,vito remap cost,Phrase,High intent but price-sensitive; worth capturing if the landing page addresses value/ROI.
+Van Tuning,Van Load & Driveability Tune,vito remap price,Phrase,Commercial intent but price-sensitive; worth capturing for lead gen.
+Van Tuning,Van Economy Tune,vito van remap cost,Phrase,High intent but price-sensitive; useful for capturing leads in the research phase.
+Van Tuning,Van Economy Tune,vito van remap price,Phrase,High intent but price-sensitive; useful for capturing leads in the research phase.
+Diagnostics & VOR,VOR / Urgent Van Diagnostics,same day & next day mobile car diagnostics,Phrase,"Strong mobile and urgent intent, but 'car' is broader than the primary 'van' focus. Worth testing for VOR leads."
+Van Tuning,Van Economy Tune,sprinter 3.0 tune,Phrase,"Relevant model and engine, though 'tune' can occasionally lean towards performance; needs monitoring for intent."
+Diagnostics & VOR,AdBlue / DPF / Emissions,how do i unblock my dpf filter without removing it?,Phrase,Informational query but indicates a DPF issue that requires professional diagnostic/cleaning service; explicitly mentions not removing it (no delete).
+Diagnostics & VOR,Limp Mode / Derate,what causes a sprinter van to go into limp mode?,Phrase,Specific to Mercedes Sprinter and a core diagnostic issue (limp mode); high chance of conversion if captured at the research stage.
+Mercedes Van Servicing,Mercedes Van Servicing & Brakes,mobilovan,Exact,Specific Mercedes-Benz service brand; users searching this are looking for mobile Mercedes van support.
+Mercedes Van Servicing,Sprinter Servicing,what's included in a sprinter service a and service b,Phrase,Specific to Sprinter servicing tiers; high relevance for potential customers researching their next service.
+Diagnostics & VOR,Standard Diagnosis,can i drive my van with the engine light on?,Phrase,High-intent problem awareness; user needs a diagnostic service to determine safety.
+Diagnostics & VOR,AdBlue / DPF / Emissions,can i drive with a dpf fault?,Phrase,Problem awareness query regarding DPF; good opportunity to offer mobile diagnostic/regeneration service.
+Diagnostics & VOR,Pre-Purchase Van Check,pre purchase van inspection,Phrase,Relevant service but 'car' intent is slightly off-target for a van specialist; needs monitoring. [deduped_rewrite_merge]
+Diagnostics & VOR,Pre-Purchase Van Check,pre purchase van inspection london,Phrase,"Geographically relevant (London) and high-value service, though 'car' is less specific than 'van'."
+Diagnostics & VOR,Limp Mode / Derate,van limp mode diagnostics,Phrase,Informational but van-specific. Could lead to a booking if the user realizes they need professional diagnostics.
+Diagnostics & VOR,Standard Diagnosis,van engine management light diagnostics,Phrase,Van-specific informational query. High chance of conversion if captured with the right mobile diagnostic message.
+Mercedes Van Servicing,Mercedes Van Servicing & Brakes,mobile van full service,Phrase,Informational but shows intent for mobile servicing; good for capturing users researching mobile options.
+Mercedes Van Servicing,Mercedes Van Servicing & Brakes,mercedes van service booking,Phrase,High intent for Mercedes servicing but could be car-focused; worth testing for van relevance.
+Van Tuning,Van Economy Tune,mobile van remap,Phrase,Research intent for mobile remapping; opportunity to capture and convert with professional commercial messaging.
+Van Tuning,Van Load & Driveability Tune,mercedes sprinter gearbox tuning,Phrase,Specific Mercedes Sprinter tuning request for gearbox/driveability; fits specialist profile but slightly niche.
+Van Tuning,Van Economy Tune,remapping ashford kent,Phrase,"Perfect geography (Kent), though 'car' is used, it captures local tuning intent."
+Van Tuning,Van Economy Tune,van ecu remapping,Phrase,"Includes van tuning and remapping, though key programming is not a core service. [deduped_rewrite_merge]"
+Van Tuning,Van Economy Tune,is remapping a van a good idea?,Phrase,Specific to vans; high relevance for a business looking to educate and convert van owners.
+Van Tuning,Van Economy Tune,is remapping a van legal?,Phrase,Legal concern query; good for capturing van owners in the consideration phase.
+Van Tuning,Van Economy Tune,mobile ecu remapping,Phrase,"Mobile intent is good, but Sussex is adjacent to Kent. Needs check if the business covers specific Sussex borders."
+Van Tuning,Van Economy Tune,ecu remap kent,Phrase,"Competitor brand but includes 'Kent' and 'ECU remap', which are high-value geo-targeted terms."
+Diagnostics & VOR,Pre-Purchase Van Check,vehicle pre purchase inspection,Phrase,Relevant intent but slightly generic (could be cars); worth testing for van-specific landing pages.
+Diagnostics & VOR,VOR / Urgent Van Diagnostics,mobile van diagnostics wont start,Phrase,"High urgency (Vehicle Off Road); while 'how to' can be DIY, the situation often requires professional mobile diagnostics."
+Diagnostics & VOR,Limp Mode / Derate,how to get a mercedes out of limp mode?,Phrase,"High-urgency Mercedes problem; while phrased as 'how to', the user likely needs professional intervention to clear the fault."
+Diagnostics & VOR,Standard Diagnosis,van engine light diagnostic mobile,Phrase,Specific to vans and indicates a current fault. Good for mobile diagnostic lead generation.
+Mercedes Van Servicing,Vito Servicing,how often do mercedes vito vans need service?,Phrase,Informational intent but highly specific to a core model; good for capturing users in the research phase of maintenance.
+Mercedes Van Servicing,Sprinter Servicing,how often do you need to service a mercedes sprinter van?,Phrase,Informational intent for a core model. Useful for top-of-funnel engagement for maintenance services.
+Mercedes Van Servicing,Sprinter Servicing,what is included in mercedes sprinter service a?,Phrase,Specific to Mercedes Sprinter 'Service A'. Users asking this are often looking to book or compare service offerings.
+Mercedes Van Servicing,Mercedes Van Servicing & Brakes,what is service a on a mercedes van?,Phrase,Specific Mercedes van service terminology. High relevance for a specialist.
+Mercedes Van Servicing,Sprinter Servicing,what is the difference between sprinter service a and b?,Phrase,Specific Sprinter service terminology; indicates a lead likely needing one of these services soon.
+Mercedes Van Servicing,Citan Brakes,citan brakes,Phrase,synthetic_citan_brakes | synthetic_citan_patch
+Mercedes Van Servicing,Citan Brakes,mercedes citan brakes,Phrase,synthetic_citan_brakes | synthetic_citan_patch
+Mercedes Van Servicing,Citan Brakes,citan brake pads,Phrase,synthetic_citan_brakes | synthetic_citan_patch
+Mercedes Van Servicing,Citan Brakes,citan brake discs,Phrase,synthetic_citan_brakes | synthetic_citan_patch
+Mercedes Van Servicing,Citan Brakes,mobile citan brakes,Phrase,synthetic_citan_brakes | synthetic_citan_patch

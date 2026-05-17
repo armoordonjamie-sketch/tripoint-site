@@ -1,11 +1,7 @@
 import { Link } from 'react-router-dom';
-import { Phone, MessageCircle, Shield, Clock, MapPin } from 'lucide-react';
+import { Shield, Clock, MapPin } from 'lucide-react';
 import { Seo } from '@/components/Seo';
 import { ServicePicker } from '@/components/ServicePicker';
-import { CTAButton } from '@/components/CTAButton';
-import { siteConfig } from '@/config/site';
-import { trackNavClick, trackPhoneClick, trackWhatsAppClick } from '@/lib/analytics';
-import { getWhatsAppHref } from '@/lib/whatsappHref';
 
 export function ServicesPage() {
     return (
@@ -38,35 +34,6 @@ export function ServicesPage() {
                     <Link to="/faq" className="hover:text-text-secondary transition-colors">
                         FAQ
                     </Link>
-                </div>
-            </div>
-
-            <div className="border-t border-border-default bg-surface-alt/50">
-                <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-4 px-4 py-5 sm:px-6 sm:py-6 lg:px-8">
-                    <span className="text-sm font-medium text-text-secondary">Ready to book?</span>
-                    <div className="flex flex-wrap items-center justify-center gap-3">
-                        <CTAButton href="/booking" size="sm" onClick={() => trackNavClick('/booking', 'Book online', 'service_card')}>
-                            Book online
-                        </CTAButton>
-                        <a
-                            href={getWhatsAppHref()}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 rounded-lg border border-border-default px-3 py-2 text-sm font-medium text-text-primary transition-colors hover:border-brand/40 hover:bg-brand/5"
-                            onClick={() => trackWhatsAppClick('service_card')}
-                        >
-                            <MessageCircle className="h-4 w-4" />
-                            WhatsApp
-                        </a>
-                        <a
-                            href={`tel:${siteConfig.contact.phoneE164}`}
-                            className="inline-flex items-center gap-2 rounded-lg border border-border-default px-3 py-2 text-sm font-medium text-text-primary transition-colors hover:border-brand/40 hover:bg-brand/5"
-                            onClick={() => trackPhoneClick('service_card')}
-                        >
-                            <Phone className="h-4 w-4" />
-                            {siteConfig.contact.phoneDisplay}
-                        </a>
-                    </div>
                 </div>
             </div>
         </div>

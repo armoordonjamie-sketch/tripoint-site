@@ -1,0 +1,291 @@
+campaign_family,ad_group_theme,keyword_candidate,recommended_match_type,reason
+Diagnostics & VOR,AdBlue / DPF / NOx,adblue warning light still on,Phrase,"Indicates a failed DIY or previous repair, good for a specialist, but very broad without model."
+Diagnostics & VOR,Standard Diagnosis,amber engine warning light,Broad,Informational intent but often leads to a diagnostic booking. Worth testing as a broad signal for van owners.
+Diagnostics & VOR,Standard Diagnosis,book a car diagnostic,Broad,Relevant intent but 'car' is broader than the 'van' focus; worth testing for general diagnostic leads.
+Diagnostics & VOR,Standard Diagnosis,book your car diagnostic check online,Phrase,Good intent but generic 'car' and 'online' might attract users looking for remote software or national chains. Worth testing for local traffic.
+Diagnostics & VOR,Standard Diagnosis,can i drive with a warning light on,Broad,"Informational query that could lead to a booking, but high risk of non-commercial/car traffic. Worth testing as a broad catch-all later."
+Diagnostics & VOR,Standard Diagnosis,can i drive with the engine management light on,Broad,Informational/emergency intent. Potential for VOR/Urgent diagnostics but likely high volume of low-intent car users.
+Diagnostics & VOR,Standard Diagnosis,can i still drive if the check engine light is on,Broad,Similar to other warning light queries; informational intent that may capture van owners in distress.
+Mercedes Van Servicing,Mercedes Van Servicing,mercedes van service specialist,Phrase,"Specific to Mercedes brand and servicing intent. While phrased as a question, it targets the right audience looking for alternatives to main dealers."
+Diagnostics & VOR,Standard Diagnosis,book van diagnostic online,Phrase,Transactional intent ('book online') but uses 'car'. Worth testing for general mobile diagnostic leads.
+Diagnostics & VOR,Standard Diagnosis,mobile diagnostics near me,Phrase,Broad intent but fits mobile diagnostic service; 'car' is often used generically for light commercials by users.
+Diagnostics & VOR,Standard Diagnosis,mobile diagnostics open now,Phrase,"Urgent intent fits mobile VOR service, though 'car' is generic."
+Diagnostics & VOR,Standard Diagnosis,engine diagnostic test,Phrase,Generic diagnostic query; worth testing for van leads but lower priority than van-specific terms.
+Diagnostics & VOR,Standard Diagnosis,van won t start on first try,Phrase,Diagnostic intent for intermittent starting issues.
+Diagnostics & VOR,Standard Diagnosis,van check engine light and abs light on,Phrase,Specific warning light combination requires diagnostic scan.
+Diagnostics & VOR,Standard Diagnosis,van check engine light and battery light,Phrase,Warning light diagnostic intent.
+Diagnostics & VOR,Standard Diagnosis,van check engine light while driving,Phrase,Urgent diagnostic intent for multiple warning lights.
+Diagnostics & VOR,Limp Mode / Derate,van check engine light and loss of power,Broad,Relevant symptoms for diagnostics but lacks 'van' or 'commercial' qualifier; worth testing for broad intent.
+Diagnostics & VOR,Standard Diagnosis,van check engine light and oil light,Broad,Generic diagnostic query; potentially relevant but high risk of passenger car traffic.
+Diagnostics & VOR,Standard Diagnosis,van check engine light rough idle,Broad,Common van diagnostic symptom but generic; needs testing to see if it attracts commercial leads.
+Diagnostics & VOR,Standard Diagnosis,check engine light van ford,Phrase,"While a commercial van, the primary diagnostic focus is Mercedes. Ford is relevant for tuning, but diagnostics is secondary."
+Diagnostics & VOR,Standard Diagnosis,dashboard warning lights,Phrase,Broad intent; could be looking for a service or just information.
+Diagnostics & VOR,Standard Diagnosis,van diesel engine management warning light,Broad,Relevant symptom but lacks 'van' qualifier; could be car-heavy traffic.
+Diagnostics & VOR,Standard Diagnosis,engine diagnostics,Phrase,Relevant service but very broad; could attract car owners rather than van-specific leads.
+Diagnostics & VOR,Standard Diagnosis,engine management light diesel,Phrase,Relevant to diesel vans but lacks explicit service intent; could be informational.
+Diagnostics & VOR,Standard Diagnosis,engine management light with exclamation mark,Phrase,Informational/symptom search; low immediate commercial intent.
+Diagnostics & VOR,Standard Diagnosis,mobile car diagnostics,Phrase,"Mobile diagnostics intent is strong, but 'car' is slightly outside the primary 'van' focus; worth testing for general mobile diagnostic leads."
+Diagnostics & VOR,AdBlue / DPF / NOx,adblue warning light diagnostics,Phrase,"Informational intent regarding AdBlue issues. Risk of DIY intent, but relevant for professional diagnostic services."
+Diagnostics & VOR,Limp Mode / Derate,how do you get out of limp mode,Phrase,"Too generic (could be any car), but relevant to the service. Better as a broad test later."
+Diagnostics & VOR,AdBlue / DPF / NOx,mercedes adblue warning help,Phrase,Specific to Mercedes and AdBlue. Users asking this are often facing an imminent non-start/derate situation.
+Diagnostics & VOR,Standard Diagnosis,how long does it take to run a diagnostic test on a vehicle,Phrase,Very broad informational query. Low immediate commercial intent.
+Diagnostics & VOR,Standard Diagnosis,how long does it take to run vehicle diagnostics,Phrase,Broad informational query.
+Diagnostics & VOR,AdBlue / DPF / NOx,adblue light countdown help,Phrase,Captures users in the early stages of an AdBlue failure/countdown.
+Diagnostics & VOR,Standard Diagnosis,indicator light van,Broad,Broad commercial van intent; user has a dashboard warning light. Worth testing for diagnostic leads.
+Diagnostics & VOR,Pre-Purchase Van Check,is a pre purchase inspection worth it,Phrase,Informational query regarding the value of the service; useful for top-of-funnel but not immediate high-intent booking.
+Diagnostics & VOR,AdBlue / DPF / NOx,is there an adblue warning light,Phrase,Informational/educational query about dashboard symbols; low immediate commercial intent.
+Diagnostics & VOR,Standard Diagnosis,master warning light,Broad,"Generic warning light query; could be a van owner seeking help, but very broad."
+Diagnostics & VOR,AdBlue / DPF / NOx,mercedes dpf fault code,Phrase,Informational intent but often leads to service booking for DPF issues.
+Diagnostics & VOR,AdBlue / DPF / NOx,mercedes dpf problems,Phrase,Informational but high relevance to Mercedes DPF diagnostic services.
+Diagnostics & VOR,Standard Diagnosis,mercedes fault finding,Phrase,Relevant service but slightly broad without a location or 'van' qualifier; worth testing for Mercedes specialist relevance.
+Diagnostics & VOR,AdBlue / DPF / NOx,mercedes fault finding adblue,Phrase,"Specific to a core service (AdBlue diagnostics) for Mercedes, though lacks geographic qualifier."
+Diagnostics & VOR,AdBlue / DPF / NOx,mercedes fault finding dpf,Phrase,"Specific diagnostic service for Mercedes, worth testing despite lack of geo-modifier."
+Diagnostics & VOR,Limp Mode / Derate,mercedes fault finding reduced power,Phrase,Relevant Mercedes limp mode intent but lacks geographic qualifier; worth testing for local reach.
+Diagnostics & VOR,VOR / Urgent Van Diagnostics,mercedes fault finding wont start,Phrase,"Urgent VOR intent for Mercedes, lacks geo but highly relevant to mobile service."
+Diagnostics & VOR,Standard Diagnosis,mobile auto electrician hourly rate,Phrase,"Informational intent regarding pricing, but could lead to a booking."
+Diagnostics & VOR,Standard Diagnosis,mobile car diagnostics near me,Phrase,"Relevant mobile intent, though 'car' is broader than the van focus; worth testing for general diagnostic leads."
+Diagnostics & VOR,Standard Diagnosis,mobile vehicle diagnostic,Broad,"Very broad term; could be medical or IT, but relevant in a vehicle context. Use with caution."
+Diagnostics & VOR,Standard Diagnosis,mobile fault finder,Phrase,Relevant but slightly ambiguous; could refer to a person or a tool. Worth testing.
+Diagnostics & VOR,Standard Diagnosis,mobile technician,Broad,Broad term; could be automotive or IT/Telecom. Worth testing with strict negatives.
+Diagnostics & VOR,Standard Diagnosis,mobile technician,Broad,Broad term; could be automotive or IT/Telecom. Worth testing with strict negatives.
+Mercedes Van Servicing,Mercedes Van Servicing,mobile van service mobile workshop,Phrase,Matches mobile servicing intent but 'mobile workshop' can be broad; needs testing for Mercedes relevance.
+Diagnostics & VOR,Pre-Purchase Van Check,van pre purchase inspection,Broad,"Too broad (UK-wide and generic inspection), but relevant service."
+Diagnostics & VOR,Pre-Purchase Van Check,pre purchase vehicle check,Broad,Slightly generic (vehicle vs van) but highly relevant to the service offering.
+Diagnostics & VOR,Pre-Purchase Van Check,pre purchase vehicle check cost,Phrase,"Relevant service query, though 'vehicle' is broader than 'van'."
+Diagnostics & VOR,Pre-Purchase Van Check,pre purchase vehicle check cost uk,Phrase,Relevant UK-wide intent for vehicle inspection.
+Diagnostics & VOR,Pre-Purchase Van Check,pre-purchase car vehicle inspection - mobile car diagnostics,Phrase,Relevant mobile intent but mentions 'car' specifically; worth testing for van crossover.
+Diagnostics & VOR,Pre-Purchase Van Check,pre-purchase inspection used car check,Phrase,Generic car intent; lower priority than van-specific or generic vehicle terms.
+Diagnostics & VOR,Standard Diagnosis,mobile mechanic diagnostic,Phrase,"While competitor branded, it shows high mobile diagnostic intent. Could be used for conquesting but generally lower priority than generic mobile terms."
+Diagnostics & VOR,Pre-Purchase Van Check,pre purchase inspection,Phrase,Competitor brand for pre-purchase inspection; relevant service but specific to RAC.
+Diagnostics & VOR,Pre-Purchase Van Check,pre purchase vehicle check,Phrase,Competitor brand for pre-purchase inspection; relevant service but specific to RAC.
+Diagnostics & VOR,Standard Diagnosis,vehicle inspection,Phrase,Competitor brand for inspection services.
+Diagnostics & VOR,Standard Diagnosis,vehicle inspection check,Phrase,Competitor brand for inspection services.
+Diagnostics & VOR,Standard Diagnosis,red engine light,Phrase,Relevant symptom but broad; could be car or van. Worth testing for van-specific landing pages.
+Diagnostics & VOR,Standard Diagnosis,red warning light on dashboard,Phrase,Generic dashboard symptom; high volume but low specificity to commercial vans.
+Diagnostics & VOR,Standard Diagnosis,signal light van,Broad,Ambiguous; could refer to indicators or dashboard warning lights. Worth testing broadly.
+Diagnostics & VOR,AdBlue / DPF / NOx,sprinter adblue tank,Phrase,Ambiguous intent; could be looking for parts or capacity info rather than a service.
+Diagnostics & VOR,AdBlue / DPF / NOx,sprinter dpf,Broad,"Broad term; could be looking for parts or deletes, but relevant for diagnostics."
+Diagnostics & VOR,Limp Mode / Derate,sprinter limp mode speed,Phrase,"Slightly more informational/symptom-based, but still relevant to VOR diagnostics."
+Diagnostics & VOR,Standard Diagnosis,sprinter power output,Broad,Informational intent regarding specifications; low immediate service conversion likelihood.
+Diagnostics & VOR,Limp Mode / Derate,limp mode diagnostics,Phrase,Informational phrasing but highly relevant to Sprinter/Vito owners experiencing issues; worth testing for high-intent diagnostic leads.
+Diagnostics & VOR,Standard Diagnosis,transit van engine management light,Phrase,"Non-Mercedes van, but fits mobile diagnostic capability for commercial vehicles."
+Diagnostics & VOR,Standard Diagnosis,vag diagnostics near me,Phrase,VAG (VW Group) covers Crafter/Transporter; relevant for commercial van diagnostics.
+Diagnostics & VOR,Standard Diagnosis,van auto electrics,Phrase,Relevant to mobile diagnostics but slightly broad as it can imply component repair rather than just diagnosis.
+Diagnostics & VOR,AdBlue / DPF / NOx,van fault finding dpf,Phrase,Relevant service but lacks geographic qualifier; good for testing broad reach.
+Diagnostics & VOR,Limp Mode / Derate,van fault finding limp mode,Phrase,High intent for urgent diagnostics but lacks location; worth testing.
+Diagnostics & VOR,VOR / Urgent Van Diagnostics,van won t start,Phrase,Broad intent but highly relevant to VOR services; needs monitoring for non-commercial or DIY intent.
+Diagnostics & VOR,Standard Diagnosis,van won t start first time,Phrase,"Intermittent starting issue, good for diagnostic lead generation but slightly broader."
+Diagnostics & VOR,Pre-Purchase Van Check,vehicle inspection check,Phrase,Relevant service but slightly generic; could attract car owners. Needs monitoring for van intent.
+Diagnostics & VOR,Standard Diagnosis,vivaro van engine management light,Phrase,Non-Mercedes van diagnostics; worth testing for mobile diagnostic service.
+Diagnostics & VOR,Standard Diagnosis,volkswagen van warning lights,Broad,Informational intent regarding warning lights; too broad for immediate high-intent spend.
+Diagnostics & VOR,Standard Diagnosis,vw van engine management light,Phrase,Non-Mercedes van diagnostics; relevant for mobile diagnostic service.
+Diagnostics & VOR,Standard Diagnosis,warning light anti lock brake,Phrase,"Relevant diagnostic intent for ABS issues, though lacks specific van qualifier."
+Diagnostics & VOR,Standard Diagnosis,warning light anti lock brake ford,Phrase,"Ford is a commercial van brand we tune, but diagnostics/brakes are primarily Mercedes focused. Worth testing for general van diagnostic traffic."
+Diagnostics & VOR,Standard Diagnosis,warning light diagnosis,Phrase,"Generic diagnostic intent, likely to capture van owners but needs monitoring for car traffic."
+Diagnostics & VOR,Standard Diagnosis,warning light diagnosis cost,Phrase,High intent but price-sensitive; relevant for mobile service comparison.
+Diagnostics & VOR,Standard Diagnosis,warning light diagnosis ford,Phrase,"Ford van diagnostics are relevant for tuning/general van work, though Mercedes is the primary focus."
+Diagnostics & VOR,Standard Diagnosis,warning light peugeot van,Phrase,"Peugeot vans are relevant commercial vehicles, but diagnostics focus is primarily Mercedes; worth testing for general van diagnostics."
+Diagnostics & VOR,Standard Diagnosis,warning light transit van,Phrase,"Ford Transit is a primary commercial van; while not Mercedes, it fits the mobile diagnostics capability for work vans."
+Diagnostics & VOR,Standard Diagnosis,warning light van,Broad,Very broad intent; could be informational or service-seeking. Better to focus on specific models first.
+Diagnostics & VOR,Standard Diagnosis,warning light van ford,Phrase,Relevant to van diagnostics but non-Mercedes; worth testing for general mobile diagnostic intent.
+Diagnostics & VOR,Standard Diagnosis,warning light vw van,Phrase,Relevant to van diagnostics but non-Mercedes; worth testing for general mobile diagnostic intent.
+Diagnostics & VOR,Standard Diagnosis,what does a full car diagnostic test consist of,Phrase,"Informational query about car diagnostics; TriPoint focuses on vans, but this could be a top-of-funnel lead for a van owner using 'car' generically."
+Diagnostics & VOR,Standard Diagnosis,what does a warning light indicate,Phrase,Very broad informational query. Low immediate intent but relevant to the diagnostic service.
+Diagnostics & VOR,Standard Diagnosis,what does engine management light mean on a van,Phrase,"Relevant to van diagnostics, though informational. Good for capturing users at the start of a fault journey."
+Diagnostics & VOR,Standard Diagnosis,what is a common cause of a no start condition in vehicles,Phrase,Broad educational query. Relevant to mobile diagnostics but lacks immediate commercial intent.
+Diagnostics & VOR,Standard Diagnosis,van breakdown help Kent,Broad,"High relevance to commercial 'VOR' (Vehicle Off Road) situations, though phrased as advice. Could capture urgent diagnostic needs."
+Diagnostics & VOR,Standard Diagnosis,van engine light diagnostics,Broad,"Broad van diagnostic intent. While 'why' is informational, it often precedes a service search. Worth testing as broad."
+Diagnostics & VOR,Standard Diagnosis,van non start diagnostics,Broad,"Relevant symptom for a mobile diagnostic service, though phrased as a question."
+Mercedes Van Servicing,Sprinter Brakes,can i drive with 80 worn brake pads,Phrase,Informational query that indicates a need for brake replacement; good for capturing users in the research phase.
+Mercedes Van Servicing,Sprinter Brakes,can you change brake fluid without changing brakes,Phrase,Informational query regarding brake maintenance; relevant to mobile servicing capabilities.
+Mercedes Van Servicing,Sprinter Brakes,van brakes tonbridge,Phrase,"Geographically relevant (Tonbridge is in Kent), but 'car' intent is slightly off-target. Worth testing for local visibility."
+Mercedes Van Servicing,Mercedes Van Servicing,van servicing,Phrase,"Broad servicing intent; includes 'car' which is not the primary focus, but 'van servicing' is relevant. Worth testing for broad reach."
+Mercedes Van Servicing,Mercedes Van Servicing,do i really need service b mercedes,Phrase,Low-intent research/PAA query. Users are questioning the need for service rather than looking to book.
+Mercedes Van Servicing,Mercedes Van Servicing,do you really need service b with mercedes,Phrase,Low-intent research/PAA query similar to previous.
+Mercedes Van Servicing,Mercedes Van Servicing,van brake quote,Broad,"High intent for service, but very broad; needs to be qualified by 'van' or 'mercedes' to avoid car-only traffic."
+Mercedes Van Servicing,Mercedes Van Servicing,mobile van service fitting,Phrase,Competitor conquesting for mobile service; relevant intent but high competition and non-specific to vans.
+Mercedes Van Servicing,Mercedes Van Servicing,mobile van service,Phrase,Competitor conquesting for van servicing.
+Mercedes Van Servicing,Mercedes Van Servicing,how much does a full mercedes service cost,Phrase,Price-sensitive query but indicates high intent for a full service; worth testing to capture users at the consideration stage.
+Mercedes Van Servicing,Mercedes Van Servicing,how much does a van service cost,Broad,"Too generic as it doesn't specify Mercedes or mobile intent, but relevant to the industry for future broad testing."
+Mercedes Van Servicing,Mercedes Van Servicing,how much is a full van service,Broad,Generic van service pricing query; lacks brand specificity for immediate high-priority spend.
+Mercedes Van Servicing,Mercedes Van Servicing,is mercedes service b major or minor,Phrase,Informational query about Mercedes service schedules; low immediate conversion intent but relevant to the niche.
+Mercedes Van Servicing,Mercedes Van Servicing,is service a or b bigger on mercedes,Phrase,Informational query regarding service types; useful for top-of-funnel but not high-intent.
+Mercedes Van Servicing,Mercedes Van Servicing,kwik fit van service,Phrase,Competitor brand query for van servicing; potentially useful for conquesting but high competition and low specificity.
+Mercedes Van Servicing,Mercedes Van Servicing,mercedes brake,Phrase,Relevant but broad; could refer to parts or cars. Worth testing for van relevance.
+Mercedes Van Servicing,Mercedes Van Servicing,mercedes brake major,Phrase,Specific service level but lacks 'van' qualifier; likely relevant.
+Mercedes Van Servicing,Mercedes Van Servicing,mercedes brake minor,Phrase,Specific service level but lacks 'van' qualifier.
+Mercedes Van Servicing,Mercedes Van Servicing,mercedes van brakes,Phrase,"A bit broad as it could be parts-only, but relevant for a specialist service."
+Mercedes Van Servicing,Mercedes Van Servicing,mercedes service prices uk,Broad,Informational intent regarding pricing; worth testing but lower conversion probability than 'mobile' or 'near me'.
+Mercedes Van Servicing,Mercedes Van Servicing,mercedes servicing,Phrase,Relevant but broad; could attract car owners. Worth testing for van leads.
+Mercedes Van Servicing,Mercedes Van Servicing,mercedes specialist service cost uk,Broad,Broad national intent; may capture local users but less targeted than 'near me' or specific towns.
+Mercedes Van Servicing,Sprinter Brakes,mercedes sprinter brake discs,Phrase,"Could be parts shopping (DIY), but often leads to service intent. Worth testing."
+Mercedes Van Servicing,Sprinter Brakes,mercedes sprinter brake discs and pads,Phrase,Likely parts-focused but relevant to brake replacement services.
+Mercedes Van Servicing,Sprinter Brakes,mercedes sprinter brake pads,Phrase,Potential for parts shopping; monitor for conversion to service booking.
+Mercedes Van Servicing,Sprinter Brakes,mercedes sprinter brakes,Phrase,"Broad term, could be parts or technical info."
+Mercedes Van Servicing,Sprinter Servicing,mercedes sprinter motorhome,Phrase,"Sprinter-based motorhomes often require specialist servicing, but intent is slightly broad."
+Mercedes Van Servicing,Sprinter Servicing,mercedes van motorhome,Broad,Motorhomes are often built on Sprinter chassis; relevant for servicing but not the primary commercial focus. Worth testing for crossover.
+Mercedes Van Servicing,Vito Brakes,mercedes vito brake pads,Exact,Could be parts shopping or service intent; worth testing as exact match to capture service seekers.
+Mercedes Van Servicing,Vito Brakes,mercedes vito brakes,Exact,"Broad term, likely parts or info, but high relevance to model. Use exact match to test."
+Mercedes Van Servicing,Vito Brakes,mercedes vito rear brake pads,Exact,Borderline parts shopping vs service intent. Exact match for testing.
+Mercedes Van Servicing,Mercedes Van Servicing,mobile mechanic near me,Broad,Strong mobile intent but 'car' is less targeted than 'van'. Worth testing for local reach.
+Mercedes Van Servicing,Mercedes Van Servicing,mobile van service at home,Broad,"Mobile service intent is good, but 'car' is generic. Test for volume."
+Mercedes Van Servicing,Mercedes Van Servicing,mobile diesel service near me,Phrase,"Relevant mobile service intent for diesel vehicles, though generic. Fits Kent/SE London service area."
+Mercedes Van Servicing,Mercedes Van Servicing,mobile mechanic near you,Phrase,"Generic mobile mechanic intent, useful for local targeting but lacks van specificity."
+Diagnostics & VOR,Standard Diagnosis,mobile technician,Broad,"Too broad for immediate high-intent spend; could be any industry (IT, appliances)."
+Diagnostics & VOR,Standard Diagnosis,mobile technician,Broad,Duplicate entry; too broad for immediate high-intent spend.
+Mercedes Van Servicing,Mercedes Van Servicing,mobile van service providers,Broad,Informational/directory intent but relevant to the service offering.
+Mercedes Van Servicing,Sprinter Brakes,sprinter brake pads,Phrase,"Broad intent, could be parts or service; worth testing for service leads."
+Mercedes Van Servicing,Sprinter Brakes,sprinter brake pads and discs,Phrase,"Commonly searched when looking for replacement service, but carries parts-only risk."
+Mercedes Van Servicing,Sprinter Brakes,sprinter brake pads major,Phrase,"Ambiguous modifier 'major', possibly referring to major service or major parts."
+Mercedes Van Servicing,Sprinter Brakes,sprinter brake pads major local,Phrase,"Local modifier helps, but 'major' remains slightly ambiguous."
+Mercedes Van Servicing,Sprinter Brakes,sprinter brake replacement interval,Phrase,Informational intent; user is looking for maintenance schedules rather than immediate service.
+Mercedes Van Servicing,Sprinter Brakes,sprinter brake sensor,Phrase,Could be a parts query or a diagnostic need; worth testing for service intent.
+Mercedes Van Servicing,Sprinter Brakes,sprinter brakes upgrade,Exact,"Upgrade intent can sometimes be DIY/enthusiast, but often relates to heavy-duty use for commercial vans."
+Mercedes Van Servicing,Sprinter Servicing,sprinter moto van,Broad,Refers to a lifestyle/hobbyist van setup; potentially relevant for servicing but low immediate intent.
+Mercedes Van Servicing,Sprinter Servicing,sprinter motocross van,Broad,Hobbyist van configuration; not a direct service request.
+Mercedes Van Servicing,Sprinter Servicing,sprinter motorhome,Phrase,"Broad term for motorhomes; while they need servicing, this is likely a sales or research query."
+Mercedes Van Servicing,Mercedes Van Servicing,van brake check and replacement,Phrase,"Relevant service but generic van intent; TriPoint focuses on Mercedes for brakes, but broad van brake queries are worth testing for lead gen."
+Mercedes Van Servicing,Mercedes Van Servicing,van brake pads near me,Phrase,High local intent for brake service; generic van intent is secondary to Mercedes specialty but fits mobile service profile.
+Mercedes Van Servicing,Mercedes Van Servicing,van brakes near me,Phrase,"Strong local intent, though generic van. Good for testing mobile service demand."
+Mercedes Van Servicing,Mercedes Van Servicing,van brakes repair,Phrase,"Relevant service intent, generic van."
+Mercedes Van Servicing,Mercedes Van Servicing,van service,Phrase,Relevant but very broad; needs monitoring to ensure it doesn't attract DIY or car queries.
+Mercedes Van Servicing,Mercedes Van Servicing,vans servicing repairs,Broad,Relevant intent but very broad; worth testing for general van service traffic.
+Mercedes Van Servicing,Vito Brakes,vito brake light switch,Phrase,Could be a parts shopper or a repair lead; worth testing cautiously.
+Mercedes Van Servicing,Vito Brakes,vito brake pads,Phrase,"Could be parts shopping intent, but worth testing for service conversion."
+Diagnostics & VOR,Standard Diagnosis,mercedes sprinter common problems,Broad,"Informational query that could lead to a diagnostic booking, but currently too top-of-funnel."
+Mercedes Van Servicing,Mercedes Van Servicing,van service checklist,Phrase,General informational query about van servicing; could be useful for capturing early-stage leads.
+Van Tuning,Van Economy Tune,are mobile remaps any good,Broad,Top-of-funnel informational query about the mobile remapping industry.
+Van Tuning,Van Load & Driveability Tune,auto gearbox tuner for mercedes sprinter w910 2018 -,Exact,Highly specific Mercedes Sprinter tuning query; fits driveability/load profile but very niche.
+Van Tuning,Van Economy Tune,can you remap a van for better fuel economy,Broad,Generic car query but relevant to economy tuning; worth testing with van-specific ad copy.
+Van Tuning,Van Economy Tune,car remap,Phrase,Generic car focus but relevant to tuning industry; too broad for immediate high-intent van focus.
+Van Tuning,Van Economy Tune,car remapping ashford kent,Phrase,Correct geography (Kent) but mentions cars; worth testing for van owners searching generally.
+Van Tuning,Van Economy Tune,car remapping near me,Phrase,Local intent but car-focused; potential for van owners but lower priority than van-specific terms.
+Van Tuning,Van Economy Tune,car van tuning-ecu remapping key programming,Phrase,Includes van tuning but also key programming which is not a core service; broad intent.
+Van Tuning,Van Economy Tune,celtic tuning,Phrase,Competitor brand term; broad and not specifically van-focused.
+Van Tuning,Van Economy Tune,celtic tuning near me,Phrase,Competitor brand with local intent; worth testing for local van tuning leads.
+Van Tuning,Van Economy Tune,commercial van modifications,Broad,"Broad term; could include styling or racking, but worth testing for tuning intent in a commercial context."
+Mercedes Van Servicing,Mercedes Van Servicing,commercial van service,Broad,"Generic servicing term; while relevant, the business specializes in Mercedes for servicing. Test for broad reach."
+Van Tuning,Van Economy Tune,do eco remaps work,Broad,Top-of-funnel research query regarding economy tuning; worth testing for conversion potential.
+Van Tuning,Van Economy Tune,do fuel economy chips really work,Broad,Research query for fuel economy solutions; 'chips' often refers to tuning boxes but overlaps with remap intent.
+Van Tuning,Van Load & Driveability Tune,van dsg remap near me,Phrase,DSG tuning is relevant for VW Transporter/Caddy fleets; 'near me' fits mobile service area.
+Van Tuning,Van Economy Tune,eco tuning,Phrase,Relevant to economy tuning but slightly broad; could apply to cars without 'van' qualifier.
+Van Tuning,Van Economy Tune,economy software,Broad,Too broad; could refer to fleet management software or PC power saving tools.
+Van Tuning,Van Economy Tune,van economy tuning,Phrase,Relevant to core service but broad; needs monitoring to ensure it attracts commercial van owners rather than passenger cars.
+Van Tuning,Van Load & Driveability Tune,van ecu remap,Broad,Extremely broad term; high risk of non-commercial traffic. Better suited for later testing with strict negatives.
+Van Tuning,Van Economy Tune,van fuel consumption remap,Broad,Relevant to economy tuning but slightly ambiguous; could be car or van. Worth testing for commercial volume.
+Van Tuning,Van Economy Tune,fuel economy,Broad,Too broad as a standalone term; likely informational or consumer-focused rather than service-seeking.
+Van Tuning,Van Economy Tune,fuel economy remap calculator,Phrase,Informational intent but often leads to service conversion for fleet/business owners.
+Van Tuning,Van Economy Tune,van gearbox remap near me,Phrase,"Relevant for driveability (DSG/TCU tuning), but slightly generic without 'van' qualifier."
+Van Tuning,Van Economy Tune,hgv and truck remapping by evolution chips,Phrase,"HGV/Truck is adjacent to large vans (Daily/Crafter), but might be too heavy-duty for current mobile setup; also contains a competitor brand."
+Van Tuning,Van Economy Tune,how much does a van remap cost,Phrase,Informational query but high commercial intent for pricing. Worth testing if CPC is low.
+Van Tuning,Van Economy Tune,how much does a van economy remap cost,Phrase,"Specific to economy tuning, which aligns with the business model."
+Van Tuning,Van Economy Tune,is an economy remap worth it,Phrase,Top-of-funnel research query. Worth testing to capture users considering the service.
+Van Tuning,Van Economy Tune,is it worth remapping a van,Phrase,Research phase query for van remapping. Useful for capturing early-stage commercial leads.
+Van Tuning,Van Economy Tune,is remap good for a diesel,Broad,Very broad and generic; could apply to cars or vans. Lower priority.
+Van Tuning,Van Economy Tune,is remapping a diesel safe,Broad,Broad informational query regarding safety/reliability.
+Van Tuning,Van Economy Tune,is remapping a van a good idea,Phrase,Research query specifically targeting vans; good for capturing potential customers in the consideration phase.
+Van Tuning,Van Economy Tune,is remapping a van worth it,Phrase,Top-of-funnel research query. Could be useful for a blog but too broad for immediate high-intent conversion.
+Van Tuning,Van Load & Driveability Tune,mercedes sprinter 313 cdi tuning,Phrase,Specific engine model query often indicates research for tuning or performance specs; relevant for commercial driveability tuning.
+Van Tuning,Van Economy Tune,mercedes vito 110 cdi tuning,Phrase,Specific low-bhp Vito model; high intent for economy or load-pull tuning to improve driveability.
+Van Tuning,Van Economy Tune,mercedes vito 111 cdi tuning,Phrase,Specific engine variant; likely looking for performance/economy improvements for work use.
+Van Tuning,Van Economy Tune,mercedes vito 116 cdi tuning,Phrase,Specific engine variant; relevant for commercial tuning services.
+Van Tuning,Van Economy Tune,mercedes-benz sprinter 2018 - present,Broad,"Too broad; lacks service intent (could be sales, specs, or parts)."
+Van Tuning,Van Economy Tune,mercedes-benz vito w447 - 2015 - 2019,Broad,Lacks service intent; likely looking for specs or parts.
+Van Tuning,Van Economy Tune,mobile van remap near me,Phrase,"Mobile remap intent is strong, but 'car' is slightly outside primary van focus; worth testing for crossover commercial car/van users."
+Van Tuning,Van Economy Tune,mobile remapping uk,Broad,"Broad geographic intent, worth testing for local relevance but lower priority than 'near me'."
+Van Tuning,Van Economy Tune,performance remap vs economy remap,Phrase,Informational/comparison intent; useful for capturing users deciding on economy tuning.
+Van Tuning,Van Economy Tune,remap near me,Phrase,Strong local intent but broad; could be for cars. Worth testing in a van-specific campaign context.
+Van Tuning,Van Economy Tune,remapping a van,Phrase,"General intent, worth testing for commercial leads."
+Van Tuning,Van Load & Driveability Tune,van tcu remap,Exact,Transmission Control Unit remapping is relevant for driveability but very niche/technical.
+Van Tuning,Van Economy Tune,van ecu remapping,Broad,Relevant but broad; needs monitoring to ensure it doesn't attract performance/stage tuning queries.
+Van Tuning,Van Economy Tune,van ecu remapping chip tuning,Phrase,Chip tuning is a slightly dated term but still used for commercial vans; monitor for hobbyist intent.
+Van Tuning,Van Economy Tune,van modifications near me,Broad,"Broad term that could include styling, but often used by van owners looking for performance/economy remapping."
+Van Tuning,Van Economy Tune,van remapping,Broad,Broad category term; useful for discovery but needs monitoring for non-commercial intent.
+Van Tuning,Van Economy Tune,van tune,Exact,Slightly broad but relevant; exact match preferred to avoid car-tuning traffic.
+Van Tuning,Van Economy Tune,van tuning uk,Phrase,Relevant service but geographically broad for a Kent-based mobile provider.
+Van Tuning,Van Economy Tune,what bhp is a 314 sprinter,Broad,Informational query about Sprinter specs; often a precursor to tuning interest.
+Van Tuning,Van Economy Tune,what bhp is the vito 111,Broad,Informational query about Vito specs; potential lead for tuning.
+Van Tuning,Van Economy Tune,what is an economy tune,Broad,Top-of-funnel educational query; low immediate intent but relevant to service offering.
+Van Tuning,Van Economy Tune,what mpg gains will i get from remapping,Phrase,Informational but high-intent for economy tuning; worth testing as a top-of-funnel query.
+Mercedes Van Servicing,Sprinter Servicing,mercedes sprinter van,Phrase,Broad model-specific term; lacks explicit service intent but highly relevant to the core business model.
+Mercedes Van Servicing,Sprinter Brakes,how long do brakes last on a mercedes sprinter van?,Phrase,Informational query about Sprinter maintenance; relevant but low immediate intent.
+Mercedes Van Servicing,Mercedes Van Servicing,is mercedes service b major or minor?,Phrase,Informational but highly relevant to Mercedes van owners; potential for top-of-funnel awareness.
+Mercedes Van Servicing,Mercedes Van Servicing,what does a van service include?,Phrase,Generic informational query about van servicing; too broad for immediate high-intent spend.
+Mercedes Van Servicing,Mercedes Van Servicing,what does mercedes major service include?,Phrase,Informational query specific to Mercedes; relevant but lacks immediate booking intent.
+Van Tuning,Van Economy Tune,does a tune improve fuel economy?,Broad,Informational query with high relevance to economy tuning services; worth testing for top-of-funnel capture.
+Diagnostics & VOR,Standard Diagnosis,auto mobile | mobile mechanic,Broad,Generic mobile mechanic intent; relevant but highly competitive and broad.
+Diagnostics & VOR,Standard Diagnosis,can a car diagnostic tell you if an engine is bad?,Phrase,Informational query; potential lead for diagnostics but lower immediate commercial intent.
+Mercedes Van Servicing,Mercedes Van Servicing,can i take my mercedes anywhere for a service?,Phrase,Broad research intent regarding Mercedes servicing; could be captured to position TriPoint as the specialist alternative.
+Diagnostics & VOR,Standard Diagnosis,diagnostics,Exact,Extremely broad; high risk of irrelevant traffic without further qualification.
+Diagnostics & VOR,Standard Diagnosis,engine management light: what to do if it comes on,Phrase,"Informational/educational query, though could lead to a booking."
+Diagnostics & VOR,Standard Diagnosis,"expert car diagnostics in ashford, kent",Phrase,"Good geography (Ashford, Kent), but 'car' is not the primary focus (van specialist)."
+Diagnostics & VOR,AdBlue / DPF / NOx,mercedes adblue warning diagnostics,Phrase,Informational query but highly relevant to Mercedes van owners facing a countdown/no-start scenario; good for capturing top-of-funnel diagnostic leads.
+Diagnostics & VOR,Standard Diagnosis,how long does it take to run a diagnostic test on a vehicle?,Phrase,Generic informational query about diagnostic duration; low immediate commercial intent.
+Diagnostics & VOR,Standard Diagnosis,how long does it take to run vehicle diagnostics?,Phrase,"Generic informational query; similar to previous, better for blog content than high-intent search."
+Diagnostics & VOR,AdBlue / DPF / NOx,adblue light diagnostics,Phrase,"Captures users in a state of urgency regarding emissions systems, though generic."
+Diagnostics & VOR,Pre-Purchase Van Check,pre purchase van inspection service,Phrase,Informational but directly related to a core service (Pre-Purchase Check); allows the business to prove value.
+Diagnostics & VOR,Standard Diagnosis,mercedes sprinter c907 diagnostics,Phrase,Highly specific Mercedes Sprinter technical query; could be a diagnostic lead or just info seeking.
+Diagnostics & VOR,Pre-Purchase Van Check,van vehicle inspection,Exact,Broad term; could be MOT or pre-purchase. Worth testing as exact match for pre-purchase leads.
+Diagnostics & VOR,Pre-Purchase Van Check,van vehicle inspections,Exact,"Similar to vehicle inspection, broad but potentially relevant for pre-purchase."
+Mercedes Van Servicing,Mercedes Van Servicing,mobile van mechanic,Broad,Very broad mobile mechanic intent; worth testing as broad but high risk of irrelevant car traffic.
+Mercedes Van Servicing,Mercedes Van Servicing,mobile van servicing,Phrase,Includes 'van' but 'car' intent is high; worth testing if filtered by audience or location.
+Mercedes Van Servicing,Mercedes Van Servicing,do i really need service b mercedes?,Phrase,"Informational intent but specific to Mercedes Service B; could capture users deciding on a service, though borderline DIY/research."
+Mercedes Van Servicing,Mercedes Van Servicing,do you really need service b with mercedes?,Phrase,Similar to previous; informational but highly relevant to Mercedes service offerings.
+Mercedes Van Servicing,Mercedes Van Servicing,is service a or b bigger on mercedes?,Phrase,Informational query about service types; low immediate commercial intent but relevant to the niche.
+Mercedes Van Servicing,Mercedes Van Servicing,mobile van servicing and repair,Broad,"Generic van service intent, potentially looking for main dealer ('official')."
+Mercedes Van Servicing,Mercedes Van Servicing,servicecare,Phrase,Mercedes ServiceCare is a specific service plan; relevant for capturing users looking for official-standard servicing.
+Mercedes Van Servicing,Mercedes Van Servicing,vans servicing & repairs,Broad,Generic van servicing; useful for testing but lacks Mercedes specificity or mobile intent.
+Diagnostics & VOR,Standard Diagnosis,what are common problems with mercedes sprinter?,Phrase,Informational query; could lead to diagnostic work but low immediate intent.
+Mercedes Van Servicing,Mercedes Van Servicing,what does mercedes mobilo cover?,Phrase,Informational query regarding Mercedes breakdown cover.
+Van Tuning,Van Economy Tune,remap for better fuel economy,Broad,Informational but high-intent for economy tuning; 'car' is broad but often used for vans by laypeople.
+Van Tuning,Van Economy Tune,do eco remaps work?,Phrase,Informational query regarding economy tuning; relevant but top-of-funnel research intent.
+Van Tuning,Van Economy Tune,do fuel economy chips really work?,Phrase,"Informational/skeptical query; 'chips' often refers to plug-in boxes rather than ECU remapping, but relevant to economy tuning audience."
+Van Tuning,Van Economy Tune,is remap good for a diesel?,Broad,Broad informational query; most vans are diesel so it is relevant but very early stage.
+Van Tuning,Van Economy Tune,is remapping a diesel safe?,Broad,Informational query regarding safety; potential to capture van owners researching the service.
+Van Tuning,Van Economy Tune,is remapping a van worth it?,Phrase,Informational query with commercial intent; useful for top-of-funnel but not immediate high-intent conversion.
+Van Tuning,Van Economy Tune,vans & commercials,Broad,Extremely broad; likely to attract junk or sales intent rather than service intent.
+Van Tuning,Van Load & Driveability Tune,what bhp is a 314 sprinter?,Phrase,Informational query often asked by owners considering a remap to higher factory specs (e.g. 314 to 316).
+Van Tuning,Van Load & Driveability Tune,what bhp is the vito 111?,Phrase,Informational query often linked to tuning potential for the entry-level Vito engine.
+Diagnostics & VOR,Standard Diagnosis,check engine light: what it means & how to respond,Phrase,Informational/educational query; could lead to a booking but high risk of DIY intent.
+Diagnostics & VOR,Limp Mode / Derate,what is limp mode on mercedes vito?,Phrase,Informational but specific to a core target vehicle (Vito); could lead to a service booking if the user realizes they can't fix it.
+Diagnostics & VOR,AdBlue / DPF / NOx,mercedes sprinter adblue warning light diagnostic,Phrase,Informational query but highly specific to Mercedes Sprinter AdBlue issues which often lead to a service booking.
+Diagnostics & VOR,AdBlue / DPF / NOx,mercedes sprinter dpf diagnostic,Phrase,Informational but indicates a specific fault on a core target vehicle (Sprinter).
+Diagnostics & VOR,Limp Mode / Derate,van limp mode diagnostic,Broad,Broad informational query. Useful for top-of-funnel but low immediate commercial intent.
+Mercedes Van Servicing,Mercedes Van Servicing,how much does a van service cost?,Phrase,Generic cost query for van servicing; relevant but lacks Mercedes specificity. Worth testing for broad reach.
+Mercedes Van Servicing,Mercedes Van Servicing,how much is a full van service?,Phrase,Generic van service cost query. Relevant to the business but not brand-specific.
+Mercedes Van Servicing,Sprinter Servicing,how often should a mercedes sprinter van be serviced?,Phrase,Informational query but highly relevant to Mercedes Sprinter owners; potential to capture users looking for a service provider once they know the interval.
+Mercedes Van Servicing,Vito Servicing,how often should a mercedes vito be serviced?,Phrase,Informational query for Vito owners; good for brand awareness and capturing intent early in the decision cycle.
+Mercedes Van Servicing,Mercedes Van Servicing,how often should a van get serviced?,Broad,Too generic; could be any van make. Low commercial intent for a Mercedes specialist.
+Mercedes Van Servicing,Mercedes Van Servicing,is it cheaper to use a mobile mechanic?,Broad,Generic mobile mechanic query; lacks van or Mercedes specificity. High risk of price-sensitive car owners.
+Mercedes Van Servicing,Sprinter Servicing,what is the service schedule for a mercedes sprinter?,Phrase,Informational but highly targeted to the core vehicle model. Good for capturing top-of-funnel Sprinter owners.
+Van Tuning,Van Economy Tune,how much does a remap usually cost?,Phrase,"Price-sensitive query, broad intent but relevant to tuning services. Worth testing for lead generation."
+Van Tuning,Van Economy Tune,how to tune a diesel engine for fuel economy?,Broad,"Educational 'how to' intent, but diesel economy is highly relevant to the service. Lower priority than direct service queries."
+Van Tuning,Van Economy Tune,is an economy remap worth it?,Phrase,Informational query with high relevance to the service; good for capturing top-of-funnel commercial interest.
+Van Tuning,Van Economy Tune,is it worth remapping a van?,Phrase,Broad commercial intent; users are weighing the benefits of the service.
+Van Tuning,Van Economy Tune,what is an economy tune?,Phrase,Purely educational; keep for later testing if top-of-funnel traffic is needed.
+Van Tuning,Van Load & Driveability Tune,ford transit van remap,Phrase,Relevant but slightly broader than specific economy/load terms; worth testing for commercial intent.
+Van Tuning,Van Load & Driveability Tune,ford transit custom tune,Phrase,Relevant model but 'tune' can occasionally attract non-commercial interest; test for B2B fit.
+Van Tuning,Van Load & Driveability Tune,ford transit custom tuning,Phrase,Broad commercial model term; monitor for performance vs utility intent.
+Van Tuning,Van Load & Driveability Tune,ford transit custom remap,Phrase,Common commercial van remapping query.
+Van Tuning,Van Economy Tune,vw crafter tune,Phrase,Relevant commercial van but 'tune' can occasionally lean towards performance; worth testing.
+Van Tuning,Van Economy Tune,vw crafter tuning,Phrase,"Relevant commercial van, broad tuning intent."
+Van Tuning,Van Economy Tune,volkswagen crafter tune,Phrase,Relevant but slightly broad; 'tune' can sometimes attract non-commercial interest.
+Van Tuning,Van Economy Tune,volkswagen crafter tuning,Phrase,Broad commercial intent for a relevant work van.
+Van Tuning,Van Economy Tune,vw transporter tune,Exact,Relevant van model but 'tune' can occasionally lean towards lifestyle/performance; exact match mitigates risk.
+Van Tuning,Van Economy Tune,vw transporter tuning,Exact,Broad term for a popular van; needs monitoring to ensure it doesn't attract 'stage 1' performance seekers.
+Van Tuning,Van Economy Tune,vw transporter remap,Exact,"High volume term for a supported van, but carries risk of non-commercial intent."
+Van Tuning,Van Economy Tune,volkswagen transporter tune,Phrase,Broad term for a relevant commercial van; worth testing but less specific than 'economy' or 'load'.
+Van Tuning,Van Economy Tune,volkswagen transporter tuning,Phrase,Broad commercial van tuning term; requires monitoring for non-business intent.
+Van Tuning,Van Economy Tune,renault trafic tune,Phrase,Relevant commercial vehicle but 'tune' can occasionally lean towards performance; worth testing for broad commercial intent.
+Van Tuning,Van Economy Tune,renault trafic tuning,Phrase,"Similar to 'tune', a standard commercial van term that is relevant but needs monitoring for intent."
+Van Tuning,Van Economy Tune,fiat ducato tune,Broad,Relevant van model but 'tune' can be slightly ambiguous; worth testing for commercial intent.
+Van Tuning,Van Economy Tune,peugeot boxer tune,Phrase,Relevant van but 'tune' can occasionally attract non-commercial interest; worth testing.
+Van Tuning,Van Economy Tune,peugeot boxer tuning,Phrase,"Relevant van, broad tuning intent."
+Van Tuning,Van Economy Tune,peugeot expert tune,Phrase,Relevant commercial van but 'tune' can be slightly broad; worth testing.
+Van Tuning,Van Economy Tune,peugeot expert tuning,Phrase,Relevant commercial van; 'tuning' is a standard term but less specific than 'economy remap'.
+Van Tuning,Van Economy Tune,citroen relay tune,Phrase,"Relevant van model, but 'tune' can occasionally be slightly broader than 'remap'."
+Van Tuning,Van Economy Tune,citroen dispatch tune,Phrase,Relevant van but 'tune' can occasionally attract non-commercial performance intent.
+Van Tuning,Van Economy Tune,citroen dispatch tuning,Phrase,"Broad commercial intent, worth testing for lead generation."
+Van Tuning,Van Economy Tune,toyota proace tune,Phrase,"Relevant commercial van, but 'tune' is slightly more ambiguous than 'remap' or 'economy tune'."
+Van Tuning,Van Economy Tune,nissan primastar tune,Phrase,Relevant commercial van but 'tune' is slightly broader than 'remap' or 'economy tune'.
+Van Tuning,Van Economy Tune,nissan primastar tuning,Phrase,Relevant commercial van; tuning is a standard term but less specific than economy-focused terms.

@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { siteConfig } from '@/config/site';
@@ -25,46 +24,30 @@ interface PricingTableProps {
     className?: string;
 }
 
+/** Desktop pricing grid (mobile uses PricingMobileCards) */
 export function PricingTable({ compact = false, className }: PricingTableProps) {
-    const { services, addOns, deposits } = siteConfig.pricing;
+    const { services } = siteConfig.pricing;
 
     return (
-        <div className={cn('space-y-8', className)}>
-            {/* Main services table */}
+        <div className={cn('hidden lg:block', className)}>
             <div className="rounded-xl border border-border-default">
                 <table className="w-full text-left">
                     <thead>
                         <tr className="border-b border-border-default">
-                            <th
-                                className={cn(
-                                    'sticky top-20 z-30 border-b border-border-default bg-surface-alt px-4 py-3 text-sm font-semibold text-text-primary shadow-sm sm:px-6',
-                                )}
-                            >
+                            <th className="sticky top-20 z-30 border-b border-border-default bg-surface-alt px-6 py-3 text-sm font-semibold text-text-primary shadow-sm">
                                 Service
                             </th>
-                            <th
-                                className={cn(
-                                    'sticky top-20 z-30 border-b border-border-default bg-surface-alt px-4 py-3 text-center text-sm font-semibold text-text-primary shadow-sm',
-                                )}
-                            >
+                            <th className="sticky top-20 z-30 border-b border-border-default bg-surface-alt px-4 py-3 text-center text-sm font-semibold text-text-primary shadow-sm">
                                 Zone A
                             </th>
-                            <th
-                                className={cn(
-                                    'sticky top-20 z-30 border-b border-border-default bg-surface-alt px-4 py-3 text-center text-sm font-semibold text-text-primary shadow-sm',
-                                )}
-                            >
+                            <th className="sticky top-20 z-30 border-b border-border-default bg-surface-alt px-4 py-3 text-center text-sm font-semibold text-text-primary shadow-sm">
                                 Zone B
                             </th>
-                            <th
-                                className={cn(
-                                    'sticky top-20 z-30 border-b border-border-default bg-surface-alt px-4 py-3 text-center text-sm font-semibold text-text-primary shadow-sm',
-                                )}
-                            >
+                            <th className="sticky top-20 z-30 border-b border-border-default bg-surface-alt px-4 py-3 text-center text-sm font-semibold text-text-primary shadow-sm">
                                 Zone C
                             </th>
                             {!compact && (
-                                <th className="sticky top-20 z-30 hidden border-b border-border-default bg-surface-alt px-4 py-3 text-sm font-semibold text-text-primary shadow-sm lg:table-cell">
+                                <th className="sticky top-20 z-30 border-b border-border-default bg-surface-alt px-4 py-3 text-sm font-semibold text-text-primary shadow-sm">
                                     Included
                                 </th>
                             )}
@@ -72,156 +55,45 @@ export function PricingTable({ compact = false, className }: PricingTableProps) 
                     </thead>
                     <tbody>
                         {services.map((service, i) => (
-                            <Fragment key={service.slug}>
-                                <tr
-                                    className={cn(
-                                        'border-b border-border-default transition-colors hover:bg-surface-alt/50',
-                                        i === services.length - 1 && compact && 'border-b-0',
-                                        i === services.length - 1 && !compact && 'lg:border-b-0',
-                                    )}
-                                >
-                                    <td className="px-4 py-4 text-sm font-medium text-text-primary sm:px-6">
-                                        {slugToHref[service.slug] ? (
-                                            <Link to={slugToHref[service.slug]} className="text-brand hover:underline">{service.name}</Link>
-                                        ) : (
-                                            service.name
-                                        )}
-                                    </td>
-                                    <td className="px-4 py-4 text-center text-sm font-bold text-brand-light">
-                                        <span className="mb-0.5 block text-[10px] font-semibold uppercase tracking-wide text-text-muted lg:hidden">
-                                            Zone A
-                                        </span>
-                                        £{service.zoneA}
-                                        <VatLabel />
-                                    </td>
-                                    <td className="px-4 py-4 text-center text-sm font-bold text-brand-light">
-                                        <span className="mb-0.5 block text-[10px] font-semibold uppercase tracking-wide text-text-muted lg:hidden">
-                                            Zone B
-                                        </span>
-                                        £{service.zoneB}
-                                        <VatLabel />
-                                    </td>
-                                    <td className="px-4 py-4 text-center text-sm font-bold text-brand-light">
-                                        <span className="mb-0.5 block text-[10px] font-semibold uppercase tracking-wide text-text-muted lg:hidden">
-                                            Zone C
-                                        </span>
-                                        £{service.zoneC}
-                                        <VatLabel />
-                                    </td>
-                                    {!compact && (
-                                        <td className="hidden px-4 py-4 text-sm text-text-secondary lg:table-cell">
-                                            {service.included}
-                                        </td>
-                                    )}
-                                </tr>
-                                {!compact && (
-                                    <tr
-                                        className={cn(
-                                            'border-b border-border-default bg-surface-alt/40 lg:hidden',
-                                            i === services.length - 1 && 'border-b-0',
-                                        )}
-                                    >
-                                        <td colSpan={4} className="px-4 py-3 text-xs leading-relaxed text-text-secondary sm:px-6">
-                                            <span className="font-semibold text-text-primary">Included: </span>
-                                            {service.included}
-                                        </td>
-                                    </tr>
+                            <tr
+                                key={service.slug}
+                                className={cn(
+                                    'border-b border-border-default transition-colors hover:bg-surface-alt/50',
+                                    i === services.length - 1 && 'border-b-0',
                                 )}
-                            </Fragment>
+                            >
+                                <td className="px-6 py-4 text-sm font-medium text-text-primary">
+                                    {slugToHref[service.slug] ? (
+                                        <Link to={slugToHref[service.slug]} className="text-brand hover:underline">
+                                            {service.name}
+                                        </Link>
+                                    ) : (
+                                        service.name
+                                    )}
+                                </td>
+                                <td className="px-4 py-4 text-center text-sm font-bold text-brand-light">
+                                    £{service.zoneA}
+                                    <VatLabel />
+                                </td>
+                                <td className="px-4 py-4 text-center text-sm font-bold text-brand-light">
+                                    £{service.zoneB}
+                                    <VatLabel />
+                                </td>
+                                <td className="px-4 py-4 text-center text-sm font-bold text-brand-light">
+                                    £{service.zoneC}
+                                    <VatLabel />
+                                </td>
+                                {!compact && (
+                                    <td className="px-4 py-4 text-sm text-text-secondary">{service.included}</td>
+                                )}
+                            </tr>
                         ))}
                     </tbody>
                 </table>
             </div>
 
-            {/* Add-ons */}
-            {!compact && (
-                <>
-                    <div>
-                        <h3 className="mb-4 text-xl font-bold text-text-primary">
-                            Add-Ons
-                        </h3>
-                        <div className="rounded-xl border border-border-default">
-                            <table className="w-full text-left">
-                                <thead>
-                                    <tr className="border-b border-border-default">
-                                        <th className="sticky top-20 z-30 border-b border-border-default bg-surface-alt px-4 py-3 text-sm font-semibold text-text-primary shadow-sm sm:px-6">
-                                            Add-On
-                                        </th>
-                                        <th className="sticky top-20 z-30 border-b border-border-default bg-surface-alt px-4 py-3 text-right text-sm font-semibold text-text-primary shadow-sm">
-                                            Price
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {addOns.map((addon, i) => (
-                                        <tr
-                                            key={addon.name}
-                                            className={cn(
-                                                'border-b border-border-default transition-colors hover:bg-surface-alt/50',
-                                                i === addOns.length - 1 && 'border-b-0',
-                                            )}
-                                        >
-                                            <td className="px-4 py-3 text-sm text-text-primary sm:px-6">
-                                                {addon.name}
-                                            </td>
-                                            <td className="px-4 py-3 text-right text-sm font-semibold text-brand-light">
-                                                {addon.price}
-                                                <VatLabel />
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    {/* Deposits */}
-                    <div>
-                        <h3 className="mb-4 text-xl font-bold text-text-primary">
-                            Deposits
-                        </h3>
-                        <div className="rounded-xl border border-border-default">
-                            <table className="w-full text-left">
-                                <thead>
-                                    <tr className="border-b border-border-default">
-                                        <th className="sticky top-20 z-30 border-b border-border-default bg-surface-alt px-4 py-3 text-sm font-semibold text-text-primary shadow-sm sm:px-6">
-                                            Booking Type
-                                        </th>
-                                        <th className="sticky top-20 z-30 border-b border-border-default bg-surface-alt px-4 py-3 text-right text-sm font-semibold text-text-primary shadow-sm">
-                                            Deposit
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {deposits.map((dep, i) => (
-                                        <tr
-                                            key={dep.zone}
-                                            className={cn(
-                                                'border-b border-border-default transition-colors hover:bg-surface-alt/50',
-                                                i === deposits.length - 1 && 'border-b-0',
-                                            )}
-                                        >
-                                            <td className="px-4 py-3 text-sm text-text-primary sm:px-6">
-                                                {dep.zone}
-                                            </td>
-                                            <td className="px-4 py-3 text-right text-sm font-semibold text-brand-light">
-                                                {dep.amount}
-                                                <VatLabel />
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                        <p className="mt-3 text-sm text-text-muted">
-                            Reschedule free with 24 hours notice. Late cancellation or no-show retains deposit.
-                        </p>
-                    </div>
-                </>
-            )}
-
             {compact && (
-                <div className="text-center">
+                <div className="mt-6 text-center">
                     <CTAButton href="/pricing" variant="outline" size="sm">
                         View Full Pricing & Add-Ons
                     </CTAButton>

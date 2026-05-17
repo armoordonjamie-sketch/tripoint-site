@@ -4,7 +4,7 @@ import {
     Wrench, Shield,
     ArrowRight, Phone, MessageCircle, Search,
     MapPin, Truck, ChevronRight,
-    BookOpen, Star, Cog,TrendingUp,
+    BookOpen, Cog, TrendingUp,
 } from 'lucide-react';
 import { Seo } from '@/components/Seo';
 import { Section } from '@/components/Section';
@@ -19,6 +19,8 @@ import { useScrollReveal } from '@/lib/useScrollReveal';
 import { OptimizedImage } from '@/components/OptimizedImage';
 import { ExpandableReportImage } from '@/components/ExpandableReportImage';
 import { VatLabel } from '@/components/VatLabel';
+import { GoogleReviews } from '@/components/GoogleReviews';
+import { GoogleReviewsSchema } from '@/components/JsonLd';
 
 const HeroScrollCue = lazy(() =>
     import('@/components/HeroScrollCue').then((m) => ({ default: m.HeroScrollCue })),
@@ -383,33 +385,9 @@ export function HomePage() {
                 </div>
             </Section>
 
-            {/* ── GOOGLE REVIEWS PROMPT ─────────────────────── */}
-            <Section>
-                <div className="mx-auto max-w-2xl reveal">
-                    <div className="rounded-2xl border border-brand/20 bg-brand/5 p-8 text-center">
-                        <div className="flex justify-center gap-1 mb-4">
-                            {[1, 2, 3, 4, 5].map((n) => (
-                                <Star key={n} className="h-6 w-6 fill-yellow-400 text-yellow-400" />
-                            ))}
-                        </div>
-                        <h2 className="text-xl font-bold text-text-primary">Happy with our service?</h2>
-                        <p className="mt-2 text-text-secondary text-sm">
-                            Reviews help other drivers find us. If we&apos;ve helped you, leaving a Google review takes less than a minute.
-                        </p>
-                        <div className="mt-5">
-                            <CTAButton
-                                href={siteConfig.social.google}
-                                external
-                                variant="outline"
-                                size="sm"
-                                icon={<ArrowRight className="h-4 w-4" />}
-                            >
-                                Leave a Google Review
-                            </CTAButton>
-                        </div>
-                    </div>
-                </div>
-            </Section>
+            {/* ── GOOGLE REVIEWS ───────────────────────────── */}
+            <GoogleReviewsSchema />
+            <GoogleReviews />
 
             {/* ── COVERAGE ─────────────────────────────────── */}
             <section className="relative overflow-hidden">
