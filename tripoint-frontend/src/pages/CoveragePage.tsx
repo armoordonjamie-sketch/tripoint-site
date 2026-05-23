@@ -84,7 +84,7 @@ export function CoveragePage() {
                             {[
                                 { value: '60min', label: 'Max drive time' },
                                 { value: '2', label: 'Operating bases' },
-                                { value: '13+', label: 'Towns covered' },
+                                { value: '6', label: 'Area pages' },
                                 { value: 'A-C', label: 'Zone pricing' },
                             ].map((s) => (
                                 <div key={s.label}>
@@ -112,7 +112,7 @@ export function CoveragePage() {
                 <div className="text-center reveal">
                     <h2 className="text-2xl font-bold text-text-primary sm:text-3xl">Coverage Map</h2>
                     <p className="mt-2 text-text-secondary">
-                        Kent and South East London - from Gravesend to Greenwich, Sevenoaks to Sidcup.
+                        Kent and South East London - from Medway to Greenwich, Tonbridge to Bexley.
                     </p>
                 </div>
                 <div className="mx-auto mt-8 max-w-5xl reveal" style={{ transitionDelay: '0.1s' }}>

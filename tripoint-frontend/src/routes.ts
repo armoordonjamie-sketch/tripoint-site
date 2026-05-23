@@ -42,9 +42,9 @@ export const routeManifest: RouteEntry[] = [
     },
     {
         path: '/areas-covered',
-        title: 'Areas Covered',
+        title: 'Areas Covered | Mobile Diagnostics Kent and SE London',
         description:
-            'Mobile vehicle diagnostics across Tonbridge, Sevenoaks, Bromley, Bexley, Greenwich, Lewisham, Dartford, Orpington, Sidcup, Eltham, Tunbridge Wells, Maidstone, Gravesend.',
+            'Mobile vehicle diagnostics across Kent and South East London from our Tonbridge and Eltham bases. Area pages for Greenwich, Bexley, Orpington, Maidstone, Tonbridge, and Gillingham and Medway.',
         canonicalPath: '/areas-covered',
         priority: 0.9,
         changefreq: 'weekly',
@@ -301,24 +301,67 @@ export const routeManifest: RouteEntry[] = [
         changefreq: 'weekly',
         indexable: true,
     },
-    // Areas covered
-    ...['tonbridge', 'sevenoaks', 'bromley', 'bexley', 'greenwich', 'lewisham', 'dartford', 'orpington', 'sidcup', 'eltham', 'tunbridge-wells', 'maidstone', 'gravesend'].map(
-        (slug) => ({
-            path: `/areas-covered/${slug}`,
-            title: `Mobile Vehicle Diagnostics in ${slug
-                .split('-')
-                .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-                .join(' ')}`,
-            description: `Mobile Mercedes diagnostics and fault finding in ${slug
-                .split('-')
-                .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-                .join(' ')}. Dealer-level STAR/XENTRY at your location.`,
-            canonicalPath: `/areas-covered/${slug}`,
-            priority: 0.7,
-            changefreq: 'monthly' as const,
-            indexable: true,
-        })
-    ),
+    // Areas covered (6 surviving pages + new Medway page)
+    {
+        path: '/areas-covered/greenwich',
+        title: 'Mobile Vehicle Diagnostics in Greenwich | TriPoint Diagnostics',
+        description:
+            'Mobile Mercedes diagnostics in SE10, SE7, SE3 and SE18. We cover the Greenwich borough from our Eltham base. Dealer-level STAR/XENTRY at your location.',
+        canonicalPath: '/areas-covered/greenwich',
+        priority: 0.7,
+        changefreq: 'monthly' as const,
+        indexable: true,
+    },
+    {
+        path: '/areas-covered/bexley',
+        title: 'Mobile Vehicle Diagnostics in Bexley | DA Postcode Coverage',
+        description:
+            'Mobile Mercedes diagnostics across DA1 to DA17. Bexley, Sidcup, Welling, Erith, and Crayford covered from our Eltham base. Zone A and B pricing.',
+        canonicalPath: '/areas-covered/bexley',
+        priority: 0.7,
+        changefreq: 'monthly' as const,
+        indexable: true,
+    },
+    {
+        path: '/areas-covered/orpington',
+        title: 'Mobile Vehicle Diagnostics in Orpington | BR5 BR6 BR7 BR8',
+        description:
+            'Mobile Mercedes diagnostics in Orpington, Chislehurst, Swanley and Hextable. BR5 to BR8 covered from our Eltham base. Xentry coding for independent garages.',
+        canonicalPath: '/areas-covered/orpington',
+        priority: 0.7,
+        changefreq: 'monthly' as const,
+        indexable: true,
+    },
+    {
+        path: '/areas-covered/maidstone',
+        title: 'Mobile Vehicle Diagnostics in Maidstone | ME14 ME15 ME16 ME17',
+        description:
+            'Mobile Mercedes diagnostics in Maidstone and surrounding villages. ME14 to ME17 covered from our Tonbridge base. Servicing, NOx diagnostics, and fault finding.',
+        canonicalPath: '/areas-covered/maidstone',
+        priority: 0.7,
+        changefreq: 'monthly' as const,
+        indexable: true,
+    },
+    {
+        path: '/areas-covered/tonbridge',
+        title: 'Mobile Vehicle Diagnostics in Tonbridge | Home Base Zone A',
+        description:
+            'TriPoint Diagnostics is based in Tonbridge. Zone A covers Tonbridge, Hildenborough, Hadlow and Paddock Wood. Same-day availability. Dealer-level Mercedes diagnostics.',
+        canonicalPath: '/areas-covered/tonbridge',
+        priority: 0.7,
+        changefreq: 'monthly' as const,
+        indexable: true,
+    },
+    {
+        path: '/areas-covered/medway',
+        title: 'Mobile Vehicle Diagnostics in Gillingham and Medway | TriPoint Diagnostics',
+        description:
+            'Mobile Mercedes diagnostics in Chatham, Gillingham and Rainham. ME5, ME7 and ME8 covered from our Tonbridge base. Van servicing, Xentry coding, and fault finding.',
+        canonicalPath: '/areas-covered/medway',
+        priority: 0.7,
+        changefreq: 'monthly' as const,
+        indexable: true,
+    },
     // Other pages
     {
         path: '/pricing',

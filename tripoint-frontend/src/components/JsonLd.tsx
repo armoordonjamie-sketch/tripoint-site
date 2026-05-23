@@ -3,18 +3,24 @@ import { googleReviews, googleReviewsAggregate } from '@/data/googleReviews';
 
 const AREA_SERVED_TOWNS = [
     'Tonbridge',
-    'Sevenoaks',
-    'Bromley',
     'Bexley',
     'Greenwich',
-    'Lewisham',
-    'Dartford',
     'Orpington',
-    'Sidcup',
-    'Eltham',
-    'Tunbridge Wells',
     'Maidstone',
-    'Gravesend',
+    'Gillingham',
+    'Medway',
+    'Chatham',
+    'Rainham',
+    'Sidcup',
+    'Welling',
+    'Erith',
+    'Crayford',
+    'Swanley',
+    'Hextable',
+    'Chislehurst',
+    'Hadlow',
+    'Hildenborough',
+    'Paddock Wood',
 ];
 
 const SERVICE_TYPES = [

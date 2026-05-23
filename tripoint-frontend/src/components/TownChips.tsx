@@ -9,10 +9,18 @@ interface TownChipsProps {
     max?: number;
 }
 
+// Special-case overrides for labels that don't slugify to their areasData key
+const TOWN_LABEL_OVERRIDES: Record<string, string> = {
+    'gillingham and medway': 'medway',
+};
+
 function townLabelToAreaSlug(town: string): string | null {
-    const slug = town.trim().toLowerCase().replace(/\s+/g, '-');
+    const normalised = town.trim().toLowerCase();
+    if (TOWN_LABEL_OVERRIDES[normalised]) return TOWN_LABEL_OVERRIDES[normalised];
+    const slug = normalised.replace(/\s+/g, '-');
     return slug in areasData ? slug : null;
 }
+
 
 export function TownChips({ className, max }: TownChipsProps) {
     const allTowns = siteConfig.coverageTowns;

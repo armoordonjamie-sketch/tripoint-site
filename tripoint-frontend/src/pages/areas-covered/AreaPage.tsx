@@ -3,10 +3,11 @@ import { Seo } from '@/components/Seo';
 import { Section } from '@/components/Section';
 import { CTAButton } from '@/components/CTAButton';
 import { FaqAccordion } from '@/components/FaqAccordion';
+import { FaqPageSchema, BreadcrumbSchema } from '@/components/JsonLd';
 import { getSeoForPath } from '@/routes';
 import { getAreaData } from '@/data/areas';
 import { siteConfig } from '@/config/site';
-import { CheckCircle2, MessageCircle, Phone, MapPin } from 'lucide-react';
+import { CheckCircle2, MessageCircle, Phone, MapPin, Wrench, FileText } from 'lucide-react';
 import { trackNavClick, trackPhoneClick, trackWhatsAppClick, trackSelectContent } from '@/lib/analytics';
 import { getWhatsAppHref } from '@/lib/whatsappHref';
 import { VatLabel } from '@/components/VatLabel';
@@ -18,37 +19,50 @@ function formatSlug(slug: string): string {
         .join(' ');
 }
 
-const WHY_CHOOSE = [
-    { title: 'Dealer-level tooling', desc: 'STAR/XENTRY diagnostics at your location. No workshop drop-off.' },
-    { title: 'Compliance-first', desc: 'We diagnose before any repair or regen. No guesswork, no masking faults.' },
-    { title: 'Mobile convenience', desc: 'We come to you at home or work. Save time and hassle.' },
-    { title: 'Clear communication', desc: 'Written report and next steps. You know what we found and what to do.' },
-];
-
-const TOP_SERVICES = [
-    { name: 'Standard Diagnosis', href: '/services/diagnostic-callout' },
-    { name: 'VOR Diagnosis', href: '/services/vor-van-diagnostics' },
-    { name: 'Pre-Purchase Health Check', href: '/services/pre-purchase-digital-health-check' },
-    { name: 'Mercedes Van Servicing', href: '/services/mercedes-van-servicing' },
-];
-
 export function AreaPage() {
     const { slug } = useParams<{ slug: string }>();
-    const town = slug ? formatSlug(slug) : '';
+    const town = slug ? (getAreaData(slug)?.name ?? formatSlug(slug)) : '';
     const path = `/areas-covered/${slug || ''}`;
     const seo = getSeoForPath(path);
     const areaData = slug ? getAreaData(slug) : undefined;
 
+    const breadcrumbItems = [
+        { name: 'Home', url: siteConfig.url },
+        { name: 'Areas Covered', url: `${siteConfig.url}/areas-covered` },
+        { name: town, url: `${siteConfig.url}${path}` },
+    ];
+
     return (
         <>
+            {/* Breadcrumb schema */}
+            <BreadcrumbSchema items={breadcrumbItems} />
+
+            {/* FAQPage schema - only when FAQs are present */}
+            {(areaData?.faqs?.length ?? 0) > 0 && (
+                <FaqPageSchema items={areaData!.faqs} />
+            )}
+
             <Seo
-                title={seo?.title ?? `Mobile Vehicle Diagnostics in ${town}`}
+                title={seo?.title ?? `Mobile Vehicle Diagnostics in ${town} | TriPoint Diagnostics`}
                 description={seo?.description}
                 canonical={seo?.canonicalPath ?? path}
             />
+
+            {/* ── HERO ─────────────────────────────────────── */}
             <section className="relative py-16 md:py-24">
                 <div className="absolute inset-0 mesh-gradient opacity-30" aria-hidden="true" />
                 <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                    {/* Breadcrumb nav */}
+                    <nav aria-label="Breadcrumb" className="mb-6">
+                        <ol className="flex flex-wrap items-center gap-1 text-xs text-text-muted">
+                            <li><Link to="/" className="hover:text-brand transition-colors">Home</Link></li>
+                            <li aria-hidden="true" className="select-none">/</li>
+                            <li><Link to="/areas-covered" className="hover:text-brand transition-colors">Areas Covered</Link></li>
+                            <li aria-hidden="true" className="select-none">/</li>
+                            <li className="text-text-secondary font-medium" aria-current="page">{town}</li>
+                        </ol>
+                    </nav>
+
                     <p className="text-sm font-semibold uppercase tracking-widest text-brand mb-3">Mobile Mercedes Specialist</p>
                     <h1 className="text-4xl font-extrabold text-text-primary sm:text-5xl">
                         Mobile Vehicle Diagnostics in {town} | Mercedes Specialist
@@ -75,7 +89,7 @@ export function AreaPage() {
                             href={`tel:${siteConfig.contact.phoneE164}`}
                             external
                             icon={<Phone className="h-4 w-4" />}
-                            onClick={() => trackPhoneClick(`area_${town.toLowerCase()}`)}
+                            onClick={() => trackPhoneClick(`area_${slug}`)}
                         >
                             Call {siteConfig.contact.phoneDisplay}
                         </CTAButton>
@@ -84,14 +98,14 @@ export function AreaPage() {
                             variant="outline"
                             external
                             icon={<MessageCircle className="h-4 w-4" />}
-                            onClick={() => trackWhatsAppClick(`area_${town.toLowerCase()}`)}
+                            onClick={() => trackWhatsAppClick(`area_${slug}`)}
                         >
                             WhatsApp Us
                         </CTAButton>
                         <CTAButton
                             href="/booking"
                             variant="outline"
-                            onClick={() => trackNavClick('/booking', 'Book Now', `area_${town.toLowerCase()}`)}
+                            onClick={() => trackNavClick('/booking', 'Book Now', `area_${slug}`)}
                         >
                             Book Online
                         </CTAButton>
@@ -99,59 +113,60 @@ export function AreaPage() {
                 </div>
             </section>
 
-            <Section>
-                <h2 className="text-2xl font-bold text-text-primary">What&apos;s Included</h2>
-                <ul className="mt-4 space-y-2">
-                    {(areaData?.included ?? [
-                        'Dealer-level STAR/XENTRY diagnostics at your location',
-                        'Fault finding and guided tests',
-                        'Coding and adaptations',
-                        'DPF and AdBlue diagnostics',
-                        'Up to 60 minutes on-site (standard callout)',
-                        'Clear written report',
-                    ]).map((item) => (
-                        <li key={item} className="flex items-start gap-2 text-text-secondary">
-                            <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-brand" />
-                            <span>{item}</span>
-                        </li>
-                    ))}
-                </ul>
-            </Section>
+            {/* ── SERVICES IN THIS AREA ─────────────────────── */}
+            {(areaData?.localServices?.length ?? 0) > 0 && (
+                <Section>
+                    <h2 className="text-2xl font-bold text-text-primary">Services in {town}</h2>
+                    <ul className="mt-4 space-y-2">
+                        {areaData!.localServices!.map((item) => (
+                            <li key={item} className="flex items-start gap-2 text-text-secondary">
+                                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-brand" />
+                                <span>{item}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </Section>
+            )}
 
-            <Section className="bg-surface-alt/30">
-                <h2 className="text-2xl font-bold text-text-primary">Why Choose TriPoint Diagnostics</h2>
-                <div className="mt-6 grid gap-4 sm:grid-cols-2">
-                    {WHY_CHOOSE.map((item) => (
-                        <div
-                            key={item.title}
-                            className="rounded-xl border border-border-default bg-surface-alt p-5"
-                        >
-                            <h3 className="font-semibold text-text-primary">{item.title}</h3>
-                            <p className="mt-2 text-sm text-text-secondary">{item.desc}</p>
-                        </div>
-                    ))}
-                </div>
-            </Section>
-
-            <Section>
-                <h2 className="text-2xl font-bold text-text-primary">Popular Services in {town}</h2>
-                <p className="mt-2 text-text-secondary">
-                    We offer a range of mobile diagnostic services across {town} and the surrounding area.
-                </p>
-                <ul className="mt-4 space-y-2">
-                    {TOP_SERVICES.map((s) => (
-                        <li key={s.href}>
-                            <Link
-                                to={s.href}
-                                className="text-brand-light hover:text-brand font-medium transition-colors"
+            {/* ── REAL JOB DETAIL ─────────────────────────── */}
+            {(areaData?.realJobDetail?.length ?? 0) > 0 && (
+                <Section className="bg-surface-alt/30">
+                    <h2 className="text-2xl font-bold text-text-primary">Jobs We Have Completed in {town}</h2>
+                    <p className="mt-2 text-text-secondary">
+                        Examples from real callouts in this area. Customer details are not included.
+                    </p>
+                    <div className="mt-6 space-y-4">
+                        {areaData!.realJobDetail!.map((job) => (
+                            <div
+                                key={job.summary}
+                                className="rounded-xl border border-border-default bg-surface-alt p-5"
                             >
-                                {s.name}
-                            </Link>
-                        </li>
-                    ))}
-                </ul>
-            </Section>
+                                <div className="flex items-start gap-3">
+                                    <Wrench className="mt-0.5 h-5 w-5 shrink-0 text-brand" />
+                                    <div>
+                                        <p className="font-semibold text-text-primary text-sm">{job.summary}</p>
+                                        <p className="mt-2 text-sm text-text-secondary">{job.detail}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </Section>
+            )}
 
+            {/* ── GARAGE NOTE (Orpington only) ─────────────── */}
+            {areaData?.garageNote && (
+                <Section>
+                    <div className="rounded-xl border border-brand/20 bg-brand/5 p-5">
+                        <div className="flex items-start gap-3">
+                            <FileText className="mt-0.5 h-5 w-5 shrink-0 text-brand" />
+                            <p className="text-sm text-text-secondary">{areaData.garageNote}</p>
+                        </div>
+                    </div>
+                </Section>
+            )}
+
+            {/* ── FAQs ─────────────────────────────────────── */}
             {(areaData?.faqs?.length ?? 0) > 0 && (
                 <Section className="bg-surface-alt/30">
                     <h2 className="text-2xl font-bold text-text-primary">FAQs for {town}</h2>
@@ -161,27 +176,52 @@ export function AreaPage() {
                 </Section>
             )}
 
-            {areaData?.nearbyAreas && areaData.nearbyAreas.length > 0 && (
+            {/* ── CROSS LINKS ──────────────────────────────── */}
+            {(areaData?.crossLinks?.length ?? 0) > 0 && (
                 <Section>
+                    <h2 className="text-xl font-bold text-text-primary">Related Services</h2>
+                    <ul className="mt-4 space-y-2">
+                        {areaData!.crossLinks!.map((s) => (
+                            <li key={s.href}>
+                                <Link
+                                    to={s.href}
+                                    className="text-brand-light hover:text-brand font-medium transition-colors"
+                                >
+                                    {s.name}
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                </Section>
+            )}
+
+            {/* ── WE ALSO COVER ─────────────────────────────── */}
+            {areaData?.nearbyAreas && areaData.nearbyAreas.length > 0 && (
+                <Section className="bg-surface-alt/30">
                     <h2 className="text-xl font-bold text-text-primary">We Also Cover</h2>
                     <p className="mt-2 text-text-secondary">
                         TriPoint Diagnostics serves the wider Kent and South East London area.
                     </p>
                     <div className="mt-4 flex flex-wrap gap-2">
-                        {areaData.nearbyAreas.map((s) => (
-                            <Link
-                                key={s}
-                                to={`/areas-covered/${s}`}
-                                onClick={() => trackSelectContent('area_link', s)}
-                                className="rounded-lg border border-border-default bg-surface-alt px-4 py-2 text-sm font-medium text-text-secondary transition-colors hover:border-brand/30 hover:bg-brand/5 hover:text-brand"
-                            >
-                                {formatSlug(s)}
-                            </Link>
-                        ))}
+                        {areaData.nearbyAreas.map((s) => {
+                            const nearbyData = getAreaData(s);
+                            const label = nearbyData?.name ?? formatSlug(s);
+                            return (
+                                <Link
+                                    key={s}
+                                    to={`/areas-covered/${s}`}
+                                    onClick={() => trackSelectContent('area_link', s)}
+                                    className="rounded-lg border border-border-default bg-surface-alt px-4 py-2 text-sm font-medium text-text-secondary transition-colors hover:border-brand/30 hover:bg-brand/5 hover:text-brand"
+                                >
+                                    {label}
+                                </Link>
+                            );
+                        })}
                     </div>
                 </Section>
             )}
 
+            {/* ── BOOKING CTA ───────────────────────────────── */}
             <Section>
                 <div className="rounded-2xl border border-brand/20 bg-brand/5 p-8 text-center">
                     <h2 className="text-2xl font-bold text-text-primary">Book a Diagnostic in {town}</h2>
@@ -190,11 +230,11 @@ export function AreaPage() {
                     </p>
                     <div className="mt-6 flex flex-wrap justify-center gap-4">
                         <CTAButton
-                            href="tel:+442080586095"
+                            href={`tel:${siteConfig.contact.phoneE164}`}
                             icon={<Phone className="h-5 w-5" />}
                             onClick={() => trackPhoneClick('area_body')}
                         >
-                            Call 020 8058 6095
+                            Call {siteConfig.contact.phoneDisplay}
                         </CTAButton>
                         <CTAButton
                             href={getWhatsAppHref()}

@@ -33,19 +33,12 @@ export const siteConfig = {
     operatingHours: 'Mon to Sat: 6 AM to 10 PM',
 
     coverageTowns: [
-        'Bromley',
-        'Bexley',
         'Greenwich',
-        'Lewisham',
-        'Dartford',
+        'Bexley',
         'Orpington',
-        'Sidcup',
-        'Eltham',
-        'Sevenoaks',
-        'Tonbridge',
-        'Tunbridge Wells',
         'Maidstone',
-        'Gravesend',
+        'Tonbridge',
+        'Gillingham and Medway',
     ],
 
     zones: [

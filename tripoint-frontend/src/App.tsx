@@ -97,6 +97,18 @@ export function AppRoutes() {
 
                     <Route path="pricing" element={<PricingPage />} />
                     <Route path="areas-covered" element={<CoveragePage />} />
+
+                    {/* Area page redirects — retired pages (8 slugs, 301-equivalent client-side) */}
+                    <Route path="areas-covered/bromley" element={<Navigate to="/areas-covered" replace />} />
+                    <Route path="areas-covered/lewisham" element={<Navigate to="/areas-covered" replace />} />
+                    <Route path="areas-covered/dartford" element={<Navigate to="/areas-covered" replace />} />
+                    <Route path="areas-covered/eltham" element={<Navigate to="/areas-covered" replace />} />
+                    <Route path="areas-covered/sevenoaks" element={<Navigate to="/areas-covered" replace />} />
+                    <Route path="areas-covered/tunbridge-wells" element={<Navigate to="/areas-covered" replace />} />
+                    <Route path="areas-covered/gravesend" element={<Navigate to="/areas-covered" replace />} />
+                    <Route path="areas-covered/sidcup" element={<Navigate to="/areas-covered/bexley" replace />} />
+
+                    {/* Surviving area pages + new Medway page */}
                     <Route path="areas-covered/:slug" element={<AreaPage />} />
                     <Route path="areas" element={<Navigate to="/areas-covered" replace />} />
                     <Route path="coverage" element={<Navigate to="/areas-covered" replace />} />
