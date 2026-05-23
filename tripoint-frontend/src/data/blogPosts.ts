@@ -677,6 +677,7 @@ export const blogPosts: BlogPost[] = [
                 <p>Book a <a href="/services/diagnostic-callout">Standard Diagnosis</a> - we cover all DPF, regen, and emissions faults in one visit.</p>
             </div>
         `,
+    },
     {
         slug: 'sprinter-p0299-turbo-underboost',
         title: 'Sprinter P0299: Turbo Underboost or Low Boost',
