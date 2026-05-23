@@ -31,6 +31,21 @@ const relatedReadingBySlug: Record<string, { label: string; href: string }[]> = 
         { label: 'Mercedes Sprinter Servicing', href: '/services/sprinter-servicing' },
         { label: 'Mobile diagnostics in Maidstone', href: '/areas-covered/maidstone' },
     ],
+    'sprinter-p0299-turbo-underboost': [
+        { label: 'Sprinter Limp Mode: What a Proper Diagnostic Looks Like', href: '/blog/sprinter-limp-mode-proper-diagnostic' },
+        { label: 'Standard Diagnosis', href: '/services/diagnostic-callout' },
+        { label: 'Mercedes Sprinter Servicing', href: '/services/sprinter-servicing' },
+    ],
+    'sprinter-p0234-turbo-overboost': [
+        { label: 'Sprinter Limp Mode: What a Proper Diagnostic Looks Like', href: '/blog/sprinter-limp-mode-proper-diagnostic' },
+        { label: 'Sprinter P0299: Turbo Underboost or Low Boost', href: '/blog/sprinter-p0299-turbo-underboost' },
+        { label: 'Standard Diagnosis', href: '/services/diagnostic-callout' },
+    ],
+    'mercedes-p2002-dpf-fault': [
+        { label: 'DPF Warning Lights: When Regen Helps vs When It Makes Things Worse', href: '/blog/dpf-warning-light-regen-vs-worse' },
+        { label: 'AdBlue Countdown: Why Clearing Codes Is Not a Fix', href: '/blog/adblue-countdown-clearing-codes-not-fix' },
+        { label: 'Standard Diagnosis', href: '/services/diagnostic-callout' },
+    ],
 };
 
 function BlogHeroImage({ src, alt }: { src: string; alt: string }) {
@@ -189,6 +204,22 @@ export function BlogPostPage() {
                 <script type="application/ld+json">
                     {JSON.stringify(breadcrumbLd)}
                 </script>
+                {post.faqs && post.faqs.length > 0 && (
+                    <script type="application/ld+json">
+                        {JSON.stringify({
+                            '@context': 'https://schema.org',
+                            '@type': 'FAQPage',
+                            mainEntity: post.faqs.map((faq) => ({
+                                '@type': 'Question',
+                                name: faq.question,
+                                acceptedAnswer: {
+                                    '@type': 'Answer',
+                                    text: faq.answer,
+                                },
+                            })),
+                        })}
+                    </script>
+                )}
             </Helmet>
 
             {/* Hero section */}

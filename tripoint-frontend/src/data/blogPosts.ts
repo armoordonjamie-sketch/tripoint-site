@@ -11,6 +11,8 @@ export interface BlogPost {
     ogImage?: string;
     thumbnail?: string;
     author?: string;
+    /** Optional FAQ items for FAQPage schema and visible FAQ block */
+    faqs?: { question: string; answer: string }[];
 }
 
 export const blogPosts: BlogPost[] = [
@@ -244,7 +246,8 @@ export const blogPosts: BlogPost[] = [
         title: 'Sprinter Limp Mode: What a Proper Diagnostic Looks Like',
         description: 'Common triggers for Sprinter limp mode, why code-clearing doesn\'t work, and what a proper diagnostic session involves.',
         category: 'Mercedes',
-        publishedAt: '2025-01-15',
+        publishedAt: '2026-05-23',
+        updatedAt: '2026-05-23',
         thumbnail: '/images/gallery/work-31.jpg',
         relatedServices: ['diagnostic-callout'],
         content: `
@@ -405,6 +408,17 @@ export const blogPosts: BlogPost[] = [
                 <li>how we'll verify it's fixed</li>
             </ul>
 
+            <hr class="blog-divider"/>
+
+            <h2>Common fault codes associated with Sprinter limp mode</h2>
+            <p>The most common codes that accompany limp mode on the W906 and W907 Sprinter with OM651 engine are P0234 (turbo overboost), P0299 (turbo underboost or low boost), P0401 (insufficient EGR flow), and P2563 (turbo actuator position sensor). On the OM654 engine found in the W907, P0299 and boost-related codes are also the most frequent triggers, often linked to the variable geometry actuator or intercooler circuit. Electrical faults on the CAN bus or in the engine harness can produce P-codes that look like boost or fuelling issues but are wiring problems in disguise. A proper diagnostic session reads the full freeze frame data alongside live boost, fuelling, and actuator values to separate the root cause from secondary codes.</p>
+
+            <p>If your Sprinter is showing a specific fault code alongside limp mode, the following guides cover the most common ones in detail.</p>
+            <ul>
+                <li><a href="/blog/sprinter-p0299-turbo-underboost">Sprinter P0299: Turbo Underboost or Low Boost</a></li>
+                <li><a href="/blog/sprinter-p0234-turbo-overboost">Sprinter P0234: Turbo Overboost</a></li>
+            </ul>
+
             <div class="blog-cta-box">
                 <p><strong>Want this done properly?</strong></p>
                 <p>If your Sprinter is in limp mode, book a <a href="/services/diagnostic-callout">Standard Diagnosis</a> - we cover all limp mode faults including turbo, boost, EGR, and electrical issues in one visit.</p>
@@ -416,7 +430,8 @@ export const blogPosts: BlogPost[] = [
         title: 'AdBlue Countdown: Why Clearing Codes Isn\'t a Fix',
         description: 'What triggers the AdBlue countdown, why it returns after clearing, and what a proper decision visit actually does.',
         category: 'Emissions',
-        publishedAt: '2025-01-20',
+        publishedAt: '2026-05-23',
+        updatedAt: '2026-05-23',
         thumbnail: '/images/gallery/work-30.jpg',
         relatedServices: ['diagnostic-callout'],
         content: `
@@ -537,7 +552,8 @@ export const blogPosts: BlogPost[] = [
         title: 'DPF Warning Lights: When Regen Helps vs When It Makes Things Worse',
         description: 'Forced regen vs passive, when regen is safe, when it masks a deeper fault, and why we diagnose first.',
         category: 'Emissions',
-        publishedAt: '2025-01-25',
+        publishedAt: '2026-05-23',
+        updatedAt: '2026-05-23',
         thumbnail: '/images/gallery/work-14.jpg',
         relatedServices: ['diagnostic-callout'],
         content: `
@@ -659,6 +675,198 @@ export const blogPosts: BlogPost[] = [
             <div class="blog-cta-box">
                 <p><strong>DPF light on?</strong></p>
                 <p>Book a <a href="/services/diagnostic-callout">Standard Diagnosis</a> - we cover all DPF, regen, and emissions faults in one visit.</p>
+            </div>
+        `,
+    {
+        slug: 'sprinter-p0299-turbo-underboost',
+        title: 'Sprinter P0299: Turbo Underboost or Low Boost',
+        description: 'P0299 on a Mercedes Sprinter W906 or W907 means the turbo is producing less boost than requested. Here is what causes it and what a proper diagnostic session looks at.',
+        category: 'Mercedes',
+        publishedAt: '2026-05-23',
+        updatedAt: '2026-05-23',
+        thumbnail: '/images/gallery/work-22.jpg',
+        relatedServices: ['diagnostic-callout', 'sprinter-servicing'],
+        faqs: [
+            { question: 'Can I drive my Sprinter with P0299?', answer: 'The van will likely be in limp mode with reduced power. It is drivable in most cases but you should not leave it undiagnosed. Running with a persistent boost fault puts additional stress on the turbo and can cause further damage if the root cause is a leak allowing unfiltered air into the intake.' },
+            { question: 'Will clearing P0299 fix it?', answer: 'No. Clearing the code removes the stored fault but does not address the underlying cause. The code will return, usually within a short drive.' },
+            { question: 'Is P0299 the same as a turbo failure?', answer: 'Not usually. P0299 indicates low boost, which has several possible causes. A failed turbo is one of them, but actuator faults and boost leaks are more common on the W906 and W907 and are significantly cheaper to fix.' },
+            { question: 'How long does it take to diagnose P0299?', answer: 'A proper diagnostic session covering live data, actuator test, and boost leak check takes approximately 45 to 60 minutes on site.' },
+        ],
+        content: `
+            <div class="blog-lead">
+                P0299 is stored when the ECU detects that actual boost pressure is significantly below the requested value. On the W906 and W907 Sprinter with OM651 and OM654 engines, this is one of the most common codes seen alongside limp mode and power loss. The code tells you that boost is low. It does not tell you why.
+            </div>
+
+            <h2>What P0299 means on a Sprinter</h2>
+            <p>The ECU compares requested boost (from the boost pressure model) against actual boost measured at the MAP sensor. When the gap is large enough for long enough, P0299 is stored and the engine enters a derate or limp mode to protect the turbo and engine from running lean. The fault can be intermittent or permanent. Intermittent P0299 with no obvious driveability symptom is often a slow actuator or a minor boost leak. Permanent P0299 with clear power loss points to a more significant restriction or failure.</p>
+
+            <hr class="blog-divider"/>
+
+            <h2>Common causes on the OM651 and OM654</h2>
+            <p>On the OM651 (W906), the most common causes in order of frequency are: a failing or sticking variable geometry actuator (the turbo cannot open the vanes fully to build boost), a boost or intake leak at an intercooler pipe, hose, or charge pipe fitting, a worn or cracked intercooler core, a faulty MAP sensor or boost pressure sensor giving an incorrect actual reading, and EGR valve issues causing exhaust backpressure that reduces effective boost. On the OM654 (W907), actuator faults are also common, with the variable geometry mechanism being a known failure point at higher mileages. Intercooler pipe connections on the W907 are a frequent source of slow leaks that produce intermittent P0299.</p>
+
+            <hr class="blog-divider"/>
+
+            <h2>What a diagnostic session looks at</h2>
+            <p>Reading fault codes alone is not enough to diagnose P0299. A proper session uses live data to compare requested boost against actual boost across the RPM range, checks actuator sweep and position accuracy (requested position versus actual position), performs a smoke test on the intake and charge system to identify boost leaks, and verifies MAP sensor plausibility by cross-referencing with other load and fuelling data. On the OM651, guided tests via Xentry can command the actuator through its full range and confirm whether the fault is mechanical or electrical.</p>
+
+            <hr class="blog-divider"/>
+
+            <h2>What P0299 does not mean</h2>
+            <p>P0299 on its own does not mean the turbo needs replacing. The majority of P0299 faults on W906 Sprinters are resolved by actuator cleaning or replacement, boost leak repair, or intercooler replacement. Replacing a turbocharger without confirming root cause through live data testing is the most expensive wrong turn on this fault.</p>
+
+            <hr class="blog-divider"/>
+
+            <h2>Frequently asked questions</h2>
+
+            <div class="blog-callout">
+                <p><strong>Can I drive my Sprinter with P0299?</strong></p>
+                <p>The van will likely be in limp mode with reduced power. It is drivable in most cases but you should not leave it undiagnosed. Running with a persistent boost fault puts additional stress on the turbo and can cause further damage if the root cause is a leak allowing unfiltered air into the intake.</p>
+            </div>
+
+            <div class="blog-callout">
+                <p><strong>Will clearing P0299 fix it?</strong></p>
+                <p>No. Clearing the code removes the stored fault but does not address the underlying cause. The code will return, usually within a short drive.</p>
+            </div>
+
+            <div class="blog-callout">
+                <p><strong>Is P0299 the same as a turbo failure?</strong></p>
+                <p>Not usually. P0299 indicates low boost, which has several possible causes. A failed turbo is one of them, but actuator faults and boost leaks are more common on the W906 and W907 and are significantly cheaper to fix.</p>
+            </div>
+
+            <div class="blog-callout">
+                <p><strong>How long does it take to diagnose P0299?</strong></p>
+                <p>A proper diagnostic session covering live data, actuator test, and boost leak check takes approximately 45 to 60 minutes on site.</p>
+            </div>
+
+            <div class="blog-cta-box">
+                <p><strong>Sprinter showing P0299?</strong></p>
+                <p>Book a <a href="/services/diagnostic-callout">Standard Diagnosis</a> - we cover boost, actuator, and leak faults with live data and a proper written fix plan.</p>
+            </div>
+        `,
+    },
+    {
+        slug: 'sprinter-p0234-turbo-overboost',
+        title: 'Sprinter P0234: Turbo Overboost',
+        description: 'P0234 on a Mercedes Sprinter means the turbo is producing more boost than requested. Here is what causes it on the W906 and W907 and what the diagnostic process looks like.',
+        category: 'Mercedes',
+        publishedAt: '2026-05-23',
+        updatedAt: '2026-05-23',
+        thumbnail: '/images/gallery/work-43.jpg',
+        relatedServices: ['diagnostic-callout'],
+        faqs: [
+            { question: 'Can P0234 damage my engine?', answer: 'Persistent overboost puts stress on the turbo bearings and can cause damage over time. The ECU limp mode is designed to prevent the worst outcomes, but the fault should be diagnosed and resolved promptly.' },
+            { question: 'Is P0234 always an actuator fault?', answer: 'On the W906 and W907 it is the most common cause. A stuck or slow actuator that cannot limit boost covers the majority of cases. Sensor faults and wiring issues are less common but possible.' },
+            { question: 'What is the fix for P0234?', answer: 'That depends on the diagnostic finding. A seized variable geometry mechanism may respond to cleaning and forced regeneration of the actuator travel. A failed actuator motor or position sensor requires replacement. A wiring fault requires tracing and repair. A quote cannot be given until the root cause is confirmed.' },
+        ],
+        content: `
+            <div class="blog-lead">
+                P0234 is stored when actual boost pressure exceeds the maximum threshold set by the ECU. Where P0299 means too little boost, P0234 means too much. On W906 and W907 Sprinters the most common trigger is a stuck or slow variable geometry actuator that cannot close the vanes sufficiently to limit boost. Limp mode is the usual result.
+            </div>
+
+            <h2>What P0234 means on a Sprinter</h2>
+            <p>The turbocharger on the OM651 and OM654 is a variable geometry unit. The ECU controls boost by adjusting the position of the vanes inside the turbo housing through an actuator. If the actuator cannot close the vanes to the commanded position, boost continues to rise beyond the target. The ECU detects this through the MAP sensor and stores P0234 before entering a derate to protect the engine.</p>
+
+            <hr class="blog-divider"/>
+
+            <h2>Common causes</h2>
+            <p>On the OM651 the most common cause is a seized or carboned variable geometry mechanism that prevents the vanes from closing. This is often accompanied by P0299 stored historically, with the fault alternating between over and under boost as the actuator sticks in different positions. A faulty actuator motor or position sensor is the next most common cause. On the OM654 the actuator mechanism is updated but carbon buildup remains a factor at higher mileages. A less common but possible cause on both engines is a boost control solenoid fault or a wiring fault in the actuator circuit.</p>
+
+            <hr class="blog-divider"/>
+
+            <h2>What a diagnostic session looks at</h2>
+            <p>Live data comparing commanded actuator position against actual position is the primary test. If the actuator is commanded to a closing position and actual position lags or does not move, the fault is mechanical or electrical in the actuator circuit. A Xentry guided test can command the actuator through its full range and record response. If the actuator moves correctly under guided test but still produces P0234 under load, the MAP sensor or boost circuit wiring should be checked for intermittent faults.</p>
+
+            <hr class="blog-divider"/>
+
+            <h2>Frequently asked questions</h2>
+
+            <div class="blog-callout">
+                <p><strong>Can P0234 damage my engine?</strong></p>
+                <p>Persistent overboost puts stress on the turbo bearings and can cause damage over time. The ECU limp mode is designed to prevent the worst outcomes, but the fault should be diagnosed and resolved promptly.</p>
+            </div>
+
+            <div class="blog-callout">
+                <p><strong>Is P0234 always an actuator fault?</strong></p>
+                <p>On the W906 and W907 it is the most common cause. A stuck or slow actuator that cannot limit boost covers the majority of cases. Sensor faults and wiring issues are less common but possible.</p>
+            </div>
+
+            <div class="blog-callout">
+                <p><strong>What is the fix for P0234?</strong></p>
+                <p>That depends on the diagnostic finding. A seized variable geometry mechanism may respond to cleaning and forced regeneration of the actuator travel. A failed actuator motor or position sensor requires replacement. A wiring fault requires tracing and repair. A quote cannot be given until the root cause is confirmed.</p>
+            </div>
+
+            <div class="blog-cta-box">
+                <p><strong>Sprinter showing P0234?</strong></p>
+                <p>Book a <a href="/services/diagnostic-callout">Standard Diagnosis</a> - we use live data and Xentry guided tests to confirm whether the fault is mechanical, electrical, or sensor-related before any parts are recommended.</p>
+            </div>
+        `,
+    },
+    {
+        slug: 'mercedes-p2002-dpf-fault',
+        title: 'Mercedes P2002: DPF Efficiency Below Threshold',
+        description: 'P2002 on a Mercedes diesel means the DPF is not reducing particulate matter as expected. Here is what triggers it, what the diagnostic process covers, and when regen helps versus when it does not.',
+        category: 'Emissions',
+        publishedAt: '2026-05-23',
+        updatedAt: '2026-05-23',
+        thumbnail: '/images/gallery/work-14.jpg',
+        relatedServices: ['diagnostic-callout'],
+        faqs: [
+            { question: 'Does P2002 mean I need a new DPF?', answer: 'Not necessarily. P2002 indicates the filter is not performing to threshold, but the cause could be soot loading, a sensor fault, or a failed regen rather than a physically damaged filter. A diagnostic session is needed to confirm which it is before any repair decision is made.' },
+            { question: 'Can I regen my DPF to fix P2002?', answer: 'A regen may resolve P2002 if the fault is soot loading and there are no underlying issues preventing a successful regen. We always check conditions before forcing a regen. If there is an active fault preventing completion, a regen will not fix P2002 and may cause further issues.' },
+            { question: 'Will P2002 cause an MOT failure?', answer: 'A DPF warning light on the dashboard is an MOT failure in itself. Resolving P2002 properly, including verifying that the filter is functioning correctly before the test, is the correct approach.' },
+            { question: 'How do you check if a DPF has been removed or tampered with?', answer: 'Through a combination of differential pressure behaviour (a gutted DPF shows abnormally low pressure drop), temperature readings, and the regen history log. Physical removal or software bypass is identifiable during a standard diagnostic session.' },
+        ],
+        content: `
+            <div class="blog-lead">
+                P2002 is stored when the ECU determines that the diesel particulate filter is not reducing particulate matter to the expected level. It is one of several DPF-related codes and is often accompanied by P2463 (DPF restriction due to soot loading) or codes pointing to the differential pressure sensor or temperature sensors used to monitor the DPF. The code can appear after a failed regen or as the first sign of a DPF problem. It does not automatically mean the DPF needs replacing.
+            </div>
+
+            <h2>What P2002 means</h2>
+            <p>The DPF is monitored by the ECU using differential pressure sensors (measuring the pressure drop across the filter), temperature sensors upstream and downstream, and the regen history log. P2002 is an efficiency code: the ECU has concluded that the filter is not performing as it should. This can be because the filter is heavily loaded with soot or ash and is blocking flow, because a previous regen did not complete correctly, because a sensor giving false readings is making the DPF appear less effective than it is, or because the DPF is physically damaged, cracked, or has been bypassed.</p>
+
+            <hr class="blog-divider"/>
+
+            <h2>What the diagnostic process covers</h2>
+            <p>A diagnostic session for P2002 reads the full freeze frame and live data for the DPF circuit: soot load percentage, ash load estimate, differential pressure readings under different conditions, temperature sensor plausibility upstream and downstream, regen history (how many regens have been attempted, how many completed, how many aborted), and any secondary codes that suggest a sensor or heating circuit fault. The purpose is to establish whether the DPF is blocked and needs a regen, whether there is an underlying fault preventing regen from completing, or whether the DPF itself is damaged and needs replacement. A forced regen without this assessment risks damaging an already-stressed DPF or masking a deeper fault.</p>
+
+            <hr class="blog-divider"/>
+
+            <h2>When regen helps and when it does not</h2>
+            <p>A forced regen is appropriate when the DPF is loaded with soot, there is no underlying fault preventing regen, and the conditions (oil level, temperature circuit, exhaust system) are correct. It is not appropriate when the DPF is loaded beyond the safe regen threshold, when there is an active EGR or turbo fault that will prevent the regen temperature being reached, when the DPF is damaged or cracked, or when P2002 is being driven by a faulty differential pressure sensor rather than actual blockage. The <a href="/blog/dpf-warning-light-regen-vs-worse">DPF warning lights post</a> on this site covers this distinction in more detail.</p>
+
+            <hr class="blog-divider"/>
+
+            <h2>P2002 and emissions compliance</h2>
+            <p>P2002 with a DPF that is genuinely failing or has been tampered with will result in an MOT failure on emissions grounds. A DPF that has been physically removed or has had software modifications to bypass the regen cycle will also produce P2002 alongside abnormal differential pressure readings. This is identifiable during a diagnostic session and is not something we will assist with. Our approach is to diagnose and repair the DPF system correctly so the vehicle passes its MOT and meets its emissions obligations.</p>
+
+            <hr class="blog-divider"/>
+
+            <h2>Frequently asked questions</h2>
+
+            <div class="blog-callout">
+                <p><strong>Does P2002 mean I need a new DPF?</strong></p>
+                <p>Not necessarily. P2002 indicates the filter is not performing to threshold, but the cause could be soot loading, a sensor fault, or a failed regen rather than a physically damaged filter. A diagnostic session is needed to confirm which it is before any repair decision is made.</p>
+            </div>
+
+            <div class="blog-callout">
+                <p><strong>Can I regen my DPF to fix P2002?</strong></p>
+                <p>A regen may resolve P2002 if the fault is soot loading and there are no underlying issues preventing a successful regen. We always check conditions before forcing a regen. If there is an active fault preventing completion, a regen will not fix P2002 and may cause further issues.</p>
+            </div>
+
+            <div class="blog-callout">
+                <p><strong>Will P2002 cause an MOT failure?</strong></p>
+                <p>A DPF warning light on the dashboard is an MOT failure in itself. Resolving P2002 properly, including verifying that the filter is functioning correctly before the test, is the correct approach.</p>
+            </div>
+
+            <div class="blog-callout">
+                <p><strong>How do you check if a DPF has been removed or tampered with?</strong></p>
+                <p>Through a combination of differential pressure behaviour (a gutted DPF shows abnormally low pressure drop), temperature readings, and the regen history log. Physical removal or software bypass is identifiable during a standard diagnostic session.</p>
+            </div>
+
+            <div class="blog-cta-box">
+                <p><strong>P2002 stored on your Mercedes?</strong></p>
+                <p>Book a <a href="/services/diagnostic-callout">Standard Diagnosis</a> - we read DPF live data and regen history before any repair decision is made.</p>
             </div>
         `,
     },

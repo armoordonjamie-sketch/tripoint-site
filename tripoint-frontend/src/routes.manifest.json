@@ -423,6 +423,33 @@
     "indexable": true
   },
   {
+    "path": "/blog/sprinter-p0299-turbo-underboost",
+    "title": "Sprinter P0299 Turbo Underboost: Causes and Diagnosis | TriPoint Diagnostics",
+    "description": "P0299 on a Mercedes Sprinter W906 or W907 means the turbo is producing less boost than requested. Here is what causes it and what a proper diagnostic session looks at.",
+    "canonicalPath": "/blog/sprinter-p0299-turbo-underboost",
+    "priority": 0.5,
+    "changefreq": "monthly",
+    "indexable": true
+  },
+  {
+    "path": "/blog/sprinter-p0234-turbo-overboost",
+    "title": "Sprinter P0234 Turbo Overboost: Causes and Diagnosis | TriPoint Diagnostics",
+    "description": "P0234 on a Mercedes Sprinter means the turbo is producing more boost than requested. Here is what causes it on the W906 and W907 and what the diagnostic process looks like.",
+    "canonicalPath": "/blog/sprinter-p0234-turbo-overboost",
+    "priority": 0.5,
+    "changefreq": "monthly",
+    "indexable": true
+  },
+  {
+    "path": "/blog/mercedes-p2002-dpf-fault",
+    "title": "Mercedes P2002 DPF Fault: What It Means and What to Do | TriPoint Diagnostics",
+    "description": "P2002 on a Mercedes diesel means the DPF is not reducing particulate matter as expected. Here is what triggers it, what the diagnostic process covers, and when regen helps versus when it does not.",
+    "canonicalPath": "/blog/mercedes-p2002-dpf-fault",
+    "priority": 0.5,
+    "changefreq": "monthly",
+    "indexable": true
+  },
+  {
     "path": "/legal/privacy-policy",
     "title": "Privacy Policy",
     "description": "TriPoint Diagnostics privacy policy. GDPR compliant.",
