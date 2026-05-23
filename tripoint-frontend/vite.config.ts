@@ -47,6 +47,7 @@ export default defineConfig(({ isSsrBuild }) => ({
     },
   },
   build: {
+    chunkSizeWarningLimit: 1000,
     rollupOptions: {
       output: {
         // manualChunks conflicts with SSR externals (lottie-react is external in SSR)
@@ -54,6 +55,8 @@ export default defineConfig(({ isSsrBuild }) => ({
           ? undefined
           : {
               lottie: ['lottie-web', 'lottie-react'],
+              markdown: ['react-markdown', 'remark-gfm'],
+              motion: ['motion', 'framer-motion'],
             },
       },
     },
