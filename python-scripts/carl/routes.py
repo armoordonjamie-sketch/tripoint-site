@@ -50,7 +50,7 @@ from database import (
     save_attachment,
     session_exists,
 )
-from notifications import _has_phone as _notification_has_phone, send_lead_notification
+from notifications import send_lead_notification
 
 load_dotenv()
 
@@ -182,7 +182,7 @@ _MAX_TOOL_ITERATIONS = 3
 
 # Strip tool-call XML that occasionally leaks into the streamed text.
 _TOOL_TAG_RE = re.compile(
-    r"<(get_availability|create_booking|get_zone_and_price)[\s\S]*?</\1>", re.MULTILINE
+    r"<(get_availability|create_booking|get_zone_and_price|capture_lead)[\s\S]*?</\1>", re.MULTILINE
 )
 
 # Em/en dash replacement — the model ignores the system-prompt rule often enough
@@ -214,11 +214,91 @@ _TOOL_LABELS: dict[str, str] = {
     "get_availability": "Checking availability...",
     "create_booking": "Creating booking...",
     "get_zone_and_price": "Calculating zone...",
+    "capture_lead": "Passing your details to Jamie...",
 }
+
+
+# Lead capture is session-coupled — Carl calls this, but the handler lives in
+# this module (not calendar_tools) because it needs session_id + chat history.
+# Trigger semantics: Carl alone decides when to fire this. No regex backstop.
+CAPTURE_LEAD_TOOL: dict[str, Any] = {
+    "type": "function",
+    "function": {
+        "name": "capture_lead",
+        "description": (
+            "Hand this customer off to Jamie for follow-up. Call this only when ALL "
+            "of the following are true:\n"
+            "  - You have already given the customer at least one useful piece of "
+            "technical or practical information (per the conversational rules).\n"
+            "  - You have enough context: the vehicle, a rough description of the "
+            "fault or job, and at least an area or postcode.\n"
+            "  - The customer has volunteered a callback number themselves, OR has "
+            "explicitly asked us to be in touch.\n"
+            "Once you call this tool, the chat UI switches to a confirmation screen "
+            "and the customer cannot reply further. Only call this when you would "
+            "naturally wrap the conversation.\n"
+            "Do NOT call this just because a phone number appears somewhere in the "
+            "chat (e.g. pasted WhatsApp text with a sender phone in a [timestamp] "
+            "prefix). The customer themselves must have given a contact number for "
+            "callback purposes."
+        ),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "reason": {
+                    "type": "string",
+                    "description": (
+                        "One short sentence stating why this is a real lead Jamie "
+                        "should follow up on now (vehicle, fault, contact)."
+                    ),
+                },
+            },
+            "required": ["reason"],
+        },
+    },
+}
+
+# All tools exposed to Carl per turn. CALENDAR_TOOLS already includes zone +
+# availability + booking; we append the lead-capture tool here.
+CARL_TOOLS: list[dict[str, Any]] = [*CALENDAR_TOOLS, CAPTURE_LEAD_TOOL]
+
+
+async def _dispatch_tool(
+    tool_name: str,
+    tool_input: dict[str, Any],
+    session_id: str,
+) -> tuple[str, bool]:
+    """
+    Run a tool and return (result_json_string, lead_captured_flag).
+
+    capture_lead is intercepted here because it needs session_id + chat history;
+    all other tools route through the pure execute_tool dispatcher.
+    """
+    if tool_name == "capture_lead":
+        reason = (tool_input or {}).get("reason", "(no reason given)")
+        print(f"Carl invoked capture_lead: {reason}", file=sys.stderr)
+        if is_lead_notified(session_id):
+            # Idempotent: already notified earlier in this session.
+            return json.dumps({"status": "already_notified"}), True
+        try:
+            history = get_session_history(session_id)
+            sent = await asyncio.to_thread(send_lead_notification, session_id, history)
+        except Exception as exc:
+            print(f"capture_lead notification failed: {exc}", file=sys.stderr)
+            traceback.print_exc(file=sys.stderr)
+            return json.dumps({"status": "error", "detail": str(exc)}), False
+        if sent:
+            mark_lead_notified(session_id)
+            return json.dumps({"status": "ok", "captured": True}), True
+        return json.dumps({"status": "send_failed"}), False
+
+    result_str = await asyncio.to_thread(execute_tool, tool_name, tool_input)
+    return result_str, False
 
 
 async def _resolve_tool_calls_streaming(
     messages: list[dict[str, Any]],
+    session_id: str,
 ) -> AsyncIterator[str]:
     """
     Run up to _MAX_TOOL_ITERATIONS non-streaming rounds to resolve tool calls,
@@ -226,11 +306,13 @@ async def _resolve_tool_calls_streaming(
     can show an animated status label to the customer.
 
     Yields SSE strings throughout, then a final internal sentinel event
-    ``_resolved`` with the finished message list and last tool name.
+    ``_resolved`` with the finished message list, last tool name, and a
+    lead_captured flag (true if Carl invoked capture_lead this turn).
     If any error occurs, yields only ``_resolved`` with the original messages unchanged.
     """
     working_messages = list(messages)
     last_tool_called: str | None = None
+    lead_captured = False
     payload_base = {
         "model": MODEL_ID,
         "max_tokens": 512,
@@ -238,7 +320,7 @@ async def _resolve_tool_calls_streaming(
         "top_p": 0.9,
         "frequency_penalty": 0.3,
         "provider": {"order": ["Anthropic"], "allow_fallbacks": False},
-        "tools": CALENDAR_TOOLS,
+        "tools": CARL_TOOLS,
     }
 
     for _ in range(_MAX_TOOL_ITERATIONS):
@@ -253,7 +335,10 @@ async def _resolve_tool_calls_streaming(
                 )
         except Exception as exc:
             print(f"Tool resolution HTTP error: {exc}", file=sys.stderr)
-            yield _sse_event("_resolved", {"messages": messages, "tool_called": None})
+            yield _sse_event(
+                "_resolved",
+                {"messages": messages, "tool_called": None, "lead_captured": lead_captured},
+            )
             return
 
         if response.status_code != 200:
@@ -261,13 +346,19 @@ async def _resolve_tool_calls_streaming(
                 f"Tool resolution upstream error {response.status_code}: {response.text}",
                 file=sys.stderr,
             )
-            yield _sse_event("_resolved", {"messages": messages, "tool_called": None})
+            yield _sse_event(
+                "_resolved",
+                {"messages": messages, "tool_called": None, "lead_captured": lead_captured},
+            )
             return
 
         try:
             data = response.json()
         except Exception:
-            yield _sse_event("_resolved", {"messages": messages, "tool_called": None})
+            yield _sse_event(
+                "_resolved",
+                {"messages": messages, "tool_called": None, "lead_captured": lead_captured},
+            )
             return
 
         choice = (data.get("choices") or [{}])[0]
@@ -301,7 +392,9 @@ async def _resolve_tool_calls_streaming(
                 print(f"Tool call (OpenAI format): {tool_name}({tool_input})", file=sys.stderr)
                 yield _sse_event("tool_status", {"label": label, "tool": tool_name})
                 await asyncio.sleep(0.01)  # Force Uvicorn to flush the socket
-                result_str = await asyncio.to_thread(execute_tool, tool_name, tool_input)
+                result_str, captured = await _dispatch_tool(tool_name, tool_input, session_id)
+                if captured:
+                    lead_captured = True
                 working_messages.append({
                     "role": "tool",
                     "tool_call_id": tool_id,
@@ -320,7 +413,9 @@ async def _resolve_tool_calls_streaming(
                 print(f"Tool call (Anthropic format): {tool_name}({tool_input})", file=sys.stderr)
                 yield _sse_event("tool_status", {"label": label, "tool": tool_name})
                 await asyncio.sleep(0.01)  # Force Uvicorn to flush the socket
-                result_str = await asyncio.to_thread(execute_tool, tool_name, tool_input)
+                result_str, captured = await _dispatch_tool(tool_name, tool_input, session_id)
+                if captured:
+                    lead_captured = True
                 tool_results.append(
                     {
                         "type": "tool_result",
@@ -330,25 +425,35 @@ async def _resolve_tool_calls_streaming(
                 )
             working_messages.append({"role": "user", "content": tool_results})
 
-    yield _sse_event("_resolved", {"messages": working_messages, "tool_called": last_tool_called})
+    yield _sse_event(
+        "_resolved",
+        {
+            "messages": working_messages,
+            "tool_called": last_tool_called,
+            "lead_captured": lead_captured,
+        },
+    )
 
 
 async def _resolve_tool_calls(
     messages: list[dict[str, Any]],
-) -> tuple[list[dict[str, Any]], str | None]:
-    """Resolve tool calls synchronously (no SSE). Returns (final_messages, tool_called)."""
+    session_id: str,
+) -> tuple[list[dict[str, Any]], str | None, bool]:
+    """Resolve tool calls synchronously (no SSE). Returns (final_messages, tool_called, lead_captured)."""
     final: list[dict[str, Any]] = messages
     tool_called: str | None = None
-    async for _sse in _resolve_tool_calls_streaming(messages):
+    lead_captured = False
+    async for _sse in _resolve_tool_calls_streaming(messages, session_id):
         if _sse.startswith("event: _resolved"):
             data_str = _sse.split("data: ", 1)[-1].strip()
             try:
                 payload = json.loads(data_str)
                 final = payload.get("messages", messages)
                 tool_called = payload.get("tool_called")
+                lead_captured = bool(payload.get("lead_captured", False))
             except Exception:
                 pass
-    return final, tool_called
+    return final, tool_called, lead_captured
 
 
 async def _chat_generator(
@@ -362,8 +467,9 @@ async def _chat_generator(
     """
     final_messages: list[dict[str, Any]] = api_messages
     tool_called: str | None = None
+    lead_captured = False
 
-    async for sse in _resolve_tool_calls_streaming(api_messages):
+    async for sse in _resolve_tool_calls_streaming(api_messages, session_id):
         if sse.startswith("event: _resolved"):
             # Sentinel: parse resolved messages and move on to streaming.
             data_str = sse.split("data: ", 1)[-1].strip()
@@ -371,12 +477,15 @@ async def _chat_generator(
                 payload = json.loads(data_str)
                 final_messages = payload.get("messages", api_messages)
                 tool_called = payload.get("tool_called")
+                lead_captured = bool(payload.get("lead_captured", False))
             except Exception:
                 pass
         else:
             yield sse  # forward tool_status events to the client
 
-    async for chunk in stream_openrouter(final_messages, session_id, attachment_ids, tool_called):
+    async for chunk in stream_openrouter(
+        final_messages, session_id, attachment_ids, tool_called, lead_captured
+    ):
         yield chunk
 
 
@@ -385,6 +494,7 @@ async def stream_openrouter(
     session_id: str,
     attachment_ids: list[int],
     tool_called: str | None = None,
+    lead_captured_via_tool: bool = False,
 ) -> AsyncIterator[str]:
     """Stream OpenRouter completion chunks as SSE events."""
     payload = {
@@ -490,17 +600,12 @@ async def stream_openrouter(
             completion_tokens=completion_tokens,
         )
 
-    # Send the lead notification as soon as a phone number appears in the history.
-    # The full history at this point includes Carl's current reply, so we capture
-    # whatever context Carl has at the moment of notification.
-    lead_captured = False
-    if reply_text and not is_lead_notified(session_id):
-        full_history = get_session_history(session_id)
-        if _notification_has_phone(full_history):
-            sent = send_lead_notification(session_id, full_history)
-            if sent:
-                mark_lead_notified(session_id)
-                lead_captured = True
+    # Lead capture is now driven by Carl invoking the capture_lead tool — see
+    # _dispatch_tool. The previous regex (any UK phone number in history) caused
+    # false positives on pasted WhatsApp/iMessage text. The tool-loop already
+    # ran send_lead_notification and mark_lead_notified inside _dispatch_tool
+    # before we got here, so we just surface the flag.
+    lead_captured = bool(lead_captured_via_tool)
 
     yield _sse_event(
         "done",

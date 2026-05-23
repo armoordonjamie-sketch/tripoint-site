@@ -53,17 +53,14 @@ _UK_PHONE_RE = re.compile(
 
 
 def extract_phone(text: str) -> str | None:
-    """Return the first UK phone number found in text, normalised (no spaces), or None."""
+    """Return the first UK phone number found in text, normalised (no spaces), or None.
+
+    Kept as a small utility (e.g. for the AI summary helper to surface a phone in
+    the email body). The legacy `_has_phone` regex gate that auto-triggered lead
+    capture has been removed — Carl now decides via the `capture_lead` tool.
+    """
     m = _UK_PHONE_RE.search(text)
     return re.sub(r"[\s\-.]", "", m.group()) if m else None
-
-
-def _has_phone(messages: list[dict[str, Any]]) -> bool:
-    return any(
-        extract_phone(m.get("content", ""))
-        for m in messages
-        if m.get("role") == "user"
-    )
 
 
 # ── AI Summary & CSV Generation ───────────────────────────────────────────────
@@ -389,13 +386,13 @@ def send_lead_notification(
     """
     Send Jamie a lead notification with AI summary and CSV attachment.
 
+    Caller is expected to have decided this is a real lead (Carl invokes the
+    capture_lead tool). No regex gate here — the AI decides.
+
     Attempts email first (always), then WhatsApp if credentials are present.
     Returns True if at least one channel succeeded.
     Does not raise — all errors are printed to stderr.
     """
-    if not _has_phone(messages):
-        return False
-
     ai_summary = _generate_ai_summary(messages)
     email_ok = _send_email(session_id, messages, ai_summary)
     whatsapp_ok = _send_whatsapp(session_id, ai_summary)
