@@ -18,7 +18,7 @@ export function PrivacyPolicyPage() {
                 <div className="mx-auto max-w-3xl prose-invert">
                     <h1 className="text-4xl font-extrabold text-text-primary">Privacy Policy</h1>
                     <p className="mt-2 text-sm text-text-muted">
-                        <strong>Tripoint Diagnostics Ltd</strong>
+                        <strong>TriPoint Diagnostics Ltd</strong>
                         <br />
                         Last updated: February 2026
                     </p>
@@ -27,14 +27,14 @@ export function PrivacyPolicyPage() {
                         <section>
                             <h2 className="text-xl font-bold text-text-primary">1. Who we are</h2>
                             <p className="mt-2">
-                                Tripoint Diagnostics Ltd (&ldquo;we&rdquo;, &ldquo;us&rdquo;, &ldquo;our&rdquo;) is an independent mobile vehicle
+                                TriPoint Diagnostics Ltd (&ldquo;we&rdquo;, &ldquo;us&rdquo;, &ldquo;our&rdquo;) is an independent mobile vehicle
                                 diagnostics and repair service operating across Kent and South East London.
                             </p>
                             <ul className="mt-2 list-inside list-disc space-y-1">
-                                <li><strong>Company name:</strong> Tripoint Diagnostics Ltd</li>
+                                <li><strong>Company name:</strong> TriPoint Diagnostics Ltd</li>
                                 <li><strong>Company number:</strong> 17038307</li>
                                 <li><strong>VAT number:</strong> 515 7327 92</li>
-                                <li><strong>Registered address:</strong> 476 Sidcup Road, Eltham, London</li>
+                                <li><strong>Registered address:</strong> 476 Sidcup Road, Eltham, London SE9 4HA</li>
                                 <li><strong>Email:</strong> <a href={`mailto:${email}`} className="text-brand hover:underline">{email}</a></li>
                                 <li><strong>Phone:</strong> {phoneDisplay}</li>
                                 <li><strong>Website:</strong> <a href={url} className="text-brand hover:underline">{url}</a></li>
@@ -190,7 +190,14 @@ export function PrivacyPolicyPage() {
                         <section>
                             <h2 className="text-xl font-bold text-text-primary">8. Cookies</h2>
                             <p className="mt-2">
-                                Our website does not use cookies for tracking or advertising. We use privacy-friendly analytics that operate without cookies. Your browser&apos;s localStorage may be used to save form progress locally on your device - this is not a cookie and is not transmitted to any server unless you submit the form.
+                                This website does not set its own cookies for tracking or advertising. We use Google
+                                Analytics 4 (GA4) to measure site usage. GA4 is a third-party service and may set
+                                cookies on your device in accordance with{' '}
+                                <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-brand hover:underline">Google&apos;s Privacy Policy</a>.
+                                These are analytics cookies only. No advertising, remarketing, or consent-based cookie
+                                categories are used on this site. Your browser&apos;s localStorage may be used to save
+                                form progress locally on your device. This is not a cookie and is not transmitted to
+                                any server unless you submit the form.
                             </p>
                         </section>
 
@@ -223,7 +230,7 @@ export function PrivacyPolicyPage() {
                             <ul className="mt-2 list-inside list-disc space-y-1">
                                 <li><strong>Email:</strong> <a href={`mailto:${email}`} className="text-brand hover:underline">{email}</a></li>
                                 <li><strong>Phone:</strong> {phoneDisplay}</li>
-                                <li><strong>Post:</strong> Tripoint Diagnostics Ltd, 476 Sidcup Road, Eltham, London</li>
+                                <li><strong>Post:</strong> TriPoint Diagnostics Ltd, 476 Sidcup Road, Eltham, London SE9 4HA</li>
                             </ul>
                         </section>
                     </div>

@@ -19,7 +19,7 @@ export function DisclaimerPage() {
                 <div className="mx-auto max-w-3xl prose-invert">
                     <h1 className="text-4xl font-extrabold text-text-primary">Disclaimer</h1>
                     <p className="mt-2 text-sm text-text-muted">
-                        <strong>Tripoint Diagnostics Ltd</strong>
+                        <strong>TriPoint Diagnostics Ltd</strong>
                         <br />
                         Last updated: February 2026
                     </p>
@@ -28,7 +28,7 @@ export function DisclaimerPage() {
                         <section>
                             <h2 className="text-xl font-bold text-text-primary">1. Independent service</h2>
                             <p className="mt-2">
-                                Tripoint Diagnostics Ltd (&ldquo;we&rdquo;, &ldquo;us&rdquo;, &ldquo;our&rdquo;) is an independent mobile vehicle diagnostics and repair service. We are <strong>not affiliated with, endorsed by, authorised by, or connected to any vehicle manufacturer</strong>, including but not limited to Mercedes-Benz, Daimler Truck, Volkswagen Group, Ford, Stellantis, or any other brand.
+                                TriPoint Diagnostics Ltd (&ldquo;we&rdquo;, &ldquo;us&rdquo;, &ldquo;our&rdquo;) is an independent mobile vehicle diagnostics and repair service. We are <strong>not affiliated with, endorsed by, authorised by, or connected to any vehicle manufacturer</strong>, including but not limited to Mercedes-Benz, Daimler Truck, Volkswagen Group, Ford, Stellantis, or any other brand.
                             </p>
                             <p className="mt-2">
                                 References to vehicle makes, models, platforms, and engine codes (e.g., Mercedes Sprinter, Vito, OM651, OM654, W906, W907) are used for <strong>descriptive purposes only</strong> to indicate the types of vehicles we work on. These names are trademarks of their respective owners.
@@ -83,7 +83,7 @@ export function DisclaimerPage() {
                             <h2 className="text-xl font-bold text-text-primary">3. Emissions compliance</h2>
                             <h3 className="mt-4 text-lg font-semibold text-text-primary">3.1 Our position</h3>
                             <p className="mt-2">
-                                Tripoint Diagnostics takes a strict, compliance-first stance on all emissions-related work. We <strong>do not perform, advertise, recommend, or facilitate</strong>:
+                                TriPoint Diagnostics takes a strict, compliance-first stance on all emissions-related work. We <strong>do not perform, advertise, recommend, or facilitate</strong>:
                             </p>
                             <ul className="mt-2 list-inside list-disc space-y-1">
                                 <li>DPF (Diesel Particulate Filter) removal, gutting, or physical deletion</li>
@@ -228,7 +228,10 @@ export function DisclaimerPage() {
                             </p>
                             <h3 className="mt-4 text-lg font-semibold text-text-primary">8.2 SERMI / security-related access</h3>
                             <p className="mt-2">
-                                The UK Security-Related Repair and Maintenance Information (SERMI) scheme is anticipated to go live on 1 April 2026. This scheme governs access to security-related vehicle data and functions. Our procedures and authorisations will be updated in line with regulatory requirements as they come into force.
+                                The UK Security-Related Repair and Maintenance Information (SERMI) scheme is now in
+                                operation. Mercedes-Benz has confirmed participation in the scheme. This scheme governs
+                                access to security-related vehicle data and functions for independent operators. Our
+                                procedures and authorisations are maintained in line with the scheme requirements.
                             </p>
                         </section>
 
@@ -255,7 +258,7 @@ export function DisclaimerPage() {
                                 <li><strong>Email:</strong> <a href={`mailto:${email}`} className="text-brand hover:underline">{email}</a></li>
                                 <li><strong>Phone:</strong> {phoneDisplay}</li>
                                 <li><strong>WhatsApp:</strong> <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="text-brand hover:underline">https://wa.me/message/NROKKGS6QK54G1</a></li>
-                                <li><strong>Post:</strong> Tripoint Diagnostics Ltd, 476 Sidcup Road, Eltham, London</li>
+                                <li><strong>Post:</strong> TriPoint Diagnostics Ltd, 476 Sidcup Road, Eltham, London SE9 4HA</li>
                             </ul>
                         </section>
                     </div>

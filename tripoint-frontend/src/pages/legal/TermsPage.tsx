@@ -12,7 +12,7 @@ export function TermsPage() {
         <>
             <Seo
                 title="Terms of Service"
-                description="TriPoint Diagnostics terms of service - service terms, deposits, cancellations, and limits."
+                description="TriPoint Diagnostics terms of service - service terms, booking, cancellations, and limits."
                 canonical="/legal/terms"
             />
 
@@ -20,7 +20,7 @@ export function TermsPage() {
                 <div className="mx-auto max-w-3xl prose-invert">
                     <h1 className="text-4xl font-extrabold text-text-primary">Terms of Service</h1>
                     <p className="mt-2 text-sm text-text-muted">
-                        <strong>Tripoint Diagnostics Ltd</strong>
+                        <strong>TriPoint Diagnostics Ltd</strong>
                         <br />
                         Last updated: February 2026
                     </p>
@@ -29,7 +29,7 @@ export function TermsPage() {
                         <section>
                             <h2 className="text-xl font-bold text-text-primary">1. Introduction</h2>
                             <p className="mt-2">
-                                These Terms of Service (&ldquo;Terms&rdquo;) govern your use of the services provided by Tripoint Diagnostics Ltd (&ldquo;we&rdquo;, &ldquo;us&rdquo;, &ldquo;our&rdquo;), Company No. 17038307, VAT No. 515 7327 92, registered at 476 Sidcup Road, Eltham, London.
+                                These Terms of Service (&ldquo;Terms&rdquo;) govern your use of the services provided by TriPoint Diagnostics Ltd (&ldquo;we&rdquo;, &ldquo;us&rdquo;, &ldquo;our&rdquo;), Company No. 17038307, VAT No. 515 7327 92, registered at 476 Sidcup Road, Eltham, London SE9 4HA.
                             </p>
                             <p className="mt-2">
                                 By booking a service or using our website, you agree to these Terms. Please read them carefully before placing a booking.
@@ -39,7 +39,7 @@ export function TermsPage() {
                         <section>
                             <h2 className="text-xl font-bold text-text-primary">2. Service overview</h2>
                             <p className="mt-2">
-                                Tripoint Diagnostics provides mobile vehicle diagnostic and selected repair services across Kent and South East London. All services are:
+                                TriPoint Diagnostics provides mobile vehicle diagnostic and selected repair services across Kent and South East London. All services are:
                             </p>
                             <ul className="mt-2 list-inside list-disc space-y-1">
                                 <li><strong>Appointment-based</strong> and subject to availability within our published coverage area</li>
@@ -52,39 +52,20 @@ export function TermsPage() {
                         </section>
 
                         <section>
-                            <h2 className="text-xl font-bold text-text-primary">3. Booking and deposits</h2>
+                            <h2 className="text-xl font-bold text-text-primary">3. Booking</h2>
                             <h3 className="mt-4 text-lg font-semibold text-text-primary">3.1 How bookings work</h3>
                             <ol className="mt-2 list-decimal list-inside space-y-1">
                                 <li>You submit a booking request via our website or by contacting us directly.</li>
                                 <li>We confirm availability and provide a quote based on your postcode (zone), service type, and vehicle.</li>
-                                <li>A deposit is required to secure your booking slot.</li>
-                                <li>Once the deposit is paid, your booking is confirmed and a calendar slot is reserved.</li>
+                                <li>Once confirmed, your booking is registered and a calendar slot is reserved.</li>
                             </ol>
 
-                            <h3 className="mt-4 text-lg font-semibold text-text-primary">3.2 Deposit amounts</h3>
-                            <div className="mt-4 overflow-x-auto">
-                                <table className="min-w-full border border-border-default divide-y divide-border-default">
-                                    <thead>
-                                        <tr className="bg-surface-elevated">
-                                            <th className="px-4 py-2 text-left text-sm font-semibold text-text-primary">Zone</th>
-                                            <th className="px-4 py-2 text-left text-sm font-semibold text-text-primary">Deposit</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody className="divide-y divide-border-default">
-                                        <tr><td className="px-4 py-2">Zone A (0-25 min drive)</td><td className="px-4 py-2">£30<VatLabel /></td></tr>
-                                        <tr><td className="px-4 py-2">Zone B (25-45 min drive)</td><td className="px-4 py-2">£30<VatLabel /></td></tr>
-                                        <tr><td className="px-4 py-2">Zone C (45-60 min drive)</td><td className="px-4 py-2">£50<VatLabel /></td></tr>
-                                        <tr><td className="px-4 py-2">VOR / Priority bookings</td><td className="px-4 py-2">£50<VatLabel /></td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            <h3 className="mt-4 text-lg font-semibold text-text-primary">3.3 Payment methods</h3>
+                            <h3 className="mt-4 text-lg font-semibold text-text-primary">3.2 Payment methods</h3>
                             <p className="mt-2">
-                                We accept card payments processed securely through Stripe. The deposit is deducted from the total service cost. The remaining balance is due on completion of the visit.
+                                We accept card payments processed securely through Stripe, bank transfer, and cash. Payment is due on completion of the visit.
                             </p>
 
-                            <h3 className="mt-4 text-lg font-semibold text-text-primary">3.4 Invoices</h3>
+                            <h3 className="mt-4 text-lg font-semibold text-text-primary">3.3 Invoices</h3>
                             <p className="mt-2">
                                 An invoice or receipt will be provided for every completed job, either by email or on request.
                             </p>
@@ -94,8 +75,8 @@ export function TermsPage() {
                             <h2 className="text-xl font-bold text-text-primary">4. Cancellations and rescheduling</h2>
                             <h3 className="mt-4 text-lg font-semibold text-text-primary">4.1 Customer cancellations</h3>
                             <ul className="mt-2 list-inside list-disc space-y-1">
-                                <li><strong>24+ hours&apos; notice:</strong> Reschedule free of charge - your deposit carries over to the new date.</li>
-                                <li><strong>Less than 24 hours&apos; notice or no-show:</strong> The deposit is retained to cover the reserved time slot and travel planning costs. No further charges apply.</li>
+                                <li><strong>24+ hours&apos; notice:</strong> Reschedule free of charge.</li>
+                                <li><strong>Less than 24 hours&apos; notice or no-show:</strong> A charge may apply to cover the reserved time slot and travel planning costs. No further charges beyond this apply.</li>
                             </ul>
 
                             <h3 className="mt-4 text-lg font-semibold text-text-primary">4.2 Our cancellations</h3>
@@ -108,7 +89,7 @@ export function TermsPage() {
                                 <li>Unforeseen circumstances prevent us from attending</li>
                             </ul>
                             <p className="mt-2">
-                                In these cases, we will offer a rescheduled appointment or a full deposit refund at your choice.
+                                In these cases, we will offer a rescheduled appointment or a full refund at your choice.
                             </p>
                         </section>
 
@@ -127,7 +108,7 @@ export function TermsPage() {
                             <h3 className="mt-4 text-lg font-semibold text-text-primary">5.3 Parts</h3>
                             <ul className="mt-2 list-inside list-disc space-y-1">
                                 <li>Parts are charged separately from diagnostic/labour fees.</li>
-                                <li>Expensive components (e.g., NOx sensors, injectors) may require a parts deposit before ordering.</li>
+                                <li>Expensive components (e.g., NOx sensors, injectors) may require payment before ordering.</li>
                                 <li>We offer three options where applicable: OEM, OEM-equivalent, or customer-supplied.</li>
                                 <li><strong>Customer-supplied parts:</strong> We will fit them at your request, but warranty coverage on the part itself is between you and the supplier. We warrant our labour only.</li>
                                 <li>Part numbers and supporting evidence (scan data, live readings) will be documented.</li>
@@ -193,7 +174,7 @@ export function TermsPage() {
 
                             <h3 className="mt-4 text-lg font-semibold text-text-primary">7.3 Limitation of liability</h3>
                             <ul className="mt-2 list-inside list-disc space-y-1">
-                                <li>Tripoint Diagnostics Ltd carries public liability and professional indemnity insurance.</li>
+                                <li>TriPoint Diagnostics Ltd carries public liability and professional indemnity insurance.</li>
                                 <li>Our total liability for any claim arising from a service is limited to the value of the service fee paid for that visit.</li>
                                 <li>We are not liable for:
                                     <ul className="ml-6 mt-1 list-disc space-y-1">
@@ -245,7 +226,7 @@ export function TermsPage() {
                         <section>
                             <h2 className="text-xl font-bold text-text-primary">9. Intellectual property</h2>
                             <p className="mt-2">
-                                All content on our website - including text, images, design, logos, diagnostic reports, and case studies - is the property of Tripoint Diagnostics Ltd or its licensors and is protected by UK copyright and intellectual property law.
+                                All content on our website - including text, images, design, logos, diagnostic reports, and case studies - is the property of TriPoint Diagnostics Ltd or its licensors and is protected by UK copyright and intellectual property law.
                             </p>
                             <p className="mt-2">
                                 You may not reproduce, distribute, or republish our content without prior written permission, except for personal use of diagnostic reports issued to you.
@@ -305,7 +286,7 @@ export function TermsPage() {
                                 <li><strong>Email:</strong> <a href={`mailto:${email}`} className="text-brand hover:underline">{email}</a></li>
                                 <li><strong>Phone:</strong> {phoneDisplay}</li>
                                 <li><strong>WhatsApp:</strong> <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="text-brand hover:underline">https://wa.me/message/NROKKGS6QK54G1</a></li>
-                                <li><strong>Post:</strong> Tripoint Diagnostics Ltd, 476 Sidcup Road, Eltham, London</li>
+                                <li><strong>Post:</strong> TriPoint Diagnostics Ltd, 476 Sidcup Road, Eltham, London SE9 4HA</li>
                             </ul>
                         </section>
                     </div>

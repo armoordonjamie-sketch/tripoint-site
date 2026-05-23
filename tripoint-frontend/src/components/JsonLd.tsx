@@ -87,19 +87,8 @@ export function LocalBusinessSchema() {
     );
 }
 
-/* ── Organization + WebSite (site-wide) ───────────────────── */
+/* ── WebSite schema (site-wide, Organization expressed via AutoRepair) ── */
 export function OrganizationWebsiteSchema() {
-    const organization = {
-        '@context': 'https://schema.org',
-        '@type': 'Organization' as const,
-        '@id': `${siteConfig.url}/#organization`,
-        name: siteConfig.brandName,
-        url: siteConfig.url,
-        logo: `${siteConfig.url}/favicon.svg`,
-        email: siteConfig.contact.email,
-        telephone: siteConfig.contact.phoneE164,
-        sameAs: sameAsSocial,
-    };
     const website = {
         '@context': 'https://schema.org',
         '@type': 'WebSite' as const,
@@ -110,10 +99,7 @@ export function OrganizationWebsiteSchema() {
         publisher: { '@id': `${siteConfig.url}/#organization` },
     };
     return (
-        <>
-            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organization) }} />
-            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(website) }} />
-        </>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(website) }} />
     );
 }
 

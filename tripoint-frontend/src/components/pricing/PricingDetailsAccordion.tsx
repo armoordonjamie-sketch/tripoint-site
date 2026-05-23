@@ -14,7 +14,7 @@ const SECTIONS = [
                 <li>Full diagnostic scan across all modules</li>
                 <li>Live data checks and guided tests</li>
                 <li>Written outcome with findings and next steps</li>
-                <li>On-site time as per service (typically 60–90 mins)</li>
+                <li>On-site time as per service (typically 60 to 90 mins)</li>
             </ul>
         ),
     },
@@ -31,12 +31,10 @@ const SECTIONS = [
     },
     {
         id: 'booking',
-        title: 'Booking & deposits',
+        title: 'Booking & cancellations',
         content: (
             <p className="text-sm text-text-secondary leading-relaxed">
-                A deposit secures your slot. Zone A/B: £30<VatLabel />. Zone C and VOR: £50<VatLabel />. Reschedule
-                free with 24 hours notice — your deposit carries over. Late cancellation or no-show retains the
-                deposit. We confirm your zone and final price when you book.
+                We confirm your zone and final price when you book. Free reschedule with 24 hours notice.
             </p>
         ),
     },
