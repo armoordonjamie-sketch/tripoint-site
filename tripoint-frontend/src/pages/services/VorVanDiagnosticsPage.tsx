@@ -47,7 +47,7 @@ const faqs = [
     { question: 'How fast can you get to me?', answer: 'VOR gets priority scheduling - we confirm you as the next available slot. For same-day or next-day triage, WhatsApp us first; we can often fit you in faster than the online booking form allows.' },
     { question: 'What if it needs parts?', answer: "We'll tell you straight away. Our triage decision is: fix now / parts needed / workshop referral. If parts are needed, we'll document exactly what's required and give you a timeline. No stringing you along." },
     { question: 'Do you cover fleet vehicles?', answer: 'Yes. We work with owner-driver couriers, SME fleets, hire branches, and depot operators. For fleets, we can discuss documented outcomes, rentable/not-rentable decisions, and preventive scan sweeps.' },
-    { question: "What's the deposit?", answer: 'VOR deposits are £50 + VAT for all zones (Zone A, B, and C). Reschedule free with 24 hours notice - your deposit carries over. Late cancellation or no-show retains the deposit.' },
+
 ];
 
 const crossSell = [
@@ -227,12 +227,34 @@ export function VorVanDiagnosticsPage() {
                                 </tbody>
                             </table>
                         </div>
-                        <p className="mt-2 text-sm text-text-muted">Includes priority scheduling and up to 75 mins on-site. Deposit £50 + VAT for all zones. Reschedule free with 24 hours notice.</p>
+                        <p className="mt-2 text-sm text-text-muted">Includes priority scheduling and up to 75 mins on-site. Reschedule free with 24 hours notice.</p>
                     </div>
 
                     <div className="mt-12 reveal">
                         <h2 className="text-2xl font-bold text-text-primary">Frequently Asked Questions</h2>
                         <div className="mt-6"><FaqAccordion items={faqs} /></div>
+                    </div>
+
+                    {/* Related fault guides */}
+                    <div className="mt-10 reveal">
+                        <h2 className="text-xl font-bold text-text-primary">Related fault guides</h2>
+                        <ul className="mt-4 space-y-3">
+                            {[
+                                { label: 'Sprinter limp mode: what a proper diagnostic looks like', href: '/blog/sprinter-limp-mode-proper-diagnostic' },
+                                { label: 'AdBlue countdown: why clearing codes is not a fix', href: '/blog/adblue-countdown-clearing-codes-not-fix' },
+                            ].map((item) => (
+                                <li key={item.href}>
+                                    <Link
+                                        to={item.href}
+                                        className="inline-flex items-center gap-2 text-sm text-brand hover:underline"
+                                        onClick={() => trackNavClick(item.href, item.label, 'vor_van_fault_guides')}
+                                    >
+                                        <ArrowRight className="h-3.5 w-3.5 shrink-0" />
+                                        {item.label}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
                     </div>
 
                     <div className="mt-12 rounded-2xl border border-brand/20 bg-brand/5 p-6 text-center reveal">
@@ -245,9 +267,7 @@ export function VorVanDiagnosticsPage() {
                         </div>
                     </div>
 
-                    <div className="mt-8 reveal">
-                        <Notice variant="info">VOR deposits are £50 + VAT for all zones. Reschedule free with 24 hours notice.</Notice>
-                    </div>
+
 
                     <div className="mt-12 reveal">
                         <h2 className="text-xl font-bold text-text-primary">Related Services</h2>

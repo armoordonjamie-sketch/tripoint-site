@@ -23,7 +23,7 @@ const categories = ['All', ...Array.from(new Set(blogPosts.map((p) => p.category
 const collectionLd = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
-    name: 'Blog | TriPoint Diagnostics',
+    name: 'Sprinter and Mercedes Fault Guides | TriPoint Diagnostics Blog',
     description: 'Technical insights on Mercedes diagnostics, turbo failures, Sprinter limp mode, AdBlue, DPF, and mobile vehicle diagnostics.',
     url: `${siteConfig.url}/blog`,
     mainEntity: {
@@ -53,8 +53,8 @@ export function BlogIndexPage() {
     return (
         <>
             <Seo
-                title="Blog"
-                description="Technical insights on Mercedes OM654 turbo failures, Sprinter limp mode, AdBlue countdown, DPF diagnostics, and mobile vehicle diagnostics from TriPoint."
+                title="Sprinter and Mercedes Fault Guides | TriPoint Diagnostics Blog"
+                description="Technical guides on common Mercedes Sprinter, Vito, and diesel van faults. Limp mode, AdBlue countdowns, DPF issues, and turbo failures explained by a Mercedes-Benz trained technician."
                 canonical="/blog"
             />
             <Helmet>

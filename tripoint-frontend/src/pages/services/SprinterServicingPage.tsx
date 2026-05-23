@@ -467,7 +467,7 @@ export function SprinterServicingPage() {
                 </div>
             </Section>
 
-            {/* \u2500\u2500\u2500 FAQ \u2500\u2500\u2500 */}
+            {/* ─── FAQ ─── */}
             <Section className="bg-surface-alt/50">
                 <div className="mx-auto max-w-3xl reveal">
                     <h2 className="text-2xl font-bold text-text-primary text-center">Frequently asked questions</h2>
@@ -475,7 +475,31 @@ export function SprinterServicingPage() {
                 </div>
             </Section>
 
-            {/* \u2500\u2500\u2500 Diagnostic notice \u2500\u2500\u2500 */}
+            {/* ─── Related fault guides ─── */}
+            <Section>
+                <div className="mx-auto max-w-5xl reveal">
+                    <h2 className="text-xl font-bold text-text-primary">Related fault guides</h2>
+                    <ul className="mt-4 space-y-3">
+                        {[
+                            { label: 'Why OM654 turbochargers are failing in Sprinter and Vito', href: '/blog/om654-turbo-failure-sprinter-vito' },
+                            { label: 'DPF warning lights: when regen helps vs when it makes things worse', href: '/blog/dpf-warning-light-regen-vs-worse' },
+                        ].map((item) => (
+                            <li key={item.href}>
+                                <Link
+                                    to={item.href}
+                                    className="inline-flex items-center gap-2 text-sm text-brand hover:underline"
+                                    onClick={() => trackNavClick(item.href, item.label, 'sprinter_servicing_fault_guides')}
+                                >
+                                    <ArrowRight className="h-3.5 w-3.5 shrink-0" />
+                                    {item.label}
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </Section>
+
+            {/* ─── Diagnostic notice ─── */}
             <Section>
                 <div className="mx-auto max-w-5xl reveal">
                     <Notice variant="info">We carry Mercedes STAR/XENTRY diagnostic equipment on every visit. If we spot a fault during your service, we can diagnose it there and then - no second visit needed.</Notice>

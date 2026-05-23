@@ -406,7 +406,7 @@ export function DiagnosticCalloutPage() {
                         <h2 className="text-xl font-bold text-text-primary lg:text-2xl">Pricing</h2>
                         <ZonePriceCards
                             rows={zonePriceRows}
-                            footnote="Includes travel and up to 60 mins on-site. Deposit £30 + VAT (Zone A/B) or £50 + VAT (Zone C). Extra time £85/hr + VAT in 15-min blocks."
+                            footnote="Includes travel and up to 60 mins on-site. Extra time £85/hr + VAT in 15-min blocks."
                         />
                         <div className="mt-4 hidden overflow-x-auto rounded-xl border border-border-default lg:block">
                             <table className="min-w-full">
@@ -424,7 +424,7 @@ export function DiagnosticCalloutPage() {
                                 </tbody>
                             </table>
                         </div>
-                        <p className="mt-2 hidden text-sm text-text-muted lg:block">Includes travel and up to 60 mins on-site. Deposit £30 + VAT (Zone A/B) or £50 + VAT (Zone C). If additional diagnostic time is needed, it&apos;s billed at £85/hour + VAT in 15-minute blocks.</p>
+                        <p className="mt-2 hidden text-sm text-text-muted lg:block">Includes travel and up to 60 mins on-site. If additional diagnostic time is needed, it&apos;s billed at £85/hour + VAT in 15-minute blocks.</p>
                     </div>
 
                     {/* Fleet */}
@@ -468,6 +468,29 @@ export function DiagnosticCalloutPage() {
                         <div className="mt-6">
                             <FaqAccordion items={faqs} />
                         </div>
+                    </div>
+
+                    {/* Related fault guides */}
+                    <div className="mt-10 reveal">
+                        <h2 className="text-xl font-bold text-text-primary">Related fault guides</h2>
+                        <ul className="mt-4 space-y-3">
+                            {[
+                                { label: 'Sprinter limp mode: what a proper diagnostic looks like', href: '/blog/sprinter-limp-mode-proper-diagnostic' },
+                                { label: 'AdBlue countdown: why clearing codes is not a fix', href: '/blog/adblue-countdown-clearing-codes-not-fix' },
+                                { label: 'DPF warning lights: when regen helps vs when it makes things worse', href: '/blog/dpf-warning-light-regen-vs-worse' },
+                            ].map((item) => (
+                                <li key={item.href}>
+                                    <Link
+                                        to={item.href}
+                                        className="inline-flex items-center gap-2 text-sm text-brand hover:underline"
+                                        onClick={() => trackNavClick(item.href, item.label, 'diagnostic_callout_fault_guides')}
+                                    >
+                                        <ArrowRight className="h-3.5 w-3.5 shrink-0" />
+                                        {item.label}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
                     </div>
 
                     <div className="mt-8 reveal">

@@ -4,10 +4,34 @@ import { Seo } from '@/components/Seo';
 import { Section } from '@/components/Section';
 import { CTAButton } from '@/components/CTAButton';
 import { OptimizedImage } from '@/components/OptimizedImage';
-import { BookOpen, ArrowRight } from 'lucide-react';
+import { BookOpen, ArrowRight, BookMarked } from 'lucide-react';
 import { getBlogPost, getPostThumbnail } from '@/data/blogPosts';
 import { siteConfig } from '@/config/site';
 import { trackNavClick, trackSelectContent } from '@/lib/analytics';
+
+/* ── Per-post related reading links ── */
+const relatedReadingBySlug: Record<string, { label: string; href: string }[]> = {
+    'om654-turbo-failure-sprinter-vito': [
+        { label: 'Mercedes Sprinter Servicing', href: '/services/sprinter-servicing' },
+        { label: 'Mercedes Vito Servicing', href: '/services/vito-servicing' },
+        { label: 'Standard Diagnosis', href: '/services/diagnostic-callout' },
+    ],
+    'sprinter-limp-mode-proper-diagnostic': [
+        { label: 'Standard Diagnosis', href: '/services/diagnostic-callout' },
+        { label: 'VOR Van Diagnostics', href: '/services/vor-van-diagnostics' },
+        { label: 'Mobile diagnostics in Greenwich', href: '/areas-covered/greenwich' },
+    ],
+    'adblue-countdown-clearing-codes-not-fix': [
+        { label: 'Standard Diagnosis', href: '/services/diagnostic-callout' },
+        { label: 'Mobile diagnostics in Bexley and Sidcup', href: '/areas-covered/bexley' },
+        { label: 'Mobile diagnostics in Gillingham and Medway', href: '/areas-covered/medway' },
+    ],
+    'dpf-warning-light-regen-vs-worse': [
+        { label: 'Standard Diagnosis', href: '/services/diagnostic-callout' },
+        { label: 'Mercedes Sprinter Servicing', href: '/services/sprinter-servicing' },
+        { label: 'Mobile diagnostics in Maidstone', href: '/areas-covered/maidstone' },
+    ],
+};
 
 function BlogHeroImage({ src, alt }: { src: string; alt: string }) {
     const isGallery = src.startsWith('/images/gallery/');
@@ -109,18 +133,11 @@ export function BlogPostPage() {
         articleSection: post.category,
         inLanguage: 'en-GB',
         author: {
-            '@type': 'Organization',
-            name: post.author ?? 'TriPoint Diagnostics',
-            url: siteConfig.url,
+            '@type': 'Person',
+            name: 'Jamie Armoordon',
         },
         publisher: {
-            '@type': 'Organization',
-            name: 'TriPoint Diagnostics',
-            url: siteConfig.url,
-            logo: {
-                '@type': 'ImageObject',
-                url: `${siteConfig.url}/favicon.svg`,
-            },
+            '@id': `${siteConfig.url}/#local-business`,
         },
         image: imageUrl,
         mainEntityOfPage: {
@@ -209,7 +226,32 @@ export function BlogPostPage() {
                             className="prose prose-invert mt-8 max-w-none prose-headings:font-bold prose-p:text-text-secondary prose-li:text-text-secondary prose-a:text-brand prose-a:no-underline hover:prose-a:underline"
                             dangerouslySetInnerHTML={{ __html: post.content }}
                         />
-                        <div className="mt-12 rounded-2xl border border-brand/20 bg-brand/5 p-6">
+
+                        {/* Related reading block */}
+                        {relatedReadingBySlug[post.slug] && (
+                            <div className="mt-10 rounded-2xl border border-border-default bg-surface-alt p-6">
+                                <div className="flex items-center gap-2 text-text-primary">
+                                    <BookMarked className="h-5 w-5 text-brand" />
+                                    <h2 className="font-semibold">Related reading</h2>
+                                </div>
+                                <ul className="mt-4 space-y-2">
+                                    {relatedReadingBySlug[post.slug].map((item) => (
+                                        <li key={item.href}>
+                                            <Link
+                                                to={item.href}
+                                                className="inline-flex items-center gap-1.5 text-sm text-brand hover:underline"
+                                                onClick={() => trackNavClick(item.href, item.label, 'blog_post_related_reading')}
+                                            >
+                                                <ArrowRight className="h-3.5 w-3.5 shrink-0" />
+                                                {item.label}
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
+
+                        <div className="mt-8 rounded-2xl border border-brand/20 bg-brand/5 p-6">
                             <p className="font-semibold text-text-primary">Need help with this?</p>
                             <p className="mt-2 text-sm text-text-secondary">
                                 We offer professional diagnostics for these issues. Book a visit or WhatsApp us.
