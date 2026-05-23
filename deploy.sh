@@ -62,6 +62,10 @@ server {
     listen 80;
     server_name $DOMAIN www.$DOMAIN;
 
+    # Allow Carl chat photo uploads (backend caps each file at 10 MB, up to 5 files).
+    # Default nginx 1M is too small.
+    client_max_body_size 25M;
+
     root $FRONTEND_DIR/dist;
     index index.html;
 

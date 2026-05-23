@@ -78,6 +78,20 @@ if [ "$LOCAL" != "$REMOTE" ]; then
             systemctl reload nginx
         fi
 
+        # Ensure client_max_body_size is set so Carl chat photo uploads aren't 413'd.
+        # Backend caps each file at 10 MB (carl/attachments.py); allow ~2 photos per request.
+        if ! grep -q "client_max_body_size" /etc/nginx/sites-enabled/tripoint; then
+            echo ">>> [$(date)] Adding client_max_body_size 25M to Nginx (was missing)..."
+            # Insert after every server_name line so both :80 and :443 blocks pick it up.
+            # --follow-symlinks: sites-enabled/tripoint is a symlink to sites-available; don't replace the symlink.
+            sed -i --follow-symlinks '/server_name /a\    client_max_body_size 25M;' /etc/nginx/sites-enabled/tripoint
+            if nginx -t; then
+                systemctl reload nginx
+            else
+                echo ">>> [$(date)] WARNING: nginx -t failed after client_max_body_size insert; not reloading."
+            fi
+        fi
+
         echo ">>> Restarting API service..."
         systemctl restart tripoint-api
         echo ">>> [$(date)] Deployment complete."
