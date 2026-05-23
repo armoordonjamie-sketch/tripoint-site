@@ -7,6 +7,8 @@ import { ToolStatusPill } from "./ToolStatusPill";
 import { ContactCTA, shouldShowCTA } from "./ContactCTA";
 import { FileText, Image, AlertCircle } from "lucide-react";
 
+const SafeReactMarkdown = (typeof ReactMarkdown === "object" && "default" in ReactMarkdown ? (ReactMarkdown as any).default : ReactMarkdown) as typeof ReactMarkdown;
+
 interface MessageBubbleProps {
   message: Message;
   isLast: boolean;
@@ -87,9 +89,9 @@ export function MessageBubble({ message, isLast, showTimestamp }: MessageBubbleP
                 <span className="whitespace-pre-wrap">{message.content}</span>
               ) : (
                 <div className="carl-prose">
-                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                  <SafeReactMarkdown remarkPlugins={[remarkGfm]}>
                     {sanitiseContent(message.content)}
-                  </ReactMarkdown>
+                  </SafeReactMarkdown>
                   {message.streaming && (
                     <span className="inline-block w-1.5 h-3.5 bg-blue-400 ml-0.5 animate-pulse rounded-sm align-middle" />
                   )}

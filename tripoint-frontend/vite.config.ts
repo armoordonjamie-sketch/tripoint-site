@@ -62,6 +62,9 @@ export default defineConfig(({ isSsrBuild }) => ({
     },
   },
   ssr: {
-    noExternal: ['react-helmet-async'],
+    // lottie-react: its CJS `default` export is the whole exports object under Node's
+    // CJS→ESM interop, so `import Lottie from 'lottie-react'` resolves to an object.
+    // Letting Vite bundle it fixes the default-export unwrap.
+    noExternal: ['react-helmet-async', 'lottie-react'],
   },
 }))

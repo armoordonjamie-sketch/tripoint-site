@@ -42,7 +42,14 @@ export async function render(url: string) {
                 </StaticRouter>
             </HelmetProvider>
         </StrictMode>,
-        { onError: (err) => console.error('SSR error:', err) }
+        {
+            onError: (err, errorInfo) => {
+                console.error('SSR error on URL', url, ':', err);
+                if (errorInfo?.componentStack) {
+                    console.error('Component stack:', errorInfo.componentStack);
+                }
+            },
+        }
     );
 
     const appHtml = await streamToString(stream);
