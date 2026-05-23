@@ -12,6 +12,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import json
 import os
 import re
@@ -299,7 +300,8 @@ async def _resolve_tool_calls_streaming(
                 label = _TOOL_LABELS.get(tool_name, "Working...")
                 print(f"Tool call (OpenAI format): {tool_name}({tool_input})", file=sys.stderr)
                 yield _sse_event("tool_status", {"label": label, "tool": tool_name})
-                result_str = execute_tool(tool_name, tool_input)
+                await asyncio.sleep(0.01)  # Force Uvicorn to flush the socket
+                result_str = await asyncio.to_thread(execute_tool, tool_name, tool_input)
                 working_messages.append({
                     "role": "tool",
                     "tool_call_id": tool_id,
@@ -317,7 +319,8 @@ async def _resolve_tool_calls_streaming(
                 label = _TOOL_LABELS.get(tool_name, "Working...")
                 print(f"Tool call (Anthropic format): {tool_name}({tool_input})", file=sys.stderr)
                 yield _sse_event("tool_status", {"label": label, "tool": tool_name})
-                result_str = execute_tool(tool_name, tool_input)
+                await asyncio.sleep(0.01)  # Force Uvicorn to flush the socket
+                result_str = await asyncio.to_thread(execute_tool, tool_name, tool_input)
                 tool_results.append(
                     {
                         "type": "tool_result",
