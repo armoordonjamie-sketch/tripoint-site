@@ -7,7 +7,7 @@ import { useChat } from "../../hooks/useChat";
 import { X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
-const WELCOME = "Hi, I'm Carl, TriPoint's diagnostic assistant. Tell me what's going on with the van and I'll help figure out the next step.";
+const WELCOME = "Hi, I'm Carl! Whether you have a fault, need a service, or are looking for tuning and upgrades, just tell me what you need and I'll help figure out the next step.";
 
 const QUICK_CHIPS = [
   "What does a diagnostic cost?",
