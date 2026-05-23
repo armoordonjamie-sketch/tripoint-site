@@ -5,7 +5,6 @@ import { trackNavClick, trackPhoneClick, trackWhatsAppClick } from '@/lib/analyt
 import { Section } from '@/components/Section';
 import { CTAButton } from '@/components/CTAButton';
 import { PhotoGallery } from '@/components/PhotoGallery';
-import { Notice } from '@/components/Notice';
 import { FaqAccordion } from '@/components/FaqAccordion';
 import { CheckCircle2, XCircle, ArrowRight, Phone, MessageCircle, Clock } from 'lucide-react';
 import { galleryImages } from '@/data/galleryImages';

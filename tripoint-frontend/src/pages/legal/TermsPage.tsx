@@ -1,7 +1,6 @@
 import { Seo } from '@/components/Seo';
 import { Section } from '@/components/Section';
 import { siteConfig } from '@/config/site';
-import { VatLabel } from '@/components/VatLabel';
 
 export function TermsPage() {
     const { email, phoneDisplay } = siteConfig.contact;
