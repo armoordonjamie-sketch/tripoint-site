@@ -85,8 +85,12 @@ def _configure_tripoint_logging() -> None:
     tri.addHandler(h)
     tri.propagate = False
 
-
 _configure_tripoint_logging()
+
+# Add carl directory to path so Carl's internal absolute imports work seamlessly
+import sys
+import os
+sys.path.append(os.path.join(os.path.dirname(__file__), 'carl'))
 
 logger = logging.getLogger("tripoint.api")
 logger.setLevel(logging.INFO)
@@ -125,6 +129,20 @@ async def startup_event():
 
     await init_db()
 
+    # Carl Initialization
+    try:
+        from carl.database import init_db as carl_init_db
+        from carl.attachments import ensure_uploads_dir
+        carl_init_db()
+        ensure_uploads_dir()
+        
+        # Load calendar tool inside startup so it caches the credentials
+        from carl.calendar_tools import get_calendar_service
+        get_calendar_service()
+        logger.info("Carl Agent initialized successfully.")
+    except Exception as e:
+        logger.error("Failed to initialize Carl Agent: %s", e)
+
     try:
         from services.ads_offline_sync import maybe_purge_offline_export_test_rows_on_startup
 
@@ -150,6 +168,10 @@ app.add_middleware(
 from routes.admin_leads import router as admin_leads_router
 
 app.include_router(admin_leads_router)
+
+# Carl Agent Router
+from carl.routes import carl_router
+app.include_router(carl_router)
 
 BASES = {
     "Tonbridge": "TN9 1PP",

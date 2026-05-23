@@ -5,6 +5,7 @@ import { Footer } from './Footer';
 import { MobileStickyCTA } from './MobileStickyCTA';
 import { ScrollDepthTracker } from './ScrollDepthTracker';
 import { LocalBusinessSchema, OrganizationWebsiteSchema } from './JsonLd';
+import { CarlWidget } from './carl/CarlWidget';
 
 export function Layout() {
     const { pathname } = useLocation();
@@ -41,6 +42,7 @@ export function Layout() {
             </main>
             <Footer />
             {showMobileSticky && <MobileStickyCTA />}
+            <CarlWidget />
         </div>
     );
 }

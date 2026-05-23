@@ -487,3 +487,36 @@
     line-height: 1.4;
   }
 }
+
+@layer components {
+  /* Markdown prose inside Carl bubbles */
+  .carl-prose p { margin-bottom: 0.6em; }
+  .carl-prose p:last-child { margin-bottom: 0; }
+  .carl-prose ul, .carl-prose ol { padding-left: 1.25rem; margin-bottom: 0.6em; }
+  .carl-prose li { margin-bottom: 0.2em; }
+  .carl-prose strong { color: #f9fafb; font-weight: 600; }
+  .carl-prose a { color: #60a5fa; text-decoration: underline; text-underline-offset: 2px; }
+  .carl-prose table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-bottom: 0.6em; }
+  .carl-prose th { background: #1f2937; color: #9ca3af; font-weight: 600; text-align: left; padding: 6px 10px; }
+  .carl-prose td { padding: 6px 10px; border-bottom: 1px solid #1f2937; }
+  .carl-prose tr:last-child td { border-bottom: none; }
+  .carl-prose code { background: #1f2937; border-radius: 3px; padding: 1px 5px; font-size: 0.85em; font-family: "Fira Code", "Cascadia Code", monospace; }
+  .carl-prose pre { background: #1f2937; border-radius: 6px; padding: 12px; overflow-x: auto; margin-bottom: 0.6em; }
+  .carl-prose pre code { background: none; padding: 0; }
+  .carl-prose h1, .carl-prose h2, .carl-prose h3 { font-weight: 600; margin-bottom: 0.4em; margin-top: 0.8em; letter-spacing: -0.01em; }
+  .carl-prose h1:first-child, .carl-prose h2:first-child, .carl-prose h3:first-child { margin-top: 0; }
+  .carl-prose blockquote { border-left: 3px solid #1d4ed8; padding-left: 0.75rem; color: #9ca3af; margin: 0.5em 0; }
+  .carl-prose hr { border: none; border-top: 1px solid #1f2937; margin: 0.75em 0; }
+
+  /* ── Tool Status Pill ─────────────────────────────── */
+  .tool-status-pill { transition: box-shadow 0.3s ease; }
+  .tool-shimmer {
+    background: linear-gradient(105deg, transparent 40%, rgba(255, 255, 255, 0.035) 50%, transparent 60%);
+    background-size: 250% 100%;
+    animation: tool-shimmer 2.8s ease-in-out infinite;
+  }
+  @keyframes tool-shimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -50% 0; }
+  }
+}

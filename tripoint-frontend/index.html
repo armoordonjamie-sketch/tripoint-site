@@ -18,6 +18,16 @@
 
 <body>
   <div id="root"><!--app-html--></div>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function(registrations) {
+        for(let registration of registrations) {
+          registration.unregister();
+          console.log('Unregistered old service worker');
+        }
+      });
+    }
+  </script>
   <script type="module" src="/src/entry-client.tsx"></script>
 </body>
 
