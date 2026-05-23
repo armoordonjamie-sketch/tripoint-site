@@ -125,7 +125,7 @@ export function PaymentSuccessPage() {
         <>
             <Seo
                 title="Payment Received"
-                description="Your payment has been received. Your booking is confirmed."
+                description="Your payment has been received. Thank you for your payment."
                 noIndex
             />
             <Section>
@@ -135,7 +135,8 @@ export function PaymentSuccessPage() {
                     </div>
                     <h1 className="text-2xl font-bold text-text-primary">Payment received</h1>
                     <p className="mt-4 text-text-secondary">
-                        Thank you. You will receive an email confirming your payment with invoice.
+                        Thank you. Your payment has been received. If an invoice or receipt was issued,
+                        you should receive it by email shortly.
                     </p>
                     <Link to="/">
                         <CTAButton className="mt-8">Back to home</CTAButton>

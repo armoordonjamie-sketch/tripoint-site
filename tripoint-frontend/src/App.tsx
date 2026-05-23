@@ -108,6 +108,8 @@ export function AppRoutes() {
                     <Route path="booking" element={<BookingPage />} />
                     <Route path="pay/:token" element={<PaymentPage />} />
                     <Route path="pay/:token/success" element={<PaymentSuccessPage />} />
+                    {/* Stripe Payment Link after_completion redirect (invoice links) */}
+                    <Route path="payment-success" element={<PaymentSuccessPage />} />
                     <Route path="report/:shareToken" element={<ReportViewerPage />} />
                     <Route path="admin" element={<AdminDashboardPage />} />
                     <Route path="admin/login" element={<AdminLoginPage />} />

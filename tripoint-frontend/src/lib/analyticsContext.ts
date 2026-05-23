@@ -138,7 +138,7 @@ export function getPageAnalyticsContextFromPath(fullPath: string): PageAnalytics
         area_slug = segments[1];
     } else if (segments[0] === 'blog' && segments[1]) {
         page_type = 'blog_post';
-    } else if (segments[0] === 'pay' && segments[2] === 'success') {
+    } else if (pathOnly === '/payment-success' || (segments[0] === 'pay' && segments[2] === 'success')) {
         page_type = 'payment_success';
     } else if (segments[0] === 'pay' && segments[1]) {
         page_type = 'payment';
