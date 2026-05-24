@@ -379,20 +379,60 @@ export function PrePurchaseHealthCheckPage() {
                 </div>
             </Section>
 
-            {/* ─── Internal links ─── */}
+            {/* ── Written report reference ── */}
+            <Section className="bg-surface-alt/50">
+                <div className="mx-auto max-w-5xl reveal">
+                    <Notice variant="info">
+                        <Link to="/sample-diagnostic-report" className="font-semibold text-brand hover:underline">See an example written report</Link> - Every pre-purchase check ends with a written condition report. Here is what you can expect.
+                    </Notice>
+                </div>
+            </Section>
+
+            {/* ── Related reading ── */}
             <Section>
                 <div className="mx-auto max-w-5xl reveal">
-                    <h2 className="text-xl font-bold text-text-primary">Related reading and coverage</h2>
+                    <h2 className="text-xl font-bold text-text-primary">What to check before buying</h2>
                     <div className="mt-4 grid gap-4 sm:grid-cols-2">
-                        <Link to="/blog/sprinter-limp-mode-proper-diagnostic" className="flex items-center gap-2 rounded-xl border border-border-default bg-surface-alt p-4 text-sm text-brand hover:border-brand/30 hover:bg-brand/5 transition-all">
+                        <Link to="/blog/adblue-countdown-clearing-codes-not-fix" className="flex items-center gap-2 rounded-xl border border-border-default bg-surface-alt p-4 text-sm text-brand hover:border-brand/30 hover:bg-brand/5 transition-all">
                             <ArrowRight className="h-4 w-4 shrink-0" />
-                            Sprinter limp mode: what a proper diagnostic looks like
+                            AdBlue countdown: why clearing codes is not a fix
                         </Link>
-                        <Link to="/areas-covered" className="flex items-center gap-2 rounded-xl border border-border-default bg-surface-alt p-4 text-sm text-brand hover:border-brand/30 hover:bg-brand/5 transition-all">
+                        <Link to="/blog/dpf-warning-light-regen-vs-worse" className="flex items-center gap-2 rounded-xl border border-border-default bg-surface-alt p-4 text-sm text-brand hover:border-brand/30 hover:bg-brand/5 transition-all">
                             <ArrowRight className="h-4 w-4 shrink-0" />
-                            Coverage: Kent and South East London service area
+                            DPF warning lights: when regen helps vs when it makes things worse
+                        </Link>
+                        <Link to="/blog/mercedes-eml-on" className="flex items-center gap-2 rounded-xl border border-border-default bg-surface-alt p-4 text-sm text-brand hover:border-brand/30 hover:bg-brand/5 transition-all">
+                            <ArrowRight className="h-4 w-4 shrink-0" />
+                            Mercedes EML on
                         </Link>
                     </div>
+                </div>
+            </Section>
+
+            {/* ── Coverage ── */}
+            <Section className="bg-surface-alt/30 border-t border-border-default pt-12 pb-12">
+                <div className="mx-auto max-w-5xl reveal text-center">
+                    <h2 className="text-sm font-semibold uppercase tracking-widest text-brand mb-4">We cover</h2>
+                    <div className="flex flex-wrap justify-center gap-x-4 gap-y-3 md:gap-x-6">
+                        {[
+                            { name: 'Greenwich', to: '/areas-covered/greenwich' },
+                            { name: 'Bexley', to: '/areas-covered/bexley' },
+                            { name: 'Orpington', to: '/areas-covered/orpington' },
+                            { name: 'Maidstone', to: '/areas-covered/maidstone' },
+                            { name: 'Tonbridge', to: '/areas-covered/tonbridge' },
+                            { name: 'Gillingham and Medway', to: '/areas-covered/medway' },
+                        ].map((area, i) => (
+                            <div key={area.name} className="flex items-center gap-x-4 md:gap-x-6">
+                                <Link to={area.to} className="text-base font-medium text-text-primary hover:text-brand transition-colors">
+                                    {area.name}
+                                </Link>
+                                {i < 5 && <span className="hidden md:inline-block text-border-default select-none">&bull;</span>}
+                            </div>
+                        ))}
+                    </div>
+                    <p className="mt-6 text-sm text-text-muted">
+                        Mobile across Kent and South East London. <Link to="/pricing" className="text-brand hover:underline">Check your zone on the pricing page.</Link>
+                    </p>
                 </div>
             </Section>
 

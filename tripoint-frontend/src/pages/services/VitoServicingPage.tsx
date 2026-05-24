@@ -424,6 +424,27 @@ export function VitoServicingPage() {
                 </div>
             </Section>
 
+            {/* ── Related reading ── */}
+            <Section>
+                <div className="mx-auto max-w-5xl reveal">
+                    <h2 className="text-xl font-bold text-text-primary">Common Vito fault guides</h2>
+                    <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                        <Link to="/blog/vito-adblue-fault" className="flex items-center gap-2 rounded-xl border border-border-default bg-surface-alt p-4 text-sm text-brand hover:border-brand/30 hover:bg-brand/5 transition-all">
+                            <ArrowRight className="h-4 w-4 shrink-0" />
+                            Vito AdBlue fault
+                        </Link>
+                        <Link to="/blog/adblue-countdown-clearing-codes-not-fix" className="flex items-center gap-2 rounded-xl border border-border-default bg-surface-alt p-4 text-sm text-brand hover:border-brand/30 hover:bg-brand/5 transition-all">
+                            <ArrowRight className="h-4 w-4 shrink-0" />
+                            AdBlue countdown: why clearing codes is not a fix
+                        </Link>
+                        <Link to="/blog/om654-turbo-failure-sprinter-vito" className="flex items-center gap-2 rounded-xl border border-border-default bg-surface-alt p-4 text-sm text-brand hover:border-brand/30 hover:bg-brand/5 transition-all">
+                            <ArrowRight className="h-4 w-4 shrink-0" />
+                            OM654 turbo failures: Sprinter and Vito
+                        </Link>
+                    </div>
+                </div>
+            </Section>
+
             {/* ─── Diagnostic notice ─── */}
             <Section className="bg-surface-alt/50">
                 <div className="mx-auto max-w-5xl reveal">
@@ -479,6 +500,33 @@ export function VitoServicingPage() {
                             </Link>
                         ))}
                     </div>
+                </div>
+            </Section>
+
+            {/* ── Coverage ── */}
+            <Section className="bg-surface-alt/30 border-t border-border-default pt-12 pb-12">
+                <div className="mx-auto max-w-5xl reveal text-center">
+                    <h2 className="text-sm font-semibold uppercase tracking-widest text-brand mb-4">We cover</h2>
+                    <div className="flex flex-wrap justify-center gap-x-4 gap-y-3 md:gap-x-6">
+                        {[
+                            { name: 'Greenwich', to: '/areas-covered/greenwich' },
+                            { name: 'Bexley', to: '/areas-covered/bexley' },
+                            { name: 'Orpington', to: '/areas-covered/orpington' },
+                            { name: 'Maidstone', to: '/areas-covered/maidstone' },
+                            { name: 'Tonbridge', to: '/areas-covered/tonbridge' },
+                            { name: 'Gillingham and Medway', to: '/areas-covered/medway' },
+                        ].map((area, i) => (
+                            <div key={area.name} className="flex items-center gap-x-4 md:gap-x-6">
+                                <Link to={area.to} className="text-base font-medium text-text-primary hover:text-brand transition-colors">
+                                    {area.name}
+                                </Link>
+                                {i < 5 && <span className="hidden md:inline-block text-border-default select-none">&bull;</span>}
+                            </div>
+                        ))}
+                    </div>
+                    <p className="mt-6 text-sm text-text-muted">
+                        Mobile across Kent and South East London. <Link to="/pricing" className="text-brand hover:underline">Check your zone on the pricing page.</Link>
+                    </p>
                 </div>
             </Section>
 

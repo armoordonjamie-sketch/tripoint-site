@@ -6,6 +6,7 @@ import { Section } from '@/components/Section';
 import { CTAButton } from '@/components/CTAButton';
 import { PhotoGallery } from '@/components/PhotoGallery';
 import { FaqAccordion } from '@/components/FaqAccordion';
+import { Notice } from '@/components/Notice';
 import { CheckCircle2, XCircle, ArrowRight, Phone, MessageCircle, Clock } from 'lucide-react';
 import { galleryImages } from '@/data/galleryImages';
 import { siteConfig } from '@/config/site';
@@ -46,7 +47,18 @@ const faqs = [
     { question: 'How fast can you get to me?', answer: 'VOR gets priority scheduling - we confirm you as the next available slot. For same-day or next-day triage, WhatsApp us first; we can often fit you in faster than the online booking form allows.' },
     { question: 'What if it needs parts?', answer: "We'll tell you straight away. Our triage decision is: fix now / parts needed / workshop referral. If parts are needed, we'll document exactly what's required and give you a timeline. No stringing you along." },
     { question: 'Do you cover fleet vehicles?', answer: 'Yes. We work with owner-driver couriers, SME fleets, hire branches, and depot operators. For fleets, we can discuss documented outcomes, rentable/not-rentable decisions, and preventive scan sweeps.' },
-
+    {
+        question: 'What counts as VOR for booking purposes?',
+        answer: 'VOR (vehicle off road) is when your van cannot be driven safely or legally. Limp mode, no-start, drivetrain warning, brake faults, AdBlue countdown at zero, or any condition where the vehicle should not be on the road. If you are unsure, send us the symptoms via WhatsApp and we will tell you whether VOR Priority applies or whether Standard Diagnosis is the right fit.'
+    },
+    {
+        question: 'How quickly can you attend a VOR call?',
+        answer: 'We prioritise VOR bookings ahead of standard diagnostic visits. Same-day attendance is often possible depending on the time of booking and current diary. We will confirm a slot at the point of booking based on actual availability.'
+    },
+    {
+        question: 'Can you start work on the same VOR visit if the fault is fixable on site?',
+        answer: 'Yes, where the fault is within our mobile scope and the parts are available or can be sourced quickly. Sensor replacements, coding, regen procedures, software resets, and many electrical repairs are completed in the same visit. For parts that need ordering or work that needs a workshop, we provide a written outcome and a clear next step.'
+    }
 ];
 
 const crossSell = [
@@ -177,7 +189,20 @@ export function VorVanDiagnosticsPage() {
                             ))}
                         </ul>
                     </div>
+                </div>
+            </Section>
 
+            {/* ── Written report reference ── */}
+            <Section className="bg-surface-alt/50">
+                <div className="mx-auto max-w-5xl reveal">
+                    <Notice variant="info">
+                        <Link to="/sample-diagnostic-report" className="font-semibold text-brand hover:underline">See what your written outcome looks like</Link> - Every VOR visit ends with a written report. Here is an example from a real visit.
+                    </Notice>
+                </div>
+            </Section>
+
+            <Section>
+                <div className="mx-auto max-w-3xl">
                     <div className="mt-10 flex flex-wrap gap-3 reveal">
                         <CTAButton href={`https://wa.me/${siteConfig.contact.whatsappE164}`} size="md" external icon={<MessageCircle className="h-4 w-4" />} onClick={() => trackWhatsAppClick('vor_van_mid')}>WhatsApp for Fast Response</CTAButton>
                         <CTAButton href="/booking" variant="outline" size="md" onClick={() => trackNavClick('/booking', 'Book Online', 'vor_van_mid')}>Book Online</CTAButton>
@@ -303,6 +328,33 @@ export function VorVanDiagnosticsPage() {
                             ))}
                         </div>
                     </div>
+                </div>
+            </Section>
+
+            {/* ── Coverage ── */}
+            <Section className="bg-surface-alt/30 border-t border-border-default pt-12 pb-12">
+                <div className="mx-auto max-w-5xl reveal text-center">
+                    <h2 className="text-sm font-semibold uppercase tracking-widest text-brand mb-4">We cover</h2>
+                    <div className="flex flex-wrap justify-center gap-x-4 gap-y-3 md:gap-x-6">
+                        {[
+                            { name: 'Greenwich', to: '/areas-covered/greenwich' },
+                            { name: 'Bexley', to: '/areas-covered/bexley' },
+                            { name: 'Orpington', to: '/areas-covered/orpington' },
+                            { name: 'Maidstone', to: '/areas-covered/maidstone' },
+                            { name: 'Tonbridge', to: '/areas-covered/tonbridge' },
+                            { name: 'Gillingham and Medway', to: '/areas-covered/medway' },
+                        ].map((area, i) => (
+                            <div key={area.name} className="flex items-center gap-x-4 md:gap-x-6">
+                                <Link to={area.to} className="text-base font-medium text-text-primary hover:text-brand transition-colors">
+                                    {area.name}
+                                </Link>
+                                {i < 5 && <span className="hidden md:inline-block text-border-default select-none">&bull;</span>}
+                            </div>
+                        ))}
+                    </div>
+                    <p className="mt-6 text-sm text-text-muted">
+                        Mobile across Kent and South East London. <Link to="/pricing" className="text-brand hover:underline">Check your zone on the pricing page.</Link>
+                    </p>
                 </div>
             </Section>
 
