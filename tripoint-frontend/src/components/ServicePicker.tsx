@@ -83,7 +83,7 @@ export function ServicePicker({ title, subtitle, badges }: ServicePickerProps) {
                                     trackSelectContent('service_category', id);
                                 }}
                                 className={cn(
-                                    'flex flex-1 items-center justify-center gap-1.5 rounded-md px-3 py-2 text-sm font-semibold transition-all min-w-0',
+                                    'flex flex-1 items-center justify-center gap-1.5 rounded-md px-3 py-2 text-sm font-semibold transition-colors min-w-0',
                                     active
                                         ? cn('bg-surface-elevated text-text-primary shadow-sm ring-1', m.tabRing)
                                         : 'text-text-muted hover:text-text-secondary hover:bg-surface-alt/60',
@@ -105,7 +105,7 @@ export function ServicePicker({ title, subtitle, badges }: ServicePickerProps) {
                             <li
                                 key={s.href}
                                 className={cn(
-                                    'group flex flex-col overflow-hidden rounded-lg border border-border-default bg-surface/80 transition-all',
+                                    'group flex flex-col overflow-hidden rounded-lg border border-border-default bg-surface/80 transition-colors',
                                     'hover:border-brand/30 hover:bg-surface-elevated/80',
                                 )}
                             >

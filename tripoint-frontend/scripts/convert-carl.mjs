@@ -36,9 +36,9 @@ async function processImage(inputName, outputWebp, outputPng, width, height) {
 
 async function main() {
     console.log('Converting assets for C1 & M2...');
-    // C1: carl-icon.png (1254x1254 to 200x200)
+    // C1: carl-icon.png (1254x1254 to 160x160, quality 70 for <5KB)
     // We will keep the original carl-icon.png for source, and generate carl-icon.webp and carl-icon-fallback.png
-    await processImage('carl-icon.png', 'carl-icon.webp', 'carl-icon-fallback.png', 200, 200);
+    await processImage('carl-icon.png', 'carl-icon.webp', 'carl-icon-fallback.png', 160, 160);
 
     // M2: 01_plain_english_summary.png (1431x466 to 662x215)
     // The audit said: "/images/sample-report/01_plain_english_summary.png is 132 KiB at 1431 by 466 pixels, displayed at 662 by 215."

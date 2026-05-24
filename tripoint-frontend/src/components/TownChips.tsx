@@ -31,7 +31,7 @@ export function TownChips({ className, max }: TownChipsProps) {
             {towns.map((town: string) => {
                 const slug = townLabelToAreaSlug(town);
                 const chipClass =
-                    'inline-flex items-center rounded-full border border-brand/15 bg-brand/5 px-3 py-1 text-xs font-medium text-brand-light backdrop-blur-sm transition-all hover:bg-brand/10 hover:border-brand/30 hover:scale-105';
+                    'inline-flex items-center rounded-full border border-brand/15 bg-brand/5 px-3 py-1 text-xs font-medium text-brand-light backdrop-blur-sm transition-[transform,colors,border-color] hover:bg-brand/10 hover:border-brand/30 hover:scale-105';
                 if (slug) {
                     return (
                         <Link

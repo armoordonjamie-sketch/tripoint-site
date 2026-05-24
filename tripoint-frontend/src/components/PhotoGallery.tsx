@@ -64,7 +64,7 @@ export function PhotoGallery({ images, columns = 3, className, maxVisible, onOpe
                             setShowAll(true);
                             onShowAll?.();
                         }}
-                        className="rounded-full border border-brand/20 bg-brand/5 px-6 py-2 text-sm font-semibold text-brand-light transition-all hover:bg-brand/10 hover:border-brand/30"
+                        className="rounded-full border border-brand/20 bg-brand/5 px-6 py-2 text-sm font-semibold text-brand-light transition-colors hover:bg-brand/10 hover:border-brand/30"
                     >
                         Show all {images.length} photos
                     </button>

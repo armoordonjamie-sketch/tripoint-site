@@ -18,12 +18,12 @@ export function getOptimizedPaths(src: string): { webp: string; webpSrcset?: str
     const dir = parts.length ? parts.join('/') + '/' : '';
     const prefix = `/images/optimized/${dir}`;
     
-    const isResponsive = RESPONSIVE_BASES.has(name) || dir.startsWith('gallery/') || dir.startsWith('blog/');
+    const isResponsive = RESPONSIVE_BASES.has(name) || dir.startsWith('gallery/') || dir.startsWith('blog/') || dir.startsWith('sample-report/') || name === 'coverage-map';
 
     if (isResponsive) {
         return {
             webp: `${prefix}${name}-1536.webp`,
-            webpSrcset: `${prefix}${name}-480.webp 480w, ${prefix}${name}-640.webp 640w, ${prefix}${name}-1024.webp 1024w, ${prefix}${name}-1536.webp 1536w`,
+            webpSrcset: `${prefix}${name}-320.webp 320w, ${prefix}${name}-480.webp 480w, ${prefix}${name}-640.webp 640w, ${prefix}${name}-768.webp 768w, ${prefix}${name}-1024.webp 1024w, ${prefix}${name}-1536.webp 1536w`,
             jpg: `${prefix}${name}-1536.jpg`,
         };
     }
@@ -53,7 +53,10 @@ function useOriginalAsset(src: string): boolean {
     );
 }
 
-export function OptimizedImage({ src, priority, alt = '', className, style, ...rest }: OptimizedImageProps) {
+export function OptimizedImage({ src, priority, alt = '', className, style, width, height, ...rest }: OptimizedImageProps) {
+    const isEager = priority;
+    const fetchPriority = priority ? ('high' as const) : undefined;
+    
     if (useOriginalAsset(src)) {
         return (
             <img
@@ -61,8 +64,11 @@ export function OptimizedImage({ src, priority, alt = '', className, style, ...r
                 alt={alt}
                 className={className}
                 style={style}
-                loading={priority ? ('eager' as const) : ('lazy' as const)}
-                fetchPriority={priority ? ('high' as const) : undefined}
+                width={width}
+                height={height}
+                loading={isEager ? 'eager' : 'lazy'}
+                decoding="async"
+                fetchPriority={fetchPriority}
                 {...rest}
             />
         );
@@ -75,8 +81,11 @@ export function OptimizedImage({ src, priority, alt = '', className, style, ...r
         alt,
         className: fill ? className : className,
         style,
-        loading: priority ? ('eager' as const) : ('lazy' as const),
-        fetchPriority: priority ? ('high' as const) : undefined,
+        width,
+        height,
+        loading: isEager ? ('eager' as const) : ('lazy' as const),
+        decoding: "async" as const,
+        fetchPriority,
         ...rest,
     };
 
@@ -86,7 +95,7 @@ export function OptimizedImage({ src, priority, alt = '', className, style, ...r
                 <source
                     type="image/webp"
                     srcSet={webpSrcset}
-                    sizes={fill ? '100vw' : '(max-width: 640px) 100vw, 1024px'}
+                    sizes={fill ? '100vw' : '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'}
                 />
                 <img src={jpg} {...imgProps} />
             </picture>

@@ -9,7 +9,7 @@ interface TestimonialCardProps {
 
 export function TestimonialCard({ name, vehicle, quote, rating = 5 }: TestimonialCardProps) {
     return (
-        <div className="glass rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-brand/5 relative overflow-hidden">
+        <div className="glass rounded-2xl p-6 transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-brand/5 relative overflow-hidden">
             {/* Decorative quote mark */}
             <Quote className="absolute -top-1 -right-1 h-16 w-16 text-brand/5 rotate-180" aria-hidden="true" />
 

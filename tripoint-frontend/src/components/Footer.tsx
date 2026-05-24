@@ -228,7 +228,7 @@ export function Footer() {
                         </div>
                     </div>
 
-                    <div className="mt-12 border-t border-border-default/80 pt-8 text-center text-xs text-text-muted">
+                    <div className="mt-12 border-t border-border-default/80 pt-8 text-center text-xs text-text-secondary">
                         <p>
                             &copy; {year} {siteConfig.brandName}. Independent service - not affiliated with vehicle manufacturers.
                         </p>

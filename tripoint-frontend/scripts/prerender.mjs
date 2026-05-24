@@ -76,7 +76,7 @@ async function runPrerender() {
         const path = route.canonicalPath || route.path || '/';
         const canonicalUrl = path === '/' ? `${SITE_URL}/` : `${SITE_URL}${path}`;
         const hreflangTags = `<link rel="alternate" hreflang="en-GB" href="${canonicalUrl}">\n<link rel="alternate" hreflang="x-default" href="${canonicalUrl}">`;
-        const lcpPreload = path === '/' ? '<link rel="preload" as="image" href="/images/optimized/gallery/work-48-1024.webp" fetchpriority="high" type="image/webp">' : '';
+        const lcpPreload = path === '/' ? '<link rel="preload" as="image" href="/images/optimized/gallery/work-48-640.webp" imagesrcset="/images/optimized/gallery/work-48-320.webp 320w, /images/optimized/gallery/work-48-480.webp 480w, /images/optimized/gallery/work-48-640.webp 640w, /images/optimized/gallery/work-48-768.webp 768w, /images/optimized/gallery/work-48-1024.webp 1024w, /images/optimized/gallery/work-48-1536.webp 1536w" imagesizes="100vw" fetchpriority="high" type="image/webp">' : '';
         const headTags = [
             lcpPreload,
             helmet?.title?.toString?.() ?? '',

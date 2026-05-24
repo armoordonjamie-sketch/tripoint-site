@@ -38,7 +38,7 @@ function FaqAccordionItem({ item }: { item: FaqItem }) {
             </button>
             <div
                 className={cn(
-                    'grid transition-all duration-200',
+                    'grid transition-[grid-template-rows,opacity] duration-200',
                     open ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0',
                 )}
             >

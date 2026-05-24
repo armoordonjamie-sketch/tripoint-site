@@ -1,19 +1,30 @@
 import { Outlet, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState, lazy, Suspense } from 'react';
 import { Header } from './Header';
 import { Footer } from './Footer';
 import { MobileStickyCTA } from './MobileStickyCTA';
 import { ScrollDepthTracker } from './ScrollDepthTracker';
 import { LocalBusinessSchema, OrganizationWebsiteSchema } from './JsonLd';
-import { CarlWidget } from './carl/CarlWidget';
+
+const CarlWidget = lazy(() => import('./carl/CarlWidget').then((m) => ({ default: m.CarlWidget })));
 
 export function Layout() {
     const { pathname } = useLocation();
+    const [mountCarl, setMountCarl] = useState(false);
 
     // Scroll to top on route change
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [pathname]);
+
+    // Delay CarlWidget rendering to save main thread JS during initial load
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setMountCarl(true);
+        }, 3500); // Wait 3.5s before loading the motion and lottie bundle for chat
+        
+        return () => clearTimeout(timer);
+    }, []);
 
     const showMobileSticky = pathname !== '/contact';
 
@@ -42,7 +53,11 @@ export function Layout() {
             </main>
             <Footer />
             {showMobileSticky && <MobileStickyCTA />}
-            <CarlWidget />
+            {mountCarl && (
+                <Suspense fallback={null}>
+                    <CarlWidget />
+                </Suspense>
+            )}
         </div>
     );
 }

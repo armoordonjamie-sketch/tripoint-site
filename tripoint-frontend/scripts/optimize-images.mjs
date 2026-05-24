@@ -20,9 +20,13 @@ const SRC_DIR = join(PUBLIC, 'images');
 const OUT_DIR = join(PUBLIC, 'images', 'optimized');
 const LOGO_OUT = join(PUBLIC, 'optimized');
 
-const WIDTHS = [480, 640, 1024, 1536];
-const WEBP_QUALITY = 75;
-const JPG_QUALITY = 80;
+const WIDTHS = [320, 480, 640, 768, 1024, 1536];
+const WEBP_QUALITY = 72;
+const JPG_QUALITY = 75;
+const AVIF_QUALITY = 50;
+
+// Flag for AVIF generation
+const GENERATE_AVIF = process.argv.includes('--avif');
 
 /** Images that need responsive srcset (hero, feature, above-fold) */
 const RESPONSIVE_IMAGES = new Set([
@@ -33,6 +37,7 @@ const RESPONSIVE_IMAGES = new Set([
     'servicing-work/hero-vito.jpg',
     'servicing-work/hero-citan.jpg',
     'servicing-work/hero-mercedes-parent.jpg',
+    'blog/om654-turbo-failure/om654-turbo-compressor-split.jpeg',
 ]);
 
 function* walkDir(dir, base = '') {
@@ -41,7 +46,7 @@ function* walkDir(dir, base = '') {
     for (const e of entries) {
         const rel = join(base, e.name);
         if (e.isDirectory()) {
-            if (e.name === 'optimized') continue; // skip output dir
+            if (e.name === 'optimized' || e.name === 'sample-report') continue; // skip output dir
             yield* walkDir(join(dir, e.name), rel);
         } else if (/\.(jpg|jpeg|png)$/i.test(e.name)) {
             yield { fullPath: join(dir, e.name), relPath: rel };
@@ -53,9 +58,12 @@ async function optimizeImage(fullPath, relPath) {
     const baseDir = dirname(join(OUT_DIR, relPath));
     const baseName = relPath.replace(/\.(jpg|jpeg|png)$/i, '');
     const fileName = baseName.split(/[/\\]/).pop();
-    const needsResponsive = RESPONSIVE_IMAGES.has(relPath.replace(/\\/g, '/')) || 
-        relPath.replace(/\\/g, '/').startsWith('gallery/') || 
-        relPath.replace(/\\/g, '/').startsWith('blog/');
+    const normalizedRelPath = relPath.replace(/\\/g, '/');
+    const needsResponsive = RESPONSIVE_IMAGES.has(normalizedRelPath) || 
+        normalizedRelPath.startsWith('gallery/') || 
+        normalizedRelPath.startsWith('blog/') ||
+        normalizedRelPath.startsWith('sample-report/') ||
+        normalizedRelPath === 'coverage-map.jpg';
 
     mkdirSync(baseDir, { recursive: true });
 
@@ -64,11 +72,19 @@ async function optimizeImage(fullPath, relPath) {
 
     if (needsResponsive) {
         for (const width of WIDTHS) {
-            const outPath = join(baseDir, `${fileName}-${width}.webp`);
+            const outPathWebp = join(baseDir, `${fileName}-${width}.webp`);
             await sharp(fullPath)
                 .resize(width, null, { withoutEnlargement: true })
                 .webp({ quality: WEBP_QUALITY })
-                .toFile(outPath);
+                .toFile(outPathWebp);
+                
+            if (GENERATE_AVIF) {
+                const outPathAvif = join(baseDir, `${fileName}-${width}.avif`);
+                await sharp(fullPath)
+                    .resize(width, null, { withoutEnlargement: true })
+                    .avif({ quality: AVIF_QUALITY, effort: 4 })
+                    .toFile(outPathAvif);
+            }
         }
         const fallbackPath = join(baseDir, `${fileName}-1536.jpg`);
         await sharp(fullPath)

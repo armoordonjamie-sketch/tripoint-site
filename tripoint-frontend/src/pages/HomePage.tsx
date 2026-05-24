@@ -148,23 +148,23 @@ export function HomePage() {
 
                 <div className="relative z-10 mx-auto max-w-7xl px-4 py-16 sm:py-20 sm:px-6 lg:px-8">
                     <div className="max-w-3xl">
-                        <h1 className="reveal text-[clamp(1.9rem,8.5vw,3rem)] font-extrabold leading-[1.1] tracking-tight text-text-primary sm:text-6xl md:text-7xl">
+                        <h1 className="text-[clamp(1.9rem,8.5vw,3rem)] font-extrabold leading-[1.1] tracking-tight text-text-primary sm:text-6xl md:text-7xl">
                             Mobile Mercedes{' '}
                             <span className="text-gradient">Diagnostics</span>{' '}
                             <br className="hidden sm:block" />
                             & Repairs
                         </h1>
 
-                        <p className="reveal mt-3 text-[clamp(1rem,4vw,1.5rem)] font-light text-text-secondary" style={{ transitionDelay: '0.05s' }}>
+                        <p className="mt-3 text-[clamp(1rem,4vw,1.5rem)] font-light text-text-secondary">
                             Kent and South East London
                         </p>
 
-                        <p className="reveal mt-3 max-w-xl text-[clamp(1rem,3.5vw,1.125rem)] text-text-secondary md:text-xl sm:mt-4" style={{ transitionDelay: '0.1s' }}>
+                        <p className="mt-3 max-w-xl text-[clamp(1rem,3.5vw,1.125rem)] text-text-secondary md:text-xl sm:mt-4">
                             Dealer-level diagnostic depth delivered to your driveway. Written findings,
                             root cause, clear next steps.
                         </p>
 
-                        <div className="reveal mt-6 flex flex-col sm:flex-row sm:items-center gap-5 sm:mt-8 sm:gap-10" style={{ transitionDelay: '0.2s' }}>
+                        <div className="mt-6 flex flex-col sm:flex-row sm:items-center gap-5 sm:mt-8 sm:gap-10">
                             <div>
                                 <p className="text-3xl sm:text-4xl font-bold text-brand-light">
                                     From £120<VatLabel />
@@ -183,8 +183,7 @@ export function HomePage() {
                             </div>
                         </div>
 
-                        {/* ── Trust Strip ── */}
-                        <div className="reveal mt-5 sm:mt-6 flex items-center max-w-sm sm:max-w-md" style={{ transitionDelay: '0.25s' }}>
+                        <div className="mt-5 sm:mt-6 flex items-center max-w-sm sm:max-w-md">
                             <a 
                                 href="https://share.google/VzrAGFshBV7ITb7s2" 
                                 target="_blank" 
@@ -213,10 +212,7 @@ export function HomePage() {
                             </div>
                         </div>
 
-                        <div
-                            className="reveal mt-6 hidden flex-wrap items-center gap-4 sm:mt-8 sm:flex"
-                            style={{ transitionDelay: '0.3s' }}
-                        >
+                        <div className="mt-6 hidden flex-wrap items-center gap-4 sm:mt-8 sm:flex">
                             <div className="hidden sm:flex gap-4">
                                 <CTAButton href="/booking" size="lg" onClick={() => trackNavClick('/booking', 'Book a Diagnostic', 'hero')}>
                                     Book a Diagnostic
@@ -556,11 +552,12 @@ export function HomePage() {
                                         className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                                     />
                                 ) : (
-                                    <img
+                                    <OptimizedImage
                                         src={getPostThumbnail(post)}
                                         alt=""
                                         className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                                        loading="lazy"
+                                        width={400}
+                                        height={225}
                                     />
                                 )}
                             </div>

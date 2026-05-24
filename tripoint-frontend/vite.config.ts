@@ -43,27 +43,22 @@ export default defineConfig(({ isSsrBuild }) => ({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
-      'lottie-web': 'lottie-web/build/player/lottie_light',
     },
   },
   build: {
     chunkSizeWarningLimit: 1000,
+    sourcemap: 'hidden',
     rollupOptions: {
       output: {
-        // manualChunks conflicts with SSR externals (lottie-react is external in SSR)
         manualChunks: isSsrBuild
           ? undefined
           : {
-              lottie: ['lottie-web', 'lottie-react'],
               motion: ['motion', 'framer-motion'],
             },
       },
     },
   },
   ssr: {
-    // lottie-react: its CJS `default` export is the whole exports object under Node's
-    // CJS→ESM interop, so `import Lottie from 'lottie-react'` resolves to an object.
-    // Letting Vite bundle it fixes the default-export unwrap.
-    noExternal: ['react-helmet-async', 'lottie-react'],
+    noExternal: ['react-helmet-async'],
   },
 }))

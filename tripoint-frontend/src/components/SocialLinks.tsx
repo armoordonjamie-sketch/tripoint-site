@@ -66,7 +66,7 @@ export function SocialLinks({
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-4 rounded-2xl border border-border-default bg-surface-alt p-5 transition-all hover:border-brand/50 hover:shadow-lg hover:shadow-brand/10"
+                    className="flex items-center gap-4 rounded-2xl border border-border-default bg-surface-alt p-5 transition-[background-color,box-shadow,border-color] hover:border-brand/50 hover:shadow-lg hover:shadow-brand/10"
                     onClick={() => trackSocialClick(platform, clickLocation)}
                 >
                     <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand/10 text-brand [&_svg]:h-6 [&_svg]:w-6">

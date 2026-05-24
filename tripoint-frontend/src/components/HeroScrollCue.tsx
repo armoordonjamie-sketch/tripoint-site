@@ -1,25 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import Lottie from 'lottie-react';
+import { ChevronDown } from 'lucide-react';
 import { trackNavClick } from '@/lib/analytics';
-import scrollCueData from '@/animations/scroll-cue.json';
 
 const SERVICES_SECTION_ID = 'home-services';
 const FADE_DISTANCE = 120;
 
-function useReducedMotion() {
-    const [reduced, setReduced] = useState(false);
-    useEffect(() => {
-        const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-        setReduced(mq.matches);
-        const handler = (e: MediaQueryListEvent) => setReduced(e.matches);
-        mq.addEventListener('change', handler);
-        return () => mq.removeEventListener('change', handler);
-    }, []);
-    return reduced;
-}
-
 export function HeroScrollCue() {
-    const reducedMotion = useReducedMotion();
     const [visible, setVisible] = useState(true);
     const rafRef = useRef(0);
 
@@ -54,20 +40,17 @@ export function HeroScrollCue() {
                 type="button"
                 onClick={scrollToServices}
                 tabIndex={visible ? 0 : -1}
-                className="pointer-events-auto flex flex-col items-center gap-1 active:scale-[0.97] transition-transform duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+                className="pointer-events-auto flex flex-col items-center gap-2 active:scale-[0.97] transition-transform duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
                 style={{ WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation' }}
                 aria-label="Scroll to services section"
             >
                 <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-text-secondary/70 drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]">
                     Explore services
                 </span>
-                <Lottie
-                    animationData={scrollCueData}
-                    loop
-                    autoplay={!reducedMotion}
-                    style={{ width: 44, height: 58 }}
-                    aria-hidden
-                />
+                <div className="flex flex-col items-center -space-y-4 animate-bounce-slow text-brand/70" aria-hidden>
+                    <ChevronDown className="h-6 w-6 animate-pulse" />
+                    <ChevronDown className="h-6 w-6" />
+                </div>
             </button>
         </div>
     );
