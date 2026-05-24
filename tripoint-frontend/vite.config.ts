@@ -48,15 +48,6 @@ export default defineConfig(({ isSsrBuild }) => ({
   build: {
     chunkSizeWarningLimit: 1000,
     sourcemap: 'hidden',
-    rollupOptions: {
-      output: {
-        manualChunks: isSsrBuild
-          ? undefined
-          : {
-              motion: ['motion', 'framer-motion'],
-            },
-      },
-    },
   },
   ssr: {
     noExternal: ['react-helmet-async'],
