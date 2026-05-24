@@ -65,6 +65,11 @@ function getGitLastMod(routePath) {
 async function runPrerender() {
     const template = readFileSync(join(DIST, 'index.html'), 'utf8');
 
+    // Save the pure SPA template for NGINX to use as a fallback for non-prerendered routes (like /admin)
+    // This prevents serving the prerendered HomePage HTML to /admin, which causes hydration mismatches.
+    writeFileSync(join(DIST, 'app-shell.html'), template, 'utf8');
+    console.log('Generated: app-shell.html (SPA fallback)');
+
     // Load the server render function (use pathToFileURL for Windows compatibility)
     const entryServerPath = pathToFileURL(join(DIST, 'server', 'entry-server.js')).href;
     const { render } = await import(entryServerPath);

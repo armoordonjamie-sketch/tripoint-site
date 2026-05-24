@@ -6,29 +6,7 @@ import { RouteLoadingFallback } from '@/components/RouteLoadingFallback';
 // Static import for LCP (landing page)
 import { HomePage } from '@/pages/HomePage';
 
-// Lazy-loaded pages
-const ServicesPage = lazy(() => import('@/pages/ServicesPage').then((m) => ({ default: m.ServicesPage })));
-const DiagnosticCalloutPage = lazy(() => import('@/pages/services/DiagnosticCalloutPage').then((m) => ({ default: m.DiagnosticCalloutPage })));
-const VorVanDiagnosticsPage = lazy(() => import('@/pages/services/VorVanDiagnosticsPage').then((m) => ({ default: m.VorVanDiagnosticsPage })));
-const PrePurchaseHealthCheckPage = lazy(() => import('@/pages/services/PrePurchaseHealthCheckPage').then((m) => ({ default: m.PrePurchaseHealthCheckPage })));
-// Mercedes Van Servicing & Brakes
-const MercedesVanServicingPage = lazy(() => import('@/pages/services/MercedesVanServicingPage').then((m) => ({ default: m.MercedesVanServicingPage })));
-const SprinterServicingPage = lazy(() => import('@/pages/services/SprinterServicingPage').then((m) => ({ default: m.SprinterServicingPage })));
-const VitoServicingPage = lazy(() => import('@/pages/services/VitoServicingPage').then((m) => ({ default: m.VitoServicingPage })));
-const CitanServicingPage = lazy(() => import('@/pages/services/CitanServicingPage').then((m) => ({ default: m.CitanServicingPage })));
-const SprinterBrakesPage = lazy(() => import('@/pages/services/SprinterBrakesPage').then((m) => ({ default: m.SprinterBrakesPage })));
-const VitoBrakesPage = lazy(() => import('@/pages/services/VitoBrakesPage').then((m) => ({ default: m.VitoBrakesPage })));
-const CitanBrakesPage = lazy(() => import('@/pages/services/CitanBrakesPage').then((m) => ({ default: m.CitanBrakesPage })));
-// Commercial Van Tuning
-const VanLoadDriveabilityTunePage = lazy(() => import('@/pages/services/VanLoadDriveabilityTunePage').then((m) => ({ default: m.VanLoadDriveabilityTunePage })));
-const VanEconomyTunePage = lazy(() => import('@/pages/services/VanEconomyTunePage').then((m) => ({ default: m.VanEconomyTunePage })));
-const FleetVanTuningPage = lazy(() => import('@/pages/services/FleetVanTuningPage').then((m) => ({ default: m.FleetVanTuningPage })));
-const PricingPage = lazy(() => import('@/pages/PricingPage').then((m) => ({ default: m.PricingPage })));
-const CoveragePage = lazy(() => import('@/pages/CoveragePage').then((m) => ({ default: m.CoveragePage })));
-const AreaPage = lazy(() => import('@/pages/areas-covered/AreaPage').then((m) => ({ default: m.AreaPage })));
-const AboutPage = lazy(() => import('@/pages/AboutPage').then((m) => ({ default: m.AboutPage })));
-const FaqPage = lazy(() => import('@/pages/FaqPage').then((m) => ({ default: m.FaqPage })));
-const BookingPage = lazy(() => import('@/pages/BookingPage').then((m) => ({ default: m.BookingPage })));
+// Lazy-loaded pages (only Admin/Payment/Report)
 const PaymentPage = lazy(() => import('@/pages/PaymentPage').then((m) => ({ default: m.PaymentPage })));
 const PaymentSuccessPage = lazy(() => import('@/pages/PaymentSuccessPage').then((m) => ({ default: m.PaymentSuccessPage })));
 const AdminLoginPage = lazy(() => import('@/pages/admin/AdminLoginPage').then((m) => ({ default: m.AdminLoginPage })));
@@ -37,19 +15,39 @@ const AdminReportsPage = lazy(() => import('@/pages/admin/AdminReportsPage').the
 const AdminLeadsPage = lazy(() => import('@/pages/admin/AdminLeadsPage').then((m) => ({ default: m.AdminLeadsPage })));
 const AdminReportEditorPage = lazy(() => import('@/pages/admin/AdminReportEditorPage').then((m) => ({ default: m.AdminReportEditorPage })));
 const ReportViewerPage = lazy(() => import('@/pages/ReportViewerPage').then((m) => ({ default: m.ReportViewerPage })));
-const ContactPage = lazy(() => import('@/pages/ContactPage').then((m) => ({ default: m.ContactPage })));
-const BlogIndexPage = lazy(() => import('@/pages/BlogIndexPage').then((m) => ({ default: m.BlogIndexPage })));
-const BlogPostPage = lazy(() => import('@/pages/BlogPostPage').then((m) => ({ default: m.BlogPostPage })));
-const PrivacyPolicyPage = lazy(() => import('@/pages/legal/PrivacyPolicyPage').then((m) => ({ default: m.PrivacyPolicyPage })));
-const TermsPage = lazy(() => import('@/pages/legal/TermsPage').then((m) => ({ default: m.TermsPage })));
-const DisclaimerPage = lazy(() => import('@/pages/legal/DisclaimerPage').then((m) => ({ default: m.DisclaimerPage })));
-const AccessibilityPage = lazy(() => import('@/pages/legal/AccessibilityPage').then((m) => ({ default: m.AccessibilityPage })));
-const OurWorkPage = lazy(() => import('@/pages/OurWorkPage').then((m) => ({ default: m.OurWorkPage })));
-const ProcessPage = lazy(() => import('@/pages/ProcessPage').then((m) => ({ default: m.ProcessPage })));
-const SampleDiagnosticReportPage = lazy(() =>
-    import('@/pages/SampleDiagnosticReportPage').then((m) => ({ default: m.SampleDiagnosticReportPage })),
-);
-const NotFoundPage = lazy(() => import('@/pages/NotFoundPage').then((m) => ({ default: m.NotFoundPage })));
+
+// Static imports for all public indexable pages to support React 18+ renderToString SSG
+import { ServicesPage } from '@/pages/ServicesPage';
+import { DiagnosticCalloutPage } from '@/pages/services/DiagnosticCalloutPage';
+import { VorVanDiagnosticsPage } from '@/pages/services/VorVanDiagnosticsPage';
+import { PrePurchaseHealthCheckPage } from '@/pages/services/PrePurchaseHealthCheckPage';
+import { MercedesVanServicingPage } from '@/pages/services/MercedesVanServicingPage';
+import { SprinterServicingPage } from '@/pages/services/SprinterServicingPage';
+import { VitoServicingPage } from '@/pages/services/VitoServicingPage';
+import { CitanServicingPage } from '@/pages/services/CitanServicingPage';
+import { SprinterBrakesPage } from '@/pages/services/SprinterBrakesPage';
+import { VitoBrakesPage } from '@/pages/services/VitoBrakesPage';
+import { CitanBrakesPage } from '@/pages/services/CitanBrakesPage';
+import { VanLoadDriveabilityTunePage } from '@/pages/services/VanLoadDriveabilityTunePage';
+import { VanEconomyTunePage } from '@/pages/services/VanEconomyTunePage';
+import { FleetVanTuningPage } from '@/pages/services/FleetVanTuningPage';
+import { PricingPage } from '@/pages/PricingPage';
+import { CoveragePage } from '@/pages/CoveragePage';
+import { AreaPage } from '@/pages/areas-covered/AreaPage';
+import { AboutPage } from '@/pages/AboutPage';
+import { FaqPage } from '@/pages/FaqPage';
+import { BookingPage } from '@/pages/BookingPage';
+import { ContactPage } from '@/pages/ContactPage';
+import { BlogIndexPage } from '@/pages/BlogIndexPage';
+import { BlogPostPage } from '@/pages/BlogPostPage';
+import { PrivacyPolicyPage } from '@/pages/legal/PrivacyPolicyPage';
+import { TermsPage } from '@/pages/legal/TermsPage';
+import { DisclaimerPage } from '@/pages/legal/DisclaimerPage';
+import { AccessibilityPage } from '@/pages/legal/AccessibilityPage';
+import { OurWorkPage } from '@/pages/OurWorkPage';
+import { ProcessPage } from '@/pages/ProcessPage';
+import { SampleDiagnosticReportPage } from '@/pages/SampleDiagnosticReportPage';
+import { NotFoundPage } from '@/pages/NotFoundPage';
 
 export function AppRoutes() {
     return (
