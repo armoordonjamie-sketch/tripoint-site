@@ -1,5 +1,5 @@
 import { StrictMode } from 'react';
-import { renderToString } from 'react-dom/server';
+
 import { StaticRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { AppRoutes } from './App';
@@ -10,21 +10,42 @@ import { RouteTracker } from '@/components/RouteTracker';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 (HelmetProvider as any).canUseDOM = false;
 
-export async function render(url: string) {
-    const helmetContext: { helmet?: import('react-helmet-async').HelmetServerState } = {};
+// @ts-ignore
+import { PassThrough } from 'stream';
+import { renderToPipeableStream } from 'react-dom/server';
 
-    const appHtml = renderToString(
-        <StrictMode>
-            <HelmetProvider context={helmetContext}>
-                <StaticRouter location={url}>
-                    <ToastProvider>
-                        <RouteTracker />
-                        <AppRoutes />
-                    </ToastProvider>
-                </StaticRouter>
-            </HelmetProvider>
-        </StrictMode>
-    );
+export function render(url: string): Promise<{ appHtml: string; helmet: import('react-helmet-async').HelmetServerState | undefined }> {
+    return new Promise((resolve, reject) => {
+        const helmetContext: { helmet?: import('react-helmet-async').HelmetServerState } = {};
+        let appHtml = '';
 
-    return { appHtml, helmet: helmetContext.helmet };
+        const { pipe } = renderToPipeableStream(
+            <StrictMode>
+                <HelmetProvider context={helmetContext}>
+                    <StaticRouter location={url}>
+                        <ToastProvider>
+                            <RouteTracker />
+                            <AppRoutes />
+                        </ToastProvider>
+                    </StaticRouter>
+                </HelmetProvider>
+            </StrictMode>,
+            {
+                onAllReady() {
+                    const stream = new PassThrough();
+                    stream.on('data', (chunk: any) => {
+                        appHtml += chunk.toString();
+                    });
+                    stream.on('end', () => {
+                        resolve({ appHtml, helmet: helmetContext.helmet });
+                    });
+                    pipe(stream);
+                },
+                onError(err) {
+                    console.error('SSR Stream Error:', err);
+                    reject(err);
+                }
+            }
+        );
+    });
 }

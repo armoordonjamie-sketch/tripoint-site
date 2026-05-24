@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
     Wrench, Shield,
@@ -20,8 +20,13 @@ import { OptimizedImage } from '@/components/OptimizedImage';
 import { ExpandableReportImage } from '@/components/ExpandableReportImage';
 import { VatLabel } from '@/components/VatLabel';
 
-import { HeroScrollCue } from '@/components/HeroScrollCue';
-import { GoogleReviews } from '@/components/GoogleReviews';
+const HeroScrollCue = lazy(() =>
+    import('@/components/HeroScrollCue').then((m) => ({ default: m.HeroScrollCue })),
+);
+
+const GoogleReviews = lazy(() =>
+    import('@/components/GoogleReviews').then((m) => ({ default: m.GoogleReviews })),
+);
 
 /* ── Intersection Observer for scroll-reveal ─────────── */
 
