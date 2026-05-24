@@ -149,13 +149,18 @@ export function CarlWidget() {
                 transition={{ duration: 0.15 }}
                 className="w-full h-full"
               >
-                <motion.img
-                  src="/carl-icon.png"
-                  alt="Chat with Carl"
+                <motion.picture
                   animate={iconControls}
-                  className="w-full h-full object-contain drop-shadow-xl"
-                  draggable={false}
-                />
+                  className="w-full h-full block"
+                >
+                  <source srcSet="/carl-icon.webp" type="image/webp" />
+                  <img
+                    src="/carl-icon-fallback.png"
+                    alt="Chat with Carl"
+                    className="w-full h-full object-contain drop-shadow-xl"
+                    draggable={false}
+                  />
+                </motion.picture>
               </motion.div>
             )}
           </AnimatePresence>

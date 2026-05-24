@@ -127,6 +127,8 @@ export function HomePage() {
                             src={img.src}
                             priority={i === 0}
                             alt=""
+                            width={1536}
+                            height={2048}
                             className="absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ease-in-out"
                             style={{
                                 objectPosition: img.position,

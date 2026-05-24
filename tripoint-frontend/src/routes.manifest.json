@@ -450,6 +450,51 @@
     "indexable": true
   },
   {
+    "path": "/blog/sprinter-p0401-egr-fault",
+    "title": "Sprinter P0401 EGR Fault: Causes and Diagnosis | TriPoint Diagnostics",
+    "description": "P0401 on a Mercedes Sprinter means insufficient EGR flow. Here is what causes it on the OM651 and OM654 and what a proper diagnostic session looks at before any parts are replaced.",
+    "canonicalPath": "/blog/sprinter-p0401-egr-fault",
+    "priority": 0.5,
+    "changefreq": "monthly",
+    "indexable": true
+  },
+  {
+    "path": "/blog/mercedes-p0420-catalyst-fault",
+    "title": "Mercedes P0420 Catalyst Fault: Causes and Diagnosis | TriPoint Diagnostics",
+    "description": "P0420 on a Mercedes diesel means catalyst efficiency is below threshold. Here is what the code means, what causes it, and what a diagnostic session looks at before condemning the cat.",
+    "canonicalPath": "/blog/mercedes-p0420-catalyst-fault",
+    "priority": 0.5,
+    "changefreq": "monthly",
+    "indexable": true
+  },
+  {
+    "path": "/blog/sprinter-p2463-dpf-soot-accumulation",
+    "title": "Sprinter P2463 DPF Soot Accumulation: Diagnosis and Regens | TriPoint Diagnostics",
+    "description": "P2463 on a Mercedes Sprinter means the DPF has accumulated soot beyond the threshold. Here is what causes it, when a forced regen helps, and when it does not.",
+    "canonicalPath": "/blog/sprinter-p2463-dpf-soot-accumulation",
+    "priority": 0.5,
+    "changefreq": "monthly",
+    "indexable": true
+  },
+  {
+    "path": "/blog/vito-adblue-fault",
+    "title": "Vito AdBlue Fault: Causes and Diagnosis | TriPoint Diagnostics",
+    "description": "AdBlue warning on a Mercedes Vito W639 or W447? Here is what causes it, why clearing the code does not fix it, and what a proper diagnostic session covers.",
+    "canonicalPath": "/blog/vito-adblue-fault",
+    "priority": 0.5,
+    "changefreq": "monthly",
+    "indexable": true
+  },
+  {
+    "path": "/blog/mercedes-eml-on",
+    "title": "Mercedes Engine Management Light On: Causes and Diagnosis | TriPoint Diagnostics",
+    "description": "Engine management light on a Mercedes van or car? Here is what it can mean, why the light alone does not tell you what is wrong, and what a proper diagnostic session involves.",
+    "canonicalPath": "/blog/mercedes-eml-on",
+    "priority": 0.5,
+    "changefreq": "monthly",
+    "indexable": true
+  },
+  {
     "path": "/legal/privacy-policy",
     "title": "Privacy Policy",
     "description": "TriPoint Diagnostics privacy policy. GDPR compliant.",

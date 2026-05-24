@@ -47,7 +47,6 @@ export function LocalBusinessSchema() {
         '@context': 'https://schema.org',
         '@type': 'AutoRepair' as const,
         '@id': `${siteConfig.url}/#business`,
-        parentOrganization: { '@id': `${siteConfig.url}/#organization` },
         name: siteConfig.brandName,
         description: siteConfig.description,
         url: siteConfig.url,
@@ -119,7 +118,7 @@ export function OrganizationWebsiteSchema() {
         url: siteConfig.url,
         name: siteConfig.brandName,
         inLanguage: 'en-GB',
-        publisher: { '@id': `${siteConfig.url}/#organization` },
+        publisher: { '@id': `${siteConfig.url}/#business` },
     };
     return (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(website) }} />

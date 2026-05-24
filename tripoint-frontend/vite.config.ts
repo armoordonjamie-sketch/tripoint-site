@@ -55,7 +55,6 @@ export default defineConfig(({ isSsrBuild }) => ({
           ? undefined
           : {
               lottie: ['lottie-web', 'lottie-react'],
-              markdown: ['react-markdown', 'remark-gfm'],
               motion: ['motion', 'framer-motion'],
             },
       },

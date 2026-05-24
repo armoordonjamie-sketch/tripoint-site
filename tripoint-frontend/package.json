@@ -8,9 +8,10 @@
     "build": "tsc -b && vite build",
     "optimize-images": "node scripts/optimize-images.mjs",
     "convert-heic": "node scripts/convert-heic.mjs",
+    "convert-carl": "node scripts/convert-carl.mjs",
     "extract-routes": "npx tsx scripts/extract-routes.mjs",
-    "build:ssg:full": "npm run optimize-images && npm run build && npm run extract-routes && vite build --ssr src/entry-server.tsx --outDir dist/server && node scripts/prerender.mjs",
-    "build:ssg:skip-images": "npm run build && npm run extract-routes && vite build --ssr src/entry-server.tsx --outDir dist/server && node scripts/prerender.mjs",
+    "build:ssg:full": "npm run optimize-images && npm run convert-carl && npm run build && npm run extract-routes && vite build --ssr src/entry-server.tsx --outDir dist/server && node scripts/prerender.mjs",
+    "build:ssg:skip-images": "npm run convert-carl && npm run build && npm run extract-routes && vite build --ssr src/entry-server.tsx --outDir dist/server && node scripts/prerender.mjs",
     "build:ssg": "node scripts/run-build-ssg.mjs",
     "lint": "eslint .",
     "preview": "vite preview"

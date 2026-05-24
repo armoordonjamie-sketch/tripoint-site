@@ -69,12 +69,15 @@ export function ChatWindow({ onClose }: ChatWindowProps) {
       {/* Header */}
       <header className="shrink-0 flex items-center gap-3 px-4 py-3 border-b border-gray-800/80 bg-[#0d0d0d]">
         <div className="relative shrink-0">
-          <img
-            src="/carl-icon.png"
-            alt="Carl"
-            className="w-10 h-10 object-contain"
-            draggable={false}
-          />
+          <picture>
+            <source srcSet="/carl-icon.webp" type="image/webp" />
+            <img
+              src="/carl-icon-fallback.png"
+              alt="Carl"
+              className="w-10 h-10 object-contain"
+              draggable={false}
+            />
+          </picture>
           <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-[#0d0d0d]" />
         </div>
         <div className="flex-1">

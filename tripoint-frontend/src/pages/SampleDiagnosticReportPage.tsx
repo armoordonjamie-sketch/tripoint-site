@@ -75,7 +75,7 @@ const strengthCards = [
 
 const evidenceItems = [
     {
-        src: `${base}/01_plain_english_summary.png`,
+        src: `${base}/01_plain_english_summary.webp`,
         alt: 'Plain-English summary section from a written diagnostic report',
         caption: 'Plain-English summary of the conclusion at the top of the write-up.',
     },
