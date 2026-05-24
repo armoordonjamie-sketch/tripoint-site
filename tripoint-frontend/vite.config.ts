@@ -19,7 +19,7 @@ function asyncCssPlugin() {
   }
 }
 
-export default defineConfig(({ isSsrBuild }) => ({
+export default defineConfig(() => ({
   plugins: [react(), tailwindcss(), asyncCssPlugin()],
   server: {
     host: true,
