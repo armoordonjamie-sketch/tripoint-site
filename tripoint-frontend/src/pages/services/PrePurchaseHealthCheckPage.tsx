@@ -95,7 +95,17 @@ export function PrePurchaseHealthCheckPage() {
                 description="Professional pre-purchase vehicle inspection with deep scan and buyer risk summary. Know what you're buying before you commit. From £160 (ex. VAT)."
                 canonical="/services/pre-purchase-digital-health-check"
             />
-            <ServiceSchema name="Pre-Purchase Digital Health Check" description="Professional pre-purchase vehicle inspection - deep scan, buyer risk summary. Know before you buy." url="/services/pre-purchase-digital-health-check" priceFrom={zoneA} />
+            <ServiceSchema
+                name="Pre-Purchase Digital Health Check"
+                description="Professional pre-purchase vehicle inspection - deep scan, buyer risk summary. Know before you buy."
+                url="/services/pre-purchase-digital-health-check"
+                priceFrom={zoneA}
+                offerCatalogItems={[
+                    { name: 'Pre-Purchase Health Check Zone A (0 to 25 minutes)', price: `${zoneA}.00`, priceCurrency: 'GBP', description: 'Deep diagnostic scan and buyer risk summary' },
+                    { name: 'Pre-Purchase Health Check Zone B (25 to 45 minutes)', price: `${zoneB}.00`, priceCurrency: 'GBP', description: 'Deep diagnostic scan and buyer risk summary' },
+                    { name: 'Pre-Purchase Health Check Zone C (45 to 60 minutes)', price: `${zoneC}.00`, priceCurrency: 'GBP', description: 'Deep diagnostic scan and buyer risk summary' },
+                ]}
+            />
             <BreadcrumbSchema items={[{ name: 'Home', url: '/' }, { name: 'Services', url: '/services' }, { name: 'Pre-Purchase Digital Health Check', url: '/services/pre-purchase-digital-health-check' }]} />
             <FaqPageSchema items={faqs} />
 
@@ -299,7 +309,7 @@ export function PrePurchaseHealthCheckPage() {
                                 </tbody>
                             </table>
                         </div>
-                        <p className="mt-2 text-sm text-text-muted">Includes travel and up to 75 mins on-site. Deposit £30 + VAT (Zone A/B) or £50 + VAT (Zone C).</p>
+                        <p className="mt-2 text-sm text-text-muted">Includes travel and up to 75 mins on-site.</p>
                     </div>
 
                     {/* FAQ */}
@@ -350,6 +360,38 @@ export function PrePurchaseHealthCheckPage() {
                                 </Link>
                             ))}
                         </div>
+                    </div>
+                </div>
+            </Section>
+
+            {/* ─── Real example ─── */}
+            <Section className="bg-surface-alt/50">
+                <div className="mx-auto max-w-3xl reveal">
+                    <h2 className="text-xl font-bold text-text-primary">A real example from a pre-purchase health check</h2>
+                    <div className="mt-4 rounded-xl border border-border-default bg-surface p-5">
+                        <p className="text-sm text-text-secondary leading-relaxed">
+                            2019 Mercedes Sprinter W907, 71,000 miles. Private sale, asking price GBP 18,500. Pre-purchase health check requested by buyer before deposit. Scan found three stored fault codes that had been cleared within the last 48 hours: NOx sensor efficiency fault, EGR flow fault, and a DPF differential pressure fault. DPF soot load at 73 percent. Buyer received a written findings report on the day, renegotiated GBP 2,200 off the purchase price, and used the report to budget for a DPF service.
+                        </p>
+                    </div>
+                    <p className="mt-4 text-sm text-text-secondary">
+                        Every pre-purchase health check ends with a written findings report. <Link to="/sample-diagnostic-report" className="font-semibold text-brand hover:underline">See an example of our documentation standard.</Link>
+                    </p>
+                </div>
+            </Section>
+
+            {/* ─── Internal links ─── */}
+            <Section>
+                <div className="mx-auto max-w-5xl reveal">
+                    <h2 className="text-xl font-bold text-text-primary">Related reading and coverage</h2>
+                    <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                        <Link to="/blog/sprinter-limp-mode-proper-diagnostic" className="flex items-center gap-2 rounded-xl border border-border-default bg-surface-alt p-4 text-sm text-brand hover:border-brand/30 hover:bg-brand/5 transition-all">
+                            <ArrowRight className="h-4 w-4 shrink-0" />
+                            Sprinter limp mode: what a proper diagnostic looks like
+                        </Link>
+                        <Link to="/areas-covered" className="flex items-center gap-2 rounded-xl border border-border-default bg-surface-alt p-4 text-sm text-brand hover:border-brand/30 hover:bg-brand/5 transition-all">
+                            <ArrowRight className="h-4 w-4 shrink-0" />
+                            Coverage: Kent and South East London service area
+                        </Link>
                     </div>
                 </div>
             </Section>

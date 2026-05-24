@@ -64,7 +64,17 @@ export function VorVanDiagnosticsPage() {
                 description="Vehicle Off Road priority diagnostic for vans and commercial vehicles. Fast triage and back-on-road decisions. Fleet, hire, depot. From £160 (ex. VAT)."
                 canonical="/services/vor-van-diagnostics"
             />
-            <ServiceSchema name="VOR Diagnosis" description="Vehicle Off Road priority diagnostic for vans and commercial vehicles. Fast triage, back-on-road decisions. Fleet, hire, depot." url="/services/vor-van-diagnostics" priceFrom={zoneA} />
+            <ServiceSchema
+                name="VOR Diagnosis"
+                description="Vehicle Off Road priority diagnostic for vans and commercial vehicles. Fast triage, back-on-road decisions. Fleet, hire, depot."
+                url="/services/vor-van-diagnostics"
+                priceFrom={zoneA}
+                offerCatalogItems={[
+                    { name: 'VOR Diagnosis Zone A (0 to 25 minutes)', price: `${zoneA}.00`, priceCurrency: 'GBP', description: 'Priority triage and diagnostic scan' },
+                    { name: 'VOR Diagnosis Zone B (25 to 45 minutes)', price: `${zoneB}.00`, priceCurrency: 'GBP', description: 'Priority triage and diagnostic scan' },
+                    { name: 'VOR Diagnosis Zone C (45 to 60 minutes)', price: `${zoneC}.00`, priceCurrency: 'GBP', description: 'Priority triage and diagnostic scan' },
+                ]}
+            />
             <BreadcrumbSchema items={[{ name: 'Home', url: '/' }, { name: 'Services', url: '/services' }, { name: 'VOR Diagnosis', url: '/services/vor-van-diagnostics' }]} />
             <FaqPageSchema items={faqs} />
 
@@ -234,13 +244,27 @@ export function VorVanDiagnosticsPage() {
                         <div className="mt-6"><FaqAccordion items={faqs} /></div>
                     </div>
 
-                    {/* Related fault guides */}
+                    {/* ─── Real example ─── */}
+                    <div className="mt-12 reveal">
+                        <h2 className="text-xl font-bold text-text-primary">A real example from a VOR callout</h2>
+                        <div className="mt-4 rounded-xl border border-border-default bg-surface p-5">
+                            <p className="text-sm text-text-secondary leading-relaxed">
+                                2020 Mercedes Sprinter W907 OM651, 142,000 miles. Multi-drop courier stuck at depot with a 'no start' condition and engine management light. Arrived on-site within 2 hours. Xentry scan revealed a hard fault for the crankshaft position sensor (no RPM signal during cranking). Sensor replaced from van stock, fault cleared, and vehicle returned to the road within 45 minutes of arrival. Written findings report issued to the fleet manager for their maintenance records.
+                            </p>
+                        </div>
+                        <p className="mt-4 text-sm text-text-secondary">
+                            Every VOR diagnosis ends with a clear documented outcome. <Link to="/sample-diagnostic-report" className="font-semibold text-brand hover:underline">See an example of our documentation standard.</Link>
+                        </p>
+                    </div>
+
+                    {/* Related reading and coverage */}
                     <div className="mt-10 reveal">
-                        <h2 className="text-xl font-bold text-text-primary">Related fault guides</h2>
+                        <h2 className="text-xl font-bold text-text-primary">Related reading and coverage</h2>
                         <ul className="mt-4 space-y-3">
                             {[
                                 { label: 'Sprinter limp mode: what a proper diagnostic looks like', href: '/blog/sprinter-limp-mode-proper-diagnostic' },
                                 { label: 'AdBlue countdown: why clearing codes is not a fix', href: '/blog/adblue-countdown-clearing-codes-not-fix' },
+                                { label: 'Coverage: Kent and South East London service area', href: '/areas-covered' },
                             ].map((item) => (
                                 <li key={item.href}>
                                     <Link

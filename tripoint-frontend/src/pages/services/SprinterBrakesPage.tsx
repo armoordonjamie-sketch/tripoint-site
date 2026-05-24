@@ -65,7 +65,17 @@ export function SprinterBrakesPage() {
                 description="Mobile Sprinter brake service. Front pads from £149 (ex. VAT), front pads and discs from £329 (ex. VAT). Fixed-price brake packages for W906 and W907 at your location."
                 canonical="/services/sprinter-brakes"
             />
-            <ServiceSchema name="Sprinter Brakes" description="Mobile Mercedes Sprinter brake service - front and rear pads and discs fitted at your location across Kent and SE London." url="/services/sprinter-brakes" priceFrom={149} />
+            <ServiceSchema
+                name="Sprinter Brakes"
+                description="Mobile Mercedes Sprinter brake service - front and rear pads and discs fitted at your location across Kent and SE London."
+                url="/services/sprinter-brakes"
+                priceFrom={149}
+                offerCatalogItems={[
+                    { name: 'Front Pads Only Zone A (0 to 25 minutes)', price: '149.00', priceCurrency: 'GBP', description: 'Mobile front pad replacement at your location' },
+                    { name: 'Front Pads Only Zone B (25 to 45 minutes)', price: '164.00', priceCurrency: 'GBP', description: 'Mobile front pad replacement at your location' },
+                    { name: 'Front Pads Only Zone C (45 to 60 minutes)', price: '179.00', priceCurrency: 'GBP', description: 'Mobile front pad replacement at your location' },
+                ]}
+            />
             <BreadcrumbSchema items={[{ name: 'Home', url: '/' }, { name: 'Services', url: '/services' }, { name: 'Mercedes Van Servicing', url: '/services/mercedes-van-servicing' }, { name: 'Sprinter Brakes', url: '/services/sprinter-brakes' }]} />
             <FaqPageSchema items={faqs} />
 
@@ -86,6 +96,15 @@ export function SprinterBrakesPage() {
                     </div>
                 </div>
             </section>
+
+            {/* ─── LEAD PARAGRAPH ─── */}
+            <Section>
+                <div className="mx-auto max-w-3xl reveal">
+                    <p className="text-base leading-relaxed text-text-secondary lg:text-xl">
+                        The Mercedes Sprinter is the UK's most widely used large van, and its brakes take significant punishment across delivery and trade work. Common fault patterns include worn front pads triggering the ASSYST brake indicator, seized caliper slider pins causing uneven inner-pad wear, and rear disc corrosion on vans that sit for extended periods. We cover W906 and W907/W910 Sprinters across Kent and South East London, fitting genuine Mercedes parts, measuring disc thickness on every job, and issuing a written report confirming all work completed.
+                    </p>
+                </div>
+            </Section>
 
             {/* ─── SECTION 1: Old vs New Pads - image left, text right ─── */}
             <Section>
@@ -321,6 +340,38 @@ export function SprinterBrakesPage() {
             <Section>
                 <div className="mx-auto max-w-5xl reveal">
                     <Notice variant="info">We carry diagnostic equipment on every visit. If there&apos;s a brake-related fault code or ABS issue, we can diagnose it at the same time - no second visit needed.</Notice>
+                </div>
+            </Section>
+
+            {/* ─── Real example ─── */}
+            <Section className="bg-surface-alt/50">
+                <div className="mx-auto max-w-3xl reveal">
+                    <h2 className="text-xl font-bold text-text-primary">A real example from a Sprinter brake job</h2>
+                    <div className="mt-4 rounded-xl border border-border-default bg-surface p-5">
+                        <p className="text-sm text-text-secondary leading-relaxed">
+                            2019 Mercedes Sprinter W907, 91,000 miles. Brake wear indicator triggered on the dash. Front discs measured below Mercedes minimum specification on the near-side. Both front pads and discs replaced with genuine Mercedes parts, caliper sliders cleaned and lubricated. Rear pads measured and found serviceable. Written findings report issued. Job complete in 55 minutes at the operator's depot.
+                        </p>
+                    </div>
+                    <p className="mt-4 text-sm text-text-secondary">
+                        Every brake job ends with a written report confirming measurements, parts fitted, and work completed. <Link to="/sample-diagnostic-report" className="font-semibold text-brand hover:underline">See an example of our documentation standard.</Link>
+                    </p>
+                </div>
+            </Section>
+
+            {/* ─── Internal links ─── */}
+            <Section>
+                <div className="mx-auto max-w-5xl reveal">
+                    <h2 className="text-xl font-bold text-text-primary">Related reading and coverage</h2>
+                    <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                        <Link to="/blog/sprinter-limp-mode-proper-diagnostic" className="flex items-center gap-2 rounded-xl border border-border-default bg-surface-alt p-4 text-sm text-brand hover:border-brand/30 hover:bg-brand/5 transition-all">
+                            <ArrowRight className="h-4 w-4 shrink-0" />
+                            Sprinter limp mode: what a proper diagnostic looks like
+                        </Link>
+                        <Link to="/areas-covered" className="flex items-center gap-2 rounded-xl border border-border-default bg-surface-alt p-4 text-sm text-brand hover:border-brand/30 hover:bg-brand/5 transition-all">
+                            <ArrowRight className="h-4 w-4 shrink-0" />
+                            Coverage: Kent and South East London service area
+                        </Link>
+                    </div>
                 </div>
             </Section>
 

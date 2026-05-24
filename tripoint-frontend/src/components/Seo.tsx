@@ -18,8 +18,9 @@ export function Seo({
     noIndex = false,
 }: SeoProps) {
     const { pathname } = useLocation();
+    const suffix = ' | TriPoint Diagnostics';
     const fullTitle = title
-        ? siteConfig.defaultSeo.titleTemplate.replace('%s', title)
+        ? (title.endsWith(suffix) ? title : siteConfig.defaultSeo.titleTemplate.replace('%s', title))
         : siteConfig.defaultSeo.defaultTitle;
 
     const canonicalUrl = canonical

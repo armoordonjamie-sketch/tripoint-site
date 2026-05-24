@@ -417,6 +417,7 @@ export const blogPosts: BlogPost[] = [
             <ul>
                 <li><a href="/blog/sprinter-p0299-turbo-underboost">Sprinter P0299: Turbo Underboost or Low Boost</a></li>
                 <li><a href="/blog/sprinter-p0234-turbo-overboost">Sprinter P0234: Turbo Overboost</a></li>
+                <li><a href="/blog/sprinter-p0401-egr-fault">P0401 EGR fault on the Sprinter</a></li>
             </ul>
 
             <div class="blog-cta-box">
@@ -865,12 +866,311 @@ export const blogPosts: BlogPost[] = [
                 <p>Through a combination of differential pressure behaviour (a gutted DPF shows abnormally low pressure drop), temperature readings, and the regen history log. Physical removal or software bypass is identifiable during a standard diagnostic session.</p>
             </div>
 
+            <hr class="blog-divider"/>
+
+            <h2>Related reading</h2>
+            <ul>
+                <li><a href="/blog/sprinter-p2463-dpf-soot-accumulation">P2463: DPF soot accumulation on the Sprinter</a></li>
+            </ul>
+
             <div class="blog-cta-box">
                 <p><strong>P2002 stored on your Mercedes?</strong></p>
                 <p>Book a <a href="/services/diagnostic-callout">Standard Diagnosis</a> - we read DPF live data and regen history before any repair decision is made.</p>
             </div>
         `,
     },
+    {
+        slug: 'sprinter-p0401-egr-fault',
+        title: 'Sprinter P0401: Insufficient EGR Flow',
+        description: 'P0401 on a Mercedes Sprinter means insufficient EGR flow. Here is what causes it on the OM651 and OM654 and what a proper diagnostic session looks at before any parts are replaced.',
+        category: 'Emissions',
+        publishedAt: '2026-05-23',
+        updatedAt: '2026-05-23',
+        thumbnail: '/images/diag_photos/egr-pipe-oil.jpg',
+        relatedServices: ['diagnostic-callout'],
+        faqs: [
+            { question: 'Can I drive with P0401?', answer: 'The van may run normally or enter a mild derate depending on whether limp mode is also active. The fault should be diagnosed promptly as continued operation with an EGR fault can cause carbon buildup to worsen and affect other components.' },
+            { question: 'Does P0401 always mean the EGR valve needs replacing?', answer: 'No. A blocked EGR pipe, a faulty EGR cooler, or a position sensor fault can all produce P0401. Replacing the valve without confirming the root cause through live data is a common and expensive mistake on this fault.' },
+            { question: 'Will cleaning the EGR valve fix P0401?', answer: 'It may, if the fault is carbon buildup on the valve itself preventing it from opening. If the restriction is in the EGR pipe or cooler, cleaning the valve will not resolve the code.' },
+            { question: 'Is P0401 an MOT failure?', answer: 'An EGR fault affecting emissions performance can cause an MOT failure on exhaust emissions grounds. A dashboard warning light is also an MOT failure in itself.' },
+            { question: 'How long does a P0401 diagnostic take?', answer: 'Approximately 45 to 60 minutes on site covering live data checks, position sensor plausibility, and visual inspection of accessible EGR components.' }
+        ],
+        content: `
+            <div class="blog-lead">
+                P0401 is stored when the ECU detects that exhaust gas recirculation flow is below the expected level. On W906 and W907 Sprinters with OM651 and OM654 engines, this is a common emissions fault that frequently triggers alongside limp mode, increased smoke, or a rough idle. The code does not identify which component has failed. It tells you the system is not delivering the expected amount of recirculated exhaust gas.
+            </div>
+
+            <figure class="blog-image">
+                <img src="/images/diag_photos/egr-pipe-oil.jpg" alt="Oil contaminated EGR pipe on Mercedes Sprinter" loading="lazy" />
+            </figure>
+
+            <h2>What the EGR system does and why P0401 occurs</h2>
+            <p>The EGR valve recirculates a controlled quantity of exhaust gas back into the intake manifold. This reduces combustion temperature and NOx output. The ECU monitors EGR flow by comparing the expected flow rate (based on valve position and engine conditions) against what the MAF sensor and other load inputs indicate is actually happening. P0401 is stored when the flow is consistently below target.</p>
+
+            <hr class="blog-divider"/>
+
+            <h2>Common causes on the OM651 and OM654</h2>
+            <p>On the OM651, the most common cause is a heavily carboned EGR valve that cannot open to the commanded position, or a partially blocked EGR pipe restricting flow. Oil-contaminated EGR pipes are a known issue on high-mileage OM651 engines and produce exactly the fault pattern P0401 describes. A faulty EGR cooler that is partially blocked is also a cause. On the OM654, the EGR system is revised but carbon buildup and valve sticking remain a factor. A failed EGR position sensor giving incorrect position feedback can cause P0401 even when the valve is physically functioning correctly.</p>
+
+            <figure class="blog-image">
+                <img src="/images/diag_photos/intake-manifold-blocked.jpg" alt="Blocked intake manifold from heavy carbon soot build up" loading="lazy" />
+            </figure>
+
+            <hr class="blog-divider"/>
+
+            <h2>What a diagnostic session looks at</h2>
+            <p>Live data showing commanded EGR position against actual EGR position is the primary check. If the valve is commanded open and actual position matches but P0401 still stores, the restriction is downstream of the valve in the pipe or cooler. If actual position does not match commanded position, the valve mechanism or motor is at fault. MAF sensor plausibility checks are run alongside this because a faulty MAF can produce a false P0401 by reporting incorrect air mass flow. A visual inspection of the EGR pipe for oil contamination or carbon restriction is done where accessible on site.</p>
+
+            <hr class="blog-divider"/>
+
+            <h2>P0401 and emissions compliance</h2>
+            <p>P0401 with a confirmed EGR fault will affect emissions performance and can contribute to an MOT failure on exhaust emissions. EGR deletion or defeat is not a legal or compliant repair for road vehicles. The correct approach is to diagnose the fault and restore the EGR system to correct function.</p>
+
+            <hr class="blog-divider"/>
+
+            <h2>Related reading</h2>
+            <ul>
+                <li><a href="/blog/sprinter-limp-mode-proper-diagnostic">Sprinter Limp Mode: What a Proper Diagnostic Looks Like</a></li>
+                <li><a href="/blog/adblue-countdown-clearing-codes-not-fix">AdBlue Countdown: Why Clearing Codes Isn't a Fix</a></li>
+                <li><a href="/services/diagnostic-callout">Standard Diagnosis Service</a></li>
+            </ul>
+
+            <div class="blog-cta-box">
+                <p><strong>Got a P0401 fault code?</strong></p>
+                <p>Book a <a href="/services/diagnostic-callout">Standard Diagnosis</a> - we'll check the live data and physically inspect the EGR system before any parts are recommended.</p>
+            </div>
+        `,
+    },
+    {
+        slug: 'mercedes-p0420-catalyst-fault',
+        title: 'Mercedes P0420: Catalyst System Efficiency Below Threshold',
+        description: 'P0420 on a Mercedes diesel means catalyst efficiency is below threshold. Here is what the code means, what causes it, and what a diagnostic session looks at before condemning the cat.',
+        category: 'Emissions',
+        publishedAt: '2026-05-23',
+        updatedAt: '2026-05-23',
+        thumbnail: '/images/diag_photos/sensor-sooted.jpg',
+        relatedServices: ['diagnostic-callout'],
+        faqs: [
+            { question: 'Does P0420 always mean I need a new catalyst?', answer: 'No. Sensor faults and upstream engine issues can produce P0420 without the catalyst itself being at fault. A diagnostic session is needed to confirm the root cause before any parts are ordered.' },
+            { question: 'Will P0420 cause an MOT failure?', answer: 'An exhaust emissions fault and a dashboard warning light are both MOT failure points. A properly functioning catalyst is required to pass the emissions check.' },
+            { question: 'Can a damaged catalyst be cleaned rather than replaced?', answer: 'In some cases a catalyst that is soot-loaded but not physically degraded can recover after correct operation. A catalyst that is structurally damaged or contaminated requires replacement.' },
+            { question: 'How is a removed or bypassed catalyst identified?', answer: 'Through exhaust temperature behaviour and sensor plausibility. A gutted or bypassed catalyst shows distinctive temperature patterns and sensor readings that differ from a degraded but present unit.' }
+        ],
+        content: `
+            <div class="blog-lead">
+                P0420 is stored when the ECU determines that the catalytic converter is not reducing harmful emissions to the required level. On Mercedes diesel vans it is often associated with the oxidation catalyst upstream of the DPF. It is a code that appears straightforward but has several possible causes beyond a failed catalyst.
+            </div>
+
+            <figure class="blog-image">
+                <img src="/images/diag_photos/multimeter-exhaust-pulse.jpg" alt="Multimeter probe testing exhaust temperature sensor reading" loading="lazy" />
+            </figure>
+
+            <h2>What P0420 means</h2>
+            <p>The catalyst efficiency is monitored by comparing exhaust gas composition upstream and downstream of the catalyst using temperature sensors, NOx sensors on equipped models, and the oxygen or lambda sensor where fitted. When the ECU calculates that the conversion efficiency is below threshold, P0420 is stored. This can reflect a genuinely degraded catalyst, a sensor giving incorrect readings, or an upstream fault that is preventing the catalyst from reaching its correct operating temperature.</p>
+
+            <hr class="blog-divider"/>
+
+            <h2>Common causes on Mercedes diesel vans</h2>
+            <p>A degraded or physically damaged oxidation catalyst is the most direct cause. However P0420 can also be triggered by: a faulty exhaust temperature sensor upstream or downstream of the catalyst giving incorrect efficiency readings, a failed or contaminated NOx sensor on SCR-equipped models creating a false efficiency assessment, an engine fault causing excessive unburned fuel to enter the exhaust and overheat or contaminate the catalyst, and a catalyst that has been physically removed or bypassed. This last cause is identifiable during a diagnostic session and is not something we will advise on or facilitate.</p>
+            
+            <figure class="blog-image">
+                <img src="/images/diag_photos/sensor-sooted.jpg" alt="Heavily sooted exhaust sensor removed for inspection" loading="lazy" />
+            </figure>
+
+            <hr class="blog-divider"/>
+
+            <h2>What a diagnostic session looks at</h2>
+            <p>Exhaust temperature sensor plausibility upstream and downstream is checked first. If sensor readings are implausible relative to engine load and conditions, the sensor rather than the catalyst may be at fault. On SCR-equipped models the NOx sensor data is reviewed for correct function. Engine fuelling and combustion health is checked to rule out an upstream fault contributing to catalyst degradation. Physical inspection of the catalyst housing where accessible. If all sensors are plausible and no upstream fault is present, the catalyst itself is the most likely cause.</p>
+
+            <hr class="blog-divider"/>
+
+            <h2>Related reading</h2>
+            <ul>
+                <li><a href="/blog/mercedes-p2002-dpf-fault">P2002: DPF Efficiency Below Threshold</a></li>
+                <li><a href="/blog/dpf-warning-light-regen-vs-worse">DPF Warning Lights: When Regen Helps vs When It Makes Things Worse</a></li>
+                <li><a href="/services/diagnostic-callout">Standard Diagnosis Service</a></li>
+            </ul>
+
+            <div class="blog-cta-box">
+                <p><strong>Seeing P0420 on your Mercedes?</strong></p>
+                <p>Book a <a href="/services/diagnostic-callout">Standard Diagnosis</a> - we'll verify sensor plausibility and rule out upstream engine issues before condemning the catalyst.</p>
+            </div>
+        `,
+    },
+    {
+        slug: 'sprinter-p2463-dpf-soot-accumulation',
+        title: 'Sprinter P2463: DPF Soot Accumulation',
+        description: 'P2463 on a Mercedes Sprinter means the DPF has accumulated soot beyond the threshold. Here is what causes it, when a forced regen helps, and when it does not.',
+        category: 'Emissions',
+        publishedAt: '2026-05-23',
+        updatedAt: '2026-05-23',
+        thumbnail: '/images/gallery/work-14.jpg',
+        relatedServices: ['diagnostic-callout'],
+        faqs: [
+            { question: 'Will a forced regen fix P2463?', answer: 'It may, if the DPF is soot-loaded within the recoverable range and there are no underlying faults. It will not fix P2463 if ash accumulation is the primary issue or if an upstream fault is preventing regen from completing.' },
+            { question: 'Can I do a manual regen by driving on the motorway?', answer: 'A sustained motorway run can initiate a passive regen if soot loading is not too high and exhaust temperatures can be reached. If P2463 is already stored, the ECU may not allow a passive regen cycle to proceed without active intervention.' },
+            { question: 'How many forced regens can a DPF tolerate?', answer: 'There is no fixed number, but repeated forced regens on a filter with high ash load or underlying faults accelerate degradation. Addressing the root cause of repeated soot accumulation is more important than the number of regens.' },
+            { question: 'Is P2463 an MOT failure?', answer: 'A DPF warning light is an MOT failure. P2463 with a dashboard warning present will fail the vehicle.' }
+        ],
+        content: `
+            <div class="blog-lead">
+                P2463 is stored when the ECU calculates that the DPF soot load has exceeded the maximum threshold. It is closely related to P2002 (DPF efficiency below threshold) and the two often appear together. P2463 is specifically a soot loading code: the filter is blocked to the point where the ECU cannot initiate or complete a normal passive regen cycle.
+            </div>
+
+            <figure class="blog-image">
+                <img src="/images/optimized/gallery/work-43.jpg" alt="Carbon build up inside a Mercedes turbocharger indicating exhaust backpressure" loading="lazy" />
+            </figure>
+
+            <h2>Why DPFs block on Sprinters</h2>
+            <p>Passive DPF regeneration requires sustained exhaust temperatures above approximately 550 to 600 degrees Celsius. On the W906 and W907 Sprinter this is achieved during prolonged motorway or A-road driving. Short urban journeys, stop-start use, and depot-based operations where the van rarely sustains a long run are the most common causes of progressive soot accumulation. On the OM651 a partially blocked EGR or a degraded oxidation catalyst can prevent the exhaust temperatures needed for passive regen from being reached, compounding the problem. Injector wear affecting combustion quality is a less common but possible contributing factor at very high mileages.</p>
+
+            <hr class="blog-divider"/>
+
+            <h2>What a diagnostic session looks at</h2>
+            <p>Soot load percentage from the DPF control module is read first. Ash load estimate is checked separately: ash is non-combustible residue from engine oil and does not reduce during regen. A DPF that is heavily ash-loaded cannot be recovered by regen regardless of how many forced cycles are attempted. Regen history is reviewed: how many regens have been attempted, how many completed, and how many aborted. A high abort rate suggests an underlying condition preventing regen completion. Differential pressure sensor readings are checked for plausibility. If soot load is within the recoverable range and no underlying fault is preventing regen, a forced regen via Xentry is appropriate. If soot load is above the safe regen threshold or ash load is the primary issue, physical DPF cleaning or replacement is the correct path.</p>
+
+            <hr class="blog-divider"/>
+
+            <h2>P2463 and the regen decision</h2>
+            <p>A forced regen should not be performed without first confirming that conditions are safe for it. Running a forced regen on a DPF that is beyond the recovery threshold risks thermal damage to the filter. Running a forced regen when an active EGR or turbo fault is present risks the regen not completing and the fault returning within a short drive. The DPF warning lights post on this site covers the regen decision in more detail.</p>
+            
+            <figure class="blog-image">
+                <img src="/images/optimized/gallery/work-14.jpg" alt="Thick soot accumulation inside an exhaust tailpipe" loading="lazy" />
+            </figure>
+
+            <hr class="blog-divider"/>
+
+            <h2>Related reading</h2>
+            <ul>
+                <li><a href="/blog/mercedes-p2002-dpf-fault">P2002: DPF Efficiency Below Threshold</a></li>
+                <li><a href="/blog/dpf-warning-light-regen-vs-worse">DPF Warning Lights: When Regen Helps vs When It Makes Things Worse</a></li>
+                <li><a href="/services/diagnostic-callout">Standard Diagnosis Service</a></li>
+            </ul>
+
+            <div class="blog-cta-box">
+                <p><strong>Stuck with P2463?</strong></p>
+                <p>Book a <a href="/services/diagnostic-callout">Standard Diagnosis</a> - we'll check your soot load, ash estimate, and regen blockers before deciding if a regen is the right move.</p>
+            </div>
+        `,
+    },
+    {
+        slug: 'vito-adblue-fault',
+        title: 'Mercedes Vito AdBlue Fault: What It Means and What to Do',
+        description: 'AdBlue warning on a Mercedes Vito W639 or W447? Here is what causes it, why clearing the code does not fix it, and what a proper diagnostic session covers.',
+        category: 'Emissions',
+        publishedAt: '2026-05-23',
+        updatedAt: '2026-05-23',
+        thumbnail: '/images/gallery/work-30.jpg',
+        relatedServices: ['diagnostic-callout', 'vito-servicing'],
+        faqs: [
+            { question: 'Can I top up AdBlue to fix the warning?', answer: 'If the warning is purely a low-level alert, topping up to the correct level and having the system reset via Xentry will resolve it. If the warning is a quality or sensor fault, topping up will not clear it.' },
+            { question: 'Can I use any AdBlue or does it need to be a specific grade?', answer: 'AdBlue must meet the ISO 22241 specification. Substandard or contaminated AdBlue is a common cause of P2BA9 quality faults on the W447. Use a reputable supplier and check the expiry date.' },
+            { question: 'How long does the diagnostic take on an AdBlue fault?', answer: 'Approximately 45 to 60 minutes covering the full SCR system scan, live data checks, and dosing unit actuation.' },
+            { question: 'What happens if the countdown reaches zero?', answer: 'The vehicle will not start. A Xentry reset is required once the underlying fault is resolved.' }
+        ],
+        content: `
+            <div class="blog-lead">
+                The Mercedes Vito W447 with the OM654 engine uses an SCR (selective catalytic reduction) system that requires AdBlue to reduce NOx emissions. When the AdBlue system develops a fault or the fluid level drops too low, the van enters a countdown warning sequence that will eventually prevent starting if not resolved. This page covers the most common Vito AdBlue fault types, what causes them, and what a diagnostic session involves.
+            </div>
+
+            <figure class="blog-image">
+                <img src="/images/optimized/gallery/work-30.jpg" alt="Mercedes instrument cluster displaying AdBlue countdown to non-start" loading="lazy" />
+            </figure>
+
+            <h2>Common AdBlue fault codes on the Vito W447</h2>
+            <p>The most frequently seen codes on the W447 Vito SCR system are P20EE (SCR NOx catalyst efficiency below threshold), P2BAD or P2BA9 (reagent quality, the ECU believes the AdBlue concentration is incorrect), P203F (reductant level sensor), and codes relating to the dosing unit or injector. Each code points to a different part of the system: the sensor measuring what goes in, the sensor measuring what comes out, the dosing unit that injects AdBlue into the exhaust, or the quality of the AdBlue itself.</p>
+
+            <hr class="blog-divider"/>
+
+            <h2>Why the countdown starts and why clearing codes does not fix it</h2>
+            <p>The AdBlue countdown is a regulatory requirement. When the SCR system detects a fault or fluid level is critically low, the ECU initiates a countdown (displayed in miles remaining) that ends in a non-start condition. This countdown cannot be reset by a generic code clear. The underlying fault or the fluid condition must be resolved, and on most faults a dealer-level reset or teach-in procedure through Xentry is required to confirm the system is functioning correctly and lift the countdown.</p>
+
+            <hr class="blog-divider"/>
+
+            <h2>What a diagnostic session covers</h2>
+            <p>Full SCR and AdBlue system scan including freeze frame data. Live data for NOx sensor upstream and downstream to confirm sensor function. Dosing unit actuation test. AdBlue quality check where accessible. Physical inspection of the AdBlue tank and fill point for contamination. Review of any historic fault pattern to identify whether the fault is intermittent or progressive.</p>
+            <p><em>Note: The W639 Vito (pre-2014) does not use AdBlue or SCR. If your W639 has an emissions warning, it relates to the EGR system rather than AdBlue. See the P0401 EGR fault page for the relevant information.</em></p>
+
+            <figure class="blog-image">
+                <img src="/images/optimized/gallery/work-27.jpg" alt="NOx sensor removed for inspection during an SCR AdBlue diagnostic" loading="lazy" />
+            </figure>
+
+            <hr class="blog-divider"/>
+
+            <h2>Related reading</h2>
+            <ul>
+                <li><a href="/blog/adblue-countdown-clearing-codes-not-fix">AdBlue Countdown: Why Clearing Codes Isn't a Fix</a></li>
+                <li><a href="/services/vito-servicing">Vito Servicing Packages</a></li>
+                <li><a href="/services/diagnostic-callout">Standard Diagnosis Service</a></li>
+            </ul>
+
+            <div class="blog-cta-box">
+                <p><strong>Vito in AdBlue countdown?</strong></p>
+                <p>Book a <a href="/services/diagnostic-callout">Standard Diagnosis</a> - we'll read the SCR live data and pinpoint the sensor, doser, or quality issue triggering the countdown.</p>
+            </div>
+        `,
+    },
+    {
+        slug: 'mercedes-eml-on',
+        title: 'Mercedes Engine Management Light On: What It Means and What to Do',
+        description: 'Engine management light on a Mercedes van or car? Here is what it can mean, why the light alone does not tell you what is wrong, and what a proper diagnostic session involves.',
+        category: 'Mercedes',
+        publishedAt: '2026-05-23',
+        updatedAt: '2026-05-23',
+        thumbnail: '/images/diag_photos/picoscope-multimeter.jpg',
+        relatedServices: ['diagnostic-callout'],
+        faqs: [
+            { question: 'Can I drive with the EML on?', answer: 'If the van drives normally with no other symptoms, it is generally safe to drive a short distance to get it diagnosed. If there is limp mode, power loss, unusual smoke, or noise, stop as soon as it is safe to do so.' },
+            { question: 'Will the EML go off on its own?', answer: 'If the fault that triggered it was intermittent and has not recurred, the ECU may clear it automatically after a set number of drive cycles. The underlying cause is still present and the code may return.' },
+            { question: 'Can a generic OBD reader tell me what is wrong?', answer: 'A generic reader will show the stored code. It will not show Mercedes-specific sub-codes, freeze frame data across all modules, or live data from proprietary Mercedes systems. It is a starting point at best.' },
+            { question: 'Does an EML cause an MOT failure?', answer: 'Yes. A dashboard warning light is an MOT failure point regardless of what caused it.' }
+        ],
+        content: `
+            <div class="blog-lead">
+                An engine management light (EML) on a Mercedes van or car tells you the ECU has detected a fault and stored a code. It does not tell you what the fault is, how serious it is, or what needs to be done. On its own the light is a prompt to investigate, not a diagnosis. This page covers what the EML indicates, why reading the code is only the starting point, and what a proper diagnostic session involves.
+            </div>
+
+            <figure class="blog-image">
+                <img src="/images/optimized/gallery/work-31.jpg" alt="Mercedes instrument cluster with the engine management light illuminated" loading="lazy" />
+            </figure>
+
+            <h2>What triggers the EML on a Mercedes</h2>
+            <p>The EML can be triggered by faults across the entire engine management system: emissions components (EGR, DPF, AdBlue, NOx sensors), fuelling (injectors, fuel pressure, rail pressure sensor), boost and turbo circuit (boost pressure, actuator, MAP sensor), electrical faults (wiring, CAN bus, connector corrosion), sensor faults (MAF, coolant temperature, crankshaft position), and coding or adaptation issues following a component replacement. On Mercedes vans the most common triggers in practice are emissions system faults, boost faults, and electrical intermittents. The EML does not distinguish between a minor sensor fault and a significant mechanical issue: the same light covers both.</p>
+
+            <hr class="blog-divider"/>
+
+            <h2>Why reading the code is not the same as diagnosing the fault</h2>
+            <p>A fault code stored in the ECU describes a symptom, not a cause. P0299 tells you boost is low. It does not tell you whether the cause is a sticking actuator, a boost leak, a worn turbo, a faulty MAP sensor, or an electrical fault in the actuator circuit. A code read without live data, plausibility checks, and guided tests produces a code number and a guess. A diagnostic session uses the code as a starting point and works through the evidence to confirm root cause.</p>
+
+            <figure class="blog-image">
+                <img src="/images/diag_photos/picoscope-multimeter.jpg" alt="Using a PicoScope and multimeter to verify an electrical fault" loading="lazy" />
+            </figure>
+
+            <hr class="blog-divider"/>
+
+            <h2>What a diagnostic session covers for an EML</h2>
+            <p>Full system scan across all modules (not just the engine module), freeze frame data review, live data checks relevant to the stored code, plausibility tests on related sensors, guided tests where the fault requires active component testing, and a written outcome naming the most likely root cause with recommended next steps.</p>
+
+            <hr class="blog-divider"/>
+
+            <h2>When an EML is urgent</h2>
+            <p>If the EML is accompanied by limp mode, loss of power, smoke, or unusual noises, the fault is likely active and more serious. If the EML is on but the van drives normally, the fault may be intermittent or stored from a previous event. Both should be investigated but a van in limp mode needs attention sooner.</p>
+            
+            <hr class="blog-divider"/>
+
+            <h2>Related reading</h2>
+            <ul>
+                <li><a href="/blog/sprinter-limp-mode-proper-diagnostic">Sprinter Limp Mode: What a Proper Diagnostic Looks Like</a></li>
+                <li><a href="/blog/adblue-countdown-clearing-codes-not-fix">AdBlue Countdown: Why Clearing Codes Isn't a Fix</a></li>
+                <li><a href="/services/diagnostic-callout">Standard Diagnosis Service</a></li>
+            </ul>
+
+            <div class="blog-cta-box">
+                <p><strong>Is your Engine Management Light on?</strong></p>
+                <p>Book a <a href="/services/diagnostic-callout">Standard Diagnosis</a> - we use dealer-level tools to confirm exactly why the light was triggered and provide a clear repair plan.</p>
+            </div>
+        `,
+    }
 ];
 
 const DEFAULT_BLOG_THUMBNAIL = '/images/gallery/work-48.jpg';

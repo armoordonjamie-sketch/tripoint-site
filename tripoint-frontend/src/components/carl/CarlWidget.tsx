@@ -82,18 +82,17 @@ export function CarlWidget() {
 
       {/* Trigger container */}
       {/* max-lg applies up to 1024px, same breakpoint where MobileStickyCTA is visible. */}
-      {/* MobileStickyCTA height is 80px + max(10px, env(safe-area-inset-bottom)) */}
-      <div className={`fixed z-[9999] max-lg:bottom-[calc(80px+max(10px,env(safe-area-inset-bottom,0px))+1rem)] lg:bottom-6 right-4 flex flex-col items-center pointer-events-none ${open ? "max-sm:hidden" : ""}`}>
+      <div className={`fixed z-[9999] max-lg:bottom-[calc(180px+env(safe-area-inset-bottom,0px))] lg:bottom-6 right-4 flex items-center justify-end gap-3 pointer-events-none ${open ? "max-sm:hidden" : ""}`}>
         
         {/* Helper Pill */}
         <AnimatePresence>
           {showHelper && !open && (
             <motion.div
-              initial={{ opacity: 0, y: 15, scale: 0.8 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.8, y: 10 }}
+              initial={{ opacity: 0, x: 15, scale: 0.8 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8, x: 10 }}
               transition={{ type: "spring", stiffness: 400, damping: 25 }}
-              className="relative mb-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full shadow-lg border border-white/10 text-xs sm:text-sm font-medium whitespace-nowrap pointer-events-auto cursor-pointer flex items-center gap-1.5 sm:gap-2"
+              className="relative px-3 py-1.5 sm:px-4 sm:py-2 rounded-full shadow-lg border border-white/10 text-xs sm:text-sm font-medium whitespace-nowrap pointer-events-auto cursor-pointer flex items-center gap-1.5 sm:gap-2"
               style={{
                 background: "rgba(15, 23, 42, 0.85)",
                 backdropFilter: "blur(12px)",
@@ -110,8 +109,8 @@ export function CarlWidget() {
               </motion.span>
               <span>Hi, I'm Carl!</span>
               
-              {/* Subtle down arrow */}
-              <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 border-[6px] border-transparent border-t-[#0f172a]/80" />
+              {/* Subtle right arrow */}
+              <div className="absolute -right-1.5 top-1/2 -translate-y-1/2 border-[6px] border-transparent border-l-[#0f172a]/80" />
             </motion.div>
           )}
         </AnimatePresence>
@@ -122,7 +121,7 @@ export function CarlWidget() {
           whileHover={{ scale: 1.07 }}
           whileTap={{ scale: 0.93 }}
           aria-label={open ? "Close chat" : "Chat with Carl"}
-          className="w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center bg-transparent pointer-events-auto relative"
+          className="w-14 h-14 lg:w-20 lg:h-20 flex items-center justify-center bg-transparent pointer-events-auto relative shrink-0"
         >
           {/* Unread dot */}
           {hasUnread && !open && (
@@ -137,7 +136,7 @@ export function CarlWidget() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.6 }}
                 transition={{ duration: 0.15 }}
-                className="flex items-center justify-center w-10 h-10 rounded-full bg-blue-600/90 shadow-lg"
+                className="flex items-center justify-center w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-blue-600/90 shadow-lg"
               >
                 <X size={20} className="text-white" />
               </motion.span>

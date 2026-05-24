@@ -74,7 +74,17 @@ export function FleetVanTuningPage() {
                 description="Fleet van tuning packages. Consistent drivability across your fleet with volume pricing and site-day rates. All van makes. From \u00a3199 (ex. VAT) per vehicle."
                 canonical="/services/fleet-van-tuning"
             />
-            <ServiceSchema name="Fleet Van Tuning" description="Fleet van tuning - volume pricing, site-day rates, diagnostic pre-check included. All van makes." url="/services/fleet-van-tuning" priceFrom={199} />
+            <ServiceSchema
+                name="Fleet Van Tuning"
+                description="Fleet van tuning - volume pricing, site-day rates, diagnostic pre-check included. All van makes."
+                url="/services/fleet-van-tuning"
+                priceFrom={199}
+                offerCatalogItems={[
+                    { name: 'Fleet Tune per vehicle Zone A (0 to 25 minutes)', price: '199.00', priceCurrency: 'GBP', description: 'Diagnostic pre-check, calibration, road test, and documentation included' },
+                    { name: 'Fleet Tune per vehicle Zone B (25 to 45 minutes)', price: '214.00', priceCurrency: 'GBP', description: 'Diagnostic pre-check, calibration, road test, and documentation included' },
+                    { name: 'Fleet Tune per vehicle Zone C (45 to 60 minutes)', price: '229.00', priceCurrency: 'GBP', description: 'Diagnostic pre-check, calibration, road test, and documentation included' },
+                ]}
+            />
             <BreadcrumbSchema items={[{ name: 'Home', url: '/' }, { name: 'Services', url: '/services' }, { name: 'Fleet Van Tuning', url: '/services/fleet-van-tuning' }]} />
             <FaqPageSchema items={faqs} />
 
@@ -96,6 +106,15 @@ export function FleetVanTuningPage() {
                     </div>
                 </div>
             </section>
+
+            {/* ─── LEAD PARAGRAPH ─── */}
+            <Section>
+                <div className="mx-auto max-w-3xl reveal">
+                    <p className="text-base leading-relaxed text-text-secondary lg:text-xl">
+                        Fleet operators running 3 or more vans face a consistent problem: factory ECU maps are set for the broadest possible compromise, not for the loads and routes your specific fleet runs. This means drivers fight a flat throttle, experience gear hunting under payload, and use more fuel than a well-calibrated map would require. Our fleet tuning service visits your depot, works through your vehicles systematically, and issues a complete documentation pack for every van including an individual calibration report and insurance handover note.
+                    </p>
+                </div>
+            </Section>
 
             {/* \u2500\u2500\u2500 SECTION 1: Why fleet operators tune \u2500\u2500\u2500 */}
             <Section>
@@ -332,6 +351,38 @@ export function FleetVanTuningPage() {
                 <div className="mx-auto max-w-3xl reveal">
                     <h2 className="text-2xl font-bold text-text-primary text-center">Frequently asked questions</h2>
                     <div className="mt-8"><FaqAccordion items={faqs} /></div>
+                </div>
+            </Section>
+
+            {/* ─── Real example ─── */}
+            <Section className="bg-surface-alt/50">
+                <div className="mx-auto max-w-3xl reveal">
+                    <h2 className="text-xl font-bold text-text-primary">A real example from a fleet tuning day</h2>
+                    <div className="mt-4 rounded-xl border border-border-default bg-surface p-5">
+                        <p className="text-sm text-text-secondary leading-relaxed">
+                            Operator running 6 Mercedes Vito W447 vans on fixed depot-to-site routes in Kent. Full diagnostic pre-check on each vehicle before calibration. All 6 passed pre-check with no active faults. Load and Driveability calibration applied to each. Insurance handover note and individual calibration report issued for all 6 vehicles. Total fleet day completed in 7 hours at the operator's depot.
+                        </p>
+                    </div>
+                    <p className="mt-4 text-sm text-text-secondary">
+                        Every fleet tune day ends with written calibration confirmation for each vehicle. <Link to="/sample-diagnostic-report" className="font-semibold text-brand hover:underline">See an example of our documentation standard.</Link>
+                    </p>
+                </div>
+            </Section>
+
+            {/* ─── Internal links ─── */}
+            <Section>
+                <div className="mx-auto max-w-5xl reveal">
+                    <h2 className="text-xl font-bold text-text-primary">Related reading and coverage</h2>
+                    <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                        <Link to="/blog/sprinter-limp-mode-proper-diagnostic" className="flex items-center gap-2 rounded-xl border border-border-default bg-surface-alt p-4 text-sm text-brand hover:border-brand/30 hover:bg-brand/5 transition-all">
+                            <ArrowRight className="h-4 w-4 shrink-0" />
+                            Sprinter limp mode: what a proper diagnostic looks like
+                        </Link>
+                        <Link to="/areas-covered" className="flex items-center gap-2 rounded-xl border border-border-default bg-surface-alt p-4 text-sm text-brand hover:border-brand/30 hover:bg-brand/5 transition-all">
+                            <ArrowRight className="h-4 w-4 shrink-0" />
+                            Coverage: Kent and South East London service area
+                        </Link>
+                    </div>
                 </div>
             </Section>
 

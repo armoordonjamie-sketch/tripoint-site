@@ -75,11 +75,21 @@ export function VanLoadDriveabilityTunePage() {
                 description="Van load tuning for better torque under payload, smoother throttle response, and reduced turbo lag. Diagnostic pre-check included. All van makes. From \u00a3199 (ex. VAT)."
                 canonical="/services/van-load-driveability-tune"
             />
-            <ServiceSchema name="Van Load & Driveability Tune" description="Van load & driveability tuning - more torque under load, better throttle response, reduced turbo lag. All van makes." url="/services/van-load-driveability-tune" priceFrom={199} />
+            <ServiceSchema
+                name="Van Load &amp; Driveability Tune"
+                description="Van load &amp; driveability tuning - more torque under load, better throttle response, reduced turbo lag. All van makes."
+                url="/services/van-load-driveability-tune"
+                priceFrom={199}
+                offerCatalogItems={[
+                    { name: 'Load and Driveability Tune Zone A (0 to 25 minutes)', price: '199.00', priceCurrency: 'GBP', description: 'Diagnostic pre-check, calibration, road test, and handover note included' },
+                    { name: 'Load and Driveability Tune Zone B (25 to 45 minutes)', price: '214.00', priceCurrency: 'GBP', description: 'Diagnostic pre-check, calibration, road test, and handover note included' },
+                    { name: 'Load and Driveability Tune Zone C (45 to 60 minutes)', price: '229.00', priceCurrency: 'GBP', description: 'Diagnostic pre-check, calibration, road test, and handover note included' },
+                ]}
+            />
             <BreadcrumbSchema items={[{ name: 'Home', url: '/' }, { name: 'Services', url: '/services' }, { name: 'Van Load & Driveability Tune', url: '/services/van-load-driveability-tune' }]} />
             <FaqPageSchema items={faqs} />
 
-            {/* \u2500\u2500\u2500 HERO \u2500\u2500\u2500 */}
+            {/* ─── HERO ─── */}
             <section className="relative h-72 sm:h-96 overflow-hidden">
                 <img
                     src="/images/services/van-sprinter-w907-front.png"
@@ -98,7 +108,16 @@ export function VanLoadDriveabilityTunePage() {
                 </div>
             </section>
 
-            {/* \u2500\u2500\u2500 SECTION 1: Why loaded vans need different tuning \u2500\u2500\u2500 */}
+            {/* ─── LEAD PARAGRAPH ─── */}
+            <Section>
+                <div className="mx-auto max-w-3xl reveal">
+                    <p className="text-base leading-relaxed text-text-secondary lg:text-xl">
+                        Commercial van ECU maps are factory-set for a compromise between an empty van and a fully loaded one, which means real-world trade and delivery use leaves significant torque on the table. Common symptoms include turbo lag from standstill, gear hunting on inclines under load, and a flat, unresponsive throttle when pulling away at junctions. A Load and Driveability Tune recalibrates the ECU specifically for work use: more usable torque from 1,500 to 2,500 RPM, faster boost onset, and a sharper throttle map. Every tune starts with a diagnostic pre-check and ends with a written calibration confirmation and insurance handover note.
+                    </p>
+                </div>
+            </Section>
+
+            {/* ─── SECTION 1: Why loaded vans need different tuning ─── */}
             <Section>
                 <div className="mx-auto max-w-5xl">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center reveal">
@@ -141,7 +160,7 @@ export function VanLoadDriveabilityTunePage() {
                 </div>
             </Section>
 
-            {/* \u2500\u2500\u2500 SECTION 2: Before vs After comparison \u2500\u2500\u2500 */}
+            {/* ─── SECTION 2: Before vs After comparison ─── */}
             <Section className="bg-surface-alt/50">
                 <div className="mx-auto max-w-5xl reveal">
                     <h2 className="text-2xl sm:text-3xl font-bold text-text-primary text-center">Before vs after</h2>
@@ -188,7 +207,7 @@ export function VanLoadDriveabilityTunePage() {
                 </div>
             </Section>
 
-            {/* \u2500\u2500\u2500 SECTION 3: Best suited for \u2500\u2500\u2500 */}
+            {/* ─── SECTION 3: Best suited for ─── */}
             <Section>
                 <div className="mx-auto max-w-5xl">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start reveal">
@@ -230,7 +249,39 @@ export function VanLoadDriveabilityTunePage() {
                 </div>
             </Section>
 
-            {/* \u2500\u2500\u2500 SECTION 4: What happens on the day \u2500\u2500\u2500 */}
+            {/* ─── Real example ─── */}
+            <Section className="bg-surface-alt/50">
+                <div className="mx-auto max-w-3xl reveal">
+                    <h2 className="text-xl font-bold text-text-primary">A real example from a load tune visit</h2>
+                    <div className="mt-4 rounded-xl border border-border-default bg-surface p-5">
+                        <p className="text-sm text-text-secondary leading-relaxed">
+                            2018 Mercedes Sprinter W907 OM651, 67,000 miles. Scaffolding operator reported the van feeling flat under full load on A-road gradients, frequently dropping a gear on inclines. Diagnostic pre-check clear. Load and Driveability calibration applied. Road-tested with weight on board. Driver reported significantly improved pull from 1,800 RPM and no gear hunting on the same routes. Written calibration confirmation and insurance handover note issued.
+                        </p>
+                    </div>
+                    <p className="mt-4 text-sm text-text-secondary">
+                        Every tune ends with a written calibration confirmation. <Link to="/sample-diagnostic-report" className="font-semibold text-brand hover:underline">See an example of our documentation standard.</Link>
+                    </p>
+                </div>
+            </Section>
+
+            {/* ─── Internal links ─── */}
+            <Section>
+                <div className="mx-auto max-w-5xl reveal">
+                    <h2 className="text-xl font-bold text-text-primary">Related reading and coverage</h2>
+                    <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                        <Link to="/blog/sprinter-limp-mode-proper-diagnostic" className="flex items-center gap-2 rounded-xl border border-border-default bg-surface-alt p-4 text-sm text-brand hover:border-brand/30 hover:bg-brand/5 transition-all">
+                            <ArrowRight className="h-4 w-4 shrink-0" />
+                            Sprinter limp mode: what a proper diagnostic looks like
+                        </Link>
+                        <Link to="/areas-covered" className="flex items-center gap-2 rounded-xl border border-border-default bg-surface-alt p-4 text-sm text-brand hover:border-brand/30 hover:bg-brand/5 transition-all">
+                            <ArrowRight className="h-4 w-4 shrink-0" />
+                            Coverage: Kent and South East London service area
+                        </Link>
+                    </div>
+                </div>
+            </Section>
+
+            {/* ─── SECTION 4: What happens on the day ─── */}
             <Section className="bg-surface-alt/50">
                 <div className="mx-auto max-w-5xl reveal">
                     <h2 className="text-2xl sm:text-3xl font-bold text-text-primary text-center">What happens on the day</h2>

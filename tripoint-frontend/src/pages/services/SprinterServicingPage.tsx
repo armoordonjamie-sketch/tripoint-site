@@ -85,7 +85,20 @@ export function SprinterServicingPage() {
                 description="Mobile Mercedes Sprinter servicing. Minor from \u00a3175 (ex. VAT), major from \u00a3295 (ex. VAT). Genuine parts, Xentry service reset, and full inspection at your door. W906 and W907/W910."
                 canonical="/services/sprinter-servicing"
             />
-            <ServiceSchema name="Sprinter Servicing" description="Mobile Mercedes Sprinter servicing - minor and major service packages for W906 and W907/W910 at your location across Kent and SE London." url="/services/sprinter-servicing" priceFrom={175} />
+            <ServiceSchema 
+                name="Sprinter Servicing" 
+                description="Mobile Mercedes Sprinter servicing - minor and major service packages for W906 and W907/W910 at your location across Kent and SE London." 
+                url="/services/sprinter-servicing" 
+                priceFrom={175}
+                offerCatalogItems={[
+                    { name: 'Minor Service Zone A (0 to 25 minutes)', price: '175.00', priceCurrency: 'GBP', description: 'Includes travel and minor service at your location' },
+                    { name: 'Minor Service Zone B (25 to 45 minutes)', price: '190.00', priceCurrency: 'GBP', description: 'Includes travel and minor service at your location' },
+                    { name: 'Minor Service Zone C (45 to 60 minutes)', price: '205.00', priceCurrency: 'GBP', description: 'Includes travel and minor service at your location' },
+                    { name: 'Major Service Zone A (0 to 25 minutes)', price: '295.00', priceCurrency: 'GBP', description: 'Includes travel and major service at your location' },
+                    { name: 'Major Service Zone B (25 to 45 minutes)', price: '310.00', priceCurrency: 'GBP', description: 'Includes travel and major service at your location' },
+                    { name: 'Major Service Zone C (45 to 60 minutes)', price: '325.00', priceCurrency: 'GBP', description: 'Includes travel and major service at your location' },
+                ]} 
+            />
             <BreadcrumbSchema items={[{ name: 'Home', url: '/' }, { name: 'Services', url: '/services' }, { name: 'Mercedes Van Servicing', url: '/services/mercedes-van-servicing' }, { name: 'Sprinter Servicing', url: '/services/sprinter-servicing' }]} />
             <FaqPageSchema items={faqs} />
 
@@ -154,7 +167,7 @@ export function SprinterServicingPage() {
             </Section>
 
             <ServicingPartsProof
-                body="Every Sprinter service uses genuine Mercedes parts — correct oil spec (MB 229.51 / 229.52 for OM651 and OM654), OEM filter housings, and replacement sump washers torqued to manufacturer values. Wrong oil or pattern filters accelerate DPF loading and wear on the ASSYST-monitored engine. We pre-order for your exact model before we arrive, so nothing is guessed on the day."
+                body="Every Sprinter service uses genuine Mercedes parts, correct oil spec (MB 229.51 / 229.52 for OM651 and OM654), OEM filter housings, and replacement sump washers torqued to manufacturer values. Wrong oil or pattern filters accelerate DPF loading and wear on the ASSYST-monitored engine. We pre-order for your exact model before we arrive, so nothing is guessed on the day."
             />
 
             {/* \u2500\u2500\u2500 SECTION 2: What\u2019s included \u2500\u2500\u2500 */}
@@ -227,7 +240,7 @@ export function SprinterServicingPage() {
                                 />
                             </div>
                             <figcaption className="border-t border-border-default bg-surface-alt px-4 py-3 text-sm text-text-secondary">
-                                Dipstick check after every oil change — we confirm the fill before handover.
+                                Dipstick check after every oil change, we confirm the fill before handover.
                             </figcaption>
                         </figure>
                         <figure className="overflow-hidden rounded-2xl border border-border-default">
@@ -239,7 +252,7 @@ export function SprinterServicingPage() {
                                 />
                             </div>
                             <figcaption className="border-t border-border-default bg-surface-alt px-4 py-3 text-sm text-text-secondary">
-                                Electronic oil level on the dash — verified on models with a readout.
+                                Electronic oil level on the dash, verified on models with a readout.
                             </figcaption>
                         </figure>
                     </div>

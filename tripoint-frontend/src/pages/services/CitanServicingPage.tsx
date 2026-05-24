@@ -62,6 +62,11 @@ const faqs = [
         answer:
             'Yes. We reset the service indicator via diagnostic equipment after every service. On W415 models this requires Renault-compatible diagnostics; on W420 models we use Mercedes Xentry.',
     },
+    {
+        question: 'Does Xentry work fully on the Citan?',
+        answer:
+            'Xentry access is more limited on W415 Citan models than on the Sprinter or Vito because the W415 shares its platform with the Renault Kangoo. For W415 service resets we use a multi-brand OEM-level platform that handles the Renault-side reset correctly. The W420 Citan uses standard Mercedes Xentry access.',
+    },
 ];
 
 const crossSell = [
@@ -80,7 +85,20 @@ export function CitanServicingPage() {
                 description="Mobile Mercedes Citan servicing. Minor from \u00a3175 (ex. VAT), major from \u00a3295 (ex. VAT). Genuine parts, service reset, full inspection at your door. W415 and W420."
                 canonical="/services/citan-servicing"
             />
-            <ServiceSchema name="Citan Servicing" description="Mobile Mercedes Citan servicing - minor and major service packages for W415 and W420 at your location across Kent and SE London." url="/services/citan-servicing" priceFrom={175} />
+            <ServiceSchema
+                name="Citan Servicing"
+                description="Mobile Mercedes Citan servicing - minor and major service packages for W415 and W420 at your location across Kent and SE London."
+                url="/services/citan-servicing"
+                priceFrom={175}
+                offerCatalogItems={[
+                    { name: 'Minor Service Zone A (0 to 25 minutes)', price: '175.00', priceCurrency: 'GBP', description: 'Includes travel and minor service at your location' },
+                    { name: 'Minor Service Zone B (25 to 45 minutes)', price: '190.00', priceCurrency: 'GBP', description: 'Includes travel and minor service at your location' },
+                    { name: 'Minor Service Zone C (45 to 60 minutes)', price: '205.00', priceCurrency: 'GBP', description: 'Includes travel and minor service at your location' },
+                    { name: 'Major Service Zone A (0 to 25 minutes)', price: '295.00', priceCurrency: 'GBP', description: 'Includes travel and major service at your location' },
+                    { name: 'Major Service Zone B (25 to 45 minutes)', price: '310.00', priceCurrency: 'GBP', description: 'Includes travel and major service at your location' },
+                    { name: 'Major Service Zone C (45 to 60 minutes)', price: '325.00', priceCurrency: 'GBP', description: 'Includes travel and major service at your location' },
+                ]}
+            />
             <BreadcrumbSchema items={[{ name: 'Home', url: '/' }, { name: 'Services', url: '/services' }, { name: 'Mercedes Van Servicing', url: '/services/mercedes-van-servicing' }, { name: 'Citan Servicing', url: '/services/citan-servicing' }]} />
             <FaqPageSchema items={faqs} />
 
@@ -97,7 +115,16 @@ export function CitanServicingPage() {
                 mobileObjectPosition="center 55%"
             />
 
-            {/* \u2500\u2500\u2500 SECTION 1: Small van, big responsibilities \u2500\u2500\u2500 */}
+            {/* ─── LEAD PARAGRAPH ─── */}
+            <Section>
+                <div className="mx-auto max-w-3xl reveal">
+                    <p className="text-base leading-relaxed text-text-secondary lg:text-xl">
+                        The Mercedes Citan is built on the Renault Kangoo platform, which means it needs someone who understands both brands. W415 models use the Renault 1.5 dCi K9K engine, while the newer W420 uses the Mercedes OM608. Xentry access is more limited on W415 models than on the Sprinter or Vito, so we use a multi-brand OEM-level diagnostic platform for those service resets. Both generations are covered across Kent and South East London, with genuine Mercedes parts and a written findings report after every visit.
+                    </p>
+                </div>
+            </Section>
+
+            {/* ─── SECTION 1: Small van, big responsibilities ─── */}
             <Section>
                 <div className="mx-auto max-w-5xl">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center reveal">
@@ -141,10 +168,10 @@ export function CitanServicingPage() {
             </Section>
 
             <ServicingPartsProof
-                body="Citan servicing uses genuine Mercedes parts with the correct oil and filter specification for your K9K, OM608, or ER30 engine. Because the Citan shares its platform with Renault, you need someone who understands both brands — we fit OEM Mercedes items and reset the service indicator with the right diagnostic tool for your generation."
+                body="Citan servicing uses genuine Mercedes parts with the correct oil and filter specification for your K9K, OM608, or ER30 engine. Because the Citan shares its platform with Renault, you need someone who understands both brands, we fit OEM Mercedes items and reset the service indicator with the right diagnostic tool for your generation."
             />
 
-            {/* \u2500\u2500\u2500 SECTION 2: What\u2019s included \u2500\u2500\u2500 */}
+            {/* ─── SECTION 2: What’s included ─── */}
             <Section className="bg-surface-alt/50">
                 <div className="mx-auto max-w-5xl reveal">
                     <h2 className="text-2xl sm:text-3xl font-bold text-text-primary text-center">What&apos;s included</h2>
@@ -239,7 +266,7 @@ export function CitanServicingPage() {
 
             <ServicingProcessGallery />
 
-            {/* \u2500\u2500\u2500 SECTION 3: Citan-specific quirks \u2500\u2500\u2500 */}
+            {/* ─── SECTION 3: Citan-specific quirks ─── */}
             <Section>
                 <div className="mx-auto max-w-5xl">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start reveal">
@@ -252,7 +279,7 @@ export function CitanServicingPage() {
                                 {[
                                     { issue: 'Timing belt vs chain', detail: 'The K9K 1.5 diesel can run either a belt or chain depending on the specific variant. A belt needs replacing at around 90,000 miles - a chain should last much longer but still needs inspecting. We check during every major service.' },
                                     { issue: 'Turbo actuator / wastegate', detail: 'The small turbo on K9K engines can suffer from sticking wastegate actuators. This shows as intermittent limp mode or reduced power. We can test this via diagnostics during any service visit.' },
-                                    { issue: 'Fuel filter location', detail: 'On W415 models the fuel filter is tucked under the bonnet in a tight space. Some garages skip it. We don\u2019t — it\u2019s included in every major service, with genuine Mercedes housings.' },
+                                    { issue: 'Fuel filter location', detail: 'On W415 models the fuel filter is tucked under the bonnet in a tight space. Some garages skip it. We don’t, it’s included in every major service, with genuine Mercedes housings.' },
                                     { issue: 'Service indicator access', detail: 'W415 Citans use a Renault-style service reset that requires specific diagnostic access. W420 models use Mercedes Xentry. We have both.' },
                                 ].map((item) => (
                                     <li key={item.issue} className="text-sm text-text-secondary">
@@ -282,7 +309,7 @@ export function CitanServicingPage() {
                                     <div className="relative aspect-[4/3] h-36 sm:h-40">
                                         <OptimizedImage src="/images/servicing-work/fuel-filter-old-vs-new.jpg" alt="Old and new Mercedes fuel filters side by side" className="absolute inset-0 h-full w-full object-cover" />
                                     </div>
-                                    <figcaption className="border-t border-border-default bg-surface-alt px-3 py-2 text-xs text-text-secondary">Fuel filter replaced on every major — not skipped in a tight bay.</figcaption>
+                                    <figcaption className="border-t border-border-default bg-surface-alt px-3 py-2 text-xs text-text-secondary">Fuel filter replaced on every major, not skipped in a tight bay.</figcaption>
                                 </figure>
                                 <figure className="overflow-hidden rounded-xl border border-border-default">
                                     <div className="relative aspect-[4/3] h-36 sm:h-40">
@@ -309,15 +336,15 @@ export function CitanServicingPage() {
                 </div>
             </Section>
 
-            {/* \u2500\u2500\u2500 SECTION 4: How it works \u2500\u2500\u2500 */}
+            {/* ─── SECTION 4: How it works ─── */}
             <Section className="bg-surface-alt/50">
                 <div className="mx-auto max-w-5xl reveal">
                     <h2 className="text-2xl sm:text-3xl font-bold text-text-primary text-center">How it works</h2>
                     <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-8">
                         {[
-                            { step: '01', icon: <MessageCircle className="h-6 w-6 text-brand" />, title: 'Send us your reg', desc: 'We confirm your Citan model, engine, and what\u2019s due. Fixed price confirmed upfront - no guesswork.' },
+                            { step: '01', icon: <MessageCircle className="h-6 w-6 text-brand" />, title: 'Send us your reg', desc: 'We confirm your Citan model, engine, and what’s due. Fixed price confirmed upfront - no guesswork.' },
                             { step: '02', icon: <Wrench className="h-6 w-6 text-brand" />, title: 'We come to you', desc: 'Correct parts pre-ordered for your exact variant. Service done at your location - home, yard, or workplace.' },
-                            { step: '03', icon: <CheckCircle2 className="h-6 w-6 text-brand" />, title: 'Drive away serviced', desc: 'Service light reset, written report with findings. Quick, professional, and you didn\u2019t lose a working day.' },
+                            { step: '03', icon: <CheckCircle2 className="h-6 w-6 text-brand" />, title: 'Drive away serviced', desc: 'Service light reset, written report with findings. Quick, professional, and you didn’t lose a working day.' },
                         ].map((s) => (
                             <div key={s.step} className="text-center">
                                 <div className="step-number mx-auto flex h-12 w-12 items-center justify-center text-lg font-bold">{s.step}</div>
@@ -330,7 +357,7 @@ export function CitanServicingPage() {
                 </div>
             </Section>
 
-            {/* \u2500\u2500\u2500 SECTION 5: Pricing \u2500\u2500\u2500 */}
+            {/* ─── SECTION 5: Pricing ─── */}
             <Section>
                 <div className="mx-auto max-w-5xl">
                     <div className="reveal">
@@ -340,8 +367,8 @@ export function CitanServicingPage() {
                             <table className="min-w-full">
                                 <thead><tr className="border-b border-border-default bg-surface-alt"><th className="px-4 py-3 text-left text-sm font-semibold text-text-primary">Package</th><th className="px-4 py-3 text-right text-sm font-semibold text-text-primary">Zone A</th><th className="px-4 py-3 text-right text-sm font-semibold text-text-primary">Zone B</th><th className="px-4 py-3 text-right text-sm font-semibold text-text-primary">Zone C</th></tr></thead>
                                 <tbody>
-                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Minor Service</td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;175<VatLabel /></td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;190<VatLabel /></td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;205<VatLabel /></td></tr>
-                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Major Service</td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;295<VatLabel /></td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;310<VatLabel /></td><td className="px-4 py-3 text-right font-semibold text-brand-light">&pound;325<VatLabel /></td></tr>
+                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Minor Service</td><td className="px-4 py-3 text-right font-semibold text-brand-light">£175<VatLabel /></td><td className="px-4 py-3 text-right font-semibold text-brand-light">£190<VatLabel /></td><td className="px-4 py-3 text-right font-semibold text-brand-light">£205<VatLabel /></td></tr>
+                                    <tr className="border-b border-border-default"><td className="px-4 py-3 text-text-secondary">Major Service</td><td className="px-4 py-3 text-right font-semibold text-brand-light">£295<VatLabel /></td><td className="px-4 py-3 text-right font-semibold text-brand-light">£310<VatLabel /></td><td className="px-4 py-3 text-right font-semibold text-brand-light">£325<VatLabel /></td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -353,14 +380,14 @@ export function CitanServicingPage() {
                             <div className="flex justify-between"><span>Brake check with measurement</span><span className="font-semibold text-brand-light">included</span></div>
                             <div className="flex justify-between"><span>Diagnostic fault scan</span><span className="font-semibold text-brand-light">included</span></div>
                             <div className="flex justify-between"><span>Timing belt condition check</span><span className="font-semibold text-brand-light">included (major)</span></div>
-                            <div className="flex justify-between"><span>Forced DPF regeneration</span><span className="font-semibold text-brand-light">from &pound;45<VatLabel /></span></div>
+                            <div className="flex justify-between"><span>Forced DPF regeneration</span><span className="font-semibold text-brand-light">from £45<VatLabel /></span></div>
 
                         </div>
                     </div>
                 </div>
             </Section>
 
-            {/* \u2500\u2500\u2500 What we can / can\u2019t do mobile \u2500\u2500\u2500 */}
+            {/* ─── What we can / can’t do mobile ─── */}
             <Section className="bg-surface-alt/50">
                 <div className="mx-auto max-w-5xl">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start reveal">
@@ -404,7 +431,7 @@ export function CitanServicingPage() {
                 </div>
             </Section>
 
-            {/* \u2500\u2500\u2500 FAQ \u2500\u2500\u2500 */}
+            {/* ─── FAQ ─── */}
             <Section>
                 <div className="mx-auto max-w-3xl reveal">
                     <h2 className="text-2xl font-bold text-text-primary text-center">Frequently asked questions</h2>
@@ -412,14 +439,46 @@ export function CitanServicingPage() {
                 </div>
             </Section>
 
-            {/* \u2500\u2500\u2500 Diagnostic notice \u2500\u2500\u2500 */}
+            {/* ─── Diagnostic notice ─── */}
             <Section className="bg-surface-alt/50">
                 <div className="mx-auto max-w-5xl reveal">
                     <Notice variant="info">We carry both Mercedes and Renault-compatible diagnostic equipment. If we spot a fault during your Citan service, we can diagnose it there and then - no second visit needed.</Notice>
                 </div>
             </Section>
 
-            {/* \u2500\u2500\u2500 Related services \u2500\u2500\u2500 */}
+            {/* ─── Real example ─── */}
+            <Section className="bg-surface-alt/50">
+                <div className="mx-auto max-w-3xl reveal">
+                    <h2 className="text-xl font-bold text-text-primary">A real example from a Citan service visit</h2>
+                    <div className="mt-4 rounded-xl border border-border-default bg-surface p-5">
+                        <p className="text-sm text-text-secondary leading-relaxed">
+                            2018 Mercedes Citan W415 K9K 1.5 dCi, 67,000 miles, due minor service. Service indicator reset using Renault-compatible OEM diagnostics, correct oil and filter fitted, fuel filter checked and found serviceable. Timing belt variant confirmed as chain on this build date. Written findings report issued same day.
+                        </p>
+                    </div>
+                    <p className="mt-4 text-sm text-text-secondary">
+                        Every Citan service ends with a written findings report. <Link to="/sample-diagnostic-report" className="font-semibold text-brand hover:underline">See an example of our documentation standard.</Link>
+                    </p>
+                </div>
+            </Section>
+
+            {/* ─── Internal links ─── */}
+            <Section>
+                <div className="mx-auto max-w-5xl reveal">
+                    <h2 className="text-xl font-bold text-text-primary">Related reading and coverage</h2>
+                    <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                        <Link to="/blog/dpf-warning-light-regen-vs-worse" className="flex items-center gap-2 rounded-xl border border-border-default bg-surface-alt p-4 text-sm text-brand hover:border-brand/30 hover:bg-brand/5 transition-all">
+                            <ArrowRight className="h-4 w-4 shrink-0" />
+                            DPF warning lights: when regen helps vs when it makes things worse
+                        </Link>
+                        <Link to="/areas-covered" className="flex items-center gap-2 rounded-xl border border-border-default bg-surface-alt p-4 text-sm text-brand hover:border-brand/30 hover:bg-brand/5 transition-all">
+                            <ArrowRight className="h-4 w-4 shrink-0" />
+                            Coverage: Kent and South East London service area
+                        </Link>
+                    </div>
+                </div>
+            </Section>
+
+            {/* ─── Related services ─── */}
             <Section>
                 <div className="mx-auto max-w-5xl reveal">
                     <h2 className="text-xl font-bold text-text-primary">Related services</h2>

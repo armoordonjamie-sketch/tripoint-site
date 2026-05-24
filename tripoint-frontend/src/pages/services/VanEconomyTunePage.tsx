@@ -76,7 +76,17 @@ export function VanEconomyTunePage() {
                 description="Van economy tuning for smoother cruising and potential fuel savings. Diagnostic pre-check included. All van makes. From \u00a3199 (ex. VAT)."
                 canonical="/services/van-economy-tune"
             />
-            <ServiceSchema name="Van Economy Tune" description="Van economy tuning - smoother power delivery, lower RPM cruising, potential fuel savings. All van makes." url="/services/van-economy-tune" priceFrom={199} />
+            <ServiceSchema
+                name="Van Economy Tune"
+                description="Van economy tuning - smoother power delivery, lower RPM cruising, potential fuel savings. All van makes."
+                url="/services/van-economy-tune"
+                priceFrom={199}
+                offerCatalogItems={[
+                    { name: 'Economy Tune Zone A (0 to 25 minutes)', price: '199.00', priceCurrency: 'GBP', description: 'Diagnostic pre-check, calibration, road test, and handover note included' },
+                    { name: 'Economy Tune Zone B (25 to 45 minutes)', price: '214.00', priceCurrency: 'GBP', description: 'Diagnostic pre-check, calibration, road test, and handover note included' },
+                    { name: 'Economy Tune Zone C (45 to 60 minutes)', price: '229.00', priceCurrency: 'GBP', description: 'Diagnostic pre-check, calibration, road test, and handover note included' },
+                ]}
+            />
             <BreadcrumbSchema items={[{ name: 'Home', url: '/' }, { name: 'Services', url: '/services' }, { name: 'Van Economy Tune', url: '/services/van-economy-tune' }]} />
             <FaqPageSchema items={faqs} />
 
@@ -98,6 +108,47 @@ export function VanEconomyTunePage() {
                     </div>
                 </div>
             </section>
+
+            {/* ─── Real example ─── */}
+            <Section className="bg-surface-alt/50">
+                <div className="mx-auto max-w-3xl reveal">
+                    <h2 className="text-xl font-bold text-text-primary">A real example from an economy tune visit</h2>
+                    <div className="mt-4 rounded-xl border border-border-default bg-surface p-5">
+                        <p className="text-sm text-text-secondary leading-relaxed">
+                            2017 Mercedes Vito W447 OM651 114 CDI, 89,000 miles. Van used primarily for motorway courier runs between depots. Driver reported 28 to 30 MPG on a regular route. Diagnostic pre-check clear. Economy calibration applied. Same route measured over the following two weeks returned an average of 34 MPG. Written calibration confirmation and insurance handover note issued.
+                        </p>
+                    </div>
+                    <p className="mt-4 text-sm text-text-secondary">
+                        Every economy tune ends with a written calibration confirmation. <Link to="/sample-diagnostic-report" className="font-semibold text-brand hover:underline">See an example of our documentation standard.</Link>
+                    </p>
+                </div>
+            </Section>
+
+            {/* ─── Internal links ─── */}
+            <Section>
+                <div className="mx-auto max-w-5xl reveal">
+                    <h2 className="text-xl font-bold text-text-primary">Related reading and coverage</h2>
+                    <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                        <Link to="/blog/sprinter-limp-mode-proper-diagnostic" className="flex items-center gap-2 rounded-xl border border-border-default bg-surface-alt p-4 text-sm text-brand hover:border-brand/30 hover:bg-brand/5 transition-all">
+                            <ArrowRight className="h-4 w-4 shrink-0" />
+                            Sprinter limp mode: what a proper diagnostic looks like
+                        </Link>
+                        <Link to="/areas-covered" className="flex items-center gap-2 rounded-xl border border-border-default bg-surface-alt p-4 text-sm text-brand hover:border-brand/30 hover:bg-brand/5 transition-all">
+                            <ArrowRight className="h-4 w-4 shrink-0" />
+                            Coverage: Kent and South East London service area
+                        </Link>
+                    </div>
+                </div>
+            </Section>
+
+            {/* ─── LEAD PARAGRAPH ─── */}
+            <Section>
+                <div className="mx-auto max-w-3xl reveal">
+                    <p className="text-base leading-relaxed text-text-secondary lg:text-xl">
+                        Factory ECU maps push commercial vans to work hard at high RPM, which is inefficient for steady dual-carriageway cruising. The Van Economy Tune recalibrates the engine map for smoother torque delivery at lower engine speeds, reducing unnecessary gear changes and bringing power on earlier. Common patterns we see include excessive fuel consumption on longer runs, frequent over-revving before upshifts, and a generally laboured throttle response. Every tune starts with a full diagnostic pre-check and ends with a written calibration confirmation and insurance handover note.
+                    </p>
+                </div>
+            </Section>
 
             {/* \u2500\u2500\u2500 SECTION 1: How an economy tune works \u2500\u2500\u2500 */}
             <Section>
@@ -153,7 +204,7 @@ export function VanEconomyTunePage() {
                             {
                                 stat: (
                                     <span className="inline-flex flex-wrap items-baseline justify-center gap-x-0">
-                                        £800–£2,000
+                                        £800 to £2,000
                                         <VatLabel />
                                     </span>
                                 ),

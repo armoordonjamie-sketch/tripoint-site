@@ -43,7 +43,7 @@ const sameAsSocial = [
 
 /* ── LocalBusiness (AutoRepair) schema ───────────────────────── */
 export function LocalBusinessSchema() {
-    const schema = {
+    const schema: Record<string, any> = {
         '@context': 'https://schema.org',
         '@type': 'AutoRepair' as const,
         '@id': `${siteConfig.url}/#business`,
@@ -77,6 +77,29 @@ export function LocalBusinessSchema() {
         sameAs: sameAsSocial,
     };
 
+    if (googleReviews && googleReviews.length > 0) {
+        schema.aggregateRating = {
+            '@type': 'AggregateRating' as const,
+            ratingValue: googleReviewsAggregate.ratingValue,
+            reviewCount: googleReviewsAggregate.reviewCount,
+            bestRating: 5,
+            worstRating: 1,
+        };
+        schema.review = googleReviews.map((r) => ({
+            '@type': 'Review' as const,
+            author: { name: r.author },
+            datePublished: r.datePublished,
+            reviewBody: r.text,
+            reviewRating: {
+                '@type': 'Rating' as const,
+                ratingValue: r.rating,
+                bestRating: 5,
+                worstRating: 1,
+            },
+            publisher: { '@type': 'Organization' as const, name: 'Google' },
+        }));
+    }
+
     return (
         <script
             type="application/ld+json"
@@ -104,16 +127,24 @@ export function OrganizationWebsiteSchema() {
 }
 
 /* ── Service schema for service pages ───────────────────────── */
+export interface OfferCatalogItem {
+    name: string;
+    price: string;
+    priceCurrency: string;
+    description: string;
+}
+
 interface ServiceSchemaProps {
     name: string;
     description: string;
     url: string;
     priceFrom: number;
     priceCurrency?: string;
+    offerCatalogItems?: OfferCatalogItem[];
 }
 
-export function ServiceSchema({ name, description, url, priceFrom, priceCurrency = 'GBP' }: ServiceSchemaProps) {
-    const schema = {
+export function ServiceSchema({ name, description, url, priceFrom, priceCurrency = 'GBP', offerCatalogItems }: ServiceSchemaProps) {
+    const schema: Record<string, unknown> = {
         '@context': 'https://schema.org',
         '@type': 'Service',
         name,
@@ -138,6 +169,20 @@ export function ServiceSchema({ name, description, url, priceFrom, priceCurrency
             priceValidUntil: '2030-12-31',
         },
     };
+
+    if (offerCatalogItems && offerCatalogItems.length > 0) {
+        schema.hasOfferCatalog = {
+            '@type': 'OfferCatalog',
+            name: 'Zone-based pricing',
+            itemListElement: offerCatalogItems.map((item) => ({
+                '@type': 'Offer',
+                name: item.name,
+                price: item.price,
+                priceCurrency: item.priceCurrency,
+                description: item.description,
+            })),
+        };
+    }
 
     return (
         <script
@@ -189,45 +234,6 @@ interface BreadcrumbItem {
 
 interface BreadcrumbSchemaProps {
     items: BreadcrumbItem[];
-}
-
-/* ── Google reviews + aggregate rating, attached to LocalBusiness ── */
-export function GoogleReviewsSchema() {
-    const businessId = `${siteConfig.url}/#business`;
-    const schema = {
-        '@context': 'https://schema.org',
-        '@type': 'AutoRepair' as const,
-        '@id': businessId,
-        name: siteConfig.brandName,
-        url: siteConfig.url,
-        aggregateRating: {
-            '@type': 'AggregateRating' as const,
-            ratingValue: googleReviewsAggregate.ratingValue,
-            reviewCount: googleReviewsAggregate.reviewCount,
-            bestRating: 5,
-            worstRating: 1,
-        },
-        review: googleReviews.map((r) => ({
-            '@type': 'Review' as const,
-            author: { '@type': 'Person' as const, name: r.author },
-            datePublished: r.datePublished,
-            reviewBody: r.text,
-            reviewRating: {
-                '@type': 'Rating' as const,
-                ratingValue: r.rating,
-                bestRating: 5,
-                worstRating: 1,
-            },
-            publisher: { '@type': 'Organization' as const, name: 'Google' },
-        })),
-    };
-
-    return (
-        <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-        />
-    );
 }
 
 export function BreadcrumbSchema({ items }: BreadcrumbSchemaProps) {

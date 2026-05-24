@@ -6,7 +6,7 @@ import { Notice } from '@/components/Notice';
 import { ExpandableReportImage } from '@/components/ExpandableReportImage';
 import { trackNavClick } from '@/lib/analytics';
 import { ZoneCalculator } from '@/components/ZoneCalculator';
-import { VatLabel } from '@/components/VatLabel';
+
 import { ZoneLegend } from '@/components/pricing/ZoneLegend';
 import { PricingMobileCards } from '@/components/pricing/PricingMobileCards';
 import { PricingExtras } from '@/components/pricing/PricingExtras';
@@ -17,7 +17,7 @@ export function PricingPage() {
         <>
             <Seo
                 title="Pricing"
-                description="Transparent zone-based pricing for mobile vehicle diagnostics. No hidden fees. Deposit secures your slot."
+                description="Transparent zone-based pricing for mobile vehicle diagnostics. Fixed prices confirmed upfront. No hidden fees."
                 canonical="/pricing"
             />
 
@@ -25,7 +25,7 @@ export function PricingPage() {
                 <div className="text-center">
                     <h1 className="text-3xl font-extrabold text-text-primary sm:text-5xl">Pricing</h1>
                     <p className="mx-auto mt-3 max-w-2xl text-base text-text-secondary sm:mt-4 sm:text-lg">
-                        Check your zone, then pick a service. Fixed prices — travel included, no hidden fees.
+                        Check your zone, then pick a service. Fixed prices, travel included, no hidden fees.
                     </p>
                     <ol className="mx-auto mt-4 flex max-w-md flex-col gap-2 text-left text-sm text-text-secondary sm:mt-5 lg:hidden">
                         <li className="flex gap-2">
@@ -44,7 +44,7 @@ export function PricingPage() {
                             <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand/15 text-xs font-bold text-brand-light">
                                 3
                             </span>
-                            Book online — we confirm your final price
+                            Book online, we confirm your final price
                         </li>
                     </ol>
                 </div>
@@ -97,11 +97,9 @@ export function PricingPage() {
                         </ul>
                     </div>
                     <div>
-                        <h2 className="text-2xl font-bold text-text-primary">How Booking &amp; Deposit Works</h2>
+                        <h2 className="text-2xl font-bold text-text-primary">How Booking Works</h2>
                         <p className="mt-4 text-text-secondary">
-                            A deposit secures your slot. Zone A/B: £30<VatLabel />. Zone C and VOR: £50<VatLabel />.
-                            Reschedule free with 24 hours notice - your deposit carries over. Late cancellation or no-show
-                            retains the deposit. We&apos;ll confirm your zone and final price when you book.
+                            We confirm your zone and final price when you book. Free reschedule with 24 hours notice.
                         </p>
                     </div>
                     <Notice variant="info">

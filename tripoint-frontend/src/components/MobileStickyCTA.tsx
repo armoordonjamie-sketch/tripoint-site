@@ -316,7 +316,7 @@ export function MobileStickyCTA() {
                                 href={getWhatsAppHref()}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-success bg-success/10 py-2 text-sm font-semibold text-success transition-colors hover:bg-success/20"
+                                className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-success py-2 text-sm font-semibold text-white transition-colors hover:bg-success/90"
                                 onClick={() => trackWhatsAppClick('sticky_mobile')}
                             >
                                 <MessageCircle className="h-5 w-5" />
@@ -324,7 +324,7 @@ export function MobileStickyCTA() {
                             </a>
                             <Link
                                 to="/booking"
-                                className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-brand py-2 text-sm font-semibold text-white transition-colors hover:bg-brand-light"
+                                className="flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-brand py-2 text-sm font-semibold text-brand transition-colors hover:bg-brand hover:text-white"
                                 onClick={() => trackNavClick('/booking', 'Book Now', 'sticky_mobile')}
                             >
                                 <CalendarDays className="h-4 w-4" />

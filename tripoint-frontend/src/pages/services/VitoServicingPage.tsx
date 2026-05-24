@@ -80,7 +80,20 @@ export function VitoServicingPage() {
                 description="Mobile Mercedes Vito servicing. Minor from \u00a3175 (ex. VAT), major from \u00a3295 (ex. VAT). Genuine parts, Xentry service reset, full inspection at your door. W639 and W447."
                 canonical="/services/vito-servicing"
             />
-            <ServiceSchema name="Vito Servicing" description="Mobile Mercedes Vito servicing - minor and major service packages for W639 and W447 at your location across Kent and SE London." url="/services/vito-servicing" priceFrom={175} />
+            <ServiceSchema
+                name="Vito Servicing"
+                description="Mobile Mercedes Vito servicing - minor and major service packages for W639 and W447 at your location across Kent and SE London."
+                url="/services/vito-servicing"
+                priceFrom={175}
+                offerCatalogItems={[
+                    { name: 'Minor Service Zone A (0 to 25 minutes)', price: '175.00', priceCurrency: 'GBP', description: 'Includes travel and minor service at your location' },
+                    { name: 'Minor Service Zone B (25 to 45 minutes)', price: '190.00', priceCurrency: 'GBP', description: 'Includes travel and minor service at your location' },
+                    { name: 'Minor Service Zone C (45 to 60 minutes)', price: '205.00', priceCurrency: 'GBP', description: 'Includes travel and minor service at your location' },
+                    { name: 'Major Service Zone A (0 to 25 minutes)', price: '295.00', priceCurrency: 'GBP', description: 'Includes travel and major service at your location' },
+                    { name: 'Major Service Zone B (25 to 45 minutes)', price: '310.00', priceCurrency: 'GBP', description: 'Includes travel and major service at your location' },
+                    { name: 'Major Service Zone C (45 to 60 minutes)', price: '325.00', priceCurrency: 'GBP', description: 'Includes travel and major service at your location' },
+                ]}
+            />
             <BreadcrumbSchema items={[{ name: 'Home', url: '/' }, { name: 'Services', url: '/services' }, { name: 'Mercedes Van Servicing', url: '/services/mercedes-van-servicing' }, { name: 'Vito Servicing', url: '/services/vito-servicing' }]} />
             <FaqPageSchema items={faqs} />
 
@@ -96,6 +109,15 @@ export function VitoServicingPage() {
                 objectPosition="center 40%"
                 mobileObjectPosition="center 50%"
             />
+
+            {/* ─── LEAD PARAGRAPH ─── */}
+            <Section>
+                <div className="mx-auto max-w-3xl reveal">
+                    <p className="text-base leading-relaxed text-text-secondary lg:text-xl">
+                        The Mercedes Vito is the mid-size workhorse of choice for tradespeople, taxi operators, and courier companies across Kent and South East London. W639 models use the OM651 engine, while the W447 added the more compact OM622 and later the OM654. Both generations use the ASSYST service system and require the MB 229.51 or 229.52 oil specification. Common fault patterns include injector seal failure on high-mileage OM651 units, turbo actuator sticking on W447 models, and DPF soot loading on vans doing short urban runs. Every service ends with a written findings report confirming work done, fluid specs used, and any advisory items.
+                    </p>
+                </div>
+            </Section>
 
             {/* \u2500\u2500\u2500 SECTION 1: The Vito workhorse \u2500\u2500\u2500 */}
             <Section>
@@ -145,7 +167,7 @@ export function VitoServicingPage() {
             </Section>
 
             <ServicingPartsProof
-                body="Vito servicing uses genuine Mercedes parts with the correct MB 229.51 oil specification for OM651, OM622, and OM654 engines. OEM filter housings, fresh sump washers, and pre-ordered parts for your exact W639 or W447 variant — so your high-mileage workhorse gets the same quality as a dealer visit, at your door."
+                body="Vito servicing uses genuine Mercedes parts with the correct MB 229.51 oil specification for OM651, OM622, and OM654 engines. OEM filter housings, fresh sump washers, and pre-ordered parts for your exact W639 or W447 variant, so your high-mileage workhorse gets the same quality as a dealer visit, at your door."
             />
 
             {/* \u2500\u2500\u2500 SECTION 2: What\u2019s included \u2500\u2500\u2500 */}
@@ -245,7 +267,7 @@ export function VitoServicingPage() {
 
             <ServicingProcessGallery />
 
-            {/* \u2500\u2500\u2500 SECTION 3: Common Vito issues we catch \u2500\u2500\u2500 */}
+            {/* ─── SECTION 3: Common Vito issues we catch ─── */}
             <Section>
                 <div className="mx-auto max-w-5xl">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center reveal">
@@ -313,7 +335,7 @@ export function VitoServicingPage() {
                 </div>
             </Section>
 
-            {/* \u2500\u2500\u2500 SECTION 4: Models covered \u2500\u2500\u2500 */}
+            {/* ─── SECTION 4: Models covered ─── */}
             <Section className="bg-surface-alt/50">
                 <div className="mx-auto max-w-5xl reveal">
                     <h2 className="text-2xl sm:text-3xl font-bold text-text-primary text-center">Models we cover</h2>
@@ -333,13 +355,22 @@ export function VitoServicingPage() {
                 </div>
             </Section>
 
-            {/* \u2500\u2500\u2500 SECTION 5: How it works \u2500\u2500\u2500 */}
+            {/* ─── LEAD PARAGRAPH ─── */}
+            <Section>
+                <div className="mx-auto max-w-3xl reveal">
+                    <p className="text-base leading-relaxed text-text-secondary lg:text-xl">
+                        The Mercedes Vito is the mid-size workhorse of choice for tradespeople, taxi operators, and courier companies across Kent and South East London. W639 models use the OM651 engine, while the W447 added the more compact OM622 and later the OM654. Both generations use the ASSYST service system and require the MB 229.51 or 229.52 oil specification. Common fault patterns include injector seal failure on high-mileage OM651 units, turbo actuator sticking on W447 models, and DPF soot loading on vans doing short urban runs. Every service ends with a written findings report confirming work done, fluid specs used, and any advisory items.
+                    </p>
+                </div>
+            </Section>
+
+            {/* ─── SECTION 1: The Vito workhorse ─── */}
             <Section>
                 <div className="mx-auto max-w-5xl reveal">
                     <h2 className="text-2xl sm:text-3xl font-bold text-text-primary text-center">How it works</h2>
                     <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-8">
                         {[
-                            { step: '01', icon: <MessageCircle className="h-6 w-6 text-brand" />, title: 'Send us your reg', desc: 'We confirm your Vito model, engine, and what\u2019s due. Fixed price confirmed upfront.' },
+                            { step: '01', icon: <MessageCircle className="h-6 w-6 text-brand" />, title: 'Send us your reg', desc: 'We confirm your Vito model, engine, and what’s due. Fixed price confirmed upfront.' },
                             { step: '02', icon: <Wrench className="h-6 w-6 text-brand" />, title: 'We come to you', desc: 'Parts and oil pre-ordered for your exact variant. Done at your location - driveway, yard, or depot.' },
                             { step: '03', icon: <CheckCircle2 className="h-6 w-6 text-brand" />, title: 'Drive away serviced', desc: 'ASSYST reset via Xentry, written report with findings. You carry on with your day.' },
                         ].map((s) => (
@@ -354,7 +385,7 @@ export function VitoServicingPage() {
                 </div>
             </Section>
 
-            {/* \u2500\u2500\u2500 SECTION 6: Pricing \u2500\u2500\u2500 */}
+            {/* ─── SECTION 6: Pricing ─── */}
             <Section className="bg-surface-alt/50">
                 <div className="mx-auto max-w-5xl">
                     <div className="reveal">
@@ -385,7 +416,7 @@ export function VitoServicingPage() {
                 </div>
             </Section>
 
-            {/* \u2500\u2500\u2500 FAQ \u2500\u2500\u2500 */}
+            {/* ─── FAQ ─── */}
             <Section>
                 <div className="mx-auto max-w-3xl reveal">
                     <h2 className="text-2xl font-bold text-text-primary text-center">Frequently asked questions</h2>
@@ -393,14 +424,50 @@ export function VitoServicingPage() {
                 </div>
             </Section>
 
-            {/* \u2500\u2500\u2500 Diagnostic notice \u2500\u2500\u2500 */}
+            {/* ─── Diagnostic notice ─── */}
             <Section className="bg-surface-alt/50">
                 <div className="mx-auto max-w-5xl reveal">
                     <Notice variant="info">We carry Mercedes STAR/XENTRY diagnostic equipment on every visit. If we find a fault during your Vito service, we can diagnose it there and then - no second visit needed.</Notice>
                 </div>
             </Section>
 
-            {/* \u2500\u2500\u2500 Related services \u2500\u2500\u2500 */}
+            {/* ─── Real example ─── */}
+            <Section className="bg-surface-alt/50">
+                <div className="mx-auto max-w-3xl reveal">
+                    <h2 className="text-xl font-bold text-text-primary">A real example from a Vito service visit</h2>
+                    <div className="mt-4 rounded-xl border border-border-default bg-surface p-5">
+                        <p className="text-sm text-text-secondary leading-relaxed">
+                            2016 Mercedes Vito W639 OM651, 98,000 miles, due Service B. ASSYST reset via Xentry, correct oil spec confirmed, DPF soot load checked as part of service findings. Injector seal condition noted at advisory stage. Written findings report issued same day.
+                        </p>
+                    </div>
+                    <p className="mt-4 text-sm text-text-secondary">
+                        Every Vito service ends with a written findings report. <Link to="/sample-diagnostic-report" className="font-semibold text-brand hover:underline">See an example of our documentation standard.</Link>
+                    </p>
+                </div>
+            </Section>
+
+            {/* ─── Internal links ─── */}
+            <Section>
+                <div className="mx-auto max-w-5xl reveal">
+                    <h2 className="text-xl font-bold text-text-primary">Related reading and coverage</h2>
+                    <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                        <Link to="/blog/dpf-warning-light-regen-vs-worse" className="flex items-center gap-2 rounded-xl border border-border-default bg-surface-alt p-4 text-sm text-brand hover:border-brand/30 hover:bg-brand/5 transition-all">
+                            <ArrowRight className="h-4 w-4 shrink-0" />
+                            DPF warning lights: when regen helps vs when it makes things worse
+                        </Link>
+                        <Link to="/blog/vito-adblue-fault" className="flex items-center gap-2 rounded-xl border border-border-default bg-surface-alt p-4 text-sm text-brand hover:border-brand/30 hover:bg-brand/5 transition-all">
+                            <ArrowRight className="h-4 w-4 shrink-0" />
+                            Vito AdBlue fault: causes and diagnosis
+                        </Link>
+                        <Link to="/areas-covered" className="flex items-center gap-2 rounded-xl border border-border-default bg-surface-alt p-4 text-sm text-brand hover:border-brand/30 hover:bg-brand/5 transition-all">
+                            <ArrowRight className="h-4 w-4 shrink-0" />
+                            Coverage: Kent and South East London service area
+                        </Link>
+                    </div>
+                </div>
+            </Section>
+
+            {/* ─── Related services ─── */}
             <Section>
                 <div className="mx-auto max-w-5xl reveal">
                     <h2 className="text-xl font-bold text-text-primary">Related services</h2>

@@ -62,7 +62,17 @@ export function CitanBrakesPage() {
     return (
         <div ref={scrollRef}>
             <Seo title="Citan Brakes" description="Mobile Citan brake service. Front pads from £169 (ex. VAT), front pads and discs from £319 (ex. VAT). Fixed-price brake packages for W415 and W420 at your location." canonical="/services/citan-brakes" />
-            <ServiceSchema name="Citan Brakes" description="Mobile Mercedes Citan brake service - front and rear pads and discs fitted at your location." url="/services/citan-brakes" priceFrom={169} />
+            <ServiceSchema
+                name="Citan Brakes"
+                description="Mobile Mercedes Citan brake service - front and rear pads and discs fitted at your location."
+                url="/services/citan-brakes"
+                priceFrom={169}
+                offerCatalogItems={[
+                    { name: 'Front Pads Only Zone A (0 to 25 minutes)', price: '169.00', priceCurrency: 'GBP', description: 'Mobile front pad replacement at your location' },
+                    { name: 'Front Pads Only Zone B (25 to 45 minutes)', price: '184.00', priceCurrency: 'GBP', description: 'Mobile front pad replacement at your location' },
+                    { name: 'Front Pads Only Zone C (45 to 60 minutes)', price: '199.00', priceCurrency: 'GBP', description: 'Mobile front pad replacement at your location' },
+                ]}
+            />
             <BreadcrumbSchema items={[{ name: 'Home', url: '/' }, { name: 'Services', url: '/services' }, { name: 'Mercedes Van Servicing', url: '/services/mercedes-van-servicing' }, { name: 'Citan Brakes', url: '/services/citan-brakes' }]} />
             <FaqPageSchema items={faqs} />
 
@@ -83,6 +93,15 @@ export function CitanBrakesPage() {
                     </div>
                 </div>
             </section>
+
+            {/* ─── LEAD PARAGRAPH ─── */}
+            <Section>
+                <div className="mx-auto max-w-3xl reveal">
+                    <p className="text-base leading-relaxed text-text-secondary lg:text-xl">
+                        The Mercedes Citan is built on the Renault Kangoo platform, which means brake parts are shared with the Renault range and are generally cheaper than Sprinter or Vito equivalents. Common fault patterns include early pad wear on the inner surface due to slider pin corrosion, and rear disc surface corrosion on vans used for short urban runs. Both the W415 and W420 are covered across Kent and South East London, with parts pre-ordered for your specific model before we arrive and a written report confirming all work completed.
+                    </p>
+                </div>
+            </Section>
 
             {/* ─── SECTION 1: Intro - image left, text right ─── */}
             <Section>
@@ -301,6 +320,38 @@ export function CitanBrakesPage() {
             <Section>
                 <div className="mx-auto max-w-5xl reveal">
                     <Notice variant="info">We carry diagnostic equipment on every visit. Brake-related fault codes can be checked at the same time - no separate appointment needed.</Notice>
+                </div>
+            </Section>
+
+            {/* ─── Real example ─── */}
+            <Section className="bg-surface-alt/50">
+                <div className="mx-auto max-w-3xl reveal">
+                    <h2 className="text-xl font-bold text-text-primary">A real example from a Citan brake job</h2>
+                    <div className="mt-4 rounded-xl border border-border-default bg-surface p-5">
+                        <p className="text-sm text-text-secondary leading-relaxed">
+                            2019 Mercedes Citan W415 K9K 1.5 dCi, 51,000 miles. Brake wear warning on the dash. Front nearside pad found significantly more worn than offside, consistent with a seized slider pin on the nearside caliper. Front pads replaced on both sides, slider pins stripped, cleaned, and lubricated. Front discs measured within specification. Written report issued. Job completed in 40 minutes at the owner's business address.
+                        </p>
+                    </div>
+                    <p className="mt-4 text-sm text-text-secondary">
+                        Every Citan brake job ends with a written report. <Link to="/sample-diagnostic-report" className="font-semibold text-brand hover:underline">See an example of our documentation standard.</Link>
+                    </p>
+                </div>
+            </Section>
+
+            {/* ─── Internal links ─── */}
+            <Section>
+                <div className="mx-auto max-w-5xl reveal">
+                    <h2 className="text-xl font-bold text-text-primary">Related reading and coverage</h2>
+                    <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                        <Link to="/blog/sprinter-limp-mode-proper-diagnostic" className="flex items-center gap-2 rounded-xl border border-border-default bg-surface-alt p-4 text-sm text-brand hover:border-brand/30 hover:bg-brand/5 transition-all">
+                            <ArrowRight className="h-4 w-4 shrink-0" />
+                            Sprinter limp mode: what a proper diagnostic looks like
+                        </Link>
+                        <Link to="/areas-covered" className="flex items-center gap-2 rounded-xl border border-border-default bg-surface-alt p-4 text-sm text-brand hover:border-brand/30 hover:bg-brand/5 transition-all">
+                            <ArrowRight className="h-4 w-4 shrink-0" />
+                            Coverage: Kent and South East London service area
+                        </Link>
+                    </div>
                 </div>
             </Section>
 

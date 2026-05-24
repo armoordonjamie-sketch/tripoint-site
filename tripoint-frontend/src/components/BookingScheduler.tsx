@@ -774,7 +774,7 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
         'w-full rounded-lg border border-border-default bg-surface px-4 py-2.5 text-sm text-text-primary placeholder:text-text-muted focus:border-brand focus:outline-none focus:ring-1 focus:ring-brand transition-colors duration-200';
     const labelClass = 'block text-sm font-medium text-text-secondary mb-1.5';
     const selectedService = services.find((s) => booking.service_ids.includes(s.id));
-    const effectiveDeposit = priceInfo?.deposit_gbp ?? availability?.deposit_gbp;
+    // const effectiveDeposit = priceInfo?.deposit_gbp ?? availability?.deposit_gbp;
 
     return (
         <div className="min-w-0 max-w-full space-y-0">
@@ -793,7 +793,6 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
                         { label: 'Zone', value: availability.zone, accent: true },
                         { label: 'Drive time', value: `${Math.round(availability.drive_time_minutes)} min` },
                         { label: 'Base price from', value: availability.fixed_price_gbp ? `£${availability.fixed_price_gbp}${vatSuffix}` : 'Quote', accent: true },
-                        { label: 'Deposit', value: availability.deposit_gbp ? `£${availability.deposit_gbp}${vatSuffix}` : 'TBC' },
                     ].map((item) => (
                         <div key={item.label} className="rounded-xl border border-brand/15 bg-brand/5 px-2 py-2 text-center sm:px-4 sm:py-3">
                             <p className="text-[10px] uppercase tracking-wider text-text-muted mb-0.5 sm:text-[11px]">{item.label}</p>
@@ -1483,10 +1482,7 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
                                     <p className="text-text-muted text-xs">Fixed Price</p>
                                     <p className="font-bold text-brand-light text-lg">{availability.fixed_price_gbp ? `£${availability.fixed_price_gbp}${vatSuffix}` : 'Quote'}</p>
                                 </div>
-                                <div>
-                                    <p className="text-text-muted text-xs">Deposit Due</p>
-                                    <p className="font-bold text-text-primary text-lg">{availability.deposit_gbp ? `£${availability.deposit_gbp}${vatSuffix}` : 'TBC'}</p>
-                                </div>
+
                             </div>
                         </div>
                     )}
@@ -1500,8 +1496,6 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
                     >
                         {submitting ? (
                             <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Submitting&hellip;</>
-                        ) : effectiveDeposit ? (
-                            `Confirm & Pay £${effectiveDeposit} Deposit${vatSuffix}`
                         ) : (
                             'Confirm Booking'
                         )}

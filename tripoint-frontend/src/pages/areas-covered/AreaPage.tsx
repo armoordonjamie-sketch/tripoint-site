@@ -79,7 +79,7 @@ export function AreaPage() {
                             Available Mon to Sat. Often same-day in core zones.
                         </span>
                         <span className="inline-flex flex-wrap items-baseline gap-x-0 font-medium text-brand-light">
-                            Diagnostics from £120–£150<VatLabel /> by zone (A/B/C) — confirmed when you book with your postcode.
+                            Diagnostics from £120 to £150<VatLabel /> by zone (A/B/C), confirmed when you book with your postcode.
                         </span>
                     </div>
 

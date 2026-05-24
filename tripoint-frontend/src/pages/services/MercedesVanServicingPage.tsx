@@ -60,7 +60,17 @@ const faqs = [
     {
         question: 'Can you do brake work at the same time?',
         answer:
-            'Yes. We offer combined service + brake packages. If brakes are due, we\u2019ll quote it alongside your service so you only need one visit. See our Sprinter Brakes, Vito Brakes, or Citan Brakes pages for specific pricing.',
+            'Yes. We offer combined service + brake packages. If brakes are due, we\'ll quote it alongside your service so you only need one visit. See our Sprinter Brakes, Vito Brakes, or Citan Brakes pages for specific pricing.',
+    },
+    {
+        question: 'What is the difference between a Minor and a Major service?',
+        answer:
+            'A Minor service (Service A) covers oil and filter, fluid levels, brake measurement, visual health check, and ASSYST reset - typically due every 15,000 miles or 12 months. A Major service (Service B) adds air filter, cabin filter, fuel filter, battery test, glow plug check, and DPF soot level reading - typically due every 30,000 miles or 24 months. Both end with a written findings report.',
+    },
+    {
+        question: 'Does the service history get documented?',
+        answer:
+            'Yes. Every service visit ends with a written findings report covering work completed, fluid specs used, brake measurements, and any advisory items. You receive a copy immediately after the visit.',
     },
 ];
 
@@ -101,11 +111,27 @@ export function MercedesVanServicingPage() {
                 description="Mobile Mercedes van servicing for Sprinter, Vito, and Citan. Minor from \u00a3175 (ex. VAT), major from \u00a3295 (ex. VAT). Genuine parts, Xentry service reset. Kent and SE London."
                 canonical="/services/mercedes-van-servicing"
             />
-            <ServiceSchema name="Mercedes Van Servicing" description="Mobile Mercedes van servicing - Sprinter, Vito, and Citan. Minor and major packages at your location." url="/services/mercedes-van-servicing" priceFrom={175} />
+            <ServiceSchema
+                name="Mercedes Van Servicing"
+                description="Mobile Mercedes van servicing - Sprinter, Vito, and Citan. Minor and major packages at your location."
+                url="/services/mercedes-van-servicing"
+                priceFrom={175}
+                offerCatalogItems={[
+                    { name: 'Minor Service Zone A (0 to 25 minutes)', price: '175.00', priceCurrency: 'GBP', description: 'Includes travel and minor service at your location' },
+                    { name: 'Minor Service Zone B (25 to 45 minutes)', price: '190.00', priceCurrency: 'GBP', description: 'Includes travel and minor service at your location' },
+                    { name: 'Minor Service Zone C (45 to 60 minutes)', price: '205.00', priceCurrency: 'GBP', description: 'Includes travel and minor service at your location' },
+                    { name: 'Major Service Zone A (0 to 25 minutes)', price: '295.00', priceCurrency: 'GBP', description: 'Includes travel and major service at your location' },
+                    { name: 'Major Service Zone B (25 to 45 minutes)', price: '310.00', priceCurrency: 'GBP', description: 'Includes travel and major service at your location' },
+                    { name: 'Major Service Zone C (45 to 60 minutes)', price: '325.00', priceCurrency: 'GBP', description: 'Includes travel and major service at your location' },
+                    { name: 'Sprinter Brake Pads & Sensors (Front)', price: '145.00', priceCurrency: 'GBP', description: 'Genuine Mercedes parts, fitting, and wear sensor reset' },
+                    { name: 'Vito Brake Pads & Sensors (Front)', price: '135.00', priceCurrency: 'GBP', description: 'Genuine Mercedes parts, fitting, and wear sensor reset' },
+                    { name: 'Citan Brake Pads & Sensors (Front)', price: '125.00', priceCurrency: 'GBP', description: 'Genuine Mercedes parts, fitting, and wear sensor reset' },
+                ]}
+            />
             <BreadcrumbSchema items={[{ name: 'Home', url: '/' }, { name: 'Services', url: '/services' }, { name: 'Mercedes Van Servicing', url: '/services/mercedes-van-servicing' }]} />
             <FaqPageSchema items={faqs} />
 
-            {/* \u2500\u2500\u2500 HERO \u2500\u2500\u2500 */}
+            {/* ——— HERO ——— */}
             <ServicingHero
                 heroSrc="/images/servicing-work/hero-mercedes-parent.jpg"
                 eyebrow="Servicing & Brakes"
@@ -119,7 +145,16 @@ export function MercedesVanServicingPage() {
                 pricingHref="/pricing"
             />
 
-            {/* \u2500\u2500\u2500 SECTION 1: Overview \u2500\u2500\u2500 */}
+            {/* ——— LEAD PARAGRAPH ——— */}
+            <Section>
+                <div className="mx-auto max-w-3xl reveal">
+                    <p className="text-base leading-relaxed text-text-secondary lg:text-xl">
+                        Mercedes Sprinter, Vito, and Citan vans cover vast mileages under heavy loads, and each model has its own service requirements. The ASSYST system calculates your next service based on actual engine load rather than a fixed mileage counter, and resetting it properly requires Xentry access. We cover all three model lines across Kent and South East London, using the correct MB 229.51 or 229.52 oil specification, genuine Mercedes parts, and a full Xentry service reset. Every visit ends with a written findings report.
+                    </p>
+                </div>
+            </Section>
+
+            {/* ——— SECTION 1: Overview ——— */}
             <Section>
                 <div className="mx-auto max-w-5xl reveal">
                     <div className="max-w-3xl">
@@ -151,7 +186,7 @@ export function MercedesVanServicingPage() {
 
             <ServicingProcessGallery />
 
-            {/* \u2500\u2500\u2500 SECTION 2: Model cards \u2500\u2500\u2500 */}
+            {/* ——— SECTION 2: Model cards ——— */}
             <Section>
                 <div className="mx-auto max-w-5xl reveal">
                     <h2 className="text-2xl sm:text-3xl font-bold text-text-primary text-center">Choose your model</h2>
@@ -182,7 +217,7 @@ export function MercedesVanServicingPage() {
                 </div>
             </Section>
 
-            {/* \u2500\u2500\u2500 SECTION 3: Dealer vs Us comparison \u2500\u2500\u2500 */}
+            {/* ——— SECTION 3: Dealer vs Us comparison ——— */}
             <Section>
                 <div className="mx-auto max-w-5xl reveal">
                     <h2 className="text-2xl sm:text-3xl font-bold text-text-primary text-center">Dealer vs TriPoint</h2>
@@ -220,7 +255,7 @@ export function MercedesVanServicingPage() {
                 </div>
             </Section>
 
-            {/* \u2500\u2500\u2500 SECTION 4: What every service includes \u2500\u2500\u2500 */}
+            {/* ——— SECTION 4: What every service includes ——— */}
             <Section className="bg-surface-alt/50">
                 <div className="mx-auto max-w-5xl reveal">
                     <h2 className="text-2xl sm:text-3xl font-bold text-text-primary text-center">What every Mercedes van service includes</h2>
@@ -246,7 +281,7 @@ export function MercedesVanServicingPage() {
                 </div>
             </Section>
 
-            {/* \u2500\u2500\u2500 SECTION 5: Service intervals explained \u2500\u2500\u2500 */}
+            {/* ——— SECTION 5: Service intervals explained ——— */}
             <Section>
                 <div className="mx-auto max-w-5xl">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start reveal">
@@ -292,7 +327,7 @@ export function MercedesVanServicingPage() {
                 </div>
             </Section>
 
-            {/* \u2500\u2500\u2500 SECTION 6: How it works \u2500\u2500\u2500 */}
+            {/* ——— SECTION 6: How it works ——— */}
             <Section className="bg-surface-alt/50">
                 <div className="mx-auto max-w-5xl reveal">
                     <h2 className="text-2xl sm:text-3xl font-bold text-text-primary text-center">How it works</h2>
@@ -313,7 +348,7 @@ export function MercedesVanServicingPage() {
                 </div>
             </Section>
 
-            {/* \u2500\u2500\u2500 Pricing summary \u2500\u2500\u2500 */}
+            {/* ——— Pricing summary ——— */}
             <Section>
                 <div className="mx-auto max-w-5xl">
                     <div className="reveal">
@@ -348,7 +383,7 @@ export function MercedesVanServicingPage() {
                 </div>
             </Section>
 
-            {/* \u2500\u2500\u2500 FAQ \u2500\u2500\u2500 */}
+            {/* ——— FAQ ——— */}
             <Section className="bg-surface-alt/50">
                 <div className="mx-auto max-w-3xl reveal">
                     <h2 className="text-2xl font-bold text-text-primary text-center">Frequently asked questions</h2>
@@ -356,14 +391,52 @@ export function MercedesVanServicingPage() {
                 </div>
             </Section>
 
-            {/* \u2500\u2500\u2500 Notice \u2500\u2500\u2500 */}
+            {/* ——— Real example ——— */}
+            <Section className="bg-surface-alt/50">
+                <div className="mx-auto max-w-3xl reveal">
+                    <h2 className="text-xl font-bold text-text-primary">A real example from a service visit</h2>
+                    <div className="mt-4 rounded-xl border border-border-default bg-surface p-5">
+                        <p className="text-sm text-text-secondary leading-relaxed">
+                            2017 Mercedes Sprinter W907 OM651, 84,000 miles, due Service B. Full major service completed at the operator's yard. ASSYST reset confirmed via Xentry with correct next interval calculated. DPF soot load checked during diagnostics - reading within normal limits. Oil spec MB 229.51 used. Written findings report issued same day.
+                        </p>
+                    </div>
+                </div>
+            </Section>
+
+            {/* ——— Notice ——— */}
             <Section>
                 <div className="mx-auto max-w-5xl reveal">
                     <Notice variant="info">We carry Mercedes STAR/XENTRY diagnostic equipment on every visit. If we find a fault during your service, we can diagnose it there and then - no second visit needed.</Notice>
                 </div>
             </Section>
 
-            {/* \u2500\u2500\u2500 FOOTER CTA \u2500\u2500\u2500 */}
+            {/* ——— Written report reference ——— */}
+            <Section className="bg-surface-alt/50">
+                <div className="mx-auto max-w-5xl reveal">
+                    <Notice variant="info">
+                        Every Mercedes van service ends with a written findings report covering work completed, oil specification used, brake measurements, and any advisory items. <Link to="/sample-diagnostic-report" className="font-semibold text-brand hover:underline">See an example of our documentation standard.</Link>
+                    </Notice>
+                </div>
+            </Section>
+
+            {/* ——— Internal links ——— */}
+            <Section>
+                <div className="mx-auto max-w-5xl reveal">
+                    <h2 className="text-xl font-bold text-text-primary">Related reading and coverage</h2>
+                    <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                        <Link to="/blog/dpf-warning-light-regen-vs-worse" className="flex items-center gap-2 rounded-xl border border-border-default bg-surface-alt p-4 text-sm text-brand hover:border-brand/30 hover:bg-brand/5 transition-all">
+                            <ArrowRight className="h-4 w-4 shrink-0" />
+                            DPF warning lights: when regen helps vs when it makes things worse
+                        </Link>
+                        <Link to="/areas-covered" className="flex items-center gap-2 rounded-xl border border-border-default bg-surface-alt p-4 text-sm text-brand hover:border-brand/30 hover:bg-brand/5 transition-all">
+                            <ArrowRight className="h-4 w-4 shrink-0" />
+                            Coverage: Kent and South East London service area
+                        </Link>
+                    </div>
+                </div>
+            </Section>
+
+            {/* ——— FOOTER CTA ——— */}
             <section className="relative overflow-hidden">
                 <div className="absolute inset-0"><div className="absolute inset-0 bg-gradient-to-r from-brand-dark/95 to-brand/85" /></div>
                 <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 md:py-20">

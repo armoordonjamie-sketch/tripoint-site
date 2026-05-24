@@ -63,23 +63,20 @@ const faqCategories: FaqCategory[] = [
         items: [
             {
                 question: 'How do I book?',
-                answer: 'You can book online via our website, WhatsApp us, or call. We\'ll confirm your zone, service, price, and next available slot. A small deposit secures the booking.',
+                answer: 'You can book online via our website, WhatsApp us, or call. We\'ll confirm your zone, service, price, and next available slot.',
             },
             {
                 question: 'How does pricing work?',
                 answer: 'All our services are fixed-price, zone-based. We have three zones (A, B, C) based on drive time from our bases. The price is confirmed before you book - no hidden fees. Parts, follow-on labour, and add-ons are quoted separately and always agreed before any work starts.',
             },
-            {
-                question: 'How do deposits work?',
-                answer: 'A small deposit secures your booking slot: £30 + VAT for Zone A/B, £50 + VAT for Zone C or VOR bookings. You can reschedule free of charge with 24 hours\' notice - the deposit carries over. Late cancellation or no-show forfeits the deposit. The remaining balance is due on completion.',
-            },
+
             {
                 question: 'What payment methods do you accept?',
-                answer: 'We accept bank transfer, card payment (via invoice link), and cash. Deposits are taken online via a secure payment link sent at the time of booking. You\'ll always receive a receipt or invoice.',
+                answer: 'We accept bank transfer, card payment (via invoice link), and cash. You\'ll always receive a receipt or invoice.',
             },
             {
                 question: 'Can I reschedule or cancel?',
-                answer: 'Yes. Reschedule free with at least 24 hours\' notice - your deposit carries over to the new date. Cancellations with less than 24 hours\' notice, or no-shows, forfeit the deposit.',
+                answer: 'Yes. Reschedule free with at least 24 hours\' notice. Contact us as early as possible if you need to cancel.',
             },
             {
                 question: 'What if the job takes longer than expected?',

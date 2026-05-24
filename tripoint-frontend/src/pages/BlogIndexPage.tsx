@@ -53,18 +53,14 @@ export function BlogIndexPage() {
     return (
         <>
             <Seo
-                title="Sprinter and Mercedes Fault Guides | TriPoint Diagnostics Blog"
+                title="Sprinter and Mercedes Fault Guides | Blog"
                 description="Technical guides on common Mercedes Sprinter, Vito, and diesel van faults. Limp mode, AdBlue countdowns, DPF issues, and turbo failures explained by a Mercedes-Benz trained technician."
                 canonical="/blog"
             />
             <Helmet>
-                <script type="application/ld+json">
-                    {JSON.stringify(collectionLd)}
-                </script>
-                <script type="application/ld+json">
-                    {JSON.stringify(breadcrumbLd)}
-                </script>
             </Helmet>
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionLd) }} />
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
 
             <Section>
                 <div className="relative mx-auto max-w-4xl">

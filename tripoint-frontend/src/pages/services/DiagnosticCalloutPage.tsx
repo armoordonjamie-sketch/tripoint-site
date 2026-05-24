@@ -64,9 +64,9 @@ const zoneB = diagnosticService?.zoneB ?? 135;
 const zoneC = diagnosticService?.zoneC ?? 150;
 
 const zonePriceRows = [
-    { zone: 'Zone A', driveTime: '0–25 mins', price: zoneA },
-    { zone: 'Zone B', driveTime: '25–45 mins', price: zoneB },
-    { zone: 'Zone C', driveTime: '45–60 mins', price: zoneC },
+    { zone: 'Zone A', driveTime: '0 to 25 mins', price: zoneA },
+    { zone: 'Zone B', driveTime: '25 to 45 mins', price: zoneB },
+    { zone: 'Zone C', driveTime: '45 to 60 mins', price: zoneC },
 ];
 
 const symptomLinks = [
@@ -87,7 +87,7 @@ const diagnosticCategories: DiagnosticCategory[] = [
         image: {
             src: '/images/diag_photos/multimeter-in-use.jpg',
             alt: 'Multimeter probing a sensor circuit on a Mercedes engine bay during live testing',
-            caption: 'Live circuit testing on the actual sensor — not just a code read.',
+            caption: 'Live circuit testing on the actual sensor, not just a code read.',
         },
     },
     {
@@ -98,7 +98,7 @@ const diagnosticCategories: DiagnosticCategory[] = [
         image: {
             src: '/images/diag_photos/egr-pipe-oil.jpg',
             alt: 'Oil-contaminated EGR pipe pulled from a Mercedes diesel during emissions diagnosis',
-            caption: 'Oil-contaminated EGR pipe — found via emissions diagnosis on a Mercedes diesel.',
+            caption: 'Oil-contaminated EGR pipe, found via emissions diagnosis on a Mercedes diesel.',
         },
     },
     {
@@ -108,8 +108,8 @@ const diagnosticCategories: DiagnosticCategory[] = [
         desc: 'Turbo boost faults, fuel rail pressure issues, injector drift, EGR valve failures, and wiring faults that cause derate. Systematic testing to isolate the root cause - especially on Sprinters (W906/W907/W910).',
         image: {
             src: '/images/diag_photos/intercooler-crack.jpg',
-            alt: 'Hairline crack found in a Sprinter intercooler — boost loss and limp mode cause',
-            caption: 'Hairline intercooler crack — root cause of boost loss and a limp-mode derate.',
+            alt: 'Hairline crack found in a Sprinter intercooler, boost loss and limp mode cause',
+            caption: 'Hairline intercooler crack, root cause of boost loss and a limp-mode derate.',
         },
     },
     {
@@ -120,7 +120,7 @@ const diagnosticCategories: DiagnosticCategory[] = [
         image: {
             src: '/images/diag_photos/corroded-connector.jpg',
             alt: 'Corroded multi-pin connector traced as the cause of an intermittent CAN-bus fault',
-            caption: 'Corroded multi-pin connector — root cause of an intermittent CAN-bus fault.',
+            caption: 'Corroded multi-pin connector, root cause of an intermittent CAN-bus fault.',
         },
     },
     {
@@ -131,7 +131,7 @@ const diagnosticCategories: DiagnosticCategory[] = [
         image: {
             src: '/images/new-images/xentry-on-mercedes-engine.jpg',
             alt: 'Mercedes Xentry diagnostics connected to engine bay for guided tests and coding',
-            caption: 'Dealer-level Xentry on site — guided tests, coding, and module access when OEM-level work is needed.',
+            caption: 'Dealer-level Xentry on site, guided tests, coding, and module access when OEM-level work is needed.',
         },
     },
 ];
@@ -198,7 +198,17 @@ export function DiagnosticCalloutPage() {
                 description="Mobile diagnostic service for Mercedes cars and vans. Full-system scan with dealer tools (Xentry), live data, guided tests, and a written fix plan. From £120 (ex. VAT) - Kent & SE London."
                 canonical="/services/diagnostic-callout"
             />
-            <ServiceSchema name="Standard Diagnosis" description="Mobile diagnostic service - full-system scan with Mercedes dealer tools, live data validation, guided tests, written fix plan. Kent & SE London." url="/services/diagnostic-callout" priceFrom={zoneA} />
+            <ServiceSchema
+                name="Standard Diagnosis"
+                description="Mobile diagnostic service - full-system scan with Mercedes dealer tools, live data validation, guided tests, written fix plan. Kent & SE London."
+                url="/services/diagnostic-callout"
+                priceFrom={zoneA}
+                offerCatalogItems={[
+                    { name: 'Standard Diagnosis Zone A (0 to 25 minutes)', price: `${zoneA}.00`, priceCurrency: 'GBP', description: 'Includes diagnostic scan, guided tests, and written fix plan' },
+                    { name: 'Standard Diagnosis Zone B (25 to 45 minutes)', price: `${zoneB}.00`, priceCurrency: 'GBP', description: 'Includes diagnostic scan, guided tests, and written fix plan' },
+                    { name: 'Standard Diagnosis Zone C (45 to 60 minutes)', price: `${zoneC}.00`, priceCurrency: 'GBP', description: 'Includes diagnostic scan, guided tests, and written fix plan' },
+                ]}
+            />
             <BreadcrumbSchema items={[{ name: 'Home', url: '/' }, { name: 'Services', url: '/services' }, { name: 'Standard Diagnosis', url: '/services/diagnostic-callout' }]} />
             <FaqPageSchema items={faqs} />
 
@@ -237,7 +247,7 @@ export function DiagnosticCalloutPage() {
                     )}
                     {/* Warm intro */}
                     <p className="text-base leading-relaxed text-text-secondary lg:text-xl">
-                        Dashboard lit up? We come to you with Mercedes dealer-level tooling, find the root cause, and leave you with a clear written fix plan — not guesswork.
+                        Dashboard lit up? We come to you with Mercedes dealer-level tooling, find the root cause, and leave you with a clear written fix plan, not guesswork.
                     </p>
 
                     <DiagnosticProofStrip items={diagnosticProofItems} />
@@ -262,10 +272,10 @@ export function DiagnosticCalloutPage() {
                         <h2 className="text-xl font-bold text-text-primary lg:text-2xl">How it works</h2>
                         <div className="mt-4 grid grid-cols-2 gap-3 lg:hidden">
                             {[
-                                { step: '01', title: 'Get in touch', desc: 'Postcode, vehicle & symptoms — fixed price confirmed.' },
+                                { step: '01', title: 'Get in touch', desc: 'Postcode, vehicle & symptoms, fixed price confirmed.' },
                                 { step: '02', title: 'Book a slot', desc: 'We arrive with full diagnostic kit.' },
                                 { step: '03', title: 'On-site diagnosis', desc: 'Full scan & live data (up to 60 mins).' },
-                                { step: '04', title: 'Written fix plan', desc: 'Root cause & next steps — plain English.' },
+                                { step: '04', title: 'Written fix plan', desc: 'Root cause & next steps, plain English.' },
                             ].map((s) => (
                                 <div key={s.step} className="rounded-xl border border-border-default bg-surface-alt/60 p-3">
                                     <span className="text-xs font-bold text-brand-light">{s.step}</span>
@@ -294,7 +304,7 @@ export function DiagnosticCalloutPage() {
 
                     <div className="mt-10 reveal lg:mt-12">
                         <h2 className="text-xl font-bold text-text-primary lg:text-2xl">Real faults we&apos;ve found</h2>
-                        <p className="mt-2 text-sm text-text-muted">Photos from real Mercedes diagnostic visits — tap any image to see the fault.</p>
+                        <p className="mt-2 text-sm text-text-muted">Photos from real Mercedes diagnostic visits, tap any image to see the fault.</p>
                         <div className="mt-4">
                             <PhotoGallery images={diagnosticPhotos} columns={3} />
                         </div>
@@ -304,7 +314,7 @@ export function DiagnosticCalloutPage() {
                     <div className="mt-12 reveal" id="what-we-diagnose">
                         <h2 className="text-xl font-bold text-text-primary lg:text-2xl">What we diagnose</h2>
                         <p className="mt-2 text-sm text-text-secondary lg:text-base">
-                            One service, one price — all fault types below.
+                            One service, one price, all fault types below.
                         </p>
                         <div className="mt-4 lg:hidden">
                             <DiagnosticCoverageAccordion categories={diagnosticCategories} />

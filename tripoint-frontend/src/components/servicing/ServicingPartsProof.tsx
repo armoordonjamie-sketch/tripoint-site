@@ -40,7 +40,7 @@ export function ServicingPartsProof({
                                 />
                             </div>
                             <figcaption className="border-t border-border-default bg-surface-alt px-4 py-3 text-sm text-text-secondary">
-                                Genuine Mercedes filter housings — not pattern parts.
+                                Genuine Mercedes filter housings, not pattern parts.
                             </figcaption>
                         </figure>
                     </div>

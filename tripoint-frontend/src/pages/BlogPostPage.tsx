@@ -147,10 +147,6 @@ export function BlogPostPage() {
         wordCount,
         articleSection: post.category,
         inLanguage: 'en-GB',
-        author: {
-            '@type': 'Person',
-            name: 'Jamie Armoordon',
-        },
         publisher: {
             '@id': `${siteConfig.url}/#local-business`,
         },
@@ -198,29 +194,23 @@ export function BlogPostPage() {
                 <meta property="og:type" content="article" />
                 <meta property="article:published_time" content={post.publishedAt} />
                 <meta property="article:section" content={post.category} />
-                <script type="application/ld+json">
-                    {JSON.stringify(blogPostingLd)}
-                </script>
-                <script type="application/ld+json">
-                    {JSON.stringify(breadcrumbLd)}
-                </script>
-                {post.faqs && post.faqs.length > 0 && (
-                    <script type="application/ld+json">
-                        {JSON.stringify({
-                            '@context': 'https://schema.org',
-                            '@type': 'FAQPage',
-                            mainEntity: post.faqs.map((faq) => ({
-                                '@type': 'Question',
-                                name: faq.question,
-                                acceptedAnswer: {
-                                    '@type': 'Answer',
-                                    text: faq.answer,
-                                },
-                            })),
-                        })}
-                    </script>
-                )}
             </Helmet>
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingLd) }} />
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
+            {post.faqs && post.faqs.length > 0 && (
+                <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+                    '@context': 'https://schema.org',
+                    '@type': 'FAQPage',
+                    mainEntity: post.faqs.map((faq) => ({
+                        '@type': 'Question',
+                        name: faq.question,
+                        acceptedAnswer: {
+                            '@type': 'Answer',
+                            text: faq.answer,
+                        },
+                    })),
+                })}} />
+            )}
 
             {/* Hero section */}
             <section className="relative flex min-h-[50vh] flex-col md:min-h-[40vh] overflow-hidden">

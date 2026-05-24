@@ -29,7 +29,7 @@ const steps = [
         num: '01',
         icon: ClipboardCheck,
         title: 'Book + Symptom Details',
-        desc: 'Get in touch via phone, WhatsApp, or our booking form. Send us: postcode, registration, make/model/mileage, symptoms and warning lights, whether the vehicle is drivable, and where it\'s parked. We\'ll confirm your zone, price, and next available slot. A small deposit secures your booking.',
+        desc: 'Get in touch via phone, WhatsApp, or our booking form. Send us: postcode, registration, make/model/mileage, symptoms and warning lights, whether the vehicle is drivable, and where it\'s parked. We\'ll confirm your zone, price, and next available slot.',
     },
     {
         num: '02',
@@ -171,11 +171,11 @@ export function ProcessPage() {
                         </ul>
                     </div>
 
-                    {/* How deposits work */}
+                    {/* How booking works */}
                     <div className="mt-10 rounded-2xl border border-brand/20 bg-brand/5 p-6 reveal">
-                        <h2 className="text-lg font-bold text-text-primary">How Booking & Deposits Work</h2>
+                        <h2 className="text-lg font-bold text-text-primary">How Booking Works</h2>
                         <p className="mt-2 text-text-secondary">
-                            A deposit secures your slot: £30 + VAT for Zone A/B, £50 + VAT for Zone C or VOR bookings. Rescheduling is free with 24 hours notice (deposit carries over). Late cancellation or no-show means the deposit is retained. Payment for the visit is due on completion.
+                            We confirm your zone and final price when you book. Payment for the visit is due on completion. Free reschedule with 24 hours notice.
                         </p>
                     </div>
 
