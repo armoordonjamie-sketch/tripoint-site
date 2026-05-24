@@ -136,7 +136,7 @@ export function HomePage() {
                             style={{
                                 objectPosition: img.position,
                                 opacity: i === heroIdx ? 1 : 0,
-                                visibility: i === heroIdx ? 'visible' : 'hidden',
+                                visibility: i === heroIdx ? undefined : 'hidden',
                             }}
                             aria-hidden="true"
                         />

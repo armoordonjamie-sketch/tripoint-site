@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { Seo } from '@/components/Seo';
 import { Section } from '@/components/Section';
 import { CTAButton } from '@/components/CTAButton';
-import { OptimizedImage } from '@/components/OptimizedImage';
+import { OptimizedImage, getOptimizedPaths } from '@/components/OptimizedImage';
 import { BookOpen, ArrowRight, BookMarked } from 'lucide-react';
 import { getBlogPost, getPostThumbnail } from '@/data/blogPosts';
 import { siteConfig } from '@/config/site';
@@ -245,7 +245,16 @@ export function BlogPostPage() {
                     <article className="flex-1 min-w-0">
                         <div
                             className="prose prose-invert mt-8 max-w-none prose-headings:font-bold prose-p:text-text-secondary prose-li:text-text-secondary prose-a:text-brand prose-a:no-underline hover:prose-a:underline"
-                            dangerouslySetInnerHTML={{ __html: post.content }}
+                            dangerouslySetInnerHTML={{
+                                __html: post.content.replace(/<img\s+src="(\/images\/(?:blog|gallery)\/[^"]+)"([^>]*)>/g, (match, src, rest) => {
+                                    const { webp, webpSrcset, jpg } = getOptimizedPaths(src);
+                                    if (!webpSrcset) return match;
+                                    return `<picture>
+                                        <source type="image/webp" srcset="${webpSrcset}" sizes="(max-width: 768px) 100vw, 800px" />
+                                        <img src="${jpg}" ${rest} />
+                                    </picture>`;
+                                }),
+                            }}
                         />
 
                         {/* Related reading block */}

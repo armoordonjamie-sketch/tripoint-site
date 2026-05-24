@@ -60,7 +60,7 @@ export function Footer() {
 
                         {/* Services - grouped by category */}
                         <div className="sm:col-span-1">
-                            <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-text-muted">
+                            <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-text-secondary">
                                 Services
                             </h3>
                             <Link
@@ -103,7 +103,7 @@ export function Footer() {
 
                         {/* Company */}
                         <div>
-                            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-text-muted">
+                            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-text-secondary">
                                 Company
                             </h3>
                             <ul className="space-y-2">
@@ -152,7 +152,7 @@ export function Footer() {
 
                         {/* Legal */}
                         <div>
-                            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-text-muted">
+                            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-text-secondary">
                                 Legal
                             </h3>
                             <ul className="space-y-2">
@@ -181,7 +181,7 @@ export function Footer() {
 
                         {/* Contact */}
                         <div className="sm:col-span-2 lg:col-span-1">
-                            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-text-muted">
+                            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-text-secondary">
                                 Contact
                             </h3>
                             <ul className="space-y-3">

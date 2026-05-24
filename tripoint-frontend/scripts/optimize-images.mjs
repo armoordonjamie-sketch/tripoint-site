@@ -53,7 +53,9 @@ async function optimizeImage(fullPath, relPath) {
     const baseDir = dirname(join(OUT_DIR, relPath));
     const baseName = relPath.replace(/\.(jpg|jpeg|png)$/i, '');
     const fileName = baseName.split(/[/\\]/).pop();
-    const needsResponsive = RESPONSIVE_IMAGES.has(relPath.replace(/\\/g, '/'));
+    const needsResponsive = RESPONSIVE_IMAGES.has(relPath.replace(/\\/g, '/')) || 
+        relPath.replace(/\\/g, '/').startsWith('gallery/') || 
+        relPath.replace(/\\/g, '/').startsWith('blog/');
 
     mkdirSync(baseDir, { recursive: true });
 
