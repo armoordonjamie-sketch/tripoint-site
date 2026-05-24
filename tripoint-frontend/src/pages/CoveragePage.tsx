@@ -1,4 +1,4 @@
-import { useEffect, useRef, lazy, Suspense } from 'react';
+import { useEffect, useRef, lazy, Suspense, useState } from 'react';
 import {
     MapPin, Clock, Navigation, MessageCircle,
     Car, CheckCircle2,
@@ -59,6 +59,11 @@ const coverageFaqs = [
 
 export function CoveragePage() {
     const scrollRef = useScrollReveal();
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     return (
         <div ref={scrollRef}>
@@ -116,7 +121,7 @@ export function CoveragePage() {
                     </p>
                 </div>
                 <div className="mx-auto mt-8 max-w-5xl reveal" style={{ transitionDelay: '0.1s' }}>
-                    {typeof window !== 'undefined' ? (
+                    {mounted ? (
                         <Suspense fallback={<div className="h-96 bg-surface-secondary animate-pulse rounded-xl" />}>
                             <CoverageMap />
                         </Suspense>
