@@ -113,17 +113,11 @@ export function HomePage() {
         return () => clearInterval(timer);
     }, [heroImages.length]);
 
-    const [hasInteracted, setHasInteracted] = useState(false);
+    // Delay loading the background images until after the initial LCP has completed
+    const [bgImagesReady, setBgImagesReady] = useState(false);
     useEffect(() => {
-        const handleInteraction = () => setHasInteracted(true);
-        window.addEventListener('scroll', handleInteraction, { once: true, passive: true });
-        window.addEventListener('mousemove', handleInteraction, { once: true, passive: true });
-        window.addEventListener('touchstart', handleInteraction, { once: true, passive: true });
-        return () => {
-            window.removeEventListener('scroll', handleInteraction);
-            window.removeEventListener('mousemove', handleInteraction);
-            window.removeEventListener('touchstart', handleInteraction);
-        };
+        const t = setTimeout(() => setBgImagesReady(true), 2000);
+        return () => clearTimeout(t);
     }, []);
 
     return (
@@ -138,9 +132,9 @@ export function HomePage() {
                 {/* Rotating background images */}
                 <div className="absolute inset-0">
                     {heroImages.map((img, i) => {
-                        // Only mount the first image during SSR and initial load so background 
-                        // hidden images don't steal bandwidth from the LCP image!
-                        if (i > 0 && heroIdx === 0) return null;
+                        // Delay mounting the secondary background images so they don't block the initial page load,
+                        // but mount them early enough (2s) so they are fully loaded before the 7s transition!
+                        if (i > 0 && !bgImagesReady) return null;
                         
                         return (
                             <OptimizedImage
@@ -288,11 +282,9 @@ export function HomePage() {
 
             {/* ── GOOGLE REVIEWS ───────────────────────────── */}
             <div className="min-h-[400px] w-full">
-                {hasInteracted && (
-                    <Suspense fallback={<div className="h-[400px] w-full" />}>
-                        <GoogleReviews />
-                    </Suspense>
-                )}
+                <Suspense fallback={<div className="h-[400px] w-full" />}>
+                    <GoogleReviews />
+                </Suspense>
             </div>
 
             {/* ── SAMPLE REPORT PROOF ─────────────────────────── */}
@@ -492,7 +484,7 @@ export function HomePage() {
             {/* ── COVERAGE ─────────────────────────────────── */}
             <section className="relative overflow-hidden">
                 <div className="absolute inset-0">
-                    {hasInteracted && <OptimizedImage src="/images/coverage-map.jpg" alt="" className="h-full w-full object-cover opacity-90" aria-hidden="true" />}
+                    <OptimizedImage src="/images/coverage-map.jpg" alt="" className="h-full w-full object-cover opacity-90" aria-hidden="true" />
                     <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/85 to-surface/60" />
                 </div>
                 <Section className="relative">
@@ -529,7 +521,7 @@ export function HomePage() {
                     </CTAButton>
                 </div>
                 <div className="mt-8 grid grid-cols-2 gap-3 md:grid-cols-4">
-                    {hasInteracted && galleryPreview.map((img, i) => (
+                    {galleryPreview.map((img, i) => (
                         <Link
                             key={img.src}
                             to="/our-work"
@@ -547,7 +539,6 @@ export function HomePage() {
                             </p>
                         </Link>
                     ))}
-                    {!hasInteracted && [0,1,2,3].map(i => <div key={i} className="aspect-[4/3] rounded-xl bg-surface-alt/50" />)}
                 </div>
             </Section>
 
