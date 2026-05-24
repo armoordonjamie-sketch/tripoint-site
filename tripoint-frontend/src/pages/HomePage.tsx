@@ -140,7 +140,7 @@ export function HomePage() {
                             <OptimizedImage
                                 key={img.src}
                                 src={img.src}
-                                priority={i === 0}
+                                priority={true}
                                 alt=""
                                 width={1536}
                                 height={2048}
