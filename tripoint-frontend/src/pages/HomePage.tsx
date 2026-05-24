@@ -19,10 +19,13 @@ import { useScrollReveal } from '@/lib/useScrollReveal';
 import { OptimizedImage } from '@/components/OptimizedImage';
 import { ExpandableReportImage } from '@/components/ExpandableReportImage';
 import { VatLabel } from '@/components/VatLabel';
-import { GoogleReviews } from '@/components/GoogleReviews';
 
 const HeroScrollCue = lazy(() =>
     import('@/components/HeroScrollCue').then((m) => ({ default: m.HeroScrollCue })),
+);
+
+const GoogleReviews = lazy(() =>
+    import('@/components/GoogleReviews').then((m) => ({ default: m.GoogleReviews })),
 );
 
 /* ── Intersection Observer for scroll-reveal ─────────── */
@@ -250,7 +253,7 @@ export function HomePage() {
                     {trustPoints.map((t, i) => (
                         <div
                             key={t.title}
-                            className="reveal glass rounded-2xl p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-brand/5 shine"
+                            className="reveal glass rounded-2xl p-6 text-center transition duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-brand/5 shine"
                             style={{ transitionDelay: `${i * 0.08}s` }}
                         >
                             <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-brand/20 to-brand/5 text-brand">
@@ -269,7 +272,9 @@ export function HomePage() {
             </Section>
 
             {/* ── GOOGLE REVIEWS ───────────────────────────── */}
-            <GoogleReviews />
+            <Suspense fallback={<div className="h-[400px] w-full" />}>
+                <GoogleReviews />
+            </Suspense>
 
             {/* ── SAMPLE REPORT PROOF ─────────────────────────── */}
             <Section>
@@ -298,7 +303,9 @@ export function HomePage() {
                             <ExpandableReportImage
                                 src="/images/sample-report/01_plain_english_summary.png"
                                 alt="Plain-English conclusion excerpt from a real TriPoint diagnostic report"
-                                className="overflow-hidden rounded-2xl"
+                                className="overflow-hidden rounded-2xl aspect-[1431/466]"
+                                width={1431}
+                                height={466}
                             />
                         </div>
                     </div>
@@ -350,7 +357,7 @@ export function HomePage() {
                         <Link
                             key={s.title}
                             to={s.href}
-                            className="reveal group rounded-2xl border border-border-default bg-surface-alt p-6 transition-all duration-300 hover:border-brand/30 hover:bg-brand/5 hover:-translate-y-1 hover:shadow-lg hover:shadow-brand/5"
+                            className="reveal group rounded-2xl border border-border-default bg-surface-alt p-6 transition duration-300 hover:border-brand/30 hover:bg-brand/5 hover:-translate-y-1 hover:shadow-lg hover:shadow-brand/5"
                             style={{ transitionDelay: `${i * 0.06}s` }}
                         >
                             <div className="flex items-center gap-4 mb-4">
@@ -373,7 +380,7 @@ export function HomePage() {
                                     </span>
                                 ))}
                             </div>
-                            <div className="mt-4 flex items-center gap-1 text-sm font-medium text-brand opacity-0 -translate-x-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">
+                            <div className="mt-4 flex items-center gap-1 text-sm font-medium text-brand opacity-0 -translate-x-1 transition duration-300 group-hover:opacity-100 group-hover:translate-x-0">
                                 Learn more <ArrowRight className="h-3.5 w-3.5" />
                             </div>
                         </Link>
@@ -516,7 +523,7 @@ export function HomePage() {
                                 className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                            <p className="absolute bottom-0 left-0 right-0 p-3 text-xs text-white/90 translate-y-3 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                            <p className="absolute bottom-0 left-0 right-0 p-3 text-xs text-white/90 translate-y-3 opacity-0 transition duration-300 group-hover:translate-y-0 group-hover:opacity-100">
                                 {img.alt}
                             </p>
                         </Link>
@@ -538,7 +545,7 @@ export function HomePage() {
                         <Link
                             key={post.slug}
                             to={`/blog/${post.slug}`}
-                            className="reveal group overflow-hidden rounded-xl border border-border-default bg-surface-alt transition-all hover:border-brand/30 hover:bg-brand/5 hover:-translate-y-0.5"
+                            className="reveal group overflow-hidden rounded-xl border border-border-default bg-surface-alt transition hover:border-brand/30 hover:bg-brand/5 hover:-translate-y-0.5"
                             style={{ transitionDelay: `${i * 0.08}s` }}
                         >
                             <div className="relative aspect-video w-full overflow-hidden">
@@ -563,8 +570,8 @@ export function HomePage() {
                                     {post.title}
                                 </h3>
                                 <p className="mt-2 text-xs text-text-muted leading-relaxed line-clamp-2">{post.description}</p>
-                                <span className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-brand group-hover:gap-2 transition-all">
-                                    Read article <ArrowRight className="h-3 w-3" />
+                                <span className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-brand">
+                                    Read article <ArrowRight className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-1" />
                                 </span>
                             </div>
                         </Link>

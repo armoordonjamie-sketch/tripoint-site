@@ -44,7 +44,7 @@ export function CTAButton({
     ...props
 }: CTAButtonProps) {
     const classes = cn(
-        'inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition-all duration-200 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none disabled:grayscale',
+        'inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition duration-200 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none disabled:grayscale',
         variants[variant],
         sizes[size],
         className,

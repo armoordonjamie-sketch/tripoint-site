@@ -10,6 +10,8 @@ interface ExpandableReportImageProps {
     className?: string;
     imgClassName?: string;
     priority?: boolean;
+    width?: number;
+    height?: number;
 }
 
 export function ExpandableReportImage({
@@ -18,6 +20,8 @@ export function ExpandableReportImage({
     className,
     imgClassName,
     priority,
+    width,
+    height,
 }: ExpandableReportImageProps) {
     const [open, setOpen] = useState(false);
     const close = useCallback(() => setOpen(false), []);
@@ -90,6 +94,8 @@ export function ExpandableReportImage({
                             alt={alt}
                             className={cn('w-full', imgClassName)}
                             priority={priority}
+                            width={width}
+                            height={height}
                         />
                         <span
                             className="pointer-events-none absolute bottom-2 right-2 flex h-9 w-9 items-center justify-center rounded-full bg-black/55 text-white shadow-md ring-1 ring-white/25 backdrop-blur-sm transition group-hover:bg-black/75 group-focus-within:ring-2 group-focus-within:ring-brand"

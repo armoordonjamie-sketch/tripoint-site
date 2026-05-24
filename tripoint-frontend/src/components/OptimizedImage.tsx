@@ -46,7 +46,6 @@ function useOriginalAsset(src: string): boolean {
     return (
         src.startsWith('/images/new-images/') ||
         src.startsWith('/images/services/') ||
-        src.startsWith('/images/sample-report/') ||
         src.startsWith('/images/servicing-work/') ||
         src.startsWith('/images/diag_photos/')
     );
