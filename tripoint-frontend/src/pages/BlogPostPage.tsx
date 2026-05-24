@@ -247,7 +247,7 @@ export function BlogPostPage() {
                             className="prose prose-invert mt-8 max-w-none prose-headings:font-bold prose-p:text-text-secondary prose-li:text-text-secondary prose-a:text-brand prose-a:no-underline hover:prose-a:underline"
                             dangerouslySetInnerHTML={{
                                 __html: post.content.replace(/<img\s+src="(\/images\/(?:blog|gallery)\/[^"]+)"([^>]*)>/g, (match, src, rest) => {
-                                    const { webp, webpSrcset, jpg } = getOptimizedPaths(src);
+                                    const { webpSrcset, jpg } = getOptimizedPaths(src);
                                     if (!webpSrcset) return match;
                                     return `<picture>
                                         <source type="image/webp" srcset="${webpSrcset}" sizes="(max-width: 768px) 100vw, 800px" />
