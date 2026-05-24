@@ -150,6 +150,11 @@ export function BlogPostPage() {
         publisher: {
             '@id': `${siteConfig.url}/#local-business`,
         },
+        author: {
+            '@type': 'Person',
+            name: 'Jamie Armoordon',
+            url: `${siteConfig.url}/about`,
+        },
         image: imageUrl,
         mainEntityOfPage: {
             '@type': 'WebPage',
@@ -189,10 +194,12 @@ export function BlogPostPage() {
                 description={post.description}
                 canonical={`/blog/${post.slug}`}
                 ogImage={post.ogImage}
+                ogImageAlt={post.ogImageAlt}
             />
             <Helmet>
                 <meta property="og:type" content="article" />
                 <meta property="article:published_time" content={post.publishedAt} />
+                {post.updatedAt && <meta property="article:modified_time" content={post.updatedAt} />}
                 <meta property="article:section" content={post.category} />
             </Helmet>
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingLd) }} />
@@ -243,6 +250,9 @@ export function BlogPostPage() {
             <Section>
                 <div className="mx-auto max-w-4xl lg:flex lg:gap-12">
                     <article className="flex-1 min-w-0">
+                        <div className="mt-2 mb-6 text-sm text-text-secondary">
+                            By <Link to="/about" className="text-brand hover:underline">Jamie Armoordon</Link> &middot; Mercedes-Benz Trained Technician &middot; TriPoint Diagnostics Ltd
+                        </div>
                         <div
                             className="prose prose-invert mt-8 max-w-none prose-headings:font-bold prose-p:text-text-secondary prose-li:text-text-secondary prose-a:text-brand prose-a:no-underline hover:prose-a:underline"
                             dangerouslySetInnerHTML={{

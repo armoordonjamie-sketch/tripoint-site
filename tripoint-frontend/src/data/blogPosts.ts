@@ -9,6 +9,7 @@ export interface BlogPost {
     content: string;
     relatedServices: string[];
     ogImage?: string;
+    ogImageAlt?: string;
     thumbnail?: string;
     author?: string;
     /** Optional FAQ items for FAQPage schema and visible FAQ block */
@@ -22,9 +23,11 @@ export const blogPosts: BlogPost[] = [
         description: 'Real workshop-level technical breakdown of OM654 turbo failures in W907 Sprinter and W447 Vito. Root causes, symptoms, repair costs, and prevention.',
         category: 'Mercedes',
         publishedAt: '2026-02-23',
+        updatedAt: '2026-05-24',
         ogImage: '/images/blog/om654-turbo-failure/om654-turbo-compressor-split.jpeg',
+        ogImageAlt: 'Split turbocharger compressor wheel showing catastrophic failure on Mercedes OM654 engine',
         thumbnail: '/images/blog/om654-turbo-failure/om654-turbo-compressor-split.jpeg',
-        author: 'TriPoint Diagnostics',
+        author: 'Jamie Armoordon',
         relatedServices: ['diagnostic-callout'],
         content: `
             <div class="blog-lead">
@@ -247,7 +250,10 @@ export const blogPosts: BlogPost[] = [
         description: 'Common triggers for Sprinter limp mode, why code-clearing doesn\'t work, and what a proper diagnostic session involves.',
         category: 'Mercedes',
         publishedAt: '2026-05-23',
-        updatedAt: '2026-05-23',
+        updatedAt: '2026-05-24',
+        ogImage: '/images/gallery/work-31.jpg',
+        ogImageAlt: 'Sprinter instrument cluster with multiple warning lights active',
+        author: 'Jamie Armoordon',
         thumbnail: '/images/gallery/work-31.jpg',
         relatedServices: ['diagnostic-callout'],
         content: `
@@ -431,8 +437,11 @@ export const blogPosts: BlogPost[] = [
         title: 'AdBlue Countdown: Why Clearing Codes Isn\'t a Fix',
         description: 'What triggers the AdBlue countdown, why it returns after clearing, and what a proper decision visit actually does.',
         category: 'Emissions',
-        publishedAt: '2026-05-23',
-        updatedAt: '2026-05-23',
+        publishedAt: '2026-05-08',
+        updatedAt: '2026-05-24',
+        ogImage: '/images/gallery/work-30.jpg',
+        ogImageAlt: 'MBUX screen showing vehicle breakdown alert on Sprinter',
+        author: 'Jamie Armoordon',
         thumbnail: '/images/gallery/work-30.jpg',
         relatedServices: ['diagnostic-callout'],
         content: `
@@ -553,8 +562,11 @@ export const blogPosts: BlogPost[] = [
         title: 'DPF Warning Lights: When Regen Helps vs When It Makes Things Worse',
         description: 'Forced regen vs passive, when regen is safe, when it masks a deeper fault, and why we diagnose first.',
         category: 'Emissions',
-        publishedAt: '2026-05-23',
-        updatedAt: '2026-05-23',
+        publishedAt: '2026-03-16',
+        updatedAt: '2026-05-24',
+        ogImage: '/images/gallery/work-14.jpg',
+        ogImageAlt: 'Sooty exhaust tailpipe showing carbon deposits for emissions check',
+        author: 'Jamie Armoordon',
         thumbnail: '/images/gallery/work-14.jpg',
         relatedServices: ['diagnostic-callout'],
         content: `
@@ -685,7 +697,10 @@ export const blogPosts: BlogPost[] = [
         description: 'P0299 on a Mercedes Sprinter W906 or W907 means the turbo is producing less boost than requested. Here is what causes it and what a proper diagnostic session looks at.',
         category: 'Mercedes',
         publishedAt: '2026-05-23',
-        updatedAt: '2026-05-23',
+        updatedAt: '2026-05-24',
+        ogImage: '/images/gallery/work-22.jpg',
+        ogImageAlt: 'Damaged turbocharger with sheared metal inside housing',
+        author: 'Jamie Armoordon',
         thumbnail: '/images/gallery/work-22.jpg',
         relatedServices: ['diagnostic-callout', 'sprinter-servicing'],
         faqs: [
@@ -753,7 +768,10 @@ export const blogPosts: BlogPost[] = [
         description: 'P0234 on a Mercedes Sprinter means the turbo is producing more boost than requested. Here is what causes it on the W906 and W907 and what the diagnostic process looks like.',
         category: 'Mercedes',
         publishedAt: '2026-05-23',
-        updatedAt: '2026-05-23',
+        updatedAt: '2026-05-24',
+        ogImage: '/images/gallery/work-43.jpg',
+        ogImageAlt: 'Garrett turbocharger removed showing soot build-up inside housing',
+        author: 'Jamie Armoordon',
         thumbnail: '/images/gallery/work-43.jpg',
         relatedServices: ['diagnostic-callout'],
         faqs: [
@@ -810,7 +828,10 @@ export const blogPosts: BlogPost[] = [
         description: 'P2002 on a Mercedes diesel means the DPF is not reducing particulate matter as expected. Here is what triggers it, what the diagnostic process covers, and when regen helps versus when it does not.',
         category: 'Emissions',
         publishedAt: '2026-05-23',
-        updatedAt: '2026-05-23',
+        updatedAt: '2026-05-24',
+        ogImage: '/images/gallery/work-14.jpg',
+        ogImageAlt: 'Sooty exhaust tailpipe showing carbon deposits for emissions check',
+        author: 'Jamie Armoordon',
         thumbnail: '/images/gallery/work-14.jpg',
         relatedServices: ['diagnostic-callout'],
         faqs: [
@@ -885,7 +906,10 @@ export const blogPosts: BlogPost[] = [
         description: 'P0401 on a Mercedes Sprinter means insufficient EGR flow. Here is what causes it on the OM651 and OM654 and what a proper diagnostic session looks at before any parts are replaced.',
         category: 'Emissions',
         publishedAt: '2026-05-23',
-        updatedAt: '2026-05-23',
+        updatedAt: '2026-05-24',
+        ogImage: '/images/diag_photos/egr-pipe-oil.jpg',
+        ogImageAlt: 'Oil contaminated EGR pipe on Mercedes Sprinter',
+        author: 'Jamie Armoordon',
         thumbnail: '/images/diag_photos/egr-pipe-oil.jpg',
         relatedServices: ['diagnostic-callout'],
         faqs: [
@@ -947,7 +971,10 @@ export const blogPosts: BlogPost[] = [
         description: 'P0420 on a Mercedes diesel means catalyst efficiency is below threshold. Here is what the code means, what causes it, and what a diagnostic session looks at before condemning the cat.',
         category: 'Emissions',
         publishedAt: '2026-05-23',
-        updatedAt: '2026-05-23',
+        updatedAt: '2026-05-24',
+        ogImage: '/images/diag_photos/sensor-sooted.jpg',
+        ogImageAlt: 'Heavily sooted exhaust sensor removed for inspection',
+        author: 'Jamie Armoordon',
         thumbnail: '/images/diag_photos/sensor-sooted.jpg',
         relatedServices: ['diagnostic-callout'],
         faqs: [
@@ -1003,7 +1030,10 @@ export const blogPosts: BlogPost[] = [
         description: 'P2463 on a Mercedes Sprinter means the DPF has accumulated soot beyond the threshold. Here is what causes it, when a forced regen helps, and when it does not.',
         category: 'Emissions',
         publishedAt: '2026-05-23',
-        updatedAt: '2026-05-23',
+        updatedAt: '2026-05-24',
+        ogImage: '/images/gallery/work-43.jpg',
+        ogImageAlt: 'Carbon build up inside a Mercedes turbocharger indicating exhaust backpressure',
+        author: 'Jamie Armoordon',
         thumbnail: '/images/gallery/work-14.jpg',
         relatedServices: ['diagnostic-callout'],
         faqs: [
@@ -1059,7 +1089,10 @@ export const blogPosts: BlogPost[] = [
         description: 'AdBlue warning on a Mercedes Vito W639 or W447? Here is what causes it, why clearing the code does not fix it, and what a proper diagnostic session covers.',
         category: 'Emissions',
         publishedAt: '2026-05-23',
-        updatedAt: '2026-05-23',
+        updatedAt: '2026-05-24',
+        ogImage: '/images/gallery/work-30.jpg',
+        ogImageAlt: 'Mercedes instrument cluster displaying AdBlue countdown to non-start',
+        author: 'Jamie Armoordon',
         thumbnail: '/images/gallery/work-30.jpg',
         relatedServices: ['diagnostic-callout', 'vito-servicing'],
         faqs: [
@@ -1116,7 +1149,10 @@ export const blogPosts: BlogPost[] = [
         description: 'Engine management light on a Mercedes van or car? Here is what it can mean, why the light alone does not tell you what is wrong, and what a proper diagnostic session involves.',
         category: 'Mercedes',
         publishedAt: '2026-05-23',
-        updatedAt: '2026-05-23',
+        updatedAt: '2026-05-24',
+        ogImage: '/images/diag_photos/picoscope-multimeter.jpg',
+        ogImageAlt: 'Using a PicoScope and multimeter to verify an electrical fault',
+        author: 'Jamie Armoordon',
         thumbnail: '/images/diag_photos/picoscope-multimeter.jpg',
         relatedServices: ['diagnostic-callout'],
         faqs: [

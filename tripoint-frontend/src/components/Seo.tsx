@@ -7,6 +7,7 @@ interface SeoProps {
     description?: string;
     canonical?: string;
     ogImage?: string;
+    ogImageAlt?: string;
     noIndex?: boolean;
 }
 
@@ -15,6 +16,7 @@ export function Seo({
     description = siteConfig.defaultSeo.description,
     canonical,
     ogImage,
+    ogImageAlt,
     noIndex = false,
 }: SeoProps) {
     const { pathname } = useLocation();
@@ -58,7 +60,7 @@ export function Seo({
             <meta property="og:image" content={imageUrl} />
             <meta property="og:image:width" content="1200" />
             <meta property="og:image:height" content="630" />
-            <meta property="og:image:alt" content={`${siteConfig.brandName} - ${siteConfig.tagline}`} />
+            <meta property="og:image:alt" content={ogImageAlt || `${siteConfig.brandName} - ${siteConfig.tagline}`} />
             <meta property="og:url" content={canonicalUrl ?? `${siteConfig.url}${pathname}`} />
 
             {/* Twitter */}
