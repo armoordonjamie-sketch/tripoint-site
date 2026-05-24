@@ -20,7 +20,7 @@ export function Layout() {
     // Delay CarlWidget rendering to save main thread JS during initial load
     useEffect(() => {
         let mounted = false;
-        let timer: NodeJS.Timeout;
+        let timer: ReturnType<typeof setTimeout>;
 
         const loadCarl = () => {
             if (mounted) return;
