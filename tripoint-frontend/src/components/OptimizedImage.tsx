@@ -84,7 +84,7 @@ export function OptimizedImage({ src, priority, alt = '', className, style, widt
         width,
         height,
         loading: isEager ? ('eager' as const) : ('lazy' as const),
-        decoding: "async" as const,
+        decoding: isEager ? ('sync' as const) : ('async' as const),
         fetchPriority,
         ...rest,
     };

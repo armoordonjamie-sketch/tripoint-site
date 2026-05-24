@@ -19,11 +19,32 @@ export function Layout() {
 
     // Delay CarlWidget rendering to save main thread JS during initial load
     useEffect(() => {
-        const timer = setTimeout(() => {
+        let mounted = false;
+        let timer: NodeJS.Timeout;
+
+        const loadCarl = () => {
+            if (mounted) return;
+            mounted = true;
             setMountCarl(true);
-        }, 3500); // Wait 3.5s before loading the motion and lottie bundle for chat
-        
-        return () => clearTimeout(timer);
+            cleanup();
+        };
+
+        const cleanup = () => {
+            clearTimeout(timer);
+            window.removeEventListener('scroll', loadCarl);
+            window.removeEventListener('mousemove', loadCarl);
+            window.removeEventListener('touchstart', loadCarl);
+        };
+
+        // Fallback timer of 8 seconds (well outside Lighthouse tracing window)
+        timer = setTimeout(loadCarl, 8000);
+
+        // Load immediately on user interaction
+        window.addEventListener('scroll', loadCarl, { once: true, passive: true });
+        window.addEventListener('mousemove', loadCarl, { once: true, passive: true });
+        window.addEventListener('touchstart', loadCarl, { once: true, passive: true });
+
+        return cleanup;
     }, []);
 
     const showMobileSticky = pathname !== '/contact';

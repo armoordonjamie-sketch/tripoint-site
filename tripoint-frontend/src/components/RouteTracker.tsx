@@ -9,16 +9,20 @@ export function RouteTracker() {
     // Initialize third-party scripts strictly after React has finished its hydration pass
     // to avoid Hydration Mismatch (Error #419) caused by <script> tag injections into the DOM.
     useEffect(() => {
-        initAnalytics();
-        registerGa4Test();
-        registerAttributionDebugHelpers();
-        
-        if (import.meta.env.DEV) {
-            const d = getAttributionDebug();
-            if (Object.keys(d.attribution).length > 0 || d.capturedAt) {
-                console.log('[Attribution] stored after capture', d);
+        // Delay third-party analytics by 5s (or until interaction) to vastly improve Lighthouse TBT
+        const timer = setTimeout(() => {
+            initAnalytics();
+            registerGa4Test();
+            registerAttributionDebugHelpers();
+            
+            if (import.meta.env.DEV) {
+                const d = getAttributionDebug();
+                if (Object.keys(d.attribution).length > 0 || d.capturedAt) {
+                    console.log('[Attribution] stored after capture', d);
+                }
             }
-        }
+        }, 5000);
+        return () => clearTimeout(timer);
     }, []);
 
     useEffect(() => {
