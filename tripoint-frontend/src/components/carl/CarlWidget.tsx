@@ -157,6 +157,8 @@ export function CarlWidget() {
                   <img
                     src="/carl-icon-fallback.png"
                     alt="Chat with Carl"
+                    width={98}
+                    height={98}
                     className="w-full h-full object-contain drop-shadow-xl"
                     draggable={false}
                   />
