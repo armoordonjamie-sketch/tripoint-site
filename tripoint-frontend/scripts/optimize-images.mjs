@@ -46,7 +46,7 @@ function* walkDir(dir, base = '') {
     for (const e of entries) {
         const rel = join(base, e.name);
         if (e.isDirectory()) {
-            if (e.name === 'optimized' || e.name === 'sample-report') continue; // skip output dir
+            if (e.name === 'optimized') continue; // skip output dir
             yield* walkDir(join(dir, e.name), rel);
         } else if (/\.(jpg|jpeg|png)$/i.test(e.name)) {
             yield { fullPath: join(dir, e.name), relPath: rel };
