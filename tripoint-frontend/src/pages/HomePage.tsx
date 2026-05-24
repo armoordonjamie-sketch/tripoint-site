@@ -113,6 +113,19 @@ export function HomePage() {
         return () => clearInterval(timer);
     }, [heroImages.length]);
 
+    const [hasInteracted, setHasInteracted] = useState(false);
+    useEffect(() => {
+        const handleInteraction = () => setHasInteracted(true);
+        window.addEventListener('scroll', handleInteraction, { once: true, passive: true });
+        window.addEventListener('mousemove', handleInteraction, { once: true, passive: true });
+        window.addEventListener('touchstart', handleInteraction, { once: true, passive: true });
+        return () => {
+            window.removeEventListener('scroll', handleInteraction);
+            window.removeEventListener('mousemove', handleInteraction);
+            window.removeEventListener('touchstart', handleInteraction);
+        };
+    }, []);
+
     return (
         <div ref={scrollRef}>
             <Seo canonical="/" />
@@ -124,23 +137,29 @@ export function HomePage() {
             >
                 {/* Rotating background images */}
                 <div className="absolute inset-0">
-                    {heroImages.map((img, i) => (
-                        <OptimizedImage
-                            key={img.src}
-                            src={img.src}
-                            priority={i === 0}
-                            alt=""
-                            width={1536}
-                            height={2048}
-                            className="absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ease-in-out"
-                            style={{
-                                objectPosition: img.position,
-                                opacity: i === heroIdx ? 1 : 0,
-                                visibility: i === heroIdx ? undefined : 'hidden',
-                            }}
-                            aria-hidden="true"
-                        />
-                    ))}
+                    {heroImages.map((img, i) => {
+                        // Only mount the first image during SSR and initial load so background 
+                        // hidden images don't steal bandwidth from the LCP image!
+                        if (i > 0 && heroIdx === 0) return null;
+                        
+                        return (
+                            <OptimizedImage
+                                key={img.src}
+                                src={img.src}
+                                priority={i === 0}
+                                alt=""
+                                width={1536}
+                                height={2048}
+                                className="absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ease-in-out"
+                                style={{
+                                    objectPosition: img.position,
+                                    opacity: i === heroIdx ? 1 : 0,
+                                    visibility: i === heroIdx ? undefined : 'hidden',
+                                }}
+                                aria-hidden="true"
+                            />
+                        );
+                    })}
                     <div className="absolute inset-0 bg-gradient-to-b from-surface/40 via-surface/70 to-surface" />
                 </div>
 
@@ -268,9 +287,13 @@ export function HomePage() {
             </Section>
 
             {/* ── GOOGLE REVIEWS ───────────────────────────── */}
-            <Suspense fallback={<div className="h-[400px] w-full" />}>
-                <GoogleReviews />
-            </Suspense>
+            <div className="min-h-[400px] w-full">
+                {hasInteracted && (
+                    <Suspense fallback={<div className="h-[400px] w-full" />}>
+                        <GoogleReviews />
+                    </Suspense>
+                )}
+            </div>
 
             {/* ── SAMPLE REPORT PROOF ─────────────────────────── */}
             <Section>
@@ -469,7 +492,7 @@ export function HomePage() {
             {/* ── COVERAGE ─────────────────────────────────── */}
             <section className="relative overflow-hidden">
                 <div className="absolute inset-0">
-                    <OptimizedImage src="/images/coverage-map.jpg" alt="" className="h-full w-full object-cover opacity-90" aria-hidden="true" />
+                    {hasInteracted && <OptimizedImage src="/images/coverage-map.jpg" alt="" className="h-full w-full object-cover opacity-90" aria-hidden="true" />}
                     <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/85 to-surface/60" />
                 </div>
                 <Section className="relative">
@@ -506,7 +529,7 @@ export function HomePage() {
                     </CTAButton>
                 </div>
                 <div className="mt-8 grid grid-cols-2 gap-3 md:grid-cols-4">
-                    {galleryPreview.map((img, i) => (
+                    {hasInteracted && galleryPreview.map((img, i) => (
                         <Link
                             key={img.src}
                             to="/our-work"
@@ -524,6 +547,7 @@ export function HomePage() {
                             </p>
                         </Link>
                     ))}
+                    {!hasInteracted && [0,1,2,3].map(i => <div key={i} className="aspect-[4/3] rounded-xl bg-surface-alt/50" />)}
                 </div>
             </Section>
 
