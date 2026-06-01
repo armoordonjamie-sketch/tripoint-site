@@ -113,7 +113,7 @@ const SERVICE_CATEGORIES = [
     { id: 'diagnostics', label: 'Diagnostics', icon: Search, desc: 'Warning lights, fault finding, pre-purchase checks' },
     { id: 'servicing', label: 'Servicing', icon: Cog, desc: 'Full-service at your location, dealer-level' },
     { id: 'brakes', label: 'Brakes', icon: Shield, desc: 'Mobile brake service for Sprinter, Vito & Citan' },
-    { id: 'tuning', label: 'Tuning', icon: TrendingUp, desc: 'Stage 1 calibration, economy tune, fleet pricing' },
+    { id: 'tuning', label: 'Remapping', icon: TrendingUp, desc: 'Stage 1 remap - power, economy, fleet pricing' },
 ];
 
 const BRAKE_PRICING: Record<string, any> = {
@@ -650,7 +650,7 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
         if (!booking.approximate_mileage.trim()) missing.push('Approximate mileage');
         const symptomsRequired = selectedCategory === 'diagnostics' || selectedCategory === 'tuning';
         if (symptomsRequired && (!booking.symptoms.trim() || booking.symptoms.trim().length < 2)) {
-            missing.push(selectedCategory === 'tuning' ? 'Tuning goals' : 'Symptoms / fault description');
+            missing.push(selectedCategory === 'tuning' ? 'Remap goals' : 'Symptoms / fault description');
         }
 
         if (missing.length > 0) {
@@ -1406,10 +1406,10 @@ export function BookingScheduler({ zoneCalcPostcode }: BookingSchedulerProps) {
                                 placeholder: 'Describe the issue, when it started, and any warning lights...'
                             },
                             tuning: {
-                                title: 'Tuning Goals',
+                                title: 'Remap Goals',
                                 icon: <TrendingUp className="h-4 w-4 text-brand" />,
                                 label: 'What are you looking to achieve? *',
-                                placeholder: 'e.g. Better fuel economy, more power, EGR delete...'
+                                placeholder: 'e.g. Better fuel economy, more pulling power for loaded work...'
                             },
                             servicing: {
                                 title: 'Service Requirements',

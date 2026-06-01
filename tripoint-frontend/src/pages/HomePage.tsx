@@ -61,18 +61,18 @@ const serviceLanes = [
         tags: ['Front', 'Rear', 'Pads + Discs'],
     },
     {
-        title: 'Tuning',
-        desc: 'ECU remaps for load performance or fuel economy. Fleet day rates available for 3+ vehicles.',
+        title: 'Remapping',
+        desc: 'Stage 1 ECU remaps for power & driveability or fuel economy. All van makes. Fleet day rates for 3+ vehicles.',
         icon: <TrendingUp className="h-6 w-6" />,
-        href: '/services/van-load-driveability-tune',
+        href: '/services/van-remapping',
         price: getPrice('van-load-driveability-tune', 199),
-        tags: ['Load & Driveability', 'Economy', 'Fleet Rates'],
+        tags: ['Power & Driveability', 'Economy', 'Fleet'],
     },
 ];
 
 const steps = [
     { num: '01', title: 'Get in Touch', desc: 'Call, WhatsApp, or book online with your vehicle details and symptoms.' },
-    { num: '02', title: 'Confirm Booking', desc: 'We confirm your slot, vehicle details, and arrival window. You will get a written confirmation with the appointment time and what to expect on the day.' },
+    { num: '02', title: 'Confirm Booking', desc: 'We confirm your slot in writing with vehicle details and an arrival window.' },
     { num: '03', title: 'On-Site Diagnosis', desc: 'Deep scan, live data, guided tests - all at your location.' },
     { num: '04', title: 'Written Fix Plan', desc: 'Clear findings, root cause, and next steps documented for you.' },
 ];
@@ -84,12 +84,14 @@ const trustPoints = [
     { icon: <MapPin className="h-6 w-6" />, title: 'Mobile Convenience', desc: 'Kent and SE London. No workshop drop-off needed - we come to you.' },
 ];
 
-/* Curated gallery preview */
+/* Curated gallery preview — 4 on md, 6 on xl+ */
 const galleryPreview = [
     galleryImages[0],
     galleryImages[22],
     galleryImages[47],
     galleryImages[40],
+    galleryImages[15],
+    galleryImages[30],
 ];
 
 /* Blog teaser - latest 3 posts */
@@ -135,7 +137,7 @@ export function HomePage() {
                         // Delay mounting the secondary background images so they don't block the initial page load,
                         // but mount them early enough (2s) so they are fully loaded before the 7s transition!
                         if (i > 0 && !bgImagesReady) return null;
-                        
+
                         return (
                             <OptimizedImage
                                 key={img.src}
@@ -158,49 +160,50 @@ export function HomePage() {
 
                 <div className="absolute inset-0 mesh-gradient opacity-50" aria-hidden="true" />
 
-                <div className="relative z-10 mx-auto max-w-7xl px-4 py-16 sm:py-20 sm:px-6 lg:px-8">
-                    <div className="max-w-3xl">
-                        <h1 className="text-[clamp(1.9rem,8.5vw,3rem)] font-extrabold leading-[1.1] tracking-tight text-text-primary sm:text-6xl md:text-7xl">
+                <div className="relative z-10 mx-auto max-w-7xl px-4 py-16 sm:py-20 sm:px-6 lg:px-8 xl:max-w-[1600px] xl:px-10 xl:py-28 2xl:max-w-[2200px] 2xl:py-36">
+                    <div className="max-w-3xl lg:max-w-4xl 2xl:max-w-5xl">
+                        <h1 className="text-[clamp(1.9rem,8.5vw,3rem)] font-extrabold leading-[1.1] tracking-tight text-text-primary sm:text-6xl md:text-7xl lg:text-[clamp(3rem,3vw,4rem)]">
                             Mobile Mercedes{' '}
                             <span className="text-gradient">Diagnostics</span>{' '}
                             <br className="hidden sm:block" />
                             & Repairs
                         </h1>
 
-                        <p className="mt-3 text-[clamp(1rem,4vw,1.5rem)] font-light text-text-secondary">
+                        <p className="mt-3 text-[clamp(1rem,4vw,1.5rem)] font-light text-text-secondary lg:text-xl">
                             Kent and South East London
                         </p>
 
-                        <p className="mt-3 max-w-xl text-[clamp(1rem,3.5vw,1.125rem)] text-text-secondary md:text-xl sm:mt-4">
+                        <p className="mt-3 max-w-xl text-[clamp(1rem,3.5vw,1.125rem)] text-text-secondary md:text-xl sm:mt-4 lg:text-lg lg:max-w-2xl 2xl:max-w-3xl">
                             Dealer-level diagnostic depth delivered to your driveway. Written findings,
                             root cause, clear next steps.
                         </p>
 
                         <div className="mt-6 flex flex-col sm:flex-row sm:items-center gap-5 sm:mt-8 sm:gap-10">
                             <div>
-                                <p className="text-3xl sm:text-4xl font-bold text-brand-light">
+                                <p className="text-3xl sm:text-4xl font-bold text-brand-light xl:text-5xl">
                                     From £120<VatLabel />
                                 </p>
-                                <p className="mt-1 text-sm text-text-secondary">
+                                <p className="mt-1 text-sm text-text-secondary xl:text-base">
                                     Mobile diagnostics, written report included
                                 </p>
                             </div>
                             <div>
-                                <p className="text-xl sm:text-2xl font-bold text-brand-light">
+                                <p className="text-xl sm:text-2xl font-bold text-brand-light xl:text-2xl">
                                     Mercedes specialist
                                 </p>
-                                <p className="mt-1 text-sm text-text-secondary">
+                                <p className="mt-1 text-sm text-text-secondary xl:text-base">
                                     Sprinter, Vito, Citan, cars
                                 </p>
                             </div>
                         </div>
 
                         <div className="mt-5 sm:mt-6 flex items-center max-w-sm sm:max-w-md">
-                            <a 
-                                href="https://share.google/VzrAGFshBV7ITb7s2" 
-                                target="_blank" 
+                            <a
+                                href="https://share.google/VzrAGFshBV7ITb7s2"
+                                target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex-1 flex flex-col justify-center gap-0.5 group"
+                                aria-label="See our 5.0-star Google Reviews"
+                                className="flex-1 flex flex-col justify-center gap-0.5 group rounded-lg border border-brand/20 bg-brand/[0.04] px-3 py-1.5 hover:border-brand/40 hover:bg-brand/10 transition-colors"
                             >
                                 <div className="flex items-center gap-1.5">
                                     <span className="text-sm font-bold text-text-primary group-hover:text-brand-light transition-colors">5.0</span>
@@ -210,7 +213,10 @@ export function HomePage() {
                                         ))}
                                     </div>
                                 </div>
-                                <span className="text-[11px] text-text-muted group-hover:text-text-secondary transition-colors mt-0.5">Google Reviews</span>
+                                <span className="text-[11px] text-text-muted group-hover:text-brand-light transition-colors mt-0.5 inline-flex items-center gap-0.5">
+                                    Google Reviews
+                                    <ChevronRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+                                </span>
                             </a>
                             
                             <div className="w-px h-8 bg-border-default/60 mx-4" aria-hidden="true" />
@@ -257,18 +263,18 @@ export function HomePage() {
                     <p className="text-sm font-semibold uppercase tracking-widest text-brand mb-3">Why Us</p>
                     <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">Why Choose TriPoint?</h2>
                 </div>
-                <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-8">
                     {trustPoints.map((t, i) => (
                         <div
                             key={t.title}
-                            className="reveal glass rounded-2xl p-6 text-center transition duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-brand/5 shine"
+                            className="reveal glass rounded-2xl p-6 text-center transition duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-brand/5 shine xl:p-8 xl:rounded-3xl"
                             style={{ transitionDelay: `${i * 0.08}s` }}
                         >
-                            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-brand/20 to-brand/5 text-brand">
+                            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-brand/20 to-brand/5 text-brand xl:h-16 xl:w-16 xl:rounded-2xl xl:mb-5">
                                 {t.icon}
                             </div>
-                            <h3 className="mb-1 font-semibold text-text-primary">{t.title}</h3>
-                            <p className="text-sm text-text-secondary">{t.desc}</p>
+                            <h3 className="mb-1 font-semibold text-text-primary xl:text-lg">{t.title}</h3>
+                            <p className="text-sm text-text-secondary xl:text-base xl:mt-2">{t.desc}</p>
                         </div>
                     ))}
                 </div>
@@ -333,15 +339,15 @@ export function HomePage() {
                             Simple, transparent process from first contact to fix plan.
                         </p>
                     </div>
-                    <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+                    <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4 xl:gap-6">
                         {steps.map((step, i) => (
-                            <div key={step.title} className="reveal relative text-center" style={{ transitionDelay: `${i * 0.1}s` }}>
+                            <div key={step.title} className="reveal relative text-center lg:glass lg:rounded-2xl lg:p-6 xl:p-8 xl:rounded-3xl" style={{ transitionDelay: `${i * 0.1}s` }}>
                                 {i < steps.length - 1 && (
-                                    <div className="hidden lg:block absolute top-5 left-[60%] w-[calc(100%-20%)] h-px bg-gradient-to-r from-brand/30 to-transparent" aria-hidden="true" />
+                                    <div className="hidden lg:block absolute top-10 left-[70%] w-[calc(100%-30%+1.5rem)] h-px bg-gradient-to-r from-brand/40 to-brand/10 xl:top-12" aria-hidden="true" />
                                 )}
-                                <div className="step-number mx-auto mb-4">{step.num}</div>
+                                <div className="step-number mx-auto mb-4 xl:mb-5">{step.num}</div>
                                 <h3 className="mb-2 text-lg font-semibold text-text-primary">{step.title}</h3>
-                                <p className="text-sm text-text-secondary">{step.desc}</p>
+                                <p className="text-sm text-text-secondary xl:mt-2">{step.desc}</p>
                             </div>
                         ))}
                     </div>
@@ -362,7 +368,7 @@ export function HomePage() {
                         Four core services - all mobile, all fixed-price, all backed by dealer-level tooling.
                     </p>
                 </div>
-                <div className="mt-10 grid gap-4 sm:grid-cols-2">
+                <div className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
                     {serviceLanes.map((s, i) => (
                         <Link
                             key={s.title}
@@ -390,7 +396,7 @@ export function HomePage() {
                                     </span>
                                 ))}
                             </div>
-                            <div className="mt-4 flex items-center gap-1 text-sm font-medium text-brand opacity-0 -translate-x-1 transition duration-300 group-hover:opacity-100 group-hover:translate-x-0">
+                            <div className="mt-4 flex items-center gap-1 text-sm font-medium text-brand transition duration-300 lg:opacity-0 lg:-translate-x-1 lg:group-hover:opacity-100 lg:group-hover:translate-x-0">
                                 Learn more <ArrowRight className="h-3.5 w-3.5" />
                             </div>
                         </Link>
@@ -419,10 +425,10 @@ export function HomePage() {
                             aria-hidden="true"
                         />
                     </div>
-                    <div className="absolute inset-0 bg-gradient-to-r from-surface via-surface/85 to-surface/40" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-surface via-surface/95 to-surface/75 sm:via-surface/85 sm:to-surface/40" />
                 </div>
-                <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 md:py-20">
-                    <div className="max-w-xl reveal">
+                <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 md:py-20 xl:max-w-[1600px] xl:px-10 xl:py-28 2xl:max-w-[2200px] 2xl:py-32">
+                    <div className="max-w-xl reveal xl:max-w-2xl 2xl:max-w-3xl">
                         <p className="text-sm font-semibold uppercase tracking-widest text-brand mb-3">Specialist Knowledge</p>
                         <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">
                             Mercedes Sprinter Expert
@@ -449,7 +455,7 @@ export function HomePage() {
 
             {/* ── PRICING TEASER ──────────────────────────────── */}
             <Section>
-                <div className="mx-auto max-w-3xl">
+                <div className="mx-auto max-w-3xl xl:max-w-4xl 2xl:max-w-5xl">
                     <div className="reveal rounded-2xl border border-border-default bg-surface-alt p-8 text-center">
                         <p className="text-sm font-semibold uppercase tracking-widest text-brand mb-3">Pricing</p>
                         <h2 className="text-2xl font-bold text-text-primary sm:text-3xl">Transparent, Zone-Based Pricing</h2>
@@ -459,15 +465,15 @@ export function HomePage() {
                         <p className="mx-auto mt-2 max-w-xl text-xs text-text-muted">
                             Shown below are Zone A prices, Zones B and C are slightly higher. See full pricing for all zones.
                         </p>
-                        <div className="mt-6 flex flex-wrap justify-center gap-6">
+                        <div className="mt-6 grid grid-cols-3 gap-3 sm:gap-6">
                             {siteConfig.pricing.services.slice(0, 3).map((s) => (
                                 <div key={s.slug} className="text-center">
-                                    <p className="text-xl font-bold text-brand-light">
+                                    <p className="text-lg sm:text-xl font-bold text-brand-light">
                                         £{s.zoneA}
                                         <VatLabel />
                                     </p>
                                     <p className="text-[10px] font-medium uppercase tracking-wide text-text-muted">Zone A</p>
-                                    <p className="text-xs text-text-muted mt-1">{s.name.split('(')[0].trim()}</p>
+                                    <p className="text-[11px] sm:text-xs text-text-muted mt-1 leading-tight">{s.name.split('(')[0].trim()}</p>
                                 </div>
                             ))}
                         </div>
@@ -519,12 +525,12 @@ export function HomePage() {
                         View All Photos
                     </CTAButton>
                 </div>
-                <div className="mt-8 grid grid-cols-2 gap-3 md:grid-cols-4">
+                <div className="mt-8 grid grid-cols-2 gap-3 md:grid-cols-4 xl:grid-cols-6">
                     {galleryPreview.map((img, i) => (
                         <Link
                             key={img.src}
                             to="/our-work"
-                            className="reveal group relative aspect-[4/3] overflow-hidden rounded-xl"
+                            className={`reveal group relative aspect-[4/3] overflow-hidden rounded-xl${i >= 4 ? ' hidden xl:block' : ''}`}
                             style={{ transitionDelay: `${i * 0.08}s` }}
                         >
                             <OptimizedImage
@@ -550,7 +556,7 @@ export function HomePage() {
                         Practical guides on common van faults, emissions issues, and what proper diagnostics looks like.
                     </p>
                 </div>
-                <div className="mx-auto mt-10 max-w-4xl grid gap-4 sm:grid-cols-3">
+                <div className="mx-auto mt-10 max-w-4xl grid gap-4 sm:grid-cols-3 lg:max-w-none xl:gap-6">
                     {latestPosts.map((post, i) => (
                         <Link
                             key={post.slug}
@@ -617,7 +623,7 @@ export function HomePage() {
                     <OptimizedImage src="/images/cta-bg.jpg" alt="" className="h-full w-full object-cover" aria-hidden="true" />
                     <div className="absolute inset-0 bg-gradient-to-r from-brand-dark/90 to-brand/80" />
                 </div>
-                <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 md:py-20">
+                <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 md:py-20 xl:max-w-[1600px] xl:px-10 xl:py-28 2xl:max-w-[2200px] 2xl:py-32">
                     <div className="text-center reveal">
                         <h2 className="text-3xl font-bold text-white sm:text-4xl md:text-5xl">
                             Need help today?

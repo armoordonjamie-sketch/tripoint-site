@@ -267,7 +267,7 @@ export function ContactPage() {
                                             <option value="diagnostics">Diagnostics</option>
                                             <option value="servicing">Servicing</option>
                                             <option value="brakes">Brakes</option>
-                                            <option value="tuning">Tuning</option>
+                                            <option value="tuning">Remapping</option>
                                             <option value="other">Other</option>
                                         </select>
                                     </div>
