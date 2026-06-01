@@ -81,7 +81,7 @@ export function CitanServicingPage() {
     return (
         <div ref={scrollRef}>
             <Seo
-                title="Citan Servicing"
+                title="Mobile Mercedes Citan Servicing"
                 description="Mobile Mercedes Citan servicing. Minor from \u00a3175 (ex. VAT), major from \u00a3295 (ex. VAT). Genuine parts, service reset, full inspection at your door. W415 and W420."
                 canonical="/services/citan-servicing"
             />

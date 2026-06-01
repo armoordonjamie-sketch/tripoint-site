@@ -70,13 +70,13 @@ export function FleetVanTuningPage() {
     return (
         <div ref={scrollRef}>
             <Seo
-                title="Fleet Van Tuning"
-                description="Fleet van tuning packages. Consistent drivability across your fleet with volume pricing and site-day rates. All van makes. From \u00a3199 (ex. VAT) per vehicle."
+                title="Fleet Van Remapping - 3+ Vans"
+                description="Fleet van remapping - consistent power and driveability across your fleet, volume pricing and depot visits. All makes. From \u00a3199 + VAT per van. Kent & SE London."
                 canonical="/services/fleet-van-tuning"
             />
             <ServiceSchema
-                name="Fleet Van Tuning"
-                description="Fleet van tuning - volume pricing, site-day rates, diagnostic pre-check included. All van makes."
+                name="Fleet Van Remapping"
+                description="Fleet van remapping - volume pricing, depot visits, diagnostic pre-check included. All van makes."
                 url="/services/fleet-van-tuning"
                 priceFrom={199}
                 offerCatalogItems={[
@@ -101,7 +101,7 @@ export function FleetVanTuningPage() {
                 <div className="absolute bottom-0 left-0 right-0 z-10 p-6 sm:p-10">
                     <div className="mx-auto max-w-5xl">
                         <p className="text-sm font-semibold uppercase tracking-widest text-blue-400 mb-2">Fleet Operators</p>
-                        <h1 className="text-4xl font-extrabold text-text-primary sm:text-5xl lg:text-6xl">Fleet Van Tuning</h1>
+                        <h1 className="text-4xl font-extrabold text-text-primary sm:text-5xl lg:text-6xl">Fleet Van Remapping</h1>
                         <p className="mt-3 max-w-xl text-lg text-text-secondary">3+ vehicles &bull; Volume pricing &bull; Depot visits &bull; All makes</p>
                     </div>
                 </div>

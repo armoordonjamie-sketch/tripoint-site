@@ -116,9 +116,9 @@ export const siteConfig = {
                 zoneC: 199,
                 included: 'Mobile brake service - front pads from £169 + VAT',
             },
-            // Commercial Van Tuning
+            // Commercial Van Remapping
             {
-                name: 'Van Load & Driveability Tune',
+                name: 'Van Power & Driveability Remap',
                 slug: 'van-load-driveability-tune',
                 zoneA: 199,
                 zoneB: 214,
@@ -126,7 +126,7 @@ export const siteConfig = {
                 included: 'Diagnostic pre-check + Stage 1 calibration',
             },
             {
-                name: 'Van Economy Tune',
+                name: 'Van Economy Remap',
                 slug: 'van-economy-tune',
                 zoneA: 199,
                 zoneB: 214,
@@ -134,7 +134,7 @@ export const siteConfig = {
                 included: 'Diagnostic pre-check + economy calibration',
             },
             {
-                name: 'Fleet Van Tuning',
+                name: 'Fleet Van Remapping',
                 slug: 'fleet-van-tuning',
                 zoneA: 199,
                 zoneB: 214,

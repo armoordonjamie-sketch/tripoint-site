@@ -57,7 +57,7 @@ export function VitoBrakesPage() {
 
     return (
         <div ref={scrollRef}>
-            <Seo title="Vito Brakes" description="Mobile Vito W447 brake service. Front pads from £169 (ex. VAT), front pads and discs from £319 (ex. VAT). Fixed-price brake packages at your location." canonical="/services/vito-brakes" />
+            <Seo title="Mobile Mercedes Vito Brakes" description="Mobile Vito W447 brake service. Front pads from £169 (ex. VAT), front pads and discs from £319 (ex. VAT). Fixed-price brake packages at your location." canonical="/services/vito-brakes" />
             <ServiceSchema
                 name="Vito Brakes"
                 description="Mobile Mercedes Vito W447 brake service - front and rear pads and discs fitted at your location."

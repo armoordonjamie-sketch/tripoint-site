@@ -81,7 +81,7 @@ export function SprinterServicingPage() {
     return (
         <div ref={scrollRef}>
             <Seo
-                title="Sprinter Servicing"
+                title="Mobile Mercedes Sprinter Servicing"
                 description="Mobile Mercedes Sprinter servicing. Minor from \u00a3175 (ex. VAT), major from \u00a3295 (ex. VAT). Genuine parts, Xentry service reset, and full inspection at your door. W906 and W907/W910."
                 canonical="/services/sprinter-servicing"
             />

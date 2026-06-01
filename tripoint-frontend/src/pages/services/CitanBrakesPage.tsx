@@ -61,7 +61,7 @@ export function CitanBrakesPage() {
 
     return (
         <div ref={scrollRef}>
-            <Seo title="Citan Brakes" description="Mobile Citan brake service. Front pads from £169 (ex. VAT), front pads and discs from £319 (ex. VAT). Fixed-price brake packages for W415 and W420 at your location." canonical="/services/citan-brakes" />
+            <Seo title="Mobile Mercedes Citan Brakes" description="Mobile Citan brake service. Front pads from £169 (ex. VAT), front pads and discs from £319 (ex. VAT). Fixed-price brake packages for W415 and W420 at your location." canonical="/services/citan-brakes" />
             <ServiceSchema
                 name="Citan Brakes"
                 description="Mobile Mercedes Citan brake service - front and rear pads and discs fitted at your location."

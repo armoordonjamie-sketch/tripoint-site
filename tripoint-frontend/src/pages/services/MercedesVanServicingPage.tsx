@@ -107,7 +107,7 @@ export function MercedesVanServicingPage() {
     return (
         <div ref={scrollRef}>
             <Seo
-                title="Mercedes Van Servicing"
+                title="Mobile Mercedes Van Servicing - Sprinter, Vito & Citan"
                 description="Mobile Mercedes van servicing for Sprinter, Vito, and Citan. Minor from \u00a3175 (ex. VAT), major from \u00a3295 (ex. VAT). Genuine parts, Xentry service reset. Kent and SE London."
                 canonical="/services/mercedes-van-servicing"
             />

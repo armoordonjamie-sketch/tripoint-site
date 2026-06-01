@@ -91,7 +91,7 @@ export function PrePurchaseHealthCheckPage() {
     return (
         <div ref={scrollRef}>
             <Seo
-                title="Pre-Purchase Digital Health Check"
+                title="Mobile Pre-Purchase Van Inspection & Health Check"
                 description="Professional pre-purchase vehicle inspection with deep scan and buyer risk summary. Know what you're buying before you commit. From £160 (ex. VAT)."
                 canonical="/services/pre-purchase-digital-health-check"
             />

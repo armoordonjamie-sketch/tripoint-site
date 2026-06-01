@@ -61,7 +61,7 @@ export function SprinterBrakesPage() {
     return (
         <div ref={scrollRef}>
             <Seo
-                title="Sprinter Brakes"
+                title="Mobile Mercedes Sprinter Brakes"
                 description="Mobile Sprinter brake service. Front pads from £149 (ex. VAT), front pads and discs from £329 (ex. VAT). Fixed-price brake packages for W906 and W907 at your location."
                 canonical="/services/sprinter-brakes"
             />

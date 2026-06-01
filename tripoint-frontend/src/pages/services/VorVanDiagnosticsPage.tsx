@@ -72,7 +72,7 @@ export function VorVanDiagnosticsPage() {
     return (
         <div ref={scrollRef}>
             <Seo
-                title="VOR Diagnosis - Priority Commercial Vehicle Diagnostics"
+                title="VOR Van Diagnostics - Same-Day Mobile Triage"
                 description="Vehicle Off Road priority diagnostic for vans and commercial vehicles. Fast triage and back-on-road decisions. Fleet, hire, depot. From £160 (ex. VAT)."
                 canonical="/services/vor-van-diagnostics"
             />

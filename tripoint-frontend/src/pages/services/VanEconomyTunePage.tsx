@@ -72,13 +72,13 @@ export function VanEconomyTunePage() {
     return (
         <div ref={scrollRef}>
             <Seo
-                title="Van Economy Tune"
-                description="Van economy tuning for smoother cruising and potential fuel savings. Diagnostic pre-check included. All van makes. From \u00a3199 (ex. VAT)."
+                title="Van Economy Remap - Better MPG"
+                description="Van economy remap for smoother cruising and potential fuel savings. Diagnostic pre-check included. Mobile, all makes. From \u00a3199 + VAT, Kent & SE London."
                 canonical="/services/van-economy-tune"
             />
             <ServiceSchema
-                name="Van Economy Tune"
-                description="Van economy tuning - smoother power delivery, lower RPM cruising, potential fuel savings. All van makes."
+                name="Van Economy Remap"
+                description="Van economy remap - smoother power delivery, lower RPM cruising, potential fuel savings. All van makes."
                 url="/services/van-economy-tune"
                 priceFrom={199}
                 offerCatalogItems={[
@@ -102,8 +102,8 @@ export function VanEconomyTunePage() {
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(16,185,129,0.18),transparent_70%)]" />
                 <div className="absolute bottom-0 left-0 right-0 z-10 p-6 sm:p-10">
                     <div className="mx-auto max-w-5xl">
-                        <p className="text-sm font-semibold uppercase tracking-widest text-emerald-400 mb-2">Commercial Van Tuning</p>
-                        <h1 className="text-4xl font-extrabold text-text-primary sm:text-5xl lg:text-6xl">Economy Tune</h1>
+                        <p className="text-sm font-semibold uppercase tracking-widest text-emerald-400 mb-2">Commercial Van Remapping</p>
+                        <h1 className="text-4xl font-extrabold text-text-primary sm:text-5xl lg:text-6xl">Economy Remap</h1>
                         <p className="mt-3 max-w-xl text-lg text-text-secondary">Smoother cruising &bull; Lower running costs &bull; All van makes</p>
                     </div>
                 </div>

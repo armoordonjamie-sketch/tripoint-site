@@ -33,6 +33,7 @@ const SERVICE_TYPES = [
     'Mercedes van servicing (Sprinter, Vito, Citan)',
     'Mobile brake service',
     'Commercial van tuning',
+    'Van ECU remapping (Stage 1)',
 ];
 
 const sameAsSocial = [

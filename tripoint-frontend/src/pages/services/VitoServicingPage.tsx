@@ -76,7 +76,7 @@ export function VitoServicingPage() {
     return (
         <div ref={scrollRef}>
             <Seo
-                title="Vito Servicing"
+                title="Mobile Mercedes Vito Servicing"
                 description="Mobile Mercedes Vito servicing. Minor from \u00a3175 (ex. VAT), major from \u00a3295 (ex. VAT). Genuine parts, Xentry service reset, full inspection at your door. W639 and W447."
                 canonical="/services/vito-servicing"
             />
