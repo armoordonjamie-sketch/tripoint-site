@@ -103,6 +103,10 @@ export function AppRoutes() {
                     <Route path="services/transit-custom-remap" element={<ModelRemapPage slug="transit-custom-remap" />} />
                     <Route path="services/vw-transporter-remap" element={<ModelRemapPage slug="vw-transporter-remap" />} />
                     <Route path="services/vw-caddy-remap" element={<ModelRemapPage slug="vw-caddy-remap" />} />
+                    <Route path="services/ford-transit-remap" element={<ModelRemapPage slug="ford-transit-remap" />} />
+                    <Route path="services/vauxhall-vivaro-remap" element={<ModelRemapPage slug="vauxhall-vivaro-remap" />} />
+                    <Route path="services/mercedes-sprinter-remap" element={<ModelRemapPage slug="mercedes-sprinter-remap" />} />
+                    <Route path="services/mercedes-vito-remap" element={<ModelRemapPage slug="mercedes-vito-remap" />} />
 
                     <Route path="pricing" element={<PricingPage />} />
                     <Route path="areas-covered" element={<CoveragePage />} />

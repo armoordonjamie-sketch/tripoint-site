@@ -108,6 +108,114 @@ export const remapModels: Record<string, RemapModel> = {
             { question: 'Is it reversible and do I tell my insurer?', answer: 'Your original file is backed up and fully reversible. Declare the remap to your insurer - we provide a written handover note for your records.' },
         ],
     },
+    'ford-transit-remap': {
+        slug: 'ford-transit-remap',
+        brand: 'Ford',
+        model: 'Transit',
+        fullName: 'Ford Transit',
+        seoTitle: 'Ford Transit Remap - Mobile Stage 1, Kent & SE London',
+        seoDescription:
+            'Mobile Ford Transit remap (Stage 1) for the 2.0 EcoBlue and 2.2/2.4 TDCi: more usable power and driveability, or better economy. Reversible, insurance note. From £199 + VAT.',
+        heroSub: '2.0 EcoBlue & 2.2/2.4 TDCi · Stage 1 · Mobile',
+        engines:
+            'For the full-size Ford Transit - 2.0 EcoBlue and earlier 2.2/2.4 TDCi. Driving the smaller Transit Custom? See our Transit Custom remap. Send your reg to confirm.',
+        intro:
+            'The full-size Ford Transit earns its keep hauling heavy loads, and the factory map is a broad compromise. A Stage 1 remap adds usable mid-range torque for loaded and towing work, sharpens throttle response, and can smooth out economy on long runs. We tune it mobile after a full diagnostic pre-check, with your original file backed up and fully reversible.',
+        gains: [
+            'Stronger low- and mid-range pull for heavy loads',
+            'Easier towing and motorway merging',
+            'Sharper throttle response, less turbo lag',
+            'Smoother cruising and potential economy gains',
+            'Calibrated within safe engine and gearbox limits',
+        ],
+        faqs: [
+            { question: 'Is this for the big Transit or the Transit Custom?', answer: 'This page is for the full-size Ford Transit. For the smaller, more common Transit Custom, see our Transit Custom remap - same process, model-specific map.' },
+            { question: 'Will it pass the MOT?', answer: 'Yes. We keep the DPF, EGR and emissions equipment intact - no deletes. A compliant remap passes the MOT like a standard van.' },
+            { question: 'Power or economy - which should I choose?', answer: 'Heavy loads and towing suit a power and driveability map; high-mileage motorway work suits an economy map. Tell us how you use it and we will advise.' },
+            { question: 'Is it reversible and do I tell my insurer?', answer: 'Your original file is backed up and fully reversible. Declare the remap to your insurer - we provide a written handover note for your records.' },
+        ],
+    },
+    'vauxhall-vivaro-remap': {
+        slug: 'vauxhall-vivaro-remap',
+        brand: 'Vauxhall',
+        model: 'Vivaro',
+        fullName: 'Vauxhall Vivaro',
+        seoTitle: 'Vauxhall Vivaro Remap - Mobile Stage 1, Kent & SE London',
+        seoDescription:
+            'Mobile Vauxhall Vivaro remap (Stage 1): more usable power and driveability, or better economy. Diagnostic pre-check, fully reversible, insurance note. From £199 + VAT.',
+        heroSub: '1.6 CDTi & 1.5/2.0 diesel · Stage 1 · Mobile',
+        engines:
+            'Covers the Vivaro across generations - the Renault-platform 1.6 CDTi and the current 1.5/2.0 diesel (shared with the Renault Trafic). Send your reg to confirm.',
+        intro:
+            'The Vauxhall Vivaro is a trade-van staple, and the stock map leaves usable torque on the table. A Stage 1 remap gives cleaner pull-away, stronger mid-range for loaded work, and the option of an economy focus for high-mileage drivers. We tune it mobile after a diagnostic pre-check, original file backed up and fully reversible.',
+        gains: [
+            'Cleaner pull-away and stronger mid-range when loaded',
+            'Sharper throttle response, less hesitation',
+            'Smoother cruising and potential economy gains',
+            'Reduced gear hunting on inclines',
+            'Tuned within safe engine limits',
+        ],
+        faqs: [
+            { question: 'Which Vivaro engines do you remap?', answer: 'The Renault-era 1.6 CDTi and the current 1.5/2.0 diesel. Send your reg and we will confirm coverage for your exact model and engine.' },
+            { question: 'Will it pass the MOT?', answer: 'Yes. We keep the DPF, EGR and emissions equipment intact - no deletes. A compliant remap passes the MOT like a standard van.' },
+            { question: 'Power or economy - which should I choose?', answer: 'Loaded, stop-start trade work suits a power and driveability map; high-mileage runs suit an economy map. Tell us how you use the van and we will advise.' },
+            { question: 'Is it reversible and do I tell my insurer?', answer: 'Your original file is backed up and fully reversible. Declare the remap to your insurer - we provide a written handover note for your records.' },
+        ],
+    },
+    'mercedes-sprinter-remap': {
+        slug: 'mercedes-sprinter-remap',
+        brand: 'Mercedes',
+        model: 'Sprinter',
+        fullName: 'Mercedes Sprinter',
+        seoTitle: 'Mercedes Sprinter Remap - Mobile Stage 1, Kent & SE London',
+        seoDescription:
+            'Mobile Mercedes Sprinter remap (Stage 1) for OM651 and OM654 (W906/W907): more usable power and driveability, or better economy. Diagnostic-first, reversible. From £199 + VAT.',
+        heroSub: 'OM651 & OM654 · W906 / W907 · Stage 1 · Mobile',
+        engines:
+            'Covers the Sprinter W906 and W907 - OM651 and OM654 diesel. Mercedes vans are our core specialism. Send your reg to confirm your exact engine.',
+        intro:
+            "The Mercedes Sprinter is the UK's workhorse van, and it is our core specialism. A Stage 1 remap adds usable torque for loaded and towing work, sharpens throttle response, and can smooth motorway economy - all calibrated after a full dealer-level diagnostic pre-check, with your original file backed up and fully reversible. We are Mercedes van specialists first, tuners second.",
+        gains: [
+            'Stronger loaded and towing pull',
+            'Sharper throttle and reduced turbo lag',
+            'Smoother motorway cruising and potential economy gains',
+            'Diagnostic-first: we tune only a healthy engine',
+            'Calibrated within safe OM651 / OM654 limits',
+        ],
+        faqs: [
+            { question: 'Are you actually Mercedes specialists?', answer: 'Yes - Mercedes vans are our core specialism, with dealer-level Xentry/STAR tooling. Every remap starts with a proper diagnostic pre-check, so we tune only a healthy engine.' },
+            { question: 'Will it pass the MOT and keep AdBlue working?', answer: 'Yes. We keep the DPF, EGR and AdBlue/SCR intact - no deletes. Everything stays road-legal and MOT-compliant.' },
+            { question: 'Power or economy - which should I choose?', answer: 'Loaded and towing work suits a power and driveability map; high-mileage motorway work suits an economy map. Tell us how you use it and we will advise.' },
+            { question: 'Is it reversible and do I tell my insurer?', answer: 'Your original file is backed up and fully reversible. Declare the remap to your insurer - we provide a written handover note for your records.' },
+        ],
+    },
+    'mercedes-vito-remap': {
+        slug: 'mercedes-vito-remap',
+        brand: 'Mercedes',
+        model: 'Vito',
+        fullName: 'Mercedes Vito',
+        seoTitle: 'Mercedes Vito Remap - Mobile Stage 1, Kent & SE London',
+        seoDescription:
+            'Mobile Mercedes Vito remap (Stage 1) for OM651 and OM654 (W447): more usable power and driveability, or better economy. Diagnostic-first, reversible. From £199 + VAT.',
+        heroSub: 'OM651 & OM654 · W447 · Stage 1 · Mobile',
+        engines:
+            'Covers the Vito W447 (and earlier W639) - OM651 and OM654 diesel. Mercedes vans are our core specialism. Send your reg to confirm your exact engine.',
+        intro:
+            'The Mercedes Vito works hard as a panel van, crew cab and taxi, and the stock map is a broad compromise. A Stage 1 remap adds usable torque and sharper response for loaded and stop-start work, or an economy focus for high-mileage drivers. Tuned after a dealer-level diagnostic pre-check, with your original file backed up and fully reversible.',
+        gains: [
+            'Stronger pull for loaded and stop-start work',
+            'Sharper throttle response, less hesitation',
+            'Smoother cruising and potential economy gains',
+            'Diagnostic-first: we tune only a healthy engine',
+            'Calibrated within safe OM651 / OM654 limits',
+        ],
+        faqs: [
+            { question: 'Are you Mercedes specialists?', answer: 'Yes - Mercedes vans are our core specialism, with dealer-level Xentry/STAR tooling. Every remap starts with a diagnostic pre-check, so we tune only a healthy engine.' },
+            { question: 'Will it pass the MOT and keep AdBlue working?', answer: 'Yes. We keep the DPF, EGR and AdBlue/SCR intact - no deletes. Everything stays road-legal and MOT-compliant.' },
+            { question: 'Power or economy - which should I choose?', answer: 'Loaded and stop-start work suits a power and driveability map; high-mileage runs suit an economy map. Tell us how you use it and we will advise.' },
+            { question: 'Is it reversible and do I tell my insurer?', answer: 'Your original file is backed up and fully reversible. Declare the remap to your insurer - we provide a written handover note for your records.' },
+        ],
+    },
 };
 
 export const remapModelList = Object.values(remapModels);

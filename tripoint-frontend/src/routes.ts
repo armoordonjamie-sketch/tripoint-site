@@ -342,6 +342,46 @@ export const routeManifest: RouteEntry[] = [
         changefreq: 'weekly',
         indexable: true,
     },
+    {
+        path: '/services/ford-transit-remap',
+        title: 'Ford Transit Remap - Mobile Stage 1, Kent & SE London',
+        description:
+            'Mobile Ford Transit remap (Stage 1) for the 2.0 EcoBlue and 2.2/2.4 TDCi: more usable power and driveability, or better economy. Reversible, insurance note.',
+        canonicalPath: '/services/ford-transit-remap',
+        priority: 0.7,
+        changefreq: 'weekly',
+        indexable: true,
+    },
+    {
+        path: '/services/vauxhall-vivaro-remap',
+        title: 'Vauxhall Vivaro Remap - Mobile Stage 1, Kent & SE London',
+        description:
+            'Mobile Vauxhall Vivaro remap (Stage 1): more usable power and driveability, or better economy. Diagnostic pre-check, reversible, insurance note.',
+        canonicalPath: '/services/vauxhall-vivaro-remap',
+        priority: 0.7,
+        changefreq: 'weekly',
+        indexable: true,
+    },
+    {
+        path: '/services/mercedes-sprinter-remap',
+        title: 'Mercedes Sprinter Remap - Mobile Stage 1, Kent & SE London',
+        description:
+            'Mobile Mercedes Sprinter remap (Stage 1) for OM651 and OM654 (W906/W907): more usable power and driveability, or better economy. Diagnostic-first, reversible.',
+        canonicalPath: '/services/mercedes-sprinter-remap',
+        priority: 0.7,
+        changefreq: 'weekly',
+        indexable: true,
+    },
+    {
+        path: '/services/mercedes-vito-remap',
+        title: 'Mercedes Vito Remap - Mobile Stage 1, Kent & SE London',
+        description:
+            'Mobile Mercedes Vito remap (Stage 1) for OM651 and OM654 (W447): more usable power and driveability, or better economy. Diagnostic-first, reversible.',
+        canonicalPath: '/services/mercedes-vito-remap',
+        priority: 0.7,
+        changefreq: 'weekly',
+        indexable: true,
+    },
     // Areas covered (6 surviving pages + new Medway page)
     {
         path: '/areas-covered/greenwich',
