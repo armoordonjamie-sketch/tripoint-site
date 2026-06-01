@@ -48,7 +48,8 @@ const breadcrumbLd = {
 
 export function BlogIndexPage() {
     const [filter, setFilter] = useState('All');
-    const filtered = filter === 'All' ? blogPosts : blogPosts.filter((p) => p.category === filter);
+    const sorted = [...blogPosts].sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
+    const filtered = filter === 'All' ? sorted : sorted.filter((p) => p.category === filter);
 
     return (
         <>

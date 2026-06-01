@@ -11,6 +11,26 @@ import { trackNavClick, trackSelectContent } from '@/lib/analytics';
 
 /* ── Per-post related reading links ── */
 const relatedReadingBySlug: Record<string, { label: string; href: string }[]> = {
+    'sprinter-obd-port-location': [
+        { label: 'Sprinter Limp Mode: What a Proper Diagnostic Looks Like', href: '/blog/sprinter-limp-mode-proper-diagnostic' },
+        { label: 'Mercedes Sprinter Warning Lights: A Plain-English Survival Guide', href: '/blog/sprinter-warning-lights-explained' },
+        { label: 'Standard Diagnosis', href: '/services/diagnostic-callout' },
+    ],
+    'sprinter-warning-lights-explained': [
+        { label: 'Mercedes Engine Management Light On', href: '/blog/mercedes-eml-on' },
+        { label: 'AdBlue Countdown: Why Clearing Codes Is Not a Fix', href: '/blog/adblue-countdown-clearing-codes-not-fix' },
+        { label: 'Standard Diagnosis', href: '/services/diagnostic-callout' },
+    ],
+    'van-underpowered-software-limited': [
+        { label: 'Does Remapping a Van Actually Improve MPG?', href: '/blog/does-remapping-a-van-improve-mpg' },
+        { label: 'Van Remapping', href: '/services/van-remapping' },
+        { label: 'VW Transporter Remap', href: '/services/vw-transporter-remap' },
+    ],
+    'does-remapping-a-van-improve-mpg': [
+        { label: 'Is Your Van Secretly Underpowered?', href: '/blog/van-underpowered-software-limited' },
+        { label: 'Van Economy Remap', href: '/services/van-economy-tune' },
+        { label: 'Van Remapping', href: '/services/van-remapping' },
+    ],
     'om654-turbo-failure-sprinter-vito': [
         { label: 'Mercedes Sprinter Servicing', href: '/services/sprinter-servicing' },
         { label: 'Mercedes Vito Servicing', href: '/services/vito-servicing' },
@@ -72,6 +92,8 @@ const serviceSlugToHref: Record<string, string> = {
     'van-load-driveability-tune': '/services/van-load-driveability-tune',
     'van-economy-tune': '/services/van-economy-tune',
     'fleet-van-tuning': '/services/fleet-van-tuning',
+    'van-remapping': '/services/van-remapping',
+    'vor-van-diagnostics': '/services/vor-van-diagnostics',
 };
 
 function serviceHrefToContentId(href: string): string {
@@ -97,9 +119,11 @@ const serviceSlugToLabel: Record<string, string> = {
     'sprinter-brakes': 'Sprinter Brakes',
     'vito-brakes': 'Vito Brakes',
     'citan-brakes': 'Citan Brakes',
-    'van-load-driveability-tune': 'Van Load & Driveability Tune',
-    'van-economy-tune': 'Van Economy Tune',
-    'fleet-van-tuning': 'Fleet Van Tuning',
+    'van-load-driveability-tune': 'Van Power & Driveability Remap',
+    'van-economy-tune': 'Van Economy Remap',
+    'fleet-van-tuning': 'Fleet Van Remapping',
+    'van-remapping': 'Van Remapping',
+    'vor-van-diagnostics': 'VOR Van Diagnostics',
 };
 
 export function BlogPostPage() {

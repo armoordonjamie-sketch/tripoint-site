@@ -95,7 +95,9 @@ const galleryPreview = [
 ];
 
 /* Blog teaser - latest 3 posts */
-const latestPosts = blogPosts.slice(0, 3);
+const latestPosts = [...blogPosts]
+    .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
+    .slice(0, 3);
 
 export function HomePage() {
     const scrollRef = useScrollReveal();

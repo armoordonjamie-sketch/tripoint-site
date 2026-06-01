@@ -654,6 +654,47 @@ export const routeManifest: RouteEntry[] = [
         changefreq: 'monthly',
         indexable: true,
     },
+    // Van remap / diagnostics blog posts
+    {
+        path: '/blog/sprinter-obd-port-location',
+        title: "Where's the OBD Port on a Mercedes Sprinter? (And Why a £15 Reader Won't Save You)",
+        description:
+            'Where to find the OBD/diagnostic port on a Mercedes Sprinter, and an honest word on why a cheap plug-in reader rarely fixes anything.',
+        canonicalPath: '/blog/sprinter-obd-port-location',
+        priority: 0.5,
+        changefreq: 'monthly',
+        indexable: true,
+    },
+    {
+        path: '/blog/sprinter-warning-lights-explained',
+        title: 'Mercedes Sprinter Warning Lights: A Plain-English Survival Guide',
+        description:
+            'Every Mercedes Sprinter dashboard warning light in plain English - which mean stop now, which mean book it in soon, and which you can mostly ignore.',
+        canonicalPath: '/blog/sprinter-warning-lights-explained',
+        priority: 0.5,
+        changefreq: 'monthly',
+        indexable: true,
+    },
+    {
+        path: '/blog/van-underpowered-software-limited',
+        title: 'Is Your Van Secretly Underpowered? The Software Handbrake Nobody Mentions',
+        description:
+            'Many vans leave the factory with power locked in software - the same engine sold at different outputs. What a Stage 1 remap can and cannot unlock.',
+        canonicalPath: '/blog/van-underpowered-software-limited',
+        priority: 0.5,
+        changefreq: 'monthly',
+        indexable: true,
+    },
+    {
+        path: '/blog/does-remapping-a-van-improve-mpg',
+        title: 'Does Remapping a Van Actually Improve MPG? An Honest Answer (No Magic Beans)',
+        description:
+            'Will a remap really save fuel? A straight answer - what genuinely changes, realistic numbers, and why anyone promising +10 MPG is having you on.',
+        canonicalPath: '/blog/does-remapping-a-van-improve-mpg',
+        priority: 0.5,
+        changefreq: 'monthly',
+        indexable: true,
+    },
     // Legal
     {
         path: '/legal/privacy-policy',
