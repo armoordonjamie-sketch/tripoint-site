@@ -301,6 +301,47 @@ export const routeManifest: RouteEntry[] = [
         changefreq: 'weekly',
         indexable: true,
     },
+    // Van Remapping (hub + model landing pages)
+    {
+        path: '/services/van-remapping',
+        title: 'Van Remapping - Mobile Stage 1 ECU Remap, Kent & SE London',
+        description:
+            'Mobile van remapping across Kent and South East London. Stage 1 ECU remap for power and driveability or economy, all common vans. Diagnostic pre-check, reversible, no deletes.',
+        canonicalPath: '/services/van-remapping',
+        priority: 0.8,
+        changefreq: 'weekly',
+        indexable: true,
+    },
+    {
+        path: '/services/transit-custom-remap',
+        title: 'Ford Transit Custom Remap - Mobile, Kent & SE London',
+        description:
+            'Mobile Ford Transit Custom remap (Stage 1): more usable power and driveability, or better economy. Diagnostic pre-check, fully reversible, insurance note.',
+        canonicalPath: '/services/transit-custom-remap',
+        priority: 0.7,
+        changefreq: 'weekly',
+        indexable: true,
+    },
+    {
+        path: '/services/vw-transporter-remap',
+        title: 'VW Transporter Remap (T5 / T6) - Mobile, Kent & SE London',
+        description:
+            'Mobile VW Transporter remap (Stage 1) for T5, T6 and T6.1 2.0 TDI: more usable power and driveability, or better economy. Reversible, insurance note.',
+        canonicalPath: '/services/vw-transporter-remap',
+        priority: 0.7,
+        changefreq: 'weekly',
+        indexable: true,
+    },
+    {
+        path: '/services/vw-caddy-remap',
+        title: 'VW Caddy Remap - Mobile Stage 1, Kent & SE London',
+        description:
+            'Mobile VW Caddy remap (Stage 1) for the 2.0 TDI: unlock usable power and driveability, or better economy. Diagnostic pre-check, reversible, insurance note.',
+        canonicalPath: '/services/vw-caddy-remap',
+        priority: 0.7,
+        changefreq: 'weekly',
+        indexable: true,
+    },
     // Areas covered (6 surviving pages + new Medway page)
     {
         path: '/areas-covered/greenwich',

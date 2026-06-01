@@ -23,6 +23,9 @@ const CitanBrakesPage = lazy(() => import('@/pages/services/CitanBrakesPage').th
 const VanLoadDriveabilityTunePage = lazy(() => import('@/pages/services/VanLoadDriveabilityTunePage').then((m) => ({ default: m.VanLoadDriveabilityTunePage })));
 const VanEconomyTunePage = lazy(() => import('@/pages/services/VanEconomyTunePage').then((m) => ({ default: m.VanEconomyTunePage })));
 const FleetVanTuningPage = lazy(() => import('@/pages/services/FleetVanTuningPage').then((m) => ({ default: m.FleetVanTuningPage })));
+// Van Remapping (hub + model landing pages)
+const VanRemappingHubPage = lazy(() => import('@/pages/services/VanRemappingHubPage').then((m) => ({ default: m.VanRemappingHubPage })));
+const ModelRemapPage = lazy(() => import('@/pages/services/ModelRemapPage').then((m) => ({ default: m.ModelRemapPage })));
 const PricingPage = lazy(() => import('@/pages/PricingPage').then((m) => ({ default: m.PricingPage })));
 const CoveragePage = lazy(() => import('@/pages/CoveragePage').then((m) => ({ default: m.CoveragePage })));
 const AreaPage = lazy(() => import('@/pages/areas-covered/AreaPage').then((m) => ({ default: m.AreaPage })));
@@ -94,6 +97,12 @@ export function AppRoutes() {
                     <Route path="services/van-load-driveability-tune" element={<VanLoadDriveabilityTunePage />} />
                     <Route path="services/van-economy-tune" element={<VanEconomyTunePage />} />
                     <Route path="services/fleet-van-tuning" element={<FleetVanTuningPage />} />
+
+                    {/* Van Remapping (hub + model pages) */}
+                    <Route path="services/van-remapping" element={<VanRemappingHubPage />} />
+                    <Route path="services/transit-custom-remap" element={<ModelRemapPage slug="transit-custom-remap" />} />
+                    <Route path="services/vw-transporter-remap" element={<ModelRemapPage slug="vw-transporter-remap" />} />
+                    <Route path="services/vw-caddy-remap" element={<ModelRemapPage slug="vw-caddy-remap" />} />
 
                     <Route path="pricing" element={<PricingPage />} />
                     <Route path="areas-covered" element={<CoveragePage />} />

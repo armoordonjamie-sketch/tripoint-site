@@ -77,9 +77,9 @@ export const CATEGORY_META: Record<
         navColumn: 'border-t-amber-500/60',
     },
     tuning: {
-        label: 'Tuning',
-        short: 'Tune',
-        desc: 'Load, economy, fleet tuning',
+        label: 'Remapping',
+        short: 'Remap',
+        desc: 'Power, economy & fleet remaps',
         Icon: TrendingUp,
         accent: ['from-violet-500/20', 'to-fuchsia-500/5'],
         tabRing: 'ring-violet-500/40',
@@ -192,8 +192,18 @@ export const SERVICES_BY_CATEGORY: Record<ServiceCategoryId, CatalogService[]> =
     ],
     tuning: [
         {
-            title: 'Van Load & Driveability Tune',
-            description: 'Better loaded pull after diagnostic pre-check.',
+            title: 'Van Remapping',
+            description: 'Stage 1 remap for power & driveability or economy. All makes.',
+            href: '/services/van-remapping',
+            priceSlug: 'van-load-driveability-tune',
+            fallbackPrice: 199,
+            Icon: TrendingUp,
+            SvgIcon: IconLoadTune,
+            thumbnailSrc: '/images/services/van-sprinter-w907-front.png',
+        },
+        {
+            title: 'Van Power & Driveability Remap',
+            description: 'More usable power and torque for loaded work, after a diagnostic pre-check.',
             href: '/services/van-load-driveability-tune',
             priceSlug: 'van-load-driveability-tune',
             fallbackPrice: 199,
@@ -202,7 +212,7 @@ export const SERVICES_BY_CATEGORY: Record<ServiceCategoryId, CatalogService[]> =
             thumbnailSrc: '/images/services/van-sprinter-w907-front.png',
         },
         {
-            title: 'Van Economy Tune',
+            title: 'Van Economy Remap',
             description: 'Economy calibration for high-mileage vans.',
             href: '/services/van-economy-tune',
             priceSlug: 'van-economy-tune',
@@ -212,8 +222,8 @@ export const SERVICES_BY_CATEGORY: Record<ServiceCategoryId, CatalogService[]> =
             thumbnailSrc: '/images/services/van-sprinter-w907-front.png',
         },
         {
-            title: 'Fleet Van Tuning',
-            description: 'Site-day fleet tuning with volume pricing.',
+            title: 'Fleet Van Remapping',
+            description: 'Site-day fleet remapping with volume pricing.',
             href: '/services/fleet-van-tuning',
             priceSlug: 'fleet-van-tuning',
             fallbackPrice: 199,
