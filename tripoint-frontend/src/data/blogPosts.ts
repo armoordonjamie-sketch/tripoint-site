@@ -1502,6 +1502,767 @@ export const blogPosts: BlogPost[] = [
             { question: 'Is an economy remap worth the money?', answer: "For high-mileage drivers, usually yes - often recovered within a few tanks. For low-mileage town vans, probably not, and we'll say so." },
             { question: 'Will it harm my engine?', answer: 'No - we only tune healthy engines and stay within safe limits. We are mechanics first, tuners second.' },
         ],
+    },
+    {
+        slug: 'sprinter-egr-valve-symptoms-cleaning',
+        title: 'Mercedes Sprinter EGR Valve: Symptoms, Location & Clean vs Replace',
+        description:
+            'Sprinter EGR valve playing up? The symptoms, where the valve and cooler sit on the OM651/OM654, and the honest answer on when a clean fixes it versus when it needs replacing.',
+        category: 'Diagnostics',
+        publishedAt: '2026-06-02',
+        updatedAt: '2026-06-02',
+        ogImage: '/images/diag_photos/egr-pipe-oil.jpg',
+        ogImageAlt: 'Oil-soaked EGR pipe removed from a Mercedes van engine',
+        thumbnail: '/images/diag_photos/egr-pipe-oil.jpg',
+        author: 'Jamie Armoordon',
+        relatedServices: ['diagnostic-callout', 'vor-van-diagnostics'],
+        content: `
+            <div class="blog-lead">A sticking Sprinter EGR valve usually shows up as a rough idle, reduced power or limp mode, an engine management light, and often a P0401 (low EGR flow) code. The valve and its cooler sit on the engine's recirculation path on the OM651/OM654. A carboned-up but mechanically sound valve can often be cleaned; a failed motor, seized valve or cracked cooler needs replacing. The trick is diagnosing flow and actuation before anyone buys a part.</div>
+
+            <h2>Symptoms of a failing EGR valve</h2>
+            <p>The EGR (Exhaust Gas Recirculation) valve feeds a measured amount of exhaust back into the intake to lower combustion temperatures and NOx. When it sticks - usually with soot - the engine's fuelling goes out of step and the van lets you know:</p>
+            <ul class="blog-checklist">
+                <li>Rough or hunting idle, hesitation under load</li>
+                <li>Reduced power or outright limp mode</li>
+                <li>Engine management light, frequently with <a href="/blog/sprinter-p0401-egr-fault">P0401 - insufficient EGR flow</a></li>
+                <li>More smoke than usual, poorer MPG, sometimes a faint exhaust smell in the cab</li>
+            </ul>
+
+            <div class="blog-takeaway">
+                <span class="takeaway-label">Key point</span>
+                <p>A blocked or stuck EGR is one of the most common limp-mode triggers we see on Sprinters - and one of the most commonly <strong>misdiagnosed</strong>, because the same symptoms overlap with turbo, sensor and DPF faults.</p>
+            </div>
+
+            <hr class="blog-divider"/>
+
+            <h2>Where the EGR valve and cooler are</h2>
+            <p>On the OM651 and OM654 the EGR valve sits in the intake/exhaust recirculation path, with the EGR cooler nearby using engine coolant to drop the exhaust-gas temperature before it re-enters the intake. Exact placement shifts between engine and model year, so it's not always the same bolt-for-bolt job.</p>
+
+            <div class="blog-callout">
+                <p>Watch the cooler, not just the valve. A <strong>cracked EGR cooler</strong> can leak coolant internally - white smoke, dropping coolant, a sweet smell - which is a more serious (and pricier) fault than a sooted valve, and needs ruling in or out properly.</p>
+            </div>
+
+            <hr class="blog-divider"/>
+
+            <h2>Clean vs replace - the honest answer</h2>
+            <div class="blog-step"><span class="step-num">1</span> <strong>Cleaning works when</strong> the valve is mechanically sound but carboned up and sticking. A proper clean, plus a check that it actuates correctly, can restore the right flow.</div>
+            <div class="blog-step"><span class="step-num">2</span> <strong>Replacement is needed when</strong> the valve motor or position sensor has failed, the valve is seized, or the cooler is cracked or leaking.</div>
+            <p>A guided diagnostic compares <em>commanded</em> position against <em>actual</em> position and flow before anything is touched. That's how you avoid the classic mistake: paying for a shiny new EGR valve when the real problem was a sensor, a blocked intake, or a vacuum/wiring fault upstream.</p>
+
+            <h2>A word on "EGR delete"</h2>
+            <p>Blanking or removing the EGR on a road-going Sprinter is illegal in the UK and an automatic MOT failure - it's emissions tampering. We diagnose and repair so the van stays road-legal and insurable. If a garage offers to "just delete it," that's a red flag, not a fix.</p>
+
+            <p>EGR symptoms overlap heavily with limp mode, turbo and DPF faults, so we read it properly first - see <a href="/blog/sprinter-limp-mode-proper-diagnostic">what a proper limp-mode diagnostic looks like</a>. <a href="/services/diagnostic-callout">Book a mobile EGR diagnostic</a> across Kent and SE London and we'll confirm the fault before any parts go near your van.</p>
+        `,
+        faqs: [
+            { question: 'Can a blocked EGR valve cause limp mode?', answer: 'Yes - restricted or stuck EGR flow is one of the most common limp-mode triggers on a Sprinter, often logging a P0401 code.' },
+            { question: 'Is cleaning the EGR a permanent fix?', answer: 'If the valve is otherwise healthy, a proper clean often holds for a long time. If the motor or sensor is worn, the fault will return - that one needs replacement.' },
+            { question: 'Do you carry out EGR diagnostics at my location?', answer: 'Yes - we are mobile across Kent and SE London with dealer-level XENTRY/STAR, and we confirm the actual fault before recommending clean or replace.' },
+        ],
+    },
+    {
+        slug: 'mercedes-sprinter-diagnostic-cost',
+        title: 'How Much Does a Mercedes Sprinter Diagnostic Cost? (UK 2026)',
+        description:
+            'What a Mercedes van diagnostic really costs in the UK - dealer vs independent vs mobile - why a £30 code read is not a diagnostic, and what you should get for the money.',
+        category: 'Diagnostics',
+        publishedAt: '2026-06-02',
+        updatedAt: '2026-06-02',
+        ogImage: '/images/new-images/xentry-on-mercedes-engine.jpg',
+        ogImageAlt: 'Dealer-level XENTRY diagnostics connected to a Mercedes van engine',
+        thumbnail: '/images/new-images/xentry-on-mercedes-engine.jpg',
+        author: 'Jamie Armoordon',
+        relatedServices: ['diagnostic-callout', 'vor-van-diagnostics'],
+        content: `
+            <div class="blog-lead">In the UK in 2026 you'll typically pay around £100-£150 for a diagnostic at a main dealer, £40-£90 at an independent garage, and from £120+VAT for a proper mobile dealer-level diagnostic that comes to you. The cheap £20-£40 "plug-in code reads" only list codes - a real diagnostic interprets live data and finds the cause, which is the bit that actually saves you money.</div>
+
+            <h2>Typical UK diagnostic prices (2026)</h2>
+            <p>Prices vary by where you go and what you actually get for it:</p>
+            <ul class="blog-checklist">
+                <li><strong>Main dealer</strong> - typically £100-£150+. Brand tooling and dealer rates, but you take the van in and leave it.</li>
+                <li><strong>Independent garage</strong> - around £40-£90. Varies hugely; often a code read plus a brief look.</li>
+                <li><strong>Fast-fit / chain</strong> - £30-£50. Usually a basic code scan, nothing more.</li>
+                <li><strong>Mobile specialist (us)</strong> - from £120+VAT. Dealer-level XENTRY/STAR, full module scan, live data and a written root-cause outcome, at your location.</li>
+            </ul>
+
+            <div class="blog-callout">
+                <p>The headline price is the least interesting number. The one that matters is <strong>what you walk away knowing</strong> - a code, or a cause. Those are very different products at surprisingly similar prices.</p>
+            </div>
+
+            <hr class="blog-divider"/>
+
+            <h2>Why the cheapest option often costs the most</h2>
+            <p>A £30 "diagnostic" is usually just a code read. If the wrong part gets fitted off the back of it - and a generic P-code points at a system, not a part - you pay for the part, the labour, and then the actual diagnostic you should have had first. We've lost count of the vans that arrive having already had a "new sensor" or two that were never the problem.</p>
+
+            <div class="blog-takeaway">
+                <span class="takeaway-label">The honest bit</span>
+                <p>Proper diagnosis isn't the expensive option - it's the one that stops you buying parts your van doesn't need. The real cost of a cheap code read is the repair it sends you off to do twice.</p>
+            </div>
+
+            <hr class="blog-divider"/>
+
+            <h2>What you should get for the money</h2>
+            <p>A diagnostic worth paying for includes a scan of <em>all</em> control units (not just the engine), live data captured and compared against Mercedes specs - boost, rail pressure, NOx, DPF differential pressure - freeze-frame analysis, guided tests where relevant, and a clear written outcome: what's wrong, how urgent, and what the repair involves. For vans that are off the road, our <a href="/services/vor-van-diagnostics">VOR priority</a> service gets you a back-on-road decision fast.</p>
+
+            <p>See exact figures on our <a href="/pricing">pricing page</a>, or <a href="/services/diagnostic-callout">book a mobile diagnostic</a> across Kent and SE London - dealer-level kit at your door, from £120+VAT.</p>
+        `,
+        faqs: [
+            { question: 'How much does Mercedes charge for a diagnostic test?', answer: 'Main dealers are typically £100-£150+. Independents and mobile specialists are often the same or less for an equivalent - or deeper - read.' },
+            { question: 'Is a mobile diagnostic more expensive than a garage?', answer: 'Not necessarily. You save the trip and the downtime, and you get dealer-level tooling and a written root-cause report at your door, from £120+VAT.' },
+            { question: 'Is a £30 code read worth it?', answer: 'It tells you a code exists, not why. For a quick "is the light real" check it has its place, but it is not a diagnosis and should never be the basis for fitting parts.' },
+        ],
+    },
+    {
+        slug: 'sprinter-adblue-tank-topping-up',
+        title: 'Mercedes Sprinter AdBlue: Tank Location, Capacity & Topping Up Without Causing a Fault',
+        description:
+            'Where the AdBlue tank is on a Mercedes Sprinter, roughly how much it holds, how to top up properly, and the top-up mistakes that trigger an AdBlue fault.',
+        category: 'Diagnostics',
+        publishedAt: '2026-06-02',
+        updatedAt: '2026-06-02',
+        ogImage: '/images/new-images/mercedes-oil-level-on-dash.jpg',
+        ogImageAlt: 'Mercedes van dashboard showing a fluid-level message',
+        thumbnail: '/images/new-images/mercedes-oil-level-on-dash.jpg',
+        author: 'Jamie Armoordon',
+        relatedServices: ['diagnostic-callout', 'vor-van-diagnostics'],
+        content: `
+            <div class="blog-lead">On most Sprinters the AdBlue (DEF) filler has a blue cap, usually sat next to the diesel filler or under the bonnet, and the tank holds roughly 22 litres - check your handbook for your exact model and year. Top up with fresh, sealed AdBlue to the right spec (ISO 22241), add a decent amount rather than a splash, then drive - the warning normally clears itself within a short run. If it doesn't clear, you've got a system fault, not a fluid problem.</div>
+
+            <h2>Where the tank and filler are</h2>
+            <ul class="blog-checklist">
+                <li><strong>W907 (2018 on):</strong> usually a blue filler cap beside the diesel filler.</li>
+                <li><strong>W906 (2006-2018):</strong> often under the bonnet or behind a separate flap.</li>
+            </ul>
+            <p>Exact placement varies by year and build, so if in doubt, the handbook wins.</p>
+
+            <div class="blog-callout">
+                <p>The one mistake that ruins your week: <strong>never put AdBlue in the diesel tank, or diesel in the AdBlue tank.</strong> Cross-contamination is an expensive, tow-truck sort of error - the blue cap is blue for a reason.</p>
+            </div>
+
+            <hr class="blog-divider"/>
+
+            <h2>How to top up properly</h2>
+            <div class="blog-step"><span class="step-num">1</span> Use <strong>fresh, sealed AdBlue</strong> to ISO 22241 - not an old open bottle from the back of the garage; it degrades.</div>
+            <div class="blog-step"><span class="step-num">2</span> Add a sensible amount (e.g. 10 litres), not a tiny splash, so the sensor actually registers the change.</div>
+            <div class="blog-step"><span class="step-num">3</span> Avoid spills on paint and connectors, and keep dirt out of the tank.</div>
+            <div class="blog-step"><span class="step-num">4</span> Turn the ignition on and drive - the countdown or warning should clear within a short run.</div>
+
+            <hr class="blog-divider"/>
+
+            <h2>When topping up won't clear the warning</h2>
+            <p>If the light stays on, or you see "AdBlue system fault" or "X starts remaining", the cause usually isn't low fluid - it's a <strong>NOx sensor, an SCR/metering fault, crystallisation, or a quality-sensor issue</strong>. Clearing the code won't fix it (here's <a href="/blog/adblue-countdown-clearing-codes-not-fix">why clearing the AdBlue countdown isn't a fix</a>), and on a Vito it's much the same story - see <a href="/blog/vito-adblue-fault">the Vito AdBlue fault guide</a>.</p>
+
+            <div class="blog-takeaway">
+                <span class="takeaway-label">Don't ignore the countdown</span>
+                <p>If the dash is counting down "starts remaining", that's a hard deadline. Run it to zero and the van may simply refuse to restart - sort it before then, not after.</p>
+            </div>
+
+            <p>Disabling the SCR/AdBlue system ("AdBlue delete") is illegal on a road van and an MOT failure - we diagnose and repair it instead. <a href="/services/vor-van-diagnostics">Book a mobile AdBlue/SCR diagnostic</a> across Kent and SE London.</p>
+        `,
+        faqs: [
+            { question: 'How much AdBlue does a Sprinter hold?', answer: 'Roughly 22 litres on most modern Sprinters, but it varies by model and year - check your handbook for the exact figure.' },
+            { question: 'How do I reset the AdBlue warning?', answer: 'Top up correctly with fresh fluid and drive; a genuine low-level warning clears itself. If it persists, it is a system fault that needs diagnosis, not a reset.' },
+            { question: 'Can I drive with the AdBlue light on?', answer: 'Briefly - but if it is counting down "starts remaining", the van may refuse to restart once it reaches zero. Act before then.' },
+        ],
+    },
+    {
+        slug: 'sprinter-wont-start-loss-of-power',
+        title: "Mercedes Sprinter Won't Start or Loss of Power: A Diagnostic Checklist",
+        description:
+            "Sprinter won't start, cutting out, or down on power? A specialist's checklist of the common causes - and why a proper diagnostic finds the real one faster than guessing at parts.",
+        category: 'Diagnostics',
+        publishedAt: '2026-06-02',
+        updatedAt: '2026-06-02',
+        ogImage: '/images/diag_photos/multimeter-voltage.jpg',
+        ogImageAlt: 'Multimeter checking voltage during a van no-start diagnosis',
+        thumbnail: '/images/diag_photos/multimeter-voltage.jpg',
+        author: 'Jamie Armoordon',
+        relatedServices: ['vor-van-diagnostics', 'diagnostic-callout'],
+        content: `
+            <div class="blog-lead">A Sprinter that won't start usually points to fuel delivery (rail pressure, pump, blocked filter), electrical faults (battery, glow plugs, immobiliser or key), or a stored fault forcing a no-start to protect the engine. Sudden loss of power is most often turbo/boost, an EGR or DPF restriction, fuel pressure, or a sensor fault tripping limp mode. The fastest route to a fix is a full read - guessing at parts on a dead van gets expensive quickly.</div>
+
+            <h2>If it won't start at all</h2>
+            <ul class="blog-checklist">
+                <li><strong>Battery / charging</strong> - a weak battery or alternator fault (often there's a battery light beforehand).</li>
+                <li><strong>Glow plugs / preheat</strong> - hard cold starting on a diesel.</li>
+                <li><strong>Fuel</strong> - low rail pressure, a failing fuel pump, a blocked filter, or air in the system.</li>
+                <li><strong>Immobiliser / key</strong> - no-crank, or crank-but-no-start, with a security fault.</li>
+                <li><strong>Stored fault</strong> - the ECU can inhibit starting to protect the engine.</li>
+            </ul>
+
+            <hr class="blog-divider"/>
+
+            <h2>If it starts but loses power or goes into limp mode</h2>
+            <ul class="blog-checklist">
+                <li><strong>Turbo / boost</strong> - under- or over-boost: <a href="/blog/sprinter-p0299-turbo-underboost">P0299</a> and <a href="/blog/sprinter-p0234-turbo-overboost">P0234</a>.</li>
+                <li><strong>EGR / DPF restriction</strong> - <a href="/blog/sprinter-p0401-egr-fault">EGR P0401</a> and <a href="/blog/sprinter-p2463-dpf-soot-accumulation">DPF soot P2463</a>.</li>
+                <li><strong>Fuel pressure or sensors</strong> - rail pressure, MAF, boost-pressure sensor.</li>
+                <li><strong>Overheating</strong> - a coolant temperature warning with power loss means stop now, before you damage the engine.</li>
+            </ul>
+
+            <div class="blog-callout">
+                <p>Low AdBlue can stop a Sprinter starting too - once the "starts remaining" countdown hits zero, that's by design. If you've had AdBlue warnings, start there: <a href="/blog/adblue-countdown-clearing-codes-not-fix">the AdBlue countdown explained</a>.</p>
+            </div>
+
+            <hr class="blog-divider"/>
+
+            <h2>Why a checklist isn't a diagnosis</h2>
+            <p>These are the usual suspects - but two vans with identical symptoms can have completely different causes. A cranking-but-no-start could be fuel pressure on one van and a crank sensor on the next. A full XENTRY/STAR scan with live data narrows it to the actual fault fast, instead of throwing a battery, then a pump, then a sensor at it and hoping.</p>
+
+            <div class="blog-takeaway">
+                <span class="takeaway-label">Off the road?</span>
+                <p>Our <strong>VOR priority</strong> service is built for exactly this - a stranded or no-power van gets a same-visit back-on-road decision wherever possible, at your location.</p>
+            </div>
+
+            <p>Stranded or down on power? <a href="/services/vor-van-diagnostics">Book a VOR priority diagnostic</a> - we come to you across Kent and SE London.</p>
+        `,
+        faqs: [
+            { question: 'Why does my Sprinter start then cut out?', answer: 'Often fuel delivery or a sensor fault, and sometimes immobiliser-related. It needs a live-data read to confirm which - the symptom alone does not pin it down.' },
+            { question: 'Can low AdBlue stop a Sprinter starting?', answer: 'Yes - once the AdBlue "starts remaining" countdown reaches zero, the van is designed not to restart until the SCR issue is resolved.' },
+            { question: 'Do you cover breakdowns?', answer: 'Yes - we offer priority VOR diagnostics across Kent and SE London and come to you, whether the van is at home, a depot, or the roadside.' },
+        ],
+    },
+    {
+        slug: 'sprinter-dpf-clean-regen-or-replace',
+        title: 'Sprinter DPF Blocked: Clean, Force Regen or Replace? (Costs Explained)',
+        description:
+            'A blocked DPF on your Mercedes Sprinter - force a regen, clean it, or replace it? An honest decision guide with UK cost ranges, and why finding the cause comes first.',
+        category: 'Diagnostics',
+        publishedAt: '2026-06-02',
+        updatedAt: '2026-06-02',
+        ogImage: '/images/diag_photos/intake-manifold-blocked.jpg',
+        ogImageAlt: 'Soot-blocked intake from a diesel van, related to DPF and emissions problems',
+        thumbnail: '/images/diag_photos/intake-manifold-blocked.jpg',
+        author: 'Jamie Armoordon',
+        relatedServices: ['diagnostic-callout', 'vor-van-diagnostics'],
+        content: `
+            <div class="blog-lead">A blocked Sprinter DPF can often be recovered with a forced regeneration if the soot levels and the underlying engine are healthy. A heavily loaded but undamaged filter may need off-vehicle cleaning. A filter that's cracked, melted or full of ash needs replacing. The step everyone skips - and the one that actually matters - is diagnosing <em>why</em> it blocked, so it doesn't just block again next month.</div>
+
+            <h2>Step 1 - why did it block?</h2>
+            <p>DPFs block because regeneration isn't completing: lots of short stop-start journeys that never get the filter hot enough, a fault stopping regens (EGR, turbo, sensors), or a differential-pressure sensor reading wrong and lying about how full it is. Fix the cause first - more on that in <a href="/blog/dpf-warning-light-regen-vs-worse">when a regen helps vs when it makes things worse</a> and <a href="/blog/mercedes-p2002-dpf-fault">P2002 DPF efficiency</a>.</p>
+
+            <div class="blog-callout">
+                <p>Forcing regen after regen on a filter that keeps blocking is treating the symptom. If the cause is an EGR fault or a wrong sensor reading, you'll be back here in a fortnight - poorer, and no wiser.</p>
+            </div>
+
+            <hr class="blog-divider"/>
+
+            <h2>Step 2 - clean, regen or replace?</h2>
+            <div class="blog-step"><span class="step-num">1</span> <strong>Forced regeneration</strong> - soot (not ash) is high, the filter and engine are healthy. The cheapest route. See <a href="/blog/sprinter-p2463-dpf-soot-accumulation">P2463 soot accumulation</a>.</div>
+            <div class="blog-step"><span class="step-num">2</span> <strong>Off-vehicle cleaning</strong> - heavy soot or ash, but the filter is structurally sound.</div>
+            <div class="blog-step"><span class="step-num">3</span> <strong>Replacement</strong> - cracked, melted, ash-saturated, or efficiency permanently below threshold.</div>
+
+            <h2>Indicative UK costs (2026)</h2>
+            <ul class="blog-checklist">
+                <li><strong>Diagnostic + forced regen</strong> - from roughly £120-£200</li>
+                <li><strong>Off-vehicle DPF clean</strong> - around £250-£450</li>
+                <li><strong>DPF replacement (genuine)</strong> - £1,000+</li>
+            </ul>
+            <p>Ranges vary by model and fault - a diagnostic gives you the real number for your van rather than a guess off a forum.</p>
+
+            <div class="blog-takeaway">
+                <span class="takeaway-label">Why "DPF delete" isn't on the menu</span>
+                <p>Removing a DPF from a road van is illegal in the UK and an automatic MOT failure - the test has checked for a fitted filter since 2014. We recover and repair filters to keep you legal, not strip them out.</p>
+            </div>
+
+            <p><a href="/services/diagnostic-callout">Book a DPF diagnostic</a> - we find why it blocked before recommending regen, clean or replace, mobile across Kent and SE London from £120+VAT.</p>
+        `,
+        faqs: [
+            { question: 'Can a blocked DPF be cleaned instead of replaced?', answer: 'Often yes, if it is not cracked, melted or ash-saturated. A heavily sooted but sound filter can be cleaned or recovered; a structurally damaged one cannot.' },
+            { question: 'How do I force a DPF regen on a Sprinter?', answer: 'It needs the right conditions and proper tooling. A guided forced regen via XENTRY is the safe way - done incorrectly, a forced regen can make things considerably worse.' },
+            { question: 'Why does my DPF keep blocking?', answer: 'Usually short-journey driving that never completes a regen, or an unfixed underlying fault (EGR, turbo, sensor). Until the cause is fixed, it will keep returning.' },
+        ],
+    },
+    {
+        slug: 'are-sprinters-expensive-to-repair',
+        title: 'Are Mercedes Sprinters Expensive to Repair? An Honest Specialist Guide',
+        description:
+            'Are Mercedes Sprinters costly to run and repair? A mobile Mercedes van specialist on the big-ticket faults, realistic costs, and how early diagnosis keeps the bills small.',
+        category: 'Mercedes',
+        publishedAt: '2026-06-02',
+        updatedAt: '2026-06-02',
+        ogImage: '/images/diag_photos/sump-off-crank.jpg',
+        ogImageAlt: 'Major engine repair underway on a Mercedes van with the sump removed',
+        thumbnail: '/images/diag_photos/sump-off-crank.jpg',
+        author: 'Jamie Armoordon',
+        relatedServices: ['vor-van-diagnostics', 'sprinter-servicing'],
+        content: `
+            <div class="blog-lead">Mercedes Sprinters aren't unusually expensive to repair <em>if</em> faults are caught early and diagnosed properly - they're a durable, high-mileage commercial platform. The costs spike when emissions faults (DPF, EGR, AdBlue/SCR) or turbo issues get ignored, or "fixed" by clearing codes until something lets go. The big-ticket items are turbo, DPF replacement and SCR repairs - and most are avoidable.</div>
+
+            <h2>The faults that cost the most</h2>
+            <ul class="blog-checklist">
+                <li><strong>Turbo</strong> - under/overboost and OM654 turbo wear: <a href="/blog/om654-turbo-failure-sprinter-vito">OM654 turbo failures</a> and <a href="/blog/sprinter-p0299-turbo-underboost">P0299</a>.</li>
+                <li><strong>DPF</strong> - replacement runs into four figures if it's left to ash-saturate: <a href="/blog/sprinter-dpf-clean-regen-or-replace">clean vs replace</a>.</li>
+                <li><strong>AdBlue / SCR</strong> - NOx sensors and metering faults: <a href="/blog/adblue-countdown-clearing-codes-not-fix">the AdBlue countdown</a>.</li>
+                <li><strong>EGR</strong> - sooting and flow faults: <a href="/blog/sprinter-egr-valve-symptoms-cleaning">the EGR valve guide</a>.</li>
+            </ul>
+
+            <div class="blog-takeaway">
+                <span class="takeaway-label">The pattern</span>
+                <p>Almost every expensive Sprinter repair we see started life as a cheap, fixable fault that got ignored or mis-fixed. A warning light caught early - and <strong>diagnosed rather than reset</strong> - is the difference between a sensor and a turbo.</p>
+            </div>
+
+            <hr class="blog-divider"/>
+
+            <h2>Why early diagnosis is the cheapest insurance</h2>
+            <p>The platform is built for serious mileage; neglect, not the design, drives most of the big bills. A £40 sensor that triggers a light, left alone, can take out a turbo or cook a DPF - and now it's a £1,500 job. Reading the fault when the light first appears is the cheapest money you'll ever spend on the van. See exactly why <a href="/blog/adblue-countdown-clearing-codes-not-fix">clearing codes isn't a fix</a>.</p>
+
+            <h2>Buying a used Sprinter or Vito?</h2>
+            <p>A Pre-Purchase Digital Health Check reads every module, flags hidden or recently cleared faults and emissions issues, and tells you what you're actually buying before the money changes hands. A clean-looking dash on a test drive hides a lot - cleared codes don't show up to the naked eye.</p>
+
+            <p>Buying or running a Sprinter or Vito? <a href="/services/vor-van-diagnostics">Book a pre-purchase health check or diagnostic</a> across Kent and SE London.</p>
+        `,
+        faqs: [
+            { question: 'Are Mercedes Sprinters reliable?', answer: 'As a platform, yes - they are built for high mileage. Most big bills come from neglected emissions or turbo faults, not from the design itself.' },
+            { question: "What's the most expensive common Sprinter repair?", answer: 'Turbo or DPF replacement, both of which run into four figures - and both are largely avoidable with early diagnosis and proper servicing.' },
+            { question: 'Is it worth getting a used Sprinter checked before buying?', answer: 'Absolutely. Cleared fault codes hide problems a test drive will not reveal - a pre-purchase health check reads every module for what is really going on.' },
+        ],
+    },
+    {
+        slug: 'sprinter-ecu-remap-mpg-power-legal',
+        title: 'Mercedes Sprinter ECU Remap: Better MPG, More Power - and Is It Legal?',
+        description:
+            'Thinking about a Mercedes Sprinter remap? What it can realistically do for MPG and power, what it cannot, the legal and insurance facts, and how to do it properly.',
+        category: 'Remapping',
+        publishedAt: '2026-06-02',
+        updatedAt: '2026-06-02',
+        ogImage: '/images/new-images/mercedes-sprinter-driving-pov.jpg',
+        ogImageAlt: "Driver's view from a Mercedes Sprinter cab on the road",
+        thumbnail: '/images/new-images/mercedes-sprinter-driving-pov.jpg',
+        author: 'Jamie Armoordon',
+        relatedServices: ['mercedes-sprinter-remap', 'van-remapping', 'van-load-driveability-tune'],
+        content: `
+            <div class="blog-lead">A properly done Sprinter ECU remap can improve drivability and economy and add safe power within the engine and gearbox's limits - most owners notice stronger low-end response and steadier MPG under load. It must keep the emissions equipment intact to stay road-legal: a remap is fine, but anything that disables the DPF, EGR or AdBlue is illegal and an MOT failure. And it should only ever be done on a healthy, fault-free engine.</div>
+
+            <h2>What a remap can realistically do</h2>
+            <ul class="blog-checklist">
+                <li>Smoother power delivery and stronger low-end torque for a loaded van</li>
+                <li>Modest, sustainable economy gains on motorway and long-haul use</li>
+                <li>Tuned to your use case - <a href="/services/van-economy-tune">economy</a> or <a href="/services/van-load-driveability-tune">power and driveability</a> (you can't fully maximise both at once)</li>
+            </ul>
+            <p>For the full picture on fuel, read the honest version: <a href="/blog/does-remapping-a-van-improve-mpg">does remapping a van actually improve MPG?</a></p>
+
+            <div class="blog-callout">
+                <p>The Sprinter is our specialism, so we tune it the way we diagnose it - conservatively, on a healthy engine, with the original file backed up. No silly numbers, no chasing a forum brag.</p>
+            </div>
+
+            <hr class="blog-divider"/>
+
+            <h2>What it can't (and shouldn't) do</h2>
+            <ul>
+                <li>It won't fix a mechanical fault - a worn turbo or blocked DPF needs <a href="/services/diagnostic-callout">repairing first</a>.</li>
+                <li>It mustn't disable emissions systems. DPF/EGR/AdBlue delete is illegal for UK road use and an MOT failure - we don't do it.</li>
+                <li>It's a modification, so there are insurance implications: you must declare it (we give you a written note to do so).</li>
+            </ul>
+
+            <h2>Why we diagnose before we remap</h2>
+            <p>We only remap a healthy engine. A pre-remap diagnostic confirms there are no underlying boost, fuel or emissions faults first - because remapping over a fault just masks it, like turning the radio up to drown out a knock. See how we approach faults in <a href="/blog/sprinter-limp-mode-proper-diagnostic">what a proper limp-mode diagnostic looks like</a>.</p>
+
+            <div class="blog-takeaway">
+                <span class="takeaway-label">The legal bit, settled</span>
+                <p>A Sprinter remap is <strong>legal, MOT-safe, insurable and reversible</strong> - provided no emissions kit is deleted and you declare it. Full detail in <a href="/blog/is-a-van-remap-legal-mot">is a van remap legal?</a></p>
+            </div>
+
+            <p>Want a remap done properly, on a healthy engine? See the <a href="/services/mercedes-sprinter-remap">Mercedes Sprinter remap page</a> or get in touch - diagnostic-led tuning across Kent and SE London.</p>
+        `,
+        faqs: [
+            { question: "Will a remap improve my Sprinter's MPG?", answer: 'It can, especially under load on longer runs when tuned for economy - typically a believable few mpg, never a guaranteed figure.' },
+            { question: 'Is remapping a Sprinter legal?', answer: 'Yes, provided the emissions equipment stays intact and you declare the modification to your insurer. Deleting the DPF, EGR or AdBlue is not legal.' },
+            { question: 'Can you remap at my location?', answer: 'Yes - mobile across Kent and SE London, always after a diagnostic health check confirms the engine is fault-free.' },
+        ],
+    },
+    {
+        slug: 'vito-w447-common-problems',
+        title: 'Mercedes Vito (W447) Common Problems Every Owner & Buyer Should Know',
+        description:
+            'The most common Mercedes Vito W447 problems - limp mode, AdBlue/SCR, DPF, EGR and gearbox niggles - what they tend to cost, and how to check before you buy.',
+        category: 'Mercedes',
+        publishedAt: '2026-06-02',
+        updatedAt: '2026-06-02',
+        ogImage: '/images/diag_photos/multimeter-in-use.jpg',
+        ogImageAlt: 'Electrical diagnostics being carried out on a Mercedes Vito',
+        thumbnail: '/images/diag_photos/multimeter-in-use.jpg',
+        author: 'Jamie Armoordon',
+        relatedServices: ['vor-van-diagnostics', 'vito-servicing', 'diagnostic-callout'],
+        content: `
+            <div class="blog-lead">The most common Mercedes Vito (W447) issues are emissions-related - AdBlue/SCR faults, DPF blockages and EGR problems - plus the usual diesel wear items (turbo, sensors) and the occasional gearbox or clutch niggle. Most start as a warning light or limp mode and are far cheaper to fix early. A full diagnostic, and a pre-purchase check on used vans, catches them before they turn into big bills.</div>
+
+            <h2>The faults Vito owners see most</h2>
+            <ul class="blog-checklist">
+                <li><strong>AdBlue / SCR</strong> - warning lights and "starts remaining" countdowns: <a href="/blog/vito-adblue-fault">Mercedes Vito AdBlue fault</a>.</li>
+                <li><strong>DPF</strong> - blockages from short-journey use: <a href="/blog/sprinter-dpf-clean-regen-or-replace">clean vs replace</a>.</li>
+                <li><strong>EGR</strong> - sooting and flow faults, shared with the Sprinter (OM651/OM654): <a href="/blog/sprinter-egr-valve-symptoms-cleaning">the EGR valve guide</a>.</li>
+                <li><strong>Turbo / boost</strong> - limp mode from under- or over-boost.</li>
+                <li><strong>Gearbox / clutch</strong> - niggles on higher-mileage examples.</li>
+            </ul>
+
+            <div class="blog-callout">
+                <p>The Vito shares most of its engine and emissions hardware with the Sprinter, so the faults - and the diagnostic approach - are largely the same. If you've read our Sprinter guides, you already know the cast of characters.</p>
+            </div>
+
+            <hr class="blog-divider"/>
+
+            <h2>W447 vs W639</h2>
+            <p>The current Vito is the <strong>W447</strong> (2014 on); the older shape is the <strong>W639</strong>. Engine and emissions hardware overlap heavily with the Sprinter (OM651/OM654), which is exactly why our Sprinter content applies so cleanly to the Vito - and why a Mercedes van specialist is the right call over a general garage.</p>
+
+            <h2>Buying a used Vito?</h2>
+            <p>A Pre-Purchase Digital Health Check reads every module for hidden or recently cleared faults - especially around AdBlue and DPF, where a suspiciously clean dash can hide an expensive problem the seller would rather you didn't find.</p>
+
+            <div class="blog-takeaway">
+                <span class="takeaway-label">Most big Vito bills are avoidable</span>
+                <p>As a platform the Vito is solid. The costs come from neglected emissions faults left to escalate - not from the van itself. Catch them early and it's an affordable workhorse.</p>
+            </div>
+
+            <p>Vito warning light, limp mode, or thinking of buying one? <a href="/services/vor-van-diagnostics">Book a mobile Vito diagnostic or pre-purchase check</a> across Kent and SE London.</p>
+        `,
+        faqs: [
+            { question: 'Are Mercedes Vitos reliable?', answer: 'Generally yes - most big costs come from neglected emissions faults rather than the platform, which is built for high commercial mileage.' },
+            { question: "What's the most common Vito fault?", answer: 'AdBlue/SCR and DPF issues lead the list, followed by EGR sooting and turbo/boost faults - all shared with the Sprinter.' },
+            { question: 'Can you diagnose a Vito at my home?', answer: 'Yes - we are mobile across Kent and SE London with dealer-level XENTRY/STAR, for both fault diagnosis and pre-purchase checks.' },
+        ],
+    },
+    {
+        slug: 'is-remapping-a-van-worth-it',
+        title: 'Is Remapping a Van Worth It? Costs, Savings & Payback Explained',
+        description:
+            'Is a van remap worth the money? Typical UK costs, realistic fuel and driveability gains, payback time, and the cases where it honestly is not worth it.',
+        category: 'Remapping',
+        publishedAt: '2026-06-02',
+        updatedAt: '2026-06-02',
+        ogImage: '/images/new-images/mpg-62-on-merc.jpg',
+        ogImageAlt: 'Mercedes van trip computer showing a strong MPG figure',
+        thumbnail: '/images/new-images/mpg-62-on-merc.jpg',
+        author: 'Jamie Armoordon',
+        relatedServices: ['van-economy-tune', 'van-remapping'],
+        content: `
+            <div class="blog-lead">For a high-mileage working van, a remap is usually worth it - a mobile economy or driveability tune costs from around £199+VAT, and high-mileage drivers often recover that within a few tanks of fuel, plus a noticeably nicer drive. It's less worth it for low-mileage vans, mostly-urban runs, or anyone expecting guaranteed figures. The honest test is your annual mileage and how you load the van.</div>
+
+            <h2>What a van remap costs (UK, mobile)</h2>
+            <ul class="blog-checklist">
+                <li><strong>Economy Tune</strong> - from £199+VAT</li>
+                <li><strong>Power & Driveability Tune</strong> - from £199+VAT</li>
+                <li><strong>Fleet tuning</strong> - volume pricing from around £169 per van for 3+ vehicles</li>
+            </ul>
+            <p>All include a diagnostic pre-check, original-file backup, a road test, and a written insurance handover note. Pricing is fixed and zone-based, confirmed before we attend - no surprises on the day.</p>
+
+            <hr class="blog-divider"/>
+
+            <h2>The payback maths (illustrative, not a promise)</h2>
+            <div class="blog-callout">
+                <p>Take a van doing <strong>30,000 miles a year at 30 mpg</strong>: it burns roughly 4,550 litres of diesel. A believable 3 mpg improvement gets it nearer 4,130 litres - around 400 litres, or roughly £600 a year saved at current pump prices. At £199+VAT, that's a fast payback. A low-mileage town van won't see the same return - and we'll tell you so.</p>
+            </div>
+            <p>Numbers depend on route, load and right foot, so we never promise a figure - read the honest version in <a href="/blog/does-remapping-a-van-improve-mpg">does remapping a van improve MPG?</a></p>
+
+            <hr class="blog-divider"/>
+
+            <h2>Beyond fuel: the driveability win</h2>
+            <p>Even where MPG barely moves, drivers report smoother pulling away, less gear hunting on hills, and a more relaxed drive - which matters a lot on a 10-hour shift. For loaded trade vans that's often the bigger benefit. Not sure which tune fits? See <a href="/blog/economy-tune-vs-load-driveability-tune">economy tune vs load & driveability tune</a>.</p>
+
+            <h2>When it's not worth it</h2>
+            <p>Low annual mileage, short city runs only, a van with an existing fault (fix that first via <a href="/services/diagnostic-callout">diagnostics</a>), or if you want emissions equipment removed - we don't do that, and it's illegal anyway (<a href="/blog/is-a-van-remap-legal-mot">is a van remap legal?</a>).</p>
+
+            <div class="blog-takeaway">
+                <span class="takeaway-label">The honest test</span>
+                <p>High mileage and steady routes? Very likely worth it. Low mileage and short hops? Probably not - and we'd rather say "don't bother" than sell you a tune you won't feel.</p>
+            </div>
+
+            <p><a href="/services/van-economy-tune">Book a tune</a>, or send your reg for fixed pricing - mobile across Kent and SE London.</p>
+        `,
+        faqs: [
+            { question: 'How much does a van remap cost?', answer: 'From around £199+VAT for a mobile economy or driveability tune, with fleet pricing from around £169 per van for 3+ vehicles.' },
+            { question: 'How quickly does a remap pay back?', answer: 'For high-mileage drivers, often within a few tanks of fuel - but fuel savings are never guaranteed and depend on your route, load and driving style.' },
+            { question: 'Is a remap reversible?', answer: 'Yes - we back up your original factory file and can restore it at any time, so a dealer visit or resale is no problem.' },
+        ],
+    },
+    {
+        slug: 'economy-tune-vs-load-driveability-tune',
+        title: 'Economy Tune vs Load & Driveability Tune: Which Does Your Van Need?',
+        description:
+            'Economy remap or load/driveability remap for your van? A clear comparison by how you actually use it - mileage, load and route - so you pick the right one.',
+        category: 'Remapping',
+        publishedAt: '2026-06-02',
+        updatedAt: '2026-06-02',
+        ogImage: '/images/new-images/fuel-price-on-pump.jpg',
+        ogImageAlt: 'Diesel pump price display',
+        thumbnail: '/images/new-images/fuel-price-on-pump.jpg',
+        author: 'Jamie Armoordon',
+        relatedServices: ['van-economy-tune', 'van-load-driveability-tune'],
+        content: `
+            <div class="blog-lead">Choose an Economy Tune if most of your miles are steady motorway and A-road cruising and you want lower running costs. Choose a Load & Driveability Tune if you run loaded, tow, or do stop-start trade work and want stronger low-down pull with less gear hunting. Same careful process, same price point - the difference is purely what the calibration is optimised for.</div>
+
+            <h2>Economy Tune - for steady, high-mileage cruising</h2>
+            <p>Optimised for efficiency: smoother torque lower in the rev range, more progressive boost, leaner steady-state fuelling. Best for couriers, motorway drivers and light-load vans. Details on the <a href="/services/van-economy-tune">Economy Tune page</a>.</p>
+
+            <h2>Load & Driveability Tune - for working, loaded vans</h2>
+            <p>Optimised for usable torque from around 1,500-2,500 rpm, faster boost onset and a sharper throttle - so a loaded van pulls away cleanly and hunts gears less on inclines. Best for trade, delivery-at-weight, and towing. Details on the <a href="/services/van-load-driveability-tune">Power & Driveability page</a>.</p>
+
+            <div class="blog-callout">
+                <p>Quick chooser: <strong>mostly motorway, light or empty, watching fuel?</strong> Economy. <strong>Loaded daily, hills, towing, stop-start trade?</strong> Load & Driveability. <strong>Genuinely mixed?</strong> Either works - tell us how you use it and we'll point you the right way on the day.</p>
+            </div>
+
+            <hr class="blog-divider"/>
+
+            <h2>What's the same either way</h2>
+            <ul class="blog-checklist">
+                <li>A diagnostic pre-check first - we don't tune a faulty van</li>
+                <li>Your original factory file backed up (fully reversible)</li>
+                <li>A road test and a written calibration confirmation</li>
+                <li>An insurance handover note for your records</li>
+                <li>No DPF, EGR or AdBlue deletes - emissions kit stays intact and road-legal</li>
+            </ul>
+            <p>Running three or more vans? A <a href="/services/fleet-van-tuning">fleet tune</a> can mix economy and driveability per vehicle to match each one's job.</p>
+
+            <div class="blog-takeaway">
+                <span class="takeaway-label">In one line</span>
+                <p>Economy is built to save fuel on steady runs; driveability is built to pull harder under load. Pick by how the van actually earns its living, not by which sounds more exciting.</p>
+            </div>
+
+            <p>Not sure which? Send your reg and how you use the van and we'll recommend the right tune - <a href="/services/van-economy-tune">mobile across Kent and SE London</a>.</p>
+        `,
+        faqs: [
+            { question: 'Can I have both an economy and a driveability tune?', answer: 'The two calibrations have different focuses, but some drivers benefit from a blend - we will advise based on your van and how you use it.' },
+            { question: 'Will either tune make my van faster?', answer: 'A driveability tune improves usable torque rather than chasing peak power; neither is about silly top-end numbers, and both stay within safe limits.' },
+            { question: 'Which one saves more fuel?', answer: 'The economy tune is built specifically for efficiency. A driveability tune is built for pulling power, so any fuel saving from it is a bonus rather than the goal.' },
+        ],
+    },
+    {
+        slug: 'is-a-van-remap-legal-mot',
+        title: 'Is a Van Remap Legal? Will It Pass the MOT?',
+        description:
+            'Is remapping a van legal in the UK, and will it still pass the MOT? The honest facts on emissions, DPF/EGR/AdBlue, insurance, and what a compliant remap looks like.',
+        category: 'Remapping',
+        publishedAt: '2026-06-02',
+        updatedAt: '2026-06-02',
+        ogImage: '/images/diag_photos/smoke-leak-test.jpg',
+        ogImageAlt: 'Smoke leak testing a van emissions system during diagnosis',
+        thumbnail: '/images/diag_photos/smoke-leak-test.jpg',
+        author: 'Jamie Armoordon',
+        relatedServices: ['van-remapping', 'van-economy-tune'],
+        content: `
+            <div class="blog-lead">Yes - remapping a van is legal in the UK, and a properly done remap will pass the MOT, provided the emissions equipment stays intact and you declare the modification to your insurer. What's illegal is <em>removing</em> emissions equipment - DPF, EGR or AdBlue/SCR deletes - which is an automatic MOT failure and an offence for road use. We don't do deletes; our tunes keep your van road-legal.</div>
+
+            <h2>What's legal</h2>
+            <ul class="blog-checklist">
+                <li><strong>ECU remapping itself</strong> - tuning the engine map for economy or driveability is permitted.</li>
+                <li><strong>Keeping emissions systems intact</strong> - our calibrations leave the DPF, EGR and AdBlue/SCR fully working.</li>
+                <li><strong>Declaring it</strong> - a remap is a modification, so you must tell your insurer (<a href="/blog/van-remap-insurance-what-to-declare">what to declare</a>).</li>
+            </ul>
+
+            <h2>What's not legal (and we won't do)</h2>
+            <ul>
+                <li><strong>DPF removal/delete</strong> - illegal for road use; the MOT has checked for a fitted DPF since 2014, so it's an instant fail.</li>
+                <li><strong>EGR delete, AdBlue (SCR) delete, decat</strong> - emissions tampering: MOT failure and an offence.</li>
+            </ul>
+
+            <div class="blog-callout">
+                <p>If a "tuner" offers deletes to chase bigger numbers, walk away. It puts your van off the road at MOT time and your business at risk if it's ever inspected - and it's exactly the corner-cutting we refuse to do.</p>
+            </div>
+
+            <hr class="blog-divider"/>
+
+            <h2>Will it pass the MOT?</h2>
+            <p>A compliant remap that keeps the emissions equipment in place and within limits passes the MOT like any standard van. The test checks the DPF is present and the van meets its smoke and emissions limits - not whether the engine map is factory-standard. We tune within conservative, emissions-safe parameters, so there's nothing for the test to catch.</p>
+
+            <div class="blog-takeaway">
+                <span class="takeaway-label">The bottom line</span>
+                <p>A van remap is <strong>legal, MOT-safe and insurable</strong> when it keeps emissions kit intact and is declared. The only way to make it illegal is to start deleting things - which we don't.</p>
+            </div>
+
+            <p>Want a tune done properly and road-legally? <a href="/services/van-remapping">Book with TriPoint</a> - no deletes, full documentation, mobile across Kent and SE London.</p>
+        `,
+        faqs: [
+            { question: 'Is remapping a van illegal?', answer: 'No - remapping itself is legal. What is illegal is removing or disabling emissions equipment such as the DPF, EGR or AdBlue system.' },
+            { question: 'Will a remap fail the MOT?', answer: 'Not if the emissions equipment is intact and within limits. Emissions deletes fail the MOT; a compliant tune passes like a standard van.' },
+            { question: 'Do I have to tell the DVLA about a remap?', answer: 'Not routinely - but you must tell your insurer, because a remap is a modification. We provide a written handover note for exactly that.' },
+        ],
+    },
+    {
+        slug: 'van-remap-insurance-what-to-declare',
+        title: 'Van Remap & Insurance: What You Must Declare (and Why)',
+        description:
+            'Do you have to tell your insurer about a van remap? Yes - exactly what to declare, why it matters, and how a written handover note protects your policy.',
+        category: 'Remapping',
+        publishedAt: '2026-06-02',
+        updatedAt: '2026-06-02',
+        ogImage: '/images/new-images/xentry-on-mercedes-engine.jpg',
+        ogImageAlt: 'Diagnostic and documentation of a van during a remap',
+        thumbnail: '/images/new-images/xentry-on-mercedes-engine.jpg',
+        author: 'Jamie Armoordon',
+        relatedServices: ['van-remapping', 'van-economy-tune'],
+        content: `
+            <div class="blog-lead">Yes - a remap is a modification, and you must declare it to your insurer. Failing to disclose it can invalidate your policy, which means a claim could be refused. Declaring it is straightforward and may have little or no premium impact for a mild economy or driveability tune - and we give you a written handover note detailing exactly what was done, so you have proof for your insurer.</div>
+
+            <h2>Why you must declare it</h2>
+            <p>A remap changes your ECU calibration - that's a modification, and insurers expect to be told about modifications. The risk is non-disclosure: if an undeclared mod comes to light at claim time, the insurer may reduce or refuse the payout, or void the policy entirely. For a working van that's a business-critical risk, and it's simply not worth taking to save a phone call.</p>
+
+            <div class="blog-callout">
+                <p>Declaring a mild tune up front is almost always cheaper than a refused claim later. The premium difference (if any) on an economy or driveability tune is small; the cost of a voided policy after a write-off is not.</p>
+            </div>
+
+            <hr class="blog-divider"/>
+
+            <h2>What to tell your insurer</h2>
+            <ul class="blog-checklist">
+                <li>That the <strong>ECU has been remapped</strong> (the engine calibration has changed).</li>
+                <li>The <strong>type</strong> - economy, driveability or fleet - and that <strong>emissions equipment is unchanged</strong> (no deletes).</li>
+                <li>The <strong>provider</strong>, and that you hold <strong>written documentation</strong> of the work.</li>
+            </ul>
+            <p>Our insurance handover note spells all of this out - keep it with your policy documents so it's to hand if you ever need it.</p>
+
+            <h2>Does it raise the premium?</h2>
+            <p>It varies by insurer and by tune. A mild, emissions-intact economy or driveability tune is a modest change and often has limited premium impact; aggressive power tuning is viewed differently. Either way, declaring honestly is always cheaper than the alternative. And because our tunes keep your van road-legal (<a href="/blog/is-a-van-remap-legal-mot">here's why that matters</a>), there's nothing awkward to explain.</p>
+
+            <div class="blog-takeaway">
+                <span class="takeaway-label">The rule</span>
+                <p>Always declare it. A two-minute call protects a policy worth tens of thousands - and our written note means you can prove exactly what was done.</p>
+            </div>
+
+            <p>Every TriPoint tune comes with a written handover note for your insurer. <a href="/services/van-remapping">Book a tune</a> - mobile across Kent and SE London.</p>
+        `,
+        faqs: [
+            { question: 'Do I have to declare a van remap to my insurer?', answer: 'Yes - always. A remap is a modification, and not declaring it can invalidate your policy and lead to a refused claim.' },
+            { question: 'Will declaring a remap definitely cost more?', answer: 'Not necessarily for a mild economy or driveability tune - it depends on the insurer. Disclose it regardless; the saving from not declaring is never worth the risk.' },
+            { question: 'What proof do I have that the remap was done properly?', answer: 'We issue a written handover note detailing the work and confirming the emissions equipment is intact - keep it with your policy documents.' },
+        ],
+    },
+    {
+        slug: 'ford-transit-remap-what-to-expect',
+        title: 'Ford Transit Remap: What to Expect (Economy vs Power)',
+        description:
+            'Thinking about a Ford Transit remap? What a tune realistically does for MPG, torque and driveability, what it cannot do, and how to keep it legal and insured.',
+        category: 'Remapping',
+        publishedAt: '2026-06-02',
+        updatedAt: '2026-06-02',
+        ogImage: '/images/new-images/mercedes-sprinter-driving-pov.jpg',
+        ogImageAlt: "Driver's view from a van cab on the road",
+        thumbnail: '/images/new-images/mercedes-sprinter-driving-pov.jpg',
+        author: 'Jamie Armoordon',
+        relatedServices: ['transit-custom-remap', 'ford-transit-remap', 'van-remapping'],
+        content: `
+            <div class="blog-lead">A Ford Transit remap can improve drivability and economy on steady runs, or low-down pulling power for loaded work - tuned to whichever you actually need. Gains vary by engine variant (the 2.0 EcoBlue is the common one) and are never guaranteed as exact figures. Done properly it keeps the DPF, EGR and AdBlue intact (road-legal), backs up your original file, is fully reversible, and must be declared to your insurer.</div>
+
+            <h2>Economy or driveability - pick by how you run it</h2>
+            <ul class="blog-checklist">
+                <li><strong>Mostly motorway / courier:</strong> an <a href="/services/van-economy-tune">economy-focused tune</a> for smoother low-rpm cruising and potential MPG gains (typically a few mpg for high-mileage drivers - <a href="/blog/does-remapping-a-van-improve-mpg">the honest MPG explainer</a>).</li>
+                <li><strong>Loaded / trade / towing:</strong> a <a href="/services/van-load-driveability-tune">load & driveability tune</a> for stronger torque and less gear hunting.</li>
+            </ul>
+
+            <div class="blog-callout">
+                <p>We cover both the <a href="/services/transit-custom-remap">Transit Custom</a> and the larger <a href="/services/ford-transit-remap">Transit</a>. Send your reg and we'll confirm the exact engine variant and what's realistic for it - no guessed numbers.</p>
+            </div>
+
+            <hr class="blog-divider"/>
+
+            <h2>What a Transit remap won't (and shouldn't) do</h2>
+            <p>It won't fix a mechanical fault - a worn turbo or blocked DPF needs <a href="/services/diagnostic-callout">diagnosing and repairing first</a>. And it won't involve any DPF, EGR or AdBlue delete - that's illegal and an MOT fail (<a href="/blog/is-a-van-remap-legal-mot">legality explained</a>). If you only run short urban hops, be realistic: an economy tune shines on steady miles, not stop-start city work.</p>
+
+            <h2>How we do it (mobile, at your yard)</h2>
+            <div class="blog-step"><span class="step-num">1</span> Diagnostic pre-check - a healthy engine only.</div>
+            <div class="blog-step"><span class="step-num">2</span> Original file backed up (fully reversible).</div>
+            <div class="blog-step"><span class="step-num">3</span> Custom calibration matched to your engine and use.</div>
+            <div class="blog-step"><span class="step-num">4</span> Road test, written confirmation and insurance handover note.</div>
+
+            <p>From £199+VAT, mobile across Kent and SE London. <a href="/services/transit-custom-remap">Book a Transit remap</a> and we'll come to you.</p>
+        `,
+        faqs: [
+            { question: 'Will a Ford Transit remap improve MPG?', answer: 'It can for steady, high-mileage driving when tuned for economy - typically a believable few mpg. It is never guaranteed and depends on route, load and driving style.' },
+            { question: 'Is a Transit remap safe and reversible?', answer: 'Yes - we tune healthy engines only, stay within safe limits, and back up your original file so it can be fully restored.' },
+            { question: 'Do you remap the Transit Custom as well as the big Transit?', answer: 'Yes - both. Send your registration and we will confirm the engine variant and coverage before booking.' },
+        ],
+    },
+    {
+        slug: 'vw-transporter-remap-what-to-expect',
+        title: "VW Transporter Remap: Economy, Driveability & What's Realistic",
+        description:
+            'A VW Transporter remap explained - realistic economy and driveability gains, what it cannot do, legality, insurance, and how a mobile tune actually works.',
+        category: 'Remapping',
+        publishedAt: '2026-06-02',
+        updatedAt: '2026-06-02',
+        ogImage: '/images/diag_photos/picoscope-multimeter.jpg',
+        ogImageAlt: 'PicoScope and multimeter set up for a diagnostic pre-check before a remap',
+        thumbnail: '/images/diag_photos/picoscope-multimeter.jpg',
+        author: 'Jamie Armoordon',
+        relatedServices: ['vw-transporter-remap', 'van-remapping', 'van-economy-tune'],
+        content: `
+            <div class="blog-lead">A VW Transporter remap can sharpen driveability and improve economy on steady runs, tuned to your use. Gains depend on the engine variant - the 2.0 TDI across the T5, T6 and T6.1 - and are never promised as exact figures. A proper tune keeps the emissions equipment intact (road-legal), backs up the original file, is reversible, and must be declared to your insurer.</div>
+
+            <h2>Economy vs driveability on a Transporter</h2>
+            <ul class="blog-checklist">
+                <li><strong>Steady miles / fuel-focused:</strong> an <a href="/services/van-economy-tune">economy tune</a> for smoother low-rpm cruising and potential MPG gains (<a href="/blog/does-remapping-a-van-improve-mpg">the honest MPG answer</a>).</li>
+                <li><strong>Loaded / camper / trade:</strong> a <a href="/services/van-load-driveability-tune">load & driveability tune</a> for stronger pull and less gear hunting.</li>
+            </ul>
+
+            <div class="blog-callout">
+                <p>The Transporter's 2.0 TDI is a textbook software-limited engine - the same block sold at several outputs, separated mostly in the map. That's exactly the headroom a Stage 1 tune brings out: <a href="/blog/van-underpowered-software-limited">the software handbrake explained</a>.</p>
+            </div>
+
+            <hr class="blog-divider"/>
+
+            <h2>Keep it legal and insured</h2>
+            <p>No DPF, EGR or AdBlue deletes - illegal and an MOT fail (<a href="/blog/is-a-van-remap-legal-mot">legality guide</a>). Declare the remap to your insurer; we provide a written handover note (<a href="/blog/van-remap-insurance-what-to-declare">insurance guide</a>). It's fully reversible too - your original file is kept on record.</p>
+
+            <h2>Mobile, at your home or depot</h2>
+            <p>Diagnostic pre-check, original file backup, calibration, road test and documentation - from £199+VAT across Kent and SE London. We also cover the <strong>VW Crafter</strong>. See the <a href="/services/vw-transporter-remap">Transporter remap page</a> for detail.</p>
+
+            <div class="blog-takeaway">
+                <span class="takeaway-label">The short version</span>
+                <p>Realistic, honest gains on a healthy engine - economy or pull, your choice - with the emissions kit intact and the original file backed up. No magic numbers, no deletes.</p>
+            </div>
+
+            <p>Send your reg and we'll confirm coverage across the T5, T6 and T6.1. <a href="/services/vw-transporter-remap">Book a mobile Transporter remap</a> - Kent and SE London.</p>
+        `,
+        faqs: [
+            { question: 'Will a Transporter remap improve MPG?', answer: 'It can for steady, high-mileage use when tuned for economy - typically a believable few mpg, never guaranteed.' },
+            { question: 'Do you cover the T5, T6 and T6.1?', answer: 'Yes - send your registration and we will confirm the engine variant and coverage. We also tune the VW Crafter.' },
+            { question: 'Is a Transporter remap reversible?', answer: 'Yes - your original factory file is stored, so the tune can be fully reversed for a dealer visit or resale.' },
+        ],
+    },
+    {
+        slug: 'fleet-van-remapping-worth-it',
+        title: 'Fleet Van Remapping: Is It Worth It for 3+ Vans?',
+        description:
+            'Running 3+ vans? How fleet remapping works, the economy and driveability case, depot visits, per-van documentation, and what to expect across a mixed fleet.',
+        category: 'Remapping',
+        publishedAt: '2026-06-02',
+        updatedAt: '2026-06-02',
+        ogImage: '/images/new-images/using-torque-wrench-on-transmission.jpg',
+        ogImageAlt: 'Workshop service being carried out on a commercial van',
+        thumbnail: '/images/new-images/using-torque-wrench-on-transmission.jpg',
+        author: 'Jamie Armoordon',
+        relatedServices: ['fleet-van-tuning', 'van-economy-tune', 'van-remapping'],
+        content: `
+            <div class="blog-lead">For a fleet of 3+ vans doing high mileage, remapping can absolutely be worth it - even small per-van MPG gains multiply across the fleet, and consistent driveability helps every driver. A fleet tune is done at your depot, with volume pricing from around £169 per van, an individual calibration report and insurance handover note per vehicle, and no emissions deletes.</div>
+
+            <h2>The fleet case</h2>
+            <p>Factory maps are a broad compromise, not tuned for your loads and routes. Across a fleet, that's fuel and driveability left on the table on every van, every day. At fleet mileages, modest per-van gains add up fast - a few mpg across a dozen high-mileage vans is real money over a year. Details on the <a href="/services/fleet-van-tuning">Fleet Tuning page</a>.</p>
+
+            <div class="blog-callout">
+                <p>Mixed makes are no problem - Sprinter, Transit, Transporter, Vivaro and more, side by side. We match the tune to each van's job, not a one-size sticker across the whole yard.</p>
+            </div>
+
+            <hr class="blog-divider"/>
+
+            <h2>How a depot visit works</h2>
+            <div class="blog-step"><span class="step-num">1</span> We come to your depot and work through the vehicles systematically.</div>
+            <div class="blog-step"><span class="step-num">2</span> A diagnostic pre-check on each - faulty vans are flagged, not tuned.</div>
+            <div class="blog-step"><span class="step-num">3</span> Every original file backed up before any change.</div>
+            <div class="blog-step"><span class="step-num">4</span> A documentation pack per van - calibration report plus insurance handover note.</div>
+
+            <h2>Economy or driveability across a fleet?</h2>
+            <p>Match the tune to the work: economy for motorway and courier fleets, driveability for loaded trade fleets - or a mix per vehicle. See <a href="/blog/economy-tune-vs-load-driveability-tune">economy vs driveability</a> to weigh it up, and <a href="/blog/is-remapping-a-van-worth-it">is remapping worth it?</a> for the payback maths.</p>
+
+            <div class="blog-takeaway">
+                <span class="takeaway-label">Why fleets stack up</span>
+                <p>The per-van saving might be modest, but you're multiplying it by every van, every mile, every year - and minimising downtime by having us come to the depot rather than vans coming off the road one by one.</p>
+            </div>
+
+            <p>Running a fleet? <a href="/services/fleet-van-tuning">Discuss your requirements</a> - depot visits across Kent and SE London, volume pricing from around £169 per van.</p>
+        `,
+        faqs: [
+            { question: 'How many vans qualify for fleet pricing?', answer: '3 or more vehicles qualifies for volume pricing, from around £169 per van.' },
+            { question: 'Do you visit our depot?', answer: 'Yes - that is the whole point. We come to you and work through the fleet systematically, keeping downtime to a minimum.' },
+            { question: 'What documentation do we get per van?', answer: 'Each vehicle gets its own calibration report and insurance handover note, plus its original file backed up and kept on record.' },
+        ],
     }
 ];
 

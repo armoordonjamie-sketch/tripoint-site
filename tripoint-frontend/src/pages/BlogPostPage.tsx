@@ -66,6 +66,81 @@ const relatedReadingBySlug: Record<string, { label: string; href: string }[]> = 
         { label: 'AdBlue Countdown: Why Clearing Codes Is Not a Fix', href: '/blog/adblue-countdown-clearing-codes-not-fix' },
         { label: 'Standard Diagnosis', href: '/services/diagnostic-callout' },
     ],
+    'sprinter-egr-valve-symptoms-cleaning': [
+        { label: 'Sprinter P0401: Insufficient EGR Flow', href: '/blog/sprinter-p0401-egr-fault' },
+        { label: 'Sprinter Limp Mode: What a Proper Diagnostic Looks Like', href: '/blog/sprinter-limp-mode-proper-diagnostic' },
+        { label: 'Standard Diagnosis', href: '/services/diagnostic-callout' },
+    ],
+    'mercedes-sprinter-diagnostic-cost': [
+        { label: "Where's the OBD Port on a Mercedes Sprinter?", href: '/blog/sprinter-obd-port-location' },
+        { label: 'Sprinter Limp Mode: What a Proper Diagnostic Looks Like', href: '/blog/sprinter-limp-mode-proper-diagnostic' },
+        { label: 'Standard Diagnosis', href: '/services/diagnostic-callout' },
+    ],
+    'sprinter-adblue-tank-topping-up': [
+        { label: 'AdBlue Countdown: Why Clearing Codes Is Not a Fix', href: '/blog/adblue-countdown-clearing-codes-not-fix' },
+        { label: 'Mercedes Vito AdBlue Fault', href: '/blog/vito-adblue-fault' },
+        { label: 'Standard Diagnosis', href: '/services/diagnostic-callout' },
+    ],
+    'sprinter-wont-start-loss-of-power': [
+        { label: 'Sprinter Limp Mode: What a Proper Diagnostic Looks Like', href: '/blog/sprinter-limp-mode-proper-diagnostic' },
+        { label: 'Sprinter P0299: Turbo Underboost or Low Boost', href: '/blog/sprinter-p0299-turbo-underboost' },
+        { label: 'VOR Van Diagnostics', href: '/services/vor-van-diagnostics' },
+    ],
+    'sprinter-dpf-clean-regen-or-replace': [
+        { label: 'DPF Warning Lights: When Regen Helps vs When It Makes Things Worse', href: '/blog/dpf-warning-light-regen-vs-worse' },
+        { label: 'Sprinter P2463: DPF Soot Accumulation', href: '/blog/sprinter-p2463-dpf-soot-accumulation' },
+        { label: 'Standard Diagnosis', href: '/services/diagnostic-callout' },
+    ],
+    'are-sprinters-expensive-to-repair': [
+        { label: 'Why OM654 Turbochargers Are Failing in Sprinter and Vito', href: '/blog/om654-turbo-failure-sprinter-vito' },
+        { label: 'Sprinter DPF Blocked: Clean, Regen or Replace?', href: '/blog/sprinter-dpf-clean-regen-or-replace' },
+        { label: 'VOR Van Diagnostics', href: '/services/vor-van-diagnostics' },
+    ],
+    'sprinter-ecu-remap-mpg-power-legal': [
+        { label: 'Does Remapping a Van Actually Improve MPG?', href: '/blog/does-remapping-a-van-improve-mpg' },
+        { label: 'Is a Van Remap Legal? Will It Pass the MOT?', href: '/blog/is-a-van-remap-legal-mot' },
+        { label: 'Mercedes Sprinter Remap', href: '/services/mercedes-sprinter-remap' },
+    ],
+    'vito-w447-common-problems': [
+        { label: 'Mercedes Vito AdBlue Fault', href: '/blog/vito-adblue-fault' },
+        { label: 'Sprinter EGR Valve: Symptoms, Location & Clean vs Replace', href: '/blog/sprinter-egr-valve-symptoms-cleaning' },
+        { label: 'Mercedes Vito Servicing', href: '/services/vito-servicing' },
+    ],
+    'is-remapping-a-van-worth-it': [
+        { label: 'Does Remapping a Van Actually Improve MPG?', href: '/blog/does-remapping-a-van-improve-mpg' },
+        { label: 'Economy Tune vs Load & Driveability Tune', href: '/blog/economy-tune-vs-load-driveability-tune' },
+        { label: 'Van Remapping', href: '/services/van-remapping' },
+    ],
+    'economy-tune-vs-load-driveability-tune': [
+        { label: 'Is Remapping a Van Worth It?', href: '/blog/is-remapping-a-van-worth-it' },
+        { label: 'Van Economy Remap', href: '/services/van-economy-tune' },
+        { label: 'Van Power & Driveability Remap', href: '/services/van-load-driveability-tune' },
+    ],
+    'is-a-van-remap-legal-mot': [
+        { label: 'Van Remap & Insurance: What You Must Declare', href: '/blog/van-remap-insurance-what-to-declare' },
+        { label: 'Is Remapping a Van Worth It?', href: '/blog/is-remapping-a-van-worth-it' },
+        { label: 'Van Remapping', href: '/services/van-remapping' },
+    ],
+    'van-remap-insurance-what-to-declare': [
+        { label: 'Is a Van Remap Legal? Will It Pass the MOT?', href: '/blog/is-a-van-remap-legal-mot' },
+        { label: 'Is Remapping a Van Worth It?', href: '/blog/is-remapping-a-van-worth-it' },
+        { label: 'Van Remapping', href: '/services/van-remapping' },
+    ],
+    'ford-transit-remap-what-to-expect': [
+        { label: 'Does Remapping a Van Actually Improve MPG?', href: '/blog/does-remapping-a-van-improve-mpg' },
+        { label: 'Economy Tune vs Load & Driveability Tune', href: '/blog/economy-tune-vs-load-driveability-tune' },
+        { label: 'Ford Transit Custom Remap', href: '/services/transit-custom-remap' },
+    ],
+    'vw-transporter-remap-what-to-expect': [
+        { label: 'Is Your Van Secretly Underpowered?', href: '/blog/van-underpowered-software-limited' },
+        { label: 'Does Remapping a Van Actually Improve MPG?', href: '/blog/does-remapping-a-van-improve-mpg' },
+        { label: 'VW Transporter Remap', href: '/services/vw-transporter-remap' },
+    ],
+    'fleet-van-remapping-worth-it': [
+        { label: 'Is Remapping a Van Worth It?', href: '/blog/is-remapping-a-van-worth-it' },
+        { label: 'Economy Tune vs Load & Driveability Tune', href: '/blog/economy-tune-vs-load-driveability-tune' },
+        { label: 'Fleet Van Remapping', href: '/services/fleet-van-tuning' },
+    ],
 };
 
 function BlogHeroImage({ src, alt }: { src: string; alt: string }) {
@@ -93,6 +168,13 @@ const serviceSlugToHref: Record<string, string> = {
     'van-economy-tune': '/services/van-economy-tune',
     'fleet-van-tuning': '/services/fleet-van-tuning',
     'van-remapping': '/services/van-remapping',
+    'transit-custom-remap': '/services/transit-custom-remap',
+    'vw-transporter-remap': '/services/vw-transporter-remap',
+    'vw-caddy-remap': '/services/vw-caddy-remap',
+    'ford-transit-remap': '/services/ford-transit-remap',
+    'vauxhall-vivaro-remap': '/services/vauxhall-vivaro-remap',
+    'mercedes-sprinter-remap': '/services/mercedes-sprinter-remap',
+    'mercedes-vito-remap': '/services/mercedes-vito-remap',
     'vor-van-diagnostics': '/services/vor-van-diagnostics',
 };
 
@@ -123,6 +205,13 @@ const serviceSlugToLabel: Record<string, string> = {
     'van-economy-tune': 'Van Economy Remap',
     'fleet-van-tuning': 'Fleet Van Remapping',
     'van-remapping': 'Van Remapping',
+    'transit-custom-remap': 'Ford Transit Custom Remap',
+    'vw-transporter-remap': 'VW Transporter Remap',
+    'vw-caddy-remap': 'VW Caddy Remap',
+    'ford-transit-remap': 'Ford Transit Remap',
+    'vauxhall-vivaro-remap': 'Vauxhall Vivaro Remap',
+    'mercedes-sprinter-remap': 'Mercedes Sprinter Remap',
+    'mercedes-vito-remap': 'Mercedes Vito Remap',
     'vor-van-diagnostics': 'VOR Van Diagnostics',
 };
 

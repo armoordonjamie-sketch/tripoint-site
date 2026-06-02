@@ -695,6 +695,158 @@ export const routeManifest: RouteEntry[] = [
         changefreq: 'monthly',
         indexable: true,
     },
+    // Diagnostics cluster
+    {
+        path: '/blog/sprinter-egr-valve-symptoms-cleaning',
+        title: 'Mercedes Sprinter EGR Valve: Symptoms, Location & Clean vs Replace',
+        description:
+            'Sprinter EGR valve symptoms, where the valve and cooler sit on the OM651/OM654, and the honest answer on when a clean works versus when it needs replacing.',
+        canonicalPath: '/blog/sprinter-egr-valve-symptoms-cleaning',
+        priority: 0.5,
+        changefreq: 'monthly',
+        indexable: true,
+    },
+    {
+        path: '/blog/mercedes-sprinter-diagnostic-cost',
+        title: 'How Much Does a Mercedes Sprinter Diagnostic Cost? (UK 2026)',
+        description:
+            'What a Mercedes van diagnostic really costs in the UK - dealer vs independent vs mobile - and why a cheap code read is not a diagnostic.',
+        canonicalPath: '/blog/mercedes-sprinter-diagnostic-cost',
+        priority: 0.5,
+        changefreq: 'monthly',
+        indexable: true,
+    },
+    {
+        path: '/blog/sprinter-adblue-tank-topping-up',
+        title: 'Mercedes Sprinter AdBlue: Tank Location, Capacity & Topping Up',
+        description:
+            'Where the AdBlue tank is on a Mercedes Sprinter, roughly how much it holds, how to top up properly, and the mistakes that trigger an AdBlue fault.',
+        canonicalPath: '/blog/sprinter-adblue-tank-topping-up',
+        priority: 0.5,
+        changefreq: 'monthly',
+        indexable: true,
+    },
+    {
+        path: '/blog/sprinter-wont-start-loss-of-power',
+        title: "Mercedes Sprinter Won't Start or Loss of Power: A Diagnostic Checklist",
+        description:
+            "Sprinter won't start, cutting out, or down on power? A specialist's checklist of the common causes - and why a proper diagnostic finds the real one fast.",
+        canonicalPath: '/blog/sprinter-wont-start-loss-of-power',
+        priority: 0.5,
+        changefreq: 'monthly',
+        indexable: true,
+    },
+    {
+        path: '/blog/sprinter-dpf-clean-regen-or-replace',
+        title: 'Sprinter DPF Blocked: Clean, Force Regen or Replace? (Costs Explained)',
+        description:
+            'A blocked Sprinter DPF - force a regen, clean it, or replace it? An honest decision guide with UK cost ranges, and why finding the cause comes first.',
+        canonicalPath: '/blog/sprinter-dpf-clean-regen-or-replace',
+        priority: 0.5,
+        changefreq: 'monthly',
+        indexable: true,
+    },
+    {
+        path: '/blog/are-sprinters-expensive-to-repair',
+        title: 'Are Mercedes Sprinters Expensive to Repair? An Honest Specialist Guide',
+        description:
+            'Are Mercedes Sprinters costly to run and repair? The big-ticket faults, realistic costs, and how early diagnosis keeps the bills small.',
+        canonicalPath: '/blog/are-sprinters-expensive-to-repair',
+        priority: 0.5,
+        changefreq: 'monthly',
+        indexable: true,
+    },
+    {
+        path: '/blog/sprinter-ecu-remap-mpg-power-legal',
+        title: 'Mercedes Sprinter ECU Remap: Better MPG, More Power - and Is It Legal?',
+        description:
+            'What a Mercedes Sprinter remap can realistically do for MPG and power, what it cannot, the legal and insurance facts, and how to do it properly.',
+        canonicalPath: '/blog/sprinter-ecu-remap-mpg-power-legal',
+        priority: 0.5,
+        changefreq: 'monthly',
+        indexable: true,
+    },
+    {
+        path: '/blog/vito-w447-common-problems',
+        title: 'Mercedes Vito (W447) Common Problems Every Owner & Buyer Should Know',
+        description:
+            'The most common Mercedes Vito W447 problems - limp mode, AdBlue/SCR, DPF, EGR and gearbox niggles - what they cost, and how to check before you buy.',
+        canonicalPath: '/blog/vito-w447-common-problems',
+        priority: 0.5,
+        changefreq: 'monthly',
+        indexable: true,
+    },
+    // Remap / tuning cluster
+    {
+        path: '/blog/is-remapping-a-van-worth-it',
+        title: 'Is Remapping a Van Worth It? Costs, Savings & Payback Explained',
+        description:
+            'Is a van remap worth the money? Typical UK costs, realistic fuel and driveability gains, payback time, and when it honestly is not worth it.',
+        canonicalPath: '/blog/is-remapping-a-van-worth-it',
+        priority: 0.5,
+        changefreq: 'monthly',
+        indexable: true,
+    },
+    {
+        path: '/blog/economy-tune-vs-load-driveability-tune',
+        title: 'Economy Tune vs Load & Driveability Tune: Which Does Your Van Need?',
+        description:
+            'Economy remap or load/driveability remap for your van? A clear comparison by how you actually use it - mileage, load and route.',
+        canonicalPath: '/blog/economy-tune-vs-load-driveability-tune',
+        priority: 0.5,
+        changefreq: 'monthly',
+        indexable: true,
+    },
+    {
+        path: '/blog/is-a-van-remap-legal-mot',
+        title: 'Is a Van Remap Legal? Will It Pass the MOT?',
+        description:
+            'Is remapping a van legal in the UK, and will it still pass the MOT? The honest facts on emissions, DPF/EGR/AdBlue, insurance and a compliant remap.',
+        canonicalPath: '/blog/is-a-van-remap-legal-mot',
+        priority: 0.5,
+        changefreq: 'monthly',
+        indexable: true,
+    },
+    {
+        path: '/blog/van-remap-insurance-what-to-declare',
+        title: 'Van Remap & Insurance: What You Must Declare (and Why)',
+        description:
+            'Do you have to tell your insurer about a van remap? Yes - what to declare, why it matters, and how a written handover note protects your policy.',
+        canonicalPath: '/blog/van-remap-insurance-what-to-declare',
+        priority: 0.5,
+        changefreq: 'monthly',
+        indexable: true,
+    },
+    {
+        path: '/blog/ford-transit-remap-what-to-expect',
+        title: 'Ford Transit Remap: What to Expect (Economy vs Power)',
+        description:
+            'What a Ford Transit remap realistically does for MPG, torque and driveability, what it cannot do, and how to keep it legal and insured.',
+        canonicalPath: '/blog/ford-transit-remap-what-to-expect',
+        priority: 0.5,
+        changefreq: 'monthly',
+        indexable: true,
+    },
+    {
+        path: '/blog/vw-transporter-remap-what-to-expect',
+        title: "VW Transporter Remap: Economy, Driveability & What's Realistic",
+        description:
+            'A VW Transporter remap explained - realistic economy and driveability gains, what it cannot do, legality, insurance, and how a mobile tune works.',
+        canonicalPath: '/blog/vw-transporter-remap-what-to-expect',
+        priority: 0.5,
+        changefreq: 'monthly',
+        indexable: true,
+    },
+    {
+        path: '/blog/fleet-van-remapping-worth-it',
+        title: 'Fleet Van Remapping: Is It Worth It for 3+ Vans?',
+        description:
+            'Running 3+ vans? How fleet remapping works, the economy and driveability case, depot visits, per-van documentation, and what to expect.',
+        canonicalPath: '/blog/fleet-van-remapping-worth-it',
+        priority: 0.5,
+        changefreq: 'monthly',
+        indexable: true,
+    },
     // Legal
     {
         path: '/legal/privacy-policy',
