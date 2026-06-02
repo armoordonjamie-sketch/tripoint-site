@@ -1237,6 +1237,11 @@ export const blogPosts: BlogPost[] = [
             <h2>What dealer-level kit actually sees</h2>
             <p>Plug Mercedes XENTRY/STAR into that same socket and the van suddenly gets chatty. Every module, live sensor data, guided tests, actuator commands - the difference between "P-something, good luck" and "your downstream NOx sensor is reading implausible values, here's the proof." Same port. Wildly different conversation.</p>
 
+            <figure class="blog-image">
+                <img src="/images/blog-photos/sprinter-obd-port-location/diagnostic-tablet-in-cab.jpg" alt="Dealer-level diagnostic scanner mounted on a van dashboard, reading the vehicle through the OBD port" loading="lazy" />
+                <figcaption>Dealer-level kit talking to a van through the same socket your £15 reader plugs into. One of these leaves you with a written answer; the other leaves you with a shrug.</figcaption>
+            </figure>
+
             <h2>So... do you even need us?</h2>
             <p>If your reader cleared a light and it stayed off, then honestly - great, crack on, we're genuinely pleased for you. But if it keeps coming back, if the van's in limp mode, or if there are <strong>no codes at all</strong> and it's still misbehaving (yes, that happens), that's the point where a proper read pays for itself. We come to you across Kent and SE London, plug into that exact socket, and leave you with a written answer instead of a shrug.</p>
         `,
@@ -1270,6 +1275,11 @@ export const blogPosts: BlogPost[] = [
                 <li><strong>Blue / green</strong> - "Relax, this is just information." High beam, indicators, cruise.</li>
             </ul>
             <p>What no colour tells you is the actual fault. A glowing amber engine light could be a £30 sensor or a £1,500 turbo wearing the same costume. That's the whole reason we diagnose before throwing parts at it.</p>
+
+            <figure class="blog-image">
+                <img src="/images/blog-photos/sprinter-warning-lights-explained/dashboard-warning-lights.jpg" alt="Van instrument cluster lit up with multiple warning lights" loading="lazy" />
+                <figcaption>A dash doing its best fruit-machine impression. Pretty - but the lights only tell you which system is unhappy, never why. That bit needs a scan.</figcaption>
+            </figure>
 
             <h2>The usual suspects (and where to read more)</h2>
             <p><strong>Engine management light</strong> - the dashboard's favourite cry for attention. Full rundown in <a href="/blog/mercedes-eml-on">our engine management light guide</a>.</p>
@@ -1310,6 +1320,11 @@ export const blogPosts: BlogPost[] = [
             <h2>Same engine, different price tag</h2>
             <p>Manufacturers love this trick, and VW's 2.0 TDI is the poster child - the same block and turbo turns up across a range of outputs, separated mainly in the ECU map rather than the hardware. It's good business: build one engine, sell several trims. It's just slightly galling when you're the one whose van won't pull up a hill with a full load.</p>
 
+            <figure class="blog-image">
+                <img src="/images/blog-photos/van-underpowered-software-limited/sprinter-bonnet-up.jpg" alt="Mercedes Sprinter with the bonnet up in the workshop before a remap" loading="lazy" />
+                <figcaption>A Sprinter in for a proper look before any map goes anywhere near it. We diagnose first, tune second - every single time.</figcaption>
+            </figure>
+
             <h2>The software handbrake</h2>
             <p>Think of it like buying a laptop where the faster processor is already inside - you just have to pay to "unlock" it. Your van's engine often has genuine headroom the factory map keeps on a leash for emissions targets, trim positioning, and one-size-fits-everyone caution. A Stage 1 <a href="/services/van-remapping">remap</a> re-calibrates that map to bring out the usable torque you've already paid for - within safe limits, with the original file backed up.</p>
 
@@ -1324,6 +1339,11 @@ export const blogPosts: BlogPost[] = [
 
             <h2>The honest bit (because someone has to be)</h2>
             <p>No, we won't quote you a magic horsepower figure - every engine and variant is different, and anyone shouting "+40 BHP guaranteed!" across a forum is selling confidence, not calibration. No, we don't do DPF, EGR or AdBlue deletes - they're illegal on the road and an instant MOT fail. And no, we won't tune a van that's already faulty: every job starts with a diagnostic health check, because remapping over a fault is just turning the radio up to hide the engine noise.</p>
+
+            <figure class="blog-image">
+                <img src="/images/blog-photos/van-underpowered-software-limited/engine-bay-sensor.jpg" alt="Hand pointing to a sensor in a diesel van engine bay during a diagnostic pre-check" loading="lazy" />
+                <figcaption>The health check that comes before the fun part. If something's off under here, that gets sorted first - a remap should unlock a healthy engine, not paper over a poorly one.</figcaption>
+            </figure>
 
             <h2>Is it legal? Will it pass the MOT?</h2>
             <p>A remap itself is perfectly legal, and a compliant one keeps all your emissions kit intact, so it sails through the MOT like standard. You do need to tell your insurer - it's a modification - and we hand you a written note for exactly that. It's fully reversible too: we keep your original file, so a dealer visit or a resale is no drama.</p>
@@ -1355,6 +1375,11 @@ export const blogPosts: BlogPost[] = [
 
             <h2>The real-world numbers</h2>
             <p>One honest example from the workshop: a 2017 Vito on motorway courier runs came in doing 28-30 mpg. Economy map on, same route, two weeks later - averaging 34. Lovely. But that's <em>one</em> van, on <em>one</em> route, with <em>one</em> driver who doesn't treat every roundabout like a drag strip. Your mileage, quite literally, may vary.</p>
+
+            <figure class="blog-image">
+                <img src="/images/blog-photos/does-remapping-a-van-improve-mpg/trip-computer-readout.jpg" alt="Mercedes van trip computer display showing live engine readouts" loading="lazy" />
+                <figcaption>The van's own readouts on a road test. The only fuel figure worth trusting is the one you see here over a few tankfuls - not a number promised up front on a forum.</figcaption>
+            </figure>
 
             <h2>Who sees the biggest gains</h2>
             <ul>
