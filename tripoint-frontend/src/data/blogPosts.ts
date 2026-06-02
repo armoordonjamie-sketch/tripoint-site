@@ -1238,8 +1238,8 @@ export const blogPosts: BlogPost[] = [
             <p>Plug Mercedes XENTRY/STAR into that same socket and the van suddenly gets chatty. Every module, live sensor data, guided tests, actuator commands - the difference between "P-something, good luck" and "your downstream NOx sensor is reading implausible values, here's the proof." Same port. Wildly different conversation.</p>
 
             <figure class="blog-image">
-                <img src="/images/blog-photos/sprinter-obd-port-location/diagnostic-tablet-in-cab.jpg" alt="Dealer-level diagnostic scanner mounted on a van dashboard, reading the vehicle through the OBD port" loading="lazy" />
-                <figcaption>Dealer-level kit talking to a van through the same socket your £15 reader plugs into. One of these leaves you with a written answer; the other leaves you with a shrug.</figcaption>
+                <img src="/images/blog-photos/sprinter-obd-port-location/xentry-picoscope-onsite.jpg" alt="Mercedes XENTRY Diagnosis Pad running PicoScope, a XENTRY Scope module and a multimeter all wired into a van on the customer's premises" loading="lazy" />
+                <figcaption>This is what plugs into the same socket your £15 reader uses: a Mercedes XENTRY Diagnosis Pad running PicoScope, a XENTRY Scope module, and a multimeter sitting at 13.745V - set up on the customer's yard, not in a workshop. One of these leaves you with a written answer; the other leaves you with a shrug.</figcaption>
             </figure>
 
             <h2>So... do you even need us?</h2>
@@ -1377,8 +1377,8 @@ export const blogPosts: BlogPost[] = [
             <p>One honest example from the workshop: a 2017 Vito on motorway courier runs came in doing 28-30 mpg. Economy map on, same route, two weeks later - averaging 34. Lovely. But that's <em>one</em> van, on <em>one</em> route, with <em>one</em> driver who doesn't treat every roundabout like a drag strip. Your mileage, quite literally, may vary.</p>
 
             <figure class="blog-image">
-                <img src="/images/blog-photos/does-remapping-a-van-improve-mpg/trip-computer-readout.jpg" alt="Mercedes van trip computer display showing live engine readouts" loading="lazy" />
-                <figcaption>The van's own readouts on a road test. The only fuel figure worth trusting is the one you see here over a few tankfuls - not a number promised up front on a forum.</figcaption>
+                <img src="/images/blog-photos/does-remapping-a-van-improve-mpg/trip-computer-readout.jpg" alt="Van trip computer display showing a fuel range of 235 miles on a road test" loading="lazy" />
+                <figcaption>The van's own range readout on a road test. The only fuel figure worth trusting is the one you watch yourself over a few tankfuls - not a number promised up front on a forum.</figcaption>
             </figure>
 
             <h2>Who sees the biggest gains</h2>
