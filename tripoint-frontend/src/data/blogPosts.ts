@@ -1224,23 +1224,52 @@ export const blogPosts: BlogPost[] = [
             <div class="blog-lead">On most Mercedes Sprinters the 16-pin OBD socket lives in the driver's footwell - usually under the steering column or tucked behind a little cover near the bonnet release. Older Sprinters often have a second, round 38-pin connector under the bonnet too. Finding the port is the easy bit. Getting it to tell you something useful is where the fun starts.</div>
 
             <h2>The short version: where to actually look</h2>
-            <p>Climb into the driver's seat and look down and to the right, around the lower dash and steering column. Nine times out of ten the 16-pin OBD port is right there, sometimes behind a clip-out trim panel near the bonnet release handle. The exact spot drifts a little between the W906 (2006-2018) and W907 (2018 on), so if you can't see it, have a feel around the footwell edges before you start dismantling the cabin in a rage.</p>
-            <p>On older Sprinters there's sometimes a round <strong>38-pin "star" connector</strong> under the bonnet as well - a hangover from the days before everything went 16-pin. You don't need it for most jobs, but don't panic if you spot a mystery round socket. It isn't aliens.</p>
+            <p>Climb into the driver's seat and look down and to the right, around the lower dash and steering column. Nine times out of ten the 16-pin OBD port is right there, sometimes behind a clip-out trim panel near the bonnet release handle.</p>
+
+            <div class="blog-step"><span class="step-num">1</span> Driver's footwell, lower dash, right-hand side - start here.</div>
+            <div class="blog-step"><span class="step-num">2</span> Under or just behind the steering column, often up above the pedals.</div>
+            <div class="blog-step"><span class="step-num">3</span> Behind a small clip-out trim panel near the bonnet release handle.</div>
+
+            <p>The exact spot drifts a little between the W906 (2006-2018) and W907 (2018 on), so if you can't see it, have a feel around the footwell edges before you start dismantling the cabin in a rage.</p>
+
+            <div class="blog-callout">
+                <p>On older Sprinters there's sometimes a round <strong>38-pin "star" connector</strong> under the bonnet too - a hangover from the days before everything went 16-pin. You don't need it for most jobs, so don't panic if you spot a mystery round socket. It isn't aliens.</p>
+            </div>
+
+            <hr class="blog-divider"/>
 
             <h2>Why two sockets? A history lesson nobody asked for</h2>
-            <p>OBD2 became the standard so any garage could read basic engine codes - great for emissions law, less great if you actually want to know why your van's sulking. A Sprinter runs dozens of control units (engine, gearbox, ABS, SCR, body, the lot), and a cheap 16-pin reader only ever gets a polite wave from the engine one.</p>
+            <p>OBD2 became the legal standard so any garage could read basic engine codes - great for emissions enforcement, less great if you actually want to know why your van's sulking. The 16-pin socket carries a few standardised channels (generic OBD2 "PIDs") plus the manufacturer's own private lines. A Sprinter runs dozens of control units - engine, gearbox, ABS, SCR/AdBlue, DPF, body, the lot - and a cheap reader only ever gets a polite wave from the engine one over those generic channels.</p>
 
             <h2>The £15 reader problem</h2>
             <p>Here's the bit the eBay listings leave out. A generic plug-in reader is brilliant at telling you there's <em>a</em> problem. It is hopeless at telling you <em>what</em>. It's the automotive equivalent of a smoke alarm: useful, loud, and completely silent on whether you've burnt the toast or the house is on fire.</p>
+            <p>It typically talks to one module - the engine ECU - reads a stored P-code, and that's about its lot. The AdBlue/SCR dosing system, the DPF soot model, the injector correction values, the gearbox and ABS modules - all running on Mercedes' own protocols - barely register that it's there.</p>
             <p>We lose count of the vans that turn up after someone's "read the codes," cleared them, and driven off feeling like a hero - right up until the light pops back on at the next roundabout. (More on that cheerful cycle in our piece on <a href="/blog/sprinter-limp-mode-proper-diagnostic">what a proper limp-mode diagnostic actually looks like</a>.)</p>
 
+            <div class="blog-takeaway">
+                <span class="takeaway-label">The honest bit</span>
+                <p>A code reader tells you <strong>which</strong> system logged a complaint. It almost never tells you <strong>why</strong>. Those are two very different questions - and only one of them gets your van fixed.</p>
+            </div>
+
+            <hr class="blog-divider"/>
+
             <h2>What dealer-level kit actually sees</h2>
-            <p>Plug Mercedes XENTRY/STAR into that same socket and the van suddenly gets chatty. Every module, live sensor data, guided tests, actuator commands - the difference between "P-something, good luck" and "your downstream NOx sensor is reading implausible values, here's the proof." Same port. Wildly different conversation.</p>
+            <p>Plug Mercedes XENTRY/STAR into that same socket and the van suddenly gets chatty. Same port, wildly different conversation - the difference between "P-something, good luck" and "your downstream NOx sensor is reading implausible values, here's the proof." Here's the sort of thing that opens up:</p>
+            <ul class="blog-checklist">
+                <li>Every control unit on the van, not just the engine - gearbox, ABS, SCR, body, the lot</li>
+                <li>Live sensor data: actual rail pressure, boost, injector correction values, DPF soot mass, AdBlue dosing</li>
+                <li>Guided tests that walk a fault to its root instead of guessing</li>
+                <li>Actuator tests - command the EGR, throttle flap or AdBlue pump and watch it respond (or not)</li>
+                <li>Service and coding functions: forced regens, SCR resets, component coding after a repair</li>
+            </ul>
+            <p>That's the whole gap in one sentence: a reader hands you a code; this hands you a cause.</p>
 
             <figure class="blog-image">
                 <img src="/images/blog-photos/sprinter-obd-port-location/xentry-picoscope-onsite.jpg" alt="Mercedes XENTRY Diagnosis Pad running PicoScope, a XENTRY Scope module and a multimeter all wired into a van on the customer's premises" loading="lazy" />
                 <figcaption>This is what plugs into the same socket your £15 reader uses: a Mercedes XENTRY Diagnosis Pad running PicoScope, a XENTRY Scope module, and a multimeter sitting at 13.745V - set up on the customer's yard, not in a workshop. One of these leaves you with a written answer; the other leaves you with a shrug.</figcaption>
             </figure>
+
+            <hr class="blog-divider"/>
 
             <h2>So... do you even need us?</h2>
             <p>If your reader cleared a light and it stayed off, then honestly - great, crack on, we're genuinely pleased for you. But if it keeps coming back, if the van's in limp mode, or if there are <strong>no codes at all</strong> and it's still misbehaving (yes, that happens), that's the point where a proper read pays for itself. We come to you across Kent and SE London, plug into that exact socket, and leave you with a written answer instead of a shrug.</p>
@@ -1276,24 +1305,51 @@ export const blogPosts: BlogPost[] = [
             </ul>
             <p>What no colour tells you is the actual fault. A glowing amber engine light could be a £30 sensor or a £1,500 turbo wearing the same costume. That's the whole reason we diagnose before throwing parts at it.</p>
 
+            <div class="blog-takeaway">
+                <span class="takeaway-label">Rule of thumb</span>
+                <p><strong>Red = stop soon. Amber = book it in. Blue/green = just information.</strong> The colour sets your panic level; only a scan sets the diagnosis.</p>
+            </div>
+
             <figure class="blog-image">
                 <img src="/images/blog-photos/sprinter-warning-lights-explained/dashboard-warning-lights.jpg" alt="Van instrument cluster lit up with multiple warning lights" loading="lazy" />
                 <figcaption>A dash doing its best fruit-machine impression. Pretty - but the lights only tell you which system is unhappy, never why. That bit needs a scan.</figcaption>
             </figure>
 
+            <hr class="blog-divider"/>
+
             <h2>The usual suspects (and where to read more)</h2>
             <p><strong>Engine management light</strong> - the dashboard's favourite cry for attention. Full rundown in <a href="/blog/mercedes-eml-on">our engine management light guide</a>.</p>
             <p><strong>Red triangle / STOP</strong> - a general "something's up" prompt, often tied to charging, coolant or brakes. Don't keep driving and hope it gets bored.</p>
             <p><strong>DPF light</strong> - a clogging filter. Sometimes a decent run clears it; sometimes it's hiding something nastier - we get into that in <a href="/blog/dpf-warning-light-regen-vs-worse">when a regen helps vs when it makes things worse</a>.</p>
-            <p><strong>AdBlue light counting down "starts remaining"</strong> - this one's a deadline, not a suggestion. Why clearing it doesn't work: <a href="/blog/adblue-countdown-clearing-codes-not-fix">the AdBlue countdown explained</a>.</p>
             <p><strong>Limp mode / reduced power</strong> - the van's self-preservation mode kicking in. <a href="/blog/sprinter-limp-mode-proper-diagnostic">What a proper limp-mode diagnostic looks like</a>.</p>
             <p><strong>ESP / ABS</strong> - usually a wheel-speed sensor. Your brakes still work, but the clever safety nets may switch themselves off.</p>
 
+            <div class="blog-callout">
+                <p><strong>The AdBlue countdown is the one that actually bites.</strong> When the dash starts showing "starts remaining," that's a hard deadline, not a suggestion - run it to zero and the van won't restart at all. Clearing the code doesn't reset it: <a href="/blog/adblue-countdown-clearing-codes-not-fix">here's why the countdown explained</a>.</p>
+            </div>
+
+            <hr class="blog-divider"/>
+
             <h2>Why "just clear it" is a plaster on a bullet wound</h2>
-            <p>Clearing a code turns the light off until the van notices the fault again - typically about two roundabouts later. Worse, it wipes the freeze-frame data we use to find the cause. We diagnose first, clear second. Revolutionary, we know.</p>
+            <p>Clearing a code turns the light off until the van notices the fault again - typically about two roundabouts later. Worse, it wipes the <strong>freeze-frame data</strong> - the snapshot of revs, load, temperature and sensor values from the exact moment the fault logged. That snapshot is often the single most useful clue we have, and a "clear all" button bins it for good. We diagnose first, clear second. Revolutionary, we know.</p>
+
+            <hr class="blog-divider"/>
 
             <h2>When to actually worry</h2>
-            <p>Red light: stop and call. Amber light <em>plus</em> reduced power, smoke, or a funny smell: book it in before it graduates to a red one. Amber light and the van drives totally normally: you've got a bit of breathing room - but don't let it become wallpaper, because warning lights love picking their moment (usually the school run or a motorway slip road). We're mobile across Kent and SE London and can read the lot at your door.</p>
+            <p>Here's the quick triage we'd run through ourselves:</p>
+            <div class="blog-step"><span class="step-num">1</span> <strong>Red light?</strong> Stop somewhere safe and call. Don't "just get it home."</div>
+            <div class="blog-step"><span class="step-num">2</span> <strong>Amber plus reduced power, smoke or a funny smell?</strong> Book it in before it graduates to a red one.</div>
+            <div class="blog-step"><span class="step-num">3</span> <strong>Amber and driving totally normally?</strong> You've got breathing room - but get it read before it picks its moment.</div>
+
+            <p>The reds that mean <em>pull over now</em>, not "later":</p>
+            <ul class="blog-checklist">
+                <li>Oil pressure (the little genie's-lamp symbol) - keep driving and you can wreck the engine in minutes</li>
+                <li>Coolant temperature - overheating warps cylinder heads and cracks blocks</li>
+                <li>Charging / battery - the van's running on borrowed time</li>
+                <li>Brake warning - never a "see how it goes" light</li>
+                <li>Red STOP triangle - the van has decided it's serious, so should you</li>
+            </ul>
+            <p>Don't let an amber one become wallpaper, either - warning lights love picking their moment, usually the school run or a motorway slip road. We're mobile across Kent and SE London and can read the lot at your door.</p>
         `,
         faqs: [
             { question: 'Is it safe to drive my Sprinter with a warning light on?', answer: 'Red - no, stop safely as soon as you can. Amber - usually short-term, but get it diagnosed before it escalates to limp mode.' },
@@ -1320,22 +1376,44 @@ export const blogPosts: BlogPost[] = [
             <h2>Same engine, different price tag</h2>
             <p>Manufacturers love this trick, and VW's 2.0 TDI is the poster child - the same block and turbo turns up across a range of outputs, separated mainly in the ECU map rather than the hardware. It's good business: build one engine, sell several trims. It's just slightly galling when you're the one whose van won't pull up a hill with a full load.</p>
 
+            <div class="blog-callout">
+                <p>Take VW's 2.0 TDI as it appears in the <strong>Transporter and Caddy</strong>: the same engine family has been sold at outputs ranging from around 90 PS up to roughly 200 PS, depending on model and year. The lower-output versions generally aren't running different turbos or pistons - they're running a more conservative map. Buy "the sensible one" and a real slice of that gap is simply software.</p>
+            </div>
+
+            <div class="blog-takeaway">
+                <span class="takeaway-label">Why they do it</span>
+                <p>One engine, several price points. Emissions targets, warranty caution and trim positioning all get baked into a deliberately soft factory map - so there's usually genuine, paid-for headroom left on the table.</p>
+            </div>
+
             <figure class="blog-image">
                 <img src="/images/blog-photos/van-underpowered-software-limited/sprinter-bonnet-up.jpg" alt="Mercedes Sprinter with the bonnet up in the workshop before a remap" loading="lazy" />
                 <figcaption>A Sprinter in for a proper look before any map goes anywhere near it. We diagnose first, tune second - every single time.</figcaption>
             </figure>
 
+            <hr class="blog-divider"/>
+
             <h2>The software handbrake</h2>
-            <p>Think of it like buying a laptop where the faster processor is already inside - you just have to pay to "unlock" it. Your van's engine often has genuine headroom the factory map keeps on a leash for emissions targets, trim positioning, and one-size-fits-everyone caution. A Stage 1 <a href="/services/van-remapping">remap</a> re-calibrates that map to bring out the usable torque you've already paid for - within safe limits, with the original file backed up.</p>
+            <p>Think of it like buying a laptop where the faster processor is already inside - you just have to pay to "unlock" it. Your van's engine often has genuine headroom the factory map keeps on a leash for emissions targets, trim positioning, and one-size-fits-everyone caution.</p>
+            <p>A Stage 1 <a href="/services/van-remapping">remap</a> re-calibrates the maps inside the ECU - the <strong>torque limiter tables, boost-pressure targets, injection timing and fuel quantity</strong> - so the engine delivers more of its available torque, lower in the rev range, where a loaded van actually lives. It isn't a magic box spliced into the throttle; it's a corrected calibration written to the standard ECU. Here's the order we do it in:</p>
+
+            <div class="blog-step"><span class="step-num">1</span> Full diagnostic health check first - no faults, or it doesn't get tuned.</div>
+            <div class="blog-step"><span class="step-num">2</span> Read and back up the original factory file, so it's always reversible.</div>
+            <div class="blog-step"><span class="step-num">3</span> Apply a custom Stage 1 map matched to your exact engine and variant.</div>
+            <div class="blog-step"><span class="step-num">4</span> Road test and data-log to confirm it's clean and safe under load.</div>
+            <div class="blog-step"><span class="step-num">5</span> Written note for your insurer, original file kept on record.</div>
+
+            <hr class="blog-divider"/>
 
             <h2>What a remap actually unlocks</h2>
-            <ul>
+            <ul class="blog-checklist">
                 <li>Stronger pull low down, where loaded vans actually live</li>
                 <li>Sharper throttle - less of that "did it hear me?" lag off the line</li>
-                <li>Less gear hunting on hills</li>
-                <li>Often smoother cruising, and sometimes a little more economy on long runs</li>
+                <li>Less gear hunting on hills and at motorway-merge speeds</li>
+                <li>Smoother cruising, and sometimes a little more economy on long runs</li>
             </ul>
             <p>We see it most on the usual workhorses - the <a href="/services/vw-transporter-remap">Transporter</a> and <a href="/services/vw-caddy-remap">Caddy</a>, the <a href="/services/transit-custom-remap">Transit Custom</a>, and yes, the <a href="/services/mercedes-sprinter-remap">Sprinter</a> and <a href="/services/mercedes-vito-remap">Vito</a> we know inside out.</p>
+
+            <hr class="blog-divider"/>
 
             <h2>The honest bit (because someone has to be)</h2>
             <p>No, we won't quote you a magic horsepower figure - every engine and variant is different, and anyone shouting "+40 BHP guaranteed!" across a forum is selling confidence, not calibration. No, we don't do DPF, EGR or AdBlue deletes - they're illegal on the road and an instant MOT fail. And no, we won't tune a van that's already faulty: every job starts with a diagnostic health check, because remapping over a fault is just turning the radio up to hide the engine noise.</p>
@@ -1345,8 +1423,15 @@ export const blogPosts: BlogPost[] = [
                 <figcaption>The health check that comes before the fun part. If something's off under here, that gets sorted first - a remap should unlock a healthy engine, not paper over a poorly one.</figcaption>
             </figure>
 
+            <hr class="blog-divider"/>
+
             <h2>Is it legal? Will it pass the MOT?</h2>
             <p>A remap itself is perfectly legal, and a compliant one keeps all your emissions kit intact, so it sails through the MOT like standard. You do need to tell your insurer - it's a modification - and we hand you a written note for exactly that. It's fully reversible too: we keep your original file, so a dealer visit or a resale is no drama.</p>
+
+            <div class="blog-takeaway">
+                <span class="takeaway-label">The legal bit, settled</span>
+                <p><strong>Legal, MOT-safe, insurable and reversible</strong> - as long as no emissions kit is deleted and you declare the modification. We give you the paperwork to do it properly.</p>
+            </div>
         `,
         faqs: [
             { question: 'Is it really the same engine with different power?', answer: "Often, yes - especially across VW's 2.0 TDI range. Much of the difference between the power outputs is in the ECU software, not the hardware." },
@@ -1373,24 +1458,41 @@ export const blogPosts: BlogPost[] = [
             <h2>What actually changes (the unsexy truth)</h2>
             <p>An economy <a href="/services/van-economy-tune">remap</a> re-shapes injection timing, boost and fuelling so the engine makes its torque lower down. The result: you use less throttle to sit at 60-65, the turbo builds boost more smoothly, and the gearbox stops hunting. You're not adding fuel from nowhere - you're stopping the van from working at high revs when it doesn't need to. Less effort, fewer drops of diesel. That's the whole trick.</p>
 
+            <div class="blog-takeaway">
+                <span class="takeaway-label">In one line</span>
+                <p>An economy map doesn't conjure fuel from thin air - it lets the engine hold a cruise with <strong>less throttle and lower revs</strong>. The saving is in the effort, not in magic.</p>
+            </div>
+
+            <hr class="blog-divider"/>
+
             <h2>The real-world numbers</h2>
             <p>One honest example from the workshop: a 2017 Vito on motorway courier runs came in doing 28-30 mpg. Economy map on, same route, two weeks later - averaging 34. Lovely. But that's <em>one</em> van, on <em>one</em> route, with <em>one</em> driver who doesn't treat every roundabout like a drag strip. Your mileage, quite literally, may vary.</p>
+
+            <div class="blog-callout">
+                <p>Here's the maths on a believable 3 mpg gain: a van doing <strong>30,000 miles a year at 30 mpg</strong> burns about 4,550 litres of diesel. Nudge that to 33 mpg and you're nearer 4,130 litres - roughly <strong>400 litres saved, or around £600 a year</strong> at current pump prices. Not life-changing, but on a high-mileage van it pays for itself and then some.</p>
+            </div>
 
             <figure class="blog-image">
                 <img src="/images/blog-photos/does-remapping-a-van-improve-mpg/trip-computer-readout.jpg" alt="Van trip computer display showing a fuel range of 235 miles on a road test" loading="lazy" />
                 <figcaption>The van's own range readout on a road test. The only fuel figure worth trusting is the one you watch yourself over a few tankfuls - not a number promised up front on a forum.</figcaption>
             </figure>
 
+            <hr class="blog-divider"/>
+
             <h2>Who sees the biggest gains</h2>
-            <ul>
+            <ul class="blog-checklist">
                 <li><strong>High-mileage motorway and A-road drivers</strong> - the sweet spot. Steady speed is where economy maps shine.</li>
                 <li><strong>Couriers doing 30k+ a year</strong> - small per-mile savings add up to real money.</li>
                 <li><strong>Light or empty-run vans</strong> - delivery and service vehicles not lugging a tonne of tools everywhere.</li>
             </ul>
-            <p>Who doesn't? Stop-start city-only vans, and anyone whose right foot has anger issues. A map can only do so much against a driving style.</p>
+            <p>Who doesn't? Stop-start city-only vans, and anyone whose right foot has anger issues. A map can only do so much against a driving style - if you accelerate like every light's a race start, you'll hand the savings straight back.</p>
+
+            <hr class="blog-divider"/>
 
             <h2>The cowboys promising the moon</h2>
             <p>If a "tuner" guarantees a specific mpg figure, or offers to "delete the DPF to save fuel," walk away. Guaranteed numbers are a sales tactic, and emissions deletes are illegal, an MOT fail, and a fast track to a refused insurance claim. We quote honestly, tune on a healthy engine only, keep your emissions kit intact, and back up your original file. Boring? Maybe. But your van stays legal and your wallet stays shut to nasty surprises.</p>
+
+            <hr class="blog-divider"/>
 
             <h2>So - is it worth it?</h2>
             <p>If you do big miles, very probably - high-mileage drivers often claw the cost back within a few tanks, plus the van's just nicer to drive. If you potter to the shops twice a week, save your money. We'll tell you honestly which camp you're in - sometimes the best upsell is "don't bother, mate." See the full picture on the <a href="/services/van-remapping">van remapping page</a>.</p>
