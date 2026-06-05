@@ -1,7 +1,7 @@
 """
 Standalone "Should I Buy This Car?" verdict feature (validation experiment).
 
-Self-contained FastAPI router. REUSES the site's existing infrastructure — it adds
+Self-contained FastAPI router. REUSES the site's existing infrastructure: it adds
 NO new email provider and NO second Stripe integration:
   - Email transport: api._send_zoho_email (Zoho SMTP), imported lazily inside handlers
     so api.py can include this router at import time without a circular import.
@@ -39,7 +39,7 @@ PRIORITY_PRICE_PENCE = int(os.getenv("VERDICT_PRIORITY_PRICE_PENCE", "700"))
 PRIORITY_LINK = f"{SITE_URL}/should-i-buy-this-car"
 
 # Best-effort, in-memory dedupe so refreshing the priority-thanks page does not re-send
-# the PRIORITY emails. (Lost on restart — acceptable for a low-volume experiment.)
+# the PRIORITY emails. (Lost on restart, acceptable for a low-volume experiment.)
 _PROCESSED_PRIORITY_SESSIONS: set[str] = set()
 
 
@@ -94,14 +94,14 @@ def _user_confirmation_email() -> tuple[str, str]:
     html_body = f"""\
 <div style="font-family:Inter,Arial,sans-serif;max-width:560px;margin:0 auto;color:#1f2937;line-height:1.6">
   <h2 style="color:#0284c7;margin:0 0 12px">Your verdict on the car is on its way 🔧</h2>
-  <p>Thanks — I've got your request. I'll personally go through the known faults for that model and
+  <p>Thanks, I've got your request. I'll personally go through the known faults for that model and
   mileage, check the MOT history, and sanity-check the price. You'll have your
   <strong>BUY / CAUTION / AVOID</strong> verdict back <strong>within 24 hours</strong>.</p>
   <p>If you've got the service history or photos of the engine bay / dashboard, just reply to this
   email and attach them.</p>
   <p>Viewing sooner? The <strong>£7 Priority Verdict</strong> comes back within 3 hours:<br>
   <a href="{PRIORITY_LINK}" style="color:#0284c7">{PRIORITY_LINK}</a></p>
-  <p style="margin-top:24px">— TriPoint Diagnostics, mechanic, 10 years in the trade.</p>
+  <p style="margin-top:24px">- TriPoint Diagnostics, mechanic, 10 years in the trade.</p>
 </div>"""
     return html_body, text
 
@@ -111,12 +111,12 @@ def _buyer_priority_email() -> str:
         '<div style="font-family:Inter,Arial,sans-serif;max-width:560px;margin:0 auto;'
         'color:#1f2937;line-height:1.6">'
         '<h2 style="color:#0284c7;margin:0 0 12px">Priority Verdict confirmed ⚡</h2>'
-        "<p>Payment received — thank you. Your <strong>Priority Verdict</strong> is at the front "
+        "<p>Payment received, thank you. Your <strong>Priority Verdict</strong> is at the front "
         "of the queue and I'll have your full written, fault-by-fault report (plus the price I'd "
         "negotiate to) back to you <strong>within 3 hours</strong>.</p>"
         "<p>If you've got the service history or photos of the engine bay / dashboard, just reply "
         "and attach them.</p>"
-        '<p style="margin-top:24px">— TriPoint Diagnostics, mechanic, 10 years in the trade.</p>'
+        '<p style="margin-top:24px">- TriPoint Diagnostics, mechanic, 10 years in the trade.</p>'
         "</div>"
     )
 
@@ -148,7 +148,7 @@ async def verdict_submit(payload: VerdictSubmitRequest):
         raise_for_status=True,
     )
 
-    # (c) Confirmation to the user (best-effort — never block the lead on this).
+    # (c) Confirmation to the user (best-effort, never block the lead on this).
     user_html, user_text = _user_confirmation_email()
     try:
         _send_email(
@@ -218,9 +218,9 @@ async def verdict_priority_confirm(payload: PriorityConfirmRequest):
     # Email admin, flagged PRIORITY.
     note_line = f"<p><strong>Worry:</strong> {html.escape(note)}</p>" if note else ""
     admin_html = (
-        f"<p><strong>⚡ PRIORITY verdict — PAID (£{PRIORITY_PRICE_PENCE / 100:.2f})</strong></p>"
-        f"<p><strong>Car:</strong> {html.escape(car) or '—'}<br>"
-        f"<strong>Email:</strong> {html.escape(email) or '—'}</p>"
+        f"<p><strong>⚡ PRIORITY verdict: PAID (£{PRIORITY_PRICE_PENCE / 100:.2f})</strong></p>"
+        f"<p><strong>Car:</strong> {html.escape(car) or '-'}<br>"
+        f"<strong>Email:</strong> {html.escape(email) or '-'}</p>"
         f"{note_line}"
         "<p>Turnaround target: <strong>3 hours</strong>.</p>"
     )

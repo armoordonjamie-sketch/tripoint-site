@@ -36,7 +36,7 @@ export function VerdictPriorityThanksPage() {
                     if (!cancelled && data?.car) setCar(data.car);
                 })
                 .catch(() => {
-                    /* best-effort — the page still shows confirmation */
+                    /* best-effort: the page still shows confirmation */
                 });
         }
         return () => {
@@ -61,7 +61,7 @@ export function VerdictPriorityThanksPage() {
                             Priority Verdict confirmed ⚡
                         </h1>
                         <p className="mt-3 text-text-secondary">
-                            Payment received — thank you.{' '}
+                            Payment received, thank you.{' '}
                             {car ? (
                                 <>
                                     Your full written verdict on{' '}

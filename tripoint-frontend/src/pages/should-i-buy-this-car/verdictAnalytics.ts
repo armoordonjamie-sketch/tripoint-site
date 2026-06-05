@@ -6,9 +6,9 @@
  * conversion events are reliably fireable and easy to wire into Google Ads / GA4 later.
  *
  * Where each event fires:
- *   verdict_request_submit    — on a successful FREE verdict submit  (ShouldIBuyThisCarPage)
- *   affiliate_click           — just before opening the affiliate link (ThanksPage)
- *   priority_verdict_purchase — when the Priority success page loads   (PriorityThanksPage)
+ *   verdict_request_submit    - on a successful FREE verdict submit  (ShouldIBuyThisCarPage)
+ *   affiliate_click           - just before opening the affiliate link (ThanksPage)
+ *   priority_verdict_purchase - when the Priority success page loads   (PriorityThanksPage)
  */
 import ReactGA from 'react-ga4';
 
@@ -36,7 +36,7 @@ export function trackVerdictEvent(
     try {
         ReactGA.event(name, params as Record<string, string | number | boolean>);
     } catch {
-        /* GA not initialised yet — dataLayer + console already captured it */
+        /* GA not initialised yet - dataLayer + console already captured it */
     }
 
     // Visible in DevTools so you can confirm the trigger before wiring Ads/GA4.

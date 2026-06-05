@@ -55,7 +55,7 @@ export const routeManifest: RouteEntry[] = [
     // noindex and served via the SPA fallback (indexable:false => not prerendered).
     {
         path: '/should-i-buy-this-car',
-        title: "Should I Buy This Car? Get a Mechanic's Honest Verdict — Free",
+        title: "Should I Buy This Car? Get a Mechanic's Honest Verdict, Free",
         description:
             "Paste any used-car listing and a mechanic with 10 years in the trade tells you what'll go wrong, what it'll really cost to run, and whether the price is fair. Free verdict in 24h.",
         canonicalPath: '/should-i-buy-this-car',

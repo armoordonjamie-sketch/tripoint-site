@@ -54,7 +54,7 @@ const SampleDiagnosticReportPage = lazy(() =>
 );
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage').then((m) => ({ default: m.NotFoundPage })));
 
-// "Should I Buy This Car?" — standalone validation experiment (src/pages/should-i-buy-this-car/)
+// "Should I Buy This Car?" - standalone validation experiment (src/pages/should-i-buy-this-car/)
 const ShouldIBuyThisCarPage = lazy(() =>
     import('@/pages/should-i-buy-this-car/ShouldIBuyThisCarPage').then((m) => ({ default: m.ShouldIBuyThisCarPage })),
 );

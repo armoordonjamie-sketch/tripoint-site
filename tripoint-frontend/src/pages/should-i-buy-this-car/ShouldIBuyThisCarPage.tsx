@@ -19,7 +19,7 @@ import {
 } from './config';
 import { trackVerdictEvent } from './verdictAnalytics';
 
-// ── Shared field classes (match the site's form styling — see ContactPage) ──
+// ── Shared field classes (match the site's form styling, see ContactPage) ──
 const inputClass =
     'w-full rounded-lg border border-border-default bg-surface px-4 py-2.5 text-sm text-text-primary placeholder:text-text-muted transition-colors focus:border-brand focus:outline-none focus:ring-1 focus:ring-brand';
 const labelClass = 'block text-sm font-medium text-text-primary mb-1.5';
@@ -38,7 +38,7 @@ const howItWorks = [
     {
         n: 1,
         title: 'Paste the listing.',
-        body: 'A link from AutoTrader, eBay, Facebook Marketplace — or just the reg plate and the asking price.',
+        body: 'A link from AutoTrader, eBay, Facebook Marketplace, or just the reg plate and the asking price.',
     },
     {
         n: 2,
@@ -48,12 +48,12 @@ const howItWorks = [
     {
         n: 3,
         title: 'Get your verdict.',
-        body: 'A clear BUY / CAUTION / AVOID by email, usually within 24 hours — with exactly what to check and what I’d pay.',
+        body: 'A clear BUY / CAUTION / AVOID by email, usually within 24 hours, with exactly what to check and what I’d pay.',
     },
 ];
 
 const whatYouGet: { emoji: string; lead: string; rest: string }[] = [
-    { emoji: '💷', lead: 'Is the price fair?', rest: 'What this car really sells for — and what I’d offer.' },
+    { emoji: '💷', lead: 'Is the price fair?', rest: 'What this car really sells for, and what I’d offer.' },
     {
         emoji: '🔧',
         lead: 'What goes wrong with this exact model at this mileage,',
@@ -62,7 +62,7 @@ const whatYouGet: { emoji: string; lead: string; rest: string }[] = [
     {
         emoji: '📋',
         lead: "What you'll be paying for next.",
-        rest: 'Repairs and services coming in the next 1–2 years.',
+        rest: 'Repairs and services coming in the next 1-2 years.',
     },
     {
         emoji: '🛠',
@@ -112,7 +112,7 @@ const faqs = [
     },
     {
         q: 'What cars can you check?',
-        a: 'Any used car for sale in the UK — private or dealer, petrol, diesel, hybrid or electric.',
+        a: 'Any used car for sale in the UK: private or dealer, petrol, diesel, hybrid or electric.',
     },
 ];
 
@@ -158,7 +158,7 @@ export function ShouldIBuyThisCarPage() {
         }
     };
 
-    // £7 Priority Verdict — carries over the car/email already typed (Stripe collects
+    // £7 Priority Verdict: carries over the car/email already typed (Stripe collects
     // the email too if it's blank). Redirects to Stripe Checkout (server-created session).
     const startPriority = async () => {
         setSubmitError(null);
@@ -183,7 +183,7 @@ export function ShouldIBuyThisCarPage() {
     return (
         <div>
             <Seo
-                title="Should I Buy This Car? Get a Mechanic's Honest Verdict — Free"
+                title="Should I Buy This Car? Get a Mechanic's Honest Verdict, Free"
                 description="Paste any used-car listing and a mechanic with 10 years in the trade tells you what'll go wrong, what it'll really cost to run, and whether the price is fair. Free verdict in 24h."
                 canonical="/should-i-buy-this-car"
             />
@@ -194,14 +194,14 @@ export function ShouldIBuyThisCarPage() {
                 <div className="relative mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-2">
                     <div className="text-center lg:text-left">
                         <h1 className="text-4xl font-extrabold leading-tight text-text-primary sm:text-5xl">
-                            Before you buy that used car — let a mechanic look first.
+                            Before you buy that used car, let a mechanic look first.
                         </h1>
                         <p className="mt-5 text-lg text-text-secondary">
                             Paste the listing. A mechanic with 10 years in the trade tells you the known faults for
                             that exact model and mileage, what it&apos;ll really cost you over the next two years, and
                             whether the price is fair. You get a straight <strong className="text-text-primary">BUY</strong>,{' '}
                             <strong className="text-text-primary">CAUTION</strong> or{' '}
-                            <strong className="text-text-primary">AVOID</strong> — not a sales pitch.
+                            <strong className="text-text-primary">AVOID</strong>, not a sales pitch.
                         </p>
                         <div className="mt-8">
                             <CTAButton onClick={scrollToForm} size="lg" className="w-full sm:w-auto">
@@ -223,7 +223,7 @@ export function ShouldIBuyThisCarPage() {
                             />
                         </div>
                         <p className="mt-3 text-center text-xs text-text-muted">
-                            Private sale or dealer forecourt — I check them all the same way.
+                            Private sale or dealer forecourt: I check them all the same way.
                         </p>
                     </div>
                 </div>
@@ -292,7 +292,7 @@ export function ShouldIBuyThisCarPage() {
                     </h2>
                     <p className="mx-auto mt-3 max-w-2xl text-sm text-text-secondary">
                         AutoTrader, eBay or Facebook Marketplace. Private or dealer. Petrol, diesel, hybrid or
-                        electric — if it&apos;s for sale in the UK, you get a straight verdict.
+                        electric. If it&apos;s for sale in the UK, you get a straight verdict.
                     </p>
                 </div>
                 <div className="mx-auto mt-8 max-w-5xl">
@@ -413,9 +413,9 @@ export function ShouldIBuyThisCarPage() {
                             Need it today?
                         </h3>
                         <p className="mt-3 text-sm text-text-secondary">
-                            The free verdict comes back within 24 hours. If you&apos;re viewing sooner — or want
+                            The free verdict comes back within 24 hours. If you&apos;re viewing sooner, or want
                             the full written report with a detailed fault-by-fault breakdown and a price I&apos;d
-                            negotiate to — get the Priority Verdict for £{PRIORITY_PRICE_GBP}, back within 3 hours.
+                            negotiate to, get the Priority Verdict for £{PRIORITY_PRICE_GBP}, back within 3 hours.
                         </p>
                         <div className="mt-5">
                             <CTAButton

@@ -17,7 +17,7 @@ export function VerdictThanksPage() {
     const [priorityLoading, setPriorityLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-    // Affiliate nudge — fire analytics BEFORE navigating, then open in a new tab.
+    // Affiliate nudge: fire analytics BEFORE navigating, then open in a new tab.
     const handleAffiliateClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
         e.preventDefault();
         trackVerdictEvent('affiliate_click', { destination: 'history_check' });
@@ -66,13 +66,13 @@ export function VerdictThanksPage() {
                                     I&apos;ve got your request for{' '}
                                     <span className="font-medium text-text-primary break-words">{car}</span>. I&apos;ll
                                     go through the known faults, check the MOT history and sanity-check the price,
-                                    then email you a clear BUY / CAUTION / AVOID — usually within 24 hours.
+                                    then email you a clear BUY / CAUTION / AVOID, usually within 24 hours.
                                 </>
                             ) : (
                                 <>
                                     I&apos;ve got your request. I&apos;ll go through the known faults, check the MOT
-                                    history and sanity-check the price, then email you a clear BUY / CAUTION / AVOID
-                                    — usually within 24 hours.
+                                    history and sanity-check the price, then email you a clear BUY / CAUTION / AVOID,
+                                    usually within 24 hours.
                                 </>
                             )}
                         </p>
@@ -88,7 +88,7 @@ export function VerdictThanksPage() {
                             <ShieldAlert className="mt-0.5 h-5 w-5 shrink-0 text-warning" aria-hidden="true" />
                             <span>
                                 <strong className="text-text-primary">While you wait:</strong> 9 out of 10 problem
-                                cars show up in a history check — outstanding finance, write-offs, mileage
+                                cars show up in a history check: outstanding finance, write-offs, mileage
                                 discrepancies.{' '}
                                 <a
                                     href={AFFILIATE_HISTORY_CHECK_URL}
