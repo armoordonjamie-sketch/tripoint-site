@@ -50,6 +50,37 @@ export const routeManifest: RouteEntry[] = [
         changefreq: 'weekly',
         indexable: true,
     },
+    // ── Should I Buy This Car? (standalone validation experiment) ──
+    // Landing page is prerendered + in the sitemap. The two thank-you pages are
+    // noindex and served via the SPA fallback (indexable:false => not prerendered).
+    {
+        path: '/should-i-buy-this-car',
+        title: "Should I Buy This Car? Get a Mechanic's Honest Verdict — Free",
+        description:
+            "Paste any used-car listing and a mechanic with 10 years in the trade tells you what'll go wrong, what it'll really cost to run, and whether the price is fair. Free verdict in 24h.",
+        canonicalPath: '/should-i-buy-this-car',
+        priority: 0.7,
+        changefreq: 'monthly',
+        indexable: true,
+    },
+    {
+        path: '/should-i-buy-this-car/thanks',
+        title: "Your verdict's on the way",
+        description: 'Your free used-car verdict request has been received.',
+        canonicalPath: '/should-i-buy-this-car/thanks',
+        priority: 0.1,
+        changefreq: 'monthly',
+        indexable: false,
+    },
+    {
+        path: '/should-i-buy-this-car/priority-thanks',
+        title: 'Priority Verdict confirmed',
+        description: 'Your £7 Priority Verdict purchase is confirmed.',
+        canonicalPath: '/should-i-buy-this-car/priority-thanks',
+        priority: 0.1,
+        changefreq: 'monthly',
+        indexable: false,
+    },
     // Services
     {
         path: '/services/mercedes-xentry-diagnostics-coding',

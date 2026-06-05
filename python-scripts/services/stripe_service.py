@@ -112,6 +112,77 @@ def create_balance_checkout_session(
     return {"id": session.id, "url": session.url}
 
 
+# ── "Should I Buy This Car?" verdict experiment ──────────────────────────────
+# Self-contained one-off charge for the £7 Priority Verdict. No booking record is
+# involved, so confirmation is verified server-side via retrieve_checkout_session()
+# (see routes/verdict.py) rather than the booking-coupled /webhooks/stripe handler.
+# To remove the experiment, delete these two functions.
+
+def create_verdict_priority_checkout_session(
+    amount_pence: int,
+    customer_email: str | None,
+    car: str = "",
+    note: str = "",
+) -> dict[str, Any]:
+    """
+    Create a one-off Stripe Checkout Session for the £7 Priority Verdict.
+    Carries the car details + note as metadata. Returns {'id', 'url'}.
+    """
+    _require_stripe()
+    success_url = (
+        f"{STRIPE_SUCCESS_URL_BASE}/should-i-buy-this-car/priority-thanks"
+        "?session_id={CHECKOUT_SESSION_ID}"
+    )
+    cancel_url = f"{STRIPE_SUCCESS_URL_BASE}/should-i-buy-this-car"
+
+    kwargs: dict[str, Any] = dict(
+        mode="payment",
+        payment_method_types=["card"],
+        line_items=[
+            {
+                "price_data": {
+                    "currency": "gbp",
+                    "unit_amount": amount_pence,
+                    "product_data": {
+                        "name": "Priority Verdict",
+                        "description": (
+                            "Full written used-car verdict: fault-by-fault breakdown plus a "
+                            "price I'd negotiate to, back within 3 hours."
+                        ),
+                    },
+                },
+                "quantity": 1,
+            }
+        ],
+        success_url=success_url,
+        cancel_url=cancel_url,
+        metadata={
+            "payment_type": "verdict_priority",
+            "car": (car or "")[:480],
+            "note": (note or "")[:480],
+        },
+    )
+    if customer_email:
+        kwargs["customer_email"] = customer_email
+        kwargs["metadata"]["email"] = customer_email[:480]
+
+    session = stripe.checkout.Session.create(**kwargs)
+    return {"id": session.id, "url": session.url}
+
+
+def retrieve_checkout_session(session_id: str) -> dict[str, Any] | None:
+    """
+    Retrieve a Checkout Session for server-side payment verification.
+    Returns the Stripe session object (dict-like) or None on failure.
+    """
+    _require_stripe()
+    try:
+        return stripe.checkout.Session.retrieve(session_id)
+    except Exception as e:  # pragma: no cover - network/SDK guard
+        logger.warning("Could not retrieve checkout session %s: %s", session_id, e)
+        return None
+
+
 def verify_webhook_signature(payload: bytes, signature: str | None) -> dict[str, Any] | None:
     """
     Verify Stripe webhook signature and return the event dict.

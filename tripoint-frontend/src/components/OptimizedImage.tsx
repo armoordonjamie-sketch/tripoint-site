@@ -49,7 +49,8 @@ function useOriginalAsset(src: string): boolean {
         src.startsWith('/images/new-images/') ||
         src.startsWith('/images/services/') ||
         src.startsWith('/images/servicing-work/') ||
-        src.startsWith('/images/diag_photos/')
+        src.startsWith('/images/diag_photos/') ||
+        src.startsWith('/images/should-i-buy-this-car/')
     );
 }
 

@@ -54,6 +54,17 @@ const SampleDiagnosticReportPage = lazy(() =>
 );
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage').then((m) => ({ default: m.NotFoundPage })));
 
+// "Should I Buy This Car?" — standalone validation experiment (src/pages/should-i-buy-this-car/)
+const ShouldIBuyThisCarPage = lazy(() =>
+    import('@/pages/should-i-buy-this-car/ShouldIBuyThisCarPage').then((m) => ({ default: m.ShouldIBuyThisCarPage })),
+);
+const VerdictThanksPage = lazy(() =>
+    import('@/pages/should-i-buy-this-car/ThanksPage').then((m) => ({ default: m.VerdictThanksPage })),
+);
+const VerdictPriorityThanksPage = lazy(() =>
+    import('@/pages/should-i-buy-this-car/PriorityThanksPage').then((m) => ({ default: m.VerdictPriorityThanksPage })),
+);
+
 export function AppRoutes() {
     return (
         <Suspense fallback={<RouteLoadingFallback />}>
@@ -144,6 +155,11 @@ export function AppRoutes() {
                     <Route path="contact" element={<ContactPage />} />
                     <Route path="blog" element={<BlogIndexPage />} />
                     <Route path="blog/:slug" element={<BlogPostPage />} />
+
+                    {/* Should I Buy This Car? (standalone experiment) */}
+                    <Route path="should-i-buy-this-car" element={<ShouldIBuyThisCarPage />} />
+                    <Route path="should-i-buy-this-car/thanks" element={<VerdictThanksPage />} />
+                    <Route path="should-i-buy-this-car/priority-thanks" element={<VerdictPriorityThanksPage />} />
 
                     {/* Legal */}
                     <Route path="legal/privacy-policy" element={<PrivacyPolicyPage />} />

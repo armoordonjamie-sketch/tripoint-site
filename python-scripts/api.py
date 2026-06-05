@@ -173,6 +173,10 @@ app.include_router(admin_leads_router)
 from carl.routes import carl_router
 app.include_router(carl_router)
 
+# "Should I Buy This Car?" verdict experiment (standalone, self-contained)
+from routes.verdict import router as verdict_router
+app.include_router(verdict_router)
+
 BASES = {
     "Tonbridge": "TN9 1PP",
     "Eltham": "SE9 4HA",
